@@ -3,9 +3,6 @@ set mouse=a    " Mouse Support
 " NERDTree
 nmap <F7> :NERDTreeToggle<CR>
 
-" Stop : lightline
-" set laststatus=2
-
 call plug#begin()
 
 " Adopt
