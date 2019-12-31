@@ -5,7 +5,8 @@ Configure my computers - heavily inspired by [webpro](https://github.com/webpro/
 # tl;dr
 
     git clone git@github.com:ianhomer/dotfiles.git ~/.dotfiles
-
+    cd ~/.dotfiles
+    make
 
 # Thanks
 
