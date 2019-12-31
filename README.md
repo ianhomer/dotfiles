@@ -4,4 +4,4 @@ Configure my computers - heavily inspired by [webpro](https://github.com/webpro/
 
 # tl;dr
 
-    git clone https://github.com/ianhomer/dotfiles ~/.dotfiles  
+    git clone git@github.com:ianhomer/dotfiles.git ~/.dotfiles  
