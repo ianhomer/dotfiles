@@ -15,7 +15,7 @@ command_install() {
     fi
   done
   stow -v -t $HOME dotfiles
-  echo "... done"
+  echo "... installed"
 }
 
 command_uninstall() {
@@ -27,7 +27,7 @@ command_uninstall() {
       mv $HOME/$FILE.bak $HOME/${FILE%%.bak} 
     fi
   done
-  echo "... done"
+  echo "... uninstalled"
 }
 
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
