@@ -28,6 +28,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'godlygeek/tabular'
 " fugitive - Git integration
 Plug 'tpope/vim-fugitive'
+" symlink - Follow symlink when opening file
+Plug 'aymericbeaumet/vim-symlink'
 
 " Assess
 Plug 'tpope/vim-surround'
