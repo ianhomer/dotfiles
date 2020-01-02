@@ -8,11 +8,25 @@ command_install() {
   if is-executable ; then
     curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
   fi
+  for FILE in `ls -A dotfiles` ; do 
+    if [ -f $HOME/$FILE -a ! -h $HOME/$FILE ] ; then 
+      echo "... backing up $FILE"
+      mv $HOME/$FILE{,.bak} 
+    fi
+  done
+	stow -v -t $HOME dotfiles
   echo "... done"
 }
 
 command_uninstall() {
   echo "Uninstalling dotfiles ..."
+  stow -v --delete -t $HOME dotfiles
+	for FILE in `ls -A dotfiles` ; do 
+    if [ -f $HOME/$FILE.bak ] ; then 
+      echo "... restoring $FILE"
+      mv $HOME/$FILE.bak $HOME/${FILE%%.bak} 
+    fi
+  done
   echo "... done"
 }
 
