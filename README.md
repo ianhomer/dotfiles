@@ -1,6 +1,6 @@
 # .dotfiles
 
-Configure my computers - heavily inspired by [webpro](https://github.com/webpro/dotfiles).
+Configure my computers - see Thanks below for inspiration.
 
 # tl;dr
 
@@ -10,4 +10,6 @@ Configure my computers - heavily inspired by [webpro](https://github.com/webpro/
 
 # Thanks
 
+* [webpro](https://github.com/webpro/dotfiles).
+* https://github.com/mathiasbynens/dotfiles
 * [Awesome dotfiles](https://github.com/webpro/awesome-dotfiles)
