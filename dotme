@@ -4,7 +4,7 @@ DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 PATH=${DOTFILES_DIR}/bin:${PATH}
 
 install_tool() {
-  brew install stow
+  brew install $1
 }
 
 command_install() {
