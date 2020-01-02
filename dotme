@@ -11,7 +11,7 @@ command_install() {
   echo "Installing dotfiles ..."
   if ! is-executable brew ; then
     echo "... installing brew"
-    #curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
   fi
   if ! is-executable stow ; then
     install_tool stow
