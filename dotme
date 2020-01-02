@@ -36,12 +36,16 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 VERBOSE=0
 
 usage() {
-  echo <<EOF
-script usage: $(basename $0) [-h] command
+  cat <<EOF
+script usage: 
+  
+  $(basename $0) [-h] command
 
-where command is one of
+where command is one of:
+
 * install (default)
 * uninstall
+
 EOF
 }
 
