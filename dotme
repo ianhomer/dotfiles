@@ -14,14 +14,14 @@ command_install() {
       mv $HOME/$FILE{,.bak} 
     fi
   done
-	stow -v -t $HOME dotfiles
+  stow -v -t $HOME dotfiles
   echo "... done"
 }
 
 command_uninstall() {
   echo "Uninstalling dotfiles ..."
   stow -v --delete -t $HOME dotfiles
-	for FILE in `ls -A dotfiles` ; do 
+  for FILE in `ls -A dotfiles` ; do 
     if [ -f $HOME/$FILE.bak ] ; then 
       echo "... restoring $FILE"
       mv $HOME/$FILE.bak $HOME/${FILE%%.bak} 
