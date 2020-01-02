@@ -3,10 +3,18 @@
 DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 PATH=${DOTFILES_DIR}/bin:${PATH}
 
+install_tool() {
+  brew install stow
+}
+
 command_install() {
   echo "Installing dotfiles ..."
-  if is-executable ; then
-    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
+  if ! is-executable brew ; then
+    echo "... installing brew"
+    #curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
+  fi
+  if ! is-executable stow ; then
+    install_tool stow
   fi
   for FILE in `ls -A dotfiles` ; do 
     if [ -f $HOME/$FILE -a ! -h $HOME/$FILE ] ; then 
