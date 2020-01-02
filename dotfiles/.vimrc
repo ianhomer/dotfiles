@@ -1,4 +1,5 @@
 set mouse=a    " Mouse Support
+set tabstop=2 shiftwidth=2 expandtab
 
 " NERDTree
 nmap <F7> :NERDTreeToggle<CR>

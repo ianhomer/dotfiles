@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+PATH=${DOTFILES_DIR}/bin:${PATH}
+
+command_install() {
+  echo "Installing dotfiles ..."
+  if is-executable ; then
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
+  fi
+  echo "... done"
+}
+
+command_uninstall() {
+  echo "Uninstalling dotfiles ..."
+  echo "... done"
+}
+
+OPTIND=1         # Reset in case getopts has been used previously in the shell.
+
+# Initialize our own variables:
+VERBOSE=0
+
+usage() {
+  echo <<EOF
+script usage: $(basename $0) [-h] command
+
+where command is one of
+* install (default)
+* uninstall
+EOF
+}
+
+while getopts "h?vf:" opt; do
+  case "$opt" in
+  h|\?)
+    usage
+    exit 0
+    ;;
+  v)  verbose=1
+    ;;
+  f)  output_file=$OPTARG
+    ;;
+  esac
+done
+
+shift $((OPTIND-1))
+
+[ "${1:-}" = "--" ] && shift
+
+COMMAND=${@:-install}
+
+command_${COMMAND} $@
+if [ $? = 127 ]; then
+  echo "'$COMMAND_NAME' is not a known command or has errors." >&2
+  usage
+  exit 1
+fi
+
