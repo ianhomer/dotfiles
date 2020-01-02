@@ -1,12 +1,12 @@
 # .dotfiles
 
-Configure my computers - see Thanks below for inspiration.
+Configure my computers - see thanks below for inspiration.
 
 # tl;dr
 
     git clone git@github.com:ianhomer/dotfiles.git ~/.dotfiles
     cd ~/.dotfiles
-    make
+    ~/dotme
 
 # Thanks
 
