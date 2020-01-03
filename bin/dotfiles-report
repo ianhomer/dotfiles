@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+line() {
+  printf "${1:-=}%.0s" {1..40}
+  printf "\n\n"
+}
+
+echo "dotfiles System Report"
+line
+
+echo "Brew"
+line '.'
+
+brew list
+
