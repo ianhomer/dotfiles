@@ -18,6 +18,20 @@ command_install() {
   echo "... installed"
 }
 
+command_update() {
+  echo "Updating system"
+  cd $DOTFILES_DIR
+  git pull
+  brew update
+  brew upgrade
+  npm update -g
+}
+
+command_clean() {
+  echo "Cleaning up caches"
+  brew cleanup
+}
+
 command_uninstall() {
   echo "Uninstalling dotfiles ..."
   stow -v --delete -t $HOME dotfiles
@@ -44,6 +58,8 @@ script usage:
 where command is one of:
 
 * install (default)
+* update
+* clean - clean up caches
 * uninstall
 
 EOF
