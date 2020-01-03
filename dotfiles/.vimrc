@@ -1,12 +1,36 @@
-set mouse=a    " Mouse Support
+"
+" Sanity vim configuration
+"
+
+" Enable mouse support
+set mouse=a    
+" Disable error bells
+set noerrorbells
+" Enhance command-line completion
+set wildmenu
+" Highlight current line
+set cursorline
+" Ignore case of searches
+set ignorecase
+" Highlight dynamically as pattern is typed
+set incsearch
+
+"
+" Subjective vim configuration
+"
+
+" Tab support with 2 spaces
 set tabstop=2 shiftwidth=2 expandtab
 
-" NERDTree
+" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+set clipboard=unnamed
+
+" NERDTree config
 nmap <F7> :NERDTreeToggle<CR>
 
 call plug#begin()
 
-" Adopt
+" Adopt : Plugins adopted for general use
 
 " NERDTree - file explore 
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -15,8 +39,6 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 " ack - Search files
 Plug 'mileszs/ack.vim'
-" lightline - Status bar
-" Plug 'itchyny/lightline.vim'
 " Airline - status bar
 Plug 'vim-airline/vim-airline'
 " gitgutter - Git change indicator to left of window
@@ -32,7 +54,8 @@ Plug 'tpope/vim-fugitive'
 " symlink - Follow symlink when opening file
 Plug 'aymericbeaumet/vim-symlink'
 
-" Assess
+" Assess : Plugins being assesed as candidates for general use
+
 Plug 'tpope/vim-surround'
 Plug 'junegunn/goyo.vim'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
