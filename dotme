@@ -3,20 +3,6 @@
 DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 PATH=${DOTFILES_DIR}/bin:${PATH}
 
-install_tool() {
-  brew install $1
-}
-
-install_brew() {
-  install-brew-packages
-}
-
-install_stow() {
-  if ! is-executable stow ; then
-    install_tool stow
-  fi
-}
-
 command_install() {
   echo "Installing dotfiles ..."
   cd $DOTFILES_DIR
