@@ -7,15 +7,21 @@ install_tool() {
   brew install $1
 }
 
-command_install() {
-  echo "Installing dotfiles ..."
-  if ! is-executable brew ; then
-    echo "... installing brew"
-    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
-  fi
+install_brew() {
+  install-brew-packages
+}
+
+install_stow() {
   if ! is-executable stow ; then
     install_tool stow
   fi
+}
+
+command_install() {
+  echo "Installing dotfiles ..."
+  cd $DOTFILES_DIR
+  git pull
+  install-brew-packages
   for FILE in `ls -A dotfiles` ; do 
     if [ -f $HOME/$FILE -a ! -h $HOME/$FILE ] ; then 
       echo "... backing up $FILE"
