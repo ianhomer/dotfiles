@@ -11,5 +11,4 @@ line
 echo "Brew"
 line '.'
 
-brew list
-
+brew leaves | column -c 80
