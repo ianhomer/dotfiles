@@ -12,4 +12,5 @@ Configure my computers - see thanks below for inspiration.
 
 * [webpro](https://github.com/webpro/dotfiles).
 * https://github.com/mathiasbynens/dotfiles
+* https://github.com/paulirish/dotfiles
 * [Awesome dotfiles](https://github.com/webpro/awesome-dotfiles)
