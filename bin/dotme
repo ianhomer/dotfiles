@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 #
 # Prepare my environment and link dotfiles into place.
 #
@@ -68,7 +69,7 @@ command_stow() {
       backup $FILE
     done
     [ $VERBOSE -eq 1 ] && echo "... stowing $DIR"
-    [ $DRY -eq 0 ] && stow -v -t $HOME .
+    [ $DRY -eq 0 ] && stow -v --ignore=.swp -t $HOME .
   done
 }
 
