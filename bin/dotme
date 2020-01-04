@@ -4,21 +4,43 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 DOTFILES_DIR="$( cd "$SCRIPT_DIR" ; cd .. && pwd )"
 PATH=${SCRIPT_DIR}:${PATH}
 VERBOSE=0
+DRY=0
+
+# Backup file before stowing
+backup() {
+  file=$1
+  if [ -f $HOME/$file -a ! -h $HOME/$file ] ; then 
+    echo "... backing up $file"
+    [ $DRY -eq 0 ] && mv $HOME/$file{,.bak} 
+  fi
+}
+
+# Restore file after unstowing
+restore() {
+  file=$1
+  if [ -f $HOME/$file.bak ] ; then 
+    echo "... restoring $file"
+    [ $DRY -eq 0 ] && mv $HOME/$file.bak $HOME/${file%%.bak} 
+  fi
+}
 
 command_install() {
   echo "Installing dotfiles ..."
   [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
   cd $DOTFILES_DIR
-  git pull
-  install-brew-packages
-  for FILE in `ls -A dotfiles` ; do 
-    if [ -f $HOME/$FILE -a ! -h $HOME/$FILE ] ; then 
-      echo "... backing up $FILE"
-      mv $HOME/$FILE{,.bak} 
-    fi
-  done
-  stow -v -t $HOME dotfiles
+  [ $DRY -eq 0 ] && git pull
+  [ $DRY -eq 0 ] && install-brew-packages
+  stow
   echo "... installed"
+}
+
+command_stow() {
+  echo "... stowing dotfiles"
+  cd $DOTFILES_DIR
+  for FILE in `find . -type f -print` ; do 
+    backup $FILE
+  done
+  [ $DRY -eq 0 ] && stow -v -t $HOME dotfiles
 }
 
 command_update() {
@@ -37,15 +59,17 @@ command_clean() {
 
 command_uninstall() {
   echo "Uninstalling dotfiles ..."
-  stow -v --delete -t $HOME dotfiles
-  for FILE in `ls -A dotfiles` ; do 
-    if [ -f $HOME/$FILE.bak ] ; then 
-      echo "... restoring $FILE"
-      mv $HOME/$FILE.bak $HOME/${FILE%%.bak} 
-    fi
-  done
+  unstow
   echo "... uninstalled"
 }
+
+command_unstow() {
+  [ $DRY -eq 0 ] && stow -v --delete -t $HOME dotfiles
+  for FILE in `find . -type f -print` ; do
+    restore $FILE 
+  done
+}
+
 
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
 
@@ -56,23 +80,27 @@ usage() {
   cat <<EOF
 script usage: 
   
-  $(basename $0) [-h] command
+  $(basename $0) [-hvd] command
 
 where command is one of:
 
-* install (default)
-* update
 * clean - clean up caches
+* install (default)
+* stow
 * uninstall
+* unstow
+* update
 
 EOF
 }
 
-while getopts "h?vf:" opt; do
+while getopts "h?vd" opt; do
   case "$opt" in
   h|\?)
     usage
     exit 0
+    ;;
+  d) DRY=1
     ;;
   v) VERBOSE=1
     ;;
