@@ -32,7 +32,7 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
 " fzf config
-let $FZF_DEFAULT_COMMAND = 'fd --type f'
+let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
 
 call plug#begin()
 
