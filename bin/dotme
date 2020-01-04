@@ -1,4 +1,16 @@
 #!/usr/bin/env bash
+#
+# Prepare my environment and link dotfiles into place.
+#
+# Files in the dotfiles directory are linked into home directory with stow. The files are
+# store in a directory for each tool. The result of the stowing is that all the files in
+# the dotfiles directory have a corresponding link from the home directory to the master
+# version in this dotfiles directory. All updates to the dotfiles are reflected when the 
+# dotfiles repository is updated.
+#
+# This process also installs a collection of tools that are useful. This process is for
+# macOS only.
+#
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 REPOSITORY_DIR="$( cd "$SCRIPT_DIR" ; cd .. && pwd )"
@@ -8,7 +20,7 @@ PATH=${SCRIPT_DIR}:${PATH}
 VERBOSE=0
 DRY=0
 
-# Backup file before stowing
+# Backup file before stowing.
 backup() {
   file=$1
   if [ -f $HOME/$file -a ! -h $HOME/$file ] ; then 
@@ -23,7 +35,7 @@ backup() {
   fi
 }
 
-# Restore file after unstowing
+# Restore file after unstowing.
 restore() {
   file=$1
   if [ -f $HOME/$file.bak ] ; then 
@@ -34,16 +46,19 @@ restore() {
   fi
 }
 
+# Main entry point for installing dotfiles, and more, for a system.
 command_install() {
   echo "Installing dotfiles ..."
   [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
   cd $REPOSITORY_DIR
   [ $DRY -eq 0 ] && git pull
+  [ $DRY -eq 0 ] && install-vim-plug
   [ $DRY -eq 0 ] && install-brew-packages
   command_stow
   echo "... installed"
 }
 
+# Just stow dotfiles, quicker than a full install.
 command_stow() {
   echo "... stowing dotfiles"
   cd $DOTFILES_DIR
@@ -57,6 +72,7 @@ command_stow() {
   done
 }
 
+# Just update system, assuming it's already been installed.
 command_update() {
   echo "Updating system"
   cd $REPOSITORY_DIR
@@ -66,17 +82,20 @@ command_update() {
   npm update -g
 }
 
+# Housekeeping and keeping things clean.
 command_clean() {
   echo "Cleaning up caches"
   brew cleanup
 }
 
+# Unistall dotfiles. Note that this does not (at this time), unstill brew packages.
 command_uninstall() {
   echo "Uninstalling dotfiles ..."
   command_unstow
   echo "... uninstalled"
 }
 
+# Unstow dotfiles.
 command_unstow() {
   echo "... unstowing files"
   cd $DOTFILES_DIR
