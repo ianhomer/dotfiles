@@ -27,6 +27,12 @@ set clipboard=unnamed
 
 " NERDTree config
 nmap <F7> :NERDTreeToggle<CR>
+let NERDTreeQuitOnOpen = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
+" fzf config
+let $FZF_DEFAULT_COMMAND = 'fd --type f'
 
 call plug#begin()
 
@@ -34,6 +40,8 @@ call plug#begin()
 
 " NERDTree - file explore 
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" NERDTree - show git changes
+Plug 'Xuyuanp/nerdtree-git-plugin'
 " fzf - Fuzzy Finder
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
