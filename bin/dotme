@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-DOTFILES_DIR="$( cd "$SCRIPT_DIR" ; cd .. && pwd )"
+REPOSITORY_DIR="$( cd "$SCRIPT_DIR" ; cd .. && pwd )"
+DOTFILES_DIR="${REPOSITORY_DIR}/dotfiles"
+
 PATH=${SCRIPT_DIR}:${PATH}
 VERBOSE=0
 DRY=0
@@ -10,8 +12,14 @@ DRY=0
 backup() {
   file=$1
   if [ -f $HOME/$file -a ! -h $HOME/$file ] ; then 
-    echo "... backing up $file"
+    echo "... backing up $HOME/$file"
     [ $DRY -eq 0 ] && mv $HOME/$file{,.bak} 
+  elif [ $VERBOSE -eq 1 ] ; then
+    if [ ! -f $HOME/$file ] ; then
+      echo "... not backing up $HOME/$file since it doesn't exist"
+    else
+      echo "... not backing up $HOME/$file since it is already stowed, i.e. a link"
+    fi
   fi
 }
 
@@ -27,7 +35,7 @@ restore() {
 command_install() {
   echo "Installing dotfiles ..."
   [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
-  cd $DOTFILES_DIR
+  cd $REPOSITORY_DIR
   [ $DRY -eq 0 ] && git pull
   [ $DRY -eq 0 ] && install-brew-packages
   stow
@@ -37,15 +45,19 @@ command_install() {
 command_stow() {
   echo "... stowing dotfiles"
   cd $DOTFILES_DIR
-  for FILE in `find . -type f -print` ; do 
-    backup $FILE
+  for DIR in `ls -d */` ; do
+    cd $DOTFILES_DIR/$DIR
+    for FILE in `find . -type f -print` ; do 
+      backup $FILE
+    done
+    [ $VERBOSE -eq 1 ] && echo "... stowing $DIR"
+    [ $DRY -eq 0 ] && stow -v -t $HOME .
   done
-  [ $DRY -eq 0 ] && stow -v -t $HOME dotfiles
 }
 
 command_update() {
   echo "Updating system"
-  cd $DOTFILES_DIR
+  cd $REPOSITORY_DIR
   git pull
   brew update
   brew upgrade
@@ -64,6 +76,7 @@ command_uninstall() {
 }
 
 command_unstow() {
+  cd $DOTFILES_DIR
   [ $DRY -eq 0 ] && stow -v --delete -t $HOME dotfiles
   for FILE in `find . -type f -print` ; do
     restore $FILE 
