@@ -5,8 +5,7 @@ Configure my computers - see thanks below for inspiration.
 # tl;dr
 
     git clone git@github.com:ianhomer/dotfiles.git ~/.dotfiles
-    cd ~/.dotfiles
-    ~/dotme
+    ~/.dotfiles/bin/dotme
 
 # Thanks
 

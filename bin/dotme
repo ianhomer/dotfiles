@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
-DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-PATH=${DOTFILES_DIR}/bin:${PATH}
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+DOTFILES_DIR="$( cd "$SCRIPT_DIR" ; cd .. && pwd )"
+PATH=${SCRIPT_DIR}:${PATH}
+VERBOSE=0
 
 command_install() {
   echo "Installing dotfiles ..."
+  [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
   cd $DOTFILES_DIR
   git pull
   install-brew-packages
@@ -71,9 +74,7 @@ while getopts "h?vf:" opt; do
     usage
     exit 0
     ;;
-  v)  verbose=1
-    ;;
-  f)  output_file=$OPTARG
+  v) VERBOSE=1
     ;;
   esac
 done
