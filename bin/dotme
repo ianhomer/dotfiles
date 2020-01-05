@@ -56,9 +56,9 @@ command_install() {
   [ $DRY -eq 0 ] && install-vim-plug
   [ $DRY -eq 0 ] && install-brew-packages
   command_stow
-  echo "... installed"
+  echo "... dotfiles installed and AOK"
 }
-
+ 
 # Pull latest version of dotfiles
 command_pull() {
   echo "... pulling latest version of dotfiles"

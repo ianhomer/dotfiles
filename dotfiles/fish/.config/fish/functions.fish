@@ -15,4 +15,4 @@ function git-set-personal-url
   end
 end
 
-echo "...Loaded ~/.config/fish/functions.fish" 
+echo "... Loaded ~/.config/fish/functions.fish" 
