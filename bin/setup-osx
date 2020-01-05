@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+
+echo "... setting up OSX defaults"
+
+#
+# Based onhttps://github.com/paulirish which is a fork of https://mths.be/osx - thx
+#
+
+#
+# Before adding anything here, try it first manually on a machine, perhaps with the system
+# preferences panel, then read the defaults with **defaults read**.
+#
+
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
+# Disable smart quotes as they’re annoying when typing code
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+# Disable smart dashes as they’re annoying when typing code
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+# Finder: show hidden files by default
+defaults write com.apple.Finder AppleShowAllFiles -bool true
+
+# Finder: show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Finder: show status bar
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Finder: show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+
+# Show the ~/Library folder
+chflags nohidden ~/Library
+
+# Hot corners
+# Possible values:
+#  0: no-op
+#  2: Mission Control
+#  3: Show application windows
+#  4: Desktop
+#  5: Start screen saver
+#  6: Disable screen saver
+#  7: Dashboard
+# 10: Put display to sleep
+# 11: Launchpad
+# 12: Notification Center
+
+# Bottom left screen corner → put to sleep
+defaults write com.apple.dock wvous-bl-corner -int 10
+defaults write com.apple.dock wvous-bl-modifier -int 0
+# Bottom right screen corner → Desktop
+defaults write com.apple.dock wvous-br-corner -int 4
+defaults write com.apple.dock wvous-br-modifier -int 0
+
+###############################################################################
+# Kill affected applications                                                  #
+###############################################################################
+
+for app in "Finder" \ ; do
+	killall "${app}" &> /dev/null
+done
+
+echo "... ... DONE - OSX defaults have been configured"
+
+

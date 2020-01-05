@@ -10,7 +10,7 @@ Configure my computers - see thanks below for inspiration.
 # Thanks
 
 * [webpro](https://github.com/webpro/dotfiles)
-* https://github.com/mathiasbynens/dotfiles
-* https://github.com/paulirish/dotfiles
+* [Mathias]( https://github.com/mathiasbynens/dotfiles )
+* [Paul Irish]( https://github.com/paulirish/dotfiles )
 * [Awesome dotfiles](https://github.com/webpro/awesome-dotfiles)
 * [Managing dotfiles with stow](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/)

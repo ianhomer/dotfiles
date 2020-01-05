@@ -61,10 +61,11 @@ Plug 'godlygeek/tabular'
 Plug 'tpope/vim-fugitive'
 " symlink - Follow symlink when opening file
 Plug 'aymericbeaumet/vim-symlink'
+" surround - Surround with brackets etc
+Plug 'tpope/vim-surround'
 
 " Assess : Plugins being assesed as candidates for general use
 
-Plug 'tpope/vim-surround'
 Plug 'junegunn/goyo.vim'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 " Plug 'junegunn/limelight.vim'
