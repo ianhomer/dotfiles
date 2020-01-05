@@ -51,13 +51,19 @@ restore() {
 command_install() {
   echo "Installing dotfiles ..."
   [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
-  cd $REPOSITORY_DIR
-  [ $DRY -eq 0 ] && git pull
+  command_pull
   [ $DRY -eq 0 ] && setup-osx
   [ $DRY -eq 0 ] && install-vim-plug
   [ $DRY -eq 0 ] && install-brew-packages
   command_stow
   echo "... installed"
+}
+
+# Pull latest version of dotfiles
+command_pull() {
+  echo "... pulling latest version of dotfiles"
+  cd $REPOSITORY_DIR
+  [ $DRY -eq 0 ] && git pull
 }
 
 # Just stow dotfiles, quicker than a full install.
@@ -126,6 +132,7 @@ where command is one of:
 
 * clean - clean up caches
 * install (default)
+* pull
 * stow
 * uninstall
 * unstow
