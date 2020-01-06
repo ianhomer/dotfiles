@@ -1,4 +1,5 @@
 brew "ack"
+brew "dos2unix"
 brew "eye-d3"
 brew "fd"
 brew "ffmpeg", args: ["with-libvpx"]
@@ -6,11 +7,17 @@ brew "findutils"
 brew "fish"
 brew "fzf"
 brew "git"
+brew "gradle"
 brew "gnupg"
 brew "imagemagick", args: ["with-webp"]
 brew "jenv"
 brew "maven"
+brew "nvm"
+brew "nmap"
 brew "rbenv"
 brew "node"
 brew "stow"
+brew "terraform"
 brew "yarn"
+
+cask "docker"
