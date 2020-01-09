@@ -1,3 +1,5 @@
+source ~/Library/Preferences/org.dystroy.broot/launcher/fish/br 
+
 function git-reset-ssh-key
   ssh-add -D
   ssh-add -l
