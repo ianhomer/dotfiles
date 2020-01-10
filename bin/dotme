@@ -57,6 +57,7 @@ command_install() {
   [ $DRY -eq 0 ] && install-vim-plug
   [ $DRY -eq 0 ] && install-node-packages
   command_stow
+  command_clean
   echo "... dotfiles installed and AOK"
 }
  
