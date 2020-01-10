@@ -52,9 +52,9 @@ command_install() {
   echo "Installing dotfiles ..."
   [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
   command_pull
+  command_brew
   [ $DRY -eq 0 ] && setup-osx
   [ $DRY -eq 0 ] && install-vim-plug
-  command_brew
   [ $DRY -eq 0 ] && install-node-packages
   command_stow
   echo "... dotfiles installed and AOK"
