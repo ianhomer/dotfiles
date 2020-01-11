@@ -66,10 +66,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'aymericbeaumet/vim-symlink'
 " surround - Surround with brackets etc
 Plug 'tpope/vim-surround'
+" goyo - Distraction free writing
+Plug 'junegunn/goyo.vim'
 
 " Assess : Plugins being assesed as candidates for general use
 
-Plug 'junegunn/goyo.vim'
+Plug 'morhetz/gruvbox'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 " Plug 'junegunn/limelight.vim'
 " Plug 'godlygeek/tabular'
@@ -77,3 +79,6 @@ Plug 'junegunn/goyo.vim'
 " Plug 'junegunn/goyo.vim'
 
 call plug#end()
+
+colorscheme gruvbox
+:set bg=dark
