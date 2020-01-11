@@ -71,6 +71,14 @@ defaults write com.apple.dock wvous-br-modifier -int 0
 duti -s org.vim.MacVim json all
 duti -s org.vim.MacVim md all
 
+# Application Specific
+
+# iterm - use profiles in dotfiles directory
+# Specify the preferences directory
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "${HOME}/.dotfiles/config/iterm2"
+# Tell iTerm2 to use the custom preferences in the directory
+defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
