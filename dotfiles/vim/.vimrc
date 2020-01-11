@@ -31,9 +31,6 @@ set clipboard=unnamed
 
 " NERDTree config
 nmap <F7> :NERDTreeToggle<CR>
-" Quit NERDTree when opening file - this feels counter-intuitive to me,
-" thinkng of removing
-" let NERDTreeQuitOnOpen = 1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
