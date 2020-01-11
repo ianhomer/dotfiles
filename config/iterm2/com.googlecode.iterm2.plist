@@ -417,6 +417,8 @@
 	</dict>
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>418 355 799 448 0 0 1680 922 </string>
+	<key>NSWindow Frame ProfilesPanel</key>
+	<string>319 13 735 382 0 0 1680 922 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>915 506 572 378 0 0 1680 922 </string>
 	<key>New Bookmarks</key>
@@ -1290,6 +1292,8 @@
 			</dict>
 			<key>Bound Hosts</key>
 			<array/>
+			<key>Brighten Bold Text</key>
+			<true/>
 			<key>Character Encoding</key>
 			<integer>4</integer>
 			<key>Close Sessions On End</key>
@@ -1673,6 +1677,8 @@
 				<key>Red Component</key>
 				<real>0.7928692102432251</real>
 			</dict>
+			<key>Minimum Contrast</key>
+			<real>0.31003639914772729</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
@@ -1773,12 +1779,12 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1680, 945}}</string>
 		<key>topLeft</key>
-		<string>{123, 699}</string>
+		<string>{149, 578}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>2FD40B6B-A107-446B-BAF3-EAADC4881C10</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>14</integer>
+	<integer>17</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2514,7 +2520,7 @@
 	<key>PrefsCustomFolder</key>
 	<string>~/.dotfiles/config/iterm2</string>
 	<key>SUEnableAutomaticChecks</key>
-	<true/>
+	<false/>
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
@@ -2539,5 +2545,9 @@
 	<false/>
 	<key>iTerm Version</key>
 	<string>3.3.7</string>
+	<key>kCPKSelectionViewPreferredModeKey</key>
+	<integer>0</integer>
+	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
+	<false/>
 </dict>
 </plist>
