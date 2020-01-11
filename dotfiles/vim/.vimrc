@@ -14,6 +14,8 @@ set cursorline
 set ignorecase
 " Highlight dynamically as pattern is typed
 set incsearch
+" Auto reload underlying file if it changes
+set autoread
 
 "
 " Subjective vim configuration
