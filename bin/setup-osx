@@ -10,14 +10,20 @@ echo "... setting up OSX defaults"
 # Before adding anything here, try it first manually on a machine, perhaps with the system
 # preferences panel, then read the defaults with **defaults read**.
 #
+# You view current defaults with
+# 
+#   defaults read | less
+#
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
 
-# Mute sounds
 # Mute volume change feedback
 defaults write -g "com.apple.sound.beep.feedback" -int 0
+
+# Quite alert
+defaults write -g "com.apple.sound.beep.volume" -float 0.2
 
 # Disable smart quotes as they’re annoying when typing code
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
