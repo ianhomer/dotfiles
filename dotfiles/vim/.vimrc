@@ -19,6 +19,10 @@ set incsearch
 " Subjective vim configuration
 "
 
+" Provide more space for command output (e.g. fugitive) - with it this you may
+" need to press ENTER after fugitive commands
+set shortmess=a
+" set cmdheight=2
 " Tab support with 2 spaces
 set tabstop=2 shiftwidth=2 expandtab
 
