@@ -7,6 +7,10 @@ Configure my computers - see thanks below for inspiration.
     git clone git@github.com:ianhomer/dotfiles.git ~/.dotfiles
     ~/.dotfiles/bin/dotme
 
+After installed then update at any time with
+
+    dotme
+
 # Thanks
 
 * [webpro](https://github.com/webpro/dotfiles)
