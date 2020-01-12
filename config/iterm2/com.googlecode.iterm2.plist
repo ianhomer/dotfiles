@@ -370,10 +370,6 @@
 	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
-	<key>NSNavLastRootDirectory</key>
-	<string>~/projects/opensource/gruvbox-contrib/iterm2</string>
-	<key>NSNavPanelExpandedSizeForOpenMode</key>
-	<string>{799, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -415,16 +411,6 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
-	<key>NSWindow Frame NSNavPanelAutosaveName</key>
-	<string>418 355 799 448 0 0 1680 922 </string>
-	<key>NSWindow Frame ProfilesPanel</key>
-	<string>319 13 735 382 0 0 1680 922 </string>
-	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 817 922 0 0 1680 922 </string>
-	<key>NSWindow Frame iTerm Window 1</key>
-	<string>817 383 572 539 0 0 1680 922 </string>
-	<key>NSWindow Frame iTerm Window 2</key>
-	<string>726 83 908 209 0 0 1680 922 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1734,7 +1720,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>HackNerdFontComplete-Regular 12</string>
+			<string>FuraCodeNerdFontComplete-Regular 11</string>
 			<key>Open Toolbelt</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -1948,26 +1934,22 @@
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
-		<string>Monaco</string>
-		<string>Hack Nerd Font</string>
+		<string>FuraCode Nerd Font</string>
+		<string>Menlo</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {1680, 945}}</string>
+		<string>{{0, 0}, {1440, 900}}</string>
 		<key>topLeft</key>
-		<string>{71, 611}</string>
+		<string>{380, 727}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
-	<string>2FD40B6B-A107-446B-BAF3-EAADC4881C10</string>
+	<string>82D5A7C5-08D8-4FB9-B6F5-00020E468A6A</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>18</integer>
-	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
-	<true/>
-	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
-	<real>600604059.65820205</real>
+	<real>600724132.92992496</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
 	<true/>
 	<key>NoSyncRecordedVariables</key>
@@ -2344,22 +2326,6 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentTab.currentSession</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentTab.window</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
 				<string>id</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
@@ -2459,15 +2425,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentSession</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentSession.terminalIconName</string>
+				<string>currentSession.commandLine</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -2499,7 +2457,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentSession.commandLine</string>
+				<string>currentSession.terminalIconName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -2556,14 +2514,6 @@
 				<true/>
 				<key>name</key>
 				<string>currentSession.name</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>window</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -2693,7 +2643,7 @@
 		</array>
 	</dict>
 	<key>NoSyncTipOfTheDayEligibilityBeganTime</key>
-	<real>600431259.65796995</real>
+	<real>600551332.92971396</real>
 	<key>PrefsCustomFolder</key>
 	<string>~/.dotfiles/config/iterm2</string>
 	<key>SUEnableAutomaticChecks</key>
@@ -2701,13 +2651,9 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final_new.xml?shard=39</string>
+	<string>https://iterm2.com/appcasts/final_new.xml?shard=3</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
-	<key>SULastCheckTime</key>
-	<date>2020-01-11T10:50:27Z</date>
-	<key>SUSendProfileInfo</key>
-	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>ShowPaneTitles</key>
