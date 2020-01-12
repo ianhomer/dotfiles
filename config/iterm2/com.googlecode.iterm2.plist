@@ -422,7 +422,9 @@
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 0 817 922 0 0 1680 922 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>817 474 817 448 0 0 1680 922 </string>
+	<string>817 383 572 539 0 0 1680 922 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>726 83 908 209 0 0 1680 922 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1387,6 +1389,8 @@
 			<string>No</string>
 			<key>Custom Directory</key>
 			<string>Yes</string>
+			<key>Custom Window Title</key>
+			<string></string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Description</key>
@@ -1731,6 +1735,8 @@
 			<true/>
 			<key>Normal Font</key>
 			<string>HackNerdFontComplete-Regular 12</string>
+			<key>Open Toolbelt</key>
+			<false/>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1920,6 +1926,8 @@
 			<true/>
 			<key>Use Bright Bold</key>
 			<true/>
+			<key>Use Custom Window Title</key>
+			<true/>
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
@@ -1929,7 +1937,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>0</integer>
+			<integer>12</integer>
 			<key>Working Directory</key>
 			<string>~</string>
 		</dict>
@@ -1948,7 +1956,7 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1680, 945}}</string>
 		<key>topLeft</key>
-		<string>{294, 769}</string>
+		<string>{71, 611}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>2FD40B6B-A107-446B-BAF3-EAADC4881C10</string>
@@ -2700,6 +2708,10 @@
 	<date>2020-01-11T10:50:27Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
+	<key>ShowNewOutputIndicator</key>
+	<true/>
+	<key>ShowPaneTitles</key>
+	<true/>
 	<key>SoundForEsc</key>
 	<false/>
 	<key>StatusBarPosition</key>
@@ -2712,6 +2724,8 @@
 	<true/>
 	<key>VisualIndicatorForEsc</key>
 	<false/>
+	<key>WindowNumber</key>
+	<true/>
 	<key>iTerm Version</key>
 	<string>3.3.7</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
