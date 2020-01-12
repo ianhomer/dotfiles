@@ -49,6 +49,9 @@ chflags nohidden ~/Library
 # Hide menu bar - TBD if good
 # defaults write NSGlobalDomain _HIHideMenuBar -int 1
 
+# Ctrl+Cmd & click and drag any where in window to move window (reboot required after applied)
+defaults write -g NSWindowShouldDragOnGesture -bool true
+
 # Hot corners
 # Possible values:
 #  0: no-op
