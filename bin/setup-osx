@@ -84,8 +84,10 @@ defaults write com.apple.dock wvous-br-modifier -int 0
 # Set up file extension handlers
 # By default OSX seems to open all tech files, json, xml, etc in xcode, this is just heavy weight and so wrong. Use vi instead for quick access.
 
+duti -s org.vim.MacVim csv all
 duti -s org.vim.MacVim json all
 duti -s org.vim.MacVim md all
+duti -s org.vim.MacVim txt all
 
 # Application Specific
 
