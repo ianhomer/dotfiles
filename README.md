@@ -11,14 +11,16 @@ After installed then update at any time with
 
     dotme
 
-#set foldcolumn=2 Why?
+# Why?
 
-This dotfiles configuration is based about my prefered way of working to streamline distraction free coding. This includes:
+This dotfiles configuration is based about my prefered way of working to
+streamline distraction free coding. This includes: 
 
-* vi - file editing
+* brew - package managerr
+* fish - friendly interactive shell
 * git - source control
 * iterm - terminal
-* brew - package managerr
+* vi - file editing
 
 It is also useful if you install a windows manager, e.g. Magnet.
 
@@ -33,14 +35,17 @@ It is also useful if you install a windows manager, e.g. Magnet.
   * **Cmd+n** - New terminal window
 * vi
   * :NERDTreeToggle - Open file browser
-    * m - open file actions
+* m - open file actions
     * Shift+i - show hidden files
   * :cd - change directory
   * :split,:vsplit - split pane
+  * 80 Ctrl-w +
   * Ctrl-w+left/right - move to another pane
   * :bd - close buffer
   * :Goyo - distraction free coding
   * zR - open all folds
+  * gw{motion} - reformat content 
+  * select+gw - reformat content
 
 # Thanks
 
