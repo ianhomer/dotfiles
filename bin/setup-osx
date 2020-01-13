@@ -46,8 +46,17 @@ defaults write com.apple.finder ShowPathbar -bool true
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
-# Hide menu bar - TBD if good
-# defaults write NSGlobalDomain _HIHideMenuBar -int 1
+# Hide menu bar
+defaults write NSGlobalDomain _HIHideMenuBar -int 1
+
+# Hide the dock
+defaults write com.apple.Dock autohide -int 1
+
+# Delay dock opening, makes it harder to accidentally open it, and if I want it I'll wait
+defaults write com.apple.Dock autohide-delay -int 1
+
+# Minise applications into the application icon in the dock
+defaults write minimize-to-application -int 1
 
 # Ctrl+Cmd & click and drag any where in window to move window (reboot required after applied)
 defaults write -g NSWindowShouldDragOnGesture -bool true
@@ -90,7 +99,7 @@ defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 # Kill affected applications                                                  #
 ###############################################################################
 
-for app in "Finder" \ ; do
+for app in "Dock" "Finder" \ ; do
 	killall "${app}" &> /dev/null
 done
 
