@@ -33,21 +33,26 @@ It is also useful if you install a windows manager, e.g. Magnet.
   * **Ctrl+Cmd+space** - Special character window
 * iterm
   * **Cmd+n** - New terminal window
+  * **git open** - Open git repository in web browser
 * vi
-  * :NERDTreeToggle - Open file browser
-* m - open file actions
-    * Shift+i - show hidden files
-  * :cd - change directory
-  * :split,:vsplit - split pane
-  * 80 Ctrl-w +
-  * Ctrl-w+left/right - move to another pane
-  * :bd - close buffer
-  * :Goyo - distraction free coding
-  * zR - open all folds
-  * vip - select paragrapgh
-  * gw{motion} - reformat content
-  * select+gw - reformat content
-  * ysiw" - surround word with quotes
+  * **:NERDTreeToggle** - Open file browser
+    * **m** - open file actions
+    * **Shift+i** - show hidden files
+  * **:cd** - change directory
+  * **:split,:vsplit** - split pane
+  * **80 Ctrl-w** + - set current pane to 80 characters
+  * **Ctrl-w+left/right** - move to another pane
+  * **:bd** - close buffer
+  * **:Goyo** - distraction free coding
+  * **zR** - open all folds
+  * **vip** - select paragraph
+  * **viW** - select current word 
+  * **gw{motion}** - reformat content
+  * **select+gw** - reformat content
+  * **select+S"** - surround selected **area** with quotes
+  * **ysiw"** - surround word with quotes
+  * markdown
+    * **viWS+** - make a word bold 
 
 # Thanks
 

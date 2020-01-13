@@ -39,8 +39,6 @@ let NERDTreeDirArrows = 1
 " fzf config
 let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
 
-call plug#begin()
-
 " Markdown syntax
 " Conceal some syntax - e.g. ** around bold
 set conceallevel=2
@@ -51,7 +49,9 @@ set foldlevelstart=20
 
 " Surround Customisations
 " This doesn't work for me - https://stackoverflow.com/questions/32769488/double-vim-surround-with
-" let b:surround_{char2nr('b')} = "**\r**"
+autocmd Filetype markdown let b:surround_43 = "**\r**"
+
+call plug#begin()
 
 " Adopt : Plugins adopted for general use
 
@@ -80,16 +80,21 @@ Plug 'tpope/vim-fugitive'
 Plug 'aymericbeaumet/vim-symlink'
 " surround - Surround with brackets etc
 Plug 'tpope/vim-surround'
+" repeat - Repeat with .
+"Plug 'tpope/vim-repeat'
 " goyo - Distraction free writing
 Plug 'junegunn/goyo.vim'
-
+" gruvbox - styling
+Plug 'morhetz/gruvbox'
 " Assess : Plugins being assesed as candidates for general use
 
-Plug 'morhetz/gruvbox'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 " Plug 'junegunn/limelight.vim'
 
 call plug#end()
 
 colorscheme gruvbox
-:set bg=dark
+set bg=dark
+
+
+
