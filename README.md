@@ -11,7 +11,7 @@ After installed then update at any time with
 
     dotme
 
-# Why?
+#set foldcolumn=2 Why?
 
 This dotfiles configuration is based about my prefered way of working to streamline distraction free coding. This includes:
 
@@ -39,6 +39,7 @@ It is also useful if you install a windows manager, e.g. Magnet.
   * Ctrl-w+left/right - move to another pane
   * :bd - close buffer
   * :Goyo - distraction free coding
+  * zR - open all folds
 
 # Thanks
 
