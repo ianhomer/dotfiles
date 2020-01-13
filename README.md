@@ -44,13 +44,15 @@ It is also useful if you install a windows manager, e.g. Magnet.
   * :bd - close buffer
   * :Goyo - distraction free coding
   * zR - open all folds
-  * gw{motion} - reformat content 
+  * vip - select paragrapgh
+  * gw{motion} - reformat content
   * select+gw - reformat content
+  * ysiw" - surround word with quotes
 
 # Thanks
 
 * [webpro](https://github.com/webpro/dotfiles)
 * [Mathias]( https://github.com/mathiasbynens/dotfiles )
-* [Paul Irish]( https://github.com/paulirish/dotfiles )
+* [Paul Irish](https://github.com/paulirish/dotfiles)
 * [Awesome dotfiles](https://github.com/webpro/awesome-dotfiles)
 * [Managing dotfiles with stow](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/)

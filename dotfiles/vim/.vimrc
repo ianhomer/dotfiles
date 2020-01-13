@@ -49,6 +49,10 @@ let g:markdown_folding = 1
 " Default large fold level start, folding everything up by default feels odd.
 set foldlevelstart=20
 
+" Surround Customisations
+" This doesn't work for me - https://stackoverflow.com/questions/32769488/double-vim-surround-with
+" let b:surround_{char2nr('b')} = "**\r**"
+
 " Adopt : Plugins adopted for general use
 
 " NERDTree - file explore 
