@@ -46,6 +46,8 @@ call plug#begin()
 set conceallevel=2
 " Enable folding
 let g:markdown_folding = 1
+" Default fold level start
+set foldlevelstart=20
 
 
 " Hold : plasticboy vim-markdown extras
