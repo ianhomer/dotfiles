@@ -46,7 +46,7 @@ call plug#begin()
 set conceallevel=2
 " Enable folding
 let g:markdown_folding = 1
-" Default fold level start
+" Default large fold level start, folding everything up by default feels odd.
 set foldlevelstart=20
 
 
