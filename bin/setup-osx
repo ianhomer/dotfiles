@@ -22,7 +22,7 @@ osascript -e 'tell application "System Preferences" to quit'
 # Mute volume change feedback
 defaults write -g "com.apple.sound.beep.feedback" -int 0
 
-# Quite alert
+# Very quiet alert, the default alert volume is crazy
 defaults write -g "com.apple.sound.beep.volume" -float 0.2
 
 # Disable smart quotes as they’re annoying when typing code
@@ -73,13 +73,14 @@ defaults write com.apple.dock wvous-br-corner -int 4
 defaults write com.apple.dock wvous-br-modifier -int 0
 
 # Set up file extension handlers
+# By default OSX seems to open all tech files, json, xml, etc in xcode, this is just heavy weight and so wrong. Use vi instead for quick access.
 
 duti -s org.vim.MacVim json all
 duti -s org.vim.MacVim md all
 
 # Application Specific
 
-# iterm - use profiles in dotfiles directory
+# iterm - use profiles in dotfiles directory so that preferences are shared.
 # Specify the preferences directory
 defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.dotfiles/config/iterm2"
 # Tell iTerm2 to use the custom preferences in the directory
