@@ -48,8 +48,9 @@ set conceallevel=2
 let g:markdown_folding = 1
 
 
-" plasticboy vim-markdown extras
+" Hold : plasticboy vim-markdown extras
 " Set child list indent to 2 spaces when you type o on a list item
+" Much of the plastic boy markdown support seems to be now in https://vimawesome.com/plugin/vim-markdown-enchanted
 "let g:vim_markdown_new_list_item_indent = 2
 
 
@@ -82,7 +83,7 @@ Plug 'aymericbeaumet/vim-symlink'
 Plug 'tpope/vim-surround'
 " goyo - Distraction free writing
 Plug 'junegunn/goyo.vim'
-" vim-markdown
+" Hold : vim-markdown
 "Plug 'plasticboy/vim-markdown'
 
 " Assess : Plugins being assesed as candidates for general use

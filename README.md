@@ -28,6 +28,7 @@ It is also useful if you install a windows manager, e.g. Magnet.
   * **Ctrl+Up** - Mission Control / space management
     * **Ctrl-right/left** - Move to other spaces 
   * **Ctrl+Cmd+click+drag** - Move Window
+  * **Ctrl+Cmd+space** - Special character window
 * iterm
   * **Cmd+n** - New terminal window
 * vi
