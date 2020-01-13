@@ -41,6 +41,18 @@ let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
 
 call plug#begin()
 
+" Markdown syntax
+" Conceal some syntax - e.g. ** around bold
+set conceallevel=2
+" Enable folding
+let g:markdown_folding = 1
+
+
+" plasticboy vim-markdown extras
+" Set child list indent to 2 spaces when you type o on a list item
+"let g:vim_markdown_new_list_item_indent = 2
+
+
 " Adopt : Plugins adopted for general use
 
 " NERDTree - file explore 
@@ -70,6 +82,8 @@ Plug 'aymericbeaumet/vim-symlink'
 Plug 'tpope/vim-surround'
 " goyo - Distraction free writing
 Plug 'junegunn/goyo.vim'
+" vim-markdown
+"Plug 'plasticboy/vim-markdown'
 
 " Assess : Plugins being assesed as candidates for general use
 
@@ -77,8 +91,6 @@ Plug 'morhetz/gruvbox'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 " Plug 'junegunn/limelight.vim'
 " Plug 'godlygeek/tabular'
-" Plug 'plasticboy/vim-markdown'
-" Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
