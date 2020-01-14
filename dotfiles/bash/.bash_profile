@@ -2,4 +2,4 @@
 
 [ -z "$PS1" ] && return
 
-echo "... running .bash_profilei from dotfiles"
+echo "... running .bash_profile from dotfiles"
