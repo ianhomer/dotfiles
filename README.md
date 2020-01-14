@@ -14,7 +14,7 @@ After installed then update at any time with
 # Why?
 
 This dotfiles configuration is based about my prefered way of working to
-streamline distraction free coding. This includes: 
+streamline distraction free coding. This includes:
 
 * brew - package managerr
 * fish - friendly interactive shell

@@ -5,7 +5,7 @@ Useful keyboard short cuts.
 # OSX
 
 * **Ctrl+Up** - Mission Control / space management
-  * **Ctrl-right/left** - Move to other spaces 
+  * **Ctrl-right/left** - Move to other spaces
 * **Ctrl+Cmd+click+drag** - Move Window
 * **Ctrl+Cmd+space** - Special character window
 
@@ -26,6 +26,7 @@ Useful keyboard short cuts.
 * **:bd** - close buffer
 * **:bn** - next buffer
 * **"2p** - paste a previous cut
+* **gf** - go to file under cursor
 * **gx** - open link in browser
 * **gt** - go to next tab
 * **tabe** - open file in new tab
@@ -36,7 +37,7 @@ Useful keyboard short cuts.
 * **80 Ctrl-w** + - set current pane to 80 characters
 * **Ctrl-w+left/right** or **Ctrl-h/j/k/l** - move to another pane
 
-## vi - Editing 
+## vi - Editing
 
 * **:Goyo** - distraction free coding
 * **gw{motion}** - reformat content
@@ -46,10 +47,10 @@ Useful keyboard short cuts.
 
 ## vi - Markdown
 
-* **viWS+** - make a word bold 
+* **viWS+** - make a word bold
 * **zR** - open all folds
 
 ## vi - Selections
 
 * **vip** - select paragraph
-* **viW** - select current word (including non-alphanumeric) 
+* **viW** - select current word (including non-alphanumeric)
