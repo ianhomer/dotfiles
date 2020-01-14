@@ -7,12 +7,12 @@ Useful keyboard short cuts.
 * **Ctrl+Up** - Mission Control / space management
   * **Ctrl-right/left** - Move to other spaces
 * **Ctrl+Cmd+click+drag** - Move Window
-* **Ctrl+Cmd+space** - Special character window
+* **Ctrl+Cmd+space** - Open special character window
 
 # iterm
 
 * **Cmd+n** - New terminal window
-  * **git open** - Open git repository in web browser
+* **git open** - Open git repository in web browser
 
 # vi
 
@@ -49,6 +49,7 @@ Useful keyboard short cuts.
 
 * **viWS+** - make a word bold
 * **zR** - open all folds
+* **zM** - close all folds
 
 ## vi - Selections
 
