@@ -6,7 +6,7 @@
 # Files in the dotfiles directory are linked into home directory with stow. The files are
 # store in a directory for each tool. The result of the stowing is that all the files in
 # the dotfiles directory have a corresponding link from the home directory to the master
-# version in this dotfiles directory. All updates to the dotfiles are reflected when the 
+# version in this dotfiles directory. All updates to the dotfiles are reflected when the
 # dotfiles repository is updated.
 #
 # This process also installs a collection of tools that are useful. This process is for
@@ -24,9 +24,9 @@ DRY=0
 # Backup file before stowing.
 backup() {
   file=$1
-  if [ -f $HOME/$file -a ! -h $HOME/$file ] ; then 
+  if [ -f $HOME/$file -a ! -h $HOME/$file ] ; then
     echo "... backing up $HOME/$file"
-    [ $DRY -eq 0 ] && mv $HOME/$file{,.bak} 
+    [ $DRY -eq 0 ] && mv $HOME/$file{,.bak}
   elif [ $VERBOSE -eq 1 ] ; then
     if [ ! -f $HOME/$file ] ; then
       echo "... not backing up $HOME/$file since it doesn't exist"
@@ -39,9 +39,9 @@ backup() {
 # Restore file after unstowing.
 restore() {
   file=$1
-  if [ -f $HOME/$file.bak ] ; then 
+  if [ -f $HOME/$file.bak ] ; then
     echo "... restoring $HOME/$file"
-    [ $DRY -eq 0 ] && mv $HOME/$file.bak $HOME/${file%%.bak} 
+    [ $DRY -eq 0 ] && mv $HOME/$file.bak $HOME/${file%%.bak}
   elif [ $VERBOSE -eq 1 ] ; then
     echo "... not restoring $HOME/$file.bak since it doesn't exist"
   fi
@@ -60,7 +60,7 @@ command_install() {
   command_clean
   echo "... dotfiles installed and AOK"
 }
- 
+
 # Pull latest version of dotfiles
 command_pull() {
   echo "... pulling latest version of dotfiles"
@@ -78,7 +78,7 @@ command_stow() {
   cd $DOTFILES_DIR
   for DIR in `ls -d */` ; do
     cd $DOTFILES_DIR/$DIR
-    for FILE in `find . -type f -print` ; do 
+    for FILE in `find . -type f -print` ; do
       backup $FILE
     done
     [ $VERBOSE -eq 1 ] && echo "... stowing $DIR"
@@ -118,7 +118,7 @@ command_unstow() {
     [ $DRY -eq 0 ] && stow -v --delete -t $HOME .
     for FILE in `find . -type f -print` ; do
       restore $FILE
-    done 
+    done
   done
 }
 
@@ -130,8 +130,8 @@ VERBOSE=0
 
 usage() {
   cat <<EOF
-script usage: 
-  
+script usage:
+
   $(basename $0) [-hvd] command
 
 where command is one of:
@@ -173,4 +173,3 @@ if [ $? = 127 ]; then
   usage
   exit 1
 fi
-
