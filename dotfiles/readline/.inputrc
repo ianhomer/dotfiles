@@ -1,0 +1,16 @@
+# Perform file completion in a case insensitive fashion
+set completion-ignore-case on
+
+# Treat hyphens and underscores as equivalent
+set completion-map-case on
+
+# Display matches for ambiguous patterns at first tab press
+set show-all-if-ambiguous on
+
+# Immediately add a trailing slash when autocompleting symlinks to directories
+set mark-symlinked-directories on
+
+# Try to get cursor to change in vi depending on mode
+#set show-mode-in-prompt on
+#set vi-cmd-mode-string "\1\e[2 q\2"
+#set vi-ins-mode-string "\1\e[6 q\2"
