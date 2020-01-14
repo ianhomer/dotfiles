@@ -31,7 +31,7 @@ Useful keyboard short cuts.
 
 * **:split,:vsplit** - split pane
 * **80 Ctrl-w** + - set current pane to 80 characters
-* **Ctrl-w+left/right** - move to another pane
+* **Ctrl-w+left/right** or **Ctrl-h/j/k/l** - move to another pane
 
 ## vi - Editing 
 
