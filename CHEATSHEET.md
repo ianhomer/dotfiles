@@ -16,24 +16,37 @@ Useful keyboard short cuts.
 
 # vi
 
+## vi - Files, Buffers & Navigations
+
 * **:NERDTreeToggle** or **<F7>** - Open file browser
   * **m** - open file actions
   * **Shift+i** - show hidden files
 * **:cd** - change directory
+* **:vreg** - show paste buffer
+* **:bd** - close buffer
+* **"2p** - paste a previous cut
+* **gx** - open link in browser
+
+## vi - Window Management
+
 * **:split,:vsplit** - split pane
 * **80 Ctrl-w** + - set current pane to 80 characters
 * **Ctrl-w+left/right** - move to another pane
-* **:bd** - close buffer
+
+## vi - Editing 
+
 * **:Goyo** - distraction free coding
-* **zR** - open all folds
-* **vip** - select paragraph
-* **viW** - select current word 
 * **gw{motion}** - reformat content
 * **select+gw** - reformat content
 * **select+S"** - surround selected **area** with quotes
 * **ysiw"** - surround word with quotes
-* **gx** - open link in browser
-* markdown
-  * **viWS+** - make a word bold 
 
+## vi - Markdown
 
+* **viWS+** - make a word bold 
+* **zR** - open all folds
+
+## vi - Selections
+
+* **vip** - select paragraph
+* **viW** - select current word (including non-alphanumeric) 
