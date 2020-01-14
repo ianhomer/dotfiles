@@ -24,6 +24,11 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+" Enable tab line
+let g:airline#extensions#tabline#enabled = 1
+" Enable powerfonts giving angled tables
+let g:airline_powerline_fonts = 1
+
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
 set shortmess=a
@@ -71,6 +76,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 " Airline - status bar
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " gitgutter - Git change indicator to left of window
 Plug 'airblade/vim-gitgutter'
 " editorconfig - Support standard editorconfig files

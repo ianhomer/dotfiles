@@ -24,8 +24,11 @@ Useful keyboard short cuts.
 * **:cd** - change directory
 * **:vreg** - show paste buffer
 * **:bd** - close buffer
+* **:bn** - next buffer
 * **"2p** - paste a previous cut
 * **gx** - open link in browser
+* **gt** - go to next tab
+* **tabe** - open file in new tab
 
 ## vi - Window Management
 
