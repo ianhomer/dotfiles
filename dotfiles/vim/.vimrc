@@ -17,6 +17,9 @@ set incsearch
 " Auto reload underlying file if it changes
 set autoread
 
+" Do not highlight current line when in insert mode
+autocmd InsertEnter,InsertLeave * set cul!
+
 " Map ctrl-j etc to moving between panes, a little quicker than Ctrl-w and
 " arrow
 nnoremap <C-J> <C-W><C-J>
