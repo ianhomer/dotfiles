@@ -14,8 +14,11 @@ set cursorline
 set ignorecase
 " Highlight dynamically as pattern is typed
 set incsearch
-" Auto reload underlying file if it changes
+" Auto reload underlying file if it changes, although
+" it only really reloads when external command run like :!ls
 set autoread
+" Auto reload when focus gained or buffer entered
+au FocusGained,BufEnter * :checktime
 
 " Do not highlight current line when in insert mode
 autocmd InsertEnter,InsertLeave * set cul!
