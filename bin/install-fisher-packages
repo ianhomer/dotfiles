@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+#
+# Install fisher packages
+#
+
+if [ ! -f ~/.config/fish/functions/fisher.fish ] ; then
+  curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+fi
+
+
