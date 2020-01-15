@@ -13,6 +13,8 @@ Useful keyboard short cuts.
 
 * **Cmd+n** - New terminal window
 * **git open** - Open git repository in web browser
+* **z mydir <tab>** - find recently opened folder (using fasd)
+* **z** - list recently opened folder weightings
 
 # vi
 
