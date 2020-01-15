@@ -4,7 +4,7 @@ set PATH ~/.dotfiles/bin $PATH
 
 
 # Point OMF state to dotfiles
-set -g OMF_CONFIG ~/dotfiles/config/omf
+set -g OMF_CONFIG ~/.dotfiles/config/omf
 
 if status --is-interactive
   source ~/.config/fish/aliases.fish
