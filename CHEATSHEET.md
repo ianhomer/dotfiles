@@ -30,6 +30,7 @@ Useful keyboard short cuts.
 * **gx** - open link in browser
 * **gt** - go to next tab
 * **tabe** - open file in new tab
+* **bufdo bd** - close all buffers
 
 ## vi - Window Management
 
