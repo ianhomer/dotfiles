@@ -1,7 +1,9 @@
 #!/usr/bin/env fish
 
 #
-# Install omg packages 
+# Install omg packages from config/omf/bundle 
 #
 
-omf install fasd
+echo "... install omf bundle from $OMF_CONFIG"
+
+omf install
