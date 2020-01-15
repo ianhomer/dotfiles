@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+#
+# Install brew packages
+#
+
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 PATH=${SCRIPT_DIR}:${PATH}
 
