@@ -52,8 +52,8 @@ defaults write NSGlobalDomain _HIHideMenuBar -int 1
 # Hide the dock
 defaults write com.apple.Dock autohide -int 1
 
-# Delay dock opening, makes it harder to accidentally open it, and if I want it I'll wait
-defaults write com.apple.Dock autohide-delay -float 0.5
+# No delay for dock opening
+defaults write com.apple.Dock autohide-delay -int 0
 
 # Minise applications into the application icon in the dock
 defaults write minimize-to-application -int 1
@@ -89,6 +89,7 @@ duti -s org.vim.MacVim json all
 duti -s org.vim.MacVim md all
 duti -s org.vim.MacVim properties all
 duti -s org.vim.MacVim tf all
+duti -s org.vim.MacVim sql all
 duti -s org.vim.MacVim txt all
 duti -s org.vim.MacVim yaml all
 
