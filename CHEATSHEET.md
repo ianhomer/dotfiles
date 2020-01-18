@@ -16,6 +16,13 @@ Useful keyboard short cuts.
 * **z mydir <tab>** - find recently opened folder (using fasd)
 * **z** - list recently opened folder weightings
 
+# tmux
+
+* **Ctrl-a** - prefix
+* prefix **c** - new window
+* prefix **w** - show windows
+* **Opt-arrow** - move between panes
+
 # vi
 
 ## vi - Files, Buffers & Navigations
