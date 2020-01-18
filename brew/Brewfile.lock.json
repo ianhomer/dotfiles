@@ -436,27 +436,6 @@
       "fasd": {
         "version": "1.0.1",
         "bottle": false
-      },
-      "tmux": {
-        "version": "3.0a",
-        "bottle": {
-          "cellar": ":any",
-          "prefix": "/usr/local",
-          "files": {
-            "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/tmux-3.0a.catalina.bottle.tar.gz",
-              "sha256": "3d29caf7e2b87c9f1af575b4ec10af3e29c5de6979a8bd884153d9e8e1b69f20"
-            },
-            "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/tmux-3.0a.mojave.bottle.tar.gz",
-              "sha256": "6cfd3987dcda2901a3ed423138db7782ea88a993e1409c4ebb9d647b1c007e8a"
-            },
-            "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/tmux-3.0a.high_sierra.bottle.tar.gz",
-              "sha256": "c7c42853ca6a3a5ad6ab6544defee14e450643f5ace274b9cf00d348e8525993"
-            }
-          }
-        }
       }
     },
     "cask": {
@@ -473,9 +452,9 @@
       "catalina": {
         "HOMEBREW_VERSION": "2.2.3",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "bd0a4c33cbb2f0990e1f89900be1540a08c8c2ac",
-        "CLT": "11.0.33.16",
-        "Xcode": "11.3",
+        "Homebrew/homebrew-core": "e6264820382dbe555f2a345b6cce192bb6320ecf",
+        "CLT": "11.3.1.0.1.1576735732",
+        "Xcode": "11.3.1",
         "macOS": "10.15.2"
       }
     }
