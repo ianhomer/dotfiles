@@ -420,9 +420,9 @@
 	<key>NSWindow Frame ProfilesPanel</key>
 	<string>319 13 735 382 0 0 1680 922 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>840 454 628 468 0 0 1680 945 </string>
-	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 0 838 945 0 0 1680 945 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>1226 796 572 356 0 0 2048 1152 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>726 0 572 377 0 0 1680 922 </string>
 	<key>New Bookmarks</key>
@@ -1780,7 +1780,7 @@
 			<key>Shortcut</key>
 			<string></string>
 			<key>Show Status Bar</key>
-			<false/>
+			<true/>
 			<key>Silence Bell</key>
 			<false/>
 			<key>Status Bar Layout</key>
@@ -1960,22 +1960,24 @@
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {1680, 945}}</string>
+		<string>{{0, 0}, {2048, 1152}}</string>
 		<key>topLeft</key>
-		<string>{260, 792}</string>
+		<string>{233, 777}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>2FD40B6B-A107-446B-BAF3-EAADC4881C10</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>18</integer>
+	<integer>21</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
-	<real>600604059.65820205</real>
+	<real>600903986.94516301</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
 	<true/>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
 	<key>NoSyncRecordedVariables</key>
 	<dict>
 		<key>0</key>
@@ -2465,7 +2467,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentSession</string>
+				<string>currentSession.terminalWindowName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -2522,6 +2524,14 @@
 				<true/>
 				<key>name</key>
 				<string>iterm2.localhostName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession.jobPid</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -2655,19 +2665,19 @@
 			</dict>
 			<dict>
 				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
 				<false/>
 				<key>name</key>
 				<string>currentSession</string>
 				<key>nonterminalContext</key>
 				<integer>1</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentSession.terminalWindowName</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
 			</dict>
 		</array>
 		<key>4</key>
