@@ -22,6 +22,10 @@ Useful keyboard short cuts.
 * prefix **c** - new window
 * prefix **w** - show windows
 * **Opt-arrow** - move between panes
+* prefix **space** - toggle between layouts
+* prefix **[** - copy mode with **Enter** to copy selection
+
+[more tmux cheats](https://tmuxcheatsheet.com/)
 
 # vi
 
