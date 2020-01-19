@@ -48,3 +48,4 @@ dotfiles](https://github.com/webpro/awesome-dotfiles) make a good attempt to. Ho
 * [Mathias]( https://github.com/mathiasbynens/dotfiles )
 * [Paul Irish](https://github.com/paulirish/dotfiles)
 * [Managing dotfiles with stow](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/)
+* [egel](https://github.com/egel/dotfiles)
