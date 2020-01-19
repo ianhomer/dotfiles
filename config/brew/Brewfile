@@ -1,3 +1,11 @@
+tap "homebrew/cask-fonts"
+
+#
+# The awesome Hack Nerd fonts combining the Hack source code font -  https://github.com/source-foundry/Hack
+# with the Nerd aggregation of icons - https://www.nerdfonts.com/
+#
+cask "font-hack-nerd-font"
+
 brew "ack"
 brew "broot"
 brew "dos2unix"
@@ -20,10 +28,10 @@ brew "nvm"
 brew "nmap"
 brew "rbenv"
 brew "node"
-brew "the_silver_searcher"
 brew "stow"
 brew "terraform"
 brew "tmux"
+
 brew "yarn"
 
 cask "docker"
