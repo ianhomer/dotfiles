@@ -35,8 +35,6 @@ nnoremap <silent> <leader>m :Maps<CR>
 nnoremap <silent> <leader>a :Ag<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 
-nnoremap <silent> <leader><C-W><Left>
-
 " Reload vimrc
 nnoremap <leader>vc :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
 " Clear whitespace
