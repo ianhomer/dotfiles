@@ -9,6 +9,11 @@ cask "font-hack-nerd-font"
 #
 # core tools
 #
+# * fd - alternative to find
+# * fish - friendly interactive shell
+# * stow - link farming
+# * the_silver_searcher - ack, recursive grep alternative a.k.a ag
+# * tmux - terminal multiplexer
 
 brew "ack"
 brew "broot"
@@ -17,15 +22,25 @@ brew "fasd"
 brew "fd"
 brew "findutils"
 brew "fish"
-brew "fzf"
+brew "gnupg"
+brew "nmap"
 brew "stow"
+brew "the_silver_searcher"
 brew "tmux"
 
 cask "iterm2"
 
 #
+# supporting tools
+#
+# * fzf - fuzzy file name searcher, powering vi plugin 
+
+brew "fzf"
+
+#
 # macos tools
 #
+# * duti - externision to tool mapping configuration
 
 brew "duti"
 brew "macvim"
@@ -44,6 +59,7 @@ brew "node"
 brew "terraform"
 brew "yarn"
 
+cask "docker"
 
 #
 # media tools
@@ -51,9 +67,4 @@ brew "yarn"
 
 brew "eye-d3"
 brew "ffmpeg", args: ["with-libvpx"]
-brew "gnupg"
 brew "imagemagick", args: ["with-webp"]
-brew "nmap"
-
-
-cask "docker"

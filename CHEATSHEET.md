@@ -35,7 +35,7 @@ Useful keyboard short cuts.
   * **m** - open file actions
   * **Shift+i** - show hidden files
 * **:cd** - change directory
-* **:vreg** - show paste buffer
+* **:reg** - show paste buffer
 * **:bd** - close buffer
 * **:bn** - next buffer
 * **"2p** - paste a previous cut
