@@ -6,33 +6,54 @@ tap "homebrew/cask-fonts"
 #
 cask "font-hack-nerd-font"
 
+#
+# core tools
+#
+
 brew "ack"
 brew "broot"
 brew "dos2unix"
-brew "duti"
-brew "eye-d3"
 brew "fasd"
 brew "fd"
-brew "ffmpeg", args: ["with-libvpx"]
 brew "findutils"
 brew "fish"
 brew "fzf"
-brew "git"
-brew "gradle"
-brew "gnupg"
-brew "imagemagick", args: ["with-webp"]
-brew "jenv"
-brew "macvim"
-brew "maven"
-brew "nvm"
-brew "nmap"
-brew "rbenv"
-brew "node"
 brew "stow"
-brew "terraform"
 brew "tmux"
 
+cask "iterm2"
+
+#
+# macos tools
+#
+
+brew "duti"
+brew "macvim"
+
+#
+# dev tools
+#
+
+brew "git"
+brew "gradle"
+brew "jenv"
+brew "maven"
+brew "nvm"
+brew "rbenv"
+brew "node"
+brew "terraform"
 brew "yarn"
 
+
+#
+# media tools
+#
+
+brew "eye-d3"
+brew "ffmpeg", args: ["with-libvpx"]
+brew "gnupg"
+brew "imagemagick", args: ["with-webp"]
+brew "nmap"
+
+
 cask "docker"
-cask "iterm2"
