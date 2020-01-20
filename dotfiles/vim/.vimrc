@@ -23,6 +23,25 @@ au FocusGained,BufEnter * :checktime
 " Do not highlight current line when in insert mode
 autocmd InsertEnter,InsertLeave * set cul!
 
+" Leader is space
+let mapleader = "\<Space>"
+
+" My shortcuts
+nnoremap <silent> <leader><space> :Buffers<CR>
+nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>c :Commits<CR>
+nnoremap <silent> <leader>h :History<CR>
+nnoremap <silent> <leader>m :Maps<CR>
+nnoremap <silent> <leader>a :Ag<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+
+nnoremap <silent> <leader><C-W><Left>
+
+" Reload vimrc
+nnoremap <leader>vc :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
+" Clear whitespace
+nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
+
 " Map ctrl-j etc to moving between panes, a little quicker than Ctrl-w and
 " arrow
 nnoremap <C-J> <C-W><C-J>
