@@ -22,6 +22,8 @@ Useful keyboard short cuts.
 * prefix **c** - new window
 * prefix **w** - show windows
 * prefix **,** - renmae window
+* prefix **|** or **-** - split pane
+* prefix **x** - close pane
 * **Opt-arrow** - move between panes
 * prefix **space** - toggle between layouts
 * prefix **[** - copy mode with **Enter** to copy selection
