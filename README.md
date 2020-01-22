@@ -26,6 +26,7 @@ includes:
 * **git** - source control
 * **iterm** - terminal
 * **vi** - file editing
+* **FiraCode Nerd Font** - ligatures, powerline and more
 
 It is also useful if you install a windows manager. My current favourute is [Magnet](https://magnet.crowdcafe.com), but
 there are sevaral good ones out there to choose from. You don't have to, however keyboard short cuts and window
