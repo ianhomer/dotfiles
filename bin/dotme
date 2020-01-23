@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 #
 # Prepare my environment and link dotfiles into place.
 #
@@ -21,7 +20,9 @@ PATH=${SCRIPT_DIR}:${PATH}
 VERBOSE=0
 DRY=0
 
+#
 # Backup file before stowing.
+#
 backup() {
   file=$1
   if [ -f $HOME/$file -a ! -h $HOME/$file ] ; then
@@ -36,7 +37,9 @@ backup() {
   fi
 }
 
+#
 # Restore file after unstowing.
+#
 restore() {
   file=$1
   if [ -f $HOME/$file.bak ] ; then
@@ -47,7 +50,9 @@ restore() {
   fi
 }
 
+#
 # Main entry point for installing dotfiles, and more, for a system.
+#
 command_install() {
   echo "Installing dotfiles ..."
   [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
@@ -61,7 +66,9 @@ command_install() {
   echo "... dotfiles installed and AOK"
 }
 
+#
 # Pull latest version of dotfiles
+#
 command_pull() {
   echo "... pulling latest version of dotfiles"
   cd $REPOSITORY_DIR

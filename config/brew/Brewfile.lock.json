@@ -6,22 +6,22 @@
         "bottle": false
       },
       "broot": {
-        "version": "0.11.9",
+        "version": "0.12.0",
         "bottle": {
           "cellar": ":any_skip_relocation",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/broot-0.11.9.catalina.bottle.tar.gz",
-              "sha256": "e6dccab5f81fd14ad040ebe6623a2bf82df86ec2812f24b102a79de364defeb3"
+              "url": "https://homebrew.bintray.com/bottles/broot-0.12.0.catalina.bottle.tar.gz",
+              "sha256": "94f495b23dc7dbf0012ee33efdfc40f3742ed6b74c9c6ab49452e21889cb753d"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/broot-0.11.9.mojave.bottle.tar.gz",
-              "sha256": "167fb4edc68e17aea721ff0af58c5584fc4094d63d55f20f51ff6e4e56f629f8"
+              "url": "https://homebrew.bintray.com/bottles/broot-0.12.0.mojave.bottle.tar.gz",
+              "sha256": "3d6929d1fa011ad6d0ea039941f7e43a3e5524a1d871f4c31e660c9a9e32d2bb"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/broot-0.11.9.high_sierra.bottle.tar.gz",
-              "sha256": "db76e7614619a987874bf7ef3683bf06ddc04dfc463ef651bc63c7306545b8c9"
+              "url": "https://homebrew.bintray.com/bottles/broot-0.12.0.high_sierra.bottle.tar.gz",
+              "sha256": "4ac5eacae4f75c830492431a8468d8f73312b8335092ac7b846f315c08d958b0"
             }
           }
         }
@@ -490,29 +490,35 @@
     },
     "cask": {
       "docker": {
-        "version": "2.1.0.5,40693"
+        "version": "18.03.1-ce-mac65,24312"
       },
       "iterm2": {
         "version": "3.3.7"
       },
       "font-hack-nerd-font": {
         "version": "2.0.0"
+      },
+      "font-firacode-nerd-font-mono": {
+        "version": "2.0.0"
+      },
+      "drawio": {
+        "version": "12.5.3"
       }
     },
     "tap": {
       "homebrew/cask-fonts": {
-        "revision": "7b213ee5ddf324cc9f55203aaaa8fc11844260e0"
+        "revision": "dffcec566e99539f44a0eef812fee18b38c5fb0d"
       }
     }
   },
   "system": {
     "macos": {
       "catalina": {
-        "HOMEBREW_VERSION": "2.2.3",
+        "HOMEBREW_VERSION": "2.2.4",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "a0d663b59370b1190928ab5815655c58bf53bb8a",
-        "CLT": "11.0.33.16",
-        "Xcode": "11.3",
+        "Homebrew/homebrew-core": "cc0bceefd6a0b779c58ee3698097125344c3c539",
+        "CLT": "11.3.1.0.1.1576735732",
+        "Xcode": "11.3.1",
         "macOS": "10.15.2"
       }
     }
