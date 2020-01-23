@@ -27,6 +27,7 @@ Useful keyboard short cuts.
 * **Opt-arrow** - move between panes
 * prefix **space** - toggle between layouts
 * prefix **[** - copy mode with **Enter** to copy selection
+* hold option + mouse - bypass tmux mouse handling and do iterm action
 
 [more tmux cheats](https://tmuxcheatsheet.com/)
 
