@@ -28,6 +28,8 @@ Useful keyboard short cuts.
 * **Opt-arrow** - move between panes
 * prefix **space** - toggle between layouts
 * prefix **[** - copy mode with **Enter** to copy selection
+* hold option + mouse - bypass tmux mouse handling and do iterm action
+* click command  click - block select
 
 [more tmux cheats](https://tmuxcheatsheet.com/)
 
@@ -73,5 +75,3 @@ Useful keyboard short cuts.
 
 * **vip** - select paragraph
 * **viW** - select current word (including non-alphanumeric)
-* hold option + mouse - bypass tmux mouse handling and do iterm action
-* click option click - block select
