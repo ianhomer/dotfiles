@@ -5,34 +5,68 @@ tap "homebrew/cask-fonts"
 # with the Nerd aggregation of icons - https://www.nerdfonts.com/
 #
 cask "font-hack-nerd-font"
+cask "font-firacode-nerd-font-mono"
+
+#
+# core tools
+#
+# * fd - alternative to find
+# * fish - friendly interactive shell
+# * stow - link farming
+# * the_silver_searcher - ack, recursive grep alternative a.k.a ag
+# * tmux - terminal multiplexer
 
 brew "ack"
 brew "broot"
 brew "dos2unix"
-brew "duti"
-brew "eye-d3"
 brew "fasd"
 brew "fd"
-brew "ffmpeg", args: ["with-libvpx"]
 brew "findutils"
 brew "fish"
-brew "fzf"
-brew "git"
-brew "gradle"
 brew "gnupg"
-brew "imagemagick", args: ["with-webp"]
-brew "jenv"
-brew "macvim"
-brew "maven"
-brew "nvm"
 brew "nmap"
-brew "rbenv"
-brew "node"
 brew "stow"
-brew "terraform"
+brew "the_silver_searcher"
 brew "tmux"
 
+cask "iterm2"
+
+#
+# supporting tools
+#
+# * fzf - fuzzy file name searcher, powering vi plugin 
+
+brew "fzf"
+
+#
+# macos tools
+#
+# * duti - externision to tool mapping configuration
+
+brew "duti"
+brew "macvim"
+
+#
+# dev tools
+#
+
+brew "git"
+brew "gradle"
+brew "jenv"
+brew "maven"
+brew "nvm"
+brew "rbenv"
+brew "node"
+brew "terraform"
 brew "yarn"
 
 cask "docker"
-cask "iterm2"
+cask "drawio"
+
+#
+# media tools
+#
+
+brew "eye-d3"
+brew "ffmpeg", args: ["with-libvpx"]
+brew "imagemagick", args: ["with-webp"]
