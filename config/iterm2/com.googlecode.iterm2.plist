@@ -360,6 +360,8 @@
 	<string>341AAE3B-2313-4C59-9717-F45C79A571E6</string>
 	<key>DisableFullscreenTransparency</key>
 	<false/>
+	<key>DoubleClickPerformsSmartSelection</key>
+	<true/>
 	<key>EnableDivisionView</key>
 	<true/>
 	<key>EnableProxyIcon</key>
@@ -473,6 +475,10 @@
 	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
+	<key>NSNavLastRootDirectory</key>
+	<string>~/projects/opensource/gruvbox-contrib/iterm2</string>
+	<key>NSNavPanelExpandedSizeForOpenMode</key>
+	<string>{799, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -514,16 +520,18 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame NSNavPanelAutosaveName</key>
+	<string>418 355 799 448 0 0 1680 922 </string>
+	<key>NSWindow Frame ProfilesPanel</key>
+	<string>499 301 735 382 0 0 2048 1152 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 1 1440 874 0 0 1440 900 </string>
+	<string>0 0 2048 1152 0 0 2048 1152 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>480 163 572 377 0 0 1440 900 </string>
+	<string>947 411 572 356 0 0 2048 1152 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>480 369 957 531 0 0 1440 900 </string>
+	<string>961 171 572 331 0 0 2048 1152 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>480 9 957 531 0 0 1440 900 </string>
-	<key>NSWindow Frame iTerm Window 4</key>
-	<string>302 421 572 377 0 0 1440 900 </string>
+	<string>308 81 572 331 0 0 2048 1152 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1053,7 +1061,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 12</string>
+			<string>FuraCodeNerdFontCompleteM-Regular 12</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1835,7 +1843,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>FuraCodeNerdFontComplete-Regular 11</string>
+			<string>FuraCodeNerdFontCompleteM-Regular 11</string>
 			<key>Open Toolbelt</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -2049,31 +2057,30 @@
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
-		<string>FuraCode Nerd Font</string>
 		<string>Menlo</string>
+		<string>FuraCode Nerd Font Mono</string>
 	</array>
-	<key>NoSyncFrame_SessionsPreferences</key>
-	<dict>
-		<key>screenFrame</key>
-		<string>{{0, 0}, {1440, 900}}</string>
-		<key>topLeft</key>
-		<string>{417, 804}</string>
-	</dict>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {1440, 900}}</string>
+		<string>{{0, 0}, {2048, 1152}}</string>
 		<key>topLeft</key>
-		<string>{380, 727}</string>
+		<string>{233, 777}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
-	<string>82D5A7C5-08D8-4FB9-B6F5-00020E468A6A</string>
+	<string>2FD40B6B-A107-446B-BAF3-EAADC4881C10</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>3</integer>
+	<integer>29</integer>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>0</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
-	<real>600724132.92992496</real>
+	<real>600903986.94516301</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
 	<true/>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
 	<key>NoSyncRecordedVariables</key>
 	<dict>
 		<key>0</key>
@@ -2563,7 +2570,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentSession</string>
+				<string>currentSession.terminalWindowName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -2571,7 +2578,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentSession.commandLine</string>
+				<string>currentSession.terminalIconName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -2603,7 +2610,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentSession.terminalIconName</string>
+				<string>currentSession.commandLine</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -2620,6 +2627,14 @@
 				<true/>
 				<key>name</key>
 				<string>iterm2.localhostName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession.jobPid</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -2753,19 +2768,19 @@
 			</dict>
 			<dict>
 				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
 				<false/>
 				<key>name</key>
 				<string>currentSession</string>
 				<key>nonterminalContext</key>
 				<integer>1</integer>
-			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<true/>
-				<key>name</key>
-				<string>currentSession.terminalWindowName</string>
-				<key>nonterminalContext</key>
-				<integer>0</integer>
 			</dict>
 		</array>
 		<key>4</key>
@@ -2797,7 +2812,7 @@
 		</array>
 	</dict>
 	<key>NoSyncTipOfTheDayEligibilityBeganTime</key>
-	<real>600551332.92971396</real>
+	<real>600431259.65796995</real>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -2838,9 +2853,13 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final_new.xml?shard=3</string>
+	<string>https://iterm2.com/appcasts/final_new.xml?shard=39</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
+	<key>SULastCheckTime</key>
+	<date>2020-01-11T10:50:27Z</date>
+	<key>SUSendProfileInfo</key>
+	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>ShowPaneTitles</key>

@@ -24,9 +24,12 @@ Useful keyboard short cuts.
 * prefix **,** - renmae window
 * prefix **|** or **-** - split pane
 * prefix **x** - close pane
+* prefix **t** - show time
 * **Opt-arrow** - move between panes
 * prefix **space** - toggle between layouts
 * prefix **[** - copy mode with **Enter** to copy selection
+* hold option + mouse - bypass tmux mouse handling and do iterm action
+* click command  click - block select
 
 [more tmux cheats](https://tmuxcheatsheet.com/)
 
