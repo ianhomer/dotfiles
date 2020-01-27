@@ -2,7 +2,6 @@ status --is-interactive; and source (rbenv init - | psub)
 
 set PATH ~/.dotfiles/bin $PATH
 
-
 # Point OMF state to dotfiles
 set -g OMF_CONFIG ~/.dotfiles/config/omf
 
@@ -16,4 +15,7 @@ if status --is-interactive
   # Use vi key bindings
   fish_vi_key_bindings
   echo "... Loaded ~/.cnfig/fish/config.fish"
+
+  # Set terminal for GPG to allow signining of git commits 
+  set -x GPG_TTY (tty)
 end
