@@ -58,8 +58,9 @@ set shortmess=a
 set cmdheight=2
 " Tab support with 2 spaces
 set tabstop=2 shiftwidth=2 expandtab
-" 80 characters just feels too small for me as a default
-set textwidth=120
+" 80 characters line width
+set textwidth=80
+set colorcolumn=80
 
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
@@ -129,6 +130,5 @@ call plug#end()
 
 colorscheme gruvbox
 set bg=dark
-
-
+highlight ColorColumn ctermbg=lightgrey
 
