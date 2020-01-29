@@ -26,6 +26,9 @@ autocmd InsertEnter,InsertLeave * set cul!
 " Leader is space
 let mapleader = "\<Space>"
 
+" Semi-colon is easier for commands
+nnoremap ; :
+
 " My shortcuts
 nnoremap <silent> <leader><space> :Buffers<CR>
 nnoremap <silent> <leader>f :Files<CR>
