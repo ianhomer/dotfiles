@@ -47,6 +47,10 @@ nnoremap <C-K> <C-W>K
 nnoremap <C-L> <C-W>L
 nnoremap <C-H> <C-W>H
 
+" Show white space
+exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
+set list
+
 " Enable tab line
 let g:airline#extensions#tabline#enabled = 1
 " Enable powerfonts giving angled tables
@@ -124,11 +128,11 @@ Plug 'morhetz/gruvbox'
 
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 " Plug 'junegunn/limelight.vim'
-
 call plug#end()
 
 colorscheme gruvbox
 set bg=dark
+" Thanks to Damian Conway
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%81v', 100)
 
