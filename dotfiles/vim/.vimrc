@@ -26,6 +26,9 @@ autocmd InsertEnter,InsertLeave * set cul!
 " Leader is space
 let mapleader = "\<Space>"
 
+" Semi-colon is easier for commands
+nnoremap ; :
+
 " My shortcuts
 nnoremap <silent> <leader><space> :Buffers<CR>
 nnoremap <silent> <leader>f :Files<CR>
@@ -47,6 +50,10 @@ nnoremap <C-K> <C-W>K
 nnoremap <C-L> <C-W>L
 nnoremap <C-H> <C-W>H
 
+" Show white space
+exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
+set list
+
 " Enable tab line
 let g:airline#extensions#tabline#enabled = 1
 " Enable powerfonts giving angled tables
@@ -58,9 +65,14 @@ set shortmess=a
 set cmdheight=2
 " Tab support with 2 spaces
 set tabstop=2 shiftwidth=2 expandtab
+<<<<<<< HEAD
 " 80 characters line width
 set textwidth=80
 set colorcolumn=80
+=======
+" 80 characters default width
+set textwidth=80
+>>>>>>> fbf0344d9463bbf491d0003d169b739bf0b2dd23
 
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
@@ -125,10 +137,11 @@ Plug 'morhetz/gruvbox'
 
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 " Plug 'junegunn/limelight.vim'
-
 call plug#end()
 
 colorscheme gruvbox
 set bg=dark
-highlight ColorColumn ctermbg=lightgrey
+" Thanks to Damian Conway
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
 

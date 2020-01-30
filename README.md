@@ -39,9 +39,9 @@ have keyboard short cuts to arrange your windows.
 
 Various dotfiles are all located in sub-folders in the dotfiles/ folder for
 various tools. On installation, each of these are stowed in to your home
-directory, i.e. original backed up and dotfiles linked into place.
-Further installation and configuration takes place with scripts in the bin/
-directory, however just look at bin/dotme to see what actually happens.
+directory, i.e. original backed up and dotfiles linked into place. Further
+installation and configuration takes place with scripts in the bin/ directory,
+however just look at bin/dotme to see what actually happens.
 
 You can also update parts of the initialisation separately, see `dotme ?` to get
 a list of each part.
