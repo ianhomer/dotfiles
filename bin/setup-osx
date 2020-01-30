@@ -46,8 +46,8 @@ defaults write com.apple.finder ShowPathbar -bool true
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
-# Hide menu bar
-defaults write NSGlobalDomain _HIHideMenuBar -int 1
+# Don't hide menu bar
+defaults write NSGlobalDomain _HIHideMenuBar -int 0
 
 # Hide the dock
 defaults write com.apple.Dock autohide -int 1
