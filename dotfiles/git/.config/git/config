@@ -1,0 +1,17 @@
+#
+# dotfiles git config
+#
+# Private configuration MUST be stored in ~/.gitconfig which should be managed
+# locally, is not managed by dotfiles and is loaded after this dotfiles managed
+# configuration file.
+#
+
+[alias]
+  conf = config --list --show-origin
+
+[commit]
+  gpgsign = false
+
+[gpg]
+  program = gpg
+
