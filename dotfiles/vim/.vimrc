@@ -65,14 +65,8 @@ set shortmess=a
 set cmdheight=2
 " Tab support with 2 spaces
 set tabstop=2 shiftwidth=2 expandtab
-<<<<<<< HEAD
-" 80 characters line width
-set textwidth=80
-set colorcolumn=80
-=======
 " 80 characters default width
 set textwidth=80
->>>>>>> fbf0344d9463bbf491d0003d169b739bf0b2dd23
 
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
