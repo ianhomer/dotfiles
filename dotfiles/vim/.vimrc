@@ -137,5 +137,5 @@ colorscheme gruvbox
 set bg=dark
 " Thanks to Damian Conway
 highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
+call matchadd('ColorColumn', '\%82v', 100)
 
