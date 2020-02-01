@@ -31,9 +31,9 @@ working to streamline distraction free coding. This includes:
 
 It is also useful if you install a windows manager. My current favourute is
 [Magnet](https://magnet.crowdcafe.com), but there are sevaral good ones out
-there to choose from. You don't have to, however
-keyboard short cuts and window optimisations are done under the assumption you
-have keyboard short cuts to arrange your windows.
+there to choose from. You don't have to, however keyboard short cuts and window
+optimisations are done under the assumption you have keyboard short cuts to
+arrange your windows.
 
 # How?
 
@@ -49,8 +49,7 @@ a list of each part.
 # Thanks
 
 Too many dotfiles projects out there that have given me inspiration to mention
-them all, although [Awesome
-dotfiles](https://github.com/webpro/awesome-dotfiles) make a good attempt to.
+them all, although [Awesome dotfiles](https://github.com/webpro/awesome-dotfiles) make a good attempt to.
 However, particular thanks to:
 
 * [webpro](https://github.com/webpro/dotfiles)
@@ -58,3 +57,5 @@ However, particular thanks to:
 * [Paul Irish](https://github.com/paulirish/dotfiles)
 * [Managing dotfiles with stow](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/)
 * [egel](https://github.com/egel/dotfiles)
+* [starcraftman](https://github.com/starcraftman/dot)
+
