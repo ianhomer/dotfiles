@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+
+import os, sys, getopt
+
+def usage():
+  scriptName = os.path.basename(__file__)
+  print(f"{scriptName} <name>.<ext>")
+
+LANGUAGES = {
+  "js" : "javascript"
+}
+
+def lanaugeFrom(extension):
+  return LANGUAGES.get(extension, "javascript")
+
+def main(argv):
+  projectName = "kata"
+  language = "javascript"
+  try:
+    opts, argv = getopt.getopt(argv,
+      "h"
+    )
+  except getopt.GetoptError:
+    print(e)
+    usage()
+    sys.exit(2)
+  for opt, arg in opts:
+    if opt == '-h':
+      usage()
+      sys.exit()
+
+  if (len(argv) > 0):
+    projectName = argv[0]
+    parts = projectName.split(".")
+    if (len(parts) > 1):
+      projectName = parts[0]
+      extension = parts[1]
+      lanaguage = lanaguageFrom(extension)
+
+  print(f"Bootstrappinig kata : {projectName} : {language}")
+
+if __name__ == "__main__":
+  main(sys.argv[1:])
+
