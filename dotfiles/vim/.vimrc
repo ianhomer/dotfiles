@@ -44,26 +44,10 @@ Plug 'morhetz/gruvbox'
 " Plug 'junegunn/limelight.vim'
 call plug#end()
 
-" Enable mouse support
-set mouse=a    
-" Disable error bells
-set noerrorbells
-" Enhance command-line completion
-set wildmenu
-" Highlight current line
-set cursorline
-" Ignore case of searches
-set ignorecase
-" Highlight dynamically as pattern is typed
-set incsearch
-" Auto reload underlying file if it changes, although
-" it only really reloads when external command run like :!ls
-set autoread
-" Auto reload when focus gained or buffer entered
-au FocusGained,BufEnter * :checktime
 
-" Do not highlight current line when in insert mode
-autocmd InsertEnter,InsertLeave * set cul!
+"
+" Command remapping
+"
 
 " Leader is space
 let mapleader = "\<Space>"
@@ -91,6 +75,32 @@ nnoremap <C-J> <C-W>J
 nnoremap <C-K> <C-W>K
 nnoremap <C-L> <C-W>L
 nnoremap <C-H> <C-W>H
+
+"
+" Window and navigation
+"
+
+" Enable mouse support
+set mouse=a
+" Disable error bells
+set noerrorbells
+" Enhance command-line completion
+set wildmenu
+" Highlight current line
+set cursorline
+" Ignore case of searches
+set ignorecase
+" Highlight dynamically as pattern is typed
+set incsearch
+" Auto reload underlying file if it changes, although
+" it only really reloads when external command run like :!ls
+set autoread
+" Auto reload when focus gained or buffer entered
+au FocusGained,BufEnter * :checktime
+" Do not highlight current line when in insert mode
+autocmd InsertEnter,InsertLeave * set cul!
+" Allow hidden buffers without saving
+set hidden
 
 " Show white space
 exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
@@ -131,13 +141,20 @@ let g:markdown_folding = 1
 " Default large fold level start, folding everything up by default feels odd.
 set foldlevelstart=20
 
-" Surround Customisations
-" This doesn't work for me - https://stackoverflow.com/questions/32769488/double-vim-surround-with
-autocmd Filetype markdown let b:surround_43 = "**\r**"
-
 colorscheme gruvbox
 set bg=dark
 " Thanks to Damian Conway
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%82v', 100)
+
+"
+" File type specific loads
+"
+
+" Surround Customisations
+" This doesn't work for me - https://stackoverflow.com/questions/32769488/double-vim-surround-with
+autocmd Filetype markdown let b:surround_43 = "**\r**"
+
+" Override shiftwidth for python
+autocmd Filetype python set shiftwidth=2
 
