@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
 #
-a Prepare coding kata
+# Prepare coding kata
 #
 
 import os, sys, getopt
+from pathlib import Path
 
 def usage():
   scriptName = os.path.basename(__file__)
@@ -13,12 +14,19 @@ def usage():
 LANGUAGES = {
   "js" : "javascript"
 }
+EXTENSIONS = {v: k for k, v in LANGUAGES.items()}
+
+PROJECTS_DIRECTORY = f"{Path.home()}/projects"
+DOJO_DIRECTORY = f"{PROJECTS_DIRECTORY}/dojo"
 
 def lanaugeFrom(extension):
   return LANGUAGES.get(extension, "javascript")
 
+def extensionFrom(language):
+  return EXTENSIONS.get(language)
+
 def main(argv):
-  projectName = "kata"
+  kataName = "kata"
   language = "javascript"
   try:
     opts, argv = getopt.getopt(argv,
@@ -34,14 +42,31 @@ def main(argv):
       sys.exit()
 
   if (len(argv) > 0):
-    projectName = argv[0]
-    parts = projectName.split(".")
+    kataName = argv[0]
+    parts = kataName.split(".")
     if (len(parts) > 1):
-      projectName = parts[0]
+      kataName = parts[0]
       extension = parts[1]
       lanaguage = lanaguageFrom(extension)
 
-  print(f"Bootstrappinig kata : {projectName} : {language}")
+  extension = extensionFrom(language)
+  print(
+    f"Bootstrappinig kata : {kataName} : {language} : " +
+    f"{extension}"
+  )
+
+  kataDirectory = f"{DOJO_DIRECTORY}/{kataName}-{extension}"
+  if not os.path.exists(kataDirectory):
+    if not os.path.exists(DOJO_DIRECTORY):
+      if not os.path.exists(PROJECTS_DIRECTORY):
+        # Require projects directry to be previously created as safety guard
+        print(f"PLease create {PROJECTS_DIRECTORY}")
+      print(f"Creating dojo directory {DOJO_DIRECTORY}")
+      os.mkdir(DOJO_DIRECTORY)
+    print(f"Creating kata directory {kataDirectory}")
+    os.mkdir(kataDirectory)
+  else:
+    print(f"Kata directory {kataDirectory}")
 
 if __name__ == "__main__":
   main(sys.argv[1:])
