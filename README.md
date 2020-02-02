@@ -57,5 +57,3 @@ However, particular thanks to:
 * [Paul Irish](https://github.com/paulirish/dotfiles)
 * [Managing dotfiles with stow](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/)
 * [egel](https://github.com/egel/dotfiles)
-* [starcraftman](https://github.com/starcraftman/dot)
-
