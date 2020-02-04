@@ -12,7 +12,7 @@ call plug#begin(g:vim_dir."/plugged")
 
 "
 " Window and file navigation
-" 
+"
 
 " NERDTree - file explore
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
