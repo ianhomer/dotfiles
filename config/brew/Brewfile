@@ -63,8 +63,6 @@ brew "jenv"
 brew "maven"
 brew "nvm"
 brew "rbenv"
-# macvim clashes with vim, and is only on v8.1, so let's exlcude it for a while
-#brew "macvim", args: ["override-system-vim"]
 brew "node"
 brew "terraform"
 brew "yarn"
