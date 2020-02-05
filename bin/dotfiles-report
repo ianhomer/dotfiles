@@ -1,14 +1,40 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
 
-line() {
-  printf "${1:-=}%.0s" {1..40}
-  printf "\n\n"
-}
+#
+# Report on configuration
+#
 
-echo "dotfiles System Report"
-line
+import os, sys, getopt, subprocess
+from pathlib import Path
 
-echo "Brew"
-line '.'
+def usage():
+  scriptName = os.path.basename(__file__)
+  print(f"{scriptName} -h|b")
 
-brew leaves | column -c 80
+def reportBrew():
+  print("Brew")
+  print("." * 40)
+  os.system("brew leaves | column -c 80")
+
+def main(argv):
+  print("dotfiles System Report")
+  print("")
+  kataName = "kata"
+  language = "javascript"
+  try:
+    opts, argv = getopt.getopt(argv,
+      "hb"
+    )
+  except getopt.GetoptError:
+    print(e)
+    usage()
+    sys.exit(2)
+  for opt, arg in opts:
+    if opt == '-h':
+      usage()
+      sys.exit()
+    elif opt == '-b':
+      reportBrew()
+
+if __name__ == "__main__":
+  main(sys.argv[1:])
