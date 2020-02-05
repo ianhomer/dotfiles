@@ -4,12 +4,11 @@
 # Report on configuration
 #
 
-import os, sys, getopt, subprocess
+import argparse, os, sys, subprocess
 from pathlib import Path
 
 def usage():
-  scriptName = os.path.basename(__file__)
-  print(f"{scriptName} -h|b")
+  parser.print_help()
 
 def heading(heading, separator = "-"):
   if (separator == "-"):
@@ -26,29 +25,26 @@ def reportFish():
   heading("omf",".")
   os.system("fish -c 'omf list'")
 
+def reportAll():
+  reportFish()
+  reportBrew()
+
+parser = argparse.ArgumentParser(description="System Report")
+parser.add_argument("--brew", dest="reports", const="brew", 
+                    help="Brew report", action='append_const')
+parser.add_argument("--fish", dest="reports", const="fish",
+                    help="fish report", action='append_const')
+parser.add_argument("--helpx", dest="help", help="Help", action="store_true")
+
 def main(argv):
   heading("dotfiles System Report"," ")
-  all = True
-  try:
-    opts, argv = getopt.getopt(argv,
-      "hb",["brew","fish"]
-    )
-  except getopt.GetoptError:
-    print(e)
-    usage()
-    sys.exit(2)
-  for opt, arg in opts:
-    all = False
-    if opt == '-h':
-      usage()
-      sys.exit()
-    elif opt == '--brew':
-      reportBrew()
-    elif opt == '--fish':
-      reportFish()
+  args = parser.parse_args()
+  if args.reports is None:
+    reportAll()
+  else:
+    if args.help : usage()
+    if 'brew' in args.reports : reportBrew()
+    if 'fish' in args.reports : reportFish()
 
-  if (all):
-    reportFish()
-    reportBrew()
 if __name__ == "__main__":
   main(sys.argv[1:])
