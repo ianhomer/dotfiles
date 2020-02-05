@@ -11,16 +11,16 @@ def usage():
   scriptName = os.path.basename(__file__)
   print(f"{scriptName} -h|b")
 
+def heading(heading, separator = "."):
+  print(heading)
+  print(separator * 40)
+
 def reportBrew():
-  print("Brew")
-  print("." * 40)
+  heading("Brew")
   os.system("brew leaves | column -c 80")
 
 def main(argv):
-  print("dotfiles System Report")
-  print("")
-  kataName = "kata"
-  language = "javascript"
+  heading("dotfiles System Report"," ")
   try:
     opts, argv = getopt.getopt(argv,
       "hb"
