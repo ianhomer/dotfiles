@@ -2,14 +2,14 @@
 #
 # Prepare my environment and link dotfiles into place.
 #
-# Files in the dotfiles directory are linked into home directory with stow. The files are
-# store in a directory for each tool. The result of the stowing is that all the files in
-# the dotfiles directory have a corresponding link from the home directory to the master
-# version in this dotfiles directory. All updates to the dotfiles are reflected when the
-# dotfiles repository is updated.
+# Files in the dotfiles directory are linked into home directory with stow. The
+# files are store in a directory for each tool. The result of the stowing is
+# that all the files in the dotfiles directory have a corresponding link from
+# the home directory to the master version in this dotfiles directory. All
+# updates to the dotfiles are reflected when the dotfiles repository is updated.
 #
-# This process also installs a collection of tools that are useful. This process is for
-# macOS only.
+# This process also installs a collection of tools that are useful. This process
+# is for macOS only.
 #
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
@@ -86,10 +86,11 @@ command_stow() {
   for DIR in `ls -d */` ; do
     cd $DOTFILES_DIR/$DIR
     for FILE in `find . -type f -print` ; do
-      backup $FILE
+      [ $DRY -eq 0 ] && backup $FILE
     done
     [ $VERBOSE -eq 1 ] && echo "... stowing $DIR"
     [ $DRY -eq 0 ] && stow -v --ignore=.swp -t $HOME .
+    [ $DRY -eq 1 ] && stow --simulate -v --ignore=.sqp -t $HOME .
   done
 }
 
