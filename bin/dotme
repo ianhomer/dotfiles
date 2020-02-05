@@ -78,7 +78,7 @@ command_pull() {
 command_brew() {
   [ $DRY -eq 0 ] && install-brew-packages
 }
-:
+
 # Just stow dotfiles, quicker than a full install.
 command_stow() {
   echo "... stowing dotfiles"
@@ -89,6 +89,8 @@ command_stow() {
       [ $DRY -eq 0 ] && backup $FILE
     done
     [ $VERBOSE -eq 1 ] && echo "... stowing $DIR"
+    # Copy directory structure so that stow links files NOT directory
+    find . -mindepth 1 -type d -exec mkdir -p $HOME/{} \;
     [ $DRY -eq 0 ] && stow -v --ignore=.swp -t $HOME .
     [ $DRY -eq 1 ] && stow --simulate -v --ignore=.sqp -t $HOME .
   done
