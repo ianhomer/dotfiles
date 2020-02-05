@@ -11,7 +11,9 @@ def usage():
   scriptName = os.path.basename(__file__)
   print(f"{scriptName} -h|b")
 
-def heading(heading, separator = "."):
+def heading(heading, separator = "-"):
+  if (separator == "-"):
+    print()
   print(heading)
   print(separator * 40)
 
@@ -19,22 +21,34 @@ def reportBrew():
   heading("Brew")
   os.system("brew leaves | column -c 80")
 
+def reportFish():
+  heading("fish")
+  heading("omf",".")
+  os.system("fish -c 'omf list'")
+
 def main(argv):
   heading("dotfiles System Report"," ")
+  all = True
   try:
     opts, argv = getopt.getopt(argv,
-      "hb"
+      "hb",["brew","fish"]
     )
   except getopt.GetoptError:
     print(e)
     usage()
     sys.exit(2)
   for opt, arg in opts:
+    all = False
     if opt == '-h':
       usage()
       sys.exit()
-    elif opt == '-b':
+    elif opt == '--brew':
       reportBrew()
+    elif opt == '--fish':
+      reportFish()
 
+  if (all):
+    reportFish()
+    reportBrew()
 if __name__ == "__main__":
   main(sys.argv[1:])
