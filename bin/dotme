@@ -91,8 +91,8 @@ command_stow() {
     [ $VERBOSE -eq 1 ] && echo "... stowing $DIR"
     # Copy directory structure so that stow links files NOT directory
     find . -mindepth 1 -type d -exec mkdir -p $HOME/{} \;
-    [ $DRY -eq 0 ] && stow -v --ignore=.swp -t $HOME .
-    [ $DRY -eq 1 ] && stow --simulate -v --ignore=.sqp -t $HOME .
+    [ $DRY -eq 0 ] && stow -v --ignore=.swp --ignore=.bak -t $HOME .
+    [ $DRY -eq 1 ] && stow --simulate -v --ignore=.swp --ignore=.bak -t $HOME .
   done
 }
 
