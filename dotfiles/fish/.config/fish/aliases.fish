@@ -2,7 +2,7 @@
 
 alias g="git"
 alias gam="git commit -am"
-alias gs="git s"
+alias gs="git status"
 alias gits="git status"
 alias gd="git diff"
 alias gd~="git diff HEAD~"
