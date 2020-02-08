@@ -60,6 +60,7 @@ command_install() {
   command_brew
   [ $DRY -eq 0 ] && setup-osx
   [ $DRY -eq 0 ] && install-vim-plug
+  [ $DRY -eq 0 ] && install-tmux-plug
   [ $DRY -eq 0 ] && install-node-packages
   command_stow
   command_clean

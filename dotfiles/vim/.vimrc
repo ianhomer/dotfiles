@@ -26,6 +26,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " editorconfig - Support standard editorconfig files
 Plug 'editorconfig/editorconfig-vim'
+" tmux - navigation integration
+Plug 'christoomey/vim-tmux-navigator'
 
 "
 " Coding
