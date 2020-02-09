@@ -1,13 +1,7 @@
 #!/usr/bin/env fish
 
 #
-# Note that this hasn't been included in the main dotme process yet ...
+# Install / update omg packages from config/omf/bundle
 #
 
-#
-# Install omg packages from config/omf/bundle 
-#
-
-echo "... install omf bundle from $OMF_CONFIG"
-
-omf install
+omf update

@@ -43,8 +43,8 @@ directory, i.e. original backed up and dotfiles linked into place. Further
 installation and configuration takes place with scripts in the bin/ directory,
 however just look at bin/dotme to see what actually happens.
 
-You can also update parts of the initialisation separately, see `dotme ?` to get
-a list of each part.
+You can also update parts of the initialisation separately, see `dotme -h` to
+get a list of each part.
 
 # Thanks
 
