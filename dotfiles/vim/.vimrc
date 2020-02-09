@@ -26,7 +26,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " editorconfig - Support standard editorconfig files
 Plug 'editorconfig/editorconfig-vim'
-" tmux - navigation integration
+" tmux - enable C-hjkl to move to across vim and tmux panes
 Plug 'christoomey/vim-tmux-navigator'
 
 "
