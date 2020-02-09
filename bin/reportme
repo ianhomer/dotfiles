@@ -22,8 +22,11 @@ def reportBrew():
 
 def reportFish():
   heading("fish")
+  print("Show fish variables\n   set | less")
   heading("omf",".")
   os.system("fish -c 'omf list'")
+  heading("bobthefish",",")
+  print("Show colors\n   bobthefish_display_colors --all")
 
 def reportAll():
   reportFish()

@@ -64,7 +64,8 @@ defaults write com.apple.Dock autohide-delay -int 0
 # Minise applications into the application icon in the dock
 defaults write minimize-to-application -int 1
 
-# Ctrl+Cmd & click and drag any where in window to move window (reboot required after applied)
+# Ctrl+Cmd & click and drag any where in window to move window (reboot required
+# after applied)
 defaults write -g NSWindowShouldDragOnGesture -bool true
 
 # Hot corners

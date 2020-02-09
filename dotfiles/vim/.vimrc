@@ -26,6 +26,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " editorconfig - Support standard editorconfig files
 Plug 'editorconfig/editorconfig-vim'
+" tmux - navigation integration
+Plug 'christoomey/vim-tmux-navigator'
 
 "
 " Coding
@@ -126,6 +128,9 @@ set list
 let g:airline#extensions#tabline#enabled = 1
 " Enable powerfonts giving angled tables
 let g:airline_powerline_fonts = 1
+
+" Backspace support
+set backspace=indent,eol,start
 
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
