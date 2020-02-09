@@ -12,7 +12,7 @@ if status --is-interactive
   # Tweak colors for me - noise reduction, red/green color blind and 
   # long-sighted.
   # execute `set | grep fish_color` to see colors in use in shell
-  set theme_color_scheme gruvbox
+  set theme_color_scheme dark
 
   # Command in white for clarity on dark background
   set fish_color_command ffffff
