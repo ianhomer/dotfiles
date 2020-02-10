@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+OS_CONFIG_EXPORT_DIR=~/.dotfiles/config/osx
+
+echo "... exporting OSX configuration to $OS_CONFIG_EXPORT_DIR"
+
+defaults read com.apple.symbolichotkeys.plist AppleSymbolicHotKeys \
+  > $OS_CONFIG_EXPORT_DIR/AppleSymbolicHotKeys.config
