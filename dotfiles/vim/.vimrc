@@ -132,6 +132,11 @@ let g:airline_powerline_fonts = 1
 " Backspace support
 set backspace=indent,eol,start
 
+" CR insert line without leaving insert mode
+nmap <CR> o<Esc>
+" Backspace to delete space without leaving insert mode
+nmap <BS> hx<Esc>
+
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
 set shortmess=a
