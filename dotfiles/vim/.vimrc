@@ -133,7 +133,7 @@ let g:airline_powerline_fonts = 1
 set backspace=indent,eol,start
 
 " CR insert line without leaving insert mode
-nmap <CR> o<Esc>
+nmap <CR> O<Esc>j
 " Backspace to delete space without leaving insert mode
 nmap <BS> hx<Esc>
 
