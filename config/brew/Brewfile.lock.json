@@ -64,22 +64,22 @@
         "bottle": false
       },
       "broot": {
-        "version": "0.13.0",
+        "version": "0.13.1",
         "bottle": {
           "cellar": ":any_skip_relocation",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/broot-0.13.0.catalina.bottle.tar.gz",
-              "sha256": "43eeaf906a5648cc1ee554e019bb07784feb6372bcc9aa939c366be4c38a9c7c"
+              "url": "https://homebrew.bintray.com/bottles/broot-0.13.1.catalina.bottle.tar.gz",
+              "sha256": "62bfe1e7e688633f6caba3ae146935539445691d81fe36bacd2edeed33ca1f4f"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/broot-0.13.0.mojave.bottle.tar.gz",
-              "sha256": "6c92d76311ea4eceab85eab11596171f756cf276546bd4c37463dc786a7189eb"
+              "url": "https://homebrew.bintray.com/bottles/broot-0.13.1.mojave.bottle.tar.gz",
+              "sha256": "d89134eaf0dedfddb05fc37c360f86931d8fa380f4cd5cee9a6648b440707c21"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/broot-0.13.0.high_sierra.bottle.tar.gz",
-              "sha256": "86cd281c8e26c5f74fbce9c519c38cf2f87042f47be3f9fe23b069fa3c04433d"
+              "url": "https://homebrew.bintray.com/bottles/broot-0.13.1.high_sierra.bottle.tar.gz",
+              "sha256": "f0c29f3bdf1abffd219ba0c7bb7e228703b74e5a04f5202cb4dc3044364cf2bf"
             }
           }
         }
@@ -586,6 +586,31 @@
             }
           }
         }
+      },
+      "lastpass-cli": {
+        "version": "1.3.3_1",
+        "bottle": {
+          "cellar": ":any",
+          "prefix": "/usr/local",
+          "files": {
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/lastpass-cli-1.3.3_1.catalina.bottle.1.tar.gz",
+              "sha256": "58009ea3abc56153d7ef9036454858ca6e40f8bbf21c729ce89b5893ddd3c1dd"
+            },
+            "mojave": {
+              "url": "https://homebrew.bintray.com/bottles/lastpass-cli-1.3.3_1.mojave.bottle.1.tar.gz",
+              "sha256": "a24ff2d326dd4f445f492c788d7d8a28d3b3a853be9454c6418f340ed85505d8"
+            },
+            "high_sierra": {
+              "url": "https://homebrew.bintray.com/bottles/lastpass-cli-1.3.3_1.high_sierra.bottle.1.tar.gz",
+              "sha256": "34fa4da7396fd076d9b0c02b1ea092701c3a2fe09447f818718eb66bb4c389d9"
+            },
+            "sierra": {
+              "url": "https://homebrew.bintray.com/bottles/lastpass-cli-1.3.3_1.sierra.bottle.1.tar.gz",
+              "sha256": "508c481d28158c3e2f2f7aa69cc8b4048d56417a157d990208f2393297b60dc7"
+            }
+          }
+        }
       }
     }
   },
@@ -594,7 +619,7 @@
       "catalina": {
         "HOMEBREW_VERSION": "2.2.5",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "d1f63190c9a98dfa9a631c62ff98b9c0890777ec",
+        "Homebrew/homebrew-core": "1911cda6d4cf4dbf894de73c10417a5561528dc9",
         "CLT": "11.0.33.17",
         "Xcode": "11.3.1",
         "macOS": "10.15.3"

@@ -120,10 +120,13 @@ export-osx-config ~/.dotfiles/tmp
 symbolicKeyDiffCount=`diff ~/.dotfiles/tmp/AppleSymbolicHotKeys.config \
      ~/.dotfiles/config/osx/AppleSymbolicHotKeys.config | wc -l`
 if [[ $symbolicKeyDiffCount -gt 0 ]] ; then
-  echo "Please unset all Mission Control keyboard shortcuts in System \
-preferences"
   diff ~/.dotfiles/tmp/AppleSymbolicHotKeys.config \
      ~/.dotfiles/config/osx/AppleSymbolicHotKeys.config 
+  echo <<EOF
+Please unset all Mission Control keyboard shortcuts in System \
+preferences. Also for Keyboard Shortcuts unset Mission Control
+move left a space and move right a space.
+EOF
 fi
 
 ############################################################################
