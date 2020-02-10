@@ -113,6 +113,19 @@ defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.dotfile
 # Tell iTerm2 to use the custom preferences in the directory
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
+# Manual guidance
+
+mkdir -p ~/.dotfiles/tmp
+export-osx-config ~/.dotfiles/tmp
+symbolicKeyDiffCount=`diff ~/.dotfiles/tmp/AppleSymbolicHotKeys.config \
+     ~/.dotfiles/config/osx/AppleSymbolicHotKeys.config | wc -l`
+if [[ $symbolicKeyDiffCount -gt 0 ]] ; then
+  echo "Please unset all Mission Control keyboard shortcuts in System \
+preferences"
+  diff ~/.dotfiles/tmp/AppleSymbolicHotKeys.config \
+     ~/.dotfiles/config/osx/AppleSymbolicHotKeys.config 
+fi
+
 ############################################################################
 # Kill affected applications
 ############################################################################
