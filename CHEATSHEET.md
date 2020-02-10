@@ -26,7 +26,8 @@ Useful keyboard short cuts.
 * prefix **x** - close pane
 * prefix **t** - show time
 * **Opt-arrow** - move between panes
-* **Ctrl-hjkl** - move between panes
+* **Ctrl-hjkl** - move between panes including through vim panes
+* **Ctrl-arrow** - move between panes including through vim panes
 * prefix **space** - toggle between layouts
 * prefix **[** - copy mode with **Enter** to copy selection
 * hold option + mouse - bypass tmux mouse handling and do iterm action
