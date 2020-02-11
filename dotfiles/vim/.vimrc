@@ -26,7 +26,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " editorconfig - Support standard editorconfig files
 Plug 'editorconfig/editorconfig-vim'
-" tmux - navigation integration
+" tmux - enable C-hjkl to move to across vim and tmux panes
 Plug 'christoomey/vim-tmux-navigator'
 
 "
@@ -87,13 +87,6 @@ nnoremap <leader>vc :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
 " Clear whitespace
 nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
 
-" Map ctrl-j etc to moving between panes, a little quicker than Ctrl-w and
-" arrow
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
 "
 " Window and navigation
 "
@@ -131,6 +124,11 @@ let g:airline_powerline_fonts = 1
 
 " Backspace support
 set backspace=indent,eol,start
+
+" CR insert line without leaving insert mode
+nmap <CR> O<Esc>j
+" Backspace to delete space without leaving insert mode
+nmap <BS> hx<Esc>
 
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
