@@ -125,7 +125,8 @@ if [[ $symbolicKeyDiffCount -gt 0 ]] ; then
   echo <<EOF
 Please unset all Mission Control keyboard shortcuts in System \
 preferences. Also for Keyboard Shortcuts unset Mission Control
-move left a space and move right a space.
+move left a space and move right a space. This allows the Ctrl
+arrow keys to be received by tmux.
 EOF
 fi
 
