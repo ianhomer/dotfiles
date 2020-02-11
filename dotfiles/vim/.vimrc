@@ -86,6 +86,8 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>vc :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
 " Clear whitespace
 nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
+" Goyo distraction free writing
+nnoremap <leader>g :Goyo<CR>
 
 "
 " Window and navigation

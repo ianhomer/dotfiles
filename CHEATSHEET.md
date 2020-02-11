@@ -66,6 +66,7 @@ Useful keyboard short cuts.
 * **select+gw** - reformat content
 * **select+S"** - surround selected **area** with quotes
 * **ysiw"** - surround word with quotes
+* **Ctrl-v** - select visual block, e.g. column
 
 ## vi - Markdown
 
