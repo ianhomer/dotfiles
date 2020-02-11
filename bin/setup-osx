@@ -113,9 +113,26 @@ defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.dotfile
 # Tell iTerm2 to use the custom preferences in the directory
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
-###############################################################################
-# Kill affected applications                                                  #
-###############################################################################
+# Manual guidance
+
+mkdir -p ~/.dotfiles/tmp
+export-osx-config ~/.dotfiles/tmp
+symbolicKeyDiffCount=`diff ~/.dotfiles/tmp/AppleSymbolicHotKeys.config \
+     ~/.dotfiles/config/osx/AppleSymbolicHotKeys.config | wc -l`
+if [[ $symbolicKeyDiffCount -gt 0 ]] ; then
+  diff ~/.dotfiles/tmp/AppleSymbolicHotKeys.config \
+     ~/.dotfiles/config/osx/AppleSymbolicHotKeys.config 
+  echo <<EOF
+Please unset all Mission Control keyboard shortcuts in System \
+preferences. Also for Keyboard Shortcuts unset Mission Control
+move left a space and move right a space. This allows the Ctrl
+arrow keys to be received by tmux.
+EOF
+fi
+
+############################################################################
+# Kill affected applications
+############################################################################
 
 for app in "Dock" "Finder" \ ; do
 	killall "${app}" &> /dev/null

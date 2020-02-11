@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+#
+# The AppleSymbolicHotKeys default in OSX has an undocumented structure
+# and it feels a little brittle to decode it. For now I just export
+# the config so that I can compare it against what I prefer.
+#
+
+OS_CONFIG_EXPORT_DIR=${1:-~/.dotfiles/config/osx}
+
+echo "... exporting OSX configuration to $OS_CONFIG_EXPORT_DIR"
+
+defaults read com.apple.symbolichotkeys.plist AppleSymbolicHotKeys \
+  > $OS_CONFIG_EXPORT_DIR/AppleSymbolicHotKeys.config
