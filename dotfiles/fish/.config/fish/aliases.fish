@@ -1,6 +1,8 @@
 # Shortcuts
 
 # git
+alias push="git push"
+alias pull="git pull"
 alias g="git"
 alias gam="git commit -am"
 alias gs="git status"
