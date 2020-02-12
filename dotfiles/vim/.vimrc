@@ -98,8 +98,6 @@ nnoremap <leader>g :Goyo<CR>
 set mouse=a
 " Disable error bells
 set noerrorbells
-" Keep messages short
-set shortmess=atI
 " Enhance command-line completion
 set wildmenu
 " Highlight current line
@@ -142,9 +140,10 @@ nmap <CR> O<Esc>j
 " Backspace to delete space without leaving insert mode
 nmap <BS> hx<Esc>
 
+" Keep messages short
+set shortmess=atI
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
-set shortmess=a
 set cmdheight=2
 " Tab support with 2 spaces
 set tabstop=2
