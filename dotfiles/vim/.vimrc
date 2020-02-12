@@ -115,6 +115,11 @@ au FocusGained,BufEnter * :checktime
 autocmd InsertEnter,InsertLeave * set cul!
 " Allow hidden buffers without saving
 set hidden
+" Optimise for faster terminal connections
+set ttyfast
+" Keep swap and backups centrally
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
 
 " Show white space
 exec "set listchars=tab:>~,nbsp:~,trail:\uB7"

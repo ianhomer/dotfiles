@@ -23,6 +23,6 @@ alias tn="t new -t"
 alias draw="open -a /Applications/draw.io.app/"
 
 alias pass="lpass show --password -c"
-alias pass-ls="lpass ls"
+alias passes="lpass ls"
 echo "... Loaded ~/.config/fish/aliases.fish"
 

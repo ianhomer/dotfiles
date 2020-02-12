@@ -14,3 +14,10 @@ if [ ! -d  ~/.local/share/nvim/site/autoload/plug.vim ] ; then
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
+if [ ! -d ~/.vim/backups ] ; then
+  mkdir ~/.vim/backups
+fi
+
+if [ ! -d ~/.vim/swaps ] ; then
+  mkdir ~/.vim/swaps
+fi
