@@ -135,10 +135,14 @@ let g:airline_powerline_fonts = 1
 " Backspace support
 set backspace=indent,eol,start
 
-" CR insert line without leaving insert mode
+" CR insert line without leaving normal mode
 nmap <CR> O<Esc>j
-" Backspace to delete space without leaving insert mode
+" Backspace to delete space without leaving normal mode
 nmap <BS> hx<Esc>
+
+" Tab without leaving normal mode
+nnoremap <s-tab> <<
+nnoremap <tab> >>
 
 " Keep messages short
 set shortmess=atI
