@@ -98,6 +98,8 @@ nnoremap <leader>g :Goyo<CR>
 set mouse=a
 " Disable error bells
 set noerrorbells
+" Keep messages short
+set shortmess=atI
 " Enhance command-line completion
 set wildmenu
 " Highlight current line
@@ -120,6 +122,8 @@ set ttyfast
 " Keep swap and backups centrally
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
+" Scroll 3 lines before border
+set scrolloff=3
 
 " Show white space
 exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
