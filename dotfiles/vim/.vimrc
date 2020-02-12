@@ -141,8 +141,8 @@ nmap <CR> O<Esc>j
 nmap <BS> hx<Esc>
 
 " Tab without leaving normal mode
-nnoremap <s-tab> <<
-nnoremap <tab> >>
+map <s-tab> <<
+map <tab> >>
 
 " Keep messages short
 set shortmess=atI
