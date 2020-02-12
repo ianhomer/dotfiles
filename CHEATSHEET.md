@@ -22,9 +22,12 @@ Useful keyboard short cuts.
 * prefix **c** - new window
 * prefix **w** - show windows
 * prefix **,** - rename window
+* prefix **$** - rename session
 * prefix **|** or **-** - split pane
 * prefix **x** - close pane
 * prefix **t** - show time
+* prefix **z** - zoom in / out of current pane
+* prefix **d** - detach from session
 * **Opt-arrow** - move between panes
 * **Ctrl-hjkl** - move between panes including through vim panes
 * **Ctrl-arrow** - move between panes including through vim panes
