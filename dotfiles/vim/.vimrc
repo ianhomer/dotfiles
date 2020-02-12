@@ -28,7 +28,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'editorconfig/editorconfig-vim'
 " tmux - enable C-hjkl to move to across vim and tmux panes
 Plug 'christoomey/vim-tmux-navigator'
-
 "
 " Coding
 "
@@ -54,6 +53,8 @@ Plug 'tpope/vim-surround'
 "
 " goyo - Distraction free writing
 Plug 'junegunn/goyo.vim'
+" tabular - lining up text
+Plug 'godlygeek/tabular'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 "
 " Style
@@ -161,6 +162,7 @@ set conceallevel=2
 let g:markdown_folding = 1
 " Default large fold level start, folding everything up by default feels odd.
 set foldlevelstart=20
+nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
 
 colorscheme gruvbox
 set bg=dark

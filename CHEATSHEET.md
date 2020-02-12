@@ -68,6 +68,7 @@ Useful keyboard short cuts.
 * **ysiw"** - surround word with quotes
 * **Ctrl-v** - select visual block, e.g. column
 * **:!%jq .** - reformat JSON
+* **:Tabularize /|** or **space\** - Align paragraph on character
 
 ## vi - Markdown
 
