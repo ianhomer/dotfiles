@@ -195,4 +195,3 @@ autocmd Filetype markdown let b:surround_43 = "**\r**"
 
 " Override shiftwidth for python
 autocmd Filetype python set shiftwidth=2
-
