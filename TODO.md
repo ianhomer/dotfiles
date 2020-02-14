@@ -22,3 +22,5 @@
 * Automatically load vim plugins, currently need to to :PlugUpdate
 * Get ta fish completion working, tmux a -t works, how do we register an alias
   for autocompletion
+* Review fish key bindings - should Ctrl-b and Ctrl-f go back a word. Quite a
+  common thing and Esc-b f is a pain
