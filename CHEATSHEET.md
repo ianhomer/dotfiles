@@ -38,6 +38,14 @@ Useful keyboard short cuts.
 
 [more tmux cheats](https://tmuxcheatsheet.com/)
 
+# fish
+
+* **Ctrl-a Ctrl-a** - beginning of line
+* **Ctrl-e** - end of line
+* **Esc-b** - back a word
+* **Esc-f** - forward a word
+* **bind** - see key bindings
+
 # vi
 
 ## vi - Files, Buffers & Navigations
