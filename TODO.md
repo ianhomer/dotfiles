@@ -16,9 +16,12 @@
 * Try devicons https://github.com/ryanoasis/vim-devicons
 * assess neofetch
 * Use includeIf to include git config per organisation / user profile
-* Try NeoVim
+* **Try NeoVim**
 * Automate set up of caps lock as escape key
 * Automatically load tmux plugins, currently need to do C-a I
 * Automatically load vim plugins, currently need to to :PlugUpdate
 * Get ta fish completion working, tmux a -t works, how do we register an alias
   for autocompletion
+* Escape dot not working reliably - not working in terminal (without iterm/tmux)
+  if it was just tmux it might be related to escape-time in config. This is in 
+  fish default key binding mode. Type bind to find key bindings.

@@ -23,9 +23,13 @@ if status --is-interactive
   # slow autocompletion - https://github.com/fish-shell/fish-shell/issues/6270
   function __fish_describe_command; end
 
-  # use vi key bindings, go back to default key bindings 
-  # with fish_default_key_bindings 
-  fish_vi_key_bindings
+  #
+  # key bindings
+  # * fish_vi_key_bindings -> vi key bindings
+  # * fish_default_key_bindings -> default key bindings
+  #
+  fish_default_key_bindings
+
   echo "... Loaded ~/.cnfig/fish/config.fish"
 
   # Set terminal for GPG to allow signining of git commits 
