@@ -24,3 +24,6 @@
 * Review fish key bindings - should Ctrl-b and Ctrl-f go back a word. Quite a
   common thing and Esc-b f is a pain
 * Automate pip install - inc pip3 install --user pynvim for nvim deoplete
+* Change <CR> mapping to perhaps shift+<CR> to make less likely to
+  accidentally press
+
