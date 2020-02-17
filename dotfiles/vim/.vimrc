@@ -28,7 +28,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'editorconfig/editorconfig-vim'
 " tmux - enable C-hjkl to move to across vim and tmux panes
 Plug 'christoomey/vim-tmux-navigator'
-
 "
 " Coding
 "
@@ -49,11 +48,18 @@ Plug 'tpope/vim-surround'
 " repeat - Repeat with .
 "Plug 'tpope/vim-repeat'
 
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  let g:deoplete#enable_at_startup = 1
+endif
+
 "
 " Writing
 "
 " goyo - Distraction free writing
 Plug 'junegunn/goyo.vim'
+" tabular - lining up text
+Plug 'godlygeek/tabular'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 "
 " Style
@@ -79,6 +85,7 @@ nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>c :Commits<CR>
 nnoremap <silent> <leader>h :History<CR>
 nnoremap <silent> <leader>m :Maps<CR>
+nnoremap <silent> <leader>r :reg<CR>
 nnoremap <silent> <leader>a :Ag<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 
@@ -86,6 +93,8 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>vc :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
 " Clear whitespace
 nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
+" Goyo distraction free writing
+nnoremap <leader>g :Goyo<CR>
 
 "
 " Window and navigation
@@ -112,6 +121,13 @@ au FocusGained,BufEnter * :checktime
 autocmd InsertEnter,InsertLeave * set cul!
 " Allow hidden buffers without saving
 set hidden
+" Optimise for faster terminal connections
+set ttyfast
+" Keep swap and backups centrally
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
+" Scroll 3 lines before border
+set scrolloff=3
 
 " Show white space
 exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
@@ -125,14 +141,22 @@ let g:airline_powerline_fonts = 1
 " Backspace support
 set backspace=indent,eol,start
 
-" CR insert line without leaving insert mode
+" CR insert line without leaving normal mode
 nmap <CR> O<Esc>j
-" Backspace to delete space without leaving insert mode
+" Backspace to delete space without leaving normal mode
 nmap <BS> hx<Esc>
 
+" Tab without leaving normal mode
+nnoremap <s-tab> <<
+inoremap <s-tab> <C-d>
+vnoremap <s-tab> <<
+nnoremap <tab> >>
+vnoremap <tab> >>
+
+" Keep messages short
+set shortmess=atI
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
-set shortmess=a
 set cmdheight=2
 " Tab support with 2 spaces
 set tabstop=2
@@ -159,6 +183,7 @@ set conceallevel=2
 let g:markdown_folding = 1
 " Default large fold level start, folding everything up by default feels odd.
 set foldlevelstart=20
+nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
 
 colorscheme gruvbox
 set bg=dark
@@ -176,4 +201,3 @@ autocmd Filetype markdown let b:surround_43 = "**\r**"
 
 " Override shiftwidth for python
 autocmd Filetype python set shiftwidth=2
-

@@ -49,7 +49,8 @@ get a list of each part.
 # Thanks
 
 Too many dotfiles projects out there that have given me inspiration to mention
-them all, although [Awesome dotfiles](https://github.com/webpro/awesome-dotfiles) make a good attempt to.
+them all, although [Awesome
+dotfiles](https://github.com/webpro/awesome-dotfiles) make a good attempt to.
 However, particular thanks to:
 
 * [webpro](https://github.com/webpro/dotfiles)
