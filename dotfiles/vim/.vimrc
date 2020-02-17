@@ -48,6 +48,11 @@ Plug 'tpope/vim-surround'
 " repeat - Repeat with .
 "Plug 'tpope/vim-repeat'
 
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  let g:deoplete#enable_at_startup = 1
+endif
+
 "
 " Writing
 "
@@ -80,6 +85,7 @@ nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <leader>c :Commits<CR>
 nnoremap <silent> <leader>h :History<CR>
 nnoremap <silent> <leader>m :Maps<CR>
+nnoremap <silent> <leader>r :reg<CR>
 nnoremap <silent> <leader>a :Ag<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 

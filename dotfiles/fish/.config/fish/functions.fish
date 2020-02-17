@@ -21,4 +21,9 @@ function git-set-personal-url
   end
 end
 
+function git-commit-and-push
+  git commit -am "$argv"
+  git push
+end
+
 echo "... Loaded ~/.config/fish/functions.fish" 

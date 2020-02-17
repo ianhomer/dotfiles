@@ -50,11 +50,11 @@ Useful keyboard short cuts.
 
 ## vi - Files, Buffers & Navigations
 
-* **:NERDTreeToggle** or **<F7>** - Open file browser
+* **:NERDTreeToggle** or **space+f** - Open file browser
   * **m** - open file actions
   * **Shift+i** - show hidden files
 * **:cd** - change directory
-* **:reg** - show paste buffer
+* **space + r** or **:reg** - show paste buffer
 * **:bd** - close buffer
 * **:bn** - next buffer
 * **"2p** - paste a previous cut
@@ -78,7 +78,7 @@ Useful keyboard short cuts.
 * **select+S"** - surround selected **area** with quotes
 * **ysiw"** - surround word with quotes
 * **Ctrl-v** - select visual block, e.g. column
-* **:!%jq .** - reformat JSON
+* **:%!jq .** - reformat JSON
 * **:Tabularize /|** or **space\** - Align paragraph on character
 
 ## vi - Markdown
