@@ -28,9 +28,14 @@ def reportFish():
   heading("bobthefish",",")
   print("Show colors\n   bobthefish_display_colors --all")
 
+def reportSoftwareUpdate():
+  heading("Software Update")
+  os.system("softwareupdate --list")
+
 def reportAll():
   reportFish()
   reportBrew()
+  reportSoftwareUpdate()
 
 parser = argparse.ArgumentParser(description="System Report")
 parser.add_argument("--brew", dest="reports", const="brew", 

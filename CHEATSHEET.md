@@ -22,9 +22,12 @@ Useful keyboard short cuts.
 * prefix **c** - new window
 * prefix **w** - show windows
 * prefix **,** - rename window
+* prefix **$** - rename session
 * prefix **|** or **-** - split pane
 * prefix **x** - close pane
 * prefix **t** - show time
+* prefix **z** - zoom in / out of current pane
+* prefix **d** - detach from session
 * **Opt-arrow** - move between panes
 * **Ctrl-hjkl** - move between panes including through vim panes
 * **Ctrl-arrow** - move between panes including through vim panes
@@ -35,15 +38,23 @@ Useful keyboard short cuts.
 
 [more tmux cheats](https://tmuxcheatsheet.com/)
 
+# fish
+
+* **Ctrl-a Ctrl-a** - beginning of line
+* **Ctrl-e** - end of line
+* **Esc-b** - back a word
+* **Esc-f** - forward a word
+* **bind** - see key bindings
+
 # vi
 
 ## vi - Files, Buffers & Navigations
 
-* **:NERDTreeToggle** or **<F7>** - Open file browser
+* **:NERDTreeToggle** or **space+f** - Open file browser
   * **m** - open file actions
   * **Shift+i** - show hidden files
 * **:cd** - change directory
-* **:reg** - show paste buffer
+* **space + r** or **:reg** - show paste buffer
 * **:bd** - close buffer
 * **:bn** - next buffer
 * **"2p** - paste a previous cut
@@ -66,6 +77,9 @@ Useful keyboard short cuts.
 * **select+gw** - reformat content
 * **select+S"** - surround selected **area** with quotes
 * **ysiw"** - surround word with quotes
+* **Ctrl-v** - select visual block, e.g. column
+* **:%!jq .** - reformat JSON
+* **:Tabularize /|** or **space\** - Align paragraph on character
 
 ## vi - Markdown
 
