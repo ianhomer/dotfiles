@@ -19,7 +19,6 @@
 * **Try NeoVim**
 * Automate set up of caps lock as escape key
 * Automatically load tmux plugins, currently need to do C-a I
-* Automatically load vim plugins, currently need to to :PlugUpdate
 * Get ta fish completion working, tmux a -t works, how do we register an alias
   for autocompletion
 * Review fish key bindings - should Ctrl-b and Ctrl-f go back a word. Quite a
