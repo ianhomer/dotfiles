@@ -42,8 +42,8 @@ Useful keyboard short cuts.
 
 * **Ctrl-a Ctrl-a** - beginning of line
 * **Ctrl-e** - end of line
-* **Esc-b** - back a word
-* **Esc-f** - forward a word
+* **Ctrl-b** - back a word
+* **Ctrl-f** - forward a word
 * **bind** - see key bindings
 
 # vi

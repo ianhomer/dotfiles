@@ -16,13 +16,7 @@
 * Try devicons https://github.com/ryanoasis/vim-devicons
 * assess neofetch
 * Use includeIf to include git config per organisation / user profile
-* **Try NeoVim**
 * Automate set up of caps lock as escape key
 * Automatically load tmux plugins, currently need to do C-a I
 * Get ta fish completion working, tmux a -t works, how do we register an alias
   for autocompletion
-* Review fish key bindings - should Ctrl-b and Ctrl-f go back a word. Quite a
-  common thing and Esc-b f is a pain
-* Change <CR> mapping to perhaps shift+<CR> to make less likely to
-  accidentally press
-
