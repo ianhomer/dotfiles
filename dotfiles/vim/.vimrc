@@ -47,8 +47,15 @@ Plug 'aymericbeaumet/vim-symlink'
 Plug 'tpope/vim-surround'
 " repeat - Repeat with .
 "Plug 'tpope/vim-repeat'
+" HTML
+Plug 'mattn/emmet-vim'
+" Linting
+Plug 'dense-analysis/ale'
 
 if has('nvim')
+  " Code completion
+  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Some people suggest deoplete ...
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   let g:deoplete#enable_at_startup = 1
 endif
@@ -159,6 +166,7 @@ vnoremap <tab> >>
 
 " Keep messages short
 set shortmess=atI
+
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
 set cmdheight=2
@@ -179,6 +187,10 @@ let NERDTreeDirArrows = 1
 
 " fzf config
 let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
+
+" Linting
+" Fix files with prettier, and then ESLint.
+let b:ale_fixers = ['prettier', 'eslint']
 
 " Markdown syntax
 " Conceal some syntax - e.g. ** around bold
