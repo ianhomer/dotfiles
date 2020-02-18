@@ -145,7 +145,7 @@ set backspace=indent,eol,start
 nmap  a<CR><Esc>
 
 " Backspace to delete space without leaving normal mode
-nmap <BS> hx<Esc>
+nmap <expr> <BS> getpos('.')[2]==1 ? "k$J" : "hx<Esc>"
 
 " Tab without leaving normal mode
 nnoremap <s-tab> <<
@@ -203,6 +203,7 @@ autocmd Filetype markdown let b:surround_43 = "**\r**"
 " Override shiftwidth for python
 autocmd Filetype python set shiftwidth=2
 
+" Placeholder for experimental output
 function! ShowDebug()
   echo "col=".string(getpos('.')[2]).";pos=".string(getpos('.'))
 endfunction
