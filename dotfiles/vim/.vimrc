@@ -141,11 +141,14 @@ let g:airline_powerline_fonts = 1
 " Backspace support
 set backspace=indent,eol,start
 
-" CR insert line without leaving normal mode
-nmap  a<CR><Esc>
+" CR insert line without leaving normal mode. Note that this
+" has special case to append CR at end of line as this feels more
+" natural.
+nmap <expr> <CR> getpos('.')[2]==strlen(getline('.')) ? "a<CR><Esc>" : "i<CR><Esc>"
 
-" Backspace to delete space without leaving normal mode
-nmap <expr> <BS> getpos('.')[2]==1 ? "k$J" : "hx<Esc>"
+" Backspace to delete space without leaving normal mode. At the
+" beginning of the line it joins line to previous.
+nmap <expr> <BS> getpos('.')[2]==1 ? "k$gJ" : "hx<Esc>"
 
 " Tab without leaving normal mode
 nnoremap <s-tab> <<
@@ -205,7 +208,7 @@ autocmd Filetype python set shiftwidth=2
 
 " Placeholder for experimental output
 function! ShowDebug()
-  echo "col=".string(getpos('.')[2]).";pos=".string(getpos('.'))
+  echo "col=".string(getpos('.')[2]).";pos=".string(getpos('.')).";line-length=".strlen(getline("."))
 endfunction
 nnoremap <silent> <leader>d :call ShowDebug()<CR>
 
