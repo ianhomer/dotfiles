@@ -142,7 +142,8 @@ let g:airline_powerline_fonts = 1
 set backspace=indent,eol,start
 
 " CR insert line without leaving normal mode
-nmap <CR> O<Esc>j
+nmap  a<CR><Esc>
+
 " Backspace to delete space without leaving normal mode
 nmap <BS> hx<Esc>
 
@@ -201,3 +202,9 @@ autocmd Filetype markdown let b:surround_43 = "**\r**"
 
 " Override shiftwidth for python
 autocmd Filetype python set shiftwidth=2
+
+function! ShowDebug()
+  echo "col=".string(getpos('.')[2]).";pos=".string(getpos('.'))
+endfunction
+nnoremap <silent> <leader>d :call ShowDebug()<CR>
+

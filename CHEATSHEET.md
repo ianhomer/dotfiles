@@ -63,6 +63,8 @@ Useful keyboard short cuts.
 * **gt** - go to next tab
 * **tabe** - open file in new tab
 * **bufdo bd** - close all buffers
+* **m** + letter - set mark
+* **'** + letter - go to mark
 
 ## vi - Window Management
 
