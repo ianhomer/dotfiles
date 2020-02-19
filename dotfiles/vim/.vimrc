@@ -50,7 +50,9 @@ Plug 'tpope/vim-surround'
 " HTML
 Plug 'mattn/emmet-vim'
 " Linting
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
+"let b:ale_fixers = ['prettier', 'eslint']
+
 " Commenter
 Plug 'preservim/nerdcommenter'
 
