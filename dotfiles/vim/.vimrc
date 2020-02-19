@@ -51,6 +51,8 @@ Plug 'tpope/vim-surround'
 Plug 'mattn/emmet-vim'
 " Linting
 Plug 'dense-analysis/ale'
+" Commenter
+Plug 'preservim/nerdcommenter'
 
 if has('nvim')
   " Code completion
@@ -96,8 +98,13 @@ nnoremap <silent> <leader>r :reg<CR>
 nnoremap <silent> <leader>a :Ag<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 
-" Reload vimrc
-nnoremap <leader>vc :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
+" Reload vimrc or neo vimrc
+if has('nvim')
+  nnoremap <leader>vc :source ~/.config/nvim/init.vim<CR>:echo "Reloaded neo init.vm"<CR>
+else
+  nnoremap <leader>vc :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
+endif
+
 " Clear whitespace
 nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
 " Goyo distraction free writing
