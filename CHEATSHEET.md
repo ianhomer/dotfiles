@@ -66,6 +66,19 @@ Useful keyboard short cuts.
 * **m** + letter - set mark
 * **'** + letter - go to mark
 
+**Go to:**
+
+* **0** - beginnning of line
+* **$** - end of line
+* **}** - next block
+* **{** - previous block
+* **[[** - next header
+* **]]** - previous header
+* **:nn** - line nn
+* **gg** - beginning of file
+* **GG** - end of file
+* **%** - next / previous bracket
+
 ## vi - Window Management
 
 * **:split,:vsplit** - split pane
