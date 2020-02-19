@@ -95,6 +95,7 @@ Useful keyboard short cuts.
 * **Ctrl-v** - select visual block, e.g. column
 * **:%!jq .** - reformat JSON
 * **:Tabularize /|** or **space\** - Align paragraph on character
+* **count<leader>cc** - comment out the next count lines
 
 ## vi - Markdown
 
