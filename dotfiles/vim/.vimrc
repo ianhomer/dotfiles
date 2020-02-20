@@ -54,6 +54,8 @@ Plug 'mattn/emmet-vim'
 " Linting
 "Plug 'dense-analysis/ale'
 "let b:ale_fixers = ['prettier', 'eslint']
+" Handy mappings
+Plug 'tpope/vim-unimpaired'
 
 " Commenter
 Plug 'preservim/nerdcommenter'
@@ -117,6 +119,12 @@ nnoremap <leader>g :Goyo<CR>
 "
 " Window and navigation
 "
+
+" Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
+" Close the current buffer and move to the previous one
+nnoremap <leader>bq :<c-u>bp <bar> bd #<cr>
+" Show all open buffers and their status
+nnoremap <leader>bl :ls<cr>
 
 " Enable mouse support
 set mouse=a
