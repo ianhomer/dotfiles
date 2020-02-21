@@ -17,7 +17,7 @@ call plug#begin(g:vim_dir."/plugged")
 " NERDTree - file explore
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Vinegar - file expore
-Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar'
 " fzf - Fuzzy Finder
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
@@ -48,14 +48,13 @@ Plug 'aymericbeaumet/vim-symlink'
 " surround - Surround with brackets etc
 Plug 'tpope/vim-surround'
 " repeat - Repeat with .
-"Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-repeat'
 " HTML
-Plug 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim'
 " Linting
-"Plug 'dense-analysis/ale'
-"let b:ale_fixers = ['prettier', 'eslint']
+" Plug 'dense-analysis/ale'
 " Handy mappings
-Plug 'tpope/vim-unimpaired'
+" Plug 'tpope/vim-unimpaired'
 
 " Commenter
 Plug 'preservim/nerdcommenter'
@@ -64,8 +63,8 @@ if has('nvim')
   " Code completion
   " Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Some people suggest deoplete ...
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  let g:deoplete#enable_at_startup = 1
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " let g:deoplete#enable_at_startup = 1
 endif
 
 "
@@ -172,12 +171,12 @@ set backspace=indent,eol,start
 
 " CR insert line without leaving normal mode. Note that this
 " has special case to append CR at end of line as this feels more
-" natural.
-nmap <expr> <CR> getpos('.')[2]==strlen(getline('.')) ? "a<CR><Esc>" : "i<CR><Esc>"
+" natural - disabled since non-vi.
+" nmap <expr> <CR> getpos('.')[2]==strlen(getline('.')) ? "a<CR><Esc>" : "i<CR><Esc>"
 
 " Backspace to delete space without leaving normal mode. At the
-" beginning of the line it joins line to previous.
-nmap <expr> <BS> getpos('.')[2]==1 ? "k$gJ" : "hx<Esc>"
+" beginning of the line it joins line to previous - disabled since non-vi.
+" nmap <expr> <BS> getpos('.')[2]==1 ? "k$gJ" : "hx<Esc>"
 
 " Tab without leaving normal mode
 nnoremap <s-tab> <<
@@ -203,7 +202,6 @@ set textwidth=80
 set clipboard=unnamed
 
 " NERDTree config
-nmap <F7> :NERDTreeToggle<CR>
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
