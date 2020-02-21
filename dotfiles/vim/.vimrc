@@ -125,6 +125,9 @@ nnoremap <leader>g :Goyo<CR>
 nnoremap <leader>bq :<c-u>bp <bar> bd #<cr>
 " Show all open buffers and their status
 nnoremap <leader>bl :ls<cr>
+" Thanks - https://www.rockyourcode.com/vim-close-all-other-buffers/
+" Close all buffers except the current one
+nnoremap <leader>bd :<c-u>up <bar> %bd <bar> e#<cr>
 
 " Enable mouse support
 set mouse=a
