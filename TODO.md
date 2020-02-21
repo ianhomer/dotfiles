@@ -26,3 +26,6 @@
 * leader-f fzf sometimes doesn't search on first time
 * cheat for listing bind keys consider maping prefix [ ] to moving pane left
   right in tmux.  What about up / down?
+* how to make the osx key mapping diff clearer to read, e.g. aligned with git
+  diff-color
+* Why does markdown indent 4 characters after bullet line word wrap
