@@ -29,3 +29,4 @@
 * how to make the osx key mapping diff clearer to read, e.g. aligned with git
   diff-color
 * Why does markdown indent 4 characters after bullet line word wrap
+* Disable auto wrap, causes more pain than gains
