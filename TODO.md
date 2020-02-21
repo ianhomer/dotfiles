@@ -20,3 +20,9 @@
 * Automatically load tmux plugins, currently need to do C-a I
 * Get ta fish completion working, tmux a -t works, how do we register an alias
   for autocompletion
+* Change <CR> mapping to perhaps leader <CR>. perhaps same for <BS>. Need to
+  think carefully, since these <CR> and <BS> bindings a bit non-vi way
+* gx glitched for me to open external URL - why?
+* leader-f fzf sometimes doesn't search on first time
+* cheat for listing bind keys consider maping prefix [ ] to moving pane left
+  right in tmux.  What about up / down?
