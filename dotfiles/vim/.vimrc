@@ -223,8 +223,9 @@ call matchadd('ColorColumn', '\%82v', 100)
 
 "
 " File type specific configuration
+" ================================
 "
-"
+
 " Markdown
 " --------
 "
@@ -232,7 +233,6 @@ call matchadd('ColorColumn', '\%82v', 100)
 " Surround Customisations
 " This doesn't work for me - https://stackoverflow.com/questions/32769488/double-vim-surround-with
 autocmd Filetype markdown let b:surround_43 = "**\r**"
-" let g:vim_markdown_new_list_item_indent=2
 
 " Markdown syntax
 " Conceal some syntax - e.g. ** around bold
@@ -250,6 +250,11 @@ nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
 
 " Override shiftwidth for python
 autocmd Filetype python set shiftwidth=2
+
+
+" Experimental configuration
+" ==========================
+"
 
 " Placeholder for experimental output
 function! ShowDebug()
