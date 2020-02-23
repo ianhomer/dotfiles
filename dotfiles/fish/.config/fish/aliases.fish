@@ -1,5 +1,7 @@
 # Shortcuts
 
+alias vi="nvim"
+
 # git
 alias push="git push"
 alias pull="git pull"

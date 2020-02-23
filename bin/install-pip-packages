@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+#
+# Install pip packages
+#
+
+pip3 install --user -r ~/.dotfiles/config/python/requirements.txt -U | \
+  grep -v "already"

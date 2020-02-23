@@ -42,8 +42,8 @@ Useful keyboard short cuts.
 
 * **Ctrl-a Ctrl-a** - beginning of line
 * **Ctrl-e** - end of line
-* **Esc-b** - back a word
-* **Esc-f** - forward a word
+* **Ctrl-b** - back a word
+* **Ctrl-f** - forward a word
 * **bind** - see key bindings
 
 # vi
@@ -63,6 +63,29 @@ Useful keyboard short cuts.
 * **gt** - go to next tab
 * **tabe** - open file in new tab
 * **bufdo bd** - close all buffers
+* **m** + letter - set mark
+* **'** + letter - go to mark
+* **Ctrl-^** - switch to previous buffer
+
+netrw
+
+* **-** - up a directory
+* **i** - change list view
+* **I** - show header
+* **gn** - make current node root of tree
+
+**Go to:**
+
+* **0** - beginnning of line
+* **$** - end of line
+* **}** - next block
+* **{** - previous block
+* **[[** - next header
+* **]]** - previous header
+* **:nn** - line nn
+* **gg** - beginning of file
+* **GG** - end of file
+* **%** - next / previous bracket
 
 ## vi - Window Management
 
@@ -80,6 +103,7 @@ Useful keyboard short cuts.
 * **Ctrl-v** - select visual block, e.g. column
 * **:%!jq .** - reformat JSON
 * **:Tabularize /|** or **space\** - Align paragraph on character
+* **count<leader>cc** - comment out the next count lines
 
 ## vi - Markdown
 

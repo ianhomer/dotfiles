@@ -26,4 +26,8 @@ function git-commit-and-push
   git push
 end
 
+function fish_user_key_bindings
+  bind \cf forward-word
+  bind \cb backward-word
+end
 echo "... Loaded ~/.config/fish/functions.fish" 
