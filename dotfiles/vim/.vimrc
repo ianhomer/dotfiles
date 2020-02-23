@@ -197,6 +197,8 @@ set shiftwidth=2
 set expandtab
 " 80 characters default width
 set textwidth=80
+" Text formating options - no autowrap
+set formatoptions=jrql
 
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
@@ -212,6 +214,26 @@ let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
 " Fix files with prettier, and then ESLint.
 let b:ale_fixers = ['prettier', 'eslint']
 
+
+colorscheme gruvbox
+set bg=dark
+" Thanks to Damian Conway
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%82v', 100)
+
+"
+" File type specific configuration
+"
+"
+" Markdown
+" --------
+"
+
+" Surround Customisations
+" This doesn't work for me - https://stackoverflow.com/questions/32769488/double-vim-surround-with
+autocmd Filetype markdown let b:surround_43 = "**\r**"
+" let g:vim_markdown_new_list_item_indent=2
+
 " Markdown syntax
 " Conceal some syntax - e.g. ** around bold
 set conceallevel=2
@@ -221,19 +243,10 @@ let g:markdown_folding = 1
 set foldlevelstart=20
 nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
 
-colorscheme gruvbox
-set bg=dark
-" Thanks to Damian Conway
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%82v', 100)
-
 "
-" File type specific loads
+" Python
+" ------
 "
-
-" Surround Customisations
-" This doesn't work for me - https://stackoverflow.com/questions/32769488/double-vim-surround-with
-autocmd Filetype markdown let b:surround_43 = "**\r**"
 
 " Override shiftwidth for python
 autocmd Filetype python set shiftwidth=2
