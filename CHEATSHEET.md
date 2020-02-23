@@ -65,6 +65,14 @@ Useful keyboard short cuts.
 * **bufdo bd** - close all buffers
 * **m** + letter - set mark
 * **'** + letter - go to mark
+* **Ctrl-^** - switch to previous buffer
+
+netrw
+
+* **-** - up a directory
+* **i** - change list view
+* **I** - show header
+* **gn** - make current node root of tree
 
 **Go to:**
 

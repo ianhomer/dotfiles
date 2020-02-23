@@ -203,6 +203,10 @@ set formatoptions=jrql
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
+" netrw config
+let g:netrw_liststyle = 3
+let g:netrw_keepdir=0
+
 " NERDTree config
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
