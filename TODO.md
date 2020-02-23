@@ -20,9 +20,9 @@
 * Automatically load tmux plugins, currently need to do C-a I
 * Get ta fish completion working, tmux a -t works, how do we register an alias
     for autocompletion
-* gx glitched for me to open external URL - why?  leader-f fzf sometimes doesn't
-* search on first time cheat for listing bind keys consider maping prefix [ ] to
+* gx glitched for me to open external URL - why?
+* leader-f fzf sometimes doesn't search on first time
+* cheat for listing bind keys consider maping prefix [ ] to
     moving pane left right in tmux.  What about up / down?
 * how to make the osx key mapping diff clearer to read, e.g. aligned with git
-    diff-color 
-
+    diff-color
