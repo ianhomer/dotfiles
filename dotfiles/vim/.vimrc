@@ -16,6 +16,8 @@ call plug#begin(g:vim_dir."/plugged")
 
 " NERDTree - file explore
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" Vinegar - better file expore than NERD
+Plug 'tpope/vim-vinegar'
 " fzf - Fuzzy Finder
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
@@ -46,11 +48,23 @@ Plug 'aymericbeaumet/vim-symlink'
 " surround - Surround with brackets etc
 Plug 'tpope/vim-surround'
 " repeat - Repeat with .
-"Plug 'tpope/vim-repeat'
+" Plug 'tpope/vim-repeat'
+" HTML
+" Plug 'mattn/emmet-vim'
+" Linting
+" Plug 'dense-analysis/ale'
+" Handy mappings
+" Plug 'tpope/vim-unimpaired'
+
+" Commenter
+Plug 'preservim/nerdcommenter'
 
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  let g:deoplete#enable_at_startup = 1
+  " Code completion
+  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Some people suggest deoplete ...
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " let g:deoplete#enable_at_startup = 1
 endif
 
 "
@@ -89,8 +103,13 @@ nnoremap <silent> <leader>r :reg<CR>
 nnoremap <silent> <leader>a :Ag<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 
-" Reload vimrc
-nnoremap <leader>vc :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
+" Reload vimrc or neo vimrc
+if has('nvim')
+  nnoremap <leader>vc :source ~/.config/nvim/init.vim<CR>:echo "Reloaded neo init.vm"<CR>
+else
+  nnoremap <leader>vc :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
+endif
+
 " Clear whitespace
 nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
 " Goyo distraction free writing
@@ -99,6 +118,15 @@ nnoremap <leader>g :Goyo<CR>
 "
 " Window and navigation
 "
+
+" Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
+" Close the current buffer and move to the previous one
+nnoremap <leader>bq :<c-u>bp <bar> bd #<cr>
+" Show all open buffers and their status
+nnoremap <leader>bl :ls<cr>
+" Thanks - https://www.rockyourcode.com/vim-close-all-other-buffers/
+" Close all buffers except the current one
+nnoremap <leader>bd :<c-u>up <bar> %bd <bar> e#<cr>
 
 " Enable mouse support
 set mouse=a
@@ -141,10 +169,14 @@ let g:airline_powerline_fonts = 1
 " Backspace support
 set backspace=indent,eol,start
 
-" CR insert line without leaving normal mode
-nmap <CR> O<Esc>j
-" Backspace to delete space without leaving normal mode
-nmap <BS> hx<Esc>
+" CR insert line without leaving normal mode. Note that this
+" has special case to append CR at end of line as this feels more
+" natural - disabled since non-vi.
+" nmap <expr> <CR> getpos('.')[2]==strlen(getline('.')) ? "a<CR><Esc>" : "i<CR><Esc>"
+
+" Backspace to delete space without leaving normal mode. At the
+" beginning of the line it joins line to previous - disabled since non-vi.
+" nmap <expr> <BS> getpos('.')[2]==1 ? "k$gJ" : "hx<Esc>"
 
 " Tab without leaving normal mode
 nnoremap <s-tab> <<
@@ -155,6 +187,7 @@ vnoremap <tab> >>
 
 " Keep messages short
 set shortmess=atI
+
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
 set cmdheight=2
@@ -164,17 +197,46 @@ set shiftwidth=2
 set expandtab
 " 80 characters default width
 set textwidth=80
+" Text formating options - no autowrap
+set formatoptions=jrql
 
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
+" netrw config
+let g:netrw_liststyle = 3
+let g:netrw_keepdir=0
+
 " NERDTree config
-nmap <F7> :NERDTreeToggle<CR>
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
 " fzf config
 let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
+
+" Linting
+" Fix files with prettier, and then ESLint.
+let b:ale_fixers = ['prettier', 'eslint']
+
+
+colorscheme gruvbox
+set bg=dark
+" Thanks to Damian Conway
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%82v', 100)
+
+"
+" File type specific configuration
+" ================================
+"
+
+" Markdown
+" --------
+"
+
+" Surround Customisations
+" This doesn't work for me - https://stackoverflow.com/questions/32769488/double-vim-surround-with
+autocmd Filetype markdown let b:surround_43 = "**\r**"
 
 " Markdown syntax
 " Conceal some syntax - e.g. ** around bold
@@ -185,19 +247,22 @@ let g:markdown_folding = 1
 set foldlevelstart=20
 nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
 
-colorscheme gruvbox
-set bg=dark
-" Thanks to Damian Conway
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%82v', 100)
-
 "
-" File type specific loads
+" Python
+" ------
 "
-
-" Surround Customisations
-" This doesn't work for me - https://stackoverflow.com/questions/32769488/double-vim-surround-with
-autocmd Filetype markdown let b:surround_43 = "**\r**"
 
 " Override shiftwidth for python
 autocmd Filetype python set shiftwidth=2
+
+
+" Experimental configuration
+" ==========================
+"
+
+" Placeholder for experimental output
+function! ShowDebug()
+  echo "col=".string(getpos('.')[2]).";pos=".string(getpos('.')).";line-length=".strlen(getline("."))
+endfunction
+nnoremap <silent> <leader>d :call ShowDebug()<CR>
+
