@@ -102,6 +102,7 @@ nnoremap <silent> <leader>m :Maps<CR>
 nnoremap <silent> <leader>r :reg<CR>
 nnoremap <silent> <leader>a :Ag<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>s :w<CR>
 
 " Reload vimrc or neo vimrc
 if has('nvim')
