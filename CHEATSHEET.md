@@ -70,6 +70,8 @@ Useful keyboard short cuts.
 * **m** + letter - set mark
 * **'** + letter - go to mark
 * **Ctrl-^** - switch to previous buffer
+* **:tab h whatever** - open help in a new tab
+* **Ctrl-w o** - make pane the only visible one
 
 ### netrw
 
