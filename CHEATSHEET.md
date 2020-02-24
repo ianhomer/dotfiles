@@ -38,6 +38,10 @@ Useful keyboard short cuts.
 
 [more tmux cheats](https://tmuxcheatsheet.com/)
 
+# git
+
+* git-set-personal-url - set the repository to push with personal credentials
+
 # fish
 
 * **Ctrl-a Ctrl-a** - beginning of line
