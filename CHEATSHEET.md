@@ -67,14 +67,16 @@ Useful keyboard short cuts.
 * **'** + letter - go to mark
 * **Ctrl-^** - switch to previous buffer
 
-netrw
+### netrw
 
 * **-** - up a directory
 * **i** - change list view
 * **I** - show header
 * **gn** - make current node root of tree
+* **gh** - hide/unhide dot files
+* **%** - create new file
 
-**Go to:**
+### Go to
 
 * **0** - beginnning of line
 * **$** - end of line
