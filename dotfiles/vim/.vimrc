@@ -40,13 +40,13 @@ Plug 'godlygeek/tabular'
 " fugitive - Git integration
 Plug 'tpope/vim-fugitive'
 " NERDTree - show git changes
-Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'Xuyuanp/nerdtree-git-plugin'
 " gitgutter - Git change indicator to left of window
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 " symlink - Follow symlink when opening file
 Plug 'aymericbeaumet/vim-symlink'
 " surround - Surround with brackets etc
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
 " repeat - Repeat with .
 " Plug 'tpope/vim-repeat'
 " HTML
@@ -57,7 +57,7 @@ Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-unimpaired'
 
 " Commenter
-Plug 'preservim/nerdcommenter'
+" Plug 'preservim/nerdcommenter'
 
 if has('nvim')
   " Code completion
@@ -151,7 +151,7 @@ autocmd InsertEnter,InsertLeave * set cul!
 " Allow hidden buffers without saving
 set hidden
 " Optimise for faster terminal connections
-set ttyfast
+" set ttyfast
 " Keep swap and backups centrally
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
@@ -180,11 +180,11 @@ set backspace=indent,eol,start
 " nmap <expr> <BS> getpos('.')[2]==1 ? "k$gJ" : "hx<Esc>"
 
 " Tab without leaving normal mode
-nnoremap <s-tab> <<
-inoremap <s-tab> <C-d>
-vnoremap <s-tab> <<
-nnoremap <tab> >>
-vnoremap <tab> >>
+" nnoremap <s-tab> <<
+" inoremap <s-tab> <C-d>
+" vnoremap <s-tab> <<
+" nnoremap <tab> >>
+" vnoremap <tab> >>
 
 " Keep messages short
 set shortmess=atI
@@ -207,12 +207,12 @@ set clipboard=unnamed
 "
 " netrw config
 "
-let g:netrw_liststyle = 3
-let g:netrw_keepdir=0
+" let g:netrw_liststyle = 3
+" let g:netrw_keepdir=0
 " When netrw pane hides then close it
 " Thanks - https://github.com/tpope/vim-vinegar/issues/13
-autocmd FileType netrw setl bufhidden=wipe
-let g:netrw_fastbrowse = 0
+" autocmd FileType netrw setl bufhidden=wipe
+" let g:netrw_fastbrowse = 0
 
 "
 " NERDTree config
@@ -221,11 +221,11 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
 " fzf config
-let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
+" let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
 
 " Linting
 " Fix files with prettier, and then ESLint.
-let b:ale_fixers = ['prettier', 'eslint']
+" let b:ale_fixers = ['prettier', 'eslint']
 
 
 colorscheme gruvbox
