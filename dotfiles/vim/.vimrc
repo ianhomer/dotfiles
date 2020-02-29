@@ -40,7 +40,7 @@ Plug 'godlygeek/tabular'
 " fugitive - Git integration
 Plug 'tpope/vim-fugitive'
 " NERDTree - show git changes
-"Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'xuyuanp/nerdtree-git-plugin'
 " gitgutter - Git change indicator to left of window
 "Plug 'airblade/vim-gitgutter'
 " symlink - Follow symlink when opening file
@@ -141,26 +141,39 @@ set cursorline
 set ignorecase
 " Highlight dynamically as pattern is typed
 set incsearch
+
+"
+" Edit configuraiton
+"
+" Do not highlight current line when in insert mode
+autocmd InsertEnter,InsertLeave * set cul!
+" Show white space
+exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
+set list
+
+"
+" File IO handling
+"
 " Auto reload underlying file if it changes, although
 " it only really reloads when external command run like :!ls
 set autoread
 " Auto reload when focus gained or buffer entered
 au FocusGained,BufEnter * :checktime
-" Do not highlight current line when in insert mode
-autocmd InsertEnter,InsertLeave * set cul!
 " Allow hidden buffers without saving
 set hidden
-" Optimise for faster terminal connections
-" set ttyfast
+" No backups or backups during write
+set nobackup
+set nowritebackup
 " Keep swap and backups centrally
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
+
+
 " Scroll 3 lines before border
 set scrolloff=3
 
-" Show white space
-exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
-set list
+" Optimise for faster terminal connections
+" set ttyfast
 
 " Enable tab line
 let g:airline#extensions#tabline#enabled = 1
