@@ -221,7 +221,7 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
 " fzf config
-" let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
+let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
 
 " Linting
 " Fix files with prettier, and then ESLint.
