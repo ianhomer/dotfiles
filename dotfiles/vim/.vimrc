@@ -59,6 +59,9 @@ Plug 'aymericbeaumet/vim-symlink'
 " Commenter
 " Plug 'preservim/nerdcommenter'
 
+" COC completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 if has('nvim')
   " Code completion
   " Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -143,9 +146,12 @@ set ignorecase
 set incsearch
 " Default updatetime is 4000 and too slow
 set updatetime=300
+" Always show sign column to stop flip-flopping
+set signcolumn=yes
 
 "
-" Edit configuraiton
+" Configuraiton for editing
+" -------------------------
 "
 " Do not highlight current line when in insert mode
 autocmd InsertEnter,InsertLeave * set cul!
@@ -155,6 +161,7 @@ set list
 
 "
 " File IO handling
+" ----------------
 "
 " Auto reload underlying file if it changes, although
 " it only really reloads when external command run like :!ls
@@ -177,6 +184,44 @@ set scrolloff=3
 " Optimise for faster terminal connections
 " set ttyfast
 
+"
+" COC CONFIG START
+" ----------------
+"
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+if has('patch8.1.1068')
+  " Use `complete_info` if your (Neo)Vim version supports it.
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+"
+" COC CONFIG END
+"
+
+"
 " Enable tab line
 let g:airline#extensions#tabline#enabled = 1
 " Enable powerfonts giving angled tables
@@ -201,8 +246,8 @@ set backspace=indent,eol,start
 " nnoremap <tab> >>
 " vnoremap <tab> >>
 
-" Keep messages short
-set shortmess=atI
+" Keep messages short and don't give ins-completion-messages (c)
+set shortmess=catI
 
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
