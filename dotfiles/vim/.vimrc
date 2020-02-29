@@ -141,6 +141,8 @@ set cursorline
 set ignorecase
 " Highlight dynamically as pattern is typed
 set incsearch
+" Default updatetime is 4000 and too slow
+set updatetime=300
 
 "
 " Edit configuraiton
