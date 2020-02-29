@@ -17,7 +17,7 @@ call plug#begin(g:vim_dir."/plugged")
 " NERDTree - file explore
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Vinegar - better file expore than NERD
-Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar'
 " fzf - Fuzzy Finder
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
