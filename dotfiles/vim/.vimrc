@@ -19,7 +19,9 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Vinegar - better file expore than NERD
 " Plug 'tpope/vim-vinegar'
 " fzf - Fuzzy Finder
-Plug '/usr/local/opt/fzf'
+" Use git repo NOT local install since I need https://github.com/junegunn/fzf.vim/issues/92
+Plug 'junegunn/fzf'
+"Plug '/usr/local/opddt/fzf'
 Plug 'junegunn/fzf.vim'
 " ack - Search files
 Plug 'mileszs/ack.vim'

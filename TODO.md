@@ -27,6 +27,9 @@
 * Automatically load tmux plugins, currently need to do C-a I
 * Get ta fish completion working, tmux a -t works, how do we register an alias
     for autocompletion
+* fzf glitching like - https://github.com/junegunn/fzf.vim/issues/927 - switched
+    to installing plugin from source to get glitch fix. Need to verify official
+    way to install plugin after fix released in fzf.
 * gx glitched for me to open external URL - why?
 * cheat for listing bind keys consider maping prefix [ ] to
     moving pane left right in tmux.  What about up / down?
