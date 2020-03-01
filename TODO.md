@@ -32,4 +32,4 @@
     moving pane left right in tmux.  What about up / down?
 * how to make the osx key mapping diff clearer to read, e.g. aligned with git
     diff-color
-* Try COC code completion
+* Try COC code completion - vimrc configuration and CocInstall
