@@ -5,10 +5,10 @@
 * fzf glitching like - https://github.com/junegunn/fzf.vim/issues/927 - switched
     to installing plugin from source to get glitch fix. Need to verify official
     way to install plugin after fix released in fzf.
-* Assess pandoc
 
 # backlog
 
+* Assess pandoc
 * Remove NERDTree once fully OK with netrw
 * Improve report tool (use python)
   - brew leaves - report what's been explicitly installed (over and above
@@ -35,5 +35,11 @@
 * how to make the osx key mapping diff clearer to read, e.g. aligned with git
     diff-color
 * Try COC code completion - vimrc configuration and CocInstall
-* Auto  jenv enable-plugin maven
+* Install Coc extensions with shell script -
+    https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions 
+    Try the following coc-json, coc-yaml, coc-tsserve, coc-html, coc-java,
+    coc-highlight,
+    coc-git, coc-yank, coc-xml, coc-markdownlint, coc-spell-checker
+* Auto jenv enable-plugin maven
+* Digest aliases from https://preslav.me/2020/03/01/use-the-git-history/
 

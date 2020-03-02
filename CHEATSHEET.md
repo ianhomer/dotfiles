@@ -31,6 +31,7 @@ Useful keyboard short cuts.
 * **Opt-arrow** - move between panes
 * **Ctrl-hjkl** - move between panes including through vim panes
 * **Ctrl-arrow** - move between panes including through vim panes
+* **Ctrl-Shift-arrow** - move window left or right in tab order
 * prefix **space** - toggle between layouts
 * prefix **[** - copy mode with **Enter** to copy selection
 * hold option + mouse - bypass tmux mouse handling and do iterm action
