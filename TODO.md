@@ -42,4 +42,5 @@
     coc-git, coc-yank, coc-xml, coc-markdownlint, coc-spell-checker
 * Auto jenv enable-plugin maven
 * Digest aliases from https://preslav.me/2020/03/01/use-the-git-history/
+* Don't remove new line at end of file automatically in JS
 
