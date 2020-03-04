@@ -1,0 +1,28 @@
+#!/bin/bash
+
+#
+# Lint file
+#   N => File does NOT end with new line
+#   E => File has empty line at end file
+#
+# As I want to check for other things, I'll add other flags
+#
+for file in "$@" ; do
+
+  if [ -f "${file}" ] ; then
+    if [ -z "$(tail -c 1 "${file}")" ] ; then
+      NL="."
+    else
+      NL="N"
+    fi
+
+    if [ -z "$(sed -n "\$p" "${file}")" ] ; then
+      EMPTY_LINE="E"
+    else
+      EMPTY_LINE="."
+    fi
+
+    echo "${NL}${EMPTY_LINE} : ${file}"
+  fi
+
+done
