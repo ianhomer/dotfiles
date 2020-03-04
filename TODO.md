@@ -25,4 +25,4 @@
 * cheat for listing bind keys consider maping prefix [ ] to
     moving pane left right in tmux.  What about up / down?
 * how to make the osx key mapping diff clearer to read, e.g. aligned with git
-    diff-color
+    diff-color.
