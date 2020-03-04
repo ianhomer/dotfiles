@@ -43,4 +43,7 @@
 * Auto jenv enable-plugin maven
 * Digest aliases from https://preslav.me/2020/03/01/use-the-git-history/
 * Don't remove new line at end of file automatically in JS
-
+* Extend column width of Goyo mode it's slightly shorter than a length of code
+    (79 chars ?) in full screen mode which is odd.
+* Should we not prevent fix of eol? How many files in codebases I use don't have
+    eols at end of line?
