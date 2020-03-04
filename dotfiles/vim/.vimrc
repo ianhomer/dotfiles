@@ -17,9 +17,11 @@ call plug#begin(g:vim_dir."/plugged")
 " NERDTree - file explore
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Vinegar - better file expore than NERD
-Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar'
 " fzf - Fuzzy Finder
-Plug '/usr/local/opt/fzf'
+" Use git repo NOT local install since I need https://github.com/junegunn/fzf.vim/issues/92
+Plug 'junegunn/fzf'
+"Plug '/usr/local/opddt/fzf'
 Plug 'junegunn/fzf.vim'
 " ack - Search files
 Plug 'mileszs/ack.vim'
@@ -40,13 +42,13 @@ Plug 'godlygeek/tabular'
 " fugitive - Git integration
 Plug 'tpope/vim-fugitive'
 " NERDTree - show git changes
-Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'xuyuanp/nerdtree-git-plugin'
 " gitgutter - Git change indicator to left of window
-Plug 'airblade/vim-gitgutter'
+"Plug 'airblade/vim-gitgutter'
 " symlink - Follow symlink when opening file
 Plug 'aymericbeaumet/vim-symlink'
 " surround - Surround with brackets etc
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
 " repeat - Repeat with .
 " Plug 'tpope/vim-repeat'
 " HTML
@@ -57,7 +59,10 @@ Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-unimpaired'
 
 " Commenter
-Plug 'preservim/nerdcommenter'
+" Plug 'preservim/nerdcommenter'
+
+" COC completion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 if has('nvim')
   " Code completion
@@ -102,6 +107,7 @@ nnoremap <silent> <leader>m :Maps<CR>
 nnoremap <silent> <leader>r :reg<CR>
 nnoremap <silent> <leader>a :Ag<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>s :w<CR>
 
 " Reload vimrc or neo vimrc
 if has('nvim')
@@ -140,27 +146,84 @@ set cursorline
 set ignorecase
 " Highlight dynamically as pattern is typed
 set incsearch
+" Default updatetime is 4000 and too slow
+set updatetime=300
+" Always show sign column to stop flip-flopping
+set signcolumn=yes
+
+"
+" Configuraiton for editing
+" -------------------------
+"
+" Do not highlight current line when in insert mode
+autocmd InsertEnter,InsertLeave * set cul!
+" Show white space
+exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
+set list
+
+"
+" File IO handling
+" ----------------
+"
 " Auto reload underlying file if it changes, although
 " it only really reloads when external command run like :!ls
 set autoread
 " Auto reload when focus gained or buffer entered
 au FocusGained,BufEnter * :checktime
-" Do not highlight current line when in insert mode
-autocmd InsertEnter,InsertLeave * set cul!
 " Allow hidden buffers without saving
 set hidden
-" Optimise for faster terminal connections
-set ttyfast
+" No backups or backups during write
+set nobackup
+set nowritebackup
 " Keep swap and backups centrally
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
+
+
 " Scroll 3 lines before border
 set scrolloff=3
 
-" Show white space
-exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
-set list
+" Optimise for faster terminal connections
+" set ttyfast
 
+"
+" COC CONFIG START
+" ----------------
+"
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+if has('patch8.1.1068')
+  " Use `complete_info` if your (Neo)Vim version supports it.
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+"
+" COC CONFIG END
+"
+
+"
 " Enable tab line
 let g:airline#extensions#tabline#enabled = 1
 " Enable powerfonts giving angled tables
@@ -168,6 +231,12 @@ let g:airline_powerline_fonts = 1
 
 " Backspace support
 set backspace=indent,eol,start
+
+" Don't fix end of lines.
+" https://stackoverflow.com/questions/729692/why-should-text-files-end-with-a-newline
+" POSIX standard requires, it but it's unnecessarily opinionated in most cases
+" and leads to git diff noise of no value.
+set nofixendofline
 
 " CR insert line without leaving normal mode. Note that this
 " has special case to append CR at end of line as this feels more
@@ -179,14 +248,14 @@ set backspace=indent,eol,start
 " nmap <expr> <BS> getpos('.')[2]==1 ? "k$gJ" : "hx<Esc>"
 
 " Tab without leaving normal mode
-nnoremap <s-tab> <<
-inoremap <s-tab> <C-d>
-vnoremap <s-tab> <<
-nnoremap <tab> >>
-vnoremap <tab> >>
+" nnoremap <s-tab> <<
+" inoremap <s-tab> <C-d>
+" vnoremap <s-tab> <<
+" nnoremap <tab> >>
+" vnoremap <tab> >>
 
-" Keep messages short
-set shortmess=atI
+" Keep messages short and don't give ins-completion-messages (c)
+set shortmess=catI
 
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
@@ -203,11 +272,19 @@ set formatoptions=jrql
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
+"
 " netrw config
-let g:netrw_liststyle = 3
-let g:netrw_keepdir=0
+"
+" let g:netrw_liststyle = 3
+" let g:netrw_keepdir=0
+" When netrw pane hides then close it
+" Thanks - https://github.com/tpope/vim-vinegar/issues/13
+" autocmd FileType netrw setl bufhidden=wipe
+" let g:netrw_fastbrowse = 0
 
+"
 " NERDTree config
+"
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
@@ -216,7 +293,7 @@ let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
 
 " Linting
 " Fix files with prettier, and then ESLint.
-let b:ale_fixers = ['prettier', 'eslint']
+" let b:ale_fixers = ['prettier', 'eslint']
 
 
 colorscheme gruvbox

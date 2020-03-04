@@ -1,3 +1,12 @@
+#
+# jenv set up
+#
+set PATH $HOME/.jenv/bin $PATH
+status --is-interactive; and source (jenv init -|psub)
+
+#
+# rbenv set up
+#
 status --is-interactive; and source (rbenv init - | psub)
 
 set PATH ~/.dotfiles/bin $PATH
@@ -10,7 +19,7 @@ if status --is-interactive
   source ~/.config/fish/functions.fish
 
   #
-  # Tweak colors for me - noise reduction, red/green color blind and 
+  # Tweak colors for me - noise reduction, red/green color blind and
   # long-sighted.
   #
   # execute `set | grep fish_color` to see colors in use in shell
@@ -22,7 +31,7 @@ if status --is-interactive
   set fish_color_error 14b77b
 
   #
-  # Work around for OSX issue causing 
+  # Work around for OSX issue causing
   # slow autocompletion - https://github.com/fish-shell/fish-shell/issues/6270
   #
   function __fish_describe_command; end
@@ -40,7 +49,7 @@ if status --is-interactive
   echo "... Loaded ~/.cnfig/fish/config.fish"
 
   #
-  # Set terminal for GPG to allow signining of git commits 
+  # Set terminal for GPG to allow signining of git commits
   #
   set -x GPG_TTY (tty)
 end
