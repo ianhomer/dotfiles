@@ -35,8 +35,10 @@
 * how to make the osx key mapping diff clearer to read, e.g. aligned with git
     diff-color
 * Try COC code completion - vimrc configuration and CocInstall
+
+*
 * Install Coc extensions with shell script -
-    https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions 
+    https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
     Try the following coc-json, coc-yaml, coc-tsserve, coc-html, coc-java,
     coc-highlight,
     coc-git, coc-yank, coc-xml, coc-markdownlint, coc-spell-checker
@@ -45,5 +47,4 @@
 * Don't remove new line at end of file automatically in JS
 * Extend column width of Goyo mode it's slightly shorter than a length of code
     (79 chars ?) in full screen mode which is odd.
-* Should we not prevent fix of eol? How many files in codebases I use don't have
-    eols at end of line?
+* Should we not prevent fix of eol?
