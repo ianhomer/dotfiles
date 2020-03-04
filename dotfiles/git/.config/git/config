@@ -6,9 +6,9 @@
 
   # See https://git-scm.com/docs/pretty-formats
   l = "log --pretty=oneline -n 20 --graph --abbrev-commit"
-  log-who = "log --format='%C(auto) %h %Cred %ae %Creset %s%Cblue%d'"
-  log-when = "log --format='%C(auto) %h %Cblue%<(12,trunc)%cr %Creset %s%Cblue%d'"
-  log-who-when = "log --format='%C(auto) %h %Cred %ae %Cblue %ci %Creset %s%Cblue%d'"
+  log-who = "log --format='%C(auto) %h %Cred%ae%Creset %<(30,trunc)%s%Cblue%d'"
+  log-when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %Cblue%cd%Creset %<(30,trunc)%s%Cblue%d'"
+  log-who-when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h%Cred %ae%Cblue %cd%Creset %<(80,trunc)%s%Cblue%d'"
 
 [color]
   ui = auto
