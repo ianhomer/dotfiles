@@ -1,12 +1,11 @@
 tap "homebrew/cask-fonts"
 
 #
-# The awesome Hack Nerd fonts combining the Hack source code font -  https://github.com/source-foundry/Hack
+# The awesome Hack Nerd fonts combining the Hack source code font 
+# -  https://github.com/source-foundry/Hack
 # with the Nerd aggregation of icons - https://www.nerdfonts.com/
 #
-cask "font-hack-nerd-font"
-cask "font-firacode-nerd-font-mono"
-cask "font-fira-code"
+cask "font-firacode-nerd-font"
 
 #
 # core tools
@@ -71,6 +70,8 @@ brew "yarn"
 
 cask "docker"
 cask "drawio"
+cask "google-cloud-sdk"
+cask "java11"
 cask "visual-studio-code"
 
 #

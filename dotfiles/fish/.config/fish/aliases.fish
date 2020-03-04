@@ -16,7 +16,7 @@ alias gd~="git diff HEAD~"
 alias gita="git add"
 alias gitc="git commit"
 alias git-whoami="git config user.name ; git config user.email"
-alias git-config-personal="git config user.e:mail ian@purplepip.com"
+alias git-config-personal="git config user.email ian@purplepip.com"
 
 # tmux
 alias t="tmux"
