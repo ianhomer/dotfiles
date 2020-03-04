@@ -232,11 +232,12 @@ let g:airline_powerline_fonts = 1
 " Backspace support
 set backspace=indent,eol,start
 
-" Don't fix end of lines.
+" If we don't want to fix end of lines.
 " https://stackoverflow.com/questions/729692/why-should-text-files-end-with-a-newline
-" POSIX standard requires, it but it's unnecessarily opinionated in most cases
-" and leads to git diff noise of no value.
-set nofixendofline
+" POSIX standard requires it new line at end of file, it's opinionated and 
+" leads to git diff noise, but probably is good for code.
+" 
+" set nofixendofline
 
 " CR insert line without leaving normal mode. Note that this
 " has special case to append CR at end of line as this feels more
