@@ -235,7 +235,7 @@ set backspace=indent,eol,start
 " If we don't want to fix end of lines.
 " https://stackoverflow.com/questions/729692/why-should-text-files-end-with-a-newline
 " POSIX standard requires it new line at end of file, it's opinionated and 
-" leads to git diff noise, but probably is good for code.
+" leads to git diff noise, but is
 " 
 " set nofixendofline
 
@@ -343,4 +343,3 @@ function! ShowDebug()
   echo "col=".string(getpos('.')[2]).";pos=".string(getpos('.')).";line-length=".strlen(getline("."))
 endfunction
 nnoremap <silent> <leader>d :call ShowDebug()<CR>
-
