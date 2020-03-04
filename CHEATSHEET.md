@@ -31,12 +31,17 @@ Useful keyboard short cuts.
 * **Opt-arrow** - move between panes
 * **Ctrl-hjkl** - move between panes including through vim panes
 * **Ctrl-arrow** - move between panes including through vim panes
+* **Ctrl-Shift-arrow** - move window left or right in tab order
 * prefix **space** - toggle between layouts
 * prefix **[** - copy mode with **Enter** to copy selection
 * hold option + mouse - bypass tmux mouse handling and do iterm action
 * click command click - block select
 
 [more tmux cheats](https://tmuxcheatsheet.com/)
+
+# git
+
+* git-set-personal-url - set the repository to push with personal credentials
 
 # fish
 
@@ -66,15 +71,19 @@ Useful keyboard short cuts.
 * **m** + letter - set mark
 * **'** + letter - go to mark
 * **Ctrl-^** - switch to previous buffer
+* **:tab h whatever** - open help in a new tab
+* **Ctrl-w o** - make pane the only visible one
 
-netrw
+### netrw
 
 * **-** - up a directory
 * **i** - change list view
 * **I** - show header
 * **gn** - make current node root of tree
+* **gh** - hide/unhide dot files
+* **%** - create new file
 
-**Go to:**
+### Go to
 
 * **0** - beginnning of line
 * **$** - end of line
