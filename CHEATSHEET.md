@@ -9,6 +9,11 @@ Useful keyboard short cuts.
 * **Ctrl+Cmd+click+drag** - Move Window
 * **Ctrl+Cmd+space** - Open special character window
 
+* **Cmd+Tab** - Switch windows
+* **Cmd+c** - Copy
+* **Cmd+v** - Paste
+* **Cmd+z** - Undo
+
 # iterm
 
 * **Cmd+n** - New terminal window

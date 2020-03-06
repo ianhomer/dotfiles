@@ -44,3 +44,6 @@
 * Digest aliases from https://preslav.me/2020/03/01/use-the-git-history/
 * Don't remove new line at end of file automatically in JS
 * Should we not prevent fix of eol?
+* Create mechamism to test keyboard output so that I can customise keyboard and
+    learn how to remap keys.
+    https://apple.stackexchange.com/questions/317548/how-do-i-get-the-calculator-button-on-a-microsoft-sculpt-keyboard-working
