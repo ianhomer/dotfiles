@@ -45,7 +45,6 @@ if status --is-interactive
   fish_default_key_bindings
   # Time between escape key press and subsequent character
   set -g fish_escape_delay_ms 200
-
 end
 
 if status --is-login
@@ -66,7 +65,6 @@ if status --is-login
   # Set terminal for GPG to allow signining of git commits
   #
   set -x GPG_TTY (tty)
-
 end
 
 [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and echo "END   : PATH = $PATH"
