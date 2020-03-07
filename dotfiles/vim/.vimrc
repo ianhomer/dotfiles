@@ -313,7 +313,22 @@ set bg=dark
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%82v', 100)
 
+" Open new splits to the right and below
+set splitright
+set splitbelow
+
 "
+" Terminal support
+"
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+function! OpenTerminal()
+  split
+  term
+  resize 10
+endfunction
+nnoremap <leader>t :call OpenTerminal()<CR>
+
+
 " File type specific configuration
 " ================================
 "
