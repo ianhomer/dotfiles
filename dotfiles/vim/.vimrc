@@ -63,7 +63,15 @@ Plug 'aymericbeaumet/vim-symlink'
 
 " COC completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = [ 'coc-css', 'coc-emmet', 'coc-java', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-yaml' ]
+let g:coc_global_extensions = [
+      \ 'coc-css',
+      \ 'coc-emmet',
+      \ 'coc-java',
+      \ 'coc-json',
+      \ 'coc-prettier',
+      \ 'coc-tsserver',
+      \ 'coc-yaml'
+      \ ]
 
 if has('nvim')
   " Code completion

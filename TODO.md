@@ -34,10 +34,8 @@
     moving pane left right in tmux.  What about up / down?
 * how to make the osx key mapping diff clearer to read, e.g. aligned with git
     diff-color.
-* Try COC code completion - vimrc configuration and CocInstall
-* Install Coc extensions with shell script -
+* Try the following coc-json, coc-yaml, coc-tsserve, coc-html, coc-java,
     https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-    Try the following coc-json, coc-yaml, coc-tsserve, coc-html, coc-java,
     coc-highlight,
     coc-git, coc-yank, coc-xml, coc-markdownlint, coc-spell-checker
 * Auto jenv enable-plugin maven
