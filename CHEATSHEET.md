@@ -78,6 +78,7 @@ Useful keyboard short cuts.
 * **Ctrl-^** - switch to previous buffer
 * **:tab h whatever** - open help in a new tab
 * **Ctrl-w o** - make pane the only visible one
+* **:noh** - clear last hightlight
 
 ### netrw
 

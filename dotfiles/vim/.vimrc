@@ -63,6 +63,7 @@ Plug 'aymericbeaumet/vim-symlink'
 
 " COC completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = [ 'coc-css', 'coc-emmet', 'coc-java', 'coc-json', 'coc-prettier', 'coc-tsserver', 'coc-yaml' ]
 
 if has('nvim')
   " Code completion
@@ -234,9 +235,9 @@ set backspace=indent,eol,start
 
 " If we don't want to fix end of lines.
 " https://stackoverflow.com/questions/729692/why-should-text-files-end-with-a-newline
-" POSIX standard requires it new line at end of file, it's opinionated and 
-" leads to git diff noise, but is
-" 
+" POSIX standard requires it new line at end of file, it's opinionated and
+" leads to git diff noise.
+"
 " set nofixendofline
 
 " CR insert line without leaving normal mode. Note that this
