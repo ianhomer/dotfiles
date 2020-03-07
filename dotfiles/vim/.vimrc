@@ -320,7 +320,8 @@ set splitbelow
 "
 " Terminal support
 "
-au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+"autocmd BufWinEnter,WinEnter,BufEnter * if &buftype == 'terminal' | :startinsert | endif
+"autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
 function! OpenTerminal()
   split
   term
