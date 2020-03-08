@@ -1,17 +1,17 @@
 # todo
 
 * Create a way to report on any files not checked in any of my bookmarked places
-  -  z, fastd or autojump, z.lua
+  * z, fastd or autojump, z.lua
 * fzf glitching like - https://github.com/junegunn/fzf.vim/issues/927 - switched
     to installing plugin from source to get glitch fix. Need to verify official
     way to install plugin after fix released in fzf.
 
-# backlog
+## backlog
 
 * Assess pandoc
 * Remove NERDTree once fully OK with netrw
 * Improve report tool (use python)
-  - brew leaves - report what's been explicitly installed (over and above
+  * brew leaves - report what's been explicitly installed (over and above
     dotfiles), suggest what packages should be removed / auto-prune option
 * Can we store learnt spelling dictionary? And make available to all tools?
     ~/Library/Spelling/LocalDictionary
@@ -22,7 +22,6 @@
 * Change default shell to fish - currently done manually with
     `chsh -s /usr/local/bin/fish`
 * Disable Mac OS auto correct keyboard -> text
-* Try devicons https://github.com/ryanoasis/vim-devicons
 * assess neofetch
 * Use includeIf to include git config per organisation / user profile
 * Automate set up of caps lock as escape key
