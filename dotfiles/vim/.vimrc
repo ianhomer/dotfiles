@@ -5,6 +5,9 @@
 let g:vim_dir = "~/.vim"
 
 if has('nvim')
+  "
+  " Store nvim plugins in isolated location
+  "
   let g:vim_dir = "~/.config/nvim"
 endif
 
