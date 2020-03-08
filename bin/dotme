@@ -51,6 +51,14 @@ restore() {
 }
 
 #
+# Compile resources
+#
+command_compile() {
+  echo "... Creating man files"
+  pandoc README.md CHEATSHEET.md TODO.md -s -t man -o tmp/README.man
+}
+
+#
 # Main entry point for installing dotfiles, and more, for a system.
 #
 command_install() {
@@ -151,6 +159,7 @@ where command is one of:
 
 * brew
 * clean - clean up caches
+* compile
 * install (default)
 * pull
 * stow
