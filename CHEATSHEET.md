@@ -2,7 +2,7 @@
 
 Useful keyboard short cuts.
 
-# OSX
+## OSX
 
 * **Ctrl+Up** - Mission Control / space management
   * **Ctrl-right/left** - Move to other spaces
@@ -14,14 +14,14 @@ Useful keyboard short cuts.
 * **Cmd+v** - Paste
 * **Cmd+z** - Undo
 
-# iterm
+## iterm
 
 * **Cmd+n** - New terminal window
 * **git open** - Open git repository in web browser
 * **z mydir <tab>** - find recently opened folder (using fasd)
 * **z** - list recently opened folder we
 
-# tmux
+## tmux
 
 * **Ctrl-a** - prefix
 * prefix **c** - new window
@@ -44,11 +44,11 @@ Useful keyboard short cuts.
 
 [more tmux cheats](https://tmuxcheatsheet.com/)
 
-# git
+## git
 
 * git-set-personal-url - set the repository to push with personal credentials
 
-# fish
+## fish
 
 * **Ctrl-a Ctrl-a** - beginning of line
 * **Ctrl-e** - end of line
@@ -56,9 +56,9 @@ Useful keyboard short cuts.
 * **Ctrl-f** - forward a word
 * **bind** - see key bindings
 
-# vi
+## vi
 
-## vi - Files, Buffers & Navigations
+### vi - Files, Buffers & Navigations
 
 * **:NERDTreeToggle** or **space+f** - Open file browser
   * **m** - open file actions
@@ -82,7 +82,7 @@ Useful keyboard short cuts.
 * **:enew|pu=execute('autocmd')** - copy output of command, e.g. autocmd, into
     buffer
 
-### netrw
+#### netrw
 
 * **-** - up a directory
 * **i** - change list view
@@ -91,7 +91,7 @@ Useful keyboard short cuts.
 * **gh** - hide/unhide dot files
 * **%** - create new file
 
-### Go to
+#### Go to
 
 * **0** - beginnning of line
 * **$** - end of line
@@ -104,13 +104,13 @@ Useful keyboard short cuts.
 * **GG** - end of file
 * **%** - next / previous bracket
 
-## vi - Window Management
+### vi - Window Management
 
 * **:split,:vsplit** - split pane
 * **80 Ctrl-w** + - set current pane to 80 characters
 * **Ctrl-w+left/right** or **Ctrl-h/j/k/l** - move to another pane
 
-## vi - Editing
+### vi - Editing
 
 * **:Goyo** - distraction free coding
 * **gw{motion}** - reformat content
@@ -122,13 +122,13 @@ Useful keyboard short cuts.
 * **:Tabularize /|** or **space\** - Align paragraph on character
 * **count<leader>cc** - comment out the next count lines
 
-## vi - Markdown
+### vi - Markdown
 
 * **viWS+** - make a word bold
 * **zR** - open all folds
 * **zM** - close all folds
 
-## vi - Selections
+### vi - Selections
 
 * **vip** - select paragraph
 * **viW** - select current word (including non-alphanumeric)
