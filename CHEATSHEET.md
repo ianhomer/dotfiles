@@ -132,3 +132,9 @@ Useful keyboard short cuts.
 
 * **vip** - select paragraph
 * **viW** - select current word (including non-alphanumeric)
+
+## Document conversions
+
+* **pandoc README.md -s -o ~/tmp/test.pdf** - convert markdown file to PDF
+
+
