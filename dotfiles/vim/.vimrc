@@ -74,14 +74,6 @@ let g:coc_global_extensions = [
       \ 'coc-yaml'
       \ ]
 
-if has('nvim')
-  " Code completion
-  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  " Some people suggest deoplete ...
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  " let g:deoplete#enable_at_startup = 1
-endif
-
 "
 " Writing
 "
@@ -161,25 +153,50 @@ set updatetime=300
 " Always show sign column to stop flip-flopping
 set signcolumn=yes
 
+
 "
-" Configuraiton for editing
-" -------------------------
+" Group all autocmds together to improve reloadability (reloads of vimrc
+" replace, not add to, exisiting commands) and source tacking (we know that
+" the autocmds came from here).
 "
-" Do not highlight current line when in insert mode
-autocmd InsertEnter,InsertLeave * set cul!
+augroup dotme
+  autocmd!
+  "
+  " *** Scope : Editing ***
+  "
+  " Do not highlight current line when in insert mode
+  autocmd InsertEnter,InsertLeave * set cul!
+
+  "
+  " *** Scope : IO ***
+  "
+  " Auto reload when focus gained or buffer entered
+  au FocusGained,BufEnter * :checktime
+
+  "
+  " *** Scope : Terminal ***
+  "
+  autocmd BufWinEnter,WinEnter,BufEnter * if &buftype == 'terminal' | :startinsert | endif
+  " autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
+
+augroup end
+
+
+"
+" *** Scope : Editing ***
+"
+
 " Show white space
 exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
 set list
 
 "
-" File IO handling
+" *** Scope : IO ***
 " ----------------
 "
 " Auto reload underlying file if it changes, although
 " it only really reloads when external command run like :!ls
 set autoread
-" Auto reload when focus gained or buffer entered
-au FocusGained,BufEnter * :checktime
 " Allow hidden buffers without saving
 set hidden
 " No backups or backups during write
@@ -318,13 +335,8 @@ set splitright
 set splitbelow
 
 "
-" Terminal support
+" *** Scope : Terminal ***
 "
-" autocmd BufWinEnter,WinEnter,BufEnter * if &buftype == 'terminal' | :startinsert | endif
-augroup dotmeTerminal
-  autocmd!
-  autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
-augroup end
 
 function! OpenTerminal()
   split
@@ -332,6 +344,8 @@ function! OpenTerminal()
   resize 10
 endfunction
 nnoremap <silent> <leader>t :call OpenTerminal()<CR>
+" Map escape in terminal mode to enter normal mode
+tnoremap <Esc> <C-\><C-n>
 
 " File type specific configuration
 " ================================
