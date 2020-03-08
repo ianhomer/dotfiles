@@ -183,6 +183,13 @@ augroup dotme
   autocmd BufWinEnter,WinEnter,BufEnter * if &buftype == 'terminal' | :startinsert | endif
   " autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
 
+  "
+  " *** Scope : Python ***
+  "
+
+  " Override shiftwidth for python
+  autocmd Filetype python set shiftwidth=2
+
 augroup end
 
 
@@ -350,7 +357,7 @@ tnoremap <Esc> <C-\><C-n>
 
 " Surround Customisations
 " This doesn't work for me - https://stackoverflow.com/questions/32769488/double-vim-surround-with
-autocmd Filetype markdown let b:surround_43 = "**\r**"
+" autocmd Filetype markdown let b:surround_43 = "**\r**"
 
 " Markdown syntax
 " Conceal some syntax - e.g. ** around bold
@@ -360,13 +367,6 @@ let g:markdown_folding = 1
 " Default large fold level start, folding everything up by default feels odd.
 set foldlevelstart=20
 nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
-
-"
-" *** Scope : Python ***
-"
-
-" Override shiftwidth for python
-autocmd Filetype python set shiftwidth=2
 
 
 " *** Scope : Experimental ***
