@@ -125,7 +125,7 @@ nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
 nnoremap <leader>g :Goyo<CR>
 
 "
-" Window and navigation
+" *** Scope : Windows ***
 "
 
 " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
@@ -193,7 +193,6 @@ set list
 
 "
 " *** Scope : IO ***
-" ----------------
 "
 " Auto reload underlying file if it changes, although
 " it only really reloads when external command run like :!ls
@@ -215,8 +214,7 @@ set scrolloff=3
 " set ttyfast
 
 "
-" COC CONFIG START
-" ----------------
+" *** Scope : COC ***
 "
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -248,7 +246,7 @@ endif
 nmap <leader>rn <Plug>(coc-rename)
 
 "
-" COC CONFIG END
+" *** Scope : Status Bar ***
 "
 
 "
@@ -302,7 +300,7 @@ set formatoptions=jrql
 set clipboard=unnamed
 
 "
-" netrw config
+" *** Scope : netrw ***
 "
 " let g:netrw_liststyle = 3
 " let g:netrw_keepdir=0
@@ -312,18 +310,13 @@ set clipboard=unnamed
 " let g:netrw_fastbrowse = 0
 
 "
-" NERDTree config
+" *** Scope : NERDTree ***
 "
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
 " fzf config
 let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
-
-" Linting
-" Fix files with prettier, and then ESLint.
-" let b:ale_fixers = ['prettier', 'eslint']
-
 
 colorscheme gruvbox
 set bg=dark
@@ -348,12 +341,8 @@ nnoremap <silent> <leader>t :call OpenTerminal()<CR>
 " Map escape in terminal mode to enter normal mode
 tnoremap <Esc> <C-\><C-n>
 
-" File type specific configuration
-" ================================
 "
-
-" Markdown
-" --------
+" *** Scope : Markdown ***
 "
 
 " Surround Customisations
@@ -370,16 +359,14 @@ set foldlevelstart=20
 nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
 
 "
-" Python
-" ------
+" *** Scope : Python ***
 "
 
 " Override shiftwidth for python
 autocmd Filetype python set shiftwidth=2
 
 
-" Experimental configuration
-" ==========================
+" *** Scope : Experimental ***
 "
 
 " Placeholder for experimental output
