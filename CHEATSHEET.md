@@ -79,6 +79,8 @@ Useful keyboard short cuts.
 * **:tab h whatever** - open help in a new tab
 * **Ctrl-w o** - make pane the only visible one
 * **:noh** - clear last hightlight
+* **:enew|pu=execute('autocmd')** - copy output of command, e.g. autocmd, into
+    buffer
 
 ### netrw
 

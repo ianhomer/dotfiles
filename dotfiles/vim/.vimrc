@@ -320,15 +320,18 @@ set splitbelow
 "
 " Terminal support
 "
-"autocmd BufWinEnter,WinEnter,BufEnter * if &buftype == 'terminal' | :startinsert | endif
-"autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
+" autocmd BufWinEnter,WinEnter,BufEnter * if &buftype == 'terminal' | :startinsert | endif
+augroup dotmeTerminal
+  autocmd!
+  autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
+augroup end
+
 function! OpenTerminal()
   split
   term
   resize 10
 endfunction
-nnoremap <leader>t :call OpenTerminal()<CR>
-
+nnoremap <silent> <leader>t :call OpenTerminal()<CR>
 
 " File type specific configuration
 " ================================
