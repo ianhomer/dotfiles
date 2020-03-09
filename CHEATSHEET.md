@@ -137,4 +137,9 @@ Useful keyboard short cuts.
 
 * **pandoc README.md -s -o ~/tmp/test.pdf** - convert markdown file to PDF
 
+## Gmail
 
+[gmail keyboard shortcuts](https://support.google.com/mail/answer/6594) :
+
+* **,** - move focus
+* **e** - archive message

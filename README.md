@@ -63,6 +63,13 @@ For a Microsoft keyboard :
 * Option Key -> Command
 * Command Key -> Option
 
+And then use [keyboard shortcuts](https://support.google.com/mail/answer/6594) -
+see [Cheatsheet](./CHEATSHEET.md) for my favourites.
+
+### Gmail
+
+Gmail -> Settings -> Keyboard Shortcuts -> Keyboard shortcuts on
+
 ## Thanks
 
 Too many dotfiles projects out there that have given me inspiration to mention
