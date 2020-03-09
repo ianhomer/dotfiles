@@ -1,6 +1,4 @@
----
-title:  dotme user guide
----
+# dotme user guide
 
 ## NAME
 
