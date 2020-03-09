@@ -51,7 +51,7 @@ restore() {
 }
 
 #
-# Compile resources
+# Compile resources. Currently this is just the man files.
 #
 command_compile() {
   echo "... Creating man files"
@@ -59,9 +59,27 @@ command_compile() {
   [ ! -d $manDir ] && mkdir $manDir
   manFile=${manDir}/dotme.1
 
-  pandoc ~/.dotfiles/README.md ~/.dotfiles/CHEATSHEET.md ~/.dotfiles/TODO.md -s -t man -o $manFile
+  pandoc                        \
+    ~/.dotfiles/bin/dotme.md    \
+    ~/.dotfiles/README.md       \
+    ~/.dotfiles/CHEATSHEET.md   \
+    ~/.dotfiles/TODO.md         \
+    -s -t man -o $manFile
+
   #install bin/man/dotme.1 /Users/ian/.dotfiles/bin/man/man1/
   #ln -fs ~/.dotfiles/tmp/dotme.1 /usr/local/share/man/man1
+}
+
+#
+# View the man files on the fly
+#
+command_man() {
+  pandoc -s                     \
+    ~/.dotfiles/bin/dotme.md    \
+    ~/.dotfiles/README.md       \
+    ~/.dotfiles/CHEATSHEET.md   \
+    ~/.dotfiles/TODO.md         \
+    -t man README.md | groff -T utf8 -man | less
 }
 
 command_help() {

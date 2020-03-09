@@ -4,22 +4,43 @@ Useful keyboard short cuts.
 
 ## OSX
 
-* **Ctrl+Up** - Mission Control / space management
-  * **Ctrl-right/left** - Move to other spaces
-* **Ctrl+Cmd+click+drag** - Move Window
-* **Ctrl+Cmd+space** - Open special character window
+**Ctrl+Up**
+: Mission Control / space management
 
-* **Cmd+Tab** - Switch windows
-* **Cmd+c** - Copy
-* **Cmd+v** - Paste
-* **Cmd+z** - Undo
+**Ctrl-right/left**
+: Move to other spaces
+
+**Ctrl+Cmd+click+drag**
+: Move Window
+
+**Ctrl+Cmd+space**
+: Open special character window
+
+**Cmd+Tab**
+: Switch windows
+
+**Cmd+c**
+: Copy
+
+**Cmd+v**
+: Paste
+
+**Cmd+z**
+: Undo
 
 ## iterm
 
-* **Cmd+n** - New terminal window
-* **git open** - Open git repository in web browser
-* **z mydir <tab>** - find recently opened folder (using fasd)
-* **z** - list recently opened folder we
+**Cmd+n**
+: New terminal window
+
+**git open**
+: Open git repository in web browser
+
+**z mydir <tab>**
+: find recently opened folder (using fasd)
+
+**z**
+: list recently opened folder we
 
 ## tmux
 
