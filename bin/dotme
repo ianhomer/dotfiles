@@ -83,7 +83,7 @@ command_man() {
 }
 
 command_help() {
-  usage
+  man dotme
 }
 
 #
@@ -177,35 +177,10 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 # Initialize our own variables:
 VERBOSE=0
 
-usage() {
-  cat <<EOF
-script usage:
-
-  $(basename $0) [-hvd] command
-
-where command is one of:
-
-* brew
-* clean - clean up caches
-* compile
-* help
-* install (default)
-* pull
-* stow
-* uninstall
-* unstow
-* update
-
-  -h this help
-  -v verbose mode
-  -d dry run
-EOF
-}
-
 while getopts "h?vd" opt; do
   case "$opt" in
   h|\?)
-    usage
+    command_help
     exit 0
     ;;
   d) DRY=1
