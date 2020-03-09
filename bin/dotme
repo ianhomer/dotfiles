@@ -55,7 +55,17 @@ restore() {
 #
 command_compile() {
   echo "... Creating man files"
-  pandoc README.md CHEATSHEET.md TODO.md -s -t man -o tmp/README.man
+  manDir=~/.dotfiles/bin/man/man1
+  [ ! -d $manDir ] && mkdir $manDir
+  manFile=${manDir}/dotme.1
+
+  pandoc ~/.dotfiles/README.md ~/.dotfiles/CHEATSHEET.md ~/.dotfiles/TODO.md -s -t man -o $manFile
+  #install bin/man/dotme.1 /Users/ian/.dotfiles/bin/man/man1/
+  #ln -fs ~/.dotfiles/tmp/dotme.1 /usr/local/share/man/man1
+}
+
+command_help() {
+  usage
 }
 
 #
@@ -160,6 +170,7 @@ where command is one of:
 * brew
 * clean - clean up caches
 * compile
+* help
 * install (default)
 * pull
 * stow

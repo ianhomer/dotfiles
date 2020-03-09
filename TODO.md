@@ -42,3 +42,5 @@
 * Create mechamism to test keyboard output so that I can customise keyboard and
     learn how to remap keys.
     https://apple.stackexchange.com/questions/317548/how-do-i-get-the-calculator-button-on-a-microsoft-sculpt-keyboard-working
+* Create man page like https://unix.stackexchange.com/questions/6891/how-can-i-add-man-page-entries-for-my-own-power-tools
+*

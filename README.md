@@ -1,10 +1,11 @@
 # .dotfiles
 
-Configure my computers, to reduce distraction and do less clickity-clickity.
+Configure my computers, to reduce distraction and and with less
+clickity-clickity.
 
 ## tl;dr
 
-First time do:
+First time clone repository and install:
 
     git clone git@github.com:ianhomer/dotfiles.git ~/.dotfiles
     ~/.dotfiles/bin/dotme

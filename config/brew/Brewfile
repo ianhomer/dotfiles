@@ -1,7 +1,7 @@
 tap "homebrew/cask-fonts"
 
 #
-# The awesome Hack Nerd fonts combining the Hack source code font 
+# The awesome Hack Nerd fonts combining the Hack source code font
 # -  https://github.com/source-foundry/Hack
 # with the Nerd aggregation of icons - https://www.nerdfonts.com/
 #
@@ -54,6 +54,8 @@ cask "dozer"
 
 #
 # office tools
+#
+# * pandoc + basictex => doc conversion, e.g. markdown to PDF
 #
 brew "pandoc"
 brew "pandoc-citeproc"
