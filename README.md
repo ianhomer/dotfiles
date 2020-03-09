@@ -47,6 +47,22 @@ however just look at bin/dotme to see what actually happens.
 You can also update parts of the initialisation separately, see `dotme -h` to
 get a list of each part.
 
+## Manual Configuration
+
+I've not worked out how to automate all configuration. Until I do, this is what
+I manually do on each environment.
+
+### Keyboard Configuration - MacOS
+
+System preferences -> keyboard -> Modifier Keys -> For each keyboard :
+
+* Caps Lock -> Escape
+
+For a Microsoft keyboard :
+
+* Option Key -> Command
+* Command Key -> Option
+
 ## Thanks
 
 Too many dotfiles projects out there that have given me inspiration to mention
