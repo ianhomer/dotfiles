@@ -50,6 +50,14 @@ restore() {
   fi
 }
 
+docfiles() {
+  DOCS="bin/dotme README CHEATSHEET TODO"
+  for doc in $DOCS ; do
+    cat ~/.dotfiles/${doc}.md
+  done
+}
+
+
 #
 # Compile resources. Currently this is just the man files.
 #
@@ -59,29 +67,25 @@ command_compile() {
   [ ! -d $manDir ] && mkdir $manDir
   manFile=${manDir}/dotme.1
 
-  pandoc                        \
-    ~/.dotfiles/bin/dotme.md    \
-    ~/.dotfiles/README.md       \
-    ~/.dotfiles/CHEATSHEET.md   \
-    ~/.dotfiles/TODO.md         \
-    -s -t man -o $manFile
-
-  #install bin/man/dotme.1 /Users/ian/.dotfiles/bin/man/man1/
-  #ln -fs ~/.dotfiles/tmp/dotme.1 /usr/local/share/man/man1
+  docfiles | pandoc -s -t man -o $manFile
 }
 
 #
 # View the man files on the fly
 #
 command_man() {
-  pandoc -s                     \
-    ~/.dotfiles/bin/dotme.md    \
-    ~/.dotfiles/README.md       \
-    ~/.dotfiles/CHEATSHEET.md   \
-    ~/.dotfiles/TODO.md         \
-    -t man README.md | groff -T utf8 -man | less
+  docfiles | pandoc -s -t man | groff -T utf8 -man | less
 }
 
+command_pdf() {
+  outfile="${TMPDIR}/dotme.pdf"
+  docfiles | pandoc -s -o $outfile
+  open $outfile
+}
+
+#
+# View the compiled man pages
+#
 command_help() {
   man dotme
 }

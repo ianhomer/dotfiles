@@ -16,7 +16,7 @@ configuration for tools like vim, tmux and brew. By running this on all local
 environment you can ensure that all local environments worked on are the
 configured the same.
 
-Support commands are as follows
+Supported commands are as follows:
 
 **brew**
 : install brew dependencies
