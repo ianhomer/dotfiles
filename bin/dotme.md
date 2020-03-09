@@ -1,14 +1,16 @@
-% DOTME(1) Version 1.0 | dotme documentation
+---
+title:  dotme user guide
+---
 
-# NAME
+## NAME
 
 **dotme** - manage environment driven by these "dot files".
 
-# SYNOPSIS
+## SYNOPSIS
 
 **dotme [-h] [-vd]** [command]
 
-# DESCIPTION
+## DESCIPTION
 
 The **dotme** utility installs and configures a local computer environment based
 driven by an opinionated set of "dot files". These "dot files" drive a commnon
@@ -54,7 +56,7 @@ installed with brew will remain.
 **update**
 : update packages already installed, e.g. brew packages
 
-# OPTIONS
+## OPTIONS
 
 -h
 : this help

@@ -35,7 +35,7 @@ else
   alias passes="lpass ls"
 
   alias docme="find . -type f -name '*.md' -not -path '*/node_modules/*'"\
-" | xargs cat | pandoc -s -o"
+" | xargs cat | pandoc -s -d ~/.pandoc/pandoc -o"
   [ {$CONFIG_LOG_LEVEL} -gt 0 ] ;and \
     echo "... Loaded ~/.config/fish/aliases.fish"
 end
