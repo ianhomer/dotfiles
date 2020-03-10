@@ -80,7 +80,15 @@ end
 # Load environment variables from a .env file
 #
 function dotenv
-  for i in (cat $argv)
+  set envFile (upfind .env)
+
+  echo ".env file loaded : $envFile"
+  if test -z "$envFile"
+    echo "WARN : No env file found"
+    exit 1
+  end
+
+  for i in (cat $envFile)
     set arr (echo $i |tr = \n)
     set -gx $arr[1] $arr[2]
   end
