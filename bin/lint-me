@@ -8,7 +8,15 @@
 #
 # As I want to check for other things, I'll add other flags
 #
-for file in "$@" ; do
+
+
+files=$@
+
+if [ -z "${files}" ] ; then
+  files=$(ls -a)
+fi
+
+for file in $files ; do
 
   if [ -f "${file}" ] ; then
     if [ -z "$(tail -c 1 "${file}")" ] ; then

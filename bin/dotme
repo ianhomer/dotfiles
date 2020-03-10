@@ -50,6 +50,46 @@ restore() {
   fi
 }
 
+docfiles() {
+  DOCS="bin/dotme README CHEATSHEET TODO"
+  for doc in $DOCS ; do
+    cat ~/.dotfiles/${doc}.md
+  done
+}
+
+
+#
+# Compile resources. Currently this is just the man files.
+#
+command_compile() {
+  echo "... Creating man files"
+  manDir=~/.dotfiles/bin/man/man1
+  [ ! -d $manDir ] && mkdir $manDir
+  manFile=${manDir}/dotme.1
+
+  docfiles | pandoc -s -t man -o $manFile
+}
+
+#
+# View the man files on the fly
+#
+command_man() {
+  docfiles | pandoc -s -t man | groff -T utf8 -man | less
+}
+
+command_pdf() {
+  outfile="${TMPDIR}/dotme.pdf"
+  docfiles | pandoc -s -o $outfile
+  open $outfile
+}
+
+#
+# View the compiled man pages
+#
+command_help() {
+  man dotme
+}
+
 #
 # Main entry point for installing dotfiles, and more, for a system.
 #
@@ -141,33 +181,10 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 # Initialize our own variables:
 VERBOSE=0
 
-usage() {
-  cat <<EOF
-script usage:
-
-  $(basename $0) [-hvd] command
-
-where command is one of:
-
-* brew
-* clean - clean up caches
-* install (default)
-* pull
-* stow
-* uninstall
-* unstow
-* update
-
-  -h this help
-  -v verbose mode
-  -d dry run
-EOF
-}
-
 while getopts "h?vd" opt; do
   case "$opt" in
   h|\?)
-    usage
+    command_help
     exit 0
     ;;
   d) DRY=1

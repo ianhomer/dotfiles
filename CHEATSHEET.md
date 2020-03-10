@@ -2,21 +2,47 @@
 
 Useful keyboard short cuts.
 
-# OSX
+## OSX
 
-* **Ctrl+Up** - Mission Control / space management
-  * **Ctrl-right/left** - Move to other spaces
-* **Ctrl+Cmd+click+drag** - Move Window
-* **Ctrl+Cmd+space** - Open special character window
+**Ctrl+Up**
+: Mission Control / space management
 
-# iterm
+**Ctrl-right/left**
+: Move to other spaces
 
-* **Cmd+n** - New terminal window
-* **git open** - Open git repository in web browser
-* **z mydir <tab>** - find recently opened folder (using fasd)
-* **z** - list recently opened folder we
+**Ctrl+Cmd+click+drag**
+: Move Window
 
-# tmux
+**Ctrl+Cmd+space**
+: Open special character window
+
+**Cmd+Tab**
+: Switch windows
+
+**Cmd+c**
+: Copy
+
+**Cmd+v**
+: Paste
+
+**Cmd+z**
+: Undo
+
+## iterm
+
+**Cmd+n**
+: New terminal window
+
+**git open**
+: Open git repository in web browser
+
+**z mydir <tab>**
+: find recently opened folder (using fasd)
+
+**z**
+: list recently opened folder we
+
+## tmux
 
 * **Ctrl-a** - prefix
 * prefix **c** - new window
@@ -25,6 +51,7 @@ Useful keyboard short cuts.
 * prefix **$** - rename session
 * prefix **|** or **-** - split pane
 * prefix **x** - close pane
+* **prefix s** - choose session
 * prefix **t** - show time
 * prefix **z** - zoom in / out of current pane
 * prefix **d** - detach from session
@@ -39,11 +66,16 @@ Useful keyboard short cuts.
 
 [more tmux cheats](https://tmuxcheatsheet.com/)
 
-# git
+from outside tmux
+
+* **tmux ls** - list sessions
+* **tmux attach -t mysession** - attach to session
+
+## git
 
 * git-set-personal-url - set the repository to push with personal credentials
 
-# fish
+## fish
 
 * **Ctrl-a Ctrl-a** - beginning of line
 * **Ctrl-e** - end of line
@@ -51,9 +83,9 @@ Useful keyboard short cuts.
 * **Ctrl-f** - forward a word
 * **bind** - see key bindings
 
-# vi
+## vi
 
-## vi - Files, Buffers & Navigations
+### vi - Files, Buffers & Navigations
 
 * **:NERDTreeToggle** or **space+f** - Open file browser
   * **m** - open file actions
@@ -73,8 +105,11 @@ Useful keyboard short cuts.
 * **Ctrl-^** - switch to previous buffer
 * **:tab h whatever** - open help in a new tab
 * **Ctrl-w o** - make pane the only visible one
+* **:noh** - clear last hightlight
+* **:enew|pu=execute('autocmd')** - copy output of command, e.g. autocmd, into
+    buffer
 
-### netrw
+#### netrw
 
 * **-** - up a directory
 * **i** - change list view
@@ -83,7 +118,7 @@ Useful keyboard short cuts.
 * **gh** - hide/unhide dot files
 * **%** - create new file
 
-### Go to
+#### Go to
 
 * **0** - beginnning of line
 * **$** - end of line
@@ -96,13 +131,13 @@ Useful keyboard short cuts.
 * **GG** - end of file
 * **%** - next / previous bracket
 
-## vi - Window Management
+### vi - Window Management
 
 * **:split,:vsplit** - split pane
 * **80 Ctrl-w** + - set current pane to 80 characters
 * **Ctrl-w+left/right** or **Ctrl-h/j/k/l** - move to another pane
 
-## vi - Editing
+### vi - Editing
 
 * **:Goyo** - distraction free coding
 * **gw{motion}** - reformat content
@@ -114,13 +149,26 @@ Useful keyboard short cuts.
 * **:Tabularize /|** or **space\** - Align paragraph on character
 * **count<leader>cc** - comment out the next count lines
 
-## vi - Markdown
+### vi - Markdown
 
 * **viWS+** - make a word bold
 * **zR** - open all folds
 * **zM** - close all folds
 
-## vi - Selections
+### vi - Selections
 
 * **vip** - select paragraph
 * **viW** - select current word (including non-alphanumeric)
+
+## Document conversions
+
+* **pandoc README.md -s -o ~/tmp/test.pdf** - convert markdown file to PDF
+
+## Gmail
+
+[gmail keyboard shortcuts](https://support.google.com/mail/answer/6594) :
+
+* **Shift-?** - keyboard shortcuts
+* **,** - move focus
+* **e** - archive message
+* **s** - star message

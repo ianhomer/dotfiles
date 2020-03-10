@@ -1,9 +1,24 @@
-source ~/Library/Preferences/org.dystroy.broot/launcher/fish/br 
+source ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
+
+if not status --is-login
+  function fish_greeting
+    #intentionally left blank
+  end
+
+  #
+  # If terminal called from within vim, then keep it simple
+  #
+  if [ -n "$VIM" ]
+    function fish_prompt
+      echo " > "
+    end
+  end
+end
 
 function fish_right_prompt
   #intentionally left blank
 end
- 
+
 function git-reset-ssh-key
   ssh-add -D
   ssh-add -l
@@ -16,7 +31,7 @@ function git-set-personal-url
   if [ $currentRemoteUrl != $personalRemoteUrl ]
     git remote set-url origin $personalRemoteUrl
     echo "Changed repository remote URL to " (git config --get remote.origin.url)
-  else 
+  else
     echo "Current repository already is using a personal URL"
   end
 end
@@ -39,7 +54,10 @@ function export
   set -gx $arr[1] $arr[2]
 end
 
-set PATH $HOME/.jenv/shims $PATH
+if status --is-login
+  set PATH $HOME/.jenv/shims $PATH
+end
+
 command jenv rehash 2>/dev/null
 function jenv
   set cmd $argv[1]
@@ -58,4 +76,24 @@ function jenv
     end
 end
 
-echo "... Loaded ~/.config/fish/functions.fish" 
+#
+# Load environment variables from a .env file
+#
+function dotenv
+  set envFile (upfind .env)
+
+  echo ".env file loaded : $envFile"
+  if test -z "$envFile"
+    echo "WARN : No env file found"
+    exit 1
+  end
+
+  for i in (cat $envFile)
+    set arr (echo $i |tr = \n)
+    set -gx $arr[1] $arr[2]
+  end
+end
+
+if status --is-login
+  echo "... Loaded ~/.config/fish/functions.fish"
+end

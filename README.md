@@ -1,10 +1,11 @@
-# .dotfiles
+# My .dotfiles
 
-Configure my computers, to reduce distraction and do less clickity-clickity.
+Configure my computers, to reduce distraction and and with less
+clickity-clickity.
 
-# tl;dr
+## tl;dr
 
-First time do:
+First time clone repository and install:
 
     git clone git@github.com:ianhomer/dotfiles.git ~/.dotfiles
     ~/.dotfiles/bin/dotme
@@ -17,17 +18,28 @@ This gets local up to date, including pulling latest version of this repository,
 sets OSX defaults, updates brew including packages. This can be run anytime to
 just get onto latest.
 
-# Why?
+## Why
 
 The configuration process in this repository provides me my prefered way of
 working to streamline distraction free coding. This includes:
 
-* **brew** - package manager
-* **fish** - friendly interactive shell
-* **git** - source control
-* **iterm** - terminal
-* **vi** - file editing
-* **FiraCode Nerd Font** - ligatures, powerline and more
+**brew**
+: package manager
+
+**fish**
+: friendly interactive shell
+
+**git**
+: source control
+
+**iterm**
+: terminal
+
+**vi**
+: file editing
+
+**FiraCode Nerd Font**
+: ligatures, powerline and more
 
 It is also useful if you install a windows manager. My current favourute is
 [Magnet](https://magnet.crowdcafe.com), but there are sevaral good ones out
@@ -35,7 +47,7 @@ there to choose from. You don't have to, however keyboard short cuts and window
 optimisations are done under the assumption you have keyboard short cuts to
 arrange your windows.
 
-# How?
+## How
 
 Various dotfiles are all located in sub-folders in the dotfiles/ folder for
 various tools. On installation, each of these are stowed in to your home
@@ -46,7 +58,30 @@ however just look at bin/dotme to see what actually happens.
 You can also update parts of the initialisation separately, see `dotme -h` to
 get a list of each part.
 
-# Thanks
+## Manual Configuration
+
+I've not worked out how to automate all configuration. Until I do, this is what
+I manually do on each environment.
+
+### Keyboard Configuration - MacOS
+
+System preferences -> keyboard -> Modifier Keys -> For each keyboard :
+
+* Caps Lock -> Escape
+
+For a Microsoft keyboard :
+
+* Option Key -> Command
+* Command Key -> Option
+
+And then use [keyboard shortcuts](https://support.google.com/mail/answer/6594) -
+see [Cheatsheet](./CHEATSHEET.md) for my favourites.
+
+### Gmail
+
+Gmail -> Settings -> Keyboard Shortcuts -> Keyboard shortcuts on
+
+## Thanks
 
 Too many dotfiles projects out there that have given me inspiration to mention
 them all, although [Awesome
