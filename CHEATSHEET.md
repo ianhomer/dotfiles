@@ -65,6 +65,11 @@ Useful keyboard short cuts.
 
 [more tmux cheats](https://tmuxcheatsheet.com/)
 
+from outside tmux
+
+* **tmux ls** - list sessions
+* **tmux attach -t mysession** - attach to session
+
 ## git
 
 * git-set-personal-url - set the repository to push with personal credentials
