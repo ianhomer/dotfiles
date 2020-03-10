@@ -51,6 +51,7 @@ Useful keyboard short cuts.
 * prefix **$** - rename session
 * prefix **|** or **-** - split pane
 * prefix **x** - close pane
+* **prefix s** - choose session
 * prefix **t** - show time
 * prefix **z** - zoom in / out of current pane
 * prefix **d** - detach from session
