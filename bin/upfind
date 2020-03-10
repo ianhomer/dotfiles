@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ -z "$@" ] ; then
+  exit 1
+fi
+
+while [[ $PWD != / ]] ; do
+  find "$PWD" -maxdepth 1 -type f -name "$@"
+  cd ..
+done
