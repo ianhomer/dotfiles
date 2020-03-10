@@ -5,6 +5,9 @@
 let g:vim_dir = "~/.vim"
 
 if has('nvim')
+  "
+  " Store nvim plugins in isolated location
+  "
   let g:vim_dir = "~/.config/nvim"
 endif
 
@@ -16,6 +19,7 @@ call plug#begin(g:vim_dir."/plugged")
 
 " NERDTree - file explore
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'ryanoasis/vim-devicons'
 " Vinegar - better file expore than NERD
 " Plug 'tpope/vim-vinegar'
 " fzf - Fuzzy Finder
@@ -63,14 +67,16 @@ Plug 'aymericbeaumet/vim-symlink'
 
 " COC completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-if has('nvim')
-  " Code completion
-  " Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  " Some people suggest deoplete ...
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  " let g:deoplete#enable_at_startup = 1
-endif
+let g:coc_global_extensions = [
+      \ 'coc-css',
+      \ 'coc-emmet',
+      \ 'coc-markdownlint',
+      \ 'coc-java',
+      \ 'coc-json',
+      \ 'coc-prettier',
+      \ 'coc-tsserver',
+      \ 'coc-yaml'
+      \ ]
 
 "
 " Writing
@@ -122,7 +128,7 @@ nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
 nnoremap <leader>g :Goyo<CR>
 
 "
-" Window and navigation
+" *** Scope : Windows ***
 "
 
 " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
@@ -151,25 +157,56 @@ set updatetime=300
 " Always show sign column to stop flip-flopping
 set signcolumn=yes
 
+
 "
-" Configuraiton for editing
-" -------------------------
+" Group all autocmds together to improve reloadability (reloads of vimrc
+" replace, not add to, exisiting commands) and source tacking (we know that
+" the autocmds came from here).
 "
-" Do not highlight current line when in insert mode
-autocmd InsertEnter,InsertLeave * set cul!
+augroup dotme
+  autocmd!
+  "
+  " *** Scope : Editing ***
+  "
+  " Do not highlight current line when in insert mode
+  autocmd InsertEnter,InsertLeave * set cul!
+
+  "
+  " *** Scope : IO ***
+  "
+  " Auto reload when focus gained or buffer entered
+  au FocusGained,BufEnter * :checktime
+
+  "
+  " *** Scope : Terminal ***
+  "
+  autocmd BufWinEnter,WinEnter,BufEnter * if &buftype == 'terminal' | :startinsert | endif
+  " autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
+
+  "
+  " *** Scope : Python ***
+  "
+
+  " Override shiftwidth for python
+  autocmd Filetype python set shiftwidth=2
+
+augroup end
+
+
+"
+" *** Scope : Editing ***
+"
+
 " Show white space
 exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
 set list
 
 "
-" File IO handling
-" ----------------
+" *** Scope : IO ***
 "
 " Auto reload underlying file if it changes, although
 " it only really reloads when external command run like :!ls
 set autoread
-" Auto reload when focus gained or buffer entered
-au FocusGained,BufEnter * :checktime
 " Allow hidden buffers without saving
 set hidden
 " No backups or backups during write
@@ -187,8 +224,7 @@ set scrolloff=3
 " set ttyfast
 
 "
-" COC CONFIG START
-" ----------------
+" *** Scope : COC ***
 "
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -220,7 +256,7 @@ endif
 nmap <leader>rn <Plug>(coc-rename)
 
 "
-" COC CONFIG END
+" *** Scope : Status Bar ***
 "
 
 "
@@ -232,11 +268,12 @@ let g:airline_powerline_fonts = 1
 " Backspace support
 set backspace=indent,eol,start
 
-" Don't fix end of lines.
+" If we don't want to fix end of lines.
 " https://stackoverflow.com/questions/729692/why-should-text-files-end-with-a-newline
-" POSIX standard requires, it but it's unnecessarily opinionated in most cases
-" and leads to git diff noise of no value.
-set nofixendofline
+" POSIX standard requires it new line at end of file, it's opinionated and
+" leads to git diff noise.
+"
+" set nofixendofline
 
 " CR insert line without leaving normal mode. Note that this
 " has special case to append CR at end of line as this feels more
@@ -273,7 +310,7 @@ set formatoptions=jrql
 set clipboard=unnamed
 
 "
-" netrw config
+" *** Scope : netrw ***
 "
 " let g:netrw_liststyle = 3
 " let g:netrw_keepdir=0
@@ -283,7 +320,7 @@ set clipboard=unnamed
 " let g:netrw_fastbrowse = 0
 
 "
-" NERDTree config
+" *** Scope : NERDTree ***
 "
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
@@ -291,29 +328,36 @@ let NERDTreeDirArrows = 1
 " fzf config
 let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
 
-" Linting
-" Fix files with prettier, and then ESLint.
-" let b:ale_fixers = ['prettier', 'eslint']
-
-
 colorscheme gruvbox
 set bg=dark
 " Thanks to Damian Conway
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%82v', 100)
 
+" Open new splits to the right and below
+set splitright
+set splitbelow
+
 "
-" File type specific configuration
-" ================================
+" *** Scope : Terminal ***
 "
 
-" Markdown
-" --------
+function! OpenTerminal()
+  split
+  term
+  resize 10
+endfunction
+nnoremap <silent> <leader>t :call OpenTerminal()<CR>
+" Map escape in terminal mode to enter normal mode
+tnoremap <Esc> <C-\><C-n>
+
+"
+" *** Scope : Markdown ***
 "
 
 " Surround Customisations
 " This doesn't work for me - https://stackoverflow.com/questions/32769488/double-vim-surround-with
-autocmd Filetype markdown let b:surround_43 = "**\r**"
+" autocmd Filetype markdown let b:surround_43 = "**\r**"
 
 " Markdown syntax
 " Conceal some syntax - e.g. ** around bold
@@ -324,17 +368,8 @@ let g:markdown_folding = 1
 set foldlevelstart=20
 nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
 
-"
-" Python
-" ------
-"
 
-" Override shiftwidth for python
-autocmd Filetype python set shiftwidth=2
-
-
-" Experimental configuration
-" ==========================
+" *** Scope : Experimental ***
 "
 
 " Placeholder for experimental output
@@ -342,4 +377,3 @@ function! ShowDebug()
   echo "col=".string(getpos('.')[2]).";pos=".string(getpos('.')).";line-length=".strlen(getline("."))
 endfunction
 nnoremap <silent> <leader>d :call ShowDebug()<CR>
-

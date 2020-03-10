@@ -1,0 +1,14 @@
+# See https://pandoc.org/MANUAL.html#default-files
+variables:
+  # Less margin for pdf outputs
+  geometry:
+  - top=2cm
+  - bottom=1.5cm
+  - left=2cm
+  - right=2cm
+
+shift-heading-level-by: 1
+
+table-of-contents: true
+
+toc-depth: 4

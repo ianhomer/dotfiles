@@ -1,7 +1,7 @@
 tap "homebrew/cask-fonts"
 
 #
-# The awesome Hack Nerd fonts combining the Hack source code font 
+# The awesome Hack Nerd fonts combining the Hack source code font
 # -  https://github.com/source-foundry/Hack
 # with the Nerd aggregation of icons - https://www.nerdfonts.com/
 #
@@ -53,6 +53,17 @@ brew "duti"
 cask "dozer"
 
 #
+# office tools
+#
+# * pandoc + basictex => doc conversion, e.g. markdown to PDF
+#
+brew "pandoc"
+brew "pandoc-citeproc"
+
+cask "basictex"
+cask "drawio"
+
+#
 # dev tools
 #
 
@@ -69,7 +80,6 @@ brew "terraform"
 brew "yarn"
 
 cask "docker"
-cask "drawio"
 cask "google-cloud-sdk"
 cask "java11"
 cask "visual-studio-code"
