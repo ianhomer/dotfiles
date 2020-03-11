@@ -136,6 +136,7 @@ from outside tmux
 * **:split,:vsplit** - split pane
 * **80 Ctrl-w** + - set current pane to 80 characters
 * **Ctrl-w+left/right** or **Ctrl-h/j/k/l** - move to another pane
+* **count<leader>cc** - comment out the next count lines
 
 ### vi - Editing
 
