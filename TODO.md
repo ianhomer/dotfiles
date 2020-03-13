@@ -47,4 +47,3 @@
     default less options system wide
 * Take reporting of keyboard layout out from install scripts
 * Try limelight again
-* Try to add space after cats in catmd
