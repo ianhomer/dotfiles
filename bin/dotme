@@ -54,6 +54,8 @@ docfiles() {
   DOCS="bin/dotme README CHEATSHEET TODO"
   for doc in $DOCS ; do
     cat ~/.dotfiles/${doc}.md
+    # Empty line between markdown files so that first title not lost
+    echo
   done
 }
 
