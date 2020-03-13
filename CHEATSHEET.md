@@ -44,12 +44,24 @@ Useful keyboard short cuts.
 
 ## tmux
 
-* **Ctrl-a** - prefix
-* prefix **c** - new window
-* prefix **w** - show windows
-* prefix **,** - rename window
-* prefix **$** - rename session
-* prefix **|** or **-** - split pane
+**Ctrl-a**
+: prefix
+
+prefix **c**
+: new window
+
+prefix **w**
+: show windows
+
+prefix **,**
+: rename window
+
+prefix **$**
+: rename session
+
+prefix **|** or **-**
+: split pane
+
 * prefix **x** - close pane
 * **prefix s** - choose session
 * prefix **t** - show time
