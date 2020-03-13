@@ -37,7 +37,6 @@ else
 
   alias findmd="find . -type f -name '*.md' -not -path '*/node_modules/*'"
   alias catmd="findmd | xargs cat"
-  alias docme="catmd | pandoc -s -d ~/.pandoc/pandoc -o"
   [ {$CONFIG_LOG_LEVEL} -gt 0 ] ;and \
     echo "... Loaded ~/.config/fish/aliases.fish"
 end
