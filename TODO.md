@@ -45,4 +45,6 @@
 * Create man page like https://unix.stackexchange.com/questions/6891/how-can-i-add-man-page-entries-for-my-own-power-tools
 * Make mane page search case insensitve, e.g. less -i - perhaps this should be
     default less options system wide
+* Take reporting of keyboard layout out from install scripts
 * Try limelight again
+* Try to add space after cats in catmd
