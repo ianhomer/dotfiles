@@ -267,7 +267,7 @@ nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<C
 " Load dotfile dictionaries for cSpell
 call coc#config('cSpell.dictionaryDefinitions', [
   \ { "name" : "dotfiles", "path": expand("$HOME/.config/dictionaries/dotfiles.txt") },
-  \ { "name" : "techy", "path": expand("$HOME/.config/dictionaries/techy.txt") }
+  \ { "name" : "dottech", "path": expand("$HOME/.config/dictionaries/dottech.txt") }
   \])
 
 "
