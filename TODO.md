@@ -29,5 +29,5 @@
 * Make man page search case insensitve, e.g. less -i - perhaps this should be
     default less options system wide
 * Try limelight again
-* Understand how to dotfile a common disctionary file for coc spelling -
-    related to CocConfig and workspaces
+* Understand how to dotfile a common dictionary file for coc spelling -
+    related to CocConfig and workspaces. Add custom dictionaries.

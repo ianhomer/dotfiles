@@ -20,7 +20,7 @@ just get onto latest.
 
 ## Why
 
-The configuration process in this repository provides me my prefered way of
+The configuration process in this repository provides me my preferred way of
 working to streamline distraction free coding. This includes:
 
 **brew**
