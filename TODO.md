@@ -26,7 +26,7 @@
 * Try the following coc-html,coc-highlight,coc-yank
 * Auto jenv enable-plugin maven
 * Digest aliases from https://preslav.me/2020/03/01/use-the-git-history/
-* Make man page search case insensitve, e.g. less -i - perhaps this should be
+* Make man page search case insensitive, e.g. less -i - perhaps this should be
     default less options system wide
 * Try limelight again
 * Understand how to dotfile a common dictionary file for coc spelling -

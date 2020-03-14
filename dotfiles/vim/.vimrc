@@ -162,7 +162,7 @@ set signcolumn=yes
 
 "
 " Group all autocmds together to improve reloadability (reloads of vimrc
-" replace, not add to, exisiting commands) and source tacking (we know that
+" replace, not add to, existing commands) and source tacking (we know that
 " the autocmds came from here).
 "
 augroup dotme
@@ -264,11 +264,12 @@ endfunction
 xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
 nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
+" Load dotfile dictionaries for cSpell
 call coc#config('cSpell.dictionaryDefinitions', [
   \ { "name" : "dotfiles", "path": expand("$HOME/.config/dictionaries/dotfiles.txt") },
   \ { "name" : "techy", "path": expand("$HOME/.config/dictionaries/techy.txt") }
   \])
- 
+
 "
 " *** Scope : Status Bar ***
 "

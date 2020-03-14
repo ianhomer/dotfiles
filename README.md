@@ -44,8 +44,8 @@ working to streamline distraction free coding. This includes:
 **FiraCode Nerd Font**
 : ligatures, powerline and more
 
-It is also useful if you install a windows manager. My current favourute is
-[Magnet](https://magnet.crowdcafe.com), but there are sevaral good ones out
+It is also useful if you install a windows manager. My current favorite is
+[Magnet](https://magnet.crowdcafe.com), but there are several good ones out
 there to choose from. You don't have to, however keyboard short cuts and window
 optimisations are done under the assumption you have keyboard short cuts to
 arrange your windows.
