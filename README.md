@@ -35,6 +35,9 @@ working to streamline distraction free coding. This includes:
 **iterm**
 : terminal
 
+**tmux**
+: terminal multiplexer
+
 **vi**
 : file editing
 

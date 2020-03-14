@@ -119,9 +119,9 @@ nnoremap <leader>s :w<CR>
 
 " Reload vimrc or neo vimrc
 if has('nvim')
-  nnoremap <leader>vc :source ~/.config/nvim/init.vim<CR>:echo "Reloaded neo init.vm"<CR>
+  nnoremap <leader>vc :source ~/.config/nvim/init.vim<CR>:CocRestart<CR>:echo "Reloaded neo init.vm"<CR>
 else
-  nnoremap <leader>vc :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
+  nnoremap <leader>vc :source ~/.vimrc<CR>:CocRestart<CR>:echo "Reloaded .vimrc"<CR>
 endif
 
 " Clear whitespace
@@ -264,6 +264,11 @@ endfunction
 xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
 nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
+call coc#config('cSpell.dictionaryDefinitions', [
+  \ { "name" : "dotfiles", "path": expand("$HOME/.config/dictionaries/dotfiles.txt") },
+  \ { "name" : "techy", "path": expand("$HOME/.config/dictionaries/techy.txt") }
+  \])
+ 
 "
 " *** Scope : Status Bar ***
 "
