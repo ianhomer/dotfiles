@@ -270,6 +270,9 @@ call coc#config('cSpell.dictionaryDefinitions', [
   \ { "name" : "dottech", "path": expand("$HOME/.config/dictionaries/dottech.txt") }
   \])
 
+call coc#config('java.home',
+  \ expand("$HOME/.jenv/versions/11/"))
+
 "
 " *** Scope : Status Bar ***
 "
