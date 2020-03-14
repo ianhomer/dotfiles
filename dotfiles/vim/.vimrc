@@ -68,6 +68,7 @@ Plug 'aymericbeaumet/vim-symlink'
 " COC completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
+      \ 'coc-actions',
       \ 'coc-css',
       \ 'coc-emmet',
       \ 'coc-markdownlint',
@@ -113,7 +114,6 @@ nnoremap <silent> <leader>c :Commits<CR>
 nnoremap <silent> <leader>h :History<CR>
 nnoremap <silent> <leader>m :Maps<CR>
 nnoremap <silent> <leader>r :reg<CR>
-nnoremap <silent> <leader>a :Ag<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>s :w<CR>
 
@@ -256,6 +256,13 @@ endif
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for do codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
 "
 " *** Scope : Status Bar ***

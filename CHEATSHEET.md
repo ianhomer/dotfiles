@@ -111,7 +111,7 @@ from outside tmux
 **tmux ls**
 : list sessions
 
-**tmux attach -t mysession**
+**tmux attach -t my-session**
 : attach to session
 
 ## git
