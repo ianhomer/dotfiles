@@ -1,4 +1,5 @@
-source ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
+# source ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
+source ~/Library/Application\ Support/org.dystroy.broot/launcher/fish/br.fish
 
 if not status --is-login
   function fish_greeting
