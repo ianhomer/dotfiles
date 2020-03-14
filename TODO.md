@@ -31,3 +31,4 @@
 * Try limelight again
 * Understand how to dotfile a common dictionary file for coc spelling -
     related to CocConfig and workspaces. Add custom dictionaries.
+* Custom dicts relative to HOME - https://github.com/streetsidesoftware/vscode-spell-checker/issues?q=is%3Aissue+is%3Aopen+Path
