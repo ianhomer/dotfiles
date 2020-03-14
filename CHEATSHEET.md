@@ -36,7 +36,7 @@ Useful keyboard short cuts.
 **git open**
 : Open git repository in web browser
 
-**z mydir <tab>**
+**z my-dir <tab>**
 : find recently opened folder (using fasd)
 
 **z**
@@ -148,7 +148,7 @@ from outside tmux
 * **Ctrl-^** - switch to previous buffer
 * **:tab h whatever** - open help in a new tab
 * **Ctrl-w o** - make pane the only visible one
-* **:noh** - clear last hightlight
+* **:noh** - clear last highlight
 * **:enew|pu=execute('autocmd')** - copy output of command, e.g. autocmd, into
     buffer
 
@@ -158,12 +158,12 @@ from outside tmux
 * **i** - change list view
 * **I** - show header
 * **gn** - make current node root of tree
-* **gh** - hide/unhide dot files
+* **gh** - hide/un-hide dot files
 * **%** - create new file
 
 #### Go to
 
-* **0** - beginnning of line
+* **0** - beginning of line
 * **$** - end of line
 * **}** - next block
 * **{** - previous block
