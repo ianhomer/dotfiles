@@ -13,7 +13,6 @@
     dotfiles), suggest what packages should be removed / auto-prune option
 * Can we store learnt spelling dictionary? And make available to all tools?
     ~/Library/Spelling/LocalDictionary
-* Pre-install plugins in vi (currently vi has to be started and :PlugUpdate run)
 * Pre-run xcode-select --install
 * Assess cmus
 * If necessary execute npm install -g npm
@@ -24,12 +23,7 @@
 * Automatically load tmux plugins, currently need to do C-a I
 * Get ta fish completion working, tmux a -t works, how do we register an alias
     for autocompletion
-* cheat for listing bind keys consider maping prefix [ ] to
-    moving pane left right in tmux.  What about up / down?
-* Try the following coc-json, coc-yaml, coc-tsserve, coc-html, coc-java,
-    https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
-    coc-highlight,
-    coc-git, coc-yank, coc-xml, coc-markdownlint, coc-spell-checker
+* Try the following coc-html,coc-highlight,coc-yank
 * Auto jenv enable-plugin maven
 * Digest aliases from https://preslav.me/2020/03/01/use-the-git-history/
 * Make man page search case insensitve, e.g. less -i - perhaps this should be

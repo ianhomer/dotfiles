@@ -74,8 +74,10 @@ let g:coc_global_extensions = [
       \ 'coc-java',
       \ 'coc-json',
       \ 'coc-prettier',
+      \ 'coc-spell-checker',
       \ 'coc-tsserver',
-      \ 'coc-yaml'
+      \ 'coc-yaml',
+      \ 'coc-xml'
       \ ]
 
 "
