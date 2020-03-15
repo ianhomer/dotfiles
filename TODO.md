@@ -11,8 +11,6 @@
 * Improve report tool (use python)
   * brew leaves - report what's been explicitly installed (over and above
     dotfiles), suggest what packages should be removed / auto-prune option
-* Can we store learnt spelling dictionary? And make available to all tools?
-    ~/Library/Spelling/LocalDictionary
 * Pre-run xcode-select --install
 * Assess cmus
 * If necessary execute npm install -g npm
@@ -29,6 +27,5 @@
 * Make man page search case insensitive, e.g. less -i - perhaps this should be
     default less options system wide
 * Try limelight again
-* Understand how to dotfile a common dictionary file for coc spelling -
-    related to CocConfig and workspaces. Add custom dictionaries.
-* Custom dicts relative to HOME - https://github.com/streetsidesoftware/vscode-spell-checker/issues?q=is%3Aissue+is%3Aopen+Path
+* Use cSpell tools to compile dictionaries trie files from txt words file
+* How to make dictionary files available to other tools (other than vim)
