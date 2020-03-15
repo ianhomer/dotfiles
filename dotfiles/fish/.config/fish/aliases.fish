@@ -21,6 +21,9 @@ else
   alias gd~="git diff HEAD~"
   alias gita="git add"
   alias gitc="git commit"
+  # count changes - thx https://preslav.me/2020/03/01/use-the-git-history/
+  alias git-count="git log --format=format: --name-only | egrep -v '^\$' | sort | uniq -c | sort -rg | head -10"
+
   alias git-whoami="git config user.name ; git config user.email"
   alias git-config-personal="git config user.email ian@purplepip.com"
 

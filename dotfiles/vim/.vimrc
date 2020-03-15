@@ -73,9 +73,12 @@ let g:coc_global_extensions = [
       \ 'coc-css',
       \ 'coc-emmet',
       \ 'coc-markdownlint',
+      \ 'coc-highlight',
+      \ 'coc-html',
       \ 'coc-java',
       \ 'coc-json',
       \ 'coc-prettier',
+      \ 'coc-python',
       \ 'coc-spell-checker',
       \ 'coc-tsserver',
       \ 'coc-yaml',
@@ -111,6 +114,7 @@ nnoremap ; :
 " My shortcuts
 nnoremap <silent> <leader><space> :Buffers<CR>
 nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>b :BCommits<CR>
 nnoremap <silent> <leader>c :Commits<CR>
 nnoremap <silent> <leader>h :History<CR>
 nnoremap <silent> <leader>m :Maps<CR>
@@ -130,6 +134,9 @@ endif
 
 " Clear whitespace
 nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
+
+" *** Scope : Writing ***
+
 " Goyo distraction free writing
 nnoremap <leader>g :Goyo<CR>
 
@@ -162,7 +169,8 @@ set incsearch
 set updatetime=300
 " Always show sign column to stop flip-flopping
 set signcolumn=yes
-
+" Support true color
+set termguicolors
 
 "
 " Group all autocmds together to improve reloadability (reloads of vimrc
@@ -319,8 +327,9 @@ call coc#config('cSpell.dictionaryDefinitions', [
 
 " set java home for coc-java
 call coc#config('java.home',
-  \ expand("$HOME/.jenv/versions/11/"))
+  \ expand("$HOME/.jenv/versions/11.0/"))
 
+autocmd CursorHold * silent call CocActionAsync('highlight')
 "
 " *** Scope : Status Bar ***
 "
@@ -333,13 +342,6 @@ let g:airline_powerline_fonts = 1
 
 " Backspace support
 set backspace=indent,eol,start
-
-" If we don't want to fix end of lines.
-" https://stackoverflow.com/questions/729692/why-should-text-files-end-with-a-newline
-" POSIX standard requires it new line at end of file, it's opinionated and
-" leads to git diff noise.
-"
-" set nofixendofline
 
 " CR insert line without leaving normal mode. Note that this
 " has special case to append CR at end of line as this feels more

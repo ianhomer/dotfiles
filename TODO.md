@@ -21,9 +21,9 @@
 - Automatically load tmux plugins, currently need to do C-a I
 - Get ta fish completion working, tmux a -t works, how do we register an alias
   for autocompletion
-- Try the following coc-html,coc-highlight,coc-yank
 - Auto jenv enable-plugin maven
-- Digest aliases from https://preslav.me/2020/03/01/use-the-git-history/
-- Try limelight again
 - Use cSpell tools to compile dictionaries trie files from txt words file
 - How to make dictionary files available to other tools (other than vim)
+- Ignore package-lock.json for spelling
+- Deploy dotfiles in docker to test fresh install on other OS
+- Try coc-eslint, coc-flow (typescript)

@@ -1,5 +1,13 @@
-# source ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
-source ~/Library/Application\ Support/org.dystroy.broot/launcher/fish/br.fish
+# Load broot alias
+if test -f ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
+  source ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
+else if test -f ~/Library/Application\ Support/org.dystroy.broot/launcher/fish/br.fish
+  echo "WARN : broot alias loaded from alternative location"
+  source ~/Library/Application\ Support/org.dystroy.broot/launcher/fish/br.fish
+else
+  echo "WARN : Cannot load broot alias"
+end
+
 
 if not status --is-login
   function fish_greeting
