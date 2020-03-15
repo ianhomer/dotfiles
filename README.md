@@ -70,12 +70,12 @@ I manually do on each environment.
 
 System preferences -> keyboard -> Modifier Keys -> For each keyboard :
 
-* Caps Lock -> Escape
+- Caps Lock -> Escape
 
 For a Microsoft keyboard :
 
-* Option Key -> Command
-* Command Key -> Option
+- Option Key -> Command
+- Command Key -> Option
 
 And then use [keyboard shortcuts](https://support.google.com/mail/answer/6594) -
 see [Cheatsheet](./CHEATSHEET.md) for my favourites.
@@ -91,9 +91,9 @@ them all, although [Awesome
 dotfiles](https://github.com/webpro/awesome-dotfiles) make a good attempt to.
 However, particular thanks to:
 
-* [webpro](https://github.com/webpro/dotfiles)
-* [Mathias]( https://github.com/mathiasbynens/dotfiles )
-* [Paul Irish](https://github.com/paulirish/dotfiles)
-* [Managing dotfiles with stow](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/)
-* [egel](https://github.com/egel/dotfiles)
-* [Ultimate vim configuration](https://github.com/amix/vimrc)
+- [webpro](https://github.com/webpro/dotfiles)
+- [Mathias](https://github.com/mathiasbynens/dotfiles)
+- [Paul Irish](https://github.com/paulirish/dotfiles)
+- [Managing dotfiles with stow](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/)
+- [egel](https://github.com/egel/dotfiles)
+- [Ultimate vim configuration](https://github.com/amix/vimrc)
