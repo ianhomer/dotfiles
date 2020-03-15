@@ -23,7 +23,8 @@ Plug 'ryanoasis/vim-devicons'
 " Vinegar - better file expore than NERD
 " Plug 'tpope/vim-vinegar'
 " fzf - Fuzzy Finder
-" Use git repo NOT local install since I need https://github.com/junegunn/fzf.vim/issues/92
+" Use git repo NOT local install since I need
+" https://github.com/junegunn/fzf.vim/issues/92
 Plug 'junegunn/fzf'
 "Plug '/usr/local/opddt/fzf'
 Plug 'junegunn/fzf.vim'
@@ -68,14 +69,17 @@ Plug 'aymericbeaumet/vim-symlink'
 " COC completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
+      \ 'coc-actions',
       \ 'coc-css',
       \ 'coc-emmet',
       \ 'coc-markdownlint',
       \ 'coc-java',
       \ 'coc-json',
       \ 'coc-prettier',
+      \ 'coc-spell-checker',
       \ 'coc-tsserver',
-      \ 'coc-yaml'
+      \ 'coc-yaml',
+      \ 'coc-xml'
       \ ]
 
 "
@@ -111,15 +115,17 @@ nnoremap <silent> <leader>c :Commits<CR>
 nnoremap <silent> <leader>h :History<CR>
 nnoremap <silent> <leader>m :Maps<CR>
 nnoremap <silent> <leader>r :reg<CR>
-nnoremap <silent> <leader>a :Ag<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>s :w<CR>
 
 " Reload vimrc or neo vimrc
 if has('nvim')
-  nnoremap <leader>vc :source ~/.config/nvim/init.vim<CR>:echo "Reloaded neo init.vm"<CR>
+  nnoremap <leader>vc
+    \ :source ~/.config/nvim/init.vim<CR>:CocRestart<CR>
+    \ :echo "Reloaded neo init.vm"<CR>
 else
-  nnoremap <leader>vc :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
+  nnoremap <leader>vc
+    \ :source ~/.vimrc<CR>:CocRestart<CR>:echo "Reloaded .vimrc"<CR>
 endif
 
 " Clear whitespace
@@ -160,7 +166,7 @@ set signcolumn=yes
 
 "
 " Group all autocmds together to improve reloadability (reloads of vimrc
-" replace, not add to, exisiting commands) and source tacking (we know that
+" replace, not add to, existing commands) and source tacking (we know that
 " the autocmds came from here).
 "
 augroup dotme
@@ -180,7 +186,8 @@ augroup dotme
   "
   " *** Scope : Terminal ***
   "
-  autocmd BufWinEnter,WinEnter,BufEnter * if &buftype == 'terminal' | :startinsert | endif
+  autocmd BufWinEnter,WinEnter,BufEnter *
+        \ if &buftype == 'terminal' | :startinsert | endif
   " autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
 
   "
@@ -247,13 +254,72 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " position. Coc only does snippet and additional edit on confirm.
 if has('patch8.1.1068')
   " Use `complete_info` if your (Neo)Vim version supports it.
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <cr>
+  \ complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+
+" Show all diagnostics
+nnoremap <silent> <leader>d  :<C-u>CocList diagnostics<CR>
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR :call
+  \ CocAction('runCommand', 'editor.action.organizeImport')
+
+" Remap for do codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+xmap <silent> <leader>a
+  \ :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>a
+  \ :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+
+" dotfiles dictionaries for cSpell
+call coc#config('cSpell.dictionaryDefinitions', [
+  \ { "name" : "dotfiles",
+  \   "path": expand("$HOME/.config/dictionaries/dotfiles.txt") },
+  \ { "name" : "dottech",
+  \   "path": expand("$HOME/.config/dictionaries/dottech.txt") }
+  \])
+
+" set java home for coc-java
+call coc#config('java.home',
+  \ expand("$HOME/.jenv/versions/11/"))
 
 "
 " *** Scope : Status Bar ***
@@ -278,7 +344,8 @@ set backspace=indent,eol,start
 " CR insert line without leaving normal mode. Note that this
 " has special case to append CR at end of line as this feels more
 " natural - disabled since non-vi.
-" nmap <expr> <CR> getpos('.')[2]==strlen(getline('.')) ? "a<CR><Esc>" : "i<CR><Esc>"
+" nmap <expr> <CR> getpos('.')[2]==strlen(getline('.')) ?
+" "a<CR><Esc>" : "i<CR><Esc>"
 
 " Backspace to delete space without leaving normal mode. At the
 " beginning of the line it joins line to previous - disabled since non-vi.
@@ -356,7 +423,8 @@ tnoremap <Esc> <C-\><C-n>
 "
 
 " Surround Customisations
-" This doesn't work for me - https://stackoverflow.com/questions/32769488/double-vim-surround-with
+" This doesn't work for me -
+" https://stackoverflow.com/questions/32769488/double-vim-surround-with
 " autocmd Filetype markdown let b:surround_43 = "**\r**"
 
 " Markdown syntax
@@ -374,6 +442,7 @@ nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
 
 " Placeholder for experimental output
 function! ShowDebug()
-  echo "col=".string(getpos('.')[2]).";pos=".string(getpos('.')).";line-length=".strlen(getline("."))
+  echo "col=".string(getpos('.')[2]).";pos="
+    \ .string(getpos('.')).";line-length=".strlen(getline("."))
 endfunction
-nnoremap <silent> <leader>d :call ShowDebug()<CR>
+nnoremap <silent> <leader>] :call ShowDebug()<CR>
