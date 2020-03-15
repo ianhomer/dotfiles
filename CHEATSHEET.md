@@ -183,15 +183,38 @@ from outside tmux
 
 ### vi - Editing
 
-- **:Goyo** - distraction free coding
-- **gw{motion}** - reformat content
-- **select+gw** - reformat content
-- **select+S"** - surround selected **area** with quotes
-- **ysiw"** - surround word with quotes
-- **Ctrl-v** - select visual block, e.g. column
-- **:%!jq .** - reformat JSON
-- **:Tabularize /|** or \*\*space\*\* - Align paragraph on character
-- **count<leader>cc** - comment out the next count lines
+:**:Goyo**
+: distraction free coding
+
+**gw{motion}**
+: reformat content
+
+**select+gw**
+: reformat content
+
+**select+S"**
+: surround selected **area** with quotes
+
+**ysiw"**
+: surround word with quotes
+
+**Ctrl-v**
+: select visual block, e.g. column
+
+**:%!jq .**
+: reformat JSON
+
+**:Tabularize /|** or \*\*space\*\*
+: Align paragraph on character
+
+**count<leader>cc**
+: comment out the next count lines
+
+**:Format** 
+: Format current buffer
+
+**<leader>d**
+: Open CoC diagnostics
 
 ### vi - Markdown
 
