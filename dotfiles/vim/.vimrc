@@ -73,6 +73,8 @@ let g:coc_global_extensions = [
       \ 'coc-css',
       \ 'coc-emmet',
       \ 'coc-markdownlint',
+      \ 'coc-highlight',
+      \ 'coc-html',
       \ 'coc-java',
       \ 'coc-json',
       \ 'coc-prettier',
@@ -111,6 +113,7 @@ nnoremap ; :
 " My shortcuts
 nnoremap <silent> <leader><space> :Buffers<CR>
 nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <leader>b :BCommits<CR>
 nnoremap <silent> <leader>c :Commits<CR>
 nnoremap <silent> <leader>h :History<CR>
 nnoremap <silent> <leader>m :Maps<CR>
@@ -165,6 +168,8 @@ set incsearch
 set updatetime=300
 " Always show sign column to stop flip-flopping
 set signcolumn=yes
+" Support true color
+set termguicolors
 
 "
 " Group all autocmds together to improve reloadability (reloads of vimrc
@@ -321,8 +326,9 @@ call coc#config('cSpell.dictionaryDefinitions', [
 
 " set java home for coc-java
 call coc#config('java.home',
-  \ expand("$HOME/.jenv/versions/11/"))
+  \ expand("$HOME/.jenv/versions/11.0/"))
 
+autocmd CursorHold * silent call CocActionAsync('highlight')
 "
 " *** Scope : Status Bar ***
 "

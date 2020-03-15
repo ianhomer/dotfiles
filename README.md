@@ -16,7 +16,7 @@ Then update at any time with:
 
 This gets local up to date, including pulling latest version of this repository,
 sets OSX defaults, updates brew including packages. This can be run anytime to
-just get onto latest.
+just get onto latest. #222 red blue
 
 ## Why
 
