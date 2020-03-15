@@ -38,7 +38,7 @@ working to streamline distraction free coding. This includes:
 **tmux**
 : terminal multiplexer
 
-**vi**
+**neovim** with **Conquerer of Completion**
 : file editing
 
 **FiraCode Nerd Font**
