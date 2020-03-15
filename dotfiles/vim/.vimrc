@@ -260,8 +260,35 @@ else
   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
+
+" Show all diagnostics
+nnoremap <silent> <leader>d  :<C-u>CocList diagnostics<CR>
 
 " Remap for do codeAction of selected region
 function! s:cocActionsOpenFromSelected(type) abort
@@ -272,7 +299,7 @@ xmap <silent> <leader>a
 nmap <silent> <leader>a
   \ :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
-" Load dotfile dictionaries for cSpell
+" dotfiles dictionaries for cSpell
 call coc#config('cSpell.dictionaryDefinitions', [
   \ { "name" : "dotfiles",
   \   "path": expand("$HOME/.config/dictionaries/dotfiles.txt") },
@@ -280,6 +307,7 @@ call coc#config('cSpell.dictionaryDefinitions', [
   \   "path": expand("$HOME/.config/dictionaries/dottech.txt") }
   \])
 
+" set java home for coc-java
 call coc#config('java.home',
   \ expand("$HOME/.jenv/versions/11/"))
 
@@ -407,4 +435,4 @@ function! ShowDebug()
   echo "col=".string(getpos('.')[2]).";pos="
     \ .string(getpos('.')).";line-length=".strlen(getline("."))
 endfunction
-nnoremap <silent> <leader>d :call ShowDebug()<CR>
+nnoremap <silent> <leader>] :call ShowDebug()<CR>
