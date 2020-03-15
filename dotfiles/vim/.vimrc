@@ -290,6 +290,16 @@ nmap <leader>rn <Plug>(coc-rename)
 " Show all diagnostics
 nnoremap <silent> <leader>d  :<C-u>CocList diagnostics<CR>
 
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR :call
+  \ CocAction('runCommand', 'editor.action.organizeImport')
+
 " Remap for do codeAction of selected region
 function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
