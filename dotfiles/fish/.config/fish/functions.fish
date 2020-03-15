@@ -1,4 +1,5 @@
-source ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
+# source ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
+source ~/Library/Application\ Support/org.dystroy.broot/launcher/fish/br.fish
 
 if not status --is-login
   function fish_greeting
@@ -94,6 +95,23 @@ function dotenv
   end
 end
 
+function docme
+  if set -q argv[1]
+    set fileName $argv[1]
+    set autoOpen 0
+  else
+    set fileName $TMPDIR/docme.pdf
+    echo "PDF : $fileName"
+    set autoOpen 1
+  end
+
+  catmd | pandoc -s -d ~/.pandoc/pandoc -o $fileName
+  if test $autoOpen -eq 1
+    open $fileName
+  end
+end
+
 if status --is-login
   echo "... Loaded ~/.config/fish/functions.fish"
 end
+

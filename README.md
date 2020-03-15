@@ -20,7 +20,7 @@ just get onto latest.
 
 ## Why
 
-The configuration process in this repository provides me my prefered way of
+The configuration process in this repository provides me my preferred way of
 working to streamline distraction free coding. This includes:
 
 **brew**
@@ -35,14 +35,17 @@ working to streamline distraction free coding. This includes:
 **iterm**
 : terminal
 
-**vi**
+**tmux**
+: terminal multiplexer
+
+**neovim** with **Conquerer of Completion**
 : file editing
 
 **FiraCode Nerd Font**
 : ligatures, powerline and more
 
-It is also useful if you install a windows manager. My current favourute is
-[Magnet](https://magnet.crowdcafe.com), but there are sevaral good ones out
+It is also useful if you install a windows manager. My current favorite is
+[Magnet](https://magnet.crowdcafe.com), but there are several good ones out
 there to choose from. You don't have to, however keyboard short cuts and window
 optimisations are done under the assumption you have keyboard short cuts to
 arrange your windows.
@@ -67,12 +70,12 @@ I manually do on each environment.
 
 System preferences -> keyboard -> Modifier Keys -> For each keyboard :
 
-* Caps Lock -> Escape
+- Caps Lock -> Escape
 
 For a Microsoft keyboard :
 
-* Option Key -> Command
-* Command Key -> Option
+- Option Key -> Command
+- Command Key -> Option
 
 And then use [keyboard shortcuts](https://support.google.com/mail/answer/6594) -
 see [Cheatsheet](./CHEATSHEET.md) for my favourites.
@@ -88,9 +91,9 @@ them all, although [Awesome
 dotfiles](https://github.com/webpro/awesome-dotfiles) make a good attempt to.
 However, particular thanks to:
 
-* [webpro](https://github.com/webpro/dotfiles)
-* [Mathias]( https://github.com/mathiasbynens/dotfiles )
-* [Paul Irish](https://github.com/paulirish/dotfiles)
-* [Managing dotfiles with stow](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/)
-* [egel](https://github.com/egel/dotfiles)
-* [Ultimate vim configuration](https://github.com/amix/vimrc)
+- [webpro](https://github.com/webpro/dotfiles)
+- [Mathias](https://github.com/mathiasbynens/dotfiles)
+- [Paul Irish](https://github.com/paulirish/dotfiles)
+- [Managing dotfiles with stow](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/)
+- [egel](https://github.com/egel/dotfiles)
+- [Ultimate vim configuration](https://github.com/amix/vimrc)

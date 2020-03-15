@@ -54,6 +54,8 @@ docfiles() {
   DOCS="bin/dotme README CHEATSHEET TODO"
   for doc in $DOCS ; do
     cat ~/.dotfiles/${doc}.md
+    # Empty line between markdown files so that first title not lost
+    echo
   done
 }
 
@@ -155,7 +157,8 @@ command_clean() {
   brew cleanup
 }
 
-# Unistall dotfiles. Note that this does not (at this time), unstill brew packages.
+# Unistall dotfiles. Note that this does not (at this time), unstill brew
+# packages.
 command_uninstall() {
   echo "Uninstalling dotfiles ..."
   command_unstow
