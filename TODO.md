@@ -24,7 +24,6 @@
 - Try the following coc-html,coc-highlight,coc-yank
 - Auto jenv enable-plugin maven
 - Digest aliases from https://preslav.me/2020/03/01/use-the-git-history/
-- Try limelight again
 - Use cSpell tools to compile dictionaries trie files from txt words file
 - How to make dictionary files available to other tools (other than vim)
 - Ignore package-lock.json for spelling

@@ -130,6 +130,9 @@ endif
 
 " Clear whitespace
 nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
+
+" *** Scope : Writing ***
+
 " Goyo distraction free writing
 nnoremap <leader>g :Goyo<CR>
 
@@ -162,7 +165,6 @@ set incsearch
 set updatetime=300
 " Always show sign column to stop flip-flopping
 set signcolumn=yes
-
 
 "
 " Group all autocmds together to improve reloadability (reloads of vimrc
@@ -333,13 +335,6 @@ let g:airline_powerline_fonts = 1
 
 " Backspace support
 set backspace=indent,eol,start
-
-" If we don't want to fix end of lines.
-" https://stackoverflow.com/questions/729692/why-should-text-files-end-with-a-newline
-" POSIX standard requires it new line at end of file, it's opinionated and
-" leads to git diff noise.
-"
-" set nofixendofline
 
 " CR insert line without leaving normal mode. Note that this
 " has special case to append CR at end of line as this feels more
