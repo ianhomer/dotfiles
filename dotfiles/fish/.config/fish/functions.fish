@@ -35,7 +35,7 @@ end
 
 function git-set-alternative-url
   if set -q argv[1]
-    set name argv[1]
+    set name $argv[1]
   else
     set name "personal"
   end
