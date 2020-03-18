@@ -33,6 +33,12 @@ Useful keyboard short cuts.
 **Cmd+L**
 : Jump to address bar
 
+**Option+Cmd** left/right
+: Go to previous/next tab
+
+**Cmd+w"
+: Close tab
+
 ## iterm
 
 **Cmd+n**
