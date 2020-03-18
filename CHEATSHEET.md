@@ -28,6 +28,11 @@ Useful keyboard short cuts.
 **Cmd+z**
 : Undo
 
+## Brave
+
+**Cmd+L**
+: Jump to address bar
+
 ## iterm
 
 **Cmd+n**
