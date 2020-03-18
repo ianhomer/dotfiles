@@ -27,3 +27,7 @@
 - Ignore package-lock.json for spelling
 - Deploy dotfiles in docker to test fresh install on other OS
 - Try coc-eslint, coc-flow (typescript)
+- Try kitty
+- Try yabai
+- Try skhd
+
