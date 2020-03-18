@@ -30,4 +30,5 @@
 - Try kitty
 - Try yabai
 - Try skhd
+- Try amethyst
 
