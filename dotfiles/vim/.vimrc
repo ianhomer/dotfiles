@@ -141,6 +141,7 @@ nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
 
 " Goyo distraction free writing
 nnoremap <leader>g :Goyo<CR>
+let g:goyo_width = 85
 
 "
 " *** Scope : Windows ***
