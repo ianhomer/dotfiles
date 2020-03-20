@@ -19,6 +19,9 @@ Useful keyboard short cuts.
 **Cmd+Tab**
 : Switch windows
 
+**Cmd+h**
+: Hide window
+
 **Cmd+c**
 : Copy
 
@@ -27,6 +30,23 @@ Useful keyboard short cuts.
 
 **Cmd+z**
 : Undo
+
+## Magnet
+
+**Ctrl-Alt+return**
+: Full screen
+
+**Ctrl-Alt-left,right,up,down**
+: Half screen
+
+**Ctrl-Alt-uijk**
+: Quarter screen
+
+**Ctrl-Alt-deftg**
+: Thirds
+
+**Ctrl-Cmd-back**
+: Back to manually set screen size
 
 ## Brave
 
@@ -41,7 +61,6 @@ Useful keyboard short cuts.
 
 **Option+Cmd b**
 : Open bookmarks
-
 
 ## iterm
 
