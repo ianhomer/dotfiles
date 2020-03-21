@@ -23,5 +23,3 @@
 - Ignore package-lock.json for spelling
 - Deploy dotfiles in docker to test fresh install on other OS
 - Try coc-eslint, coc-flow (typescript)
-- Why ~/.config/fish/conf.d/omf.fish on home mac? Is that needed?  Have I not
-    included omf install in my dotfile?
