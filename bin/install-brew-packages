@@ -9,7 +9,8 @@ PATH=${SCRIPT_DIR}:${PATH}
 
 if ! is-executable brew ; then
   echo "... installing brew"
-  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
+  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install \
+    | ruby
 fi
 
 echo "... updating brew"

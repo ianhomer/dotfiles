@@ -1,10 +1,9 @@
 # todo
 
-- Create a way to report on any files not checked in any of my bookmarked places
-  - z, fastd or autojump, z.lua
-
 ## backlog
 
+- Create a way to report on any files not checked in any of my bookmarked places
+  - z, fastd or autojump, z.lua
 - Improve report tool (use python)
   - brew leaves - report what's been explicitly installed (over and above
     dotfiles), suggest what packages should be removed / auto-prune option

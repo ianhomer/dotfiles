@@ -42,7 +42,7 @@ parser.add_argument("--brew", dest="reports", const="brew",
                     help="Brew report", action='append_const')
 parser.add_argument("--fish", dest="reports", const="fish",
                     help="fish report", action='append_const')
-parser.add_argument("--helpx", dest="help", help="Help", action="store_true")
+parser.add_argument("--help", dest="help", help="Help", action="store_true")
 
 def main(argv):
   heading("dotfiles System Report"," ")
