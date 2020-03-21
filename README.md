@@ -66,9 +66,9 @@ get a list of each part.
 I've not worked out how to automate all configuration. Until I do, this is what
 I manually do on each environment.
 
-### Hammerspoon
+### Initialise a few desktop apps
 
-Enable Security / Accessibility for Hammerspoon in System preferences.
+Open dozer and configure menu hiding.
 
 ### Keyboard Configuration - MacOS
 
