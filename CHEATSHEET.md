@@ -114,6 +114,12 @@ prefix **d**
 **Opt-arrow**
 : move between panes
 
+**prefix Ctrl-s**
+: save tmux state
+
+**prefix Ctrl-r**
+: reload tmux state
+
 **Ctrl-hjkl**
 : move between panes including through vim panes
 
