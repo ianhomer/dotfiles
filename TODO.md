@@ -2,7 +2,7 @@
 
 - Create a way to report on any files not checked in any of my bookmarked places
   - z, fastd or autojump, z.lua
-- fzf glitching like - https://github.com/junegunn/fzf.vim/issues/927 - switched
+- fzf [glitching](https://github.com/junegunn/fzf.vim/issues/927) - switched
   to installing plugin from source to get glitch fix. Need to verify official
   way to install plugin after fix released in fzf.
 
@@ -27,6 +27,3 @@
 - Ignore package-lock.json for spelling
 - Deploy dotfiles in docker to test fresh install on other OS
 - Try coc-eslint, coc-flow (typescript)
-- Try kitty
-- Try Hammerspoon
-
