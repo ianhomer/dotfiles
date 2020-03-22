@@ -186,17 +186,36 @@ command_unstow() {
 
 # Set a dotme local variable
 command_set() {
-  name=$2
+  envFile=~/.config/dotme/.env
+  name=${2}
+  if [[ -z "$name" ]] ; then
+    if [[ -f $envFile ]] ; then
+      echo $envFile
+      cat $envFile
+    else
+      echo "... $envFile not yet created"
+    fi
+    return
+  fi
+  name=`echo MY_$name | tr a-z A-Z`
   value=$3
   if [[ -z "$value" ]] ; then
-    echo "Usage: dotme set name value"
-    exit 1
+    if [[ -f $envFile ]] ; then
+      if grep -q "$name=" $envFile ; then
+        echo $envFile
+        grep "$name=" $envFile
+      else 
+        echo "... $name not set"
+      fi
+    else
+      echo "... $envFile not yet created"
+    fi
+    return
   fi
   echo "...setting dotme env - $name = $value"
   mkdir -p ~/.config/dotme
-  envFile=~/.config/dotme/.env
   touch $envFile
-  if grep -q "$name=" $envFile; then
+  if grep -q "$name=" $envFile ; then
     sed -i.bak "s/$name=.*/$name=$value/g" $envFile 
   else
     echo "$name=$value" >> $envFile

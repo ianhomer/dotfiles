@@ -6,5 +6,3 @@ USER me
 RUN ls /home
 RUN git clone https://github.com/ianhomer/dotfiles.git\
       ~/.dotfiles
-#RUN ~/.dotfiles/bin/dotme
-
