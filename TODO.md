@@ -22,3 +22,4 @@
 - Try coc-eslint, coc-flow (typescript)
 - Set default directory for tmux window so new panes start in given directory
 - Review cursors in kitty, looks different to iterm
+- Assess geeknote
