@@ -4,8 +4,8 @@
 # Install / update omg packages from config/omf/bundle
 #
 
-if [ ! -d  ~/.local/share/omf ] ; then
+if not test -d  ~/.local/share/omf
   curl -L https://get.oh-my.fish | fish
-fi
+end
 
 omf update
