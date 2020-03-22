@@ -197,12 +197,11 @@ command_set() {
   envFile=~/.config/dotme/.env
   touch $envFile
   if grep -q "$name=" $envFile; then
-    sed -i'.bak' "s/$name=.*/$name=$value/g" $envFile 
+    sed -i.bak "s/$name=.*/$name=$value/g" $envFile 
   else
     echo "$name=$value" >> $envFile
   fi
 }
-
 
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
 
