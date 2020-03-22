@@ -22,5 +22,9 @@ if [[ ! -f $keyFile ]] ; then
 fi
 
 echo "... key file = ${keyFile}.pub"
-echo "... public key is in clipboard"
-cat "${keyFile}.pub" | pbcopy
+if hash pbcopy ; then
+  cat "${keyFile}.pub" | pbcopy
+  echo "... public key is in clipboard"
+else
+  cat "${keyFile}.pub"
+fi
