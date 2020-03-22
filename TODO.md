@@ -20,3 +20,4 @@
 - Ignore package-lock.json for spelling
 - Deploy dotfiles in docker to test fresh install on other OS
 - Try coc-eslint, coc-flow (typescript)
+- Set default directory for tmux window so new panes start in given directory
