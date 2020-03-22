@@ -184,6 +184,25 @@ command_unstow() {
   done
 }
 
+# Set a dotme local variable
+command_set() {
+  name=$2
+  value=$3
+  if [[ -z "$value" ]] ; then
+    echo "Usage: dotme set name value"
+    exit 1
+  fi
+  echo "...setting dotme env - $name = $value"
+  mkdir -p ~/.config/dotme
+  envFile=~/.config/dotme/.env
+  touch $envFile
+  if grep -q "$name=" $envFile; then
+    sed -i'.bak' "s/$name=.*/$name=$value/g" $envFile 
+  else
+    echo "$name=$value" >> $envFile
+  fi
+}
+
 
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
 
@@ -207,7 +226,7 @@ shift $((OPTIND-1))
 
 [ "${1:-}" = "--" ] && shift
 
-COMMAND=${@:-install}
+COMMAND=${1:-install}
 
 command_${COMMAND} $@
 if [ $? = 127 ]; then
