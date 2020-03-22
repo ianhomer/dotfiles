@@ -22,7 +22,7 @@ if [[ ! -f $keyFile ]] ; then
 fi
 
 echo "... key file = ${keyFile}.pub"
-if hash pbcopy ; then
+if hash pbcopy 2>/dev/null ; then
   cat "${keyFile}.pub" | pbcopy
   echo "... public key is in clipboard"
 else

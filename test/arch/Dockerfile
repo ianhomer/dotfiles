@@ -1,5 +1,5 @@
 FROM archlinux:latest
-RUN pacman -Syu --noconfirm git
+RUN pacman -Syu --noconfirm git openssh
 RUN groupadd mygroup && \
     useradd -m -g mygroup me
 USER me
