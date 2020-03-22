@@ -18,5 +18,3 @@ Copy public deploy key into deploy key for repository
     cd ~/.dotfiles
     git checkout feature/jelly
 
-
-
