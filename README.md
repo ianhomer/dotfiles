@@ -32,8 +32,8 @@ working to streamline distraction free coding. This includes:
 **git**
 : source control
 
-**iterm**
-: terminal
+**kitty**
+: slick terminal
 
 **tmux**
 : terminal multiplexer
@@ -68,7 +68,12 @@ I manually do on each environment.
 
 ### Initialise a few desktop apps
 
+#### MacOs
+
 Open dozer and configure menu hiding.
+
+Open Alfred, set up privacy options, point configuration to a cloud storage of
+your choosing, and configure Alfred to your choosing. 
 
 ### Keyboard Configuration - MacOS
 

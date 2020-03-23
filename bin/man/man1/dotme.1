@@ -10,19 +10,19 @@ files\[rq].
 .SS SYNOPSIS
 .PP
 \f[B]dotme [-h] [-vd]\f[R] [command]
-.SS DESCIPTION
+.SS DESCRIPTION
 .PP
 The \f[B]dotme\f[R] utility installs and configures a local computer
 environment based driven by an opinionated set of \[lq]dot files\[rq].
-These \[lq]dot files\[rq] drive a commnon configuration for tools like
+These \[lq]dot files\[rq] drive a common configuration for tools like
 vim, tmux and brew.
 By running this on all local environment you can ensure that all local
 environments worked on are the configured the same.
 .PP
 Supported commands are as follows:
 .TP
-\f[B]brew\f[R]
-install brew dependencies
+\f[B]packages\f[R]
+install packages with local package manager, e.g.\ brew or pacman
 .TP
 \f[B]clean\f[R]
 clean up caches
@@ -47,7 +47,7 @@ stow the configuration files so that each tool picks up the desired
 configuration.
 .TP
 \f[B]uninstall\f[R]
-unistall the dot file configuration, reversing some of the steps made
+uninstall the dot file configuration, reversing some of the steps made
 during installing.
 Note that this is not a complete reversal, for example applications
 installed with brew will remain.
@@ -108,13 +108,13 @@ friendly interactive shell
 \f[B]git\f[R]
 source control
 .TP
-\f[B]iterm\f[R]
-terminal
+\f[B]kitty\f[R]
+slick terminal
 .TP
 \f[B]tmux\f[R]
 terminal multiplexer
 .TP
-\f[B]vi\f[R]
+\f[B]neovim\f[R] with \f[B]Conquerer of Completion\f[R]
 file editing
 .TP
 \f[B]FiraCode Nerd Font\f[R]
@@ -142,6 +142,13 @@ You can also update parts of the initialisation separately, see
 .PP
 I\[cq]ve not worked out how to automate all configuration.
 Until I do, this is what I manually do on each environment.
+.SS Initialise a few desktop apps
+.SS MacOs
+.PP
+Open dozer and configure menu hiding.
+.PP
+Open Alfred, set up privacy options, point configuration to a cloud
+storage of your choosing, and configure Alfred to your choosing.
 .SS Keyboard Configuration - MacOS
 .PP
 System preferences -> keyboard -> Modifier Keys -> For each keyboard :
@@ -200,6 +207,9 @@ Open special character window
 \f[B]Cmd+Tab\f[R]
 Switch windows
 .TP
+\f[B]Cmd+h\f[R]
+Hide window
+.TP
 \f[B]Cmd+c\f[R]
 Copy
 .TP
@@ -208,6 +218,35 @@ Paste
 .TP
 \f[B]Cmd+z\f[R]
 Undo
+.SS Magnet
+.TP
+\f[B]Ctrl-Alt+return\f[R]
+Full screen
+.TP
+\f[B]Ctrl-Alt-left,right,up,down\f[R]
+Half screen
+.TP
+\f[B]Ctrl-Alt-uijk\f[R]
+Quarter screen
+.TP
+\f[B]Ctrl-Alt-deftg\f[R]
+Thirds
+.TP
+\f[B]Ctrl-Cmd-back\f[R]
+Back to manually set screen size
+.SS Brave
+.TP
+\f[B]Cmd+l\f[R]
+Jump to address bar
+.TP
+\f[B]Option+Cmd\f[R] left/right
+Go to previous/next tab
+.TP
+\f[B]Cmd+w\f[R]
+Close tab
+.TP
+\f[B]Option+Cmd b\f[R]
+Open bookmarks
 .SS iterm
 .TP
 \f[B]Cmd+n\f[R]
@@ -258,6 +297,12 @@ detach from session
 .TP
 \f[B]Opt-arrow\f[R]
 move between panes
+.TP
+\f[B]prefix Ctrl-s\f[R]
+save tmux state
+.TP
+\f[B]prefix Ctrl-r\f[R]
+reload tmux state
 .TP
 \f[B]Ctrl-hjkl\f[R]
 move between panes including through vim panes
@@ -458,6 +503,7 @@ gmail keyboard shortcuts (https://support.google.com/mail/answer/6594) :
 .IP \[bu] 2
 \f[B]s\f[R] - star message
 .SH todo
+.SS backlog
 .IP \[bu] 2
 Create a way to report on any files not checked in any of my bookmarked
 places
@@ -465,11 +511,6 @@ places
 .IP \[bu] 2
 z, fastd or autojump, z.lua
 .RE
-.IP \[bu] 2
-fzf glitching like - https://github.com/junegunn/fzf.vim/issues/927 -
-switched to installing plugin from source to get glitch fix.
-Need to verify official way to install plugin after fix released in fzf.
-.SS backlog
 .IP \[bu] 2
 Improve report tool (use python)
 .RS 2
@@ -480,8 +521,6 @@ option
 .RE
 .IP \[bu] 2
 Pre-run xcode-select \[en]install
-.IP \[bu] 2
-Assess cmus
 .IP \[bu] 2
 If necessary execute npm install -g npm
 .IP \[bu] 2
@@ -494,20 +533,17 @@ Use includeIf to include git config per organisation / user profile
 .IP \[bu] 2
 Automatically load tmux plugins, currently need to do C-a I
 .IP \[bu] 2
-Get ta fish completion working, tmux a -t works, how do we register an
-alias for autocompletion
-.IP \[bu] 2
-Try the following coc-html,coc-highlight,coc-yank
-.IP \[bu] 2
 Auto jenv enable-plugin maven
-.IP \[bu] 2
-Digest aliases from https://preslav.me/2020/03/01/use-the-git-history/
-.IP \[bu] 2
-Make man page search case insensitive, e.g.\ less -i - perhaps this
-should be default less options system wide
-.IP \[bu] 2
-Try limelight again
 .IP \[bu] 2
 Use cSpell tools to compile dictionaries trie files from txt words file
 .IP \[bu] 2
 How to make dictionary files available to other tools (other than vim)
+.IP \[bu] 2
+Ignore package-lock.json for spelling
+.IP \[bu] 2
+Deploy dotfiles in docker to test fresh install on other OS
+.IP \[bu] 2
+Try coc-eslint, coc-flow (typescript)
+.IP \[bu] 2
+Set default directory for tmux window so new panes start in given
+directory
