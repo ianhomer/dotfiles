@@ -73,7 +73,11 @@ I manually do on each environment.
 Open dozer and configure menu hiding.
 
 Open Alfred, set up privacy options, point configuration to a cloud storage of
-your choosing, and configure Alfred to your choosing. 
+your choosing, and configure Alfred to your choosing.
+
+### Alfred
+
+Alfred Preferences -> Advanced -> Set Preferences folder -> ~/.dotfiles/config/alfred
 
 ### Keyboard Configuration - MacOS
 
