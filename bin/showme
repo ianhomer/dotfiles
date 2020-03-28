@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+
+#
+# Show local configuration
+#
+
+import argparse, os, sys, subprocess
+from pathlib import Path
+
+def usage():
+  parser.print_help()
+
+def heading(heading, separator = "-"):
+  if (separator == "-"):
+    print()
+  print(heading)
+  print(separator * 40)
+
+def reportBrew():
+  heading("Brew")
+  os.system("brew leaves | column -c 80")
+
+def reportFish():
+  heading("fish")
+  print("Show fish variables\n   set | less")
+  heading("omf",".")
+  os.system("fish -c 'omf list'")
+  heading("bobthefish",",")
+  print("Show colors\n   bobthefish_display_colors --all")
+
+def reportSoftwareUpdate():
+  heading("Software Update")
+  os.system("softwareupdate --list")
+
+def reportAll():
+  reportFish()
+  reportBrew()
+  reportSoftwareUpdate()
+
+parser = argparse.ArgumentParser(description="System Report")
+parser.add_argument("--brew", dest="reports", const="brew", 
+                    help="Brew report", action='append_const')
+parser.add_argument("--fish", dest="reports", const="fish",
+                    help="fish report", action='append_const')
+parser.add_argument("--help", dest="help", help="Help", action="store_true")
+
+def main(argv):
+  heading("dotfiles System Report"," ")
+  args = parser.parse_args()
+  if args.reports is None:
+    reportAll()
+  else:
+    if args.help : usage()
+    if 'brew' in args.reports : reportBrew()
+    if 'fish' in args.reports : reportFish()
+
+if __name__ == "__main__":
+  main(sys.argv[1:])
