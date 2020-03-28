@@ -475,6 +475,14 @@
 	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
+	<key>NSColorPanelMode</key>
+	<string>6</string>
+	<key>NSColorPanelMode.modal</key>
+	<integer>6</integer>
+	<key>NSColorPanelToolbarIsShown.modal</key>
+	<integer>1</integer>
+	<key>NSColorPanelVisibleSwatchRows.modal</key>
+	<integer>2</integer>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/projects/opensource/gruvbox-contrib/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
@@ -520,12 +528,16 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame NSColorPanel</key>
+	<string>0 83 224 275 0 0 1680 922 </string>
+	<key>NSWindow Frame NSColorPanel.modal</key>
+	<string>728 509 224 275 0 0 1680 922 </string>
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>624 510 799 448 0 0 2048 1129 </string>
 	<key>NSWindow Frame ProfilesPanel</key>
 	<string>499 301 735 382 0 0 2048 1152 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 2048 1129 0 0 2048 1129 </string>
+	<string>0 476 1680 446 0 0 1680 922 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 689 650 429 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1263,6 +1275,8 @@
 			<false/>
 			<key>Silence Bell</key>
 			<false/>
+			<key>Smart Cursor Color</key>
+			<false/>
 			<key>Status Bar Layout</key>
 			<dict>
 				<key>advanced configuration</key>
@@ -1408,6 +1422,8 @@
 			<true/>
 			<key>Use Bright Bold</key>
 			<true/>
+			<key>Use Cursor Guide</key>
+			<false/>
 			<key>Use Custom Window Title</key>
 			<true/>
 			<key>Use Italic Font</key>
@@ -1440,14 +1456,14 @@
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {2048, 1152}}</string>
+		<string>{{0, 0}, {1680, 945}}</string>
 		<key>topLeft</key>
-		<string>{277, 1117}</string>
+		<string>{391, 866}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>2FD40B6B-A107-446B-BAF3-EAADC4881C10</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>45</integer>
+	<integer>49</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2188,6 +2204,11 @@
 			</dict>
 		</array>
 	</dict>
+	<key>NoSyncSearchHistory2</key>
+	<array>
+		<string>alias</string>
+		<string>dotme</string>
+	</array>
 	<key>NoSyncTipOfTheDayEligibilityBeganTime</key>
 	<real>600431259.65796995</real>
 	<key>PassOnControlClick</key>

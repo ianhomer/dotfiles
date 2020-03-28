@@ -19,6 +19,9 @@ Useful keyboard short cuts.
 **Cmd+Tab**
 : Switch windows
 
+**Cmd+h**
+: Hide window
+
 **Cmd+c**
 : Copy
 
@@ -27,6 +30,40 @@ Useful keyboard short cuts.
 
 **Cmd+z**
 : Undo
+
+**Cmd+Shift+.** - in finder window
+: Show hidden files
+
+## Magnet
+
+**Ctrl-Alt+return**
+: Full screen
+
+**Ctrl-Alt-left,right,up,down**
+: Half screen
+
+**Ctrl-Alt-uijk**
+: Quarter screen
+
+**Ctrl-Alt-deftg**
+: Thirds
+
+**Ctrl-Cmd-back**
+: Back to manually set screen size
+
+## Brave
+
+**Cmd+l**
+: Jump to address bar
+
+**Option+Cmd** left/right
+: Go to previous/next tab
+
+**Cmd+w**
+: Close tab
+
+**Option+Cmd b**
+: Open bookmarks
 
 ## iterm
 
@@ -79,6 +116,12 @@ prefix **d**
 
 **Opt-arrow**
 : move between panes
+
+**prefix Ctrl-s**
+: save tmux state
+
+**prefix Ctrl-r**
+: reload tmux state
 
 **Ctrl-hjkl**
 : move between panes including through vim panes

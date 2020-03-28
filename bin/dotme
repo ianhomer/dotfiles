@@ -99,8 +99,8 @@ command_install() {
   echo "Installing dotfiles ..."
   [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
   command_pull
-  command_brew
-  [ $DRY -eq 0 ] && setup-osx
+  command_packages
+  [ $DRY -eq 0 ] && is-macos && setup-osx
   [ $DRY -eq 0 ] && install-omf-packages
   [ $DRY -eq 0 ] && install-pip-packages
   [ $DRY -eq 0 ] && install-vim-packages
@@ -120,8 +120,14 @@ command_pull() {
   [ $DRY -eq 0 ] && git pull
 }
 
-command_brew() {
-  [ $DRY -eq 0 ] && install-brew-packages
+command_packages() {
+  if [[ $DRY -eq 0 ]] ; then
+    if is-macos ; then
+      install-brew-packages
+    elif has-pacman ; then
+      has-pacman
+    fi
+  fi
 }
 
 # Just stow dotfiles, quicker than a full install.
@@ -178,6 +184,43 @@ command_unstow() {
   done
 }
 
+# Set a dotme local variable
+command_set() {
+  envFile=~/.config/dotme/.env
+  name=${2}
+  if [[ -z "$name" ]] ; then
+    if [[ -f $envFile ]] ; then
+      echo $envFile
+      cat $envFile
+    else
+      echo "... $envFile not yet created"
+    fi
+    return
+  fi
+  name=`echo MY_$name | tr a-z A-Z`
+  value=$3
+  if [[ -z "$value" ]] ; then
+    if [[ -f $envFile ]] ; then
+      if grep -q "$name=" $envFile ; then
+        echo $envFile
+        grep "$name=" $envFile
+      else 
+        echo "... $name not set"
+      fi
+    else
+      echo "... $envFile not yet created"
+    fi
+    return
+  fi
+  echo "...setting dotme env - $name = $value"
+  mkdir -p ~/.config/dotme
+  touch $envFile
+  if grep -q "$name=" $envFile ; then
+    sed -i.bak "s/$name=.*/$name=$value/g" $envFile 
+  else
+    echo "$name=$value" >> $envFile
+  fi
+}
 
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
 
@@ -201,7 +244,7 @@ shift $((OPTIND-1))
 
 [ "${1:-}" = "--" ] && shift
 
-COMMAND=${@:-install}
+COMMAND=${1:-install}
 
 command_${COMMAND} $@
 if [ $? = 127 ]; then

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+#
+# Install pacman packages
+#
+
+pacman -S - < ~/.dotfiles/config/package/pkglist.txt

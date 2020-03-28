@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
+#
+# Find the first occurence of a named file in current or parent directory
+#
 
 if [ -z "$@" ] ; then
+  echo "Please specify name of file to up-find"
   exit 1
 fi
 
