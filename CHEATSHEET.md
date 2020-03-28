@@ -31,6 +31,9 @@ Useful keyboard short cuts.
 **Cmd+z**
 : Undo
 
+**Cmd+Shift+.** - in finder window
+: Show hidden files
+
 ## Magnet
 
 **Ctrl-Alt+return**
