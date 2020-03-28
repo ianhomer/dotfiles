@@ -22,3 +22,4 @@
 - Try coc-eslint, coc-flow (typescript)
 - Set default directory for tmux window so new panes start in given directory
 - alfred config in dotfiles
+- sort out why can't move kitty window with no window decorations

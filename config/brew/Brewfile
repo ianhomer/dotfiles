@@ -10,12 +10,12 @@ cask "font-firacode-nerd-font"
 #
 # core tools
 #
-# * fd - alternative to find
-# * fish - friendly interactive shell
-# * mas - mac app store command line
-# * stow - link farming
-# * the_silver_searcher - ack, recursive grep alternative a.k.a ag
-# * tmux - terminal multiplexer
+# - fd - alternative to find
+# - fish - friendly interactive shell
+# - mas - mac app store command line
+# - stow - link farming
+# - the_silver_searcher - ack, recursive grep alternative a.k.a ag
+# - tmux - terminal multiplexer
 
 brew "ack"
 brew "broot"
@@ -42,7 +42,7 @@ cask "kitty"
 #
 # supporting tools
 #
-# * fzf - fuzzy file name searcher, powering vi plugin
+# - fzf - fuzzy file name searcher, powering vi plugin
 
 brew "fzf"
 
@@ -97,3 +97,9 @@ cask "visual-studio-code"
 brew "eye-d3"
 brew "ffmpeg", args: ["with-libvpx"]
 brew "imagemagick", args: ["with-webp"]
+
+# Mac App Store
+#
+# - Todoist
+#
+mas "Todoist", id: 585829637
