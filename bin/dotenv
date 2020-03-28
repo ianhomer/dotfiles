@@ -1,0 +1,12 @@
+#
+# Given a posix shell, load dotme local env variables into your shell env
+# variables. Note that this must be sourced, i.e.
+#
+#     .  ~/.dotfiles/bin/dotenv
+#
+
+envFile=${1:-~/.config/dotme/.env}
+if [ -f $envFile ] ; then
+  echo "... loading env from $envFile"
+  export $(cat $envFile | xargs)
+fi

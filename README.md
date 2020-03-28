@@ -16,7 +16,7 @@ Then update at any time with:
 
 This gets local up to date, including pulling latest version of this repository,
 sets OSX defaults, updates brew including packages. This can be run anytime to
-just get onto latest. #222 red blue
+just get onto latest.
 
 ## Why
 
@@ -32,8 +32,8 @@ working to streamline distraction free coding. This includes:
 **git**
 : source control
 
-**iterm**
-: terminal
+**kitty**
+: slick terminal
 
 **tmux**
 : terminal multiplexer
@@ -65,6 +65,19 @@ get a list of each part.
 
 I've not worked out how to automate all configuration. Until I do, this is what
 I manually do on each environment.
+
+### Initialise a few desktop apps
+
+#### MacOs
+
+Open dozer and configure menu hiding.
+
+Open Alfred, set up privacy options, point configuration to a cloud storage of
+your choosing, and configure Alfred to your choosing.
+
+### Alfred
+
+Alfred Preferences -> Advanced -> Set Preferences folder -> ~/.dotfiles/config/alfred
 
 ### Keyboard Configuration - MacOS
 

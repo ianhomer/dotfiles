@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+if [[ -z "$1" ]] ; then
+  . dotenv
+else
+  MY_EMAIL=$1
+fi
+
+if [[ -z $MY_EMAIL ]] ; then
+  echo "... set email with"
+  echo "    dotme set EMAIL my@com"
+  exit 1
+fi
+
+keyFile=~/.ssh/id_rsa
+
+if [[ ! -f $keyFile ]] ; then
+  echo "... creating SSH key for : $MY_EMAIL"
+  ssh-keygen -t rsa -b 4096 -C $MY_EMAIL \
+    -f $keyFile                          \
+    -q -N ""
+fi
+
+echo "... key file = ${keyFile}.pub"
+if hash pbcopy 2>/dev/null ; then
+  cat "${keyFile}.pub" | pbcopy
+  echo "... public key is in clipboard"
+else
+  cat "${keyFile}.pub"
+fi
