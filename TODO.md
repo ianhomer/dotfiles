@@ -22,3 +22,8 @@
 - Try coc-eslint, coc-flow (typescript)
 - Set default directory for tmux window so new panes start in given directory
 - alfred config in dotfiles
+- experiment with markdown linting more, doesn't seem to lint list line wrapping well
+- report on launchtl services on startup / suggest pruning. `launchtl list`, 
+  `ls /Library/LaunchAgents`,`ls /Library/LaunchDaemons`. Look at errors in start
+  up logs to report which are zombies
+` 
