@@ -28,4 +28,4 @@
 - report on launchtl services on startup / suggest pruning. `launchtl list`,
   `ls /Library/LaunchAgents`,`ls /Library/LaunchDaemons`. Look at errors in start
   up logs to report which are zombies
-  `
+- network speed monitoring, e.g. `npm install --global fast-cli`
