@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# npm install --global fast-cli
+#
+
+export LOG=~/.fast.log
+echo "----" >> ${LOG}
+date >> ${LOG}
+/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep " SSID" >> ${LOG}
+fast --upload >> ${LOG}
