@@ -44,11 +44,10 @@ working to streamline distraction free coding. This includes:
 **FiraCode Nerd Font**
 : ligatures, powerline and more
 
-It is also useful if you install a windows manager. My current favorite is
-[Magnet](https://magnet.crowdcafe.com), but there are several good ones out
-there to choose from. You don't have to, however keyboard short cuts and window
-optimisations are done under the assumption you have keyboard short cuts to
-arrange your windows.
+**[alfred](https://www.alfredapp.com/),
+[dozer](https://github.com/Mortennn/Dozer),
+[magnet](https://magnet.crowdcafe.com/)**
+: MacOS+ with better hotkeys, focused status bar and window manager
 
 ## How
 
@@ -68,14 +67,14 @@ I manually do on each environment.
 
 ### Initialise a few desktop apps
 
-#### MacOs
+#### Dozer
 
 Open dozer and configure menu hiding.
 
+### Alfred
+
 Open Alfred, set up privacy options, point configuration to a cloud storage of
 your choosing, and configure Alfred to your choosing.
-
-### Alfred
 
 Alfred Preferences -> Advanced -> Set Preferences folder -> ~/.dotfiles/config/alfred
 

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+#
+# Completely uninstall evernote
+#
+
+read -p "Would you like to completely remove evernote and local caches? " -n 1 -r
+echo   
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  osascript -e 'quit app "Evernote"'
+  if [[ $? -eq 0 ]] ; then 
+    brew cask uninstall evernote
+
+    echo "Removing evernote caches"
+    rm -Rf ~/Library/Caches/com.evernote.*
+    rm -Rf ~/Library/Application\ Support/com.evernote.Evernote*
+    rm -Rf ~/Library/Preferences/com.evernote.Evernote*
+  else
+    echo "*** Cannot quit Evernote, not uninstalling"
+  fi
+fi
+
+

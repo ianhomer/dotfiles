@@ -22,3 +22,10 @@
 - Try coc-eslint, coc-flow (typescript)
 - Set default directory for tmux window so new panes start in given directory
 - alfred config in dotfiles
+- experiment with markdown linting more, doesn't seem to lint list line wrapping
+  well. `gq` shortcut ends up putting line wrap in a new list item. Can `:Format`
+  be improved to just sort this out?
+- report on launchtl services on startup / suggest pruning. `launchtl list`,
+  `ls /Library/LaunchAgents`,`ls /Library/LaunchDaemons`. Look at errors in start
+  up logs to report which are zombies
+- network speed monitoring, e.g. `npm install --global fast-cli`
