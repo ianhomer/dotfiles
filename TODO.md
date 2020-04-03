@@ -21,7 +21,6 @@
 - Deploy dotfiles in docker to test fresh install on other OS
 - Try coc-eslint, coc-flow (typescript)
 - Set default directory for tmux window so new panes start in given directory
-- alfred config in dotfiles
 - experiment with markdown linting more, doesn't seem to lint list line wrapping
   well. `gq` shortcut ends up putting line wrap in a new list item. Can `:Format`
   be improved to just sort this out?
