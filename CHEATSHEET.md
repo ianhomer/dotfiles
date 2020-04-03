@@ -34,6 +34,14 @@ Useful keyboard short cuts.
 **Cmd+Shift+.** - in finder window
 : Show hidden files
 
+## Todoist
+
+**Ctrl-Cmd+a**
+: Create task
+
+**Ctrl-Cmd-t**
+: Open up tasks list
+
 ## Magnet
 
 **Ctrl-Alt+return**
