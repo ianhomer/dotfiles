@@ -29,6 +29,8 @@
   up logs to report which are zombies
 - network speed monitoring, e.g. `npm install --global fast-cli`
 - try java and python code completion on all envs
+- Update spelling add word to only add to .cspell.json not also
+  .vim/coc-settings.json
 
 ## themes
 
