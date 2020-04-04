@@ -100,7 +100,7 @@ command_install() {
   [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
   command_pull
   command_packages
-  [ $DRY -eq 0 ] && is-macos && setup-osx
+  [ $DRY -eq 0 ] && is-macos && configure-osx-defaults
   [ $DRY -eq 0 ] && install-omf-packages
   [ $DRY -eq 0 ] && install-pip-packages
   [ $DRY -eq 0 ] && install-vim-packages
