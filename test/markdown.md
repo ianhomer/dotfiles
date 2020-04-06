@@ -26,6 +26,14 @@ Long line lists
 - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
   incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
 
+Nested lists
+
+- item 1
+- item 2
+  - item 2a
+  - item 2b
+- item 3
+
 ## Definitions
 
 Long line definitions
