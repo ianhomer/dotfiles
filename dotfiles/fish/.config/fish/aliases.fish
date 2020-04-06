@@ -8,7 +8,7 @@ else
   alias vi="nvim"
 
   # git
-  alias master="git checkout master"
+  alias master="git checkout master && git pull"
   alias push="git push"
   alias pull="git pull"
   alias g="git"

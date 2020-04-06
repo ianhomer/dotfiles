@@ -301,6 +301,8 @@ if has('nvim')
 
   " Add `:Format` command to format current buffer.
   command! -nargs=0 Format :call CocAction('format')
+  command! -nargs=0 Prettier :CocCommand prettier.formatFile
+  command! -nargs=0 MarkdownFormat :CocCommand markdownlint.fixAll
 
   " Add `:Fold` command to fold current buffer.
   command! -nargs=? Fold :call CocAction('fold', <f-args>)
@@ -317,6 +319,11 @@ if has('nvim')
     \ :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
   nmap <silent> <leader>a
     \ :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+
+  " Remap keys for applying codeAction to the current line.
+  nmap <leader>ac  <Plug>(coc-codeaction)
+  " Apply AutoFix to problem on the current line.
+  nmap <leader>qf  <Plug>(coc-fix-current)
 
   " dotfiles dictionaries for cSpell
   call coc#config('cSpell.dictionaryDefinitions', [
@@ -403,6 +410,7 @@ let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
 colorscheme gruvbox
 set bg=dark
 " Thanks to Damian Conway
+set colorcolumn=""
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%82v', 100)
 
