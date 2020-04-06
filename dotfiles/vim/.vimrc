@@ -50,9 +50,9 @@ Plug 'tpope/vim-fugitive'
 " symlink - Follow symlink when opening file
 Plug 'aymericbeaumet/vim-symlink'
 " surround - Surround with brackets etc
-" Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 " repeat - Repeat with .
-" Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 " HTML
 " Plug 'mattn/emmet-vim'
 " Linting

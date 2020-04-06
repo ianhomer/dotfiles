@@ -109,3 +109,4 @@ However, particular thanks to:
 - [Managing dotfiles with stow](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/)
 - [egel](https://github.com/egel/dotfiles)
 - [Ultimate vim configuration](https://github.com/amix/vimrc)
+- [noctuid - keyboard-based workflows](https://github.com/noctuid/dotfiles)

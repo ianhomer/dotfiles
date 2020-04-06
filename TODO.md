@@ -36,4 +36,4 @@
 
 - system monitoring, e.g. network speed
 - linting
-- cheatsheet management
+- cheatsheet management - e.g. https://github.com/denisidoro/navi
