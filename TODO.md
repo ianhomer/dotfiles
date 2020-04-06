@@ -36,4 +36,5 @@
 
 - system monitoring, e.g. network speed
 - linting
-- cheatsheet management - e.g. https://github.com/denisidoro/navi
+- cheatsheet management - e.g. <https://github.com/denisidoro/navi,> <https://github.com/tldr-pages/tldr>
+
