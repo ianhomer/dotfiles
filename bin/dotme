@@ -51,9 +51,9 @@ restore() {
 }
 
 docfiles() {
-  DOCS="bin/dotme README CHEATSHEET TODO"
+  DOCS="bin/dotme.md README.md docs/cheats/* CHEATSHEET.md TODO.md"
   for doc in $DOCS ; do
-    cat ~/.dotfiles/${doc}.md
+    cat ~/.dotfiles/${doc}
     # Empty line between markdown files so that first title not lost
     echo
   done
@@ -204,7 +204,7 @@ command_set() {
       if grep -q "$name=" $envFile ; then
         echo $envFile
         grep "$name=" $envFile
-      else 
+      else
         echo "... $name not set"
       fi
     else
@@ -216,7 +216,7 @@ command_set() {
   mkdir -p ~/.config/dotme
   touch $envFile
   if grep -q "$name=" $envFile ; then
-    sed -i.bak "s/$name=.*/$name=$value/g" $envFile 
+    sed -i.bak "s/$name=.*/$name=$value/g" $envFile
   else
     echo "$name=$value" >> $envFile
   fi
