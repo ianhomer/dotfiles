@@ -312,7 +312,7 @@ function RawBlock(format, str)
 end
 
 function Div(s, attr)
-  return "<div" .. attributes(attr) .. ">\n" .. s .. "</div>"
+  return s .. "\n"
 end
 
 -- The following code will produce runtime warnings when you haven't defined

@@ -1,4 +1,4 @@
-# Cheats
+# Cheats - OSX
 
 ## OSX
 
