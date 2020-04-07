@@ -104,11 +104,11 @@ function SoftBreak()
 end
 
 function LineBreak()
-  return "<br/>"
+  return "\n"
 end
 
 function Emph(s)
-  return "<em>" .. s .. "</em>"
+  return s
 end
 
 function Strong(s)
@@ -116,49 +116,47 @@ function Strong(s)
 end
 
 function Subscript(s)
-  return "<sub>" .. s .. "</sub>"
+  return s
 end
 
 function Superscript(s)
-  return "<sup>" .. s .. "</sup>"
+  return s
 end
 
 function SmallCaps(s)
-  return '<span style="font-variant: small-caps;">' .. s .. '</span>'
+  return s
 end
 
 function Strikeout(s)
-  return '<del>' .. s .. '</del>'
+  return s
 end
 
 function Link(s, src, tit, attr)
-  return "<a href='" .. escape(src,true) .. "' title='" ..
-         escape(tit,true) .. "'>" .. s .. "</a>"
+  return s
 end
 
 function Image(s, src, tit, attr)
-  return "<img src='" .. escape(src,true) .. "' title='" ..
-         escape(tit,true) .. "'/>"
+  return src
 end
 
 function Code(s, attr)
-  return "<code" .. attributes(attr) .. ">" .. escape(s) .. "</code>"
+  return s
 end
 
 function InlineMath(s)
-  return "\\(" .. escape(s) .. "\\)"
+  return s
 end
 
 function DisplayMath(s)
-  return "\\[" .. escape(s) .. "\\]"
+  return s
 end
 
 function SingleQuoted(s)
-  return "&lsquo;" .. s .. "&rsquo;"
+  return s
 end
 
 function DoubleQuoted(s)
-  return "&ldquo;" .. s .. "&rdquo;"
+  return s
 end
 
 function Note(s)
@@ -174,15 +172,11 @@ function Note(s)
 end
 
 function Span(s, attr)
-  return "<span" .. attributes(attr) .. ">" .. s .. "</span>"
+  return s
 end
 
 function RawInline(format, str)
-  if format == "html" then
-    return str
-  else
-    return ''
-  end
+  return str
 end
 
 function Cite(s, cs)
@@ -199,7 +193,7 @@ function Plain(s)
 end
 
 function Para(s)
-  return "<p>" .. s .. "</p>"
+  return s
 end
 
 -- lev is an integer, the header level.
@@ -208,45 +202,35 @@ function Header(lev, s, attr)
 end
 
 function BlockQuote(s)
-  return "<blockquote>\n" .. s .. "\n</blockquote>"
+  return s
 end
 
 function HorizontalRule()
-  return "<hr/>"
+  return "# ---"
 end
 
 function LineBlock(ls)
-  return '<div style="white-space: pre-line;">' .. table.concat(ls, '\n') ..
-         '</div>'
+  return table.concat(ls, '\n')
 end
 
 function CodeBlock(s, attr)
-  -- If code block has class 'dot', pipe the contents through dot
-  -- and base64, and include the base64-encoded png as a data: URL.
-  if attr.class and string.match(' ' .. attr.class .. ' ',' dot ') then
-    local img = pipe("base64", {}, pipe("dot", {"-T" .. image_format}, s))
-    return '<img src="data:' .. image_mime_type .. ';base64,' .. img .. '"/>'
-  -- otherwise treat as code (one could pipe through a highlighter)
-  else
-    return "<pre><code" .. attributes(attr) .. ">" .. escape(s) ..
-           "</code></pre>"
-  end
+  return s
 end
 
 function BulletList(items)
   local buffer = {}
   for _, item in pairs(items) do
-    table.insert(buffer, "<li>" .. item .. "</li>")
+    table.insert(buffer, "# - " .. item .. "\n")
   end
-  return "<ul>\n" .. table.concat(buffer, "\n") .. "\n</ul>"
+  return "\n" .. table.concat(buffer, "\n") .. "\n"
 end
 
 function OrderedList(items)
   local buffer = {}
   for _, item in pairs(items) do
-    table.insert(buffer, "<li>" .. item .. "</li>")
+    table.insert(buffer, "# * " .. item .. "\n")
   end
-  return "<ol>\n" .. table.concat(buffer, "\n") .. "\n</ol>"
+  return "\n" .. table.concat(buffer, "\n") .. "\n"
 end
 
 function DefinitionList(items)
@@ -274,9 +258,7 @@ function html_align(align)
 end
 
 function CaptionedImage(src, tit, caption, attr)
-   return '<div class="figure">\n<img src="' .. escape(src,true) ..
-      '" title="' .. escape(tit,true) .. '"/>\n' ..
-      '<p class="caption">' .. caption .. '</p>\n</div>'
+   return caption
 end
 
 -- Caption is a string, aligns is an array of strings,
@@ -326,11 +308,7 @@ function Table(caption, aligns, widths, headers, rows)
 end
 
 function RawBlock(format, str)
-  if format == "html" then
-    return str
-  else
-    return ''
-  end
+  return str
 end
 
 function Div(s, attr)
