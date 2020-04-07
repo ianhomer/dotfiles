@@ -3,16 +3,16 @@
 ## fish
 
 **Ctrl-a Ctrl-a**
-: beginning of line
+: go to beginning of line
 
 **Ctrl-e**
-: end of line
+: go to end of line
 
 **Ctrl-b**
-: back a word
+: go back a word
 
 **Ctrl-f**
-: forward a word
+: go forward a word
 
 **bind**
 : see key bindings

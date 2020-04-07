@@ -1,18 +1,4 @@
--- This is a sample custom writer for pandoc.  It produces output
--- that is very similar to that of pandoc's HTML writer.
--- There is one new feature: code blocks marked with class 'dot'
--- are piped through graphviz and images are included in the HTML
--- output using 'data:' URLs. The image format can be controlled
--- via the `image_format` metadata field.
---
--- Invoke with: pandoc -t sample.lua
---
--- Note:  you need not have lua installed on your system to use this
--- custom writer.  However, if you do have lua installed, you can
--- use it to test changes to the script.  'lua sample.lua' will
--- produce informative error messages if your code contains
--- syntax errors.
---
+-- Convert markdown cheats files to navi format
 --
 -- Test with
 --    cat docs/cheats/vim.md | pandoc -t src/pandoc/navi.lua
