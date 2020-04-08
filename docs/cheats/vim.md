@@ -2,7 +2,7 @@
 
 ## vi
 
-### Files, Buffers & Navigations
+### vi - files
 
 **:NERDTreeToggle** or **space+f**
 : Open file browser
@@ -58,7 +58,7 @@
 **:enew|pu=execute('autocmd')**
 : copy output of command, e.g. autocmd, into buffer
 
-#### NERDTree
+#### vi - NERDTree
 
 **m**
 : open file actions
@@ -66,7 +66,7 @@
 **Shift+i**
 : show hidden files
 
-#### netrw
+#### vi - netrw
 
 - **-** - up a directory
 - **i** - change list view
@@ -75,7 +75,7 @@
 - **gh** - hide/un-hide dot files
 - **%** - create new file
 
-#### Go to
+#### vi - navigation
 
 - **0**- beginning of line
 - **\$** - end of line
@@ -88,14 +88,14 @@
 - **GG** - end of file
 - **%** - next / previous bracket
 
-### vi - Window Management
+### vi - windows
 
 - **:split,:vsplit** - split pane
 - **80 Ctrl-w** + - set current pane to 80 characters
 - **Ctrl-w+left/right** or **Ctrl-h/j/k/l** - move to another pane
 - **count<leader>cc** - comment out the next count lines
 
-### vi - Editing
+### vi - editing
 
 :**:Goyo**
 : distraction free coding
