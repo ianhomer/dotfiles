@@ -63,25 +63,42 @@ function Blocksep()
   return "\n\n"
 end
 
+function dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. dump(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
+end
+
+local context = {}
+
 -- This function is called once for the whole document. Parameters:
 -- body is a string, metadata is a table, variables is a table.
 -- This gives you a fragment.  You could use the metadata table to
 -- fill variables in a custom lua template.  Or, pass `--template=...`
 -- to pandoc, and pandoc will do the template processing as usual.
 function Doc(body, metadata, variables)
+  local tags = {'auto'}
+  if not metadata['title'] == nil then
+    table.insert(tags, metadata['title'])
+  end
+  context['tags'] = table.concat(tags, ',')
   local buffer = {}
   local function add(s)
     table.insert(buffer, s)
   end
   add(body)
-  if #notes > 0 then
-    add('<ol class="footnotes">')
-    for _,note in pairs(notes) do
-      add(note)
-    end
-    add('</ol>')
-  end
-  return table.concat(buffer,'\n') .. '\n'
+
+  return '; ' .. dump(metadata) .. '\n' ..
+    '; ' .. dump(variables) .. '\n' ..
+    '; ' .. dump(context) .. '\n' ..
+    table.concat(buffer,'\n') .. '\n'
 end
 
 -- The functions that follow render corresponding pandoc elements.
@@ -98,11 +115,11 @@ function Space()
 end
 
 function SoftBreak()
-  return "\n"
+  return ''
 end
 
 function LineBreak()
-  return "\n"
+  return ''
 end
 
 function Emph(s)
@@ -158,19 +175,11 @@ function DoubleQuoted(s)
 end
 
 function Note(s)
-  local num = #notes + 1
-  -- insert the back reference right before the final closing tag.
-  s = string.gsub(s,
-          '(.*)</', '%1 <a href="#fnref' .. num ..  '">&#8617;</a></')
-  -- add a list item with the note to the note table.
-  table.insert(notes, '<li id="fn' .. num .. '">' .. s .. '</li>')
-  -- return the footnote reference, linked to the note.
-  return '<a id="fnref' .. num .. '" href="#fn' .. num ..
-            '"><sup>' .. num .. '</sup></a>'
+  return ''
 end
 
 function Span(s, attr)
-  return s
+  return ''
 end
 
 function RawInline(format, str)
@@ -186,16 +195,15 @@ function Plain(s)
 end
 
 function Para(s)
-  return s
+  return ''
 end
 
--- lev is an integer, the header level.
 function Header(lev, s, attr)
   return "% " .. s .. "\n"
 end
 
 function BlockQuote(s)
-  return s
+  return ''
 end
 
 function HorizontalRule()
@@ -207,7 +215,7 @@ function LineBlock(ls)
 end
 
 function CodeBlock(s, attr)
-  return s
+  return ''
 end
 
 function BulletList(items)
