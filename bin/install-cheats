@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+#
+# Build and install cheats
+#
+
+DATA_DIR=~/Library/ApplicationSupport
+NAVI_DATA_DIR="${DATA_DIR}/navi"
+[[ -d ${NAVI_DATA_DIR} ]] || mkdir "${NAVI_DATA_DIR}"
+NAVI_CHEATS_DIR="${DATA_DIR}/navi/cheats"
+[[ -d ${NAVI_CHEATS_DIR} ]] || mkdir "${NAVI_CHEATS_DIR}"
+
+
+OUT_DIR="${NAVI_CHEATS_DIR}/ianhomer__dotfiles"
+[[ -d ${OUTDIR} ]] || mkdir "${OUT_DIR}"
+
+for cheat in ~/.dotfiles/docs/cheats/* ; do
+  filename=$(basename $cheat)
+  name=${filename%.*}
+  pandoc -t src/pandoc/navi.lua -o "${OUT_DIR}/${name}.cheat" $cheat
+  echo "Generated navi cheat for $name"
+done

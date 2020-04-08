@@ -33,8 +33,6 @@ local function escape(s, in_attribute)
         return '&lt;'
       elseif x == '>' then
         return '&gt;'
-      elseif x == '&' then
-        return '&amp;'
       elseif x == '"' then
         return '&quot;'
       elseif x == "'" then
