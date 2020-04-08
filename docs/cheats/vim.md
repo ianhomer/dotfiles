@@ -83,7 +83,7 @@
 **gh**
 : hide/un-hide dot files
 
-**%**
+percent **%**
 : create new file
 
 #### vi - navigation
@@ -115,7 +115,7 @@
 **GG**
 : end of file
 
-**%**
+percent **%**
 : next / previous bracket
 
 ### vi - windows
