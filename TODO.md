@@ -36,7 +36,8 @@
 
 - system monitoring, e.g. network speed
 - linting
-- cheatsheet management - e.g. <https://github.com/denisidoro/navi,>
+- cheatsheet management - e.g. <https://devhints.io/>
+    <https://github.com/denisidoro/navi,>
     <https://github.com/tldr-pages/tldr>, cheat.
     <https://github.com/mutdmour/alfred-workflow-cheatsheet/tree/master/src/apps>
     man pages. Integrate with alfred. Export automatically from tools.

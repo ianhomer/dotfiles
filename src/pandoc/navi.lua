@@ -174,16 +174,11 @@ function Span(s, attr)
 end
 
 function RawInline(format, str)
-  return str
+  return ''
 end
 
 function Cite(s, cs)
-  local ids = {}
-  for _,cit in ipairs(cs) do
-    table.insert(ids, cit.citationId)
-  end
-  return "<span class=\"cite\" data-citation-ids=\"" .. table.concat(ids, ",") ..
-    "\">" .. s .. "</span>"
+  return ''
 end
 
 function Plain(s)
@@ -259,58 +254,26 @@ function CaptionedImage(src, tit, caption, attr)
    return caption
 end
 
--- Caption is a string, aligns is an array of strings,
--- widths is an array of floats, headers is an array of
--- strings, rows is an array of arrays of strings.
 function Table(caption, aligns, widths, headers, rows)
   local buffer = {}
   local function add(s)
     table.insert(buffer, s)
   end
-  add("<table>")
-  if caption ~= "" then
-    add("<caption>" .. caption .. "</caption>")
-  end
-  if widths and widths[1] ~= 0 then
-    for _, w in pairs(widths) do
-      add('<col width="' .. string.format("%.0f%%", w * 100) .. '" />')
-    end
-  end
-  local header_row = {}
-  local empty_header = true
-  for i, h in pairs(headers) do
-    local align = html_align(aligns[i])
-    table.insert(header_row,'<th align="' .. align .. '">' .. h .. '</th>')
-    empty_header = empty_header and h == ""
-  end
-  if empty_header then
-    head = ""
-  else
-    add('<tr class="header">')
-    for _,h in pairs(header_row) do
-      add(h)
-    end
-    add('</tr>')
-  end
-  local class = "even"
+  -- Table assumed to have definition in second column
+  -- and command in first
   for _, row in pairs(rows) do
-    class = (class == "even" and "odd") or "even"
-    add('<tr class="' .. class .. '">')
-    for i,c in pairs(row) do
-      add('<td align="' .. html_align(aligns[i]) .. '">' .. c .. '</td>')
-    end
-    add('</tr>')
+    add('# '.. row[2])
+    add(row[1])
   end
-  add('</table>')
-  return table.concat(buffer,'\n')
+  return table.concat(buffer,'\n') ..'\n'
 end
 
 function RawBlock(format, str)
-  return str
+  return ''
 end
 
 function Div(s, attr)
-  return s .. "\n"
+  return ''
 end
 
 -- The following code will produce runtime warnings when you haven't defined

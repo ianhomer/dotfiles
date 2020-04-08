@@ -1,8 +1,8 @@
 # Cheats - vim
 
-## vi
+## vim
 
-### vi - files
+### vim, files
 
 **:NERDTreeToggle** or **space+f**
 : Open file browser
@@ -68,25 +68,55 @@
 
 #### vi - netrw
 
-- **-** - up a directory
-- **i** - change list view
-- **I** - show header
-- **gn** - make current node root of tree
-- **gh** - hide/un-hide dot files
-- **%** - create new file
+**-**
+: up a directory
+
+**i**
+: change list view
+
+**I**
+: show header
+
+**gn**
+: make current node root of tree
+
+**gh**
+: hide/un-hide dot files
+
+**%**
+: create new file
 
 #### vi - navigation
 
-- **0**- beginning of line
-- **\$** - end of line
-- **}** - next block
-- **{** - previous block
-- **[[** - next header
-- **]]** - previous header
-- **:nn** - line nn
-- **gg** - beginning of file
-- **GG** - end of file
-- **%** - next / previous bracket
+**0**
+:beginning of line
+
+**\$**
+: end of line
+
+**}**
+: next block
+
+**{**
+: previous block
+
+**[[**
+: next header
+
+**]]**
+: previous header
+
+**:nn**
+: line nn
+
+**gg**
+: beginning of file
+
+**GG**
+: end of file
+
+**%**
+: next / previous bracket
 
 ### vi - windows
 
