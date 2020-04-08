@@ -207,7 +207,7 @@ function BlockQuote(s)
 end
 
 function HorizontalRule()
-  return "# ---"
+  return "; ---"
 end
 
 function LineBlock(ls)
@@ -221,7 +221,7 @@ end
 function BulletList(items)
   local buffer = {}
   for _, item in pairs(items) do
-    table.insert(buffer, "# - " .. item .. "\n")
+    table.insert(buffer, "; - " .. item .. "\n")
   end
   return "\n" .. table.concat(buffer, "\n") .. "\n"
 end
@@ -229,7 +229,7 @@ end
 function OrderedList(items)
   local buffer = {}
   for _, item in pairs(items) do
-    table.insert(buffer, "# * " .. item .. "\n")
+    table.insert(buffer, "; * " .. item .. "\n")
   end
   return "\n" .. table.concat(buffer, "\n") .. "\n"
 end
