@@ -32,7 +32,3 @@
 - Update spelling add word to only add to .cspell.json not also
   .vim/coc-settings.json
 
-## themes
-
-- system monitoring, e.g. network speed
-- linting
