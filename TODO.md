@@ -36,18 +36,3 @@
 
 - system monitoring, e.g. network speed
 - linting
-- cheatsheet management - e.g. <https://devhints.io/>
-    <https://github.com/denisidoro/navi,>
-    <https://github.com/tldr-pages/tldr>, cheat.
-    <https://github.com/mutdmour/alfred-workflow-cheatsheet/tree/master/src/apps>
-    man pages. Integrate with alfred. Export automatically from tools.
-
-    ln -s ~/.dotfiles/config/navi/fish ~/Library/Application\ Support/navi/cheats/
-    ln -s ~/.dotfiles/config/navi/vi ~/Library/Application\ Support/navi/cheats/
-
-  drive cheats from module md files which output well to man files with pandoc
-  convert automatically as necessary to inputs required by navi, cheat and
-  alfred.
-  <https://dev.to/koenighotze/cheat-sheets-in-your-terminal--1dli>
-  <https://gist.github.com/hpcsc/bebea8b364a5b4053cd775c6fe58162c>
-
