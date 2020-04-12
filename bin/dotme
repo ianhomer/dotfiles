@@ -103,6 +103,7 @@ command_install() {
   [ $DRY -eq 0 ] && is-macos && configure-osx-defaults
   [ $DRY -eq 0 ] && install-omf-packages
   [ $DRY -eq 0 ] && install-pip-packages
+  [ $DRY -eq 0 ] && install-gem-packages
   [ $DRY -eq 0 ] && install-vim-packages
   [ $DRY -eq 0 ] && install-tmux-packages
   [ $DRY -eq 0 ] && install-node-packages
