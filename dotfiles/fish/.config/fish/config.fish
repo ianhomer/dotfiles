@@ -1,17 +1,20 @@
 set CONFIG_LOG_LEVEL 0
 status --is-login; and set CONFIG_LOG_LEVEL 1
-set CONFIG_LOG_LEVEL 3
+#set CONFIG_LOG_LEVEL 3
 
 if [ {$CONFIG_LOG_LEVEL} -gt 1 ]
   set START_DATE (gdate +%s%3N)
   echo "START : $START_DATE"
   echo "PATH  : $PATH"
+end
 
-  function time-me
+function time-me
+  if [ {$CONFIG_LOG_LEVEL} -gt 1 ]
     set DATE (gdate +%s%3N)
     printf "    TIME : %20s : %s\n" $argv[1] (expr $DATE - $START_DATE)
   end
 end
+
 if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
   status --is-interactive; and echo "... INTERACTIVE shell"
   status --is-login; and echo "... LOGIN shell"
@@ -23,15 +26,17 @@ if status --is-login
   # jenv set up
   #
 
+  # equivalent of source (jenv init -|psub) with functions and completions
+  # dotfiled
   set -gx JENV_SHELL fish
   set -gx JENV_LOADED 1
-
-  #source (jenv init -|psub)
 
   #
   # rbenv set up
   #
-  source (rbenv init -|psub)
+  # equivalent of source (rbenv init -|psub) with functions and completions
+  # dotfiled
+  set -gx RBENV_SHELL fish
 
   # Point OMF state to dotfiles
   set -g OMF_CONFIG ~/.dotfiles/config/omf
