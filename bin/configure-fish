@@ -8,6 +8,6 @@
 # Set up universal variables to improve shell start up times
 #
 
-. ~/.dotfiles/dotfiles/fish/.config/fish/functions/add_to_user_path.fish
+. ~/.dotfiles/dotfiles/fish/.config/fish/functions/add-to-user-path.fish
 
-add_to_user_path ~/.dotfiles/bin
+add-to-universal-path ~/.dotfiles/bin ~/.jenv/bin
