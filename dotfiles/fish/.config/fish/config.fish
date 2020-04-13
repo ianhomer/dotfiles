@@ -37,6 +37,7 @@ end
 if status --is-interactive
   time-me "BEFORE aliases"
   source ~/.config/fish/aliases.fish
+  time-me "AFTER aliases"
   source ~/.config/fish/functions.fish
   set DATE (gdate +%s%3N)
   time-me "AFTER functions"
