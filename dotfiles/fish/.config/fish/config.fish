@@ -1,5 +1,6 @@
 set CONFIG_LOG_LEVEL 0
 status --is-login; and set CONFIG_LOG_LEVEL 1
+#set CONFIG_LOG_LEVEL 2
 
 [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and echo "START : PATH = $PATH"
 if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
