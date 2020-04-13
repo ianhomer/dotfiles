@@ -23,7 +23,10 @@ if status --is-login
   # jenv set up
   #
 
-  source (jenv init -|psub)
+  set -gx JENV_SHELL fish
+  set -gx JENV_LOADED 1
+
+  #source (jenv init -|psub)
 
   #
   # rbenv set up
