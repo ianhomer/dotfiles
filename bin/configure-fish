@@ -1,14 +1,13 @@
 #!/usr/local/bin/fish
 #
-# Configure fish.
+# Configure fish
 #
-
 
 #
 # Set up universal variables to improve shell start up times
 #
 
-. ~/.dotfiles/dotfiles/fish/.config/fish/functions/add-to-user-path.fish
+. ~/.dotfiles/dotfiles/fish/.config/fish/functions/add-to-universal-path.fish
 
 add-to-universal-path ~/.dotfiles/bin ~/.jenv/bin ~/.jenv/shims ~/.rbenv/shims
 

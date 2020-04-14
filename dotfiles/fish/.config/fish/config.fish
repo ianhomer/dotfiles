@@ -1,4 +1,4 @@
-set CONFIG_LOG_LEVEL 1
+set CONFIG_LOG_LEVEL 0
 status --is-login; and set CONFIG_LOG_LEVEL 2
 
 set SHELL_START_DATE (gdate +%s%3N)
@@ -92,6 +92,7 @@ if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
   echo "PATH = $PATH"
 end
 [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and echo "... Loaded ~/.config/fish/config.fish"
-[ {$CONFIG_LOG_LEVEL} -gt 0 ] ;and \
+if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
+  set DATE (gdate +%s%3N)
   echo "... Initialised in "(expr $DATE - $SHELL_START_DATE)"ms"
-
+end
