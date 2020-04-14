@@ -31,20 +31,6 @@
 - try java and python code completion on all envs
 - Update spelling add word to only add to .cspell.json not also
   .vim/coc-settings.json
-
-## themes
-
-- system monitoring, e.g. network speed
-- linting
-- cheatsheet management - e.g. <https://github.com/denisidoro/navi,>
-    <https://github.com/tldr-pages/tldr>, cheat.
-    <https://github.com/mutdmour/alfred-workflow-cheatsheet/tree/master/src/apps>
-    man pages. Integrate with alfred. Export automatically from tools.
-
-    ln -s ~/.dotfiles/config/navi/fish ~/Library/Application\ Support/navi/cheats/
-    ln -s ~/.dotfiles/config/navi/vi ~/Library/Application\ Support/navi/cheats/
-
-  drive cheats from module md files which output well to man files with pandoc
-  convert automatically as necessary to inputs required by navi, cheat and
-  alfred.
+- Bring coc troubleshooting practive into play :CocInfo, :checkhealth
+  :CocOpenLog, :version
 

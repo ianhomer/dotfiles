@@ -449,6 +449,12 @@ let g:markdown_folding = 1
 set foldlevelstart=20
 nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
 
+"
+" *** Scope : Python ***
+"
+" Disable python2 support
+" let g:loaded_python_provider = 0
+
 
 " *** Scope : Experimental ***
 "

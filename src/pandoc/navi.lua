@@ -63,25 +63,42 @@ function Blocksep()
   return "\n\n"
 end
 
+function dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. dump(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
+end
+
+local context = {}
+
 -- This function is called once for the whole document. Parameters:
 -- body is a string, metadata is a table, variables is a table.
 -- This gives you a fragment.  You could use the metadata table to
 -- fill variables in a custom lua template.  Or, pass `--template=...`
 -- to pandoc, and pandoc will do the template processing as usual.
 function Doc(body, metadata, variables)
+  local tags = {'auto'}
+  if not metadata['title'] == nil then
+    table.insert(tags, metadata['title'])
+  end
+  context['tags'] = table.concat(tags, ',')
   local buffer = {}
   local function add(s)
     table.insert(buffer, s)
   end
   add(body)
-  if #notes > 0 then
-    add('<ol class="footnotes">')
-    for _,note in pairs(notes) do
-      add(note)
-    end
-    add('</ol>')
-  end
-  return table.concat(buffer,'\n') .. '\n'
+
+  return '; ' .. dump(metadata) .. '\n' ..
+    '; ' .. dump(variables) .. '\n' ..
+    '; ' .. dump(context) .. '\n' ..
+    table.concat(buffer,'\n') .. '\n'
 end
 
 -- The functions that follow render corresponding pandoc elements.
@@ -98,11 +115,11 @@ function Space()
 end
 
 function SoftBreak()
-  return "\n"
+  return ''
 end
 
 function LineBreak()
-  return "\n"
+  return ''
 end
 
 function Emph(s)
@@ -158,32 +175,19 @@ function DoubleQuoted(s)
 end
 
 function Note(s)
-  local num = #notes + 1
-  -- insert the back reference right before the final closing tag.
-  s = string.gsub(s,
-          '(.*)</', '%1 <a href="#fnref' .. num ..  '">&#8617;</a></')
-  -- add a list item with the note to the note table.
-  table.insert(notes, '<li id="fn' .. num .. '">' .. s .. '</li>')
-  -- return the footnote reference, linked to the note.
-  return '<a id="fnref' .. num .. '" href="#fn' .. num ..
-            '"><sup>' .. num .. '</sup></a>'
+  return ''
 end
 
 function Span(s, attr)
-  return s
+  return ''
 end
 
 function RawInline(format, str)
-  return str
+  return ''
 end
 
 function Cite(s, cs)
-  local ids = {}
-  for _,cit in ipairs(cs) do
-    table.insert(ids, cit.citationId)
-  end
-  return "<span class=\"cite\" data-citation-ids=\"" .. table.concat(ids, ",") ..
-    "\">" .. s .. "</span>"
+  return ''
 end
 
 function Plain(s)
@@ -191,20 +195,19 @@ function Plain(s)
 end
 
 function Para(s)
-  return s
+  return ''
 end
 
--- lev is an integer, the header level.
 function Header(lev, s, attr)
   return "% " .. s .. "\n"
 end
 
 function BlockQuote(s)
-  return s
+  return ''
 end
 
 function HorizontalRule()
-  return "# ---"
+  return "; ---"
 end
 
 function LineBlock(ls)
@@ -212,13 +215,13 @@ function LineBlock(ls)
 end
 
 function CodeBlock(s, attr)
-  return s
+  return ''
 end
 
 function BulletList(items)
   local buffer = {}
   for _, item in pairs(items) do
-    table.insert(buffer, "# - " .. item .. "\n")
+    table.insert(buffer, "; - " .. item .. "\n")
   end
   return "\n" .. table.concat(buffer, "\n") .. "\n"
 end
@@ -226,7 +229,7 @@ end
 function OrderedList(items)
   local buffer = {}
   for _, item in pairs(items) do
-    table.insert(buffer, "# * " .. item .. "\n")
+    table.insert(buffer, "; * " .. item .. "\n")
   end
   return "\n" .. table.concat(buffer, "\n") .. "\n"
 end
@@ -259,58 +262,26 @@ function CaptionedImage(src, tit, caption, attr)
    return caption
 end
 
--- Caption is a string, aligns is an array of strings,
--- widths is an array of floats, headers is an array of
--- strings, rows is an array of arrays of strings.
 function Table(caption, aligns, widths, headers, rows)
   local buffer = {}
   local function add(s)
     table.insert(buffer, s)
   end
-  add("<table>")
-  if caption ~= "" then
-    add("<caption>" .. caption .. "</caption>")
-  end
-  if widths and widths[1] ~= 0 then
-    for _, w in pairs(widths) do
-      add('<col width="' .. string.format("%.0f%%", w * 100) .. '" />')
-    end
-  end
-  local header_row = {}
-  local empty_header = true
-  for i, h in pairs(headers) do
-    local align = html_align(aligns[i])
-    table.insert(header_row,'<th align="' .. align .. '">' .. h .. '</th>')
-    empty_header = empty_header and h == ""
-  end
-  if empty_header then
-    head = ""
-  else
-    add('<tr class="header">')
-    for _,h in pairs(header_row) do
-      add(h)
-    end
-    add('</tr>')
-  end
-  local class = "even"
+  -- Table assumed to have definition in second column
+  -- and command in first
   for _, row in pairs(rows) do
-    class = (class == "even" and "odd") or "even"
-    add('<tr class="' .. class .. '">')
-    for i,c in pairs(row) do
-      add('<td align="' .. html_align(aligns[i]) .. '">' .. c .. '</td>')
-    end
-    add('</tr>')
+    add('# '.. row[2])
+    add(row[1])
   end
-  add('</table>')
-  return table.concat(buffer,'\n')
+  return table.concat(buffer,'\n') ..'\n'
 end
 
 function RawBlock(format, str)
-  return str
+  return ''
 end
 
 function Div(s, attr)
-  return s .. "\n"
+  return ''
 end
 
 -- The following code will produce runtime warnings when you haven't defined

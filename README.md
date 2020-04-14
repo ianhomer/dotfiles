@@ -80,9 +80,13 @@ Alfred Preferences -> Advanced -> Set Preferences folder -> ~/.dotfiles/config/a
 
 ### Keyboard Configuration - MacOS
 
-System preferences -> keyboard -> Modifier Keys -> For each keyboard :
+System preferences
+
+-> keyboard -> Modifier Keys -> For each keyboard :
 
 - Caps Lock -> Escape
+
+-> Mission Control - remove all keyboard and mouse shortcuts
 
 For a Microsoft keyboard :
 

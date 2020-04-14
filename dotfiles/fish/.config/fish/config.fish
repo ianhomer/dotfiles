@@ -1,8 +1,21 @@
-set CONFIG_LOG_LEVEL 0
-status --is-login; and set CONFIG_LOG_LEVEL 1
+set CONFIG_LOG_LEVEL 1
+status --is-login; and set CONFIG_LOG_LEVEL 2
 
-[ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and echo "START : PATH = $PATH"
+set SHELL_START_DATE (gdate +%s%3N)
+
 if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
+  echo "START : $SHELL_START_DATE"
+  echo "PATH  : $PATH"
+end
+
+function time-me
+  if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
+    set DATE (gdate +%s%3N)
+    printf "    TIME : %20s : %s\n" $argv[1] (expr $DATE - $SHELL_START_DATE)
+  end
+end
+
+if [ {$CONFIG_LOG_LEVEL} -gt 3 ]
   status --is-interactive; and echo "... INTERACTIVE shell"
   status --is-login; and echo "... LOGIN shell"
 end
@@ -13,22 +26,29 @@ if status --is-login
   # jenv set up
   #
 
-  set PATH $HOME/.jenv/bin $PATH
-  source (jenv init -|psub)
+  # equivalent of source (jenv init -|psub) with functions and completions
+  # dotfiled
+  set -gx JENV_SHELL fish
+  set -gx JENV_LOADED 1
 
   #
   # rbenv set up
   #
-  source (rbenv init - | psub)
-  set PATH ~/.dotfiles/bin $PATH
+  # equivalent of source (rbenv init -|psub) with functions and completions
+  # dotfiled
+  set -gx RBENV_SHELL fish
 
   # Point OMF state to dotfiles
   set -g OMF_CONFIG ~/.dotfiles/config/omf
 end
 
 if status --is-interactive
+  time-me "BEFORE aliases"
   source ~/.config/fish/aliases.fish
+  time-me "AFTER aliases"
   source ~/.config/fish/functions.fish
+  set DATE (gdate +%s%3N)
+  time-me "AFTER functions"
 
   #
   # Work around for OSX issue causing
@@ -67,6 +87,11 @@ if status --is-login
   set -x GPG_TTY (tty)
 end
 
-[ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and echo "END   : PATH = $PATH"
-[ {$CONFIG_LOG_LEVEL} -gt 0 ] ;and echo "... Loaded ~/.config/fish/config.fish"
+if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
+  time-me "END"
+  echo "PATH = $PATH"
+end
+[ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and echo "... Loaded ~/.config/fish/config.fish"
+[ {$CONFIG_LOG_LEVEL} -gt 0 ] ;and \
+  echo "... Initialised in "(expr $DATE - $SHELL_START_DATE)"ms"
 
