@@ -3,6 +3,7 @@
 "
 
 let g:vim_dir = "~/.vim"
+let g:dotme_coc_enabled = "y"
 
 if has('nvim')
   "
@@ -64,7 +65,7 @@ Plug 'tpope/vim-repeat'
 " Plug 'preservim/nerdcommenter'
 
 " COC completion
-if has('nvim')
+if exists('g:dotme_coc_enabled') && has('nvim')
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   let g:coc_global_extensions = [
       \ 'coc-actions',
@@ -121,14 +122,25 @@ nnoremap <silent> <leader>r :reg<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>s :w<CR>
 
-" Reload vimrc or neo vimrc
+" Reload vimrc, neo vimrc and coc
 if has('nvim')
-  nnoremap <leader>vc
-    \ :source ~/.config/nvim/init.vim<CR>:CocRestart<CR>
-    \ :echo "Reloaded neo init.vm"<CR>
+  if exists('g:dotme_coc_enabled')
+    nnoremap <leader>vc
+      \ :source ~/.config/nvim/init.vim<CR>:CocRestart<CR>
+      \ :echo "Reloaded neo init.vm"<CR>
+  else
+    nnoremap <leader>vc
+      \ :source ~/.config/nvim/init.vim<CR>
+      \ :echo "Reloaded neo init.vm"<CR>
+  endif
 else
-  nnoremap <leader>vc
-    \ :source ~/.vimrc<CR>:CocRestart<CR>:echo "Reloaded .vimrc"<CR>
+  if exists('g:dotme_coc_enabled')
+    nnoremap <leader>vc
+      \ :source ~/.vimrc<CR>:CocRestart<CR>:echo "Reloaded .vimrc"<CR>
+  else
+    nnoremap <leader>vc
+      \ :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
+  endif
 endif
 
 " Clear whitespace
@@ -237,7 +249,9 @@ set scrolloff=3
 " Optimise for faster terminal connections
 " set ttyfast
 
-source ~/.config/vim/coc.vimrc
+if exists('g:dotme_coc_enabled')
+  source ~/.config/vim/coc.vimrc
+endif
 
 "
 " *** Scope : Status Bar ***
