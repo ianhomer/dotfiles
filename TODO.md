@@ -34,4 +34,6 @@
 - Bring coc troubleshooting practice into play :CocInfo, :checkhealth
   :CocOpenLog, :version
 - Try tmuxinator
-- Coc add spelling should to just cspell.json not .vim config.
+- Coc add spelling should to just cspell.json not .vim config
+- Why CoC stopping, why sometimes line length marker not loading? Set variable
+  at end of vimrc script and health check on whether always loaded.
