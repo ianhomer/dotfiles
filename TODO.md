@@ -31,6 +31,7 @@
 - try java and python code completion on all envs
 - Update spelling add word to only add to .cspell.json not also
   .vim/coc-settings.json
-- Bring coc troubleshooting practive into play :CocInfo, :checkhealth
+- Bring coc troubleshooting practice into play :CocInfo, :checkhealth
   :CocOpenLog, :version
-
+- Try tmuxinator
+- Coc add spelling should to just cspell.json not .vim config.
