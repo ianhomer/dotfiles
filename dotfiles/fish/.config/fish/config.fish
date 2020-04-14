@@ -1,7 +1,10 @@
-set CONFIG_LOG_LEVEL 0
-status --is-login; and set CONFIG_LOG_LEVEL 2
+set CONFIG_LOG_LEVEL 1
+status --is-login; and set CONFIG_LOG_LEVEL 1
 
-set SHELL_START_DATE (gdate +%s%3N)
+if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
+  set_color grey
+  set SHELL_START_DATE (gdate +%s%3N)
+end
 
 if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
   echo "START : $SHELL_START_DATE"
@@ -95,4 +98,5 @@ end
 if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
   set DATE (gdate +%s%3N)
   echo "... Initialised in "(expr $DATE - $SHELL_START_DATE)"ms"
+  set_color normal
 end
