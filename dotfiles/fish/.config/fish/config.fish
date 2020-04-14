@@ -1,21 +1,21 @@
-set CONFIG_LOG_LEVEL 0
-status --is-login; and set CONFIG_LOG_LEVEL 1
-#set CONFIG_LOG_LEVEL 3
+set CONFIG_LOG_LEVEL 1
+status --is-login; and set CONFIG_LOG_LEVEL 2
 
-if [ {$CONFIG_LOG_LEVEL} -gt 1 ]
-  set START_DATE (gdate +%s%3N)
-  echo "START : $START_DATE"
+set SHELL_START_DATE (gdate +%s%3N)
+
+if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
+  echo "START : $SHELL_START_DATE"
   echo "PATH  : $PATH"
 end
 
 function time-me
-  if [ {$CONFIG_LOG_LEVEL} -gt 1 ]
+  if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
     set DATE (gdate +%s%3N)
-    printf "    TIME : %20s : %s\n" $argv[1] (expr $DATE - $START_DATE)
+    printf "    TIME : %20s : %s\n" $argv[1] (expr $DATE - $SHELL_START_DATE)
   end
 end
 
-if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
+if [ {$CONFIG_LOG_LEVEL} -gt 3 ]
   status --is-interactive; and echo "... INTERACTIVE shell"
   status --is-login; and echo "... LOGIN shell"
 end
@@ -87,9 +87,11 @@ if status --is-login
   set -x GPG_TTY (tty)
 end
 
-if [ {$CONFIG_LOG_LEVEL} -gt 1 ]
+if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
   time-me "END"
   echo "PATH = $PATH"
 end
-[ {$CONFIG_LOG_LEVEL} -gt 0 ] ;and echo "... Loaded ~/.config/fish/config.fish"
+[ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and echo "... Loaded ~/.config/fish/config.fish"
+[ {$CONFIG_LOG_LEVEL} -gt 0 ] ;and \
+  echo "... Initialised in "(expr $DATE - $SHELL_START_DATE)"ms"
 

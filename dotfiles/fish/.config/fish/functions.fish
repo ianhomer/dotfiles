@@ -44,7 +44,6 @@ function fish_user_key_bindings
   bind \cb backward-word
 end
 
-if status --is-login
+[ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
   echo "... Loaded ~/.config/fish/functions.fish"
-end
 
