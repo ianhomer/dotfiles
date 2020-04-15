@@ -12,6 +12,8 @@ if has('nvim')
   " Store nvim plugins in isolated location
   "
   let g:vim_dir = "~/.config/nvim"
+else
+  let g:coc_enabled = 0
 endif
 
 call plug#begin(g:vim_dir."/plugged")
