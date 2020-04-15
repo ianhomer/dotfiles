@@ -3,9 +3,9 @@
 "
 
 let g:vim_dir = "~/.vim"
-let g:dotme_coc_enabled = "y"
 
 if has('nvim')
+  let g:dotme_coc_enabled = "y"
   "
   " Store nvim plugins in isolated location
   "
