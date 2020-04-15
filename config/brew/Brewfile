@@ -68,8 +68,8 @@ cask "evernote"
 # * pandoc + basictex => doc conversion, e.g. markdown to PDF
 #
 brew "pandoc"
-# pandoc-citeproc disabled for now since password prompt appearing after this
-# in brew install, need to troubleshoot why.
+# pandoc-citeproc,basictex disabled for now since password prompt appearing
+# after this in brew install, need to troubleshoot why.
 #brew "pandoc-citeproc"
 #cask "basictex"
 cask "drawio"
