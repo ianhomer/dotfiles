@@ -28,6 +28,11 @@ if g:slim < 10
   " fzf - Fuzzy Finder
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
+  "
+  " Style
+  "
+  " gruvbox - styling
+  Plug 'morhetz/gruvbox'
 endif
 
 if g:slim < 9
@@ -110,11 +115,6 @@ if g:slim < 9
   " tabular - lining up text
   if g:slim < 5 | Plug 'godlygeek/tabular' | endif
   " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-  "
-  " Style
-  "
-  " gruvbox - styling
-  Plug 'morhetz/gruvbox'
 endif
 
 call plug#end()
@@ -166,7 +166,9 @@ else
 endif
 
 " Clear whitespace
-nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
+if g:slim < 5
+  nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
+endif
 
 " *** Scope : Writing ***
 
@@ -179,15 +181,16 @@ endif
 "
 " *** Scope : Windows ***
 "
-
-" Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
-" Close the current buffer and move to the previous one
-nnoremap <leader>bq :<c-u>bp <bar> bd #<cr>
-" Show all open buffers and their status
-nnoremap <leader>bl :ls<cr>
-" Thanks - https://www.rockyourcode.com/vim-close-all-other-buffers/
-" Close all buffers except the current one
-nnoremap <leader>bd :<c-u>up <bar> %bd <bar> e#<cr>
+if g:slim < 1
+  " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
+  " Close the current buffer and move to the previous one
+  nnoremap <leader>bq :<c-u>bp <bar> bd #<cr>
+  " Show all open buffers and their status
+  nnoremap <leader>bl :ls<cr>
+  " Thanks - https://www.rockyourcode.com/vim-close-all-other-buffers/
+  " Close all buffers except the current one
+  nnoremap <leader>bd :<c-u>up <bar> %bd <bar> e#<cr>
+endif
 
 " Enable mouse support
 set mouse=a
@@ -215,31 +218,34 @@ set termguicolors
 "
 augroup dotme
   autocmd!
-  "
-  " *** Scope : Editing ***
-  "
-  " Do not highlight current line when in insert mode
-  autocmd InsertEnter,InsertLeave * set cul!
 
-  "
-  " *** Scope : IO ***
-  "
-  " Auto reload when focus gained or buffer entered
-  au FocusGained,BufEnter * :checktime
+  if g:slim < 5
+    "
+    " *** Scope : Editing ***
+    "
+    " Do not highlight current line when in insert mode
+    autocmd InsertEnter,InsertLeave * set cul!
 
-  "
-  " *** Scope : Terminal ***
-  "
-  autocmd BufWinEnter,WinEnter,BufEnter *
-        \ if &buftype == 'terminal' | :startinsert | endif
-  " autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
+    "
+    " *** Scope : IO ***
+    "
+    " Auto reload when focus gained or buffer entered
+    au FocusGained,BufEnter * :checktime
 
-  "
-  " *** Scope : Python ***
-  "
+    "
+    " *** Scope : Terminal ***
+    "
+    autocmd BufWinEnter,WinEnter,BufEnter *
+          \ if &buftype == 'terminal' | :startinsert | endif
+    " autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
 
-  " Override shiftwidth for python
-  autocmd Filetype python set shiftwidth=2
+    "
+    " *** Scope : Python ***
+    "
+
+    " Override shiftwidth for python
+    autocmd Filetype python set shiftwidth=2
+  endif
 augroup end
 
 
@@ -281,11 +287,13 @@ endif
 " *** Scope : Status Bar ***
 "
 
-"
-" Enable tab line
-let g:airline#extensions#tabline#enabled = 1
-" Enable powerfonts giving angled tables
-let g:airline_powerline_fonts = 1
+if g:slim < 9
+  "
+  " Enable tab line
+  let g:airline#extensions#tabline#enabled = 1
+  " Enable powerfonts giving angled tables
+  let g:airline_powerline_fonts = 1
+endif
 
 " Backspace support
 set backspace=indent,eol,start
@@ -327,24 +335,28 @@ set clipboard=unnamed
 
 " source ~/.config/vim/netrw.vimrc
 
-"
-" *** Scope : NERDTree ***
-"
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
+if g:slim < 5
+  "
+  " *** Scope : NERDTree ***
+  "
+  let NERDTreeMinimalUI = 1
+  let NERDTreeDirArrows = 1
+endif
 
-" fzf config
-let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
+if g:slim < 10
+  " fzf config
+  let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
 
-if g:slim < 8
   colorscheme gruvbox
   set bg=dark
 endif
 
-" Thanks to Damian Conway                                                         test long line
-set colorcolumn=""
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%82v', 100)
+if g:slim < 6
+  " Thanks to Damian Conway                                                         test long line
+  set colorcolumn=""
+  highlight ColorColumn ctermbg=magenta
+  call matchadd('ColorColumn', '\%82v', 100)
+endif
 
 " Open new splits to the right and below
 set splitright
@@ -361,14 +373,17 @@ set splitbelow
 " https://stackoverflow.com/questions/32769488/double-vim-surround-with
 " autocmd Filetype markdown let b:surround_43 = "**\r**"
 
-" Markdown syntax
-" Conceal some syntax - e.g. ** around bold
-set conceallevel=2
-" Enable folding
-let g:markdown_folding = 1
-" Default large fold level start, folding everything up by default feels odd.
-set foldlevelstart=20
-nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
+if g:slim < 5
+  " Markdown syntax
+  " Conceal some syntax - e.g. ** around bold
+  set conceallevel=2
+
+  " Enable folding
+  let g:markdown_folding = 1
+  " Default large fold level start, folding everything up by default feels odd.
+  set foldlevelstart=20
+  nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
+endif
 
 "
 " *** Scope : Python ***
@@ -376,5 +391,7 @@ nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
 " Disable python2 support
 " let g:loaded_python_provider = 0
 
-source ~/.config/vim/experimental.vimrc
+if g:slim < 5
+  source ~/.config/vim/experimental.vimrc
+endif
 
