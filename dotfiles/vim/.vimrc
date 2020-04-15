@@ -4,10 +4,13 @@
 
 let g:vim_dir = "~/.vim"
 " Raise slim level to disable configs
-let g:slim = 1
+" - 9 => core essentials
+" - 8 => very useful
+" - 5 => no fancy
+let g:slim = 9
 
 if has('nvim')
-  let g:coc_enabled = 1
+  let g:coc_enabled = g:slim < 5 ? 1 : 0
   "
   " Store nvim plugins in isolated location
   "
@@ -18,91 +21,101 @@ endif
 
 call plug#begin(g:vim_dir."/plugged")
 
-"
-" Window and file navigation
-"
-
-" NERDTree - file explore
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'ryanoasis/vim-devicons'
-" Vinegar - better file expore than NERD
-" Plug 'tpope/vim-vinegar'
-" fzf - Fuzzy Finder
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-" ack - Search files
-Plug 'mileszs/ack.vim'
-" Airline - status bar
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" editorconfig - Support standard editorconfig files
-Plug 'editorconfig/editorconfig-vim'
-" tmux - enable C-hjkl to move to across vim and tmux panes
-Plug 'christoomey/vim-tmux-navigator'
-"
-" Coding
-"
-" polyglot
-Plug 'sheerun/vim-polyglot'
-" tabular - Lining up columns
-Plug 'godlygeek/tabular'
-" fugitive - Git integration
-Plug 'tpope/vim-fugitive'
-" NERDTree - show git changes
-"Plug 'xuyuanp/nerdtree-git-plugin'
-" gitgutter - Git change indicator to left of window
-"Plug 'airblade/vim-gitgutter'
-" symlink - Follow symlink when opening file
-Plug 'aymericbeaumet/vim-symlink'
-" surround - Surround with brackets etc
-Plug 'tpope/vim-surround'
-" repeat - Repeat with .
-Plug 'tpope/vim-repeat'
-" HTML
-" Plug 'mattn/emmet-vim'
-" Linting
-" Plug 'dense-analysis/ale'
-" Handy mappings
-" Plug 'tpope/vim-unimpaired'
-
-" Commenter
-" Plug 'preservim/nerdcommenter'
-
-" COC completion
-if g:coc_enabled == 1
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  let g:coc_global_extensions = [
-      \ 'coc-actions',
-      \ 'coc-css',
-      \ 'coc-emmet',
-      \ 'coc-markdownlint',
-      \ 'coc-highlight',
-      \ 'coc-html',
-      \ 'coc-java',
-      \ 'coc-json',
-      \ 'coc-prettier',
-      \ 'coc-python',
-      \ 'coc-spell-checker',
-      \ 'coc-tsserver',
-      \ 'coc-yaml',
-      \ 'coc-xml'
-      \ ]
+if g:slim < 10
+  "
+  " Core essentials
+  "
+  " fzf - Fuzzy Finder
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
 endif
 
-"
-" Writing
-"
-" goyo - Distraction free writing
-Plug 'junegunn/goyo.vim'
+if g:slim < 9
 
-" tabular - lining up text
-Plug 'godlygeek/tabular'
-" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-"
-" Style
-"
-" gruvbox - styling
-Plug 'morhetz/gruvbox'
+  "
+  " Window and file management
+  "
+
+  " NERDTree - file explore
+  if g:slim < 7 | Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } | endif
+  if g:slim < 5 | Plug 'ryanoasis/vim-devicons' | endif
+  " Vinegar - better file expore than NERD
+  " Plug 'tpope/vim-vinegar'
+  " ack - Search files
+  Plug 'mileszs/ack.vim'
+  " Airline - status bar
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  " editorconfig - Support standard editorconfig files
+  Plug 'editorconfig/editorconfig-vim'
+  " tmux - enable C-hjkl to move to across vim and tmux panes
+  Plug 'christoomey/vim-tmux-navigator'
+  
+  "
+  " Coding
+  "
+  " polyglot
+  Plug 'sheerun/vim-polyglot'
+  " tabular - Lining up columns
+  Plug 'godlygeek/tabular'
+  " fugitive - Git integration
+  Plug 'tpope/vim-fugitive'
+  " NERDTree - show git changes
+  "Plug 'xuyuanp/nerdtree-git-plugin'
+  " gitgutter - Git change indicator to left of window
+  "Plug 'airblade/vim-gitgutter'
+  " symlink - Follow symlink when opening file
+  Plug 'aymericbeaumet/vim-symlink'
+  " surround - Surround with brackets etc
+  Plug 'tpope/vim-surround'
+  " repeat - Repeat with .
+  Plug 'tpope/vim-repeat'
+  " HTML
+  " Plug 'mattn/emmet-vim'
+  " Linting
+  " Plug 'dense-analysis/ale'
+  " Handy mappings
+  " Plug 'tpope/vim-unimpaired'
+
+  " Commenter
+  " Plug 'preservim/nerdcommenter'
+
+  " COC completion
+  if g:coc_enabled == 1
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    let g:coc_global_extensions = [
+        \ 'coc-actions',
+        \ 'coc-css',
+        \ 'coc-emmet',
+        \ 'coc-markdownlint',
+        \ 'coc-highlight',
+        \ 'coc-html',
+        \ 'coc-java',
+        \ 'coc-json',
+        \ 'coc-prettier',
+        \ 'coc-python',
+        \ 'coc-spell-checker',
+        \ 'coc-tsserver',
+        \ 'coc-yaml',
+        \ 'coc-xml'
+        \ ]
+  endif
+
+  "
+  " Writing
+  "
+  " goyo - Distraction free writing
+  if g:slim < 5 | Plug 'junegunn/goyo.vim' | endif
+
+  " tabular - lining up text
+  if g:slim < 5 | Plug 'godlygeek/tabular' | endif
+  " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+  "
+  " Style
+  "
+  " gruvbox - styling
+  Plug 'morhetz/gruvbox'
+endif
 
 call plug#end()
 
@@ -117,15 +130,19 @@ let mapleader = "\<Space>"
 nnoremap ; :
 
 " My shortcuts
-nnoremap <silent> <leader><space> :Buffers<CR>
-nnoremap <silent> <leader>f :Files<CR>
-nnoremap <silent> <leader>b :BCommits<CR>
-nnoremap <silent> <leader>c :Commits<CR>
-nnoremap <silent> <leader>h :History<CR>
-nnoremap <silent> <leader>m :Maps<CR>
-nnoremap <silent> <leader>r :reg<CR>
-nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>s :w<CR>
+if g:slim < 10
+  nnoremap <silent> <leader><space> :Buffers<CR>
+  nnoremap <silent> <leader>f :Files<CR>
+elseif g:slim < 9
+  nnoremap <silent> <leader>b :BCommits<CR>
+  nnoremap <silent> <leader>c :Commits<CR>
+  nnoremap <silent> <leader>h :History<CR>
+  nnoremap <silent> <leader>m :Maps<CR>
+  nnoremap <silent> <leader>r :reg<CR>
+  nnoremap <leader>s :w<CR>
+elseif g:slim < 7
+  nnoremap <leader>n :NERDTreeToggle<CR>
+endif
 
 " Reload vimrc, neo vimrc and coc
 if has('nvim')
@@ -154,7 +171,7 @@ nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
 " *** Scope : Writing ***
 
 " Goyo distraction free writing
-if g:slim < 9
+if g:slim < 5
   nnoremap <leader>g :Goyo<CR>
   let g:goyo_width = 85
 endif
@@ -319,8 +336,11 @@ let NERDTreeDirArrows = 1
 " fzf config
 let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
 
-colorscheme gruvbox
-set bg=dark
+if g:slim < 8
+  colorscheme gruvbox
+  set bg=dark
+endif
+
 " Thanks to Damian Conway                                                         test long line
 set colorcolumn=""
 highlight ColorColumn ctermbg=magenta
