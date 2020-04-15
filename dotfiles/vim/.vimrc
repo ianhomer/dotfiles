@@ -4,14 +4,19 @@
 
 let g:vim_dir = "~/.vim"
 " Raise slim level to disable configs
-" - 9 => core essentials
-" - 8 => very useful
-" - 5 => no fancy
+" - 9 => core config
+" - 8 => core plugins
+" - 7 => useful config
+" - 6 => useful plugins
+" - 5 => power config
+" - 4 => power plugins
+" - 1 => experimental config
+" - 0 => experimental plugins
 "
 " Slim level can be used to reduce start up times, troubleshoot interactions
 " between configurations and plugins
 "
-let g:slim = 0
+let g:slim = 6
 
 if has('nvim')
   let g:coc_enabled = g:slim < 5 ? 1 : 0
@@ -25,7 +30,7 @@ endif
 
 call plug#begin(g:vim_dir."/plugged")
 
-if g:slim < 10
+if g:slim < 9
   "
   " Core essentials
   "
@@ -39,14 +44,14 @@ if g:slim < 10
   Plug 'morhetz/gruvbox'
 endif
 
-if g:slim < 9
+if g:slim < 7
 
   "
   " Window and file management
   "
 
   " NERDTree - file explore
-  if g:slim < 7 | Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } | endif
+  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
   if g:slim < 5 | Plug 'ryanoasis/vim-devicons' | endif
   " Vinegar - better file expore than NERD
   " Plug 'tpope/vim-vinegar'
@@ -56,19 +61,19 @@ if g:slim < 9
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   " editorconfig - Support standard editorconfig files
-  Plug 'editorconfig/editorconfig-vim'
+  if g:slim < 5 | Plug 'editorconfig/editorconfig-vim' | endif
   " tmux - enable C-hjkl to move to across vim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
-  
+
   "
   " Coding
   "
   " polyglot
-  Plug 'sheerun/vim-polyglot'
+  if g:slim < 5 | Plug 'sheerun/vim-polyglot' | endif
   " tabular - Lining up columns
-  Plug 'godlygeek/tabular'
+  if g:slim < 5 | Plug 'godlygeek/tabular' | endif
   " fugitive - Git integration
-  Plug 'tpope/vim-fugitive'
+  if g:slim < 5 | Plug 'tpope/vim-fugitive' | endif
   " NERDTree - show git changes
   "Plug 'xuyuanp/nerdtree-git-plugin'
   " gitgutter - Git change indicator to left of window
@@ -76,9 +81,9 @@ if g:slim < 9
   " symlink - Follow symlink when opening file
   Plug 'aymericbeaumet/vim-symlink'
   " surround - Surround with brackets etc
-  Plug 'tpope/vim-surround'
+  if g:slim < 5 | Plug 'tpope/vim-surround' | endif
   " repeat - Repeat with .
-  Plug 'tpope/vim-repeat'
+  if g:slim < 5 | Plug 'tpope/vim-repeat' | endif
   " HTML
   " Plug 'mattn/emmet-vim'
   " Linting
@@ -137,7 +142,7 @@ nnoremap ; :
 if g:slim < 10
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :Files<CR>
-  if g:slim < 9
+  if g:slim < 8
     nnoremap <silent> <leader>b :BCommits<CR>
     nnoremap <silent> <leader>c :Commits<CR>
     nnoremap <silent> <leader>h :History<CR>
@@ -172,7 +177,7 @@ else
 endif
 
 " Clear whitespace
-if g:slim < 5
+if g:slim < 8
   nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
 endif
 
@@ -187,7 +192,7 @@ endif
 "
 " *** Scope : Windows ***
 "
-if g:slim < 1
+if g:slim < 6
   " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
   " Close the current buffer and move to the previous one
   nnoremap <leader>bq :<c-u>bp <bar> bd #<cr>
@@ -225,7 +230,7 @@ set termguicolors
 augroup dotme
   autocmd!
 
-  if g:slim < 5
+  if g:slim < 8
     "
     " *** Scope : Editing ***
     "
@@ -241,7 +246,7 @@ augroup dotme
     autocmd FocusGained,BufEnter * :checktime
   endif
 
-  if g:slim < 5
+  if g:slim < 6
     "
     " *** Scope : Terminal ***
     "
@@ -299,7 +304,7 @@ endif
 " *** Scope : Status Bar ***
 "
 
-if g:slim < 9
+if g:slim < 7
   "
   " Enable tab line
   let g:airline#extensions#tabline#enabled = 1
@@ -363,7 +368,7 @@ if g:slim < 10
   set bg=dark
 endif
 
-if g:slim < 6
+if g:slim < 8
   " Thanks to Damian Conway                                                         test long line
   set colorcolumn=""
   highlight ColorColumn ctermbg=magenta
@@ -385,7 +390,7 @@ set splitbelow
 " https://stackoverflow.com/questions/32769488/double-vim-surround-with
 " autocmd Filetype markdown let b:surround_43 = "**\r**"
 
-if g:slim < 5
+if g:slim < 7
   " Markdown syntax
   " Conceal some syntax - e.g. ** around bold
   set conceallevel=2
@@ -394,7 +399,10 @@ if g:slim < 5
   let g:markdown_folding = 1
   " Default large fold level start, folding everything up by default feels odd.
   set foldlevelstart=20
-  nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
+
+  if g:slim < 5
+    nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
+  endif
 endif
 
 "
@@ -403,7 +411,7 @@ endif
 " Disable python2 support
 " let g:loaded_python_provider = 0
 
-if g:slim < 5
+if g:slim < 2
   source ~/.config/vim/experimental.vimrc
 endif
 
