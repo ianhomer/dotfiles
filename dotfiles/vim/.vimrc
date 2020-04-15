@@ -7,7 +7,11 @@ let g:vim_dir = "~/.vim"
 " - 9 => core essentials
 " - 8 => very useful
 " - 5 => no fancy
-let g:slim = 9
+"
+" Slim level can be used to reduce start up times, troubleshoot interactions
+" between configurations and plugins
+"
+let g:slim = 0
 
 if has('nvim')
   let g:coc_enabled = g:slim < 5 ? 1 : 0
@@ -133,15 +137,17 @@ nnoremap ; :
 if g:slim < 10
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :Files<CR>
-elseif g:slim < 9
-  nnoremap <silent> <leader>b :BCommits<CR>
-  nnoremap <silent> <leader>c :Commits<CR>
-  nnoremap <silent> <leader>h :History<CR>
-  nnoremap <silent> <leader>m :Maps<CR>
-  nnoremap <silent> <leader>r :reg<CR>
-  nnoremap <leader>s :w<CR>
-elseif g:slim < 7
-  nnoremap <leader>n :NERDTreeToggle<CR>
+  if g:slim < 9
+    nnoremap <silent> <leader>b :BCommits<CR>
+    nnoremap <silent> <leader>c :Commits<CR>
+    nnoremap <silent> <leader>h :History<CR>
+    nnoremap <silent> <leader>m :Maps<CR>
+    nnoremap <silent> <leader>r :reg<CR>
+    nnoremap <leader>s :w<CR>
+    if g:slim < 7
+      nnoremap <leader>n :NERDTreeToggle<CR>
+    endif
+  endif
 endif
 
 " Reload vimrc, neo vimrc and coc
@@ -225,20 +231,26 @@ augroup dotme
     "
     " Do not highlight current line when in insert mode
     autocmd InsertEnter,InsertLeave * set cul!
+  endif
 
+  if g:slim < 8
     "
     " *** Scope : IO ***
     "
     " Auto reload when focus gained or buffer entered
-    au FocusGained,BufEnter * :checktime
+    autocmd FocusGained,BufEnter * :checktime
+  endif
 
+  if g:slim < 5
     "
     " *** Scope : Terminal ***
     "
     autocmd BufWinEnter,WinEnter,BufEnter *
           \ if &buftype == 'terminal' | :startinsert | endif
     " autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
+  endif
 
+  if g:slim < 8
     "
     " *** Scope : Python ***
     "
@@ -335,7 +347,7 @@ set clipboard=unnamed
 
 " source ~/.config/vim/netrw.vimrc
 
-if g:slim < 5
+if g:slim < 7
   "
   " *** Scope : NERDTree ***
   "
