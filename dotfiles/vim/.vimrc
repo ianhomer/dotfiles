@@ -1,11 +1,13 @@
 "
 " Load plugins
-"
+" vimscript cheatsheet : https://devhints.io/vimscript
 
 let g:vim_dir = "~/.vim"
+" Raise slim level to disable configs
+let g:slim = 1
 
 if has('nvim')
-  let g:dotme_coc_enabled = "y"
+  let g:coc_enabled = 1
   "
   " Store nvim plugins in isolated location
   "
@@ -65,7 +67,7 @@ Plug 'tpope/vim-repeat'
 " Plug 'preservim/nerdcommenter'
 
 " COC completion
-if exists('g:dotme_coc_enabled') && has('nvim')
+if g:coc_enabled == 1
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   let g:coc_global_extensions = [
       \ 'coc-actions',
@@ -90,6 +92,7 @@ endif
 "
 " goyo - Distraction free writing
 Plug 'junegunn/goyo.vim'
+
 " tabular - lining up text
 Plug 'godlygeek/tabular'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
@@ -124,7 +127,7 @@ nnoremap <leader>s :w<CR>
 
 " Reload vimrc, neo vimrc and coc
 if has('nvim')
-  if exists('g:dotme_coc_enabled')
+  if g:coc_enabled == 1
     nnoremap <leader>vc
       \ :source ~/.config/nvim/init.vim<CR>:CocRestart<CR>
       \ :echo "Reloaded neo init.vm"<CR>
@@ -134,7 +137,7 @@ if has('nvim')
       \ :echo "Reloaded neo init.vm"<CR>
   endif
 else
-  if exists('g:dotme_coc_enabled')
+  if g:coc_enabled == 1
     nnoremap <leader>vc
       \ :source ~/.vimrc<CR>:CocRestart<CR>:echo "Reloaded .vimrc"<CR>
   else
@@ -149,8 +152,10 @@ nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
 " *** Scope : Writing ***
 
 " Goyo distraction free writing
-nnoremap <leader>g :Goyo<CR>
-let g:goyo_width = 85
+if g:slim < 9
+  nnoremap <leader>g :Goyo<CR>
+  let g:goyo_width = 85
+endif
 
 "
 " *** Scope : Windows ***
@@ -249,7 +254,7 @@ set scrolloff=3
 " Optimise for faster terminal connections
 " set ttyfast
 
-if exists('g:dotme_coc_enabled')
+if g:coc_enabled == 1
   source ~/.config/vim/coc.vimrc
 endif
 
@@ -314,7 +319,7 @@ let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
 
 colorscheme gruvbox
 set bg=dark
-" Thanks to Damian Conway                                                         x
+" Thanks to Damian Conway                                                         test long line
 set colorcolumn=""
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%82v', 100)
