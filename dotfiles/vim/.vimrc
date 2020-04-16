@@ -162,7 +162,7 @@ endif
 
 " Toggle power slim mode
 function! PowerToggle()
-  let g:slim_session = exists('g:slim_session') ? g:slim_session > 5 ? 4 : 6 : 4
+  let g:slim_session = exists('g:slim_session') ? g:slim_session > 4 ? 4 : 5 : 4
   echo "Current slim ".g:slim." - reload config to change to ".g:slim_session
 endfunction
 nnoremap <silent> <leader>p :call PowerToggle()<CR>
