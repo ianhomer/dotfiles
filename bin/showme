@@ -25,8 +25,12 @@ def reportFish():
   print("Show fish variables\n   set | less")
   heading("omf",".")
   os.system("fish -c 'omf list'")
-  heading("bobthefish",",")
+  heading("bobthefish",".")
   print("Show colors\n   bobthefish_display_colors --all")
+
+def reportNode():
+  heading("node")
+  os.system("npm -g list --depth=0")
 
 def reportSoftwareUpdate():
   heading("Software Update")
@@ -35,6 +39,7 @@ def reportSoftwareUpdate():
 def reportAll():
   reportFish()
   reportBrew()
+  reportNode()
   reportSoftwareUpdate()
 
 parser = argparse.ArgumentParser(description="System Report")
@@ -42,7 +47,7 @@ parser.add_argument("--brew", dest="reports", const="brew",
                     help="Brew report", action='append_const')
 parser.add_argument("--fish", dest="reports", const="fish",
                     help="fish report", action='append_const')
-parser.add_argument("--help", dest="help", help="Help", action="store_true")
+#parser.add_argument("--help", dest="help", help="Help", action="store_true")
 
 def main(argv):
   heading("dotfiles System Report"," ")
