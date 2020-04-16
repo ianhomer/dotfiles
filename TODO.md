@@ -37,4 +37,5 @@
 - Coc add spelling should to just cspell.json not .vim config
 - Why CoC sometimes stopping? Doesn't always seems to start up right and I have
   to restart with leader vc
+- Perhaps start up CoC optionally when needed and shut down if not needed - TBD
 - Missing spelling, e.g. anonymised, anonymized, should be in core dictionary
