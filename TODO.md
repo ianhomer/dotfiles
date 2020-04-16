@@ -39,3 +39,9 @@
   to restart with leader vc
 - Perhaps start up CoC optionally when needed and shut down if not needed - TBD
 - Missing spelling, e.g. anonymised, anonymized, should be in core dictionary
+- Node install needs to install into node version used by default shell, e.g.
+    nvm global version in fish shell, currently install-node-packages is
+    installing from bash shell, perhaps need to set up nvm in bash shell too. I
+    prefer bin scripts to not use fish where possible.
+- Only install npm package in install-node-packages if not already installed and
+  update existing ones if updates are avilable.

@@ -1,5 +1,5 @@
-public class Foo {
-  public String bar(String a) {
-    return a;
+public class Scratch {
+  public String foo(String bar) {
+    return bar;
   }
 }

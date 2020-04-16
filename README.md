@@ -100,6 +100,29 @@ see [Cheatsheet](./CHEATSHEET.md) for my favourites.
 
 Gmail -> Settings -> Keyboard Shortcuts -> Keyboard shortcuts on
 
+## Spelling
+
+Spell checking in vi takes place with
+[coc-spell-checker](https://github.com/iamcco/coc-spell-checker) which uses
+[cspell](https://www.npmjs.com/package/cspell).
+
+The coc configuration in the vim configuration in these dotfiles explicitly adds
+the dotfiles.txt, dottech.txt and dotinbox.txt files in ~/.config/dictionaries.
+This is in addition to the [default
+dictionaries](https://github.com/iamcco/coc-spell-checker) added by the
+coc-spell-checker plugin, which includes conditional dictionaries based on file
+language, e.g. javascript, python specific spelling. This provides a default set
+of dictionaries for all local development.
+
+Project specific words are configured in the cspell.json file in the project
+root.
+
+Other dictionaries could be loaded from
+[coc-spell-dicts](https://github.com/iamcco/coc-cspell-dicts) following that
+project README, and from
+[cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts) by adding
+global package to install-node-packages script.
+
 ## Thanks
 
 Too many dotfiles projects out there that have given me inspiration to mention

@@ -1,4 +1,4 @@
-set CONFIG_LOG_LEVEL 1
+set CONFIG_LOG_LEVEL 0
 status --is-login; and set CONFIG_LOG_LEVEL 1
 
 if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
