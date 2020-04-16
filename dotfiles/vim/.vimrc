@@ -19,7 +19,8 @@ let g:vim_dir = "~/.vim"
 " between configurations and plugins. It can also be used to introduce new
 " configuration and plugins with control.
 "
-let g:slim = exists('$VIM_SLIM') ? $VIM_SLIM : 4
+let g:slim = exists('$VIM_SLIM') ? $VIM_SLIM : exists('g:slim_session') ?
+  \ g:slim_session : 6
 
 if has('nvim')
   let g:coc_enabled = g:slim < 5 ? 1 : 0
@@ -70,6 +71,7 @@ if g:slim < 7
 
   "
   " Coding
+
   "
   " polyglot
   if g:slim < 5 | Plug 'sheerun/vim-polyglot' | endif
@@ -125,7 +127,7 @@ if g:slim < 7
   " tabular - lining up text
   if g:slim < 5 | Plug 'godlygeek/tabular' | endif
   " mardown preview
-  if g:slim < 1 | Plug 'iamcco/markdown-preview.nvim', 
+  if g:slim < 1 | Plug 'iamcco/markdown-preview.nvim',
         \ { 'do': 'cd app & yarn install' } | endif
 endif
 
@@ -158,24 +160,33 @@ if g:slim < 10
   endif
 endif
 
+" Toggle power slim mode
+function! PowerToggle()
+  let g:slim_session = exists('g:slim_session') ? g:slim_session > 5 ? 4 : 6 : 4
+  echo "Current slim ".g:slim." - reload config to change to ".g:slim_session
+endfunction
+nnoremap <silent> <leader>p :call PowerToggle()<CR>
+
 " Reload vimrc, neo vimrc and coc
 if has('nvim')
   if g:coc_enabled == 1
     nnoremap <leader>vc
       \ :source ~/.config/nvim/init.vim<CR>:CocRestart<CR>
-      \ :echo "Reloaded neo init.vm"<CR>
+      \ :echo "Reloaded neo init.vm with CoC - slim = ".g:slim<CR>
   else
     nnoremap <leader>vc
       \ :source ~/.config/nvim/init.vim<CR>
-      \ :echo "Reloaded neo init.vm"<CR>
+      \ :echo "Reloaded neo init.vm - slim = ".g:slim<CR>
   endif
 else
   if g:coc_enabled == 1
     nnoremap <leader>vc
-      \ :source ~/.vimrc<CR>:CocRestart<CR>:echo "Reloaded .vimrc"<CR>
+      \ :source ~/.vimrc<CR>:CocRestart<CR>
+      \ :echo "Reloaded .vimrc - slim = ".g:slim<CR>
   else
     nnoremap <leader>vc
-      \ :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
+      \ :source ~/.vimrc<CR>
+      \ :echo "Reloaded .vimrc - slim = ".g:slim<CR>
   endif
 endif
 
