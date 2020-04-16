@@ -36,6 +36,4 @@
 - Try tmuxinator
 - Coc add spelling should to just cspell.json not .vim config
 - Why CoC stopping, why some:w
-- times line length marker not loading? Set variable
-  at end of vimrc script and health check on whether always loaded.
 - Missing spelling, e.g. anonymised, anonymized, should be in core dictionary

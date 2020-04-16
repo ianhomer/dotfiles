@@ -55,7 +55,7 @@ if g:slim < 7
 
   " NERDTree - file explore
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-  if g:slim < 5 | Plug 'ryanoasis/vim-devicons' | endif
+  Plug 'ryanoasis/vim-devicons'
   " Vinegar - better file expore than NERD
   " Plug 'tpope/vim-vinegar'
   " ack - Search files
