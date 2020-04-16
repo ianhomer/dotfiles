@@ -35,5 +35,6 @@
   :CocOpenLog, :version
 - Try tmuxinator
 - Coc add spelling should to just cspell.json not .vim config
-- Why CoC stopping, why some:w
+- Why CoC sometimes stopping? Doesn't always seems to start up right and I have
+  to restart with leader vc
 - Missing spelling, e.g. anonymised, anonymized, should be in core dictionary
