@@ -22,5 +22,7 @@ if [ ! -d ~/.vim/swaps ] ; then
   mkdir ~/.vim/swaps
 fi
 
+# Update plugins used in power mode
+export VIM_SLIM=4
 vim +PlugUpgrade +PlugUpdate +qa
 nvim +PlugUpgrade +PlugUpdate +qa
