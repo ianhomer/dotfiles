@@ -10,13 +10,17 @@
 
 npm list --global --depth=0
 
-npm install --global cspell
-npm install --global cspell-dict-lorem-ipsum
-cspell-dict-lorem-ipsum-link
-npm install --global cypress
-npm install --global git-open
-npm install --global neovim
-npm install --global npm-check-updates
-npm install --global serverless
+command -v cspell || npm install --global cspell
+command -v cspell-dict-lorem-ipsum-link ||        \
+  npm install --global cspell-dict-lorem-ipsum ;  \
+  cspell-dict-lorem-ipsum-link
+command -v cypress || npm install --global cypress
+command -v git-open || npm install --global git-open
+command -v neovim-node-host || npm install --global neovim
+command -v ncu || npm install --global npm-check-updates
+command -v serverless || npm install --global serverle
 
-echo "... Installed node packages"
+npm -g outdated
+
+echo
+echo "... Global node packages installed"
