@@ -31,12 +31,12 @@
 - try java and python code completion on all envs
 - Update spelling add word to only add to .cspell.json not also
   .vim/coc-settings.json
-- Bring coc troubleshooting practice into play :CocInfo, :checkhealth, :CocOpenLog, :version
-- Report on what's running that I may have started 
+- Bring coc troubleshooting practice into play :CocInfo, :checkhealth,
+  :CocOpenLog, :version
+- Report on what's running that I may have started
   but don't need, e.g.
   vim instances, mysqld, docker, bluetooth
 - Try tmuxinator
-- Coc add spelling should to just cspell.json not .vim config
 - Why CoC sometimes stopping? Doesn't always seems to start up right and I have
   to restart with leader vc
 - Perhaps start up CoC optionally when needed and shut down if not needed - TBD
@@ -47,4 +47,5 @@
 - Only install npm package in install-node-packages if not already installed and
   update existing ones if updates are available.
 - Raise PR for missing english words in core dictionary, anonymised. Scan for
-  other missing words
+  other missing words. Although interesting that this words is missing from other
+  lists like /usr/share/dict/words

@@ -123,7 +123,7 @@ project README, and from
 [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts) by adding
 global package to install-node-packages script.
 
-Per-project custom dictionaries can be added to the project ~/.cpsell.json,
+Per-project custom dictionaries can be added to the project ~/.cspell.json,
 e.g.
 
     "dictionaries": [
@@ -134,6 +134,12 @@ e.g.
 To trace where a word is defined:
 
     cspell trace <word>
+
+To show spelling mistakes in a file: 
+
+    cspell check test/scratch.md --color | less -r
+
+Note also that a list of words is normally installed at /usr/share/dict/words.
 
 ## Thanks
 
