@@ -93,7 +93,6 @@ if g:slim < 7
   if g:slim < 1 | Plug 'dense-analysis/ale' | endif
   " Handy mappings
   if g:slim < 1 | Plug 'tpope/vim-unimpaired' | endif
-
   " Commenter
   if g:slim < 5 | Plug 'preservim/nerdcommenter' | endif
 
@@ -123,9 +122,9 @@ if g:slim < 7
   "
   " goyo - Distraction free writing
   if g:slim < 7 | Plug 'junegunn/goyo.vim' | endif
-
   " tabular - lining up text
   if g:slim < 5 | Plug 'godlygeek/tabular' | endif
+  " mardown preview
   if g:slim < 1 | Plug 'iamcco/markdown-preview.nvim', 
         \ { 'do': 'cd app & yarn install' } | endif
 endif
