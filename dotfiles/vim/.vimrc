@@ -16,7 +16,7 @@ let g:vim_dir = "~/.vim"
 " Slim level can be used to reduce start up times, troubleshoot interactions
 " between configurations and plugins
 "
-let g:slim = 6
+let g:slim = exists('$VIM_SLIM') ? $VIM_SLIM : 6
 
 if has('nvim')
   let g:coc_enabled = g:slim < 5 ? 1 : 0
@@ -360,7 +360,7 @@ if g:slim < 7
   let NERDTreeDirArrows = 1
 endif
 
-if g:slim < 10
+if g:slim < 9
   " fzf config
   let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
 
