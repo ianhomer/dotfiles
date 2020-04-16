@@ -19,7 +19,7 @@ let g:vim_dir = "~/.vim"
 " between configurations and plugins. It can also be used to introduce new
 " configuration and plugins with control.
 "
-let g:slim = exists('$VIM_SLIM') ? $VIM_SLIM : 6
+let g:slim = exists('$VIM_SLIM') ? $VIM_SLIM : 4
 
 if has('nvim')
   let g:coc_enabled = g:slim < 5 ? 1 : 0
