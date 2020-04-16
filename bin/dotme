@@ -108,6 +108,7 @@ command_install() {
   [ $DRY -eq 0 ] && install-vim-packages
   [ $DRY -eq 0 ] && install-tmux-packages
   [ $DRY -eq 0 ] && install-node-packages
+  [ $DRY -eq 0 ] && install-jenv-versions
   [ $DRY -eq 0 ] && configure-fish
   command_clean
   echo "... dotfiles installed and AOK"
