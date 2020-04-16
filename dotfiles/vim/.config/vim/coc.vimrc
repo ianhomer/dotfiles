@@ -98,5 +98,11 @@ if has('nvim')
     \ expand("$HOME/.jenv/versions/11.0/"))
 
   autocmd CursorHold * silent call CocActionAsync('highlight')
+
+  " Use <TAB> for selections ranges.
+  " NOTE: Requires 'textDocument/selectionRange' support from the language server.
+  " coc-tsserver, coc-python are the examples of servers that support it.
+  nmap <silent> <TAB> <Plug>(coc-range-select)
+  xmap <silent> <TAB> <Plug>(coc-range-select)
 endif
 
