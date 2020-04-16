@@ -10,11 +10,14 @@ let g:vim_dir = "~/.vim"
 " - 6 => useful plugins
 " - 5 => power config
 " - 4 => power plugins
+" - 3 => trial config
+"   2 => trial plugins
 " - 1 => experimental config
 " - 0 => experimental plugins
 "
 " Slim level can be used to reduce start up times, troubleshoot interactions
-" between configurations and plugins
+" between configurations and plugins. It can also be used to introduce new
+" configuration and plugins with control.
 "
 let g:slim = exists('$VIM_SLIM') ? $VIM_SLIM : 6
 
@@ -61,7 +64,7 @@ if g:slim < 7
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   " editorconfig - Support standard editorconfig files
-  if g:slim < 5 | Plug 'editorconfig/editorconfig-vim' | endif
+  if g:slim < 3 | Plug 'editorconfig/editorconfig-vim' | endif
   " tmux - enable C-hjkl to move to across vim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
 
