@@ -92,7 +92,7 @@ if g:slim < 7
   " Plug 'tpope/vim-unimpaired'
 
   " Commenter
-  " Plug 'preservim/nerdcommenter'
+  if g:slim < 5 | Plug 'preservim/nerdcommenter' | endif
 
   " COC completion
   if g:coc_enabled == 1
@@ -119,7 +119,7 @@ if g:slim < 7
   " Writing
   "
   " goyo - Distraction free writing
-  if g:slim < 5 | Plug 'junegunn/goyo.vim' | endif
+  if g:slim < 7 | Plug 'junegunn/goyo.vim' | endif
 
   " tabular - lining up text
   if g:slim < 5 | Plug 'godlygeek/tabular' | endif
@@ -184,7 +184,7 @@ endif
 " *** Scope : Writing ***
 
 " Goyo distraction free writing
-if g:slim < 5
+if g:slim < 7
   nnoremap <leader>g :Goyo<CR>
   let g:goyo_width = 85
 endif
@@ -219,8 +219,11 @@ set incsearch
 set updatetime=300
 " Always show sign column to stop flip-flopping
 set signcolumn=yes
-" Support true color
-set termguicolors
+if has("nvim")
+  " Support true color in nvim only, this feature causes colours to not render
+  " in vim in tmux
+  set termguicolors
+endif
 
 "
 " Group all autocmds together to improve reloadability (reloads of vimrc
