@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+#
+# Build and install cheats
+#
+
+# Prepare navi cheats route
+DATA_DIR=~/Library/ApplicationSupport
+NAVI_DATA_DIR="${DATA_DIR}/navi"
+[[ -d ${NAVI_DATA_DIR} ]] || mkdir "${NAVI_DATA_DIR}"
+NAVI_CHEATS_DIR="${DATA_DIR}/navi/cheats"
+[[ -d ${NAVI_CHEATS_DIR} ]] || mkdir "${NAVI_CHEATS_DIR}"
+
+OUT_DIR="${NAVI_CHEATS_DIR}/ianhomer__dotfiles"
+[[ -d ${OUT_DIR} ]] || mkdir "${OUT_DIR}"
+
+# Loop through cheats
+for cheat in ~/.dotfiles/docs/cheats/* ; do
+  filename=$(basename $cheat)
+  name=${filename%.*}
+  outfile="${OUT_DIR}/${name}.cheat"
+
+  if [[ ${outfile} -ot ${cheat} ]] ; then
+    pandoc -t src/pandoc/navi.lua -o ${outfile} $cheat
+    echo "Generated navi cheat for $name"
+  fi
+done

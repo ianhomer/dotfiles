@@ -21,7 +21,6 @@
 - Deploy dotfiles in docker to test fresh install on other OS
 - Try coc-eslint, coc-flow (typescript)
 - Set default directory for tmux window so new panes start in given directory
-- alfred config in dotfiles
 - experiment with markdown linting more, doesn't seem to lint list line wrapping
   well. `gq` shortcut ends up putting line wrap in a new list item. Can `:Format`
   be improved to just sort this out?
@@ -29,3 +28,24 @@
   `ls /Library/LaunchAgents`,`ls /Library/LaunchDaemons`. Look at errors in start
   up logs to report which are zombies
 - network speed monitoring, e.g. `npm install --global fast-cli`
+- try java and python code completion on all envs
+- Update spelling add word to only add to .cspell.json not also
+  .vim/coc-settings.json
+- Bring coc troubleshooting practice into play :CocInfo, :checkhealth,
+  :CocOpenLog, :version
+- Report on what's running that I may have started
+  but don't need, e.g.
+  vim instances, mysqld, docker, bluetooth
+- Try tmuxinator
+- Why CoC sometimes stopping? Doesn't always seems to start up right and I have
+  to restart with leader vc
+- Perhaps start up CoC optionally when needed and shut down if not needed - TBD
+- Node install needs to install into node version used by default shell, e.g.
+    nvm global version in fish shell, currently install-node-packages is
+    installing from bash shell, perhaps need to set up nvm in bash shell too. I
+    prefer bin scripts to not use fish where possible.
+- Only install npm package in install-node-packages if not already installed and
+  update existing ones if updates are available.
+- Raise PR for missing english words in core dictionary, anonymised. Scan for
+  other missing words. Although interesting that this words is missing from other
+  lists like /usr/share/dict/words

@@ -8,14 +8,16 @@ else
   alias vi="nvim"
 
   # git
-  alias master="git checkout master"
+  alias master="git checkout master && git pull"
   alias push="git push"
   alias pull="git pull"
   alias g="git"
   alias git-commit-am="git commit -am"
   alias gs="git status"
+  alias gsv="git status -v"
   alias gits="git status"
   alias gd="git diff"
+  alias gdc="git diff --cached"
   alias git-diff="git diff"
   alias git-diff-head~="git diff HEAD~"
   alias gd~="git diff HEAD~"
@@ -35,6 +37,6 @@ else
   alias findmd="find . -type f -name '*.md' -not -path '*/node_modules/*' | sort"
   # cat markdown files with a space between each
   alias catmd="findmd | xargs awk '(NR>1 && FNR==1){printf (\"\n\")};1'"
-  [ {$CONFIG_LOG_LEVEL} -gt 0 ] ;and \
+  [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
     echo "... Loaded ~/.config/fish/aliases.fish"
 end

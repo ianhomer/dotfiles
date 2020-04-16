@@ -1,102 +1,133 @@
 "
 " Load plugins
-"
+" vimscript cheatsheet : https://devhints.io/vimscript
 
 let g:vim_dir = "~/.vim"
+" Raise slim level to disable configs
+" - 9 => core config
+" - 8 => core plugins
+" - 7 => useful config
+" - 6 => useful plugins
+" - 5 => power config
+" - 4 => power plugins
+" - 3 => trial config
+"   2 => trial plugins
+" - 1 => experimental config
+" - 0 => experimental plugins
+"
+" Slim level can be used to reduce start up times, troubleshoot interactions
+" between configurations and plugins. It can also be used to introduce new
+" configuration and plugins with control.
+"
+let g:slim = exists('$VIM_SLIM') ? $VIM_SLIM : 4
 
 if has('nvim')
+  let g:coc_enabled = g:slim < 5 ? 1 : 0
   "
   " Store nvim plugins in isolated location
   "
   let g:vim_dir = "~/.config/nvim"
+else
+  let g:coc_enabled = 0
 endif
 
 call plug#begin(g:vim_dir."/plugged")
 
-"
-" Window and file navigation
-"
-
-" NERDTree - file explore
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'ryanoasis/vim-devicons'
-" Vinegar - better file expore than NERD
-" Plug 'tpope/vim-vinegar'
-" fzf - Fuzzy Finder
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-" ack - Search files
-Plug 'mileszs/ack.vim'
-" Airline - status bar
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" editorconfig - Support standard editorconfig files
-Plug 'editorconfig/editorconfig-vim'
-" tmux - enable C-hjkl to move to across vim and tmux panes
-Plug 'christoomey/vim-tmux-navigator'
-"
-" Coding
-"
-" polyglot
-Plug 'sheerun/vim-polyglot'
-" tabular - Lining up columns
-Plug 'godlygeek/tabular'
-" fugitive - Git integration
-Plug 'tpope/vim-fugitive'
-" NERDTree - show git changes
-"Plug 'xuyuanp/nerdtree-git-plugin'
-" gitgutter - Git change indicator to left of window
-"Plug 'airblade/vim-gitgutter'
-" symlink - Follow symlink when opening file
-Plug 'aymericbeaumet/vim-symlink'
-" surround - Surround with brackets etc
-" Plug 'tpope/vim-surround'
-" repeat - Repeat with .
-" Plug 'tpope/vim-repeat'
-" HTML
-" Plug 'mattn/emmet-vim'
-" Linting
-" Plug 'dense-analysis/ale'
-" Handy mappings
-" Plug 'tpope/vim-unimpaired'
-
-" Commenter
-" Plug 'preservim/nerdcommenter'
-
-" COC completion
-if has('nvim')
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  let g:coc_global_extensions = [
-      \ 'coc-actions',
-      \ 'coc-css',
-      \ 'coc-emmet',
-      \ 'coc-markdownlint',
-      \ 'coc-highlight',
-      \ 'coc-html',
-      \ 'coc-java',
-      \ 'coc-json',
-      \ 'coc-prettier',
-      \ 'coc-python',
-      \ 'coc-spell-checker',
-      \ 'coc-tsserver',
-      \ 'coc-yaml',
-      \ 'coc-xml'
-      \ ]
+if g:slim < 9
+  "
+  " Core essentials
+  "
+  " fzf - Fuzzy Finder
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
+  "
+  " Style
+  "
+  " gruvbox - styling
+  Plug 'morhetz/gruvbox'
 endif
 
-"
-" Writing
-"
-" goyo - Distraction free writing
-Plug 'junegunn/goyo.vim'
-" tabular - lining up text
-Plug 'godlygeek/tabular'
-" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-"
-" Style
-"
-" gruvbox - styling
-Plug 'morhetz/gruvbox'
+if g:slim < 7
+
+  "
+  " Window and file management
+  "
+
+  " NERDTree - file explore
+  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  Plug 'ryanoasis/vim-devicons'
+  " Vinegar - better file expore than NERD
+  " Plug 'tpope/vim-vinegar'
+  " ack - Search files
+  Plug 'mileszs/ack.vim'
+  " Airline - status bar
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  " editorconfig - Support standard editorconfig files
+  if g:slim < 3 | Plug 'editorconfig/editorconfig-vim' | endif
+  " tmux - enable C-hjkl to move to across vim and tmux panes
+  Plug 'christoomey/vim-tmux-navigator'
+
+  "
+  " Coding
+  "
+  " polyglot
+  if g:slim < 5 | Plug 'sheerun/vim-polyglot' | endif
+  " tabular - Lining up columns
+  if g:slim < 5 | Plug 'godlygeek/tabular' | endif
+  " fugitive - Git integration
+  if g:slim < 5 | Plug 'tpope/vim-fugitive' | endif
+  " NERDTree - show git changes
+  "Plug 'xuyuanp/nerdtree-git-plugin'
+  " gitgutter - Git change indicator to left of window
+  "Plug 'airblade/vim-gitgutter'
+  " symlink - Follow symlink when opening file
+  Plug 'aymericbeaumet/vim-symlink'
+  " surround - Surround with brackets etc
+  if g:slim < 5 | Plug 'tpope/vim-surround' | endif
+  " repeat - Repeat with .
+  if g:slim < 5 | Plug 'tpope/vim-repeat' | endif
+  " HTML
+  " Plug 'mattn/emmet-vim'
+  " Linting
+  " Plug 'dense-analysis/ale'
+  " Handy mappings
+  " Plug 'tpope/vim-unimpaired'
+
+  " Commenter
+  if g:slim < 5 | Plug 'preservim/nerdcommenter' | endif
+
+  " COC completion
+  if g:coc_enabled == 1
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    let g:coc_global_extensions = [
+        \ 'coc-actions',
+        \ 'coc-css',
+        \ 'coc-emmet',
+        \ 'coc-markdownlint',
+        \ 'coc-highlight',
+        \ 'coc-html',
+        \ 'coc-java',
+        \ 'coc-json',
+        \ 'coc-prettier',
+        \ 'coc-python',
+        \ 'coc-spell-checker',
+        \ 'coc-tsserver',
+        \ 'coc-yaml',
+        \ 'coc-xml'
+        \ ]
+  endif
+
+  "
+  " Writing
+  "
+  " goyo - Distraction free writing
+  if g:slim < 7 | Plug 'junegunn/goyo.vim' | endif
+
+  " tabular - lining up text
+  if g:slim < 5 | Plug 'godlygeek/tabular' | endif
+  " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+endif
 
 call plug#end()
 
@@ -111,47 +142,69 @@ let mapleader = "\<Space>"
 nnoremap ; :
 
 " My shortcuts
-nnoremap <silent> <leader><space> :Buffers<CR>
-nnoremap <silent> <leader>f :Files<CR>
-nnoremap <silent> <leader>b :BCommits<CR>
-nnoremap <silent> <leader>c :Commits<CR>
-nnoremap <silent> <leader>h :History<CR>
-nnoremap <silent> <leader>m :Maps<CR>
-nnoremap <silent> <leader>r :reg<CR>
-nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>s :w<CR>
+if g:slim < 10
+  nnoremap <silent> <leader><space> :Buffers<CR>
+  nnoremap <silent> <leader>f :Files<CR>
+  if g:slim < 8
+    nnoremap <silent> <leader>b :BCommits<CR>
+    nnoremap <silent> <leader>c :Commits<CR>
+    nnoremap <silent> <leader>h :History<CR>
+    nnoremap <silent> <leader>m :Maps<CR>
+    nnoremap <silent> <leader>r :reg<CR>
+    nnoremap <leader>s :w<CR>
+    if g:slim < 7
+      nnoremap <leader>n :NERDTreeToggle<CR>
+    endif
+  endif
+endif
 
-" Reload vimrc or neo vimrc
+" Reload vimrc, neo vimrc and coc
 if has('nvim')
-  nnoremap <leader>vc
-    \ :source ~/.config/nvim/init.vim<CR>:CocRestart<CR>
-    \ :echo "Reloaded neo init.vm"<CR>
+  if g:coc_enabled == 1
+    nnoremap <leader>vc
+      \ :source ~/.config/nvim/init.vim<CR>:CocRestart<CR>
+      \ :echo "Reloaded neo init.vm"<CR>
+  else
+    nnoremap <leader>vc
+      \ :source ~/.config/nvim/init.vim<CR>
+      \ :echo "Reloaded neo init.vm"<CR>
+  endif
 else
-  nnoremap <leader>vc
-    \ :source ~/.vimrc<CR>:CocRestart<CR>:echo "Reloaded .vimrc"<CR>
+  if g:coc_enabled == 1
+    nnoremap <leader>vc
+      \ :source ~/.vimrc<CR>:CocRestart<CR>:echo "Reloaded .vimrc"<CR>
+  else
+    nnoremap <leader>vc
+      \ :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
+  endif
 endif
 
 " Clear whitespace
-nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
+if g:slim < 8
+  nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
+endif
 
 " *** Scope : Writing ***
 
 " Goyo distraction free writing
-nnoremap <leader>g :Goyo<CR>
-let g:goyo_width = 85
+if g:slim < 7
+  nnoremap <leader>g :Goyo<CR>
+  let g:goyo_width = 85
+endif
 
 "
 " *** Scope : Windows ***
 "
-
-" Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
-" Close the current buffer and move to the previous one
-nnoremap <leader>bq :<c-u>bp <bar> bd #<cr>
-" Show all open buffers and their status
-nnoremap <leader>bl :ls<cr>
-" Thanks - https://www.rockyourcode.com/vim-close-all-other-buffers/
-" Close all buffers except the current one
-nnoremap <leader>bd :<c-u>up <bar> %bd <bar> e#<cr>
+if g:slim < 6
+  " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
+  " Close the current buffer and move to the previous one
+  nnoremap <leader>bq :<c-u>bp <bar> bd #<cr>
+  " Show all open buffers and their status
+  nnoremap <leader>bl :ls<cr>
+  " Thanks - https://www.rockyourcode.com/vim-close-all-other-buffers/
+  " Close all buffers except the current one
+  nnoremap <leader>bd :<c-u>up <bar> %bd <bar> e#<cr>
+endif
 
 " Enable mouse support
 set mouse=a
@@ -169,8 +222,11 @@ set incsearch
 set updatetime=300
 " Always show sign column to stop flip-flopping
 set signcolumn=yes
-" Support true color
-set termguicolors
+if has("nvim")
+  " Support true color in nvim only, this feature causes colours to not render
+  " in vim in tmux
+  set termguicolors
+endif
 
 "
 " Group all autocmds together to improve reloadability (reloads of vimrc
@@ -179,32 +235,40 @@ set termguicolors
 "
 augroup dotme
   autocmd!
-  "
-  " *** Scope : Editing ***
-  "
-  " Do not highlight current line when in insert mode
-  autocmd InsertEnter,InsertLeave * set cul!
 
-  "
-  " *** Scope : IO ***
-  "
-  " Auto reload when focus gained or buffer entered
-  au FocusGained,BufEnter * :checktime
+  if g:slim < 8
+    "
+    " *** Scope : Editing ***
+    "
+    " Do not highlight current line when in insert mode
+    autocmd InsertEnter,InsertLeave * set cul!
+  endif
 
-  "
-  " *** Scope : Terminal ***
-  "
-  autocmd BufWinEnter,WinEnter,BufEnter *
-        \ if &buftype == 'terminal' | :startinsert | endif
-  " autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
+  if g:slim < 8
+    "
+    " *** Scope : IO ***
+    "
+    " Auto reload when focus gained or buffer entered
+    autocmd FocusGained,BufEnter * :checktime
+  endif
 
-  "
-  " *** Scope : Python ***
-  "
+  if g:slim < 6
+    "
+    " *** Scope : Terminal ***
+    "
+    autocmd BufWinEnter,WinEnter,BufEnter *
+          \ if &buftype == 'terminal' | :startinsert | endif
+    " autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
+  endif
 
-  " Override shiftwidth for python
-  autocmd Filetype python set shiftwidth=2
+  if g:slim < 8
+    "
+    " *** Scope : Python ***
+    "
 
+    " Override shiftwidth for python
+    autocmd Filetype python set shiftwidth=2
+  endif
 augroup end
 
 
@@ -238,110 +302,21 @@ set scrolloff=3
 " Optimise for faster terminal connections
 " set ttyfast
 
-if has('nvim')
-  "
-  " *** Scope : COC ***
-  "
-  " Use tab for trigger completion with characters ahead and navigate.
-  " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-  " other plugin before putting this into your config.
-  inoremap <silent><expr> <TAB>
-        \ pumvisible() ? "\<C-n>" :
-        \ <SID>check_back_space() ? "\<TAB>" :
-        \ coc#refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-  function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-  endfunction
-
-  " Use <c-space> to trigger completion.
-  inoremap <silent><expr> <c-space> coc#refresh()
-
-  " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-  " position. Coc only does snippet and additional edit on confirm.
-  if has('patch8.1.1068')
-    " Use `complete_info` if your (Neo)Vim version supports it.
-    inoremap <expr> <cr>
-    \ complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-  else
-    imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-  endif
-
-  " Use `[g` and `]g` to navigate diagnostics
-  nmap <silent> [g <Plug>(coc-diagnostic-prev)
-  nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-  " GoTo code navigation.
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
-  nmap <silent> gr <Plug>(coc-references)
-
-  " Use K to show documentation in preview window.
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-  function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-      execute 'h '.expand('<cword>')
-    else
-      call CocAction('doHover')
-    endif
-  endfunction
-
-  " Highlight the symbol and its references when holding the cursor.
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-
-  " Symbol renaming.
-  nmap <leader>rn <Plug>(coc-rename)
-
-  " Show all diagnostics
-  nnoremap <silent> <leader>d  :<C-u>CocList diagnostics<CR>
-
-  " Add `:Format` command to format current buffer.
-  command! -nargs=0 Format :call CocAction('format')
-
-  " Add `:Fold` command to fold current buffer.
-  command! -nargs=? Fold :call CocAction('fold', <f-args>)
-
-  " Add `:OR` command for organize imports of the current buffer.
-  command! -nargs=0 OR :call
-    \ CocAction('runCommand', 'editor.action.organizeImport')
-
-  " Remap for do codeAction of selected region
-  function! s:cocActionsOpenFromSelected(type) abort
-    execute 'CocCommand actions.open ' . a:type
-  endfunction
-  xmap <silent> <leader>a
-    \ :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-  nmap <silent> <leader>a
-    \ :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
-
-  " dotfiles dictionaries for cSpell
-  call coc#config('cSpell.dictionaryDefinitions', [
-    \ { "name" : "dotfiles",
-    \   "path": expand("$HOME/.config/dictionaries/dotfiles.txt") },
-    \ { "name" : "dottech",
-    \   "path": expand("$HOME/.config/dictionaries/dottech.txt") }
-    \])
-
-  " set java home for coc-java
-  call coc#config('java.home',
-    \ expand("$HOME/.jenv/versions/11.0/"))
-
-  autocmd CursorHold * silent call CocActionAsync('highlight')
+if g:coc_enabled == 1
+  source ~/.config/vim/coc.vimrc
 endif
 
 "
 " *** Scope : Status Bar ***
 "
 
-"
-" Enable tab line
-let g:airline#extensions#tabline#enabled = 1
-" Enable powerfonts giving angled tables
-let g:airline_powerline_fonts = 1
+if g:slim < 7
+  "
+  " Enable tab line
+  let g:airline#extensions#tabline#enabled = 1
+  " Enable powerfonts giving angled tables
+  let g:airline_powerline_fonts = 1
+endif
 
 " Backspace support
 set backspace=indent,eol,start
@@ -381,47 +356,36 @@ set formatoptions=jrql
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
-"
-" *** Scope : netrw ***
-"
-" let g:netrw_liststyle = 3
-" let g:netrw_keepdir=0
-" When netrw pane hides then close it
-" Thanks - https://github.com/tpope/vim-vinegar/issues/13
-" autocmd FileType netrw setl bufhidden=wipe
-" let g:netrw_fastbrowse = 0
+" source ~/.config/vim/netrw.vimrc
 
-"
-" *** Scope : NERDTree ***
-"
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
+if g:slim < 7
+  "
+  " *** Scope : NERDTree ***
+  "
+  let NERDTreeMinimalUI = 1
+  let NERDTreeDirArrows = 1
+endif
 
-" fzf config
-let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
+if g:slim < 9
+  " fzf config
+  let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
 
-colorscheme gruvbox
-set bg=dark
-" Thanks to Damian Conway
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%82v', 100)
+  colorscheme gruvbox
+  set bg=dark
+endif
+
+if g:slim < 8
+  " Thanks to Damian Conway                                                         test long line
+  set colorcolumn=""
+  highlight ColorColumn ctermbg=magenta
+  call matchadd('ColorColumn', '\%82v', 100)
+endif
 
 " Open new splits to the right and below
 set splitright
 set splitbelow
 
-"
-" *** Scope : Terminal ***
-"
-
-function! OpenTerminal()
-  split
-  term
-  resize 10
-endfunction
-nnoremap <silent> <leader>t :call OpenTerminal()<CR>
-" Map escape in terminal mode to enter normal mode
-tnoremap <Esc> <C-\><C-n>
+"source ~/.config/vim/terminal.vimrc
 
 "
 " *** Scope : Markdown ***
@@ -432,22 +396,28 @@ tnoremap <Esc> <C-\><C-n>
 " https://stackoverflow.com/questions/32769488/double-vim-surround-with
 " autocmd Filetype markdown let b:surround_43 = "**\r**"
 
-" Markdown syntax
-" Conceal some syntax - e.g. ** around bold
-set conceallevel=2
-" Enable folding
-let g:markdown_folding = 1
-" Default large fold level start, folding everything up by default feels odd.
-set foldlevelstart=20
-nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
+if g:slim < 7
+  " Markdown syntax
+  " Conceal some syntax - e.g. ** around bold
+  set conceallevel=2
 
+  " Enable folding
+  let g:markdown_folding = 1
+  " Default large fold level start, folding everything up by default feels odd.
+  set foldlevelstart=20
 
-" *** Scope : Experimental ***
+  if g:slim < 5
+    nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
+  endif
+endif
+
 "
+" *** Scope : Python ***
+"
+" Disable python2 support
+" let g:loaded_python_provider = 0
 
-" Placeholder for experimental output
-function! ShowDebug()
-  echo "col=".string(getpos('.')[2]).";pos="
-    \ .string(getpos('.')).";line-length=".strlen(getline("."))
-endfunction
-nnoremap <silent> <leader>] :call ShowDebug()<CR>
+if g:slim < 2
+  source ~/.config/vim/experimental.vimrc
+endif
+

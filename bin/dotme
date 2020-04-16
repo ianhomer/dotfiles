@@ -51,9 +51,9 @@ restore() {
 }
 
 docfiles() {
-  DOCS="bin/dotme README CHEATSHEET TODO"
+  DOCS="bin/dotme.md README.md docs/cheats/* CHEATSHEET.md TODO.md"
   for doc in $DOCS ; do
-    cat ~/.dotfiles/${doc}.md
+    cat ~/.dotfiles/${doc}
     # Empty line between markdown files so that first title not lost
     echo
   done
@@ -100,13 +100,16 @@ command_install() {
   [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
   command_pull
   command_packages
-  [ $DRY -eq 0 ] && is-macos && setup-osx
+  command_stow
+  [ $DRY -eq 0 ] && is-macos && configure-osx-defaults
   [ $DRY -eq 0 ] && install-omf-packages
   [ $DRY -eq 0 ] && install-pip-packages
+  [ $DRY -eq 0 ] && install-gem-packages
   [ $DRY -eq 0 ] && install-vim-packages
   [ $DRY -eq 0 ] && install-tmux-packages
   [ $DRY -eq 0 ] && install-node-packages
-  command_stow
+  [ $DRY -eq 0 ] && install-jenv-versions
+  [ $DRY -eq 0 ] && configure-fish
   command_clean
   echo "... dotfiles installed and AOK"
 }
@@ -204,7 +207,7 @@ command_set() {
       if grep -q "$name=" $envFile ; then
         echo $envFile
         grep "$name=" $envFile
-      else 
+      else
         echo "... $name not set"
       fi
     else
@@ -216,7 +219,7 @@ command_set() {
   mkdir -p ~/.config/dotme
   touch $envFile
   if grep -q "$name=" $envFile ; then
-    sed -i.bak "s/$name=.*/$name=$value/g" $envFile 
+    sed -i.bak "s/$name=.*/$name=$value/g" $envFile
   else
     echo "$name=$value" >> $envFile
   fi
