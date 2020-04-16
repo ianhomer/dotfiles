@@ -60,7 +60,7 @@ def main(argv):
     if not os.path.exists(DOJO_DIRECTORY):
       if not os.path.exists(PROJECTS_DIRECTORY):
         # Require projects directry to be previously created as safety guard
-        print(f"PLease create {PROJECTS_DIRECTORY}")
+        print(f"Please create {PROJECTS_DIRECTORY}")
       print(f"Creating dojo directory {DOJO_DIRECTORY}")
       os.mkdir(DOJO_DIRECTORY)
     print(f"Creating kata directory {kataDirectory}")
