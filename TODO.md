@@ -40,11 +40,11 @@
 - Why CoC sometimes stopping? Doesn't always seems to start up right and I have
   to restart with leader vc
 - Perhaps start up CoC optionally when needed and shut down if not needed - TBD
-- Missing spelling, e.g. anonymised, anonymized, ould be in core dictionary.
-    How do I test what is in the core dictionaries.
 - Node install needs to install into node version used by default shell, e.g.
     nvm global version in fish shell, currently install-node-packages is
     installing from bash shell, perhaps need to set up nvm in bash shell too. I
     prefer bin scripts to not use fish where possible.
 - Only install npm package in install-node-packages if not already installed and
-  update existing ones if updates are avilable.
+  update existing ones if updates are available.
+- Raise PR for missing english words in core dictionary, anonymised. Scan for
+  other missing words
