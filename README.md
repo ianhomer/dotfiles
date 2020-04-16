@@ -49,6 +49,9 @@ working to streamline distraction free coding. This includes:
 [magnet](https://magnet.crowdcafe.com/)**
 : MacOS+ with better hotkeys, focused status bar and window manager
 
+Other tools woven into these dotfiles are **fzf**, **cspell**, **node**,
+**java** and **python**.
+
 ## How
 
 Various dotfiles are all located in sub-folders in the dotfiles/ folder for
