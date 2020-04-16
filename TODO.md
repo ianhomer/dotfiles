@@ -46,6 +46,5 @@
     nvm global version in fish shell, currently install-node-packages is
     installing from bash shell, perhaps need to set up nvm in bash shell too. I
     prefer bin scripts to not use fish where possible.
-- Add central lorem-ipsum dictionary to spell checking 
 - Only install npm package in install-node-packages if not already installed and
   update existing ones if updates are avilable.

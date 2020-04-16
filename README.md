@@ -123,6 +123,14 @@ project README, and from
 [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts) by adding
 global package to install-node-packages script.
 
+Per-project custom dictionaries can be added to the project ~/.cpsell.json,
+e.g.
+
+    "dictionaries": [
+      "lorem-ipsum"
+    ],
+
+
 To trace where a word is defined:
 
     cspell trace <word>
