@@ -8,6 +8,7 @@ else
   echo "WARN : Cannot load broot alias"
 end
 
+time-me "AFTER broot"
 
 if not status --is-login
   function fish_greeting
@@ -33,35 +34,6 @@ function git-reset-ssh-key
   ssh-add -l
 end
 
-function git-set-alternative-url
-  if set -q argv[1]
-    set name $argv[1]
-  else
-    set name "personal"
-  end
-
-  set currentRemoteUrl (git config --get remote.origin.url)
-  echo "... current remote URL = $currentRemoteUrl"
-  switch $currentRemoteUrl
-  case "*github.com*"
-    set host "github.com"
-  case "*bitbucket.org*"
-    set host "bitbucket.org"
-  case "*"
-    echo "Host for current remote URL not recognised"
-    exit 1
-  end
-  set alternativeRemoteUrl (string replace "$host:" "$host-$name:" $currentRemoteUrl)
-
-  echo "... alternative remote URL $alternativeRemoteUrl"
-  if [ $currentRemoteUrl != $alternativeRemoteUrl ]
-    git remote set-url origin $alternativeRemoteUrl
-    echo "Changed repository remote URL to " (git config --get remote.origin.url)
-  else
-    echo "Current repository already is using a alternative URL"
-  end
-end
-
 function git-commit-and-push
   git commit -am "$argv"
   git push
@@ -72,71 +44,6 @@ function fish_user_key_bindings
   bind \cb backward-word
 end
 
-#
-# jenv support
-#
-function export
-  set arr (echo $argv|tr = \n)
-  set -gx $arr[1] $arr[2]
-end
-
-if status --is-login
-  set PATH $HOME/.jenv/shims $PATH
-end
-
-command jenv rehash 2>/dev/null
-function jenv
-  set cmd $argv[1]
-  set arg ""
-  if test (count $argv) -gt 1
-    # Great... fish first array index is ... 1 !
-    set arg $argv[2..-1]
-  end
-
-  switch "$cmd"
-    case enable-plugin rehash shell shell-options
-        set script (jenv "sh-$cmd" "$arg")
-        eval $script
-    case '*'
-        command jenv $cmd $arg
-    end
-end
-
-#
-# Load environment variables from a .env file
-#
-function dotenv
-  set envFile (upfind .env)
-
-  if test -z "$envFile"
-    echo "WARN : No env file found"
-    return 1
-  end
-  echo ".env file loaded : $envFile"
-
-  for i in (cat $envFile)
-    set arr (echo $i |tr = \n)
-    set -gx $arr[1] $arr[2]
-  end
-end
-
-function docme
-  if set -q argv[1]
-    set fileName $argv[1]
-    set autoOpen 0
-  else
-    set fileName $TMPDIR/docme.pdf
-    echo "PDF : $fileName"
-    set autoOpen 1
-  end
-
-  catmd | pandoc -s -d ~/.pandoc/pandoc -o $fileName
-  if test $autoOpen -eq 1
-    open $fileName
-  end
-end
-
-if status --is-login
+[ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
   echo "... Loaded ~/.config/fish/functions.fish"
-end
 

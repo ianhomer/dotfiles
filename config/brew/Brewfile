@@ -1,4 +1,5 @@
 tap "homebrew/cask-fonts"
+tap "AdoptOpenJDK/openjdk"
 
 #
 # The awesome Hack Nerd fonts combining the Hack source code font
@@ -10,6 +11,7 @@ cask "font-firacode-nerd-font"
 #
 # core tools
 #
+# - coreutils - gnu core utilities
 # - fd - alternative to find
 # - fish - friendly interactive shell
 # - mas - mac app store command line
@@ -19,6 +21,7 @@ cask "font-firacode-nerd-font"
 
 brew "ack"
 brew "broot"
+brew "coreutils"
 brew "dos2unix"
 brew "fasd"
 brew "fd"
@@ -27,6 +30,7 @@ brew "fish"
 brew "gnupg"
 brew "lastpass-cli"
 brew "mas"
+brew "navi"
 brew "neovim"
 brew "nmap"
 brew "speedtest-cli"
@@ -38,6 +42,7 @@ brew "vim"
 
 cask "iterm2"
 cask "kitty"
+
 
 #
 # supporting tools
@@ -65,9 +70,10 @@ cask "evernote"
 # * pandoc + basictex => doc conversion, e.g. markdown to PDF
 #
 brew "pandoc"
-brew "pandoc-citeproc"
-
-cask "basictex"
+# pandoc-citeproc,basictex disabled for now since password prompt appearing
+# after this in brew install, need to troubleshoot why.
+#brew "pandoc-citeproc"
+#cask "basictex"
 cask "drawio"
 
 #
