@@ -57,7 +57,7 @@ if g:slim < 7
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
   Plug 'ryanoasis/vim-devicons'
   " Vinegar - better file expore than NERD
-  " Plug 'tpope/vim-vinegar'
+  if g:slim < 1 | Plug 'tpope/vim-vinegar' | endif
   " ack - Search files
   Plug 'mileszs/ack.vim'
   " Airline - status bar
@@ -78,9 +78,9 @@ if g:slim < 7
   " fugitive - Git integration
   if g:slim < 5 | Plug 'tpope/vim-fugitive' | endif
   " NERDTree - show git changes
-  "Plug 'xuyuanp/nerdtree-git-plugin'
+  if g:slim < 1 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
   " gitgutter - Git change indicator to left of window
-  "Plug 'airblade/vim-gitgutter'
+  if g:slim < 1 | Plug 'airblade/vim-gitgutter' | endif
   " symlink - Follow symlink when opening file
   Plug 'aymericbeaumet/vim-symlink'
   " surround - Surround with brackets etc
@@ -88,11 +88,11 @@ if g:slim < 7
   " repeat - Repeat with .
   if g:slim < 5 | Plug 'tpope/vim-repeat' | endif
   " HTML
-  " Plug 'mattn/emmet-vim'
+  if g:slim < 1 | Plug 'mattn/emmet-vim' | endif
   " Linting
-  " Plug 'dense-analysis/ale'
+  if g:slim < 1 | Plug 'dense-analysis/ale' | endif
   " Handy mappings
-  " Plug 'tpope/vim-unimpaired'
+  if g:slim < 1 | Plug 'tpope/vim-unimpaired' | endif
 
   " Commenter
   if g:slim < 5 | Plug 'preservim/nerdcommenter' | endif
@@ -126,7 +126,8 @@ if g:slim < 7
 
   " tabular - lining up text
   if g:slim < 5 | Plug 'godlygeek/tabular' | endif
-  " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+  if g:slim < 1 | Plug 'iamcco/markdown-preview.nvim', 
+        \ { 'do': 'cd app & yarn install' } | endif
 endif
 
 call plug#end()
