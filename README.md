@@ -123,6 +123,10 @@ project README, and from
 [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts) by adding
 global package to install-node-packages script.
 
+To trace where a word is defined:
+
+    cspell trace <word>
+
 ## Thanks
 
 Too many dotfiles projects out there that have given me inspiration to mention
