@@ -31,8 +31,10 @@
 - try java and python code completion on all envs
 - Update spelling add word to only add to .cspell.json not also
   .vim/coc-settings.json
-- Bring coc troubleshooting practice into play :CocInfo, :checkhealth
-  :CocOpenLog, :version
+- Bring coc troubleshooting practice into play :CocInfo, :checkhealth, :CocOpenLog, :version
+- Report on what's running that I may have started 
+  but don't need, e.g.
+  vim instances, mysqld, docker, bluetooth
 - Try tmuxinator
 - Coc add spelling should to just cspell.json not .vim config
 - Why CoC sometimes stopping? Doesn't always seems to start up right and I have
