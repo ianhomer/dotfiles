@@ -61,7 +61,7 @@ installation and configuration takes place with scripts in the bin/ directory,
 however just look at bin/dotme to see what actually happens.
 
 You can also update parts of the initialisation separately, see `dotme -h` to
-get a list of each part.
+get a list of each part. `man dotme` will give you more guidance on usage.
 
 ## Manual Configuration
 
