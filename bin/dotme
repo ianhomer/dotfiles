@@ -101,15 +101,15 @@ command_install() {
   command_pull
   command_packages
   command_stow
-  [ $DRY -eq 0 ] && is-macos && configure-osx-defaults
-  [ $DRY -eq 0 ] && install-omf-packages
-  [ $DRY -eq 0 ] && install-pip-packages
-  [ $DRY -eq 0 ] && install-gem-packages
-  [ $DRY -eq 0 ] && install-vim-packages
-  [ $DRY -eq 0 ] && install-tmux-packages
-  [ $DRY -eq 0 ] && install-node-packages
-  [ $DRY -eq 0 ] && install-jenv-versions
-  [ $DRY -eq 0 ] && configure-fish
+  [ $DRY -eq 0 ] && is-macos && dotme-osx-defaults
+  [ $DRY -eq 0 ] && dotme-omf
+  [ $DRY -eq 0 ] && dotme-pip
+  [ $DRY -eq 0 ] && dotme-gem
+  [ $DRY -eq 0 ] && dotme-vim
+  [ $DRY -eq 0 ] && dotme-tmux
+  [ $DRY -eq 0 ] && dotme-node
+  [ $DRY -eq 0 ] && dotme-jenv
+  [ $DRY -eq 0 ] && dotme-fish
   command_clean
   echo "... dotfiles installed and AOK"
 }
@@ -126,7 +126,7 @@ command_pull() {
 command_packages() {
   if [[ $DRY -eq 0 ]] ; then
     if is-macos ; then
-      install-brew-packages
+      dotme-brew
     elif has-pacman ; then
       has-pacman
     fi
