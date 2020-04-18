@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+#
+# Install brew packages
+#
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+PATH=${SCRIPT_DIR}:${PATH}
+
+if ! is-executable brew ; then
+  echo "... installing brew"
+  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install \
+    | ruby
+fi
+
+echo "... updating brew"
+
+# Use latest version of brew
+brew update
+
+# Upgrade any already installed formulae
+brew upgrade
+
+cd $SCRIPT_DIR/../config/brew
+brew bundle
+
+if [[ "$1" == "with-admin" ]] ; then
+  echo "... installing admin packages"
+  cd $SCRIPT_DIR/../config/brew/admin
+  brew bundle
+fi

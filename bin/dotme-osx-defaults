@@ -1,0 +1,124 @@
+#!/usr/bin/env bash
+
+echo "... setting up OSX defaults"
+
+#
+# Based onhttps://github.com/paulirish which is a fork of https://mths.be/osx - thx
+#
+
+#
+# Before adding anything here, try it first manually on a machine, perhaps with the system
+# preferences panel, then read the defaults with **defaults read**.
+#
+# You view current defaults with
+#
+#   defaults read | less
+#
+
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
+# Mute volume change feedback
+defaults write -g "com.apple.sound.beep.feedback" -int 0
+
+# Very quiet alert, the default alert volume is crazy
+defaults write -g "com.apple.sound.beep.volume" -float 0.2
+
+# Disable "Ask Siri"
+defaults write com.apple.assistant.support "Assistant Enabled" -bool false
+
+# Remove siri icon from status menu
+defaults write com.apple.Siri StatusMenuVisible -bool false
+
+# Disable smart quotes as they’re annoying when typing code
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+# Disable smart dashes as they’re annoying when typing code
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+# Finder: show hidden files by default
+defaults write com.apple.Finder AppleShowAllFiles -bool true
+
+# Finder: show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Finder: show status bar
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Finder: show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+
+# Show the ~/Library folder
+chflags nohidden ~/Library
+
+# Don't hide menu bar
+defaults write NSGlobalDomain _HIHideMenuBar -int 0
+
+# Hide the dock
+defaults write com.apple.Dock autohide -int 1
+
+# No delay for dock opening
+defaults write com.apple.Dock autohide-delay -int 0
+
+# Minise applications into the application icon in the dock
+defaults write minimize-to-application -int 1
+
+# Ctrl+Cmd & click and drag any where in window to move window (reboot required
+# after applied)
+defaults write -g NSWindowShouldDragOnGesture -bool true
+
+# Hot corners
+# Possible values:
+#  0: no-op
+#  2: Mission Control
+#  3: Show application windows
+#  4: Desktop
+#  5: Start screen saver
+#  6: Disable screen saver
+#  7: Dashboard
+# 10: Put display to sleep
+# 11: Launchpad
+# 12: Notification Center
+
+# Bottom left screen corner → put to sleep
+defaults write com.apple.dock wvous-bl-corner -int 10
+defaults write com.apple.dock wvous-bl-modifier -int 0
+# Bottom right screen corner → Desktop
+defaults write com.apple.dock wvous-br-corner -int 4
+defaults write com.apple.dock wvous-br-modifier -int 0
+
+# Set up file extension handlers
+# By default OSX seems to open all tech files, json, xml, etc in xcode, this is
+# just heavy weight and so wrong. Use vi instead for quick access.
+# To show current mapping for an extenion use `duti -x myext`
+
+duti -s org.vim.MacVim csv all
+duti -s org.vim.MacVim json all
+duti -s org.vim.MacVim md all
+duti -s com.apple.Preview pdf all
+duti -s org.vim.MacVim properties all
+duti -s com.brave.Browser png all
+duti -s org.vim.MacVim tf all
+duti -s org.vim.MacVim sql all
+duti -s com.brave.Browser svg all
+duti -s org.vim.MacVim txt all
+duti -s org.vim.MacVim yaml all
+
+# Application Specific
+
+# iterm - use profiles in dotfiles directory so that preferences are shared.
+# Specify the preferences directory
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.dotfiles/config/iterm2"
+# Tell iTerm2 to use the custom preferences in the directory
+defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+
+############################################################################
+# Kill affected applications
+############################################################################
+
+for app in "Dock" "Finder" \ ; do
+	killall "${app}" &> /dev/null
+done
+
+echo "... ... DONE - OSX defaults have been configured"
