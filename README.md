@@ -110,7 +110,7 @@ Spell checking in vi takes place with
 [cspell](https://www.npmjs.com/package/cspell).
 
 The coc configuration in the vim configuration in these dotfiles explicitly adds
-the dotfiles.txt, dottech.txt and dotinbox.txt files in ~/.config/dictionaries.
+the dot\*.txt files in ~/.config/dictionaries.
 This is in addition to the [default
 dictionaries](https://github.com/iamcco/coc-spell-checker) added by the
 coc-spell-checker plugin, which includes conditional dictionaries based on file

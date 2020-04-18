@@ -44,6 +44,3 @@
     nvm global version in fish shell, currently install-node-packages is
     installing from bash shell, perhaps need to set up nvm in bash shell too. I
     prefer bin scripts to not use fish where possible.
-- Raise PR for missing english words in core dictionary, anonymised. Scan for
-  other missing words. Although interesting that this words is missing from other
-  lists like /usr/share/dict/words

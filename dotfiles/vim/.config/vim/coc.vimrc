@@ -92,7 +92,9 @@ if has('nvim')
     \ { "name" : "dottech",
     \   "path": expand("$HOME/.config/dictionaries/dottech.txt") },
     \ { "name" : "dotinbox",
-    \   "path": expand("$HOME/.config/dictionaries/dotinbox.txt") }
+    \   "path": expand("$HOME/.config/dictionaries/dotinbox.txt") },
+    \ { "name" : "doten",
+    \   "path": expand("$HOME/.config/dictionaries/doten.txt") }
     \])
 
   " set java home for coc-java
