@@ -1,0 +1,13 @@
+#!/usr/local/bin/fish
+
+#
+# Install fisher, a package manager for fish
+#
+
+if not test -f ~/.config/fish/functions/fisher.fish
+  curl https://git.io/fisher --create-dirs -sLo \
+    ~/.config/fish/functions/fisher.fish
+end
+
+fisher ls | grep fish-nvm || \
+  fisher add jorgebucaran/fish-nvm

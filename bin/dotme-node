@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+#
+# Install node packages
+#
+
+#
+# Set up nvm
+#
+
+[ ! -d ~/.nvm ] && mkdir ~/.nvm
+
+npm list --global --depth=0
+
+# Install missing packages
+cat ~/.dotfiles/config/node/global.txt | grep -v '#' | \
+  grep -v "`npm list --global --depth=0 | grep "@" |   \
+  sed 's/.* \([^@]*\).*/\1/'`" | \
+  xargs npm install --global
+
+npm -g outdated
+
+echo
+echo "... Global node packages installed"
