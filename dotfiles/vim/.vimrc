@@ -407,11 +407,11 @@ set splitbelow
 " https://stackoverflow.com/questions/32769488/double-vim-surround-with
 " autocmd Filetype markdown let b:surround_43 = "**\r**"
 
+" Don't conceal any syntax
+set conceallevel=0
+
 if g:slim < 7
   " Markdown syntax
-  " Conceal some syntax - e.g. ** around bold
-  set conceallevel=2
-
   " Enable folding
   let g:markdown_folding = 1
   " Default large fold level start, folding everything up by default feels odd.
