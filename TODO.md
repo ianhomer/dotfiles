@@ -32,4 +32,3 @@
 - Report on what's running that I may have started but don't need, e.g.
   vim instances, mysqld, docker, bluetooth
 - Try tmuxinator
-- Use nvm (initialise bash and fish shell)
