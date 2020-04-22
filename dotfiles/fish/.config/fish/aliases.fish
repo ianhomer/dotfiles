@@ -29,6 +29,9 @@ else
   alias git-whoami="git config user.name ; git config user.email"
   alias git-config-personal="git config user.email ian@purplepip.com"
 
+  # Attach to tmux session if exists, otherwise new
+  alias tm="tmux attach || tmux new"
+
   alias draw="open -a /Applications/draw.io.app/"
 
   alias pass="lpass show --password -c"
