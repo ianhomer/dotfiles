@@ -20,21 +20,16 @@
 - Ignore package-lock.json for spelling
 - Deploy dotfiles in docker to test fresh install on other OS
 - Try coc-eslint, coc-flow (typescript)
-- Set default directory for tmux window so new panes start in given directory
 - experiment with markdown linting more, doesn't seem to lint list line wrapping
   well. `gq` shortcut ends up putting line wrap in a new list item. Can `:Format`
   be improved to just sort this out?
 - report on launchtl services on startup / suggest pruning. `launchtl list`,
   `ls /Library/LaunchAgents`,`ls /Library/LaunchDaemons`. Look at errors in start
   up logs to report which are zombies
-- network speed monitoring, e.g. `npm install --global fast-cli`
 - try java and python code completion on all envs
-- Update spelling add word to only add to .cspell.json not also
-  .vim/coc-settings.json
 - Bring coc troubleshooting practice into play :CocInfo, :checkhealth,
   :CocOpenLog, :version
-- Report on what's running that I may have started
-  but don't need, e.g.
+- Report on what's running that I may have started but don't need, e.g.
   vim instances, mysqld, docker, bluetooth
 - Try tmuxinator
 - Use nvm (initialise bash and fish shell)
