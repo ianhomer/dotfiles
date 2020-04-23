@@ -13,9 +13,12 @@
 npm list --global --depth=0
 
 # Install missing packages
-cat ~/.dotfiles/config/node/global.txt | grep -v '#' | \
-  grep -v "`npm list --global --depth=0 | grep "@" |   \
-  sed 's/.* \([^@]*\).*/\1/'`" | \
+
+cat ~/.dotfiles/config/node/global.txt | grep -v '#' |    \
+  sed 's/$/@/' |                                          \
+  grep -F -v "`npm list --global --depth=0 | grep "@" |   \
+  sed 's/.* \([^@]*\).*/\1@/'`" |                         \
+  sed 's/@//' |                                           \
   xargs npm install --global
 
 npm -g outdated
