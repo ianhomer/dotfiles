@@ -3,6 +3,11 @@
 #
 # Install node packages
 #
+# Global packages should only be used when npx <command> is not an option, which
+# is normally when a global package is required as a integration with another
+# tool. Do not install globally just to run a node command from the command line
+# since npx will normally be preferred.
+#
 
 #
 # Set up nvm
@@ -10,15 +15,16 @@
 
 [ ! -d ~/.nvm ] && mkdir ~/.nvm
 
+#
+# Report what's install globally
+#
 npm list --global --depth=0
 
 # Install missing packages
 
-cat ~/.dotfiles/config/node/global.txt | grep -v '#' |
-  sed 's/$/@/' |
+cat ~/.dotfiles/config/node/global.txt | grep -v '#' | grep '@' |
   grep -F -v "`npm list --global --depth=0 | grep "@" |
-  sed 's/.* \([^@]*\).*/\1@/'`" |
-  sed 's/@//' |
+  sed 's/.* \([^@]*\).*/\1/'`" |
   xargs npm install --global
 
 npm -g outdated
