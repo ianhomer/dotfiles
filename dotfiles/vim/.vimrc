@@ -153,7 +153,6 @@ if g:slim < 10
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>m :Maps<CR>
     nnoremap <silent> <leader>r :reg<CR>
-    nnoremap <leader>s :w<CR>
     if g:slim < 7
       nnoremap <leader>n :NERDTreeToggle<CR>
     endif
