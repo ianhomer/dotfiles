@@ -19,7 +19,8 @@ let g:vim_dir = "~/.vim"
 " between configurations and plugins. It can also be used to introduce new
 " configuration and plugins with control.
 "
-let g:slim = exists('$VIM_SLIM') ? $VIM_SLIM : 4
+let g:slim = exists('$VIM_SLIM') ? $VIM_SLIM : exists('g:slim_session') ?
+  \ g:slim_session : 6
 
 if has('nvim')
   let g:coc_enabled = g:slim < 5 ? 1 : 0
@@ -57,7 +58,7 @@ if g:slim < 7
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
   Plug 'ryanoasis/vim-devicons'
   " Vinegar - better file expore than NERD
-  " Plug 'tpope/vim-vinegar'
+  if g:slim < 1 | Plug 'tpope/vim-vinegar' | endif
   " ack - Search files
   Plug 'mileszs/ack.vim'
   " Airline - status bar
@@ -70,6 +71,7 @@ if g:slim < 7
 
   "
   " Coding
+
   "
   " polyglot
   if g:slim < 5 | Plug 'sheerun/vim-polyglot' | endif
@@ -78,9 +80,9 @@ if g:slim < 7
   " fugitive - Git integration
   if g:slim < 5 | Plug 'tpope/vim-fugitive' | endif
   " NERDTree - show git changes
-  "Plug 'xuyuanp/nerdtree-git-plugin'
+  if g:slim < 1 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
   " gitgutter - Git change indicator to left of window
-  "Plug 'airblade/vim-gitgutter'
+  if g:slim < 1 | Plug 'airblade/vim-gitgutter' | endif
   " symlink - Follow symlink when opening file
   Plug 'aymericbeaumet/vim-symlink'
   " surround - Surround with brackets etc
@@ -88,12 +90,11 @@ if g:slim < 7
   " repeat - Repeat with .
   if g:slim < 5 | Plug 'tpope/vim-repeat' | endif
   " HTML
-  " Plug 'mattn/emmet-vim'
+  if g:slim < 1 | Plug 'mattn/emmet-vim' | endif
   " Linting
-  " Plug 'dense-analysis/ale'
+  if g:slim < 1 | Plug 'dense-analysis/ale' | endif
   " Handy mappings
-  " Plug 'tpope/vim-unimpaired'
-
+  if g:slim < 1 | Plug 'tpope/vim-unimpaired' | endif
   " Commenter
   if g:slim < 5 | Plug 'preservim/nerdcommenter' | endif
 
@@ -123,10 +124,11 @@ if g:slim < 7
   "
   " goyo - Distraction free writing
   if g:slim < 7 | Plug 'junegunn/goyo.vim' | endif
-
   " tabular - lining up text
   if g:slim < 5 | Plug 'godlygeek/tabular' | endif
-  " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+  " mardown preview
+  if g:slim < 1 | Plug 'iamcco/markdown-preview.nvim',
+        \ { 'do': 'cd app & yarn install' } | endif
 endif
 
 call plug#end()
@@ -158,26 +160,37 @@ if g:slim < 10
   endif
 endif
 
-" Reload vimrc, neo vimrc and coc
-if has('nvim')
-  if g:coc_enabled == 1
-    nnoremap <leader>vc
-      \ :source ~/.config/nvim/init.vim<CR>:CocRestart<CR>
-      \ :echo "Reloaded neo init.vm"<CR>
-  else
-    nnoremap <leader>vc
-      \ :source ~/.config/nvim/init.vim<CR>
-      \ :echo "Reloaded neo init.vm"<CR>
-  endif
-else
-  if g:coc_enabled == 1
-    nnoremap <leader>vc
-      \ :source ~/.vimrc<CR>:CocRestart<CR>:echo "Reloaded .vimrc"<CR>
-  else
-    nnoremap <leader>vc
-      \ :source ~/.vimrc<CR>:echo "Reloaded .vimrc"<CR>
-  endif
+" Toggle power slim mode
+if !exists("*PowerToggle")
+  function! PowerToggle()
+    let g:slim_session = exists('g:slim_session') ? g:slim_session > 4 ? 4 : 5 : 4
+    echo "Current slim ".g:slim." - reload config to change to ".g:slim_session
+    call ReloadConfig()
+  endfunction
+  nnoremap <silent> <leader>p :call PowerToggle()<CR>
 endif
+
+" Reload vimrc, neo vimrc and coc
+let g:config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
+let g:reload_config = "source ".g:config_file
+if !exists("*ReloadConfig")
+  function! ReloadConfig()
+    exec g:reload_config
+    call RestartConfig()
+    let config_message = has('nvim') ? "neo init.vm" : ".vimrc" 
+    let coc_message = g:coc_enabled == 1 ? " with Coc" : ""
+    echo "Reloaded ".config_message.coc_message" - slim = ".g:slim
+  endfunction
+endif
+
+function! RestartConfig()
+  if g:coc_enabled == 1
+    echo "Restarting CoC"
+    CocRestart
+  endif
+endfunction
+
+nnoremap <silent> <leader>vc :call ReloadConfig()<CR>
 
 " Clear whitespace
 if g:slim < 8
@@ -218,7 +231,7 @@ set cursorline
 set ignorecase
 " Highlight dynamically as pattern is typed
 set incsearch
-" Default updatetime is 4000 and too slow
+" Default updatetime is 4000 and too slowupdatetimeupdatetimeupdatetime
 set updatetime=300
 " Always show sign column to stop flip-flopping
 set signcolumn=yes
@@ -396,11 +409,11 @@ set splitbelow
 " https://stackoverflow.com/questions/32769488/double-vim-surround-with
 " autocmd Filetype markdown let b:surround_43 = "**\r**"
 
+" Don't conceal any syntax
+set conceallevel=0
+
 if g:slim < 7
   " Markdown syntax
-  " Conceal some syntax - e.g. ** around bold
-  set conceallevel=2
-
   " Enable folding
   let g:markdown_folding = 1
   " Default large fold level start, folding everything up by default feels odd.
@@ -420,4 +433,3 @@ endif
 if g:slim < 2
   source ~/.config/vim/experimental.vimrc
 endif
-
