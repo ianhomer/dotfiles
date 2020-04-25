@@ -170,6 +170,7 @@ if !exists("*PowerToggle")
   nnoremap <silent> <leader>p :call PowerToggle()<CR>
 endif
 
+" Reload vimrc, neo vimrc and coc
 let g:config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
 let g:reload_config = "source ".g:config_file
 if !exists("*ReloadConfig")
@@ -189,30 +190,7 @@ function! RestartConfig()
   endif
 endfunction
 
-" Reload vimrc, neo vimrc and coc
 nnoremap <silent> <leader>vc :call ReloadConfig()<CR>
-
-"if has('nvim')
-"  if g:coc_enabled == 1
-"    nnoremap <leader>vc
-"      \ :source ~/.config/nvim/init.vim<CR>:CocRestart<CR>
-"      \ :echo "Reloaded neo init.vm with CoC - slim = ".g:slim<CR>
-"  else
-"    nnoremap <leader>vc
-"      \ :source ~/.config/nvim/init.vim<CR>
-"      \ :echo "Reloaded neo init.vm - slim = ".g:slim<CR>
-"  endif
-"else
-"  if g:coc_enabled == 1
-"    nnoremap <leader>vc
-"      \ :source ~/.vimrc<CR>:CocRestart<CR>
-"      \ :echo "Reloaded .vimrc - slim = ".g:slim<CR>
-"  else
-"    nnoremap <leader>vc
-"      \ :source ~/.vimrc<CR>
-"      \ :echo "Reloaded .vimrc - slim = ".g:slim<CR>
-"  endif
-"endif
 
 " Clear whitespace
 if g:slim < 8
