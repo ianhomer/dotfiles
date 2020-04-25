@@ -161,34 +161,58 @@ if g:slim < 10
 endif
 
 " Toggle power slim mode
-function! PowerToggle()
-  let g:slim_session = exists('g:slim_session') ? g:slim_session > 4 ? 4 : 5 : 4
-  echo "Current slim ".g:slim." - reload config to change to ".g:slim_session
+if !exists("*PowerToggle")
+  function! PowerToggle()
+    let g:slim_session = exists('g:slim_session') ? g:slim_session > 4 ? 4 : 5 : 4
+    echo "Current slim ".g:slim." - reload config to change to ".g:slim_session
+    call ReloadConfig()
+  endfunction
+  nnoremap <silent> <leader>p :call PowerToggle()<CR>
+endif
+
+let g:config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
+let g:reload_config = "source ".g:config_file
+if !exists("*ReloadConfig")
+  function! ReloadConfig()
+    exec g:reload_config
+    call RestartConfig()
+    let config_message = has('nvim') ? "neo init.vm" : ".vimrc" 
+    let coc_message = g:coc_enabled == 1 ? " with Coc" : ""
+    echo "Reloaded ".config_message.coc_message" - slim = ".g:slim
+  endfunction
+endif
+
+function! RestartConfig()
+  if g:coc_enabled == 1
+    echo "Restarting CoC"
+    CocRestart
+  endif
 endfunction
-nnoremap <silent> <leader>p :call PowerToggle()<CR>
 
 " Reload vimrc, neo vimrc and coc
-if has('nvim')
-  if g:coc_enabled == 1
-    nnoremap <leader>vc
-      \ :source ~/.config/nvim/init.vim<CR>:CocRestart<CR>
-      \ :echo "Reloaded neo init.vm with CoC - slim = ".g:slim<CR>
-  else
-    nnoremap <leader>vc
-      \ :source ~/.config/nvim/init.vim<CR>
-      \ :echo "Reloaded neo init.vm - slim = ".g:slim<CR>
-  endif
-else
-  if g:coc_enabled == 1
-    nnoremap <leader>vc
-      \ :source ~/.vimrc<CR>:CocRestart<CR>
-      \ :echo "Reloaded .vimrc - slim = ".g:slim<CR>
-  else
-    nnoremap <leader>vc
-      \ :source ~/.vimrc<CR>
-      \ :echo "Reloaded .vimrc - slim = ".g:slim<CR>
-  endif
-endif
+nnoremap <silent> <leader>vc :call ReloadConfig()<CR>
+
+"if has('nvim')
+"  if g:coc_enabled == 1
+"    nnoremap <leader>vc
+"      \ :source ~/.config/nvim/init.vim<CR>:CocRestart<CR>
+"      \ :echo "Reloaded neo init.vm with CoC - slim = ".g:slim<CR>
+"  else
+"    nnoremap <leader>vc
+"      \ :source ~/.config/nvim/init.vim<CR>
+"      \ :echo "Reloaded neo init.vm - slim = ".g:slim<CR>
+"  endif
+"else
+"  if g:coc_enabled == 1
+"    nnoremap <leader>vc
+"      \ :source ~/.vimrc<CR>:CocRestart<CR>
+"      \ :echo "Reloaded .vimrc - slim = ".g:slim<CR>
+"  else
+"    nnoremap <leader>vc
+"      \ :source ~/.vimrc<CR>
+"      \ :echo "Reloaded .vimrc - slim = ".g:slim<CR>
+"  endif
+"endif
 
 " Clear whitespace
 if g:slim < 8
@@ -229,7 +253,7 @@ set cursorline
 set ignorecase
 " Highlight dynamically as pattern is typed
 set incsearch
-" Default updatetime is 4000 and too slow
+" Default updatetime is 4000 and too slowupdatetimeupdatetimeupdatetime
 set updatetime=300
 " Always show sign column to stop flip-flopping
 set signcolumn=yes
@@ -431,4 +455,3 @@ endif
 if g:slim < 2
   source ~/.config/vim/experimental.vimrc
 endif
-
