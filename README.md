@@ -49,6 +49,9 @@ working to streamline distraction free coding. This includes:
 [magnet](https://magnet.crowdcafe.com/)**
 : MacOS+ with better hotkeys, focused status bar and window manager
 
+Other tools woven into these dotfiles are **fzf**, **pandoc**, **cspell**,
+**node**, **java** and **python**.
+
 ## How
 
 Various dotfiles are all located in sub-folders in the dotfiles/ folder for
@@ -58,7 +61,7 @@ installation and configuration takes place with scripts in the bin/ directory,
 however just look at bin/dotme to see what actually happens.
 
 You can also update parts of the initialisation separately, see `dotme -h` to
-get a list of each part.
+get a list of each part. `man dotme` will give you more guidance on usage.
 
 ## Manual Configuration
 
@@ -107,7 +110,7 @@ Spell checking in vi takes place with
 [cspell](https://www.npmjs.com/package/cspell).
 
 The coc configuration in the vim configuration in these dotfiles explicitly adds
-the dotfiles.txt, dottech.txt and dotinbox.txt files in ~/.config/dictionaries.
+the dot\*.txt files in ~/.config/dictionaries.
 This is in addition to the [default
 dictionaries](https://github.com/iamcco/coc-spell-checker) added by the
 coc-spell-checker plugin, which includes conditional dictionaries based on file

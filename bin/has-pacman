@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+#
+# Is the arch pacman package manager installed
+# 
 if hash pacman 2>/dev/null 2>/dev/null ; then
   exit 0
 else
