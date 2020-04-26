@@ -40,7 +40,7 @@ if g:slim < 9
   "
   " fzf - Fuzzy Finder
   Plug 'junegunn/fzf'
-  Plug 'junegunn/fzf.vim'
+  Plug 'git@github.com:ianhomer/fzf.vim.git', { 'branch' : 'fix/maps-comment' }
   "
   " Style
   "
@@ -327,7 +327,7 @@ set scrolloff=3
 " set ttyfast
 
 if g:coc_enabled == 1
-  source ~/.config/vim/coc.vimrc
+  source ~/.config/vim/coc.vim
 endif
 
 "
@@ -380,7 +380,7 @@ set formatoptions=jrql
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
-" source ~/.config/vim/netrw.vimrc
+" source ~/.config/vim/netrw.vim
 
 if g:slim < 7
   "
@@ -394,9 +394,7 @@ endif
 if g:slim < 9
   " fzf config
   let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
-  command! -bar -bang MyMaps
-    \ call fzf#vim#maps("n", <bang>0)
-
+  source ~/.config/vim/fzf.vim
   colorscheme gruvbox
   set bg=dark
 endif
@@ -412,7 +410,7 @@ endif
 set splitright
 set splitbelow
 
-"source ~/.config/vim/terminal.vimrc
+"source ~/.config/vim/terminal.vim
 
 "
 " *** Scope : Markdown ***
@@ -442,5 +440,5 @@ endif
 " *** Scope : Python ***
 "
 if g:slim < 2
-  source ~/.config/vim/experimental.vimrc
+  source ~/.config/vim/experimental.vim
 endif
