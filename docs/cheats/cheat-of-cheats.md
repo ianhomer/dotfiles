@@ -1,5 +1,10 @@
 # Cheat of Cheats
 
+## collections
+
+- https://cheatography.com/
+- https://devhints.io/
+
 ## vi
 
 - https://devhints.io/vim

@@ -38,16 +38,22 @@ working to streamline distraction free coding. This includes:
 **tmux**
 : terminal multiplexer
 
-**neovim** with **Conquerer of Completion**
+**neovim** with **Conquer of Completion**
 : file editing
 
 **FiraCode Nerd Font**
 : ligatures, powerline and more
 
-**[alfred](https://www.alfredapp.com/),
-[dozer](https://github.com/Mortennn/Dozer),
-[magnet](https://magnet.crowdcafe.com/)**
-: MacOS+ with better hotkeys, focused status bar and window manager
+MacOS with
+
+**[alfred](https://www.alfredapp.com/)**
+: better hotkeys
+
+**[dozer](https://github.com/Mortennn/Dozer)**
+: focused status bar
+
+**[magnet](https://magnet.crowdcafe.com/)**
+: window manager
 
 Other tools woven into these dotfiles are **fzf**, **pandoc**, **cspell**,
 **node**, **java** and **python**.
