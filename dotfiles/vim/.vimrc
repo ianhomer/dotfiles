@@ -167,10 +167,15 @@ let mapleader = "\<Space>"
 nnoremap ; :
 
 " My shortcuts
+" numbered leaders, e.g. <leader>1 are placeholders for command that may get
+" mapped to a better key once matured.
 if g:slim < 10
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :Files<CR>
   nnoremap <silent> <leader>s :w<CR>
+
+  " close all buffers
+  nnoremap <silent> <leader>1 :bufdo bd<CR>
   if g:slim < 8
     nnoremap <silent> <leader>b :BCommits<CR>
     nnoremap <silent> <leader>c :Commits<CR>
@@ -180,6 +185,10 @@ if g:slim < 10
     if g:slim < 7
       nnoremap <leader>n :NERDTreeToggle<CR>
     endif
+  endif
+
+  if g:coc_enabled == 1
+    nnoremap <silent> <leader>2 :Format<CR>
   endif
 endif
 
@@ -200,7 +209,7 @@ if !exists("*ReloadConfig")
   function! ReloadConfig()
     exec g:reload_config
     call RestartConfig()
-    let config_message = has('nvim') ? "neo init.vm" : ".vimrc" 
+    let config_message = has('nvim') ? "neo init.vm" : ".vimrc"
     let coc_message = g:coc_enabled == 1 ? " with Coc" : ""
     echo "Reloaded ".config_message.coc_message" - slim = ".g:slim
   endfunction
