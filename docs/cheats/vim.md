@@ -2,6 +2,41 @@
 
 ## vim
 
+### leader
+
+**space + space**
+: Open buffers
+
+**space + r**
+: Open (paste) registry
+
+**space + f**
+: Open files
+
+**space + g**
+: Open goyo
+
+**space + c**
+: Commits
+
+**space + cw**
+: Clear white space
+
+**space + h**
+: File open history
+
+**space + vc**
+: Reload vim configuration
+
+**space + n**
+: Open nerd tree 
+
+**space + m**
+: Key board maps
+
+**space + s**
+: Save file
+
 ### vim, files
 
 **:NERDTreeToggle** or **space+f**
