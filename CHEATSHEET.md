@@ -27,20 +27,6 @@ Useful keyboard short cuts.
 **Ctrl-Cmd-back**
 : Back to manually set screen size
 
-## Brave
-
-**Cmd+l**
-: Jump to address bar
-
-**Option+Cmd** left/right
-: Go to previous/next tab
-
-**Cmd+w**
-: Close tab
-
-**Option+Cmd b**
-: Open bookmarks
-
 ## iterm
 
 **Cmd+n**

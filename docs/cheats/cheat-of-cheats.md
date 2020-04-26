@@ -4,10 +4,15 @@
 
 - https://devhints.io/vim
 - https://vim.rtorr.com/
+- **<leader>-m** -> configured maps
 
 ## tmux
 
 - https://tmuxcheatsheet.com/
+
+## mac
+
+System Preferences -> Keyboard -> Shortcuts
 
 ## other tools
 

@@ -71,6 +71,7 @@ if g:slim < 7
 
   "
   " Coding
+  "
 
   "
   " polyglot
@@ -133,6 +134,28 @@ endif
 
 call plug#end()
 
+" Enable mouse support
+set mouse=a
+" Disable error bells
+set noerrorbells
+" Enhance command-line completion
+set wildmenu
+" Highlight current line
+set cursorline
+" Ignore case of searches
+set ignorecase
+" Highlight dynamically as pattern is typed
+set incsearch
+" Default updatetime is 4000 and too slow
+set updatetime=300
+" Always show sign column to stop flip-flopping
+set signcolumn=yes
+if has("nvim")
+  " Support true color in nvim only, this feature causes colours to not render
+  " in vim in tmux
+  set termguicolors
+endif
+
 "
 " Command remapping
 "
@@ -147,6 +170,7 @@ nnoremap ; :
 if g:slim < 10
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :Files<CR>
+  nnoremap <silent> <leader>s :w<CR>
   if g:slim < 8
     nnoremap <silent> <leader>b :BCommits<CR>
     nnoremap <silent> <leader>c :Commits<CR>
@@ -216,28 +240,6 @@ if g:slim < 6
   " Thanks - https://www.rockyourcode.com/vim-close-all-other-buffers/
   " Close all buffers except the current one
   nnoremap <leader>bd :<c-u>up <bar> %bd <bar> e#<cr>
-endif
-
-" Enable mouse support
-set mouse=a
-" Disable error bells
-set noerrorbells
-" Enhance command-line completion
-set wildmenu
-" Highlight current line
-set cursorline
-" Ignore case of searches
-set ignorecase
-" Highlight dynamically as pattern is typed
-set incsearch
-" Default updatetime is 4000 and too slowupdatetimeupdatetimeupdatetime
-set updatetime=300
-" Always show sign column to stop flip-flopping
-set signcolumn=yes
-if has("nvim")
-  " Support true color in nvim only, this feature causes colours to not render
-  " in vim in tmux
-  set termguicolors
 endif
 
 "

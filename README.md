@@ -10,7 +10,7 @@ First time clone repository and install:
     git clone git@github.com:ianhomer/dotfiles.git ~/.dotfiles
     ~/.dotfiles/bin/dotme
 
-Then update at any time with:
+then update at any time with:
 
     dotme
 
@@ -85,9 +85,14 @@ Alfred Preferences -> Advanced -> Set Preferences folder -> ~/.dotfiles/config/a
 
 System preferences
 
--> keyboard -> Modifier Keys -> For each keyboard :
+-> Keyboard -> Modifier Keys -> For each keyboard :
 
 - Caps Lock -> Escape
+
+-> Keyboard -> Shortcuts -> 
+
+- Disable Mission Control Ctrl-arrow short cuts
+- Disable any other shortcuts that would never get used
 
 -> Mission Control - remove all keyboard and mouse shortcuts
 
