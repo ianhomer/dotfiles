@@ -96,7 +96,7 @@ if g:slim < 7
   if g:slim < 1 | Plug 'dense-analysis/ale' | endif
   " Handy mappings
   if g:slim < 1 | Plug 'tpope/vim-unimpaired' | endif
-  " Commenter
+  " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
   if g:slim < 5 | Plug 'preservim/nerdcommenter' | endif
 
   " COC completion
@@ -178,12 +178,13 @@ if g:slim < 10
   nnoremap <silent> <leader>1 :bufdo bd<CR>
   if g:slim < 8
     nnoremap <silent> <leader>b :BCommits<CR>
-    nnoremap <silent> <leader>c :Commits<CR>
+    nnoremap <silent> <leader>3 :Commits<CR>
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>m :Maps<CR>
     nnoremap <silent> <leader>r :reg<CR>
     if g:slim < 7
       nnoremap <leader>n :NERDTreeToggle<CR>
+      nnoremap <leader>h :NERDTreeFind<CR>
     endif
   endif
 
@@ -226,7 +227,7 @@ nnoremap <silent> <leader>v :call ReloadConfig()<CR>
 
 " Clear whitespace
 if g:slim < 8
-  nnoremap <Leader>w :%s/\s\+$//g<CR>:nohlsearch<CR>
+  nnoremap <leader>w :%s/\s\+$//g<CR>:nohlsearch<CR>
 endif
 
 " *** Scope : Writing ***
@@ -240,15 +241,15 @@ endif
 "
 " *** Scope : Windows ***
 "
-if g:slim < 6
+if g:slim < 8
   " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
   " Close the current buffer and move to the previous one
-  nnoremap <leader>bq :<c-u>bp <bar> bd #<cr>
+  nnoremap <leader>q :<c-u>bp <bar> bd #<cr>
   " Show all open buffers and their status
-  nnoremap <leader>bl :ls<cr>
+  nnoremap <leader>l :ls<cr>
   " Thanks - https://www.rockyourcode.com/vim-close-all-other-buffers/
   " Close all buffers except the current one
-  nnoremap <leader>bd :<c-u>up <bar> %bd <bar> e#<cr>
+  nnoremap <leader>d :<c-u>up <bar> %bd <bar> e#<cr>
 endif
 
 "
@@ -431,16 +432,13 @@ if g:slim < 7
   set foldlevelstart=20
 
   if g:slim < 5
-    nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
+    nnoremap <silent> <leader>\ :Tabularize/\|<CR>
   endif
 endif
 
 "
 " *** Scope : Python ***
 "
-" Disable python2 support
-" let g:loaded_python_provider = 0
-
 if g:slim < 2
   source ~/.config/vim/experimental.vimrc
 endif
