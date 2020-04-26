@@ -57,7 +57,9 @@ if g:slim < 7
   "
 
   " NERDTree - file explore
-  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  Plug 'preservim/nerdtree'
+  source ~/.config/vim/nerdtree.vim
+
   Plug 'ryanoasis/vim-devicons'
   " Vinegar - better file expore than NERD
   if g:slim < 1 | Plug 'tpope/vim-vinegar' | endif
@@ -83,10 +85,7 @@ if g:slim < 7
   " fugitive - Git integration
   if g:slim < 5 | Plug 'tpope/vim-fugitive' | endif
   " NERDTree - show git changes
-  if g:slim < 1 
-    Plug 'xuyuanp/nerdtree-git-plugin'
-    source ~/.config/vim/nerdtree.vim
-  endif
+  if g:slim < 1 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
   " gitgutter - Git change indicator to left of window
   if g:slim < 1 | Plug 'airblade/vim-gitgutter' | endif
   " symlink - Follow symlink when opening file
@@ -189,7 +188,7 @@ if g:slim < 10
     nnoremap <silent> <leader>m :Maps<CR>
     nnoremap <silent> <leader>r :reg<CR>
     if g:slim < 7
-      nnoremap <leader>n :NERDTreeToggle<CR>
+      nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
       nnoremap <leader>h :NERDTreeFind<CR>
     endif
   endif
