@@ -19,7 +19,7 @@
 **space + c**
 : Commits
 
-**space + ce**
+**space + cw**
 : Clear white space
 
 **space + h**
@@ -34,12 +34,8 @@
 **space + m**
 : Key board maps
 
-
-
-**space + q**
-: 
-
-
+**space + s**
+: Save file
 
 ### vim, files
 

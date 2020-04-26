@@ -213,11 +213,11 @@ function! RestartConfig()
   endif
 endfunction
 
-nnoremap <silent> <leader>vc :call ReloadConfig()<CR>
+nnoremap <silent> <leader>v :call ReloadConfig()<CR>
 
 " Clear whitespace
 if g:slim < 8
-  nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
+  nnoremap <Leader>w :%s/\s\+$//g<CR>:nohlsearch<CR>
 endif
 
 " *** Scope : Writing ***
