@@ -41,6 +41,8 @@ if g:slim < 9
   " fzf - Fuzzy Finder
   Plug 'junegunn/fzf'
   Plug 'git@github.com:ianhomer/fzf.vim.git', { 'branch' : 'fix/maps-comment' }
+  source ~/.config/vim/fzf.vim
+
   "
   " Style
   "
@@ -81,7 +83,10 @@ if g:slim < 7
   " fugitive - Git integration
   if g:slim < 5 | Plug 'tpope/vim-fugitive' | endif
   " NERDTree - show git changes
-  if g:slim < 1 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
+  if g:slim < 1 
+    Plug 'xuyuanp/nerdtree-git-plugin'
+    source ~/.config/vim/nerdtree.vim
+  endif
   " gitgutter - Git change indicator to left of window
   if g:slim < 1 | Plug 'airblade/vim-gitgutter' | endif
   " symlink - Follow symlink when opening file
@@ -118,6 +123,7 @@ if g:slim < 7
         \ 'coc-yaml',
         \ 'coc-xml'
         \ ]
+    source ~/.config/vim/coc.vim
   endif
 
   "
@@ -326,10 +332,6 @@ set scrolloff=3
 " Optimise for faster terminal connections
 " set ttyfast
 
-if g:coc_enabled == 1
-  source ~/.config/vim/coc.vim
-endif
-
 "
 " *** Scope : Status Bar ***
 "
@@ -392,9 +394,6 @@ if g:slim < 7
 endif
 
 if g:slim < 9
-  " fzf config
-  let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
-  source ~/.config/vim/fzf.vim
   colorscheme gruvbox
   set bg=dark
 endif
