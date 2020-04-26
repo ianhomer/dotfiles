@@ -394,6 +394,8 @@ endif
 if g:slim < 9
   " fzf config
   let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
+  command! -bar -bang MyMaps
+    \ call fzf#vim#maps("n", <bang>0)
 
   colorscheme gruvbox
   set bg=dark
