@@ -216,7 +216,6 @@ endif
 if !exists("*PowerToggle")
   function! PowerToggle()
     let g:slim_session = exists('g:slim_session') ? g:slim_session > 4 ? 4 : 5 : 4
-    echo "Current slim ".g:slim." - reload config to change to ".g:slim_session
     call ReloadConfig()
   endfunction
   nnoremap <silent> <leader>p :call PowerToggle()<CR>
@@ -231,13 +230,16 @@ if !exists("*ReloadConfig")
     call RestartConfig()
     let config_message = has('nvim') ? "neo init.vm" : ".vimrc"
     let coc_message = g:coc_enabled == 1 ? " with Coc" : ""
-    echo "Reloaded ".config_message.coc_message" - slim = ".g:slim
+    if g:coc_enabled != 1
+      " only display message if CoC not enabled, it it is enabled, this extra
+      " message causes overload in the 2 row command window
+      echo "Reloaded ".config_message.coc_message" - slim = ".g:slim
+    endif
   endfunction
 endif
 
 function! RestartConfig()
   if g:coc_enabled == 1
-    echo "Restarting CoC"
     CocRestart
     source ~/.config/vim/coc.vim
   endif
