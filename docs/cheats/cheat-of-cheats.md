@@ -8,3 +8,7 @@
 ## tmux
 
 - https://tmuxcheatsheet.com/
+
+## other tools
+
+- https://support.google.com/mail/answer/6594

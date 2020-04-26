@@ -3,6 +3,19 @@
 **Ctrl-a**
 : prefix
 
+### sessions
+
+prefix **\$**
+: rename session
+
+prefix **s**
+: choose session
+
+prefix **d**
+: detach from session
+
+### windows
+
 prefix **c**
 : new window
 
@@ -12,35 +25,22 @@ prefix **w**
 prefix **,**
 : rename window
 
-prefix **\$**
-: rename session
+**Ctrl-Shift-arrow**
+: move window left or right in tab order
 
-prefix **|** or **-**
+### panes
+
+prefix **z**
+: zoom in / out of current pane
+
+prefix **\** or **-**
 : split pane
 
 prefix **x**
 : close pane
 
-**prefix s**
-: choose session
-
-prefix **t**
-: show time
-
-prefix **z**
-: zoom in / out of current pane
-
-prefix **d**
-: detach from session
-
 **Opt-arrow**
 : move between panes
-
-**prefix Ctrl-s**
-: save tmux state
-
-**prefix Ctrl-r**
-: reload tmux state
 
 **Ctrl-hjkl**
 : move between panes including through vim panes
@@ -48,8 +48,19 @@ prefix **d**
 **Ctrl-arrow**
 : move between panes including through vim panes
 
-**Ctrl-Shift-arrow**
-: move window left or right in tab order
+prefix **{}**
+: move pane left / right
+
+### misc
+
+prefix **t**
+: show time
+
+**prefix Ctrl-s**
+: save tmux state
+
+**prefix Ctrl-r**
+: reload tmux state
 
 prefix **space**
 : toggle between layouts
@@ -57,16 +68,11 @@ prefix **space**
 prefix **[**
 : copy mode with **Enter** to copy selection
 
-prefix **{}**
-: move pane left / right
-
 hold option + mouse
 : bypass tmux mouse handling and do iterm action
 
 click command click
 : block select
-
-[more tmux cheats](https://tmuxcheatsheet.com/)
 
 from outside tmux
 
@@ -76,4 +82,7 @@ from outside tmux
 **tmux attach -tmy-session**
 : attach to session
 
+### links
+
+[more tmux cheats](https://tmuxcheatsheet.com/)
 
