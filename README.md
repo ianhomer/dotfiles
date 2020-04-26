@@ -108,7 +108,7 @@ For a Microsoft keyboard :
 - Command Key -> Option
 
 And then use [keyboard shortcuts](https://support.google.com/mail/answer/6594) -
-see [Cheatsheet](./CHEATSHEET.md) for my favourites.
+see [Cheatsheet](./docs/cheats/) for my favourites.
 
 ### Gmail
 
