@@ -122,7 +122,6 @@ if g:slim < 7
         \ 'coc-yaml',
         \ 'coc-xml'
         \ ]
-    source ~/.config/vim/coc.vim
   endif
 
   "
@@ -160,6 +159,21 @@ if has("nvim")
   " in vim in tmux
   set termguicolors
 endif
+" Keep messages short and don't give ins-completion-messages (c)
+set shortmess=catI
+" Provide more space for command output (e.g. fugitive) - with it this you may
+" need to press ENTER after fugitive commands
+set cmdheight=2
+" Tab support with 2 spaces
+set tabstop=2
+set shiftwidth=2
+set expandtab
+" 80 characters default width
+set textwidth=80
+" Text formating options - no autowrap
+set formatoptions=jrql
+" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+set clipboard=unnamed
 
 "
 " Command remapping
@@ -225,6 +239,7 @@ function! RestartConfig()
   if g:coc_enabled == 1
     echo "Restarting CoC"
     CocRestart
+    source ~/.config/vim/coc.vim
   endif
 endfunction
 
@@ -362,24 +377,6 @@ set backspace=indent,eol,start
 " vnoremap <s-tab> <<
 " nnoremap <tab> >>
 " vnoremap <tab> >>
-
-" Keep messages short and don't give ins-completion-messages (c)
-set shortmess=catI
-
-" Provide more space for command output (e.g. fugitive) - with it this you may
-" need to press ENTER after fugitive commands
-set cmdheight=2
-" Tab support with 2 spaces
-set tabstop=2
-set shiftwidth=2
-set expandtab
-" 80 characters default width
-set textwidth=80
-" Text formating options - no autowrap
-set formatoptions=jrql
-
-" Use the OS clipboard by default (on versions compiled with `+clipboard`)
-set clipboard=unnamed
 
 " source ~/.config/vim/netrw.vim
 
