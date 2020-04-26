@@ -40,7 +40,9 @@ if g:slim < 9
   "
   " fzf - Fuzzy Finder
   Plug 'junegunn/fzf'
-  Plug 'junegunn/fzf.vim'
+  Plug 'git@github.com:ianhomer/fzf.vim.git', { 'branch' : 'fix/maps-comment' }
+  source ~/.config/vim/fzf.vim
+
   "
   " Style
   "
@@ -55,7 +57,9 @@ if g:slim < 7
   "
 
   " NERDTree - file explore
-  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  Plug 'preservim/nerdtree'
+  source ~/.config/vim/nerdtree.vim
+
   Plug 'ryanoasis/vim-devicons'
   " Vinegar - better file expore than NERD
   if g:slim < 1 | Plug 'tpope/vim-vinegar' | endif
@@ -71,6 +75,7 @@ if g:slim < 7
 
   "
   " Coding
+  "
 
   "
   " polyglot
@@ -95,7 +100,7 @@ if g:slim < 7
   if g:slim < 1 | Plug 'dense-analysis/ale' | endif
   " Handy mappings
   if g:slim < 1 | Plug 'tpope/vim-unimpaired' | endif
-  " Commenter
+  " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
   if g:slim < 5 | Plug 'preservim/nerdcommenter' | endif
 
   " COC completion
@@ -117,6 +122,7 @@ if g:slim < 7
         \ 'coc-yaml',
         \ 'coc-xml'
         \ ]
+    source ~/.config/vim/coc.vim
   endif
 
   "
@@ -133,6 +139,28 @@ endif
 
 call plug#end()
 
+" Enable mouse support
+set mouse=a
+" Disable error bells
+set noerrorbells
+" Enhance command-line completion
+set wildmenu
+" Highlight current line
+set cursorline
+" Ignore case of searches
+set ignorecase
+" Highlight dynamically as pattern is typed
+set incsearch
+" Default updatetime is 4000 and too slow
+set updatetime=300
+" Always show sign column to stop flip-flopping
+set signcolumn=yes
+if has("nvim")
+  " Support true color in nvim only, this feature causes colours to not render
+  " in vim in tmux
+  set termguicolors
+endif
+
 "
 " Command remapping
 "
@@ -144,19 +172,29 @@ let mapleader = "\<Space>"
 nnoremap ; :
 
 " My shortcuts
+" numbered leaders, e.g. <leader>1 are placeholders for command that may get
+" mapped to a better key once matured.
 if g:slim < 10
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :Files<CR>
+  nnoremap <silent> <leader>s :w<CR>
+
+  " close all buffers
+  nnoremap <silent> <leader>1 :bufdo bd<CR>
   if g:slim < 8
     nnoremap <silent> <leader>b :BCommits<CR>
-    nnoremap <silent> <leader>c :Commits<CR>
+    nnoremap <silent> <leader>3 :Commits<CR>
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>m :Maps<CR>
     nnoremap <silent> <leader>r :reg<CR>
-    nnoremap <leader>s :w<CR>
     if g:slim < 7
-      nnoremap <leader>n :NERDTreeToggle<CR>
+      nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
+      nnoremap <leader>h :NERDTreeFind<CR>
     endif
+  endif
+
+  if g:coc_enabled == 1
+    nnoremap <silent> <leader>2 :Format<CR>
   endif
 endif
 
@@ -177,7 +215,7 @@ if !exists("*ReloadConfig")
   function! ReloadConfig()
     exec g:reload_config
     call RestartConfig()
-    let config_message = has('nvim') ? "neo init.vm" : ".vimrc" 
+    let config_message = has('nvim') ? "neo init.vm" : ".vimrc"
     let coc_message = g:coc_enabled == 1 ? " with Coc" : ""
     echo "Reloaded ".config_message.coc_message" - slim = ".g:slim
   endfunction
@@ -190,11 +228,11 @@ function! RestartConfig()
   endif
 endfunction
 
-nnoremap <silent> <leader>vc :call ReloadConfig()<CR>
+nnoremap <silent> <leader>v :call ReloadConfig()<CR>
 
 " Clear whitespace
 if g:slim < 8
-  nnoremap <Leader>cw :%s/\s\+$//g<CR>:nohlsearch<CR>
+  nnoremap <leader>w :%s/\s\+$//g<CR>:nohlsearch<CR>
 endif
 
 " *** Scope : Writing ***
@@ -208,37 +246,15 @@ endif
 "
 " *** Scope : Windows ***
 "
-if g:slim < 6
+if g:slim < 8
   " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
   " Close the current buffer and move to the previous one
-  nnoremap <leader>bq :<c-u>bp <bar> bd #<cr>
+  nnoremap <leader>q :<c-u>bp <bar> bd #<cr>
   " Show all open buffers and their status
-  nnoremap <leader>bl :ls<cr>
+  nnoremap <leader>l :ls<cr>
   " Thanks - https://www.rockyourcode.com/vim-close-all-other-buffers/
   " Close all buffers except the current one
-  nnoremap <leader>bd :<c-u>up <bar> %bd <bar> e#<cr>
-endif
-
-" Enable mouse support
-set mouse=a
-" Disable error bells
-set noerrorbells
-" Enhance command-line completion
-set wildmenu
-" Highlight current line
-set cursorline
-" Ignore case of searches
-set ignorecase
-" Highlight dynamically as pattern is typed
-set incsearch
-" Default updatetime is 4000 and too slowupdatetimeupdatetimeupdatetime
-set updatetime=300
-" Always show sign column to stop flip-flopping
-set signcolumn=yes
-if has("nvim")
-  " Support true color in nvim only, this feature causes colours to not render
-  " in vim in tmux
-  set termguicolors
+  nnoremap <leader>d :<c-u>up <bar> %bd <bar> e#<cr>
 endif
 
 "
@@ -315,10 +331,6 @@ set scrolloff=3
 " Optimise for faster terminal connections
 " set ttyfast
 
-if g:coc_enabled == 1
-  source ~/.config/vim/coc.vimrc
-endif
-
 "
 " *** Scope : Status Bar ***
 "
@@ -369,7 +381,7 @@ set formatoptions=jrql
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
-" source ~/.config/vim/netrw.vimrc
+" source ~/.config/vim/netrw.vim
 
 if g:slim < 7
   "
@@ -377,12 +389,10 @@ if g:slim < 7
   "
   let NERDTreeMinimalUI = 1
   let NERDTreeDirArrows = 1
+  let NERDTreeAutoDeleteBuffer = 1
 endif
 
 if g:slim < 9
-  " fzf config
-  let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
-
   colorscheme gruvbox
   set bg=dark
 endif
@@ -398,7 +408,7 @@ endif
 set splitright
 set splitbelow
 
-"source ~/.config/vim/terminal.vimrc
+"source ~/.config/vim/terminal.vim
 
 "
 " *** Scope : Markdown ***
@@ -420,16 +430,13 @@ if g:slim < 7
   set foldlevelstart=20
 
   if g:slim < 5
-    nnoremap <silent> <Leader>\ :Tabularize/\|<CR>
+    nnoremap <silent> <leader>\ :Tabularize/\|<CR>
   endif
 endif
 
 "
 " *** Scope : Python ***
 "
-" Disable python2 support
-" let g:loaded_python_provider = 0
-
 if g:slim < 2
-  source ~/.config/vim/experimental.vimrc
+  source ~/.config/vim/experimental.vim
 endif
