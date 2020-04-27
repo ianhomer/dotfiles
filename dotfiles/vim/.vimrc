@@ -191,7 +191,10 @@ nnoremap ; :
 if g:slim < 10
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :Files<CR>
-  nnoremap <silent> <leader>s :w<CR>
+  " save all files
+  nnoremap <silent> <leader>s :wall<CR>
+  " dummy map
+  nnoremap <silent> <leader>9 :echo "9 pressed"<CR>
 
   " close all buffers
   nnoremap <silent> <leader>1 :bufdo bd<CR>
@@ -227,6 +230,7 @@ let g:config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
 let g:reload_config = "source ".g:config_file
 if !exists("*ReloadConfig")
   function! ReloadConfig()
+    wall
     exec g:reload_config
     call RestartConfig()
     let config_message = has('nvim') ? "neo init.vm" : ".vimrc"

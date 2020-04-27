@@ -61,17 +61,12 @@ Term with multiple definitions and long lines
 
 ## Tables
 
-| asd    | as
-| asdasd | asd
-| asd    | asd
-
-| a       | b
-| -       | -
+| x       | y
+| --      | --
 | value1  | value2
 | value12 | value22
-| asd     | asd     |
+| asd     | asd
 
-
-| b    | c
-| -    | -
+| x    | y
+| --   | --
 | this |

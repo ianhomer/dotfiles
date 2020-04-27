@@ -10,8 +10,8 @@ augroup thingity
       \ nnoremap <buffer> <silent> <leader>t :call <SID>LintTable()<CR>
     autocmd FileType markdown
       \ inoremap <buffer> <silent> <Bar> <Bar><Esc>:call <SID>LintTable()<CR>$a
-    "autocmd FileType markdown
-    "  \ nnoremap <buffer> <silent> <leader>y Oi|x|y|<CR>|--|--|<CR><ESC>:call <SID>LintTable()<CR>
+    autocmd FileType markdown
+      \ nnoremap <buffer> <silent> <leader>y {j0i\|x\|y<CR>\|--\|--<CR><ESC>:call <SID>LintTable()<CR>
   else
     nnoremap <silent> <leader>t :echo "Tabular not installed"<CR>
   endif
