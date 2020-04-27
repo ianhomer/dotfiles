@@ -199,11 +199,9 @@ if g:slim < 10
     nnoremap <silent> <leader>b :BCommits<CR>
     nnoremap <silent> <leader>3 :Commits<CR>
     nnoremap <silent> <leader>h :History<CR>
-    nnoremap <silent> <leader>m :Maps<CR>
     nnoremap <silent> <leader>r :reg<CR>
     if g:slim < 7
       nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
-      nnoremap <leader>h :NERDTreeFind<CR>
     endif
   endif
 
@@ -270,8 +268,6 @@ if g:slim < 8
   " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
   " Close the current buffer and move to the previous one
   nnoremap <leader>q :<c-u>bp <bar> bd #<cr>
-  " Show all open buffers and their status
-  nnoremap <leader>l :ls<cr>
   " Thanks - https://www.rockyourcode.com/vim-close-all-other-buffers/
   " Close all buffers except the current one
   nnoremap <leader>d :<c-u>up <bar> %bd <bar> e#<cr>
@@ -430,10 +426,6 @@ if g:slim < 7
   let g:markdown_folding = 1
   " Default large fold level start, folding everything up by default feels odd.
   set foldlevelstart=20
-
-  if g:slim < 5
-    nnoremap <silent> <leader>\ :Tabularize/\|<CR>
-  endif
 endif
 
 "
