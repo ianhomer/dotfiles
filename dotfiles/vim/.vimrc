@@ -81,7 +81,7 @@ if g:slim < 7
   " polyglot
   if g:slim < 5 | Plug 'sheerun/vim-polyglot' | endif
   " tabular - Lining up columns
-  if g:slim < 5 | Plug 'godlygeek/tabular' | endif
+  Plug 'godlygeek/tabular'
   " fugitive - Git integration
   if g:slim < 5 | Plug 'tpope/vim-fugitive' | endif
   " NERDTree - show git changes
@@ -211,6 +211,9 @@ if g:slim < 10
     nnoremap <silent> <leader>2 :Format<CR>
   endif
 endif
+
+
+source ~/.config/vim/thingity.vim
 
 " Toggle power slim mode
 if !exists("*PowerToggle")
