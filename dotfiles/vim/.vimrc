@@ -77,31 +77,33 @@ if g:slim < 7
   " Coding
   "
 
-  "
-  " polyglot
-  if g:slim < 5 | Plug 'sheerun/vim-polyglot' | endif
   " tabular - Lining up columns
   Plug 'godlygeek/tabular'
+  " symlink - Follow symlink when opening file
+  Plug 'aymericbeaumet/vim-symlink'
+  " surround - Surround with brackets etc
+  Plug 'tpope/vim-surround'
+  " repeat - Repeat with mapped commands with . not just the native command
+  Plug 'tpope/vim-repeat'
+  " endwise - auto close structure
+  Plug 'tpope/vim-endwise'
+
+  " polyglot
+  if g:slim < 5 | Plug 'sheerun/vim-polyglot' | endif
   " fugitive - Git integration
   if g:slim < 5 | Plug 'tpope/vim-fugitive' | endif
+  " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
+  if g:slim < 5 | Plug 'preservim/nerdcommenter' | endif
   " NERDTree - show git changes
   if g:slim < 1 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
   " gitgutter - Git change indicator to left of window
   if g:slim < 1 | Plug 'airblade/vim-gitgutter' | endif
-  " symlink - Follow symlink when opening file
-  Plug 'aymericbeaumet/vim-symlink'
-  " surround - Surround with brackets etc
-  if g:slim < 5 | Plug 'tpope/vim-surround' | endif
-  " repeat - Repeat with .
-  if g:slim < 5 | Plug 'tpope/vim-repeat' | endif
   " HTML
   if g:slim < 1 | Plug 'mattn/emmet-vim' | endif
   " Linting
   if g:slim < 1 | Plug 'dense-analysis/ale' | endif
   " Handy mappings
   if g:slim < 1 | Plug 'tpope/vim-unimpaired' | endif
-  " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
-  if g:slim < 5 | Plug 'preservim/nerdcommenter' | endif
 
   " COC completion
   if g:coc_enabled == 1
@@ -129,8 +131,6 @@ if g:slim < 7
   "
   " goyo - Distraction free writing
   if g:slim < 7 | Plug 'junegunn/goyo.vim' | endif
-  " tabular - lining up text
-  if g:slim < 5 | Plug 'godlygeek/tabular' | endif
   " mardown preview
   if g:slim < 1 | Plug 'iamcco/markdown-preview.nvim',
         \ { 'do': 'cd app & yarn install' } | endif
