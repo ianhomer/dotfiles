@@ -193,6 +193,8 @@ if g:slim < 10
   nnoremap <silent> <leader>f :Files<CR>
   " save all files
   nnoremap <silent> <leader>s :wall<CR>
+  " select all
+  nnoremap <silent> <leader>4 ggVG
   " dummy map
   nnoremap <silent> <leader>9 :echo "9 pressed"<CR>
 
