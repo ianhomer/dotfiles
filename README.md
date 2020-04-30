@@ -69,62 +69,8 @@ however just look at bin/dotme to see what actually happens.
 You can also update parts of the initialisation separately, see `dotme -h` to
 get a list of each part. `man dotme` will give you more guidance on usage.
 
-## Manual Configuration
-
-I've not worked out how to automate all configuration. Until I do, this is what
-I manually do on each environment.
-
-### Initialise a few desktop apps
-
-#### Dozer
-
-Open dozer and configure menu hiding.
-
-### Alfred
-
-Open Alfred, set up privacy options, point configuration to a cloud storage of
-your choosing, and configure Alfred to your choosing.
-
-Alfred Preferences -> Advanced -> Set Preferences folder -> ~/.dotfiles/config/alfred
-
-### Slack
-
-Optimise slack performance
-
-Preferences -> Accessibility -> Allow animated images and emoji
-
-### Keyboard Configuration - MacOS
-
-System preferences
-
--> Keyboard -> Modifier Keys -> For each keyboard :
-
-- Caps Lock -> Escape
-
--> Keyboard -> Shortcuts -> 
-
-- Disable Mission Control Ctrl-arrow short cuts
-- Disable any other shortcuts that would never get used
-
--> Mission Control - remove all keyboard and mouse shortcuts
-
-For a Microsoft keyboard :
-
-- Option Key -> Command
-- Command Key -> Option
-
-And then use [keyboard shortcuts](https://support.google.com/mail/answer/6594) -
-see [Cheatsheet](./docs/cheats/) for my favourites.
-
-Optimise Spotlight so that's it's only used for application find. 
-
-System Preferences -> Spotlight -> Search Results -> remove all categories except Applications
-
-System Preferences -> Spotlight -> Privacy -> add all documents and project directories
-
-### Gmail
-
-Gmail -> Settings -> Keyboard Shortcuts -> Keyboard shortcuts on
+I configure a few things on my system [./docs/manual-configuration.md](manually)
+for minor tweaks and enhancements.
 
 ## Thanks
 
