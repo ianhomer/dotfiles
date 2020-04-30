@@ -52,8 +52,7 @@ Optimise Spotlight so that it's only used for application find.
 System Preferences -> Spotlight -> Search Results -> remove all categories
 except Applications
 
-System Preferences -> Spotlight -> Privacy -> add all documents and project
-directories
+System Preferences -> Spotlight -> Privacy -> add following directories
 
 - /System/Library/Frameworks
 - /System/Library/Perl
