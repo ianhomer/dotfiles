@@ -87,6 +87,12 @@ your choosing, and configure Alfred to your choosing.
 
 Alfred Preferences -> Advanced -> Set Preferences folder -> ~/.dotfiles/config/alfred
 
+### Slack
+
+Optimise slack performance
+
+Preferences -> Accessibility -> Allow animated images and emoji
+
 ### Keyboard Configuration - MacOS
 
 System preferences
