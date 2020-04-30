@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# Report on directories of files in spotlight / mds index
+#
+
+# Verbosity
+VERBOSE=1
+# Depth
+DEPTH=3
+
+# Search pattern, default "."
+PATTERN=${1:-.}
+
+[ "${VERBOSE}" == "1" ] && echo "Searching for spotlight files containing ${PATTERN}"
+
+mdfind -name $PATTERN | sed 's|^\(/[^/]*/[^/]*/[^/]*\).*$|\1|' | sort | uniq -c | sort -n
+
