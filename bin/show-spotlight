@@ -4,14 +4,32 @@
 #
 
 # Verbosity
-VERBOSE=1
+VERBOSE=0
 # Depth
-DEPTH=3
+DEPTH=4
+
+OPTIND=1         # Reset in case getopts has been used previously in the shell.
+
+while getopts "h?vd:" opt; do
+  case "$opt" in
+  h|\?)
+    command_help
+    exit 0
+    ;;
+  d) DEPTH=${OPTARG}
+    ;;
+  v) VERBOSE=1
+    ;;
+  esac
+done
+
+shift $((OPTIND-1))
 
 # Search pattern, default "."
 PATTERN=${1:-.}
 
 [ "${VERBOSE}" == "1" ] && echo "Searching for spotlight files containing ${PATTERN}"
+[ "${VERBOSE}" == "1" ] && echo "Depth : ${DEPTH}"
 
-mdfind -name $PATTERN | sed 's|^\(\(/[^/]*\){3}\).*$|\1|' | sort | uniq -c | sort -n
+mdfind -name $PATTERN | sed "s|^\(\(/[^/]*\)\{${DEPTH}\}\).*$|\1|" | sort | uniq -c | sort -n
 
