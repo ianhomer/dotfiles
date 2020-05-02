@@ -3,6 +3,7 @@
 | Alt-Space |    | OSX | Window   | Open Kitty
 | Cmd-Tab   |    | OSX | Window   | Cycle applications
 | Cmd-~     |    | OSX | Window   | Cycle Windows
+| Cmd-y     | *  | OSX | Cheats   | Open floating shell
 | Ctrl-Tab  | *  | OSX | Window   | Cycle Tabs
 | ghjk      | *  | vi  | Motion   | Left, Up, Down, Right
 | gg        |    | vi  | Motion   | Top of buffer
