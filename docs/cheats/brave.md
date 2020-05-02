@@ -31,14 +31,20 @@ Doesn't work in extension tabs due to security constraints.
 **go**
 : Go to URL
 
-**b**
-: Open a bookmark
+**t**, **b**
+: Search history, bookmarks
 
-**ss**,**sg**
-: Search stack overflow, google
+**f**, **v**
+: Find link, visual mode & go to text
 
 **i**,**I**
 : Go to input box, use vi edit mode
+
+**T**
+: Go to tab
+
+**ss**,**sg**
+: Search stack overflow, google
 
 **ya**
 : Copy a URL from the page
