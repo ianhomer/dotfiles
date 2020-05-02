@@ -1,3 +1,9 @@
+" Leader is space
+let mapleader = "\<Space>"
+
+" Semi-colon is easier for commands
+nnoremap ; :
+
 "
 " Load plugins
 " vimscript cheatsheet : https://devhints.io/vimscript
@@ -178,12 +184,6 @@ set clipboard=unnamed
 "
 " Command remapping
 "
-
-" Leader is space
-let mapleader = "\<Space>"
-
-" Semi-colon is easier for commands
-nnoremap ; :
 
 " My shortcuts
 " numbered leaders, e.g. <leader>1 are placeholders for command that may get

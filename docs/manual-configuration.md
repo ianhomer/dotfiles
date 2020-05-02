@@ -78,6 +78,12 @@ System Preferences -> Spotlight -> Privacy -> add following directories
 
 To report on what folders are in your index use `show-spotlight`.
 
+### Browser
+
+Install
+[Surfkeys](https://chrome.google.com/webstore/detail/surfingkeys/gfbliohnnapiefjpjlpjnehglfpaknnc)
+for vim like keys in browser. Type ? in browser for help.
+
 ### Gmail
 
 Gmail -> Settings -> Keyboard Shortcuts -> Keyboard shortcuts on
