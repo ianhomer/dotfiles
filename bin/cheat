@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#
+# Cheats
+#
+
+tail -n +3 ~/.dotfiles/docs/cheats/list.md | 
+  sed 's/|/ /g' | fzf
