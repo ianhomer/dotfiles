@@ -55,4 +55,3 @@ Doesn't work in extension tabs due to security constraints.
 **x**
 : Close a tab
 
-See https://github.com/brookhong/Surfingkeys for more details.
