@@ -52,6 +52,9 @@ Doesn't work in extension tabs due to security constraints.
 **yy**
 : Copy the current URL of the page
 
+**yG**
+: Screenshot full page
+
 **x**
 : Close a tab
 
