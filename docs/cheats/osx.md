@@ -9,7 +9,13 @@
 : Open special character window
 
 **Cmd+Tab**
-: Switch windows
+: Switch Application. Shift reverses.
+
+**Cmd+`**
+: Switch between windows in app. Shift reverses.
+
+**Ctrl+Tab**
+: Cycle through tabs in a window. Shift reverses.
 
 **Cmd+h**
 : Hide window
@@ -37,4 +43,8 @@
 
 **Cmd+Alt+D**
 : Show or hide dock
+
+## Links
+
+https://duckduckgo.com/?q=mac+shortcuts&t=brave&ia=cheatsheet&iax=1
 
