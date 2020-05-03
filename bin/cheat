@@ -3,5 +3,7 @@
 # Cheats
 #
 
-tail -n +3 ~/.dotfiles/docs/cheats/list.md | 
-  sed 's/|/ /g' | fzf
+cat ~/.dotfiles/docs/cheats/*.md | fzf-cheats | fzf
+
+# tail -n +3 ~/.dotfiles/docs/cheats/list.md | 
+#  sed 's/|/ /g' | fzf

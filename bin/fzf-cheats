@@ -11,10 +11,7 @@ def usage():
   scriptName = os.path.basename(__file__)
   print(f"{scriptName}")
 
-lineFormat = "{command:10s} {definition:20s}"
-
-def printLine(meta):
-  print(lineFormat.format(**meta))
+lineFormat = "{command:20s} {application:10s} {context:20s} {definition:20s}"
 
 metas = []
 
@@ -22,29 +19,47 @@ application = "default"
 context = "main"
 mark = ""
 command = "n/a"
-defintion = "definition"
+definition = "definition"
 
-DEBUG=1
+DEBUG=0
+
+def printLine(meta):
+  print(lineFormat.format(**meta))
+
+def debug(message):
+  if DEBUG: print("DEBUG : " + message)
 
 def parse(line):
-  if DEBUG: print("line : " + line)
+  global application, context, command, definition, mark
+  debug("line - " + line)
+  # Heading 
   match = re.search('^(#+) (.*)$', line)
   if match:
-    if DEBUG: print("heading : " + match.group(1) + ":" + match.group(2))
+    debug("heading : " + match.group(1) + ":" + match.group(2))
     headingDepth=len(match.group(1))
     if headingDepth == 2:
       application = match.group(2)
     else:
       context = match.group(2)
     return
+  # Command
   match = re.search('\*\*([^\*]*)\*\*', line)
   if match:
-    if DEBUG: print("command " + match.group(1))
+    debug("command " + match.group(1))
     command = match.group(1)
-
+    return
+  definition=line
+  # Definition
+  match = re.search('^: ([^;:\.]+).*$', line)
+  if match:
+    printLine({
+      "application": application,
+      "context": context,
+      "command": command,
+      "definition": match.group(1)
+    })
 
 def main(argv):
-  metas.append({"command":"x", "definition":"des"})
   for line in fileinput.input():
     parse(line.rstrip())
 
