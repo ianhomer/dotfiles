@@ -11,7 +11,8 @@ def usage():
   scriptName = os.path.basename(__file__)
   print(f"{scriptName}")
 
-lineFormat = "{command:20s} {application:10s} {context:20s} {definition:20s}"
+lineFormat = "\u001b[0m {command:20s} \u001b[32m{application:10s}" + \
+  " \u001b[33m{context:10s} \u001b[36m {definition:20s}"
 
 metas = []
 

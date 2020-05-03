@@ -1,6 +1,6 @@
-# Cheats - OSX
-
 ## OSX
+
+### Windows
 
 **Ctrl+Cmd+click+drag**
 : Move Window

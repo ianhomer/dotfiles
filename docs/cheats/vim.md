@@ -78,7 +78,7 @@
 **'** + letter
 : go to mark
 
-**Ctrl-^**
+**Ctrl+^**
 : switch to previous buffer
 
 **:tab h whatever**
@@ -177,7 +177,7 @@ percent **%**
 **ysiw"**
 : surround word with quotes
 
-**Ctrl-v**
+**Ctrl+v**
 : select visual block, e.g. column
 
 **:%!jq .**
@@ -186,25 +186,25 @@ percent **%**
 **:Tabularize /|** or \*\*space\*\*
 : Align paragraph on character
 
-**count<leader>cc**
+**count+space+cc**
 : comment out the next count lines
 
 **:Format**
 : Format current buffer
 
-**<leader>d**
+**space+d**
 : Open CoC diagnostics
 
 **nu**
 : Show line numbers
 
-### vi - Markdown
+### Markdown
 
 - **viWS+** - make a word bold
 - **zR** - open all folds
 - **zM** - close all folds
 
-### vi - Selections
+### Selections
 
 - **vip** - select paragraph
 - **viW** - select current word (including non-alphanumeric)

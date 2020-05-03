@@ -12,10 +12,10 @@
 **Option+Cmd b**
 : Open bookmarks
 
-**Ctrl-Tab**
-: Forward to nex tab
+**Ctrl+Tab**
+: Forward to next tab
 
-**Ctrl-Shift-Tab**
+**Ctrl+Shift+Tab**
 : Back to previous tab
 
 ### Surfkeys

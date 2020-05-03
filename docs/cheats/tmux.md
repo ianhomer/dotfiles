@@ -1,71 +1,77 @@
 ## tmux
 
-**Ctrl-a**
+**Ctrl+a**
 : prefix
 
 ### sessions
 
-prefix **\$**
+**Ctrl+a+$**
 : rename session
 
-prefix **s**
+**Ctrl+a+s**
 : choose session
 
-prefix **d**
+**Ctrl+a+d**
 : detach from session
 
 ### windows
 
-prefix **c**
+**Ctrl+a+c**
 : new window
 
-prefix **w**
+**Ctrl+a+w**
 : show windows
 
-prefix **,**
+**Ctrl+a+,**
 : rename window
 
-**Ctrl-Shift-arrow**
+**Ctrl+Shift+arrow**
 : move window left or right in tab order
 
 ### panes
 
-prefix **z**
+**Ctrl+a+z**
 : zoom in / out of current pane
 
-prefix **\** or **-**
-: split pane
+**Ctrl+a+\**
+: split pane right
 
-prefix **x**
+**Ctrl+a+-**
+: split pane below
+
+**Ctrl+a+x**
 : close pane
 
-**Opt-arrow**
+**Opt+arrow**
 : move between panes
 
-**Ctrl-hjkl**
-: move between panes including through vim panes
+**Ctrl+hjkl**
+: move between panes ; including through vim panes
 
-**Ctrl-arrow**
-: move between panes including through vim panes
+**Ctrl+arrow**
+: move between panes ; including through vim panes
 
-prefix **{}**
-: move pane left / right
+**Ctrl+a+{**
+: move pane left
+
+**Ctrl+a+}**
+: move pane right
 
 ### misc
 
-prefix **t**
+**Ctrl+a+t**
 : show time
 
-**prefix Ctrl-s**
+**Ctrl+a+s**
 : save tmux state
 
-**prefix Ctrl-r**
+**Ctrl+a+Ctrl-r**
 : reload tmux state
 
-prefix **space**
+**Ctrl+a+space**
 : toggle between layouts
 
-prefix **[**
+**Ctrl+a+[**
 : copy mode with **Enter** to copy selection
 
 hold option + mouse
