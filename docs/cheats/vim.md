@@ -2,42 +2,42 @@
 
 ## vim
 
-### leader
+### misc
 
-**space + space**
+**space+space**
 : Open buffers
 
-**space + r**
+**space+r**
 : Open (paste) registry
 
-**space + f**
+**space+f**
 : Open files
 
-**space + g**
+**space+g**
 : Open goyo
 
-**space + c**
+**space+c**
 : Commits
 
-**space + cw**
+**space+cw**
 : Clear white space
 
-**space + h**
+**space+h**
 : File open history
 
-**space + vc**
+**space+vc**
 : Reload vim configuration
 
-**space + n**
+**space+n**
 : Open nerd tree 
 
-**space + m**
-: Key board maps
+**space+m**
+: Keyboard maps
 
-**space + s**
+**space+s**
 : Save file
 
-### vim, files
+### files
 
 **:NERDTreeToggle** or **space+f**
 : Open file browser
@@ -90,10 +90,10 @@
 **:noh**
 : clear last highlight
 
-**:enew|pu=execute('autocmd')**
+**:enew | pu=execute('autocmd')**
 : copy output of command, e.g. autocmd, into buffer
 
-#### vi - NERDTree
+#### NERDTree
 
 **m**
 : open file actions
@@ -101,7 +101,7 @@
 **Shift+i**
 : show hidden files
 
-#### vi - netrw
+#### netrw
 
 **-**
 : up a directory
@@ -121,7 +121,7 @@
 percent **%**
 : create new file
 
-#### vi - navigation
+#### motion
 
 **0**
 :beginning of line
@@ -153,14 +153,14 @@ percent **%**
 percent **%**
 : next / previous bracket
 
-### vi - windows
+### windows
 
 - **:split,:vsplit** - split pane
 - **80 Ctrl-w** + - set current pane to 80 characters
 - **Ctrl-w+left/right** or **Ctrl-h/j/k/l** - move to another pane
 - **count<leader>cc** - comment out the next count lines
 
-### vi - editing
+### edit
 
 :**:Goyo**
 : distraction free coding
@@ -194,6 +194,9 @@ percent **%**
 
 **<leader>d**
 : Open CoC diagnostics
+
+**nu**
+: Show line numbers
 
 ### vi - Markdown
 

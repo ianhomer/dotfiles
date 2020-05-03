@@ -3,7 +3,10 @@
 # Cheats
 #
 
-cat ~/.dotfiles/docs/cheats/*.md | fzf-cheats | fzf
+cat ~/.dotfiles/docs/cheats/*.md |
+  fzf-cheats |
+  sort |
+  fzf --tiebreak=index
 
-# tail -n +3 ~/.dotfiles/docs/cheats/list.md | 
+# tail -n +3 ~/.dotfiles/docs/cheats/list.md |
 #  sed 's/|/ /g' | fzf
