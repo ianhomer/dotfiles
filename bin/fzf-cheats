@@ -4,7 +4,7 @@
 # Generate cheats for streaming into fzf
 #
 
-import os, sys, fileinput, getopt
+import os, re, sys, fileinput, getopt
 from pathlib import Path
 
 def usage():
@@ -18,10 +18,22 @@ def printLine(meta):
 
 metas = []
 
+application = "default"
+context = "main"
+mark = ""
+defintion = "definition"
+
+DEBUG=1
+
+def parse(line):
+  heading = re:search('^(#+) (.*)$')
+  if heading:
+    print("heading : ".heading.group(1).":".heading.group(2)) if DEBUG
+
 def main(argv):
   metas.append({"command":"x", "definition":"des"})
   for line in fileinput.input():
-    print(line.rstrip())
+    parse(line.rstrip())
 
   for meta in metas:
     printLine(meta)
