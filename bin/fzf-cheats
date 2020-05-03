@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+
+#
+# Generate cheats for streaming into fzf
+#
+
+import os, sys, fileinput, getopt
+from pathlib import Path
+
+def usage():
+  scriptName = os.path.basename(__file__)
+  print(f"{scriptName}")
+
+lineFormat = "{command:10s} {definition:20s}"
+
+def printLine(meta):
+  print(lineFormat.format(**meta))
+
+metas = []
+
+def main(argv):
+  metas.append({"command":"x", "definition":"des"})
+  for line in fileinput.input():
+    print(line.rstrip())
+
+  for meta in metas:
+    printLine(meta)
+
+if __name__ == "__main__":
+  main(sys.argv[1:])
+
