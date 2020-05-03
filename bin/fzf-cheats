@@ -21,14 +21,27 @@ metas = []
 application = "default"
 context = "main"
 mark = ""
+command = "n/a"
 defintion = "definition"
 
 DEBUG=1
 
 def parse(line):
-  heading = re:search('^(#+) (.*)$')
-  if heading:
-    print("heading : ".heading.group(1).":".heading.group(2)) if DEBUG
+  if DEBUG: print("line : " + line)
+  match = re.search('^(#+) (.*)$', line)
+  if match:
+    if DEBUG: print("heading : " + match.group(1) + ":" + match.group(2))
+    headingDepth=len(match.group(1))
+    if headingDepth == 2:
+      application = match.group(2)
+    else:
+      context = match.group(2)
+    return
+  match = re.search('\*\*([^\*]*)\*\*', line)
+  if match:
+    if DEBUG: print("command " + match.group(1))
+    command = match.group(1)
+
 
 def main(argv):
   metas.append({"command":"x", "definition":"des"})
