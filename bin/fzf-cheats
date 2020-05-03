@@ -11,8 +11,14 @@ def usage():
   scriptName = os.path.basename(__file__)
   print(f"{scriptName}")
 
-lineFormat = "\u001b[0m {command:20s} \u001b[32m{application:10s}" + \
-  " \u001b[33m{context:10s} \u001b[36m {definition:20s}"
+COMMAND_CHAR="⌘"
+SHIFT_CHAR="⇧"
+CONTROL_CHAR="⌃"
+OPTION_CHAR="⌥"
+SPACE_CHAR="␣"
+
+lineFormat = "\u001b[0m {command:15s} \u001b[32m{application:10s}" + \
+    " \u001b[33m{context:10s} \u001b[36m {definition:s} \u001b[30m{hidden:s}"
 
 metas = []
 
@@ -30,6 +36,14 @@ def printLine(meta):
 
 def debug(message):
   if DEBUG: print("DEBUG : " + message)
+
+def transformCommand(command):
+  return command \
+      .replace("Cmd+",COMMAND_CHAR) \
+      .replace("Shift+",SHIFT_CHAR) \
+      .replace("Ctrl+",CONTROL_CHAR) \
+      .replace("Option+",OPTION_CHAR) \
+      .replace("space+",SPACE_CHAR)
 
 def parse(line):
   global application, context, command, definition, mark, lastWasCommand
@@ -59,8 +73,9 @@ def parse(line):
     printLine({
       "application": application,
       "context": context,
-      "command": command,
-      "definition": match.group(1)
+      "command": transformCommand(command),
+      "definition": match.group(1),
+      "hidden" : command
     })
   lastWasCommand = 0
 
