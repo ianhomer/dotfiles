@@ -44,6 +44,17 @@
 **Cmd+Alt+D**
 : Show or hide dock
 
+**Ctrl+Fn+F3**
+
+**Ctrl+Fn+F3**
+: Use dock with arrow keys
+
+**Ctrl+Fn+F2**
+: Use menu with arrow keys
+
+
+See System Preferences -> Keyboard -> Shortcuts for details
+
 ## Links
 
 https://duckduckgo.com/?q=mac+shortcuts&t=brave&ia=cheatsheet&iax=1
