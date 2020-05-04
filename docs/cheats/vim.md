@@ -28,18 +28,20 @@
 **space+vc**
 : Reload vim configuration
 
-**space+n**
-: Open nerd tree 
+### maps
 
 **space+m**
 : Keyboard maps
 
+### files
+
+***space+n**
+: Open nerd tree 
+
 **space+s**
 : Save file
 
-### files
-
-**:NERDTreeToggle** or **space+f**
+*:NERDTreeToggle** or **space+f**
 : Open file browser
 
 **:cd**
@@ -162,7 +164,7 @@ percent **%**
 
 ### edit
 
-:**:Goyo**
+**space+g**, **:Goyo**
 : distraction free coding
 
 **gw{motion}**
