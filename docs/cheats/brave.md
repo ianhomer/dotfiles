@@ -25,26 +25,44 @@ Doesn't work in extension tabs due to security constraints.
 **?**
 : Help
 
-**e/d**
-: page up / down
+**e**
+: page up 
+
+**d**
+: page down
 
 **go**
 : Go to URL
 
-**t**, **b**
-: Search history, bookmarks
+**t**
+: Search history
 
-**f**, **v**
-: Find link, visual mode & go to text
+**b**
+: Search bookmarks
 
-**i**,**I**
-: Go to input box, use vi edit mode
+**f**
+: Find link
+
+**v**
+: Find text (visual mode)
+
+**i**
+: Go to input box
+
+**I**
+: Go to input box with vi edit mode
 
 **T**
 : Go to tab
 
-**ss**,**sg**
-: Search stack overflow, google
+**gxx**
+: Close all tabs except current one 
+
+**ss**
+: Search stack overflow
+
+**sg**
+: Search google
 
 **ya**
 : Copy a URL from the page
