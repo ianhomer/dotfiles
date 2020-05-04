@@ -15,7 +15,7 @@
 **Ctrl+Tab**
 : Forward to next tab
 
-**Ctrl+Shift+Tab**
+**Shift+Ctrl+Tab**
 : Back to previous tab
 
 ### Surfkeys

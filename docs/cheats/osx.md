@@ -29,19 +29,19 @@
 **Cmd+z**
 : Undo
 
-**Cmd+Shift+.** - in finder window
+**Shift+Cmd+.** - in finder window
 : Show hidden files
 
-**Cmd+Shift+3**
+**Shift+Cmd+3**
 : full screen shot capture
 
-**Cmd+Shift+4**
+**Shift+Cmd+4**
 : select portion of screen to capture
 
-**Cmd+Shift+5**
+**Shift+Cmd+5**
 : screen shot interactive mode
 
-**Cmd+Alt+D**
+**Cmd+Alt+d**
 : Show or hide dock
 
 **Ctrl+Fn+F3**

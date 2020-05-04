@@ -25,7 +25,7 @@
 **Ctrl+a+,**
 : rename window
 
-**Ctrl+Shift+arrow**
+**Shift+Ctrl+arrow**
 : move window left or right in tab order
 
 ### panes

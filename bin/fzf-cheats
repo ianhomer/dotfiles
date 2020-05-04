@@ -17,8 +17,8 @@ CONTROL_CHAR="⌃"
 OPTION_CHAR="⌥"
 SPACE_CHAR="␣"
 
-lineFormat = "\u001b[0m {command:15s} \u001b[32m{application:10s}" + \
-    " \u001b[33m{context:10s} \u001b[36m {definition:s} \u001b[30m{hidden:s}"
+lineFormat = "\u001b[0m {command:20s} \u001b[32m{application:10s}" + \
+  " \u001b[33m{context:10s} \u001b[36m {definition:s}"
 
 metas = []
 
@@ -37,13 +37,22 @@ def printLine(meta):
 def debug(message):
   if DEBUG: print("DEBUG : " + message)
 
+def hidden(s):
+  return "\u001b[30m" + s + "\u001b[0m"
+
+COMMAND_REPLACE = hidden("cmd") + COMMAND_CHAR
+SHIFT_REPLACE = hidden("shift") + SHIFT_CHAR
+CONTROL_REPLACE = hidden("ctrl") + CONTROL_CHAR
+OPTION_REPLACE = hidden("opt") + OPTION_CHAR
+SPACE_REPLACE = hidden("space") + SPACE_CHAR
+
 def transformCommand(command):
   return command \
-      .replace("Cmd+",COMMAND_CHAR) \
-      .replace("Shift+",SHIFT_CHAR) \
-      .replace("Ctrl+",CONTROL_CHAR) \
-      .replace("Option+",OPTION_CHAR) \
-      .replace("space+",SPACE_CHAR)
+    .replace("Cmd+",COMMAND_REPLACE) \
+    .replace("Shift+",SHIFT_REPLACE) \
+    .replace("Ctrl+",CONTROL_REPLACE) \
+    .replace("Option+",OPTION_REPLACE) \
+    .replace("space+",SPACE_REPLACE)
 
 def parse(line):
   global application, context, command, definition, mark, lastWasCommand
@@ -73,9 +82,8 @@ def parse(line):
     printLine({
       "application": application,
       "context": context,
-      "command": transformCommand(command),
-      "definition": match.group(1),
-      "hidden" : command
+      "command": command,
+      "definition": match.group(1)
     })
   lastWasCommand = 0
 
