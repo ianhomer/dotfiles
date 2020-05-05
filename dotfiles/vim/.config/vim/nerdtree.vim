@@ -1,3 +1,6 @@
+let g:NERDTreeRespectWildIgnore = 1
+let g:NERDTreeIgnore = [ '^node_modules$' ]
+
 function! NERDTreeFindOrToggle()
   if g:NERDTree.IsOpen() || @% == ""
     NERDTreeToggle
