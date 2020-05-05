@@ -287,6 +287,11 @@ endif
 augroup dotme
   autocmd!
 
+  augroup SyntaxSettings
+    autocmd!
+    autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+  augroup END
+
   if g:slim < 8
     "
     " *** Scope : Editing ***
