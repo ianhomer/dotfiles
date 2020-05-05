@@ -31,7 +31,10 @@
 ### maps
 
 **space+m**
-: Keyboard maps
+: Keyboard map for normal mode
+
+**space+l**
+: Keyboard map for insert mode
 
 ### files
 

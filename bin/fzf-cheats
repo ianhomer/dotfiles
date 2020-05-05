@@ -31,6 +31,9 @@ lastWasCommand = 0
 
 DEBUG=0
 
+class Command:
+
+
 def printLine(meta):
   print(lineFormat.format(**meta))
 
