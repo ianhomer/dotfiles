@@ -4,17 +4,8 @@
 
 ### misc
 
-**space+space**
-: Open buffers
-
 **space+r**
 : Open (paste) registry
-
-**space+f**
-: Open files
-
-**space+g**
-: Open goyo
 
 **space+c**
 : Commits
@@ -25,13 +16,13 @@
 **space+h**
 : File open history
 
-**space+vc**
-: Reload vim configuration
-
 ### maps
 
 **space+m**
 : Keyboard map for normal mode
+
+**:Maps!**
+: Open maps in full screen
 
 **space+l**
 : Keyboard map for insert mode
@@ -42,7 +33,7 @@
 : Open nerd tree 
 
 **space+s**
-: Save file
+: Save all files
 
 *:NERDTreeToggle** or **space+f**
 : Open file browser
@@ -51,13 +42,7 @@
 : change directory
 
 **space + r** or **:reg**
-: show paste buffer
-
-**:bd**
-: close buffer
-
-**:bn**
-: next buffer
+: show paste registry
 
 **"2p**
 : paste a previous cut
@@ -73,9 +58,6 @@
 
 **tabe**
 : open file in new tab
-
-**bufdo bd**
-: close all buffers
 
 **m** + letter
 : set mark
@@ -97,6 +79,26 @@
 
 **:enew | pu=execute('autocmd')**
 : copy output of command, e.g. autocmd, into buffer
+
+### buffers
+
+**:bd**
+: close buffer
+
+**:bn**
+: next buffer
+
+**bufdo bd**
+: close all buffers
+
+**space+b**
+: Commits for current buffer
+
+**space+5**
+: Close all buffers except current one
+
+**space+space**
+: Show buffers
 
 #### NERDTree
 
@@ -168,7 +170,7 @@ percent **%**
 ### edit
 
 **space+g**, **:Goyo**
-: distraction free coding
+: distraction free coding with Goyo
 
 **gw{motion}**
 : reformat content
@@ -200,8 +202,17 @@ percent **%**
 **space+d**
 : Open CoC diagnostics
 
-**nu**
+**:nu**
 : Show line numbers
+
+**:set rnu**
+: Show relative line numbers
+
+**star**
+: Search for next occurence of word under cursor
+
+**space+w**
+: Clear white space at end of lines
 
 ### Markdown
 
@@ -213,4 +224,13 @@ percent **%**
 
 - **vip** - select paragraph
 - **viW** - select current word (including non-alphanumeric)
+
+### Configuration
+
+**space+p**
+: Toggle power configuration
+
+**space+v**
+: Reload vim configuration
+
 

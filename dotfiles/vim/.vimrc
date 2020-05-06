@@ -276,7 +276,7 @@ if g:slim < 8
   nnoremap <leader>q :<c-u>bp <bar> bd #<cr>
   " Thanks - https://www.rockyourcode.com/vim-close-all-other-buffers/
   " Close all buffers except the current one
-  nnoremap <leader>d :<c-u>up <bar> %bd <bar> e#<cr>
+  nnoremap <leader>5 :<c-u>up <bar> %bd <bar> e#<cr>
 endif
 
 "
