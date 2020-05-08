@@ -187,13 +187,15 @@ set clipboard=unnamed
 
 " Numbered modes of configuration
 " 0 = vanilla mode
-nnoremap <silent> <leader>1 :set nornu<CR>
-" 2 = mobbing mode
-nnoremap <silent> <leader>2 :set rnu<CR>
+nnoremap <silent> <leader>1 :set nonu<CR>:set nornu<CR>
+" 2 = personal dev mode
+nnoremap <silent> <leader>2 :set rnu<CR>:set nu<CR>
+" 3 = mobbing mode
+nnoremap <silent> <leader>3 :set nu<CR>:set nornu<CR>
 
 
 " My shortcuts
-" numbered leaders, e.g. <leader>1 are placeholders for command that may get
+" numbered leaders, e.g. <leader>5+ are placeholders for command that may get
 " mapped to a better key once matured.
 if g:slim < 10
   nnoremap <silent> <leader><space> :Buffers<CR>
@@ -209,7 +211,7 @@ if g:slim < 10
   nnoremap <silent> <leader>8 :bufdo bd<CR>
   if g:slim < 8
     nnoremap <silent> <leader>b :BCommits<CR>
-    nnoremap <silent> <leader>3 :Commits<CR>
+    nnoremap <silent> <leader>6 :Commits<CR>
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
     if g:slim < 7
