@@ -57,13 +57,20 @@
 **Ctrl+a+}**
 : move pane right
 
+### maps
+
+**Ctrl+a+?**
+: show bindings
+
+### edit
+
+**Ctrl+a+[**
+: vi copy mode with **Enter** to copy selection
+
 ### misc
 
 **Ctrl+a+t**
 : show time
-
-**Ctrl+a+s**
-: save tmux state
 
 **Ctrl+a+Ctrl-r**
 : reload tmux state
@@ -71,16 +78,11 @@
 **Ctrl+a+space**
 : toggle between layouts
 
-**Ctrl+a+[**
-: copy mode with **Enter** to copy selection
-
 hold option + mouse
 : bypass tmux mouse handling and do iterm action
 
 click command click
 : block select
-
-from outside tmux
 
 **tmux ls**
 : list sessions
