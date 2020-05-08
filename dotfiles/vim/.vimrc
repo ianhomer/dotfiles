@@ -214,6 +214,9 @@ if g:slim < 10
   nnoremap <silent> <leader>f :Files<CR>
   " save all files
   nnoremap <silent> <leader>s :wall<CR>
+  " reset things
+  nnoremap <silent> <leader>z :noh<CR>
+
   " select all
   nnoremap <silent> <leader>7 ggVG
   " dummy map
