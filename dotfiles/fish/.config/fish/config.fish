@@ -65,7 +65,7 @@ if status --is-interactive
   # * fish_vi_key_bindings -> vi key bindings
   # * fish_default_key_bindings -> default key bindings
   #
-  fish_default_key_bindings
+  fish_vi_key_bindings
   # Time between escape key press and subsequent character
   set -g fish_escape_delay_ms 200
 end

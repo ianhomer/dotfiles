@@ -185,6 +185,13 @@ set clipboard=unnamed
 " Command remapping
 "
 
+" Numbered modes of configuration
+" 0 = vanilla mode
+nnoremap <silent> <leader>1 :set nornu<CR>
+" 2 = mobbing mode
+nnoremap <silent> <leader>2 :set rnu<CR>
+
+
 " My shortcuts
 " numbered leaders, e.g. <leader>1 are placeholders for command that may get
 " mapped to a better key once matured.
@@ -194,12 +201,12 @@ if g:slim < 10
   " save all files
   nnoremap <silent> <leader>s :wall<CR>
   " select all
-  nnoremap <silent> <leader>4 ggVG
+  nnoremap <silent> <leader>7 ggVG
   " dummy map
   nnoremap <silent> <leader>9 :echo "9 pressed"<CR>
 
   " close all buffers
-  nnoremap <silent> <leader>1 :bufdo bd<CR>
+  nnoremap <silent> <leader>8 :bufdo bd<CR>
   if g:slim < 8
     nnoremap <silent> <leader>b :BCommits<CR>
     nnoremap <silent> <leader>3 :Commits<CR>
@@ -211,7 +218,7 @@ if g:slim < 10
   endif
 
   if g:coc_enabled == 1
-    nnoremap <silent> <leader>2 :Format<CR>
+    nnoremap <silent> <leader>6 :Format<CR>
   endif
 endif
 
