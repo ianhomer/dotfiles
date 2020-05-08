@@ -20,6 +20,10 @@ Install keycastr to see key presses on screen
 
     brew cask install keycastr
 
+To debug key pressess into kitty
+
+    kitty --debug-keyboard
+
 ## Reset Alfred Preferences
 
 To change alfred to use local preferences, not synced one :
