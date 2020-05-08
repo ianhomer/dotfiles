@@ -259,6 +259,9 @@ if g:slim < 8
   nnoremap <leader>w :%s/\s\+$//g<CR>:nohlsearch<CR>
 endif
 
+" Write all buffers before navigating from Vim to tmux pane
+let g:tmux_navigator_save_on_switch = 2
+
 " *** Scope : Writing ***
 
 " Goyo distraction free writing
