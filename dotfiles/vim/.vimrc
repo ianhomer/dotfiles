@@ -185,6 +185,19 @@ set clipboard=unnamed
 " Command remapping
 "
 
+" Identify free leader mappings
+" 
+nnoremap <silent> <leader>i :echo "i not mapped"<CR>
+nnoremap <silent> <leader>e :echo "e not mapped"<CR>
+nnoremap <silent> <leader>j :echo "j not mapped"<CR>
+nnoremap <silent> <leader>k :echo "k not mapped"<CR>
+nnoremap <silent> <leader>o :echo "o not mapped"<CR>
+nnoremap <silent> <leader>t :echo "t not mapped"<CR>
+nnoremap <silent> <leader>u :echo "u not mapped"<CR>
+nnoremap <silent> <leader>x :echo "x not mapped"<CR>
+nnoremap <silent> <leader>y :echo "y not mapped"<CR>
+nnoremap <silent> <leader>z :echo "z not mapped"<CR>
+
 " Numbered modes of configuration
 " 0 = vanilla mode
 nnoremap <silent> <leader>1 :set nonu<CR>:set nornu<CR>
