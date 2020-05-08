@@ -193,7 +193,6 @@ nnoremap <silent> <leader>2 :set rnu<CR>:set nu<CR>
 " 3 = mobbing mode
 nnoremap <silent> <leader>3 :set nu<CR>:set nornu<CR>
 
-
 " My shortcuts
 " numbered leaders, e.g. <leader>5+ are placeholders for command that may get
 " mapped to a better key once matured.
