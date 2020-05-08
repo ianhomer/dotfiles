@@ -188,15 +188,11 @@ set clipboard=unnamed
 " Identify free leader mappings
 " 
 nnoremap <silent> <leader>i :echo "i not mapped"<CR>
-nnoremap <silent> <leader>e :echo "e not mapped"<CR>
 nnoremap <silent> <leader>j :echo "j not mapped"<CR>
 nnoremap <silent> <leader>k :echo "k not mapped"<CR>
-nnoremap <silent> <leader>o :echo "o not mapped"<CR>
 nnoremap <silent> <leader>t :echo "t not mapped"<CR>
 nnoremap <silent> <leader>u :echo "u not mapped"<CR>
-nnoremap <silent> <leader>x :echo "x not mapped"<CR>
 nnoremap <silent> <leader>y :echo "y not mapped"<CR>
-nnoremap <silent> <leader>z :echo "z not mapped"<CR>
 
 " Numbered modes of configuration
 " 0 = vanilla mode
@@ -218,15 +214,15 @@ if g:slim < 10
   nnoremap <silent> <leader>z :noh<CR>
 
   " select all
-  nnoremap <silent> <leader>7 ggVG
+  nnoremap <silent> <leader>o ggVG
   " dummy map
   nnoremap <silent> <leader>9 :echo "9 pressed"<CR>
 
   " close all buffers
-  nnoremap <silent> <leader>8 :bufdo bd<CR>
+  nnoremap <silent> <leader>x :bufdo bd<CR>
   if g:slim < 8
     nnoremap <silent> <leader>b :BCommits<CR>
-    nnoremap <silent> <leader>6 :Commits<CR>
+    nnoremap <silent> <leader>e :Commits<CR>
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
     if g:slim < 7
@@ -235,7 +231,7 @@ if g:slim < 10
   endif
 
   if g:coc_enabled == 1
-    nnoremap <silent> <leader>6 :Format<CR>
+    nnoremap <silent> <leader>k :Format<CR>
   endif
 endif
 
