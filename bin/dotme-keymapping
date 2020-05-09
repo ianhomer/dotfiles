@@ -19,6 +19,25 @@ case $mode in
   set)
     userkeymapping
     ;;
+  install)
+    cat<<EOF >"$HOME"/Library/LaunchAgents/userkeymapping.plist
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>userkeymapping</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>$HOME/.dotfiles/bin/userkeymapping</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+</dict>
+</plist>
+EOF
+    launchctl load "$HOME"/Library/LaunchAgents/userkeymapping.plist
+    ;;
   reset)
     hidutil property --set '{"UserKeyMapping":[{}]}'
     echo "...Resetting user key mapping"
