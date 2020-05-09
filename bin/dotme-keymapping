@@ -18,13 +18,12 @@ case $mode in
     ;;
   set)
     echo "...Set not implemented yet"
-    value=`cat $keymappingFile | tr '\n' ' ' | sed 's|[[:space:]]||g'`
-    echo $value
+    value=`userkeymapping`
     hidutil property --set $value
     ;;
   reset)
     hidutil property --set '{"UserKeyMapping":[{}]}'
-    echo "...Resetting user key mbpping"
+    echo "...Resetting user key mapping"
     ;;
   *)
     echo "... mode $mode not recognised"
