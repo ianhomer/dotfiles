@@ -208,6 +208,7 @@ nnoremap <silent> <leader>3 :set nu<CR>:set nornu<CR>
 if g:slim < 10
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :Files<CR>
+  nnoremap <silent> <leader>F :Files!<CR>
   " save all files
   nnoremap <silent> <leader>s :wall<CR>
   " reset things
@@ -222,7 +223,9 @@ if g:slim < 10
   nnoremap <silent> <leader>x :bufdo bd<CR>
   if g:slim < 8
     nnoremap <silent> <leader>b :BCommits<CR>
+    nnoremap <silent> <leader>B :BCommits!<CR>
     nnoremap <silent> <leader>e :Commits<CR>
+    nnoremap <silent> <leader>E :Commits!<CR>
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
     if g:slim < 7

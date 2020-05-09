@@ -16,4 +16,5 @@ command! -bar -bang MapsInsert
   \ call fzf#vim#maps("i", {'options': '--tiebreak=index'}, <bang>0)
 
 nnoremap <silent> <leader>m :Maps<CR>
+nnoremap <silent> <leader>M :Maps!<CR>
 nnoremap <silent> <leader>l :MapsInsert<CR>
