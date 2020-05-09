@@ -17,9 +17,7 @@ case $mode in
     hidutil property --get "UserKeyMapping"
     ;;
   set)
-    echo "...Set not implemented yet"
-    value=`userkeymapping`
-    hidutil property --set $value
+    userkeymapping
     ;;
   reset)
     hidutil property --set '{"UserKeyMapping":[{}]}'
