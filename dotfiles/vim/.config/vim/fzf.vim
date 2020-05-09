@@ -17,4 +17,4 @@ command! -bar -bang MapsInsert
 
 nnoremap <silent> <leader>m :Maps<CR>
 nnoremap <silent> <leader>M :Maps!<CR>
-nnoremap <silent> <leader>l :MapsInsert<CR>
+nnoremap <silent> <leader>k :MapsInsert<CR>

@@ -233,11 +233,20 @@ if g:slim < 10
     endif
   endif
 
-  if g:coc_enabled == 1
-    nnoremap <silent> <leader>k :Format<CR>
-  endif
+  nnoremap <silent> <leader>l :call LintMe()<CR>
 endif
 
+function! LintMe()
+  echo "Linting ..".&filetype
+  if g:coc_enabled == 1
+    " Lint
+    Format
+  else
+    if &filetype == "json"
+      execute "%!jq ."
+    endif
+  endif
+endfunction
 
 source ~/.config/vim/thingity.vim
 
