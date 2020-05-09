@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# 
+# Show key mapping
+#
+# See 
+# - https://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x/46460200#46460200
+# - https://developer.apple.com/library/archive/technotes/tn2450/_index.html#//apple_ref/doc/uid/DTS40017618-CH1-KEY_TABLE_USAGES
+# - https://apple.stackexchange.com/questions/283252/how-do-i-remap-a-key-in-macos-sierra-e-g-right-alt-to-right-control
+
+mode=${1:-"show"}
+
+keymappingFile=~/.dotfiles/config/osx/keymapping.json
+
+case $mode in
+  show)
+    echo "... Current key mapping"
+    hidutil property --get "UserKeyMapping"
+    ;;
+  set)
+    echo "...Set not implemented yet"
+    value=`cat $keymappingFile | tr '\n' ' ' | sed 's|[[:space:]]||g'`
+    echo $value
+    hidutil property --set $value
+    ;;
+  reset)
+    hidutil property --set '{"UserKeyMapping":[{}]}'
+    echo "...Resetting user key mbpping"
+    ;;
+  *)
+    echo "... mode $mode not recognised"
+    ;;
+esac
+
