@@ -363,7 +363,7 @@ set list
 " Add operator af for all file
 onoremap af :<C-u>normal! ggVG<CR>
 
-" Return to visual mode after indenting
+" Return to visual mode after indening
 vnoremap < <gv
 vnoremap > >gv
 
