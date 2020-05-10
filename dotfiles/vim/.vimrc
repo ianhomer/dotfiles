@@ -181,13 +181,14 @@ set formatoptions=jrql
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
+
 "
 " Command remapping
 "
 source ~/.config/vim/modes.vim
 
 " Identify free leader mappings
-" 
+"
 nnoremap <silent> <leader>i :echo "i not mapped"<CR>
 nnoremap <silent> <leader>j :echo "j not mapped"<CR>
 nnoremap <silent> <leader>k :echo "k not mapped"<CR>
@@ -359,7 +360,6 @@ augroup end
 exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
 set list
 
-"
 " *** Scope : IO ***
 "
 " Auto reload underlying file if it changes, although
