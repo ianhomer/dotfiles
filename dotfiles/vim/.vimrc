@@ -184,41 +184,7 @@ set clipboard=unnamed
 "
 " Command remapping
 "
-
-" 1 = vanilla mode
-function ResetMode() 
-  set nonu
-  set nornu
-endfunction
-
-" 2 = personal dev mode
-function PersonalDevMode()
-  call ResetMode()
-  set rnu
-  set nu
-endfunction
-
-" 3 = mobbing mode
-function MobbingMode()
-  call ResetMode()
-  set nu
-endfunction
-
-" 4 = training mode
-function TrainingMode()
-  call ResetMode()
-  set rnu
-  noremap <Up> <NOP>
-  noremap <Down> <NOP>
-  noremap <Left> <NOP>
-  noremap <Right> <NOP>
-endfunction
-
-" Numbered modes of configuration
-nnoremap <silent> <leader>1 :call ResetMode()<CR>
-nnoremap <silent> <leader>2 :call PersonalDevMode()<CR>
-nnoremap <silent> <leader>3 :call MobbingMode()<CR>
-nnoremap <silent> <leader>4 :call TrainingMode()<CR>
+source ~/.config/vim/modes.vim
 
 " Identify free leader mappings
 " 
@@ -230,8 +196,6 @@ nnoremap <silent> <leader>u :echo "u not mapped"<CR>
 nnoremap <silent> <leader>y :echo "y not mapped"<CR>
 
 " My shortcuts
-" numbered leaders, e.g. <leader>5+ are placeholders for command that may get
-" mapped to a better key once matured.
 if g:slim < 10
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :Files<CR>
