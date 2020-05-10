@@ -360,6 +360,9 @@ augroup end
 exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
 set list
 
+" Add operator af for all file
+onoremap af :<C-u>normal! ggVG<CR>
+
 " *** Scope : IO ***
 "
 " Auto reload underlying file if it changes, although

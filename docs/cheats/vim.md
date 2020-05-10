@@ -214,6 +214,9 @@ percent **%**
 **space+w**
 : Clear white space at end of lines
 
+**yaf**
+: Yank all filw
+
 ### Markdown
 
 - **viWS+** - make a word bold

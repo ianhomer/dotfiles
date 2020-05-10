@@ -53,7 +53,6 @@ function! TrainingMode()
   vnoremap <Down> :call DisabledEcho("visual mode down")<CR>
   vnoremap <Left> :call DisabledEcho("visual mode left")<CR>
   vnoremap <Right> :call DisabledEcho("visual mode right")<CR>
-
 endfunction
 
 " Numbered modes of configuration
