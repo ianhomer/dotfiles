@@ -1,9 +1,6 @@
 " Leader is space
 let mapleader = "\<Space>"
 
-" Semi-colon is easier for commands
-nnoremap ; :
-
 "
 " Load plugins
 " vimscript cheatsheet : https://devhints.io/vimscript
