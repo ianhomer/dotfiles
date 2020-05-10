@@ -363,6 +363,10 @@ set list
 " Add operator af for all file
 onoremap af :<C-u>normal! ggVG<CR>
 
+" Return to visual mode after indenting
+vnoremap < <gv
+vnoremap > >gv
+
 " *** Scope : IO ***
 "
 " Auto reload underlying file if it changes, although

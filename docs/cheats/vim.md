@@ -29,13 +29,13 @@
 
 ### files
 
-***space+n**
+**space+n**
 : Open nerd tree 
 
 **space+s**
 : Save all files
 
-*:NERDTreeToggle** or **space+f**
+**:NERDTreeToggle** or **space+f**
 : Open file browser
 
 **:cd**
@@ -159,6 +159,9 @@ percent **%**
 
 percent **%**
 : next / previous bracket
+
+**,star**
+: search for word under cursor
 
 ### windows
 
