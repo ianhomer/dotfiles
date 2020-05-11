@@ -17,6 +17,7 @@ else
   alias gsv="git status -v"
   alias gits="git status"
   alias gd="git diff"
+  alias gds="git diff --staged"
   alias gdc="git diff --cached"
   alias git-diff="git diff"
   alias git-diff-head~="git diff HEAD~"
