@@ -1,5 +1,6 @@
 " Leader is space
 let mapleader = "\<Space>"
+let maplocalleader = "\,"
 
 "
 " Load plugins
@@ -23,7 +24,7 @@ let g:vim_dir = "~/.vim"
 " configuration and plugins with control.
 "
 let g:slim = exists('$VIM_SLIM') ? $VIM_SLIM : exists('g:slim_session') ?
-  \ g:slim_session : 6
+  \ g:slim_session : 5
 
 if has('nvim')
   let g:coc_enabled = g:slim < 5 ? 1 : 0
@@ -77,6 +78,12 @@ if g:slim < 7
   Plug 'christoomey/vim-tmux-navigator'
 
   "
+  " Help
+  "
+  " vim-which-key - guidance on what keys do
+  Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
+  "
   " Coding
   "
 
@@ -92,11 +99,11 @@ if g:slim < 7
   Plug 'tpope/vim-endwise'
 
   " polyglot
-  if g:slim < 5 | Plug 'sheerun/vim-polyglot' | endif
+  if g:slim < 3 | Plug 'sheerun/vim-polyglot' | endif
   " fugitive - Git integration
-  if g:slim < 5 | Plug 'tpope/vim-fugitive' | endif
+  if g:slim < 3 | Plug 'tpope/vim-fugitive' | endif
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
-  if g:slim < 5 | Plug 'preservim/nerdcommenter' | endif
+  if g:slim < 3 | Plug 'preservim/nerdcommenter' | endif
   " NERDTree - show git changes
   if g:slim < 1 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
   " gitgutter - Git change indicator to left of window
@@ -155,6 +162,8 @@ set ignorecase
 set incsearch
 " Default updatetime is 4000 and too slow
 set updatetime=300
+" Quicker timeout between key presses
+set timeoutlen=500
 " Always show sign column to stop flip-flopping
 set signcolumn=yes
 if has("nvim")
@@ -219,6 +228,8 @@ if g:slim < 10
     nnoremap <silent> <leader>r :reg<CR>
     if g:slim < 7
       nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
+      nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+      nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
     endif
   endif
 
