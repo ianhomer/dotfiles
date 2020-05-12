@@ -24,7 +24,7 @@ let g:vim_dir = "~/.vim"
 " configuration and plugins with control.
 "
 let g:slim = exists('$VIM_SLIM') ? $VIM_SLIM : exists('g:slim_session') ?
-  \ g:slim_session : 5
+  \ g:slim_session : 6
 
 if has('nvim')
   let g:coc_enabled = g:slim < 5 ? 1 : 0
