@@ -198,7 +198,6 @@ source ~/.config/vim/modes.vim
 nnoremap <silent> <leader>i :echo "i not mapped"<CR>
 nnoremap <silent> <leader>j :echo "j not mapped"<CR>
 nnoremap <silent> <leader>k :echo "k not mapped"<CR>
-nnoremap <silent> <leader>t :echo "t not mapped"<CR>
 nnoremap <silent> <leader>u :echo "u not mapped"<CR>
 nnoremap <silent> <leader>y :echo "y not mapped"<CR>
 
@@ -228,6 +227,7 @@ if g:slim < 10
     nnoremap <silent> <leader>r :reg<CR>
     if g:slim < 7
       nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
+      nnoremap <silent> <leader>t :execute 'NERDTree ~/projects/things'<CR>
       nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
     endif
