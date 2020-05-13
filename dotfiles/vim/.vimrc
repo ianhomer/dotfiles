@@ -207,6 +207,9 @@ if g:slim < 10
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :Files<CR>
   nnoremap <silent> <leader>F :Files!<CR>
+
+  nnoremap <silent> <leader>i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
+ 
   " save all files
   nnoremap <silent> <leader>s :wall<CR>
   " reset things
