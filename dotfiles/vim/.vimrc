@@ -101,7 +101,7 @@ if g:slim < 7
   " polyglot
   if g:slim < 3 | Plug 'sheerun/vim-polyglot' | endif
   " fugitive - Git integration
-  if g:slim < 3 | Plug 'tpope/vim-fugitive' | endif
+  Plug 'tpope/vim-fugitive'
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
   if g:slim < 3 | Plug 'preservim/nerdcommenter' | endif
   " NERDTree - show git changes
@@ -140,7 +140,7 @@ if g:slim < 7
   " Writing
   "
   " goyo - Distraction free writing
-  if g:slim < 7 | Plug 'junegunn/goyo.vim' | endif
+  Plug 'junegunn/goyo.vim'
   " mardown preview
   if g:slim < 1 | Plug 'iamcco/markdown-preview.nvim',
         \ { 'do': 'cd app & yarn install' } | endif
