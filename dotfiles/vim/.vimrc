@@ -208,7 +208,7 @@ if g:slim < 10
   nnoremap <silent> <leader>f :Files<CR>
   nnoremap <silent> <leader>F :Files!<CR>
 
-  nnoremap <silent> <leader>i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
+  nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
  
   " save all files
   nnoremap <silent> <leader>s :wall<CR>
@@ -231,7 +231,7 @@ if g:slim < 10
     nnoremap <silent> <leader>r :reg<CR>
     if g:slim < 7
       nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
-      nnoremap <silent> <leader>j :execute 'NERDTree ~/projects/things'<CR>
+      nnoremap <silent> <leader>,j :execute 'NERDTree ~/projects/things'<CR>
       nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
     endif
