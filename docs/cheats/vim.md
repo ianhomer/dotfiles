@@ -108,6 +108,18 @@
 **Shift+i**
 : show hidden files
 
+**U**
+: Up directory
+
+**C**
+: Set root directory
+
+**cd**
+: Change current directory to current note
+
+**CD**
+: Change root directory to current directory
+
 #### netrw
 
 **-**
