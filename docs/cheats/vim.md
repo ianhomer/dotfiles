@@ -103,10 +103,13 @@
 #### NERDTree
 
 **m**
-: open file actions
+: open file action
 
 **Shift+i**
 : show hidden files
+
+**Shift+r**
+: reload node
 
 **U**
 : Up directory
