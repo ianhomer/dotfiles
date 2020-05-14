@@ -233,7 +233,21 @@ percent **%**
 : Clear white space at end of lines
 
 **yaf**
-: Yank all filw
+: Yank all file
+
+### Git
+
+**:G**
+: Git status window (or refresh it)
+
+**:Gwrite**
+: Git add current file
+
+**:Gcommit**
+: Git commit staged
+
+**:Gpush**
+: Git push
 
 ### Markdown
 
