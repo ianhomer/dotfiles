@@ -17,7 +17,6 @@ let g:coc_global_extensions = [
       \ 'coc-xml'
       \ ]
 
-
 " dotfiles dictionaries for cSpell
 call coc#config('cSpell.dictionaryDefinitions', [
       \ { "name" : "dotfiles",
@@ -34,4 +33,3 @@ call coc#config('cSpell.dictionaryDefinitions', [
 call coc#config('java.home',
       \ expand("$HOME/.jenv/versions/11.0/"))
 
-let g:coc_force_debug = 1
