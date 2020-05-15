@@ -283,10 +283,10 @@ endif
 
 function! RestartConfig()
   if g:coc_enabled == 1
-    CocRestart
     if has('nvim')
       source ~/.config/vim/coc.vim
     endif
+    CocRestart
   endif
 endfunction
 
