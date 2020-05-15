@@ -118,22 +118,6 @@ if g:slim < 7
   " COC completion
   if g:coc_enabled == 1
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    let g:coc_global_extensions = [
-        \ 'coc-actions',
-        \ 'coc-css',
-        \ 'coc-emmet',
-        \ 'coc-markdownlint',
-        \ 'coc-highlight',
-        \ 'coc-html',
-        \ 'coc-java',
-        \ 'coc-json',
-        \ 'coc-prettier',
-        \ 'coc-python',
-        \ 'coc-spell-checker',
-        \ 'coc-tsserver',
-        \ 'coc-yaml',
-        \ 'coc-xml'
-        \ ]
   endif
 
   "
