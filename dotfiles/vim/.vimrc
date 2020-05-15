@@ -180,7 +180,6 @@ source ~/.config/vim/modes.vim
 " Identify free leader mappings
 "
 nnoremap <silent> <leader>i :echo "i not mapped"<CR>
-nnoremap <silent> <leader>j :echo "j not mapped"<CR>
 nnoremap <silent> <leader>k :echo "k not mapped"<CR>
 nnoremap <silent> <leader>u :echo "u not mapped"<CR>
 nnoremap <silent> <leader>t :echo "t not mapped"<CR>
@@ -193,7 +192,10 @@ if g:slim < 10
   nnoremap <silent> <leader>F :Files!<CR>
 
   nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
- 
+  nnoremap <silent> <leader>j :Ag<CR>'
+  nnoremap <silent> <leader>J :Ag!<CR>'
+
+
   " save all files
   nnoremap <silent> <leader>s :wall<CR>
   " reset things
