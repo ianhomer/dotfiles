@@ -61,11 +61,11 @@ Term with multiple definitions and long lines
 
 ## Tables
 
-| x       | y
-| --      | --
-| value1  | value2
-| value12 | value22
-| asd     | asd
+| x     | y
+| --    | --
+| value | value
+| value | value
+| value | value
 
 | x    | y
 | --   | --

@@ -1,7 +1,6 @@
 # My .dotfiles
 
-Configure my computers, to reduce distraction and and with less
-clickity-clickity.
+Configure my computers, to reduce distraction and more keyboard focused.
 
 ## tl;dr
 

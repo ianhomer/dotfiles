@@ -367,6 +367,9 @@ onoremap af :<C-u>normal! ggVG<CR>
 vnoremap < <gv
 vnoremap > >gv
 
+set spell spelllang=en
+set spellfile=~/.vim/spell/en.utf-8.add
+
 " *** Scope : IO ***
 "
 " Auto reload underlying file if it changes, although
