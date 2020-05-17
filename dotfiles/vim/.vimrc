@@ -367,26 +367,7 @@ onoremap af :<C-u>normal! ggVG<CR>
 vnoremap < <gv
 vnoremap > >gv
 
-set spelllang=en,dottech,dotipsum
-set spellfile=~/.config/vim/spell/en.utf-8.add
-
-" Refresh spelling files
-function! UpdateSpelling()
-  let l:spelldir = substitute(g:vim_dir, '\~', $HOME, '') . '/spell' 
-  if !isdirectory(l:spelldir)
-    echo 'Creating local spell directory ' . l:spelldir
-    call mkdir(l:spelldir)
-  endif
-  for d in glob('~/.config/dictionaries/*.txt', 1, 1)
-    let l:outfile = l:spelldir . '/'. fnamemodify(d, ":t:r") . '.utf-8.spl'
-    if filereadable(d) && (!filereadable(l:outfile) || getftime(d) > getftime(l:outfile))
-      echo d . ":" . fnamemodify(d, ":t:r")
-      echo 'Updating '.l:outfile
-      exec 'mkspell! ' . l:outfile . ' ' . d
-    endif
-  endfor
-endfunction
-call UpdateSpelling()
+source ~/.config/vim/spell.vim
 
 " *** Scope : IO ***
 "

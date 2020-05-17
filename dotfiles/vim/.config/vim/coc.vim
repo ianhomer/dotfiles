@@ -11,11 +11,13 @@ let g:coc_global_extensions = [
       \ 'coc-json',
       \ 'coc-prettier',
       \ 'coc-python',
-      \ 'coc-spell-checker',
       \ 'coc-tsserver',
       \ 'coc-yaml',
       \ 'coc-xml'
       \ ]
+
+" Other extensions of interest 
+" coc-spell-checker <- native vim spell support feels better
 
 " dotfiles dictionaries for cSpell
 call coc#config('cSpell.dictionaryDefinitions', [
