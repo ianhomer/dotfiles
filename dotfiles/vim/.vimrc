@@ -115,7 +115,7 @@ if g:slim < 7
   " Handy mappings
   if g:slim < 1 | Plug 'tpope/vim-unimpaired' | endif
 
-  " COC completion
+  " CoC completion
   if g:coc_enabled == 1
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
   endif
@@ -125,7 +125,7 @@ if g:slim < 7
   "
   " goyo - Distraction free writing
   Plug 'junegunn/goyo.vim'
-  " mardown preview
+  " markdown preview
   if g:slim < 1 | Plug 'iamcco/markdown-preview.nvim',
         \ { 'do': 'cd app & yarn install' } | endif
 endif
@@ -249,7 +249,7 @@ if !exists("*PowerToggle")
   nnoremap <silent> <leader>p :call PowerToggle()<CR>
 endif
 
-" Reload vimrc, neo vimrc and coc
+" Reload vimrc, neo vimrc and CoC
 let g:config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
 let g:reload_config = "source ".g:config_file
 if !exists("*ReloadConfig")
@@ -258,7 +258,7 @@ if !exists("*ReloadConfig")
     exec g:reload_config
     call RestartConfig()
     let config_message = has('nvim') ? "neo init.vm" : ".vimrc"
-    let coc_message = g:coc_enabled == 1 ? " with Coc" : ""
+    let coc_message = g:coc_enabled == 1 ? " with CoC" : ""
     if g:coc_enabled != 1
       " only display message if CoC not enabled, it it is enabled, this extra
       " message causes overload in the 2 row command window
