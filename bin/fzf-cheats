@@ -1,0 +1,101 @@
+#!/usr/bin/env python3
+
+#
+# Generate cheats for streaming into fzf
+#
+
+import os, re, sys, fileinput, getopt
+from pathlib import Path
+
+def usage():
+  scriptName = os.path.basename(__file__)
+  print(f"{scriptName}")
+
+COMMAND_CHAR="⌘"
+SHIFT_CHAR="⇧"
+CONTROL_CHAR="⌃"
+OPTION_CHAR="⌥"
+SPACE_CHAR="␣"
+
+lineFormat = "\u001b[0m {command:20s} \u001b[32m{application:10s}" + \
+  " \u001b[33m{context:10s} \u001b[36m {definition:s}"
+
+metas = []
+
+application = "default"
+context = "main"
+mark = ""
+command = "n/a"
+definition = "definition"
+lastWasCommand = 0
+
+DEBUG=0
+
+commands = []
+
+def printLine(meta):
+  print(lineFormat.format(**meta))
+
+def debug(message):
+  if DEBUG: print("DEBUG : " + message)
+
+def hidden(s):
+  return "\u001b[30m" + s + "\u001b[0m"
+
+COMMAND_REPLACE = hidden("cmd") + COMMAND_CHAR
+SHIFT_REPLACE = hidden("shift") + SHIFT_CHAR
+CONTROL_REPLACE = hidden("ctrl") + CONTROL_CHAR
+OPTION_REPLACE = hidden("opt") + OPTION_CHAR
+SPACE_REPLACE = hidden("space") + SPACE_CHAR
+
+def transformCommand(command):
+  return command \
+    .replace("Cmd+",COMMAND_REPLACE) \
+    .replace("Shift+",SHIFT_REPLACE) \
+    .replace("Ctrl+",CONTROL_REPLACE) \
+    .replace("Option+",OPTION_REPLACE) \
+    .replace("space+",SPACE_REPLACE)
+
+def parse(line):
+  global application, context, command, definition, mark, lastWasCommand
+  debug("line - " + line)
+  # Heading 
+  match = re.search('^(#+) (.*)$', line)
+  if match:
+    debug("heading : " + match.group(1) + ":" + match.group(2))
+    headingDepth=len(match.group(1))
+    if headingDepth == 2:
+      application = match.group(2)
+    else:
+      context = match.group(2)
+    lastWasCommand = 0
+    return
+  # Command
+  match = re.search('\*\*([^\*\s]*)\*\*', line)
+  if match:
+    debug("command " + match.group(1))
+    command = match.group(1)
+    lastWasCommand = 1
+    return
+  definition=line
+  # Definition
+  match = re.search('^: ([^;:\.]+).*$', line)
+  if lastWasCommand and match:
+    printLine({
+      "application": application,
+      "context": context,
+      "command": command,
+      "definition": match.group(1)
+    })
+  lastWasCommand = 0
+
+def main(argv):
+  for line in fileinput.input():
+    parse(line.rstrip())
+
+  for meta in metas:
+    printLine(meta)
+
+if __name__ == "__main__":
+  main(sys.argv[1:])
+

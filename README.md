@@ -1,7 +1,6 @@
 # My .dotfiles
 
-Configure my computers, to reduce distraction and and with less
-clickity-clickity.
+Configure my computers, to reduce distraction and more keyboard focused.
 
 ## tl;dr
 
@@ -69,91 +68,8 @@ however just look at bin/dotme to see what actually happens.
 You can also update parts of the initialisation separately, see `dotme -h` to
 get a list of each part. `man dotme` will give you more guidance on usage.
 
-## Manual Configuration
-
-I've not worked out how to automate all configuration. Until I do, this is what
-I manually do on each environment.
-
-### Initialise a few desktop apps
-
-#### Dozer
-
-Open dozer and configure menu hiding.
-
-### Alfred
-
-Open Alfred, set up privacy options, point configuration to a cloud storage of
-your choosing, and configure Alfred to your choosing.
-
-Alfred Preferences -> Advanced -> Set Preferences folder -> ~/.dotfiles/config/alfred
-
-### Keyboard Configuration - MacOS
-
-System preferences
-
--> Keyboard -> Modifier Keys -> For each keyboard :
-
-- Caps Lock -> Escape
-
--> Keyboard -> Shortcuts -> 
-
-- Disable Mission Control Ctrl-arrow short cuts
-- Disable any other shortcuts that would never get used
-
--> Mission Control - remove all keyboard and mouse shortcuts
-
-For a Microsoft keyboard :
-
-- Option Key -> Command
-- Command Key -> Option
-
-And then use [keyboard shortcuts](https://support.google.com/mail/answer/6594) -
-see [Cheatsheet](./docs/cheats/) for my favourites.
-
-### Gmail
-
-Gmail -> Settings -> Keyboard Shortcuts -> Keyboard shortcuts on
-
-## Spelling
-
-Spell checking in vi takes place with
-[coc-spell-checker](https://github.com/iamcco/coc-spell-checker) which uses
-[cspell](https://www.npmjs.com/package/cspell).
-
-The coc configuration in the vim configuration in these dotfiles explicitly adds
-the dot\*.txt files in ~/.config/dictionaries.
-This is in addition to the [default
-dictionaries](https://github.com/iamcco/coc-spell-checker) added by the
-coc-spell-checker plugin, which includes conditional dictionaries based on file
-language, e.g. javascript, python specific spelling. This provides a default set
-of dictionaries for all local development.
-
-Project specific words are configured in the cspell.json file in the project
-root.
-
-Other dictionaries could be loaded from
-[coc-spell-dicts](https://github.com/iamcco/coc-cspell-dicts) following that
-project README, and from
-[cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts) by adding
-global package to install-node-packages script.
-
-Per-project custom dictionaries can be added to the project ~/.cspell.json,
-e.g.
-
-    "dictionaries": [
-      "lorem-ipsum"
-    ],
-
-
-To trace where a word is defined:
-
-    cspell trace <word>
-
-To show spelling mistakes in a file: 
-
-    cspell check test/scratch.md --color | less -r
-
-Note also that a list of words is normally installed at /usr/share/dict/words.
+I configure a few things on my system [./docs/manual-configuration.md](manually)
+for minor tweaks and enhancements.
 
 ## Thanks
 

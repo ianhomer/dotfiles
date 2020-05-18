@@ -2,42 +2,38 @@
 
 ## vim
 
-### leader
+### misc
 
-**space + space**
-: Open buffers
-
-**space + r**
+**space+r**
 : Open (paste) registry
 
-**space + f**
-: Open files
-
-**space + g**
-: Open goyo
-
-**space + c**
+**space+c**
 : Commits
 
-**space + cw**
+**space+cw**
 : Clear white space
 
-**space + h**
+**space+h**
 : File open history
 
-**space + vc**
-: Reload vim configuration
+### maps
 
-**space + n**
+**space+m**
+: Keyboard map for normal mode
+
+**:Maps!**
+: Open maps in full screen
+
+**space+l**
+: Keyboard map for insert mode
+
+### files
+
+**space+n**
 : Open nerd tree 
 
-**space + m**
-: Key board maps
-
-**space + s**
-: Save file
-
-### vim, files
+**space+s**
+: Save all files
 
 **:NERDTreeToggle** or **space+f**
 : Open file browser
@@ -46,13 +42,7 @@
 : change directory
 
 **space + r** or **:reg**
-: show paste buffer
-
-**:bd**
-: close buffer
-
-**:bn**
-: next buffer
+: show paste registry
 
 **"2p**
 : paste a previous cut
@@ -69,16 +59,13 @@
 **tabe**
 : open file in new tab
 
-**bufdo bd**
-: close all buffers
-
 **m** + letter
 : set mark
 
 **'** + letter
 : go to mark
 
-**Ctrl-^**
+**Ctrl+^**
 : switch to previous buffer
 
 **:tab h whatever**
@@ -90,18 +77,53 @@
 **:noh**
 : clear last highlight
 
-**:enew|pu=execute('autocmd')**
+**:enew | pu=execute('autocmd')**
 : copy output of command, e.g. autocmd, into buffer
 
-#### vi - NERDTree
+### buffers
+
+**:bd**
+: close buffer
+
+**:bn**
+: next buffer
+
+**bufdo bd**
+: close all buffers
+
+**space+b**
+: Commits for current buffer
+
+**space+5**
+: Close all buffers except current one
+
+**space+space**
+: Show buffers
+
+#### NERDTree
 
 **m**
-: open file actions
+: open file action
 
 **Shift+i**
 : show hidden files
 
-#### vi - netrw
+**Shift+r**
+: reload node
+
+**U**
+: Up directory
+
+**C**
+: Set root directory
+
+**cd**
+: Change current directory to current note
+
+**CD**
+: Change root directory to current directory
+
+#### netrw
 
 **-**
 : up a directory
@@ -121,7 +143,7 @@
 percent **%**
 : create new file
 
-#### vi - navigation
+#### motion
 
 **0**
 :beginning of line
@@ -153,17 +175,20 @@ percent **%**
 percent **%**
 : next / previous bracket
 
-### vi - windows
+**,star**
+: search for word under cursor
+
+### windows
 
 - **:split,:vsplit** - split pane
 - **80 Ctrl-w** + - set current pane to 80 characters
 - **Ctrl-w+left/right** or **Ctrl-h/j/k/l** - move to another pane
 - **count<leader>cc** - comment out the next count lines
 
-### vi - editing
+### edit
 
-:**:Goyo**
-: distraction free coding
+**space+g**, **:Goyo**
+: distraction free coding with Goyo
 
 **gw{motion}**
 : reformat content
@@ -177,7 +202,7 @@ percent **%**
 **ysiw"**
 : surround word with quotes
 
-**Ctrl-v**
+**Ctrl+v**
 : select visual block, e.g. column
 
 **:%!jq .**
@@ -186,23 +211,61 @@ percent **%**
 **:Tabularize /|** or \*\*space\*\*
 : Align paragraph on character
 
-**count<leader>cc**
+**count+space+cc**
 : comment out the next count lines
 
 **:Format**
 : Format current buffer
 
-**<leader>d**
+**space+d**
 : Open CoC diagnostics
 
-### vi - Markdown
+**:nu**
+: Show line numbers
+
+**:set rnu**
+: Show relative line numbers
+
+**star**
+: Search for next occurence of word under cursor
+
+**space+w**
+: Clear white space at end of lines
+
+**yaf**
+: Yank all file
+
+### Git
+
+**:G**
+: Git status window (or refresh it)
+
+**:Gwrite**
+: Git add current file
+
+**:Gcommit**
+: Git commit staged
+
+**:Gpush**
+: Git push
+
+### Markdown
 
 - **viWS+** - make a word bold
 - **zR** - open all folds
 - **zM** - close all folds
 
-### vi - Selections
+### Selections
 
 - **vip** - select paragraph
 - **viW** - select current word (including non-alphanumeric)
+
+### Configuration
+
+**space+p**
+: Toggle power configuration
+
+**space+v**
+: Reload vim configuration
+
 

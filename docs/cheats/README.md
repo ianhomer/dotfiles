@@ -10,27 +10,36 @@
 
 ## Todoist
 
-**Ctrl-Cmd+a**
+**Ctrl+Cmd+a**
 : Create task
 
-**Ctrl-Cmd-t**
+**Ctrl+Cmd+t**
 : Open up tasks list
 
 ## Magnet
 
-**Ctrl-Alt+return**
+**Ctrl+Alt+return**
 : Full screen
 
-**Ctrl-Alt-left,right,up,down**
-: Half screen
+**Ctrl+Alt+left**
+: Window to left half
 
-**Ctrl-Alt-uijk**
+**Ctrl+Alt+right**
+: Window to right half
+
+**Ctrl+Alt+up**
+: Window to top half
+
+**Ctrl+Alt+down**
+: Window to bottom half
+
+**Ctrl+Alt+uijk**
 : Quarter screen
 
-**Ctrl-Alt-deftg**
+**Ctrl+Alt+deftg**
 : Thirds
 
-**Ctrl-Cmd-back**
+**Ctrl+Cmd+back**
 : Back to manually set screen size
 
 ## iterm

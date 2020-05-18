@@ -16,6 +16,13 @@ then remapped the ~ AOK. Not sure why it got it wrong first time.
 
 In vi -> i -> <C-v> -> <key> combo => vi prints raw code.
 
+Install keycastr to see key presses on screen
+
+    brew cask install keycastr
+
+To debug key pressess into kitty
+
+    kitty --debug-keyboard
 
 ## Reset Alfred Preferences
 

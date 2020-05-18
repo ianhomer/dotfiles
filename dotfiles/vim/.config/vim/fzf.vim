@@ -12,4 +12,9 @@ let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
 command! -bar -bang Maps
   \ call fzf#vim#maps("n", {'options': '--tiebreak=index'}, <bang>0)
 
+command! -bar -bang MapsInsert
+  \ call fzf#vim#maps("i", {'options': '--tiebreak=index'}, <bang>0)
 
+nnoremap <silent> <leader>m :Maps<CR>
+nnoremap <silent> <leader>M :Maps!<CR>
+nnoremap <silent> <leader>k :MapsInsert<CR>

@@ -1,3 +1,7 @@
+" Leader is space
+let mapleader = "\<Space>"
+let maplocalleader = "\,"
+
 "
 " Load plugins
 " vimscript cheatsheet : https://devhints.io/vimscript
@@ -74,65 +78,54 @@ if g:slim < 7
   Plug 'christoomey/vim-tmux-navigator'
 
   "
+  " Help
+  "
+  " vim-which-key - guidance on what keys do
+  Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
+  "
   " Coding
   "
 
-  "
-  " polyglot
-  if g:slim < 5 | Plug 'sheerun/vim-polyglot' | endif
   " tabular - Lining up columns
-  if g:slim < 5 | Plug 'godlygeek/tabular' | endif
+  Plug 'godlygeek/tabular'
+  " symlink - Follow symlink when opening file
+  Plug 'aymericbeaumet/vim-symlink'
+  " surround - Surround with brackets etc
+  Plug 'tpope/vim-surround'
+  " repeat - Repeat with mapped commands with . not just the native command
+  Plug 'tpope/vim-repeat'
+  " endwise - auto close structure
+  Plug 'tpope/vim-endwise'
+
+  " polyglot
+  if g:slim < 3 | Plug 'sheerun/vim-polyglot' | endif
   " fugitive - Git integration
-  if g:slim < 5 | Plug 'tpope/vim-fugitive' | endif
+  Plug 'tpope/vim-fugitive'
+  " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
+  if g:slim < 3 | Plug 'preservim/nerdcommenter' | endif
   " NERDTree - show git changes
   if g:slim < 1 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
   " gitgutter - Git change indicator to left of window
   if g:slim < 1 | Plug 'airblade/vim-gitgutter' | endif
-  " symlink - Follow symlink when opening file
-  Plug 'aymericbeaumet/vim-symlink'
-  " surround - Surround with brackets etc
-  if g:slim < 5 | Plug 'tpope/vim-surround' | endif
-  " repeat - Repeat with .
-  if g:slim < 5 | Plug 'tpope/vim-repeat' | endif
   " HTML
   if g:slim < 1 | Plug 'mattn/emmet-vim' | endif
   " Linting
   if g:slim < 1 | Plug 'dense-analysis/ale' | endif
   " Handy mappings
   if g:slim < 1 | Plug 'tpope/vim-unimpaired' | endif
-  " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
-  if g:slim < 5 | Plug 'preservim/nerdcommenter' | endif
 
-  " COC completion
+  " CoC completion
   if g:coc_enabled == 1
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    let g:coc_global_extensions = [
-        \ 'coc-actions',
-        \ 'coc-css',
-        \ 'coc-emmet',
-        \ 'coc-markdownlint',
-        \ 'coc-highlight',
-        \ 'coc-html',
-        \ 'coc-java',
-        \ 'coc-json',
-        \ 'coc-prettier',
-        \ 'coc-python',
-        \ 'coc-spell-checker',
-        \ 'coc-tsserver',
-        \ 'coc-yaml',
-        \ 'coc-xml'
-        \ ]
-    source ~/.config/vim/coc.vim
   endif
 
   "
   " Writing
   "
   " goyo - Distraction free writing
-  if g:slim < 7 | Plug 'junegunn/goyo.vim' | endif
-  " tabular - lining up text
-  if g:slim < 5 | Plug 'godlygeek/tabular' | endif
-  " mardown preview
+  Plug 'junegunn/goyo.vim'
+  " markdown preview
   if g:slim < 1 | Plug 'iamcco/markdown-preview.nvim',
         \ { 'do': 'cd app & yarn install' } | endif
 endif
@@ -153,6 +146,8 @@ set ignorecase
 set incsearch
 " Default updatetime is 4000 and too slow
 set updatetime=300
+" Quicker timeout between key presses
+set timeoutlen=500
 " Always show sign column to stop flip-flopping
 set signcolumn=yes
 if has("nvim")
@@ -160,70 +155,123 @@ if has("nvim")
   " in vim in tmux
   set termguicolors
 endif
+" Keep messages short and don't give ins-completion-messages (c)
+set shortmess=catI
+" Provide more space for command output (e.g. fugitive) - with it this you may
+" need to press ENTER after fugitive commands
+set cmdheight=2
+" Tab support with 2 spaces
+set tabstop=2
+set shiftwidth=2
+set expandtab
+" 80 characters default width
+set textwidth=80
+" Text formating options - no autowrap
+set formatoptions=jrql
+" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+set clipboard=unnamed
+
 
 "
 " Command remapping
 "
+source ~/.config/vim/modes.vim
 
-" Leader is space
-let mapleader = "\<Space>"
-
-" Semi-colon is easier for commands
-nnoremap ; :
+" Identify free leader mappings
+"
+nnoremap <silent> <leader>i :echo "i not mapped"<CR>
+nnoremap <silent> <leader>k :echo "k not mapped"<CR>
+nnoremap <silent> <leader>u :echo "u not mapped"<CR>
+nnoremap <silent> <leader>t :echo "t not mapped"<CR>
+nnoremap <silent> <leader>y :echo "y not mapped"<CR>
 
 " My shortcuts
-" numbered leaders, e.g. <leader>1 are placeholders for command that may get
-" mapped to a better key once matured.
 if g:slim < 10
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :Files<CR>
-  nnoremap <silent> <leader>s :w<CR>
+  nnoremap <silent> <leader>F :Files!<CR>
+
+  nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
+  nnoremap <silent> <leader>j :Ag<CR>'
+  nnoremap <silent> <leader>J :Ag!<CR>'
+
+
+  " save all files
+  nnoremap <silent> <leader>s :wall<CR>
+  " reset things
+  nnoremap <silent> <leader>z :noh<CR>
+
+  " select all
+  nnoremap <silent> <leader>o ggVG
+  " dummy map
+  nnoremap <silent> <leader>9 :echo "9 pressed"<CR>
 
   " close all buffers
-  nnoremap <silent> <leader>1 :bufdo bd<CR>
+  nnoremap <silent> <leader>x :bufdo bd<CR>
   if g:slim < 8
     nnoremap <silent> <leader>b :BCommits<CR>
-    nnoremap <silent> <leader>3 :Commits<CR>
+    nnoremap <silent> <leader>B :BCommits!<CR>
+    nnoremap <silent> <leader>e :Commits<CR>
+    nnoremap <silent> <leader>E :Commits!<CR>
     nnoremap <silent> <leader>h :History<CR>
-    nnoremap <silent> <leader>m :Maps<CR>
     nnoremap <silent> <leader>r :reg<CR>
     if g:slim < 7
       nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
-      nnoremap <leader>h :NERDTreeFind<CR>
+      nnoremap <silent> <leader>,j :execute 'NERDTree ~/projects/things'<CR>
+      nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+      nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
     endif
   endif
 
-  if g:coc_enabled == 1
-    nnoremap <silent> <leader>2 :Format<CR>
-  endif
+  nnoremap <silent> <leader>l :call LintMe()<CR>
 endif
+
+function! LintMe()
+  echo "Linting ..".&filetype
+  if g:coc_enabled == 1
+    " Lint
+    Format
+  else
+    if &filetype == "json"
+      execute "%!jq ."
+    endif
+  endif
+endfunction
+
+source ~/.config/vim/thingity.vim
 
 " Toggle power slim mode
 if !exists("*PowerToggle")
   function! PowerToggle()
     let g:slim_session = exists('g:slim_session') ? g:slim_session > 4 ? 4 : 5 : 4
-    echo "Current slim ".g:slim." - reload config to change to ".g:slim_session
     call ReloadConfig()
   endfunction
   nnoremap <silent> <leader>p :call PowerToggle()<CR>
 endif
 
-" Reload vimrc, neo vimrc and coc
+" Reload vimrc, neo vimrc and CoC
 let g:config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
 let g:reload_config = "source ".g:config_file
 if !exists("*ReloadConfig")
   function! ReloadConfig()
+    wall
     exec g:reload_config
     call RestartConfig()
     let config_message = has('nvim') ? "neo init.vm" : ".vimrc"
-    let coc_message = g:coc_enabled == 1 ? " with Coc" : ""
-    echo "Reloaded ".config_message.coc_message" - slim = ".g:slim
+    let coc_message = g:coc_enabled == 1 ? " with CoC" : ""
+    if g:coc_enabled != 1
+      " only display message if CoC not enabled, it it is enabled, this extra
+      " message causes overload in the 2 row command window
+      echo "Reloaded ".config_message.coc_message" - slim = ".g:slim
+    endif
   endfunction
 endif
 
 function! RestartConfig()
   if g:coc_enabled == 1
-    echo "Restarting CoC"
+    if has('nvim')
+      source ~/.config/vim/coc.vim
+    endif
     CocRestart
   endif
 endfunction
@@ -234,6 +282,9 @@ nnoremap <silent> <leader>v :call ReloadConfig()<CR>
 if g:slim < 8
   nnoremap <leader>w :%s/\s\+$//g<CR>:nohlsearch<CR>
 endif
+
+" Write all buffers before navigating from Vim to tmux pane
+let g:tmux_navigator_save_on_switch = 2
 
 " *** Scope : Writing ***
 
@@ -250,11 +301,9 @@ if g:slim < 8
   " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
   " Close the current buffer and move to the previous one
   nnoremap <leader>q :<c-u>bp <bar> bd #<cr>
-  " Show all open buffers and their status
-  nnoremap <leader>l :ls<cr>
   " Thanks - https://www.rockyourcode.com/vim-close-all-other-buffers/
   " Close all buffers except the current one
-  nnoremap <leader>d :<c-u>up <bar> %bd <bar> e#<cr>
+  nnoremap <leader>5 :<c-u>up <bar> %bd <bar> e#<cr>
 endif
 
 "
@@ -264,6 +313,8 @@ endif
 "
 augroup dotme
   autocmd!
+
+  autocmd BufNewFile,BufRead *.tsx set filetype=typescript
 
   if g:slim < 8
     "
@@ -309,7 +360,15 @@ augroup end
 exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
 set list
 
-"
+" Add operator af for all file
+onoremap af :<C-u>normal! ggVG<CR>
+
+" Return to visual mode after indenting
+vnoremap < <gv
+vnoremap > >gv
+
+source ~/.config/vim/spell.vim
+
 " *** Scope : IO ***
 "
 " Auto reload underlying file if it changes, although
@@ -363,24 +422,6 @@ set backspace=indent,eol,start
 " nnoremap <tab> >>
 " vnoremap <tab> >>
 
-" Keep messages short and don't give ins-completion-messages (c)
-set shortmess=catI
-
-" Provide more space for command output (e.g. fugitive) - with it this you may
-" need to press ENTER after fugitive commands
-set cmdheight=2
-" Tab support with 2 spaces
-set tabstop=2
-set shiftwidth=2
-set expandtab
-" 80 characters default width
-set textwidth=80
-" Text formating options - no autowrap
-set formatoptions=jrql
-
-" Use the OS clipboard by default (on versions compiled with `+clipboard`)
-set clipboard=unnamed
-
 " source ~/.config/vim/netrw.vim
 
 if g:slim < 7
@@ -428,10 +469,6 @@ if g:slim < 7
   let g:markdown_folding = 1
   " Default large fold level start, folding everything up by default feels odd.
   set foldlevelstart=20
-
-  if g:slim < 5
-    nnoremap <silent> <leader>\ :Tabularize/\|<CR>
-  endif
 endif
 
 "

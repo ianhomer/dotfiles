@@ -1,7 +1,9 @@
 # todo
 
-- Try out increasing leader timeout, what's best usability?
 - Update git-set-alternative-url to 
   - be bash script
   - switch from https URL to ssh URL
-- Make leader n open nerd tree with find if opened from file buffer
+- Surround leaders for bold double star,backtick wrap. If visual selection
+  exists then wrap that otherwise wrap single word
+- Why Ctrl+Fn+F2 to enable menu only seems to work after Ctrl+Fn+F3
+- Improve mechanism to search for a word, e.g. ,star to search with :Ag

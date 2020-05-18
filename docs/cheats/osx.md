@@ -1,6 +1,6 @@
-# Cheats - OSX
-
 ## OSX
+
+### Windows
 
 **Ctrl+Cmd+click+drag**
 : Move Window
@@ -9,7 +9,13 @@
 : Open special character window
 
 **Cmd+Tab**
-: Switch windows
+: Switch Application. Shift reverses.
+
+**Cmd+`**
+: Switch between windows in app. Shift reverses.
+
+**Ctrl+Tab**
+: Cycle through tabs in a window. Shift reverses.
 
 **Cmd+h**
 : Hide window
@@ -23,18 +29,33 @@
 **Cmd+z**
 : Undo
 
-**Cmd+Shift+.** - in finder window
+**Shift+Cmd+.** - in finder window
 : Show hidden files
 
-**Cmd+Shift+3**
+**Shift+Cmd+3**
 : full screen shot capture
 
-**Cmd+Shift+4**
+**Shift+Cmd+4**
 : select portion of screen to capture
 
-**Cmd+Shift+5**
+**Shift+Cmd+5**
 : screen shot interactive mode
 
-**Cmd+Alt+D**
+**Cmd+Alt+d**
 : Show or hide dock
+
+**Ctrl+Fn+F3**
+
+**Ctrl+Fn+F3**
+: Use dock with arrow keys
+
+**Ctrl+Fn+F2**
+: Use menu with arrow keys
+
+
+See System Preferences -> Keyboard -> Shortcuts for details
+
+## Links
+
+https://duckduckgo.com/?q=mac+shortcuts&t=brave&ia=cheatsheet&iax=1
 

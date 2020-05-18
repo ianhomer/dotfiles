@@ -10,7 +10,7 @@ function dotenv
   end
   echo ".env file loaded : $envFile"
 
-  for i in (cat $envFile)
+  for i in (grep -v '^#' $envFile | awk 'NF')
     set arr (echo $i |tr = \n)
     set -gx $arr[1] $arr[2]
   end

@@ -1,18 +1,20 @@
-# Cheats - fish
+# fish
 
 ## fish
 
-**Ctrl-a Ctrl-a**
+### line
+
+**Ctrl+a Ctrl+a**
 : go to beginning of line
 
-**Ctrl-e**
+**Ctrl+e**
 : go to end of line
 
-**Ctrl-b**
+**Ctrl+b**
 : go back a word
 
-**Ctrl-f**
+**Ctrl+f**
 : go forward a word
 
 **bind**
-: see key bindings
+: see key binding
