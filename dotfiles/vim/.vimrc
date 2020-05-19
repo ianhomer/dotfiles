@@ -76,6 +76,8 @@ if g:slim < 7
   if g:slim < 3 | Plug 'editorconfig/editorconfig-vim' | endif
   " tmux - enable C-hjkl to move to across vim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
+  " Improved path support
+  Plug 'tpope/vim-apathy'
 
   "
   " Help
