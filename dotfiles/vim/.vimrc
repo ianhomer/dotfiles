@@ -240,6 +240,7 @@ if exists('*which_key#register')
   let g:which_key_map.j = { 'name' : '...FZF search' }
   let g:which_key_map[','] = { 'name' : '...Misc' }
   let g:which_key_map['.'] = { 'name' : '...Bookmarked' }
+  let g:which_key_map['c'] = { 'name' : '...Commenter' }
   call which_key#register('<Space>', "g:which_key_map")
 endif
 
