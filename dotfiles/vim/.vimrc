@@ -105,7 +105,7 @@ if g:slim < 7
   " fugitive - Git integration
   Plug 'tpope/vim-fugitive'
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
-  if g:slim < 3 | Plug 'preservim/nerdcommenter' | endif
+  Plug 'preservim/nerdcommenter'
   " NERDTree - show git changes
   if g:slim < 1 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
   " gitgutter - Git change indicator to left of window
@@ -233,11 +233,15 @@ if g:slim < 10
   nnoremap <leader>.e <C-W><C-=>
 endif
 
-let g:which_key_map =  {}
-let g:which_key_map.j = { 'name' : '...FZF search' }
-let g:which_key_map[','] = { 'name' : '...Misc' }
-let g:which_key_map['.'] = { 'name' : '...Bookmarked' }
-call which_key#register('<Space>', "g:which_key_map")
+if exists('*which_key#register')
+  " Note that this currently when config reloaded after which keys as been used
+  " since which keys is lazily loaded  
+  let g:which_key_map =  {}
+  let g:which_key_map.j = { 'name' : '...FZF search' }
+  let g:which_key_map[','] = { 'name' : '...Misc' }
+  let g:which_key_map['.'] = { 'name' : '...Bookmarked' }
+  call which_key#register('<Space>', "g:which_key_map")
+endif
 
 function! LintMe()
   echo "Linting ..".&filetype
