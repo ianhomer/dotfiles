@@ -180,10 +180,17 @@ percent **%**
 
 ### windows
 
-- **:split,:vsplit** - split pane
-- **80 Ctrl-w** + - set current pane to 80 characters
-- **Ctrl-w+left/right** or **Ctrl-h/j/k/l** - move to another pane
-- **count<leader>cc** - comment out the next count lines
+**:split**
+: split pane
+
+**:vsplit**
+: split pan verticallyxx
+
+**80 Ctrl+w**
+: set current pane to 80 charactersxx
+
+**Ctrl+w Ctrl+=**
+: even out the windows
 
 ### edit
 

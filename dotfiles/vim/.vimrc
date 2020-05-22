@@ -226,6 +226,7 @@ if g:slim < 10
   endif
 
   nnoremap <silent> <leader>l :call LintMe()<CR>
+  nnoremap <leader>.e <C-W><C-=>
 endif
 
 function! LintMe()
@@ -236,6 +237,8 @@ function! LintMe()
   else
     if &filetype == "json"
       execute "%!jq ."
+    elseif &filetype == "markdown"
+      normal magggqG`a
     endif
   endif
 endfunction
