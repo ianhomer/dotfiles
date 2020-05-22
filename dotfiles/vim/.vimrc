@@ -194,8 +194,12 @@ if g:slim < 10
   nnoremap <silent> <leader>F :Files!<CR>
 
   nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
-  nnoremap <silent> <leader>j :Ag<CR>'
-  nnoremap <silent> <leader>J :Ag!<CR>'
+  " exact
+  nnoremap <silent> <leader>je :Ag<CR>'
+  nnoremap <silent> <leader>jE :Ag!<CR>'
+  " todos
+  nnoremap <silent> <leader>jt :Ag<CR>'[\ ]
+  nnoremap <silent> <leader>jT :Ag!<CR>'[\ ]
 
 
   " save all files
@@ -228,6 +232,12 @@ if g:slim < 10
   nnoremap <silent> <leader>l :call LintMe()<CR>
   nnoremap <leader>.e <C-W><C-=>
 endif
+
+let g:which_key_map =  {}
+let g:which_key_map.j = { 'name' : '...FZF search' }
+let g:which_key_map[','] = { 'name' : '...Misc' }
+let g:which_key_map['.'] = { 'name' : '...Bookmarked' }
+call which_key#register('<Space>', "g:which_key_map")
 
 function! LintMe()
   echo "Linting ..".&filetype
