@@ -109,7 +109,7 @@ if g:slim < 7
   " NERDTree - show git changes
   if g:slim < 1 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
   " gitgutter - Git change indicator to left of window
-  if g:slim < 1 | Plug 'airblade/vim-gitgutter' | endif
+  Plug 'airblade/vim-gitgutter'
   " HTML
   if g:slim < 1 | Plug 'mattn/emmet-vim' | endif
   " Linting
