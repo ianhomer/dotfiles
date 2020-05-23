@@ -256,16 +256,44 @@ percent **%**
 **:Gpush**
 : Git push
 
+### Fugitive Window
+
+**=**
+: Show diff for selected file
+
+**s**
+: Stage selected file
+
+**X**
+: Discard changes on selected file
+
+**cc**
+: Commit staged files
+
+**cw**
+: Change commit message for selected commit
+
 ### Markdown
 
-- **viWS+** - make a word bold
-- **zR** - open all folds
-- **zM** - close all folds
+**viWS+**
+: make a word bold
+
+**zR**
+: open all folds
+
+**zM**
+: close all folds
+
+**<space>+l**
+: Lint file
 
 ### Selections
 
-- **vip** - select paragraph
-- **viW** - select current word (including non-alphanumeric)
+**vip**
+: select paragraph
+
+**viW**
+: select current word (including non-alphanumeric)
 
 ### Configuration
 
@@ -274,5 +302,3 @@ percent **%**
 
 **space+v**
 : Reload vim configuration
-
-
