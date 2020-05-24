@@ -128,7 +128,7 @@ if g:slim < 7
   " goyo - Distraction free writing
   Plug 'junegunn/goyo.vim'
   " markdown preview
-  if g:slim < 1 | Plug 'iamcco/markdown-preview.nvim',
+  if g:slim < 7 | Plug 'iamcco/markdown-preview.nvim',
         \ { 'do': 'cd app & yarn install' } | endif
 endif
 

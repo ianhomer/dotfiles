@@ -206,7 +206,7 @@ percent **%**
 **select+S"**
 : surround selected **area** with quotes
 
-**ysiw"**
+**ysiW"**
 : surround word with quotes
 
 **Ctrl+v**
