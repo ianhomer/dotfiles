@@ -4,7 +4,7 @@
 
 This is **Bold**.
 
-This is _Emphasis_
+This is _Emphasis_.
 
 ~~Strike Through~~
 
