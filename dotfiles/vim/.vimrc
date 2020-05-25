@@ -389,6 +389,14 @@ vnoremap > >gv
 
 source ~/.config/vim/spell.vim
 
+" Surround customisation
+
+let b:surround_{char2nr('b')} = "**\r**"
+let b:surround_{char2nr('i')} = "*\r*"
+
+nmap <leader>.b ysiWb
+nmap <leader>.i ysiWi
+
 " *** Scope : IO ***
 "
 " Auto reload underlying file if it changes, although
