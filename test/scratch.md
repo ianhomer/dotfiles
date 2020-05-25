@@ -38,6 +38,12 @@ Nested lists
   - item 2b
 - item 3
 
+Numbered lists
+
+1. Line 1
+2. Line 2
+3. Line 3
+
 ## Definitions
 
 Long line definitions
