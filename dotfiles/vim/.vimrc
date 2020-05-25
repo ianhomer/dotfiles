@@ -235,7 +235,7 @@ endif
 
 if exists('*which_key#register')
   " Note that this currently when config reloaded after which keys as been used
-  " since which keys is lazily loaded  
+  " since which keys is lazily loaded
   let g:which_key_map =  {}
   let g:which_key_map.j = { 'name' : '...FZF search' }
   let g:which_key_map[','] = { 'name' : '...Misc' }
@@ -393,9 +393,17 @@ source ~/.config/vim/spell.vim
 
 let b:surround_{char2nr('b')} = "**\r**"
 let b:surround_{char2nr('i')} = "*\r*"
+let b:surround_{char2nr('<')} = "<\r>"
 
+" Markdown surrounds
+" bold
 nmap <leader>.b ysiWb
+" italic
 nmap <leader>.i ysiWi
+" link
+nmap <leader>.l EBysiW(i[]<C-o>h
+" bare link
+nmap <leader>.L ysiW<
 
 " *** Scope : IO ***
 "
