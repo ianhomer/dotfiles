@@ -16,6 +16,9 @@ This is a long line, this is a long line, this is a long line, this is a long li
 
 This is a spellingmistake.
 
+Line with 2 white spaces at end.  
+Another line with 2 white spaces at end.  
+
 ## Lists
 
 - List 1

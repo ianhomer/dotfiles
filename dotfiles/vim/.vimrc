@@ -168,8 +168,6 @@ set shiftwidth=2
 set expandtab
 " 80 characters default width
 set textwidth=80
-" Text formating options - no autowrap
-set formatoptions=jrql
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
@@ -390,15 +388,14 @@ source ~/.config/vim/spell.vim
 
 " Surround customisation
 
-let b:surround_{char2nr('b')} = "**\r**"
-let b:surround_{char2nr('i')} = "*\r*"
-let b:surround_{char2nr('<')} = "<\r>"
+let g:surround_{char2nr('b')} = "**\r**"
+let g:surround_{char2nr('<')} = "<\r>"
 
 " Markdown surrounds
 " bold
 nmap <leader>.b ysiWb
 " italic
-nmap <leader>.i ysiWi
+nmap <leader>.i ysiW*
 " link
 nmap <leader>.l EBysiW(i[]<C-o>h
 " bare link
