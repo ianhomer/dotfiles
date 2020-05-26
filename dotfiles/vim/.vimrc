@@ -2,6 +2,8 @@
 let mapleader = "\<Space>"
 let maplocalleader = "\,"
 
+filetype plugin on
+
 "
 " Load plugins
 " vimscript cheatsheet : https://devhints.io/vimscript
