@@ -49,6 +49,13 @@ Numbered lists
 2. Line 2
 3. Line 3
 
+Todos
+
+- [ ] Do this
+- [ ] And this, and this, and this, and this, and this, and this, and this, and
+  this, and this, and this, and this, and this, and this
+- [x] This too
+
 ## Definitions
 
 Long line definitions
