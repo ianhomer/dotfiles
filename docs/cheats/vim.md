@@ -178,6 +178,12 @@ percent **%**
 **,star**
 : search for word under cursor
 
+**Ctrl+o**
+: Jump to previous cursor postion (jumplist)
+
+**Ctrl+i**
+: Jump to next cursor position (jumplist)
+
 ### windows
 
 **:split**

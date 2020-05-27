@@ -303,7 +303,7 @@ nnoremap <silent> <leader>v :call ReloadConfig()<CR>
 " Clear whitespace
 function! PruneWhiteSpace()
   %s/\s\+$//ge
-  nohlsearch
+  call ReduceBlankLines()
 endfunction
 
 function! ReduceBlankLines()
@@ -312,13 +312,11 @@ function! ReduceBlankLines()
 endfunction
 
 function! TrimEndLines()
-  let save_cursor = getpos(".")
   silent! %s#\($\n\s*\)\+\%$##
-  call setpos('.', save_cursor)
 endfunction
 
 if g:slim < 8
-  nnoremap <leader>w :call PruneWhiteSpace()<CR>
+  nnoremap <leader>w :call PruneWhiteSpace()<CR><C-o>
 endif
 
 " Write all buffers before navigating from Vim to tmux pane
