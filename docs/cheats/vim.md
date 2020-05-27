@@ -271,7 +271,7 @@ percent **%**
 : Toggle stage of selected file
 
 **-**
-: Push current commit
+: Push current commit or HEAD if on Unpushed line
 
 **s**
 : Stage selected file
