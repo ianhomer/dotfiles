@@ -201,7 +201,6 @@ if g:slim < 10
   nnoremap <silent> <leader>jt :Ag<CR>'[\ ]
   nnoremap <silent> <leader>jT :Ag!<CR>'[\ ]
 
-
   " save all files
   nnoremap <silent> <leader>s :wall<CR>
   " reset things
@@ -226,6 +225,7 @@ if g:slim < 10
       nnoremap <silent> <leader>,j :execute 'NERDTree ~/projects/things'<CR>
       nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+      nnoremap <leader>p :Gpush<CR>
     endif
   endif
 
@@ -268,7 +268,7 @@ if !exists("*PowerToggle")
     let g:slim_session = exists('g:slim_session') ? g:slim_session > 4 ? 4 : 5 : 4
     call ReloadConfig()
   endfunction
-  nnoremap <silent> <leader>p :call PowerToggle()<CR>
+  nnoremap <silent> <leader>5 :call PowerToggle()<CR>
 endif
 
 " Reload vimrc, neo vimrc and CoC
@@ -387,7 +387,6 @@ augroup dotme
   endif
 augroup end
 
-
 "
 " *** Scope : Editing ***
 "
@@ -433,7 +432,6 @@ set nowritebackup
 " Keep swap and backups centrally
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
-
 
 " Scroll 3 lines before border
 set scrolloff=3
