@@ -300,13 +300,13 @@ endfunction
 nnoremap <silent> <leader>v :call ReloadConfig()<CR>
 
 " Clear whitespace
-function! ClearWhiteSpace()
-  s/\s\+$//g
+function! PruneWhiteSpace()
+  s/\s\+$//ge
   nohlsearch
 endfunction
 
 if g:slim < 8
-  nnoremap <leader>w :call ClearWhiteSpace()<CR>
+  nnoremap <leader>w :call PruneWhiteSpace()<CR>
 endif
 
 " Write all buffers before navigating from Vim to tmux pane
