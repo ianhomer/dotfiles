@@ -253,7 +253,7 @@ function! LintMe()
       execute "%!jq ."
     elseif &filetype == "markdown"
       normal magggqG
-      "call ClearWhiteSpace()
+      call PruneWhiteSpace()
       normal `a
     endif
   endif
@@ -301,7 +301,7 @@ nnoremap <silent> <leader>v :call ReloadConfig()<CR>
 
 " Clear whitespace
 function! PruneWhiteSpace()
-  s/\s\+$//ge
+  %s/\s\+$//ge
   nohlsearch
 endfunction
 
