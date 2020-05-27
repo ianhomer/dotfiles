@@ -305,6 +305,17 @@ function! PruneWhiteSpace()
   nohlsearch
 endfunction
 
+function! ReduceBlankLines()
+  call TrimEndLines()
+  v/\S/,//-j
+endfunction
+
+function! TrimEndLines()
+  let save_cursor = getpos(".")
+  silent! %s#\($\n\s*\)\+\%$##
+  call setpos('.', save_cursor)
+endfunction
+
 if g:slim < 8
   nnoremap <leader>w :call PruneWhiteSpace()<CR>
 endif
