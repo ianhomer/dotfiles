@@ -301,7 +301,8 @@ nnoremap <silent> <leader>v :call ReloadConfig()<CR>
 
 " Clear whitespace
 function! ClearWhiteSpace()
-  s/\s\+$//g
+  " s/\s\+$//g
+  execute "%s/\\\s\\\+$//g"
   nohlsearch
 endfunction
 
