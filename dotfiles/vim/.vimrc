@@ -52,8 +52,9 @@ if g:slim < 9
   "
   " Style
   "
-  " gruvbox - styling
   Plug 'morhetz/gruvbox'
+  Plug 'tomasr/molokai'
+  Plug 'jnurmine/zenburn'
 endif
 
 if g:slim < 7
