@@ -267,6 +267,9 @@ percent **%**
 **=**
 : Show diff for selected file
 
+**-**
+: Toggle stage of selected file
+
 **s**
 : Stage selected file
 
