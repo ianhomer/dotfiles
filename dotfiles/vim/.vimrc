@@ -252,7 +252,9 @@ function! LintMe()
     if &filetype == "json"
       execute "%!jq ."
     elseif &filetype == "markdown"
-      normal magggqG`a
+      normal magggqG
+      "call ClearWhiteSpace()
+      normal `a
     endif
   endif
 endfunction
@@ -298,8 +300,13 @@ endfunction
 nnoremap <silent> <leader>v :call ReloadConfig()<CR>
 
 " Clear whitespace
+function! ClearWhiteSpace()
+  s/\s\+$//g
+  nohlsearch
+endfunction
+
 if g:slim < 8
-  nnoremap <leader>w :%s/\s\+$//g<CR>:nohlsearch<CR>
+  nnoremap <leader>w :call ClearWhiteSpace()<CR>
 endif
 
 " Write all buffers before navigating from Vim to tmux pane
