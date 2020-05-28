@@ -69,6 +69,14 @@ def parse(line):
       context = match.group(2)
     lastWasCommand = 0
     return
+  # Command and definition
+  match = re.search('[-|] `([^`]*)` [:|] ([^|]*)', line)
+  if match:
+    printLine({
+      "context": application + ' ' + context,
+      "command": match.group(1),
+      "definition": match.group(2)
+    })
   # Command
   match = re.search('\*\*([^\*]*)\*\*', line)
   if match:
