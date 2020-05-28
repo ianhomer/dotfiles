@@ -4,60 +4,38 @@
 
 ### misc
 
-**space+r**
-: Open (paste) registry
-
-**space+c**
-: Commits
-
-**space+cw**
-: Clear white space
-
-**space+h**
-: File open history
+|            |                       |
+| --         | --                    |
+| `space+r`  | Open (paste) registry |
+| `space+c`  | Commits               |
+| `space+cw` | Clear white space     |
+| `space+h`  | File open history     |
 
 ### maps
 
-**space+m**
+`space+m`
 : Keyboard map for normal mode
 
-**:Maps!**
+`:Maps!`
 : Open maps in full screen
 
-**space+l**
+`space+l`
 : Keyboard map for insert mode
 
 ### files
 
-**space+n**
-: Open nerd tree 
-
-**space+s**
-: Save all files
-
-**:NERDTreeToggle** or **space+f**
-: Open file browser
-
-**:cd**
-: change directory
-
-**space + r** or **:reg**
-: show paste registry
-
-**"2p**
-: paste a previous cut
-
-**gf**
-: go to file under cursor
-
-**gx**
-: open link in browser
-
-**gt**
-: go to next tab
-
-**tabe**
-: open file in new tab
+|                       |                         |
+| --                    | --                      |
+| `space+n`             | Open nerd tree          |
+| `space+s`             | Save all files          |
+| `space+f`             | Open file browser       |
+| `:cd`                 | change directory        |
+| `space + r` or `:reg` | show paste registry     |
+| `"2p`                 | paste a previous cut    |
+| `gf`                  | go to file under cursor |
+| `gx`                  | open link in browser    |
+| `gt`                  | go to next tab          |
+| `tabe`                | open file in new tab    |
 
 **m** + letter
 : set mark
@@ -145,8 +123,7 @@ percent **%**
 
 #### motion
 
-**0**
-:beginning of line
+**0** :beginning of line
 
 **\$**
 : end of line
