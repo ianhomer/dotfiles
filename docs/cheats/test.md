@@ -10,8 +10,10 @@ The following should be equivalent
 `:`
 : Definition List with backtick
 
-- `-` : List
+- `-` : List with backtick
+- **-** : List with bold
 
-|          |       |
-| --       | --    |
-| `{pipe}` | Table |
+|            |                         |
+| --         | --                      |
+| `{pipe}`   | Table row with backtick |
+| **{pipe}** | Table row with bold     |
