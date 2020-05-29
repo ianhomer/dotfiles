@@ -28,5 +28,5 @@ nmap <buffer> <leader>kL ysiW<
 nmap <buffer> <silent> <leader>kc 0f*ds*cs*`j
 
 " Convert defintion list to table, move to next definition
-nmap <buffer> <silent> <leader>kr 0f*ds*cs*`Jf:r\|I\|\|<ESC>jj
+nmap <buffer> <silent> <leader>kr 0ds*cs*`Jf:r\|I\|\|<ESC>jj
 

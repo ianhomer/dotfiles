@@ -13,14 +13,11 @@
 
 ### maps
 
-`space+m`
-: Keyboard map for normal mode
-
-`:Maps!`
-: Open maps in full screen
-
-`space+l`
-: Keyboard map for insert mode
+|           |                              |
+| --        | --                           |
+| `space+m` | Keyboard map for normal mode |
+| `:Maps!`  | Open maps in full screen     |
+| `space+l` | Keyboard map for insert mode |
 
 ### files
 
@@ -57,30 +54,19 @@
 | `space+5`     | Close all buffers except current one |
 | `space+space` | Show buffers                         |
 
-#### NERDTree
+### NERDTree
 
-**m**
-: open file action
+|           |                                            |
+| --        | --                                         |
+| `m`       | open file action                           |
+| `Shift+i` | show hidden files                          |
+| `Shift+r` | reload node                                |
+| `U`       | Up directory                               |
+| `C`       | Set root directory                         |
+| `cd`      | Change current directory to current note   |
+| `CD`      | Change root directory to current directory |
 
-**Shift+i**
-: show hidden files
-
-**Shift+r**
-: reload node
-
-**U**
-: Up directory
-
-**C**
-: Set root directory
-
-**cd**
-: Change current directory to current note
-
-**CD**
-: Change root directory to current directory
-
-#### netrw
+### netrw
 
 **-**
 : up a directory
@@ -100,7 +86,7 @@
 percent **%**
 : create new file
 
-#### motion
+### motion
 
 **0** :beginning of line
 
@@ -211,12 +197,12 @@ percent **%**
 | `:Gcommit` | Git commit staged                 |
 | `:Gpush`   | Git push                          |
 
-### Fugitive Window
+### Fugitive
 
 |      |                                                 |
 | --   | --                                              |
 | `=`  | Show diff for selected file                     |
-| `-`  | Toggle stage of selected file                   |
+| `-`  | Stage of selected file (toggle)                  |
 | `-`  | Push current commit or HEAD if on Unpushed line |
 | `s`  | Stage selected file                             |
 | `X`  | Discard changes on selected file                |
