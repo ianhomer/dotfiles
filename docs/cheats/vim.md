@@ -24,59 +24,38 @@
 
 ### files
 
-|                       |                         |
-| --                    | --                      |
-| `space+n`             | Open nerd tree          |
-| `space+s`             | Save all files          |
-| `space+f`             | Open file browser       |
-| `:cd`                 | change directory        |
-| `space + r` or `:reg` | show paste registry     |
-| `"2p`                 | paste a previous cut    |
-| `gf`                  | go to file under cursor |
-| `gx`                  | open link in browser    |
-| `gt`                  | go to next tab          |
-| `tabe`                | open file in new tab    |
+|                       |                                |
+| --                    | --                             |
+| `space+n`             | Open nerd tree                 |
+| `space+s`             | Save all files                 |
+| `space+f`             | Open file browser              |
+| `:cd`                 | change directory               |
+| `space + r` or `:reg` | show paste registry            |
+| `"2p`                 | paste a previous cut           |
+| `gf`                  | go to file under cursor        |
+| `gx`                  | open link in browser           |
+| `gt`                  | go to next tab                 |
+| `tabe`                | open file in new tab           |
+| `m` + letter          | set mark                       |
+| `'` + letter          | go to mark                     |
+| `Ctrl+^`              | switch to previous buffer      |
+| `:tab h whatever`     | open help in a new tab         |
+| `Ctrl-w o`            | make pane the only visible one |
+| `:noh`                | clear last highlight           |
 
-**m** + letter
-: set mark
-
-**'** + letter
-: go to mark
-
-**Ctrl+^**
-: switch to previous buffer
-
-**:tab h whatever**
-: open help in a new tab
-
-**Ctrl-w o**
-: make pane the only visible one
-
-**:noh**
-: clear last highlight
-
-**:enew | pu=execute('autocmd')**
+`:enew | pu=execute('autocmd')`
 : copy output of command, e.g. autocmd, into buffer
 
 ### buffers
 
-**:bd**
-: close buffer
-
-**:bn**
-: next buffer
-
-**bufdo bd**
-: close all buffers
-
-**space+b**
-: Commits for current buffer
-
-**space+5**
-: Close all buffers except current one
-
-**space+space**
-: Show buffers
+|               |                                      |
+| --            | --                                   |
+| `:bd`         | close buffer                         |
+| `:bn`         | next buffer                          |
+| `bufdo bd`    | close all buffers                    |
+| `space+b`     | Commits for current buffer           |
+| `space+5`     | Close all buffers except current one |
+| `space+space` | Show buffers                         |
 
 #### NERDTree
 
@@ -234,6 +213,8 @@ percent **%**
 
 ### Fugitive Window
 
+|      |                                                 |
+| --   | --                                              |
 | `=`  | Show diff for selected file                     |
 | `-`  | Toggle stage of selected file                   |
 | `-`  | Push current commit or HEAD if on Unpushed line |
