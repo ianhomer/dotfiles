@@ -227,54 +227,28 @@ percent **%**
 
 ### Git
 
-**:G**
-: Git status window (or refresh it)
-
-**:Gwrite**
-: Git add current file
-
-**:Gcommit**
-: Git commit staged
-
-**:Gpush**
-: Git push
+| `:G`       | Git status window (or refresh it) |
+| `:Gwrite`  | Git add current file              |
+| `:Gcommit` | Git commit staged                 |
+| `:Gpush`   | Git push                          |
 
 ### Fugitive Window
 
-**=**
-: Show diff for selected file
-
-**-**
-: Toggle stage of selected file
-
-**-**
-: Push current commit or HEAD if on Unpushed line
-
-**s**
-: Stage selected file
-
-**X**
-: Discard changes on selected file
-
-**cc**
-: Commit staged files
-
-**cw**
-: Change commit message for selected commit
+| `=`  | Show diff for selected file                     |
+| `-`  | Toggle stage of selected file                   |
+| `-`  | Push current commit or HEAD if on Unpushed line |
+| `s`  | Stage selected file                             |
+| `X`  | Discard changes on selected file                |
+| `cc` | Commit staged files                             |
+| `cw` | Change commit message for selected commit       |
+| `q`  | Quit fugitive window                            |
 
 ### Markdown
 
-**viWS+**
-: make a word bold
-
-**zR**
-: open all folds
-
-**zM**
-: close all folds
-
-**<space>+l**
-: Lint file
+| `viWS+`     | make a word bold |
+| `zR`        | open all folds   |
+| `zM`        | close all folds  |
+| `<space>+l` | Lint file        |
 
 ### Selections
 

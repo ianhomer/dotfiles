@@ -182,7 +182,6 @@ source ~/.config/vim/modes.vim
 " Identify free leader mappings
 "
 nnoremap <silent> <leader>i :echo "i not mapped"<CR>
-nnoremap <silent> <leader>k :echo "k not mapped"<CR>
 nnoremap <silent> <leader>u :echo "u not mapped"<CR>
 nnoremap <silent> <leader>t :echo "t not mapped"<CR>
 nnoremap <silent> <leader>y :echo "y not mapped"<CR>
@@ -195,8 +194,8 @@ if g:slim < 10
 
   nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
   " exact
-  nnoremap <silent> <leader>je :Ag<CR>'
-  nnoremap <silent> <leader>jE :Ag!<CR>'
+  nnoremap <silent> <leader>jj :Ag<CR>'
+  nnoremap <silent> <leader>jJ :Ag!<CR>'
   " todos
   nnoremap <silent> <leader>jt :Ag<CR>'[\ ]
   nnoremap <silent> <leader>jT :Ag!<CR>'[\ ]
@@ -237,10 +236,11 @@ if exists('*which_key#register')
   " Note that this currently when config reloaded after which keys as been used
   " since which keys is lazily loaded
   let g:which_key_map =  {}
+  let g:which_key_map.c = { 'name' : '...Commenter' }
   let g:which_key_map.j = { 'name' : '...FZF search' }
+  let g:which_key_map['k'] = { 'name' : '...Bookmarks' }
   let g:which_key_map[','] = { 'name' : '...Misc' }
-  let g:which_key_map['.'] = { 'name' : '...Bookmarked' }
-  let g:which_key_map['c'] = { 'name' : '...Commenter' }
+  let g:which_key_map['.'] = { 'name' : '...Experimental' }
   call which_key#register('<Space>', "g:which_key_map")
 endif
 
