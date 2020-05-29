@@ -241,7 +241,7 @@ percent **%**
 | `X`  | Discard changes on selected file                |
 | `cc` | Commit staged files                             |
 | `cw` | Change commit message for selected commit       |
-| `q`  | Quit fugitive window                            |
+| `gq` | Quit fugitive window                            |
 
 ### Markdown
 

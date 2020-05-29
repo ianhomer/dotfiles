@@ -3,6 +3,16 @@ set formatlistpat+=\\\|^:\\s
 " Support table row as list when formating
 set formatlistpat+=\\\|^\|\\s
 
+" Markdown surrounds
+" bold
+nmap <leader>kb ysiWb
+" italic
+nmap <leader>ki ysiW*
+" link
+nmap <leader>kl EBysiW(i[]<C-o>h
+" bare link
+nmap <leader>kL ysiW<
+
 " Convert bold to backtick, move to next row
 nmap <silent> <leader>kc 0f*ds*cs*`j
 

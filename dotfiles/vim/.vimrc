@@ -192,14 +192,6 @@ if g:slim < 10
   nnoremap <silent> <leader>f :Files<CR>
   nnoremap <silent> <leader>F :Files!<CR>
 
-  nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
-  " exact
-  nnoremap <silent> <leader>jj :Ag<CR>'
-  nnoremap <silent> <leader>jJ :Ag!<CR>'
-  " todos
-  nnoremap <silent> <leader>jt :Ag<CR>'[\ ]
-  nnoremap <silent> <leader>jT :Ag!<CR>'[\ ]
-
   " save all files
   nnoremap <silent> <leader>s :wall<CR>
   " reset things
@@ -408,16 +400,6 @@ source ~/.config/vim/spell.vim
 
 let g:surround_{char2nr('b')} = "**\r**"
 let g:surround_{char2nr('<')} = "<\r>"
-
-" Markdown surrounds
-" bold
-nmap <leader>.b ysiWb
-" italic
-nmap <leader>.i ysiW*
-" link
-nmap <leader>.l EBysiW(i[]<C-o>h
-" bare link
-nmap <leader>.L ysiW<
 
 " *** Scope : IO ***
 "
