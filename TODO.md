@@ -1,8 +1,5 @@
 # todo
 
-- [ ] Make cheats pick up alternative formats, list / table (instead of
-    definition lists
-- [ ] Support todos in markdown lists format
 - [ ] Update git-set-alternative-url to be bash script and switch from https URL
   to ssh URL
 - Surround leaders for bold double star,backtick wrap. If visual selection
