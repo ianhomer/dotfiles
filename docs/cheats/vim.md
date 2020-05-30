@@ -202,7 +202,7 @@ percent **%**
 |      |                                                 |
 | --   | --                                              |
 | `=`  | Show diff for selected file                     |
-| `-`  | Stage of selected file (toggle)                  |
+| `-`  | Stage of selected file (toggle)                 |
 | `-`  | Push current commit or HEAD if on Unpushed line |
 | `s`  | Stage selected file                             |
 | `X`  | Discard changes on selected file                |
