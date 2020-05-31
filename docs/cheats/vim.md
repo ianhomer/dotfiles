@@ -164,6 +164,16 @@ percent **%**
 **:Tabularize /|** or \*\*space\*\*
 : Align paragraph on character
 
+### Spell
+
+|          |                                           |
+| --       | --                                        |
+| `zg`     | Add word to dictionary                    |
+| `z=`     | Show spell options                        |
+| `Ctrl+n` | In insert mode, complete options previous |
+| `Ctrl+p` | In insert mode, complete options next     |
+
+
 ### Git
 
 |            |                                        |

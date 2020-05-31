@@ -510,3 +510,7 @@ endif
 if g:slim < 2
   source ~/.config/vim/experimental.vim
 endif
+
+" Allow per project vimrc files
+set exrc
+set secure
