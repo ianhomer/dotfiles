@@ -169,6 +169,7 @@ percent **%**
 |          |                                           |
 | --       | --                                        |
 | `zg`     | Add word to dictionary                    |
+| `2zg`    | Add word to second dictionary             |
 | `z=`     | Show spell options                        |
 | `Ctrl+n` | In insert mode, complete options previous |
 | `Ctrl+p` | In insert mode, complete options next     |
