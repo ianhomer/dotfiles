@@ -216,7 +216,7 @@ if g:slim < 10
       nnoremap <silent> <leader>,j :execute 'NERDTree ~/projects/things'<CR>
       nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
-      nnoremap <leader>p :Gpush<CR>
+      nnoremap <silent> <leader>p :MarkdownPreview<CR>
     endif
   endif
 
