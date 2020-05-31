@@ -197,8 +197,8 @@ if g:slim < 10
   " reset things
   nnoremap <silent> <leader>z :noh<CR>
 
-  " select all
-  nnoremap <silent> <leader>o ggVG
+  " Hide all windows except the current one
+  nnoremap <silent> <leader>O :only<CR>
   " dummy map
   nnoremap <silent> <leader>9 :echo "9 pressed"<CR>
 
@@ -213,6 +213,8 @@ if g:slim < 10
     nnoremap <silent> <leader>r :reg<CR>
     if g:slim < 7
       nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
+      " Close all buffers except the current one
+      nnoremap <silent> <leader>o :NERDTreeClose<bar>wall<bar>%bd<bar>e#<bar>bd#<CR> 
       nnoremap <silent> <leader>,j :execute 'NERDTree ~/projects/things'<CR>
       nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
