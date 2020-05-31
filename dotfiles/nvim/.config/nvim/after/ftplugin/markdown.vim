@@ -32,3 +32,18 @@ nmap <buffer> <silent> <leader>kr 0ds*cs*`Jf:r\|I\|\|<ESC>jj
 
 set spell
 
+" Find local spell file
+function! AddLocalSpellFile(directory, depth)
+  if a:depth < 10 && a:directory != "/"
+    let l:localspellfile = a:directory . "/.vim/local.utf-8.add"
+    if filereadable(l:localspellfile) && &spellfile !~ l:localspellfile 
+      let &spellfile = l:localspellfile . "," . &spellfile
+    endif
+    call AddLocalSpellFile(fnamemodify(a:directory, ":h"), a:depth + 1)
+  endif
+endfunction
+
+call AddLocalSpellFile(expand('%:p:h'), 0)
+
+
+

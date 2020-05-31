@@ -183,6 +183,7 @@ percent **%**
 | `:Gwrite`  | Git add current file                   |
 | `:Gcommit` | Git commit staged                      |
 | `:Gpush`   | Git push                               |
+| `:Gcd`     | Change CWD to git root                 |
 
 ### Fugitive
 
