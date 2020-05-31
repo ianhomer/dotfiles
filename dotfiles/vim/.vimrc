@@ -331,9 +331,6 @@ if g:slim < 8
   " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
   " Close the current buffer and move to the previous one
   nnoremap <leader>q :<c-u>bp <bar> bd #<cr>
-  " Thanks - https://www.rockyourcode.com/vim-close-all-other-buffers/
-  " Close all buffers except the current one
-  nnoremap <leader>5 :<c-u>up <bar> %bd <bar> e#<cr>
 endif
 
 "
