@@ -14,6 +14,8 @@ set formatlistpat+=\\\|^:\\s
 " Support table row as list when formating
 set formatlistpat+=\\\|^\|\\s
 
+set autoindent
+
 " Markdown surrounds
 " bold
 nmap <buffer> <leader>kb ysiWb
