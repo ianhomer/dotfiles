@@ -44,6 +44,7 @@ function! AddLocalSpellFile(directory, depth)
         endif
       endfor
     endif
+    call AddLocalSpellFile(fnamemodify(a:directory, ":h"), a:depth + 1)
   endif
 endfunction
 

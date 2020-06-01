@@ -1,5 +1,8 @@
 # todo
 
+- [ ] Markdown linting with code blocks
+- [ ] Markdown linting with frontmatter
+- [ ] Fix iterm window to front of screen
 - [ ] Set up best practice for local spelling file
 - [ ] Update git-set-alternative-url to be bash script and switch from https URL
   to ssh URL
