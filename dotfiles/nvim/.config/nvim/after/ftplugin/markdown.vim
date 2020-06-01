@@ -30,16 +30,20 @@ nmap <buffer> <silent> <leader>kc 0f*ds*cs*`j
 " Convert defintion list to table, move to next definition
 nmap <buffer> <silent> <leader>kr 0ds*cs*`Jf:r\|I\|\|<ESC>jj
 
-set spell
+setlocal spell
 
 " Find local spell file
 function! AddLocalSpellFile(directory, depth)
   if a:depth < 10 && a:directory != "/"
-    let l:localspellfile = a:directory . "/.vim/local.utf-8.add"
-    if filereadable(l:localspellfile) && &spellfile !~ l:localspellfile 
-      let &spellfile = l:localspellfile . "," . &spellfile
+    let l:localvimdir = a:directory . "/.vim"
+    if isdirectory(l:localvimdir)
+      " Add all *.add files found in parent .vim directory to to local spellfile
+      for l:localspellfile in split(glob(l:localvimdir . "/*.add"))
+        if &l:spellfile !~ l:localspellfile
+          let &l:spellfile = l:localspellfile . "," . &l:spellfile
+        endif
+      endfor
     endif
-    call AddLocalSpellFile(fnamemodify(a:directory, ":h"), a:depth + 1)
   endif
 endfunction
 
