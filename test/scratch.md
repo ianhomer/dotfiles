@@ -57,7 +57,8 @@ Todos
 
 - [ ] Do this
 - [ ] And this, and this, and this, and this, and this, and this, and this, and
-  this, and this, and this, and this, and this, and this
+  this, and this, and this, and this, and this, and this, and this, and this,
+  and this.
 - [x] This too
 
 ## Definitions
@@ -95,6 +96,13 @@ Term with multiple definitions and long lines
 | x    | y  |
 | --   | -- |
 | this |    |
+
+## Code
+
+```
+    fenced-block
+    second-line
+```
 
 ## Scratch
 
