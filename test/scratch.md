@@ -1,3 +1,7 @@
+---
+label: foo
+---
+
 # Title
 
 ## Heading 1
