@@ -16,7 +16,7 @@ set formatlistpat+=\\\|^\|\\s
 " Support fenced blocks
 set formatlistpat+=\\\|^\\s\\{4\\}
 " Support frontmatter yaml
-set formatlistpat+=\\\|^[^:]\\+:\\s
+set formatlistpat+=\\\|^[^:\\s]\\+:\\s
 
 set autoindent
 

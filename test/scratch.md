@@ -17,12 +17,10 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
 nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
-This is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line, this is a long line
+Join these lines to make this is a long line, this is a long line, this is a long line, this is a long
+line, this is a long line, this is a long line, this is a long line
 
 This is a spellingmistake.
-
-Line with 2 white spaces at end.  
-Another line with 2 white spaces at end.  
 
 ## Lists
 
@@ -31,14 +29,14 @@ Another line with 2 white spaces at end.
 
 Long line lists
 
-- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-  tempor
-  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  consequat.
 - Lorem ipsum
-- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-  tempor
-  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis
 
 Nested lists
 
@@ -101,9 +99,11 @@ Term with multiple definitions and long lines
 ## Code
 
 ```
-    fenced-block
-    second-line
+fenced-block
+second-line
 ```
+
+More code:
 
     unfenced-block
     second-line
@@ -111,4 +111,3 @@ Term with multiple definitions and long lines
 ## Scratch
 
 Hello world!
-
