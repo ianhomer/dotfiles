@@ -22,7 +22,7 @@ set autoindent
 
 set formatoptions=jtcqln
 
-set comments=fb:*,fb:-,fb:+,n:>,s:---,e:---,s:```,e:```
+set comments=fb:*,fb:-,fb:+,n:>,se:---,se:```
 
 " Markdown surrounds
 " bold

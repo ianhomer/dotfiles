@@ -108,6 +108,11 @@ More code:
     unfenced-block
     second-line
 
+```
+another-fenced-block
+second-line
+```
+
 ## Scratch
 
 Hello world!
