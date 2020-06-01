@@ -13,8 +13,16 @@ nnoremap <buffer> <silent> <leader>y {j0i\|\|\|<CR>\|--\|--\|<CR><ESC>:call <SID
 set formatlistpat+=\\\|^:\\s
 " Support table row as list when formating
 set formatlistpat+=\\\|^\|\\s
+" Support fenced blocks
+set formatlistpat+=\\\|^\\s\\{4\\}
+" Support frontmatter yaml
+set formatlistpat+=\\\|^[^:]\\+:\\s
 
 set autoindent
+
+set formatoptions=jtcqln
+
+set comments=fb:*,fb:-,fb:+,n:>,s:---,e:---,s:```,e:```
 
 " Markdown surrounds
 " bold

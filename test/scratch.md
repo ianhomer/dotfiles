@@ -1,5 +1,6 @@
 ---
 label: foo
+tag: bar
 ---
 
 # Title
@@ -103,6 +104,9 @@ Term with multiple definitions and long lines
     fenced-block
     second-line
 ```
+
+    unfenced-block
+    second-line
 
 ## Scratch
 
