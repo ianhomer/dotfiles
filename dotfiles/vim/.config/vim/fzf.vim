@@ -15,6 +15,15 @@ command! -bar -bang Maps
 command! -bar -bang MapsInsert
   \ call fzf#vim#maps("i", {'options': '--tiebreak=index'}, <bang>0)
 
+nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
+
+" exact
+nnoremap <silent> <leader>jj :Ag<CR>'
+nnoremap <silent> <leader>jJ :Ag!<CR>'
+" todos
+nnoremap <silent> <leader>jt :Ag<CR>'[\ ]
+nnoremap <silent> <leader>jT :Ag!<CR>'[\ ]
+
 nnoremap <silent> <leader>m :Maps<CR>
 nnoremap <silent> <leader>M :Maps!<CR>
-nnoremap <silent> <leader>k :MapsInsert<CR>
+nnoremap <silent> <leader>,mi :MapsInsert<CR>

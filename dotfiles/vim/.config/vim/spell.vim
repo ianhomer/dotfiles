@@ -1,5 +1,6 @@
 set spelllang=en,local
 set spellfile=~/.config/vim/spell/en.utf-8.add
+set complete+=kspell
 
 " 
 " Refresh spelling files

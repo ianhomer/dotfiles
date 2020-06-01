@@ -182,7 +182,6 @@ source ~/.config/vim/modes.vim
 " Identify free leader mappings
 "
 nnoremap <silent> <leader>i :echo "i not mapped"<CR>
-nnoremap <silent> <leader>k :echo "k not mapped"<CR>
 nnoremap <silent> <leader>u :echo "u not mapped"<CR>
 nnoremap <silent> <leader>t :echo "t not mapped"<CR>
 nnoremap <silent> <leader>y :echo "y not mapped"<CR>
@@ -193,22 +192,13 @@ if g:slim < 10
   nnoremap <silent> <leader>f :Files<CR>
   nnoremap <silent> <leader>F :Files!<CR>
 
-  nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
-  " exact
-  nnoremap <silent> <leader>je :Ag<CR>'
-  nnoremap <silent> <leader>jE :Ag!<CR>'
-  " todos
-  nnoremap <silent> <leader>jt :Ag<CR>'[\ ]
-  nnoremap <silent> <leader>jT :Ag!<CR>'[\ ]
-
-
   " save all files
   nnoremap <silent> <leader>s :wall<CR>
   " reset things
   nnoremap <silent> <leader>z :noh<CR>
 
-  " select all
-  nnoremap <silent> <leader>o ggVG
+  " Hide all windows except the current one
+  nnoremap <silent> <leader>O :only<CR>
   " dummy map
   nnoremap <silent> <leader>9 :echo "9 pressed"<CR>
 
@@ -223,9 +213,12 @@ if g:slim < 10
     nnoremap <silent> <leader>r :reg<CR>
     if g:slim < 7
       nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
+      " Close all buffers except the current one
+      nnoremap <silent> <leader>o :NERDTreeClose<bar>wall<bar>%bd<bar>e#<bar>bd#<CR> 
       nnoremap <silent> <leader>,j :execute 'NERDTree ~/projects/things'<CR>
       nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+      nnoremap <silent> <leader>p :MarkdownPreview<CR>
     endif
   endif
 
@@ -237,10 +230,11 @@ if exists('*which_key#register')
   " Note that this currently when config reloaded after which keys as been used
   " since which keys is lazily loaded
   let g:which_key_map =  {}
+  let g:which_key_map.c = { 'name' : '...Commenter' }
   let g:which_key_map.j = { 'name' : '...FZF search' }
+  let g:which_key_map['k'] = { 'name' : '...Bookmarks' }
   let g:which_key_map[','] = { 'name' : '...Misc' }
-  let g:which_key_map['.'] = { 'name' : '...Bookmarked' }
-  let g:which_key_map['c'] = { 'name' : '...Commenter' }
+  let g:which_key_map['.'] = { 'name' : '...Experimental' }
   call which_key#register('<Space>', "g:which_key_map")
 endif
 
@@ -268,7 +262,7 @@ if !exists("*PowerToggle")
     let g:slim_session = exists('g:slim_session') ? g:slim_session > 4 ? 4 : 5 : 4
     call ReloadConfig()
   endfunction
-  nnoremap <silent> <leader>p :call PowerToggle()<CR>
+  nnoremap <silent> <leader>5 :call PowerToggle()<CR>
 endif
 
 " Reload vimrc, neo vimrc and CoC
@@ -303,7 +297,7 @@ nnoremap <silent> <leader>v :call ReloadConfig()<CR>
 " Clear whitespace
 function! PruneWhiteSpace()
   %s/\s\+$//ge
-  nohlsearch
+  call ReduceBlankLines()
 endfunction
 
 function! ReduceBlankLines()
@@ -312,13 +306,11 @@ function! ReduceBlankLines()
 endfunction
 
 function! TrimEndLines()
-  let save_cursor = getpos(".")
   silent! %s#\($\n\s*\)\+\%$##
-  call setpos('.', save_cursor)
 endfunction
 
 if g:slim < 8
-  nnoremap <leader>w :call PruneWhiteSpace()<CR>
+  nnoremap <leader>w :call PruneWhiteSpace()<CR><C-o>
 endif
 
 " Write all buffers before navigating from Vim to tmux pane
@@ -339,9 +331,6 @@ if g:slim < 8
   " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
   " Close the current buffer and move to the previous one
   nnoremap <leader>q :<c-u>bp <bar> bd #<cr>
-  " Thanks - https://www.rockyourcode.com/vim-close-all-other-buffers/
-  " Close all buffers except the current one
-  nnoremap <leader>5 :<c-u>up <bar> %bd <bar> e#<cr>
 endif
 
 "
@@ -389,7 +378,6 @@ augroup dotme
   endif
 augroup end
 
-
 "
 " *** Scope : Editing ***
 "
@@ -412,16 +400,6 @@ source ~/.config/vim/spell.vim
 let g:surround_{char2nr('b')} = "**\r**"
 let g:surround_{char2nr('<')} = "<\r>"
 
-" Markdown surrounds
-" bold
-nmap <leader>.b ysiWb
-" italic
-nmap <leader>.i ysiW*
-" link
-nmap <leader>.l EBysiW(i[]<C-o>h
-" bare link
-nmap <leader>.L ysiW<
-
 " *** Scope : IO ***
 "
 " Auto reload underlying file if it changes, although
@@ -435,7 +413,6 @@ set nowritebackup
 " Keep swap and backups centrally
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
-
 
 " Scroll 3 lines before border
 set scrolloff=3
@@ -530,3 +507,7 @@ endif
 if g:slim < 2
   source ~/.config/vim/experimental.vim
 endif
+
+" Allow per project vimrc files
+set exrc
+set secure
