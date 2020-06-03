@@ -1,0 +1,5 @@
+#!/bin/bash
+
+java -XshowSettings:properties -version 2>&1 > /dev/null | \
+  grep 'java.home' |\
+  tr " = " \\n | tail -n 1
