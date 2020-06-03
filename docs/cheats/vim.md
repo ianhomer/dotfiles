@@ -39,6 +39,8 @@
 | `:tab h whatever`     | open help in a new tab         |
 | `Ctrl-w o`            | make pane the only visible one |
 | `:noh`                | clear last highlight           |
+| `"add`                | Delete line into registry a    |
+| `"ap`                 | Paste line from registry a     |
 
 `:enew | pu=execute('autocmd')`
 : copy output of command, e.g. autocmd, into buffer
@@ -68,77 +70,41 @@
 
 ### netrw
 
-**-**
-: up a directory
-
-**i**
-: change list view
-
-**I**
-: show header
-
-**gn**
-: make current node root of tree
-
-**gh**
-: hide/un-hide dot files
-
-percent **%**
-: create new file
+|             |                                |
+| --          | --                             |
+| `-`         | up a directory                 |
+| `i`         | change list view               |
+| `I`         | show header                    |
+| `gn`        | make current node root of tree |
+| `gh`        | hide/un-hide dot files         |
+| `percent %` | create new file                |
 
 ### motion
 
-**0** :beginning of line
-
-**\$**
-: end of line
-
-**}**
-: next block
-
-**{**
-: previous block
-
-**[[**
-: next header
-
-**]]**
-: previous header
-
-**:nn**
-: line nn
-
-**gg**
-: beginning of file
-
-**GG**
-: end of file
-
-percent **%**
-: next / previous bracket
-
-**,star**
-: search for word under cursor
-
-**Ctrl+o**
-: Jump to previous cursor postion (jumplist)
-
-**Ctrl+i**
-: Jump to next cursor position (jumplist)
+|             |                                            |
+| --          | --                                         |
+| `0`         | beginning of line                          |
+| `\$`        | end of line                                |
+| `}`         | next block                                 |
+| `{`         | previous block                             |
+| `[[`        | next header                                |
+| `]]`        | previous header                            |
+| `:nn`       | line nn                                    |
+| `gg`        | beginning of file                          |
+| `GG`        | end of file                                |
+| `percent %` | next / previous bracket                    |
+| `,star`     | search for word under cursor               |
+| `Ctrl+o`    | Jump to previous cursor postion (jumplist) |
+| `Ctrl+i`    | Jump to next cursor position (jumplist)    |
 
 ### windows
 
-**:split**
-: split pane
-
-**:vsplit**
-: split pan verticallyxx
-
-**80 Ctrl+w**
-: set current pane to 80 charactersxx
-
-**Ctrl+w Ctrl+=**
-: even out the windows
+|                 |                                   |
+| --              | --                                |
+| `:split`        | split pane                        |
+| `:vsplit`       | split pan vertically              |
+| `80 Ctrl+w`     | set current pane to 80 characters |
+| `Ctrl+w Ctrl+=` | even out the windows              |
 
 ### edit
 
@@ -207,16 +173,14 @@ percent **%**
 
 ### Selections
 
-**vip**
-: select paragraph
-
-**viW**
-: select current word (including non-alphanumeric)
+|       |                                                  |
+| --    | --                                               |
+| `vip` | select paragraph                                 |
+| `viW` | select current word (including non-alphanumeric) |
 
 ### Configuration
 
-**space+p**
-: Toggle power configuration
-
-**space+v**
-: Reload vim configuration
+|           |                            |
+| --        | --                         |
+| `space+p` | Toggle power configuration |
+| `space+v` | Reload vim configuration   |
