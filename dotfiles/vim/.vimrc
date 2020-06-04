@@ -28,14 +28,12 @@ let g:vim_dir = "~/.vim"
 let g:slim = exists('$VIM_SLIM') ? $VIM_SLIM : exists('g:slim_session') ?
   \ g:slim_session : 6
 
+let g:coc_enabled = g:slim < 5 ? 1 : 0
 if has('nvim')
-  let g:coc_enabled = g:slim < 5 ? 1 : 0
   "
   " Store nvim plugins in isolated location
   "
   let g:vim_dir = "~/.config/nvim"
-else
-  let g:coc_enabled = 0
 endif
 
 call plug#begin(g:vim_dir."/plugged")

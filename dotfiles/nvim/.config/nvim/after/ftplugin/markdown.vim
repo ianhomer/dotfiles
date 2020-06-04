@@ -9,6 +9,11 @@ inoremap <buffer> <silent> <Bar> <Bar><Esc>:call <SID>LintTable()<CR>$a
 " Add table header (TODO - try to do this as part of the LintTable function if necessary)
 nnoremap <buffer> <silent> <leader>y {j0i\|\|\|<CR>\|--\|--\|<CR><ESC>:call <SID>LintTable()<CR>
 
+" The rest of this filetype plugin is not relevant if we're using CoC
+if g:coc_enabled == 1
+  finish
+end
+
 " Support definition list as a list when formating
 set formatlistpat+=\\\|^:\\s
 " Support table row as list when formating
