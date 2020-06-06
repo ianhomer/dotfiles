@@ -2,6 +2,8 @@
 let mapleader = "\<Space>"
 let maplocalleader = "\,"
 
+filetype plugin on
+
 "
 " Load plugins
 " vimscript cheatsheet : https://devhints.io/vimscript
@@ -26,14 +28,12 @@ let g:vim_dir = "~/.vim"
 let g:slim = exists('$VIM_SLIM') ? $VIM_SLIM : exists('g:slim_session') ?
   \ g:slim_session : 6
 
+let g:coc_enabled = g:slim < 5 ? 1 : 0
 if has('nvim')
-  let g:coc_enabled = g:slim < 5 ? 1 : 0
   "
   " Store nvim plugins in isolated location
   "
   let g:vim_dir = "~/.config/nvim"
-else
-  let g:coc_enabled = 0
 endif
 
 call plug#begin(g:vim_dir."/plugged")
@@ -50,8 +50,9 @@ if g:slim < 9
   "
   " Style
   "
-  " gruvbox - styling
   Plug 'morhetz/gruvbox'
+  Plug 'tomasr/molokai'
+  Plug 'jnurmine/zenburn'
 endif
 
 if g:slim < 7
@@ -76,6 +77,8 @@ if g:slim < 7
   if g:slim < 3 | Plug 'editorconfig/editorconfig-vim' | endif
   " tmux - enable C-hjkl to move to across vim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
+  " Improved path support
+  Plug 'tpope/vim-apathy'
 
   "
   " Help
@@ -103,11 +106,11 @@ if g:slim < 7
   " fugitive - Git integration
   Plug 'tpope/vim-fugitive'
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
-  if g:slim < 3 | Plug 'preservim/nerdcommenter' | endif
+  Plug 'preservim/nerdcommenter'
   " NERDTree - show git changes
   if g:slim < 1 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
   " gitgutter - Git change indicator to left of window
-  if g:slim < 1 | Plug 'airblade/vim-gitgutter' | endif
+  Plug 'airblade/vim-gitgutter'
   " HTML
   if g:slim < 1 | Plug 'mattn/emmet-vim' | endif
   " Linting
@@ -126,7 +129,7 @@ if g:slim < 7
   " goyo - Distraction free writing
   Plug 'junegunn/goyo.vim'
   " markdown preview
-  if g:slim < 1 | Plug 'iamcco/markdown-preview.nvim',
+  if g:slim < 7 | Plug 'iamcco/markdown-preview.nvim',
         \ { 'do': 'cd app & yarn install' } | endif
 endif
 
@@ -166,11 +169,8 @@ set shiftwidth=2
 set expandtab
 " 80 characters default width
 set textwidth=80
-" Text formating options - no autowrap
-set formatoptions=jrql
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
-
 
 "
 " Command remapping
@@ -180,7 +180,6 @@ source ~/.config/vim/modes.vim
 " Identify free leader mappings
 "
 nnoremap <silent> <leader>i :echo "i not mapped"<CR>
-nnoremap <silent> <leader>k :echo "k not mapped"<CR>
 nnoremap <silent> <leader>u :echo "u not mapped"<CR>
 nnoremap <silent> <leader>t :echo "t not mapped"<CR>
 nnoremap <silent> <leader>y :echo "y not mapped"<CR>
@@ -191,18 +190,13 @@ if g:slim < 10
   nnoremap <silent> <leader>f :Files<CR>
   nnoremap <silent> <leader>F :Files!<CR>
 
-  nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
-  nnoremap <silent> <leader>j :Ag<CR>'
-  nnoremap <silent> <leader>J :Ag!<CR>'
-
-
   " save all files
   nnoremap <silent> <leader>s :wall<CR>
   " reset things
   nnoremap <silent> <leader>z :noh<CR>
 
-  " select all
-  nnoremap <silent> <leader>o ggVG
+  " Hide all windows except the current one
+  nnoremap <silent> <leader>O :only<CR>
   " dummy map
   nnoremap <silent> <leader>9 :echo "9 pressed"<CR>
 
@@ -217,13 +211,29 @@ if g:slim < 10
     nnoremap <silent> <leader>r :reg<CR>
     if g:slim < 7
       nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
+      " Close all buffers except the current one
+      nnoremap <silent> <leader>o :NERDTreeClose<bar>wall<bar>%bd<bar>e#<bar>bd#<CR> 
       nnoremap <silent> <leader>,j :execute 'NERDTree ~/projects/things'<CR>
       nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+      nnoremap <silent> <leader>p :MarkdownPreview<CR>
     endif
   endif
 
   nnoremap <silent> <leader>l :call LintMe()<CR>
+  nnoremap <leader>.e <C-W><C-=>
+endif
+
+if exists('*which_key#register')
+  " Note that this currently when config reloaded after which keys as been used
+  " since which keys is lazily loaded
+  let g:which_key_map =  {}
+  let g:which_key_map.c = { 'name' : '...Commenter' }
+  let g:which_key_map.j = { 'name' : '...FZF search' }
+  let g:which_key_map['k'] = { 'name' : '...Bookmarks' }
+  let g:which_key_map[','] = { 'name' : '...Misc' }
+  let g:which_key_map['.'] = { 'name' : '...Experimental' }
+  call which_key#register('<Space>', "g:which_key_map")
 endif
 
 function! LintMe()
@@ -234,6 +244,10 @@ function! LintMe()
   else
     if &filetype == "json"
       execute "%!jq ."
+    elseif &filetype == "markdown"
+      normal magggqG
+      call PruneWhiteSpace()
+      normal `a
     endif
   endif
 endfunction
@@ -246,7 +260,7 @@ if !exists("*PowerToggle")
     let g:slim_session = exists('g:slim_session') ? g:slim_session > 4 ? 4 : 5 : 4
     call ReloadConfig()
   endfunction
-  nnoremap <silent> <leader>p :call PowerToggle()<CR>
+  nnoremap <silent> <leader>5 :call PowerToggle()<CR>
 endif
 
 " Reload vimrc, neo vimrc and CoC
@@ -279,8 +293,22 @@ endfunction
 nnoremap <silent> <leader>v :call ReloadConfig()<CR>
 
 " Clear whitespace
+function! PruneWhiteSpace()
+  %s/\s\+$//ge
+  call ReduceBlankLines()
+endfunction
+
+function! ReduceBlankLines()
+  call TrimEndLines()
+  v/\S/,//-j
+endfunction
+
+function! TrimEndLines()
+  silent! %s#\($\n\s*\)\+\%$##
+endfunction
+
 if g:slim < 8
-  nnoremap <leader>w :%s/\s\+$//g<CR>:nohlsearch<CR>
+  nnoremap <leader>w :call PruneWhiteSpace()<CR><C-o>
 endif
 
 " Write all buffers before navigating from Vim to tmux pane
@@ -301,9 +329,6 @@ if g:slim < 8
   " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
   " Close the current buffer and move to the previous one
   nnoremap <leader>q :<c-u>bp <bar> bd #<cr>
-  " Thanks - https://www.rockyourcode.com/vim-close-all-other-buffers/
-  " Close all buffers except the current one
-  nnoremap <leader>5 :<c-u>up <bar> %bd <bar> e#<cr>
 endif
 
 "
@@ -351,7 +376,6 @@ augroup dotme
   endif
 augroup end
 
-
 "
 " *** Scope : Editing ***
 "
@@ -369,6 +393,11 @@ vnoremap > >gv
 
 source ~/.config/vim/spell.vim
 
+" Surround customisation
+
+let g:surround_{char2nr('b')} = "**\r**"
+let g:surround_{char2nr('<')} = "<\r>"
+
 " *** Scope : IO ***
 "
 " Auto reload underlying file if it changes, although
@@ -382,7 +411,6 @@ set nowritebackup
 " Keep swap and backups centrally
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
-
 
 " Scroll 3 lines before border
 set scrolloff=3
@@ -477,3 +505,7 @@ endif
 if g:slim < 2
   source ~/.config/vim/experimental.vim
 endif
+
+" Allow per project vimrc files
+set exrc
+set secure

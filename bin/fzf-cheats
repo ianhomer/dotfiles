@@ -17,8 +17,7 @@ CONTROL_CHAR="⌃"
 OPTION_CHAR="⌥"
 SPACE_CHAR="␣"
 
-lineFormat = "\u001b[0m {command:20s} \u001b[32m{application:10s}" + \
-  " \u001b[33m{context:10s} \u001b[36m {definition:s}"
+lineFormat = "\u001b[0m {command:20s} \u001b[33m{context:15s} \u001b[36m {definition:s}"
 
 metas = []
 
@@ -70,10 +69,21 @@ def parse(line):
       context = match.group(2)
     lastWasCommand = 0
     return
-  # Command
-  match = re.search('\*\*([^\*\s]*)\*\*', line)
+  # Command and definition
+  match = re.search('^[-|] `([^`]*)`\s*[:|] ([^|]*)', line)
+  if not match:
+    match = re.search('^[-|] \*\*([^\*]*)\*\*\s*[:|] ([^|]*)', line)
   if match:
-    debug("command " + match.group(1))
+    printLine({
+      "context": application + ' ' + context,
+      "command": match.group(1),
+      "definition": match.group(2)
+    })
+  # Command
+  match = re.search('^\*\*([^\*]*)\*\*', line)
+  if not match:
+    match = re.search('^`([^`]*)`', line)
+  if match:
     command = match.group(1)
     lastWasCommand = 1
     return
@@ -82,8 +92,7 @@ def parse(line):
   match = re.search('^: ([^;:\.]+).*$', line)
   if lastWasCommand and match:
     printLine({
-      "application": application,
-      "context": context,
+      "context": application + ' ' + context,
       "command": command,
       "definition": match.group(1)
     })
