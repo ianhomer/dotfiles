@@ -9,26 +9,27 @@ filetype plugin on
 " vimscript cheatsheet : https://devhints.io/vimscript
 
 let g:vim_dir = "~/.vim"
-" Raise slim level to disable configs
-" - 9 => core config
-" - 8 => core plugins
-" - 7 => useful config
-" - 6 => useful plugins
-" - 5 => power config
-" - 4 => power plugins
-" - 3 => trial config
-"   2 => trial plugins
-" - 1 => experimental config
-" - 0 => experimental plugins
+
+" Raise config level to disable configs
+" - 0 => core config
+" - 1 => core plugins
+" - 2 => useful config
+" - 3 => useful plugins
+" - 4 => power config
+" - 5 => power plugins
+" - 6 => trial config
+"   7 => trial plugins
+" - 8 => experimental config
+" - 9 => experimental plugins
 "
-" Slim level can be used to reduce start up times, troubleshoot interactions
+" Config level can be used to reduce start up times, troubleshoot interactions
 " between configurations and plugins. It can also be used to introduce new
 " configuration and plugins with control.
 "
-let g:slim = exists('$VIM_SLIM') ? $VIM_SLIM : exists('g:slim_session') ?
-  \ g:slim_session : 6
+let g:level = exists('$VIM_LEVEL') ? $VIM_LEVEL : exists('g:level_session') ?
+  \ g:level_session : 4
 
-let g:coc_enabled = g:slim < 5 ? 1 : 0
+let g:coc_enabled = g:level > 4 ? 1 : 0
 if has('nvim')
   "
   " Store nvim plugins in isolated location
@@ -38,7 +39,7 @@ endif
 
 call plug#begin(g:vim_dir."/plugged")
 
-if g:slim < 9
+if g:level > 0
   "
   " Core essentials
   "
@@ -55,7 +56,7 @@ if g:slim < 9
   Plug 'jnurmine/zenburn'
 endif
 
-if g:slim < 7
+if g:level > 3
 
   "
   " Window and file management
@@ -67,14 +68,14 @@ if g:slim < 7
 
   Plug 'ryanoasis/vim-devicons'
   " Vinegar - better file expore than NERD
-  if g:slim < 1 | Plug 'tpope/vim-vinegar' | endif
+  if g:level > 8 | Plug 'tpope/vim-vinegar' | endif
   " ack - Search files
   Plug 'mileszs/ack.vim'
   " Airline - status bar
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   " editorconfig - Support standard editorconfig files
-  if g:slim < 3 | Plug 'editorconfig/editorconfig-vim' | endif
+  if g:level > 6 | Plug 'editorconfig/editorconfig-vim' | endif
   " tmux - enable C-hjkl to move to across vim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
   " Improved path support
@@ -102,21 +103,21 @@ if g:slim < 7
   Plug 'tpope/vim-endwise'
 
   " polyglot
-  if g:slim < 3 | Plug 'sheerun/vim-polyglot' | endif
+  if g:level > 6 | Plug 'sheerun/vim-polyglot' | endif
   " fugitive - Git integration
   Plug 'tpope/vim-fugitive'
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
   Plug 'preservim/nerdcommenter'
   " NERDTree - show git changes
-  if g:slim < 1 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
+  if g:level > 8 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
   " gitgutter - Git change indicator to left of window
   Plug 'airblade/vim-gitgutter'
   " HTML
-  if g:slim < 1 | Plug 'mattn/emmet-vim' | endif
+  if g:level > 8 | Plug 'mattn/emmet-vim' | endif
   " Linting
-  if g:slim < 1 | Plug 'dense-analysis/ale' | endif
+  if g:level > 8 | Plug 'dense-analysis/ale' | endif
   " Handy mappings
-  if g:slim < 1 | Plug 'tpope/vim-unimpaired' | endif
+  if g:level > 8 | Plug 'tpope/vim-unimpaired' | endif
 
   " CoC completion
   if g:coc_enabled == 1
@@ -129,7 +130,7 @@ if g:slim < 7
   " goyo - Distraction free writing
   Plug 'junegunn/goyo.vim'
   " markdown preview
-  if g:slim < 7 | Plug 'iamcco/markdown-preview.nvim',
+  if g:level > 2 | Plug 'iamcco/markdown-preview.nvim',
         \ { 'do': 'cd app & yarn install' } | endif
 endif
 
@@ -185,7 +186,7 @@ nnoremap <silent> <leader>t :echo "t not mapped"<CR>
 nnoremap <silent> <leader>y :echo "y not mapped"<CR>
 
 " My shortcuts
-if g:slim < 10
+if g:level > 0
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :Files<CR>
   nnoremap <silent> <leader>F :Files!<CR>
@@ -202,14 +203,14 @@ if g:slim < 10
 
   " close all buffers
   nnoremap <silent> <leader>x :bufdo bd<CR>
-  if g:slim < 8
+  if g:level > 2
     nnoremap <silent> <leader>b :BCommits<CR>
     nnoremap <silent> <leader>B :BCommits!<CR>
     nnoremap <silent> <leader>e :Commits<CR>
     nnoremap <silent> <leader>E :Commits!<CR>
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
-    if g:slim < 7
+    if g:level > 3
       nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
       " Close all buffers except the current one
       nnoremap <silent> <leader>o :NERDTreeClose<bar>wall<bar>%bd<bar>e#<bar>bd#<CR> 
@@ -254,13 +255,13 @@ endfunction
 
 source ~/.config/vim/thingity.vim
 
-" Toggle power slim mode
-if !exists("*PowerToggle")
-  function! PowerToggle()
-    let g:slim_session = exists('g:slim_session') ? g:slim_session > 4 ? 4 : 5 : 4
+" Toggle CoC mode
+if !exists("*CoCToggle")
+  function! CoCToggle()
+    let g:level_session = exists('g:level_session') ? g:level_session > 4 ? 4 : 5 : 4
     call ReloadConfig()
   endfunction
-  nnoremap <silent> <leader>5 :call PowerToggle()<CR>
+  nnoremap <silent> <leader>5 :call CoCToggle()<CR>
 endif
 
 " Reload vimrc, neo vimrc and CoC
@@ -276,7 +277,7 @@ if !exists("*ReloadConfig")
     if g:coc_enabled != 1
       " only display message if CoC not enabled, it it is enabled, this extra
       " message causes overload in the 2 row command window
-      echo "Reloaded ".config_message.coc_message" - slim = ".g:slim
+      echo "Reloaded ".config_message.coc_message" - level = ".g:level
     endif
   endfunction
 endif
@@ -307,7 +308,7 @@ function! TrimEndLines()
   silent! %s#\($\n\s*\)\+\%$##
 endfunction
 
-if g:slim < 8
+if g:level > 2
   nnoremap <leader>w :call PruneWhiteSpace()<CR><C-o>
 endif
 
@@ -317,7 +318,7 @@ let g:tmux_navigator_save_on_switch = 2
 " *** Scope : Writing ***
 
 " Goyo distraction free writing
-if g:slim < 7
+if g:level > 3
   nnoremap <leader>g :Goyo<CR>
   let g:goyo_width = 85
 endif
@@ -325,7 +326,7 @@ endif
 "
 " *** Scope : Windows ***
 "
-if g:slim < 8
+if g:level < 2
   " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
   " Close the current buffer and move to the previous one
   nnoremap <leader>q :<c-u>bp <bar> bd #<cr>
@@ -341,7 +342,7 @@ augroup dotme
 
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript
 
-  if g:slim < 8
+  if g:level > 2
     "
     " *** Scope : Editing ***
     "
@@ -349,7 +350,7 @@ augroup dotme
     autocmd InsertEnter,InsertLeave * set cul!
   endif
 
-  if g:slim < 8
+  if g:level > 2
     "
     " *** Scope : IO ***
     "
@@ -357,7 +358,7 @@ augroup dotme
     autocmd FocusGained,BufEnter * :checktime
   endif
 
-  if g:slim < 6
+  if g:level > 2
     "
     " *** Scope : Terminal ***
     "
@@ -366,7 +367,7 @@ augroup dotme
     " autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
   endif
 
-  if g:slim < 8
+  if g:level < 2
     "
     " *** Scope : Python ***
     "
@@ -422,7 +423,7 @@ set scrolloff=3
 " *** Scope : Status Bar ***
 "
 
-if g:slim < 7
+if g:level > 3
   "
   " Enable tab line
   let g:airline#extensions#tabline#enabled = 1
@@ -452,7 +453,7 @@ set backspace=indent,eol,start
 
 " source ~/.config/vim/netrw.vim
 
-if g:slim < 7
+if g:level > 3
   "
   " *** Scope : NERDTree ***
   "
@@ -461,12 +462,12 @@ if g:slim < 7
   let NERDTreeAutoDeleteBuffer = 1
 endif
 
-if g:slim < 9
+if g:level > 1
   colorscheme gruvbox
   set bg=dark
 endif
 
-if g:slim < 8
+if g:level > 2
   " Thanks to Damian Conway                                                         test long line
   set colorcolumn=""
   highlight ColorColumn ctermbg=magenta
@@ -491,7 +492,7 @@ set splitbelow
 " Don't conceal any syntax
 set conceallevel=0
 
-if g:slim < 7
+if g:level > 3
   " Markdown syntax
   " Enable folding
   let g:markdown_folding = 1
@@ -499,10 +500,7 @@ if g:slim < 7
   set foldlevelstart=20
 endif
 
-"
-" *** Scope : Python ***
-"
-if g:slim < 2
+if g:level > 8
   source ~/.config/vim/experimental.vim
 endif
 
