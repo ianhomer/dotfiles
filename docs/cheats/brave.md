@@ -18,6 +18,9 @@
 **Shift+Ctrl+Tab**
 : Back to previous tab
 
+**Shift+Fn+Delete**
+: Delete suggestion from URL bar
+
 ### Surfkeys
 
 Doesn't work in extension tabs due to security constraints.
