@@ -7,3 +7,6 @@
   exists then wrap that otherwise wrap single word
 - [ ] Why Ctrl+Fn+F2 to enable menu only seems to work after Ctrl+Fn+F3
 - [ ] Improve mechanism to search for a word, e.g. ,star to search with :Ag
+- [ ] Upgrade brew cask on dotme <- how to handle some packages that need admin?
+  Perhaps cherry pick casks that autoupdate. 
+- [ ] Report on outdated across all packaging tools.
