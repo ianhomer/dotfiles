@@ -1,26 +1,28 @@
-" Leader is space
-let mapleader = "\<Space>"
-let maplocalleader = "\,"
-
-filetype plugin on
-
-"
-" Load plugins
-" vimscript cheatsheet : https://devhints.io/vimscript
-
-let g:vim_dir = "~/.vim"
-
-source ~/.config/vim/config-levels.vim
-
 if has('nvim')
   " Store nvim plugins in isolated location
 
   let g:vim_dir = "~/.config/nvim"
+else
+  let g:vim_dir = "~/.vim"
 endif
 
-call plug#begin(g:vim_dir."/plugged")
+" Leader is space
+let mapleader = "\<Space>"
+let maplocalleader = "\,"
 
-if g:config_level
+source ~/.config/vim/config-levels.vim
+
+if g:config_level > 0
+  filetype plugin on
+else
+  filetype plugin off
+endif
+
+"
+" Load plugins
+"
+call plug#begin(g:vim_dir."/plugged")
+if g:config_level > 0
   "
   " Core essentials
   "
@@ -111,7 +113,7 @@ if g:config_level > 3
   " goyo - Distraction free writing
   Plug 'junegunn/goyo.vim'
   " markdown preview
-  if g:config_level > 2 | Plug 'iamcco/markdown-preview.nvim',
+  if g:config_level > 3 | Plug 'iamcco/markdown-preview.nvim',
         \ { 'do': 'cd app & yarn install' } | endif
 endif
 
