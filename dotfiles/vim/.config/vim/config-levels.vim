@@ -15,7 +15,7 @@
 " configuration and plugins with control.
 "
 let g:config_level = exists('$VIM_CONFIG_LEVEL' ) ?
-  \ $VIM_COFIG_LEVEL : exists('g:config_level_session') ?
+  \ $VIM_CONFIG_LEVEL : exists('g:config_level_session') ?
   \ g:config_level_session : 4
 
 let g:coc_enabled = exists('g:coc_enabled_session') ? g:coc_enabled_session : 0
