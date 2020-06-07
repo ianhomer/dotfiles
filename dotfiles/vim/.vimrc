@@ -445,7 +445,7 @@ if g:config_level > 3
   let NERDTreeAutoDeleteBuffer = 1
 endif
 
-if g:config_level > 1
+if g:config_level > 0
   colorscheme gruvbox
   set bg=dark
 endif
