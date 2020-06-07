@@ -1,3 +1,7 @@
+if g:config_level < 1
+  finish
+endif
+
 set spelllang=en,local
 set spellfile=~/.config/vim/spell/en.utf-8.add
 set complete+=kspell

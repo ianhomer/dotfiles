@@ -36,5 +36,24 @@ if !exists("*CoCToggle")
   nnoremap <silent> <leader>5 :call CoCToggle()<CR>
 endif
 
-nnoremap <silent> <leader>90 :let g:config_level_session=0<CR>
+nnoremap <silent> <leader>90 :call ConfigLevel(0)<CR>
+nnoremap <silent> <leader>91 :call ConfigLevel(1)<CR>
+nnoremap <silent> <leader>92 :call ConfigLevel(2)<CR>
+nnoremap <silent> <leader>93 :call ConfigLevel(3)<CR>
+nnoremap <silent> <leader>94 :call ConfigLevel(4)<CR>
+nnoremap <silent> <leader>95 :call ConfigLevel(5)<CR>
+nnoremap <silent> <leader>96 :call ConfigLevel(6)<CR>
+nnoremap <silent> <leader>97 :call ConfigLevel(7)<CR>
+nnoremap <silent> <leader>98 :call ConfigLevel(8)<CR>
+nnoremap <silent> <leader>99 :call ConfigLevel(9)<CR>
+
+if !exists("*ConfigLevel")
+  function! ConfigLevel(level)
+    let g:config_level_session=a:level
+    if g:config_level == 0
+      set all&
+    endif
+    call ReloadConfig()
+  endfunction
+endif
 

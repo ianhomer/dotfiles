@@ -13,7 +13,6 @@ let g:vim_dir = "~/.vim"
 source ~/.config/vim/config-levels.vim
 
 if has('nvim')
-  "
   " Store nvim plugins in isolated location
 
   let g:vim_dir = "~/.config/nvim"
@@ -311,7 +310,9 @@ endif
 augroup dotme
   autocmd!
 
-  autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+  if g:config_level > 0
+    autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+  endif
 
   if g:config_level > 2
     "
@@ -338,7 +339,7 @@ augroup dotme
     " autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
   endif
 
-  if g:config_level < 2
+  if g:config_level > 2
     "
     " *** Scope : Python ***
     "
@@ -353,39 +354,44 @@ augroup end
 "
 
 " Show white space
-exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
-set list
+if g:config_level > 0
+  exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
+  set list
 
-" Add operator af for all file
-onoremap af :<C-u>normal! ggVG<CR>
+  " Add operator af for all file
+  onoremap af :<C-u>normal! ggVG<CR>
 
-" Return to visual mode after indenting
-vnoremap < <gv
-vnoremap > >gv
+  " Return to visual mode after indenting
+  vnoremap < <gv
+  vnoremap > >gv
+endif
 
 source ~/.config/vim/spell.vim
 
 " Surround customisation
-
-let g:surround_{char2nr('b')} = "**\r**"
-let g:surround_{char2nr('<')} = "<\r>"
+if g:config_level > 2
+  let g:surround_{char2nr('b')} = "**\r**"
+  let g:surround_{char2nr('<')} = "<\r>"
+endif
 
 " *** Scope : IO ***
 "
-" Auto reload underlying file if it changes, although
-" it only really reloads when external command run like :!ls
-set autoread
-" Allow hidden buffers without saving
-set hidden
-" No backups or backups during write
-set nobackup
-set nowritebackup
-" Keep swap and backups centrally
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
+if g:config_level > 0
+  " Auto reload underlying file if it changes, although
+  " it only really reloads when external command run like :!ls
+  set autoread
+  " Allow hidden buffers without saving
+  set hidden
+  " No backups or backups during write
+  set nobackup
+  set nowritebackup
+  " Keep swap and backups centrally
+  set backupdir=~/.vim/backups
+  set directory=~/.vim/swaps
 
-" Scroll 3 lines before border
-set scrolloff=3
+  " Scroll 3 lines before border
+  set scrolloff=3
+endif
 
 " Optimise for faster terminal connections
 " set ttyfast
@@ -403,7 +409,9 @@ if g:config_level > 3
 endif
 
 " Backspace support
-set backspace=indent,eol,start
+if g:config_level > 0
+  set backspace=indent,eol,start
+endif
 
 " CR insert line without leaving normal mode. Note that this
 " has special case to append CR at end of line as this feels more
@@ -446,8 +454,10 @@ if g:config_level > 2
 endif
 
 " Open new splits to the right and below
-set splitright
-set splitbelow
+if g:config_level > 0
+  set splitright
+  set splitbelow
+endif
 
 "source ~/.config/vim/terminal.vim
 

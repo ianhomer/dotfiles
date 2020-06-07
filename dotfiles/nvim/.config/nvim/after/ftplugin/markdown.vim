@@ -1,3 +1,7 @@
+if g:config_level < 2
+  finish
+endif
+
 function! s:LintTable()
   echo "Linting markdown table"
   Tabularize/|/l1
