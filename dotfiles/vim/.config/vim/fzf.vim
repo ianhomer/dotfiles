@@ -23,6 +23,10 @@ nnoremap <silent> <leader>jJ :Ag!<CR>'
 " todos
 nnoremap <silent> <leader>jt :Ag<CR>'[\ ]
 nnoremap <silent> <leader>jT :Ag!<CR>'[\ ]
+" hidden
+command! -bar -bang AgHidden
+  \ call fzf#vim#ag(<q-args>,'-m 0 --hidden --ignore .git', <bang>0)
+nnoremap <silent> <leader>jh :AgHidden<CR>
 
 nnoremap <silent> <leader>m :Maps<CR>
 nnoremap <silent> <leader>M :Maps!<CR>

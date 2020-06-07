@@ -26,20 +26,21 @@ let g:vim_dir = "~/.vim"
 " between configurations and plugins. It can also be used to introduce new
 " configuration and plugins with control.
 "
-let g:level = exists('$VIM_LEVEL') ? $VIM_LEVEL : exists('g:level_session') ?
-  \ g:level_session : 4
+let g:config_level = exists('$VIM_CONFIG_LEVEL' ) ? 
+  \ $VIM_COFIG_LEVEL : exists('g:config_level_session') ?
+  \ g:config_level_session : 4
 
-let g:coc_enabled = g:level > 4 ? 1 : 0
+let g:coc_enabled = g:config_level > 4 ? 1 : 0
 if has('nvim')
   "
   " Store nvim plugins in isolated location
-  "
+
   let g:vim_dir = "~/.config/nvim"
 endif
 
 call plug#begin(g:vim_dir."/plugged")
 
-if g:level > 0
+if g:config_level
   "
   " Core essentials
   "
@@ -56,7 +57,7 @@ if g:level > 0
   Plug 'jnurmine/zenburn'
 endif
 
-if g:level > 3
+if g:config_level > 3
 
   "
   " Window and file management
@@ -68,14 +69,14 @@ if g:level > 3
 
   Plug 'ryanoasis/vim-devicons'
   " Vinegar - better file expore than NERD
-  if g:level > 8 | Plug 'tpope/vim-vinegar' | endif
+  if g:config_level > 8 | Plug 'tpope/vim-vinegar' | endif
   " ack - Search files
   Plug 'mileszs/ack.vim'
   " Airline - status bar
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   " editorconfig - Support standard editorconfig files
-  if g:level > 6 | Plug 'editorconfig/editorconfig-vim' | endif
+  if g:config_level > 6 | Plug 'editorconfig/editorconfig-vim' | endif
   " tmux - enable C-hjkl to move to across vim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
   " Improved path support
@@ -103,21 +104,21 @@ if g:level > 3
   Plug 'tpope/vim-endwise'
 
   " polyglot
-  if g:level > 6 | Plug 'sheerun/vim-polyglot' | endif
+  if g:config_level > 6 | Plug 'sheerun/vim-polyglot' | endif
   " fugitive - Git integration
   Plug 'tpope/vim-fugitive'
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
   Plug 'preservim/nerdcommenter'
   " NERDTree - show git changes
-  if g:level > 8 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
+  if g:config_level > 8 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
   " gitgutter - Git change indicator to left of window
   Plug 'airblade/vim-gitgutter'
   " HTML
-  if g:level > 8 | Plug 'mattn/emmet-vim' | endif
+  if g:config_level > 8 | Plug 'mattn/emmet-vim' | endif
   " Linting
-  if g:level > 8 | Plug 'dense-analysis/ale' | endif
+  if g:config_level > 8 | Plug 'dense-analysis/ale' | endif
   " Handy mappings
-  if g:level > 8 | Plug 'tpope/vim-unimpaired' | endif
+  if g:config_level > 8 | Plug 'tpope/vim-unimpaired' | endif
 
   " CoC completion
   if g:coc_enabled == 1
@@ -130,7 +131,7 @@ if g:level > 3
   " goyo - Distraction free writing
   Plug 'junegunn/goyo.vim'
   " markdown preview
-  if g:level > 2 | Plug 'iamcco/markdown-preview.nvim',
+  if g:config_level > 2 | Plug 'iamcco/markdown-preview.nvim',
         \ { 'do': 'cd app & yarn install' } | endif
 endif
 
@@ -186,7 +187,7 @@ nnoremap <silent> <leader>t :echo "t not mapped"<CR>
 nnoremap <silent> <leader>y :echo "y not mapped"<CR>
 
 " My shortcuts
-if g:level > 0
+if g:config_level > 0
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :Files<CR>
   nnoremap <silent> <leader>F :Files!<CR>
@@ -203,14 +204,14 @@ if g:level > 0
 
   " close all buffers
   nnoremap <silent> <leader>x :bufdo bd<CR>
-  if g:level > 2
+  if g:config_level > 2
     nnoremap <silent> <leader>b :BCommits<CR>
     nnoremap <silent> <leader>B :BCommits!<CR>
     nnoremap <silent> <leader>e :Commits<CR>
     nnoremap <silent> <leader>E :Commits!<CR>
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
-    if g:level > 3
+    if g:config_level > 3
       nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
       " Close all buffers except the current one
       nnoremap <silent> <leader>o :NERDTreeClose<bar>wall<bar>%bd<bar>e#<bar>bd#<CR> 
@@ -258,7 +259,7 @@ source ~/.config/vim/thingity.vim
 " Toggle CoC mode
 if !exists("*CoCToggle")
   function! CoCToggle()
-    let g:level_session = exists('g:level_session') ? g:level_session > 4 ? 4 : 5 : 4
+    let g:config_level_session = exists('g:config_level_session') ? g:config_level_session > 4 ? 4 : 5 : 4
     call ReloadConfig()
   endfunction
   nnoremap <silent> <leader>5 :call CoCToggle()<CR>
@@ -277,7 +278,7 @@ if !exists("*ReloadConfig")
     if g:coc_enabled != 1
       " only display message if CoC not enabled, it it is enabled, this extra
       " message causes overload in the 2 row command window
-      echo "Reloaded ".config_message.coc_message" - level = ".g:level
+      echo "Reloaded ".config_message.coc_message" - level = ".g:config_level
     endif
   endfunction
 endif
@@ -308,7 +309,7 @@ function! TrimEndLines()
   silent! %s#\($\n\s*\)\+\%$##
 endfunction
 
-if g:level > 2
+if g:config_level > 2
   nnoremap <leader>w :call PruneWhiteSpace()<CR><C-o>
 endif
 
@@ -318,7 +319,7 @@ let g:tmux_navigator_save_on_switch = 2
 " *** Scope : Writing ***
 
 " Goyo distraction free writing
-if g:level > 3
+if g:config_level > 3
   nnoremap <leader>g :Goyo<CR>
   let g:goyo_width = 85
 endif
@@ -326,7 +327,7 @@ endif
 "
 " *** Scope : Windows ***
 "
-if g:level < 2
+if g:config_level < 2
   " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
   " Close the current buffer and move to the previous one
   nnoremap <leader>q :<c-u>bp <bar> bd #<cr>
@@ -342,7 +343,7 @@ augroup dotme
 
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript
 
-  if g:level > 2
+  if g:config_level > 2
     "
     " *** Scope : Editing ***
     "
@@ -350,7 +351,7 @@ augroup dotme
     autocmd InsertEnter,InsertLeave * set cul!
   endif
 
-  if g:level > 2
+  if g:config_level > 2
     "
     " *** Scope : IO ***
     "
@@ -358,7 +359,7 @@ augroup dotme
     autocmd FocusGained,BufEnter * :checktime
   endif
 
-  if g:level > 2
+  if g:config_level > 2
     "
     " *** Scope : Terminal ***
     "
@@ -367,7 +368,7 @@ augroup dotme
     " autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
   endif
 
-  if g:level < 2
+  if g:config_level < 2
     "
     " *** Scope : Python ***
     "
@@ -423,7 +424,7 @@ set scrolloff=3
 " *** Scope : Status Bar ***
 "
 
-if g:level > 3
+if g:config_level > 3
   "
   " Enable tab line
   let g:airline#extensions#tabline#enabled = 1
@@ -453,7 +454,7 @@ set backspace=indent,eol,start
 
 " source ~/.config/vim/netrw.vim
 
-if g:level > 3
+if g:config_level > 3
   "
   " *** Scope : NERDTree ***
   "
@@ -462,12 +463,12 @@ if g:level > 3
   let NERDTreeAutoDeleteBuffer = 1
 endif
 
-if g:level > 1
+if g:config_level > 1
   colorscheme gruvbox
   set bg=dark
 endif
 
-if g:level > 2
+if g:config_level > 2
   " Thanks to Damian Conway                                                         test long line
   set colorcolumn=""
   highlight ColorColumn ctermbg=magenta
@@ -492,7 +493,7 @@ set splitbelow
 " Don't conceal any syntax
 set conceallevel=0
 
-if g:level > 3
+if g:config_level > 3
   " Markdown syntax
   " Enable folding
   let g:markdown_folding = 1
@@ -500,7 +501,7 @@ if g:level > 3
   set foldlevelstart=20
 endif
 
-if g:level > 8
+if g:config_level > 8
   source ~/.config/vim/experimental.vim
 endif
 
