@@ -25,13 +25,13 @@ if !exists("*CoCToggle")
   function! CoCToggle()
     let g:coc_enabled_session = exists('g:coc_enabled_session') ?
       \ 1 - g:coc_enabled_session : 1
-    if g:coc_enabled_session == 0
-      CocDisable
-    end
+    "if g:coc_enabled_session == 0
+    "  CocDisable
+    "end
     call ReloadConfig()
-    if g:coc_enabled_session == 1
-      CocEnable
-    end
+    "if g:coc_enabled_session == 1
+    "  CocEnable
+    "end
   endfunction
   nnoremap <silent> <leader>5 :call CoCToggle()<CR>
 endif

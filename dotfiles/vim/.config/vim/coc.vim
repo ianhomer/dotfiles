@@ -9,13 +9,16 @@ let g:coc_global_extensions = [
       \ 'coc-html',
       \ 'coc-java',
       \ 'coc-json',
-      \ 'coc-prettier',
       \ 'coc-python',
       \ 'coc-spell-checker',
       \ 'coc-tsserver',
       \ 'coc-yaml',
       \ 'coc-xml'
       \ ]
+
+" Extensions to include
+" 'coc-prettier',
+" 
 
 " dotfiles dictionaries for cSpell
 call coc#config('cSpell.dictionaryDefinitions', [

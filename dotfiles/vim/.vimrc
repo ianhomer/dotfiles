@@ -41,6 +41,9 @@ if g:config_level > 0
   " NERDTree - file explore
   Plug 'preservim/nerdtree'
   source ~/.config/vim/nerdtree.vim
+
+  " fugitive - Git integration
+  Plug 'tpope/vim-fugitive'
 endif
 
 if g:config_level > 3
@@ -87,8 +90,6 @@ if g:config_level > 3
 
   " polyglot
   if g:config_level > 6 | Plug 'sheerun/vim-polyglot' | endif
-  " fugitive - Git integration
-  Plug 'tpope/vim-fugitive'
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
   Plug 'preservim/nerdcommenter'
   " NERDTree - show git changes
@@ -102,11 +103,6 @@ if g:config_level > 3
   " Handy mappings
   if g:config_level > 8 | Plug 'tpope/vim-unimpaired' | endif
 
-  " CoC completion
-  if g:coc_enabled == 1
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  endif
-
   "
   " Writing
   "
@@ -115,6 +111,11 @@ if g:config_level > 3
   " markdown preview
   if g:config_level > 3 | Plug 'iamcco/markdown-preview.nvim',
         \ { 'do': 'cd app & yarn install' } | endif
+endif
+  
+" CoC completion
+if g:coc_enabled == 1
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
 
 call plug#end()
@@ -254,11 +255,12 @@ if !exists("*ReloadConfig")
   endfunction
 endif
 
+if g:coc_enabled == 1
+  source ~/.config/vim/coc.vim
+endif
+
 function! RestartConfig()
   if g:coc_enabled == 1
-    if has('nvim')
-      source ~/.config/vim/coc.vim
-    endif
     CocRestart
   endif
 endfunction
