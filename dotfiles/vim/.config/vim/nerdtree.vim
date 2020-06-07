@@ -9,3 +9,5 @@ function! NERDTreeFindOrToggle()
   endif
 endfunction
 
+nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
+

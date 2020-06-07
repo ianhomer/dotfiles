@@ -37,6 +37,10 @@ if g:config_level > 0
   Plug 'morhetz/gruvbox'
   Plug 'tomasr/molokai'
   Plug 'jnurmine/zenburn'
+
+  " NERDTree - file explore
+  Plug 'preservim/nerdtree'
+  source ~/.config/vim/nerdtree.vim
 endif
 
 if g:config_level > 3
@@ -44,10 +48,6 @@ if g:config_level > 3
   "
   " Window and file management
   "
-
-  " NERDTree - file explore
-  Plug 'preservim/nerdtree'
-  source ~/.config/vim/nerdtree.vim
 
   Plug 'ryanoasis/vim-devicons'
   " Vinegar - better file expore than NERD
@@ -184,6 +184,7 @@ if g:config_level > 0
 
   " close all buffers
   nnoremap <silent> <leader>x :bufdo bd<CR>
+  
   if g:config_level > 2
     nnoremap <silent> <leader>b :BCommits<CR>
     nnoremap <silent> <leader>B :BCommits!<CR>
@@ -192,7 +193,6 @@ if g:config_level > 0
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
     if g:config_level > 3
-      nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
       " Close all buffers except the current one
       nnoremap <silent> <leader>o :NERDTreeClose<bar>wall<bar>%bd<bar>e#<bar>bd#<CR>
       nnoremap <silent> <leader>,j :execute 'NERDTree ~/projects/things'<CR>
