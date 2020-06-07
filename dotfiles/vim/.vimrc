@@ -26,11 +26,11 @@ let g:vim_dir = "~/.vim"
 " between configurations and plugins. It can also be used to introduce new
 " configuration and plugins with control.
 "
-let g:config_level = exists('$VIM_CONFIG_LEVEL' ) ? 
+let g:config_level = exists('$VIM_CONFIG_LEVEL' ) ?
   \ $VIM_COFIG_LEVEL : exists('g:config_level_session') ?
   \ g:config_level_session : 4
 
-let g:coc_enabled = g:config_level > 4 ? 1 : 0
+let g:coc_enabled = exists('g:coc_enabled_session') ? g:coc_enabled_session : 0
 if has('nvim')
   "
   " Store nvim plugins in isolated location
@@ -214,7 +214,7 @@ if g:config_level > 0
     if g:config_level > 3
       nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
       " Close all buffers except the current one
-      nnoremap <silent> <leader>o :NERDTreeClose<bar>wall<bar>%bd<bar>e#<bar>bd#<CR> 
+      nnoremap <silent> <leader>o :NERDTreeClose<bar>wall<bar>%bd<bar>e#<bar>bd#<CR>
       nnoremap <silent> <leader>,j :execute 'NERDTree ~/projects/things'<CR>
       nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
@@ -259,8 +259,15 @@ source ~/.config/vim/thingity.vim
 " Toggle CoC mode
 if !exists("*CoCToggle")
   function! CoCToggle()
-    let g:config_level_session = exists('g:config_level_session') ? g:config_level_session > 4 ? 4 : 5 : 4
+    let g:coc_enabled_session = exists('g:coc_enabled_session') ?
+      \ 1 - g:coc_enabled_session : 1
+    if g:coc_enabled_session == 0
+      CocDisable
+    end
     call ReloadConfig()
+    if g:coc_enabled_session == 1
+      CocEnable
+    end
   endfunction
   nnoremap <silent> <leader>5 :call CoCToggle()<CR>
 endif
