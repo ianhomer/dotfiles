@@ -182,6 +182,8 @@ if g:config_level > 0
 
   " Hide all windows except the current one
   nnoremap <silent> <leader>O :only<CR>
+  " Close all buffers except the current one
+  nnoremap <silent> <leader>o :NERDTreeClose<bar>wall<bar>%bd<bar>e#<bar>bd#<CR>
 
   " close all buffers
   nnoremap <silent> <leader>x :bufdo bd<CR>
@@ -194,8 +196,6 @@ if g:config_level > 0
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
     if g:config_level > 3
-      " Close all buffers except the current one
-      nnoremap <silent> <leader>o :NERDTreeClose<bar>wall<bar>%bd<bar>e#<bar>bd#<CR>
       nnoremap <silent> <leader>,j :execute 'NERDTree ~/projects/things'<CR>
       nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
