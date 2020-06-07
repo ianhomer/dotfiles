@@ -180,8 +180,6 @@ if g:config_level > 0
 
   " Hide all windows except the current one
   nnoremap <silent> <leader>O :only<CR>
-  " dummy map
-  nnoremap <silent> <leader>9 :echo "9 pressed"<CR>
 
   " close all buffers
   nnoremap <silent> <leader>x :bufdo bd<CR>

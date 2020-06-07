@@ -36,4 +36,5 @@ if !exists("*CoCToggle")
   nnoremap <silent> <leader>5 :call CoCToggle()<CR>
 endif
 
+nnoremap <silent> <leader>90 :let g:config_level_session=0<CR>
 
