@@ -89,7 +89,10 @@ if g:config_level > 3
   Plug 'tpope/vim-endwise'
 
   nnoremap <silent> <leader>9s :call Toggle("syntastic")<CR>
-  if IsEnabled("syntastic") | Plug 'scrooloose/syntastic' | endif
+  if IsEnabled("syntastic")
+    Plug 'vim-syntastic/syntastic'
+    source ~/.config/vim/syntastic.vim
+  endif
   " polyglot
   nnoremap <silent> <leader>9p :call Toggle("polyglot")<CR>
   if IsEnabled("polyglot") | Plug 'sheerun/vim-polyglot' | endif
