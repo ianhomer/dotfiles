@@ -88,8 +88,11 @@ if g:config_level > 3
   " endwise - auto close structure
   Plug 'tpope/vim-endwise'
 
+  nnoremap <silent> <leader>9s :call Toggle("syntastic")<CR>
+  if IsEnabled("syntastic") | Plug 'scrooloose/syntastic' | endif
   " polyglot
-  if g:config_level > 6 | Plug 'sheerun/vim-polyglot' | endif
+  nnoremap <silent> <leader>9p :call Toggle("polyglot")<CR>
+  if IsEnabled("polyglot") | Plug 'sheerun/vim-polyglot' | endif
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
   Plug 'preservim/nerdcommenter'
   " NERDTree - show git changes
@@ -109,12 +112,11 @@ if g:config_level > 3
   " goyo - Distraction free writing
   Plug 'junegunn/goyo.vim'
   " markdown preview
-  if g:config_level > 3 | Plug 'iamcco/markdown-preview.nvim',
-        \ { 'do': 'cd app & yarn install' } | endif
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 endif
   
 " CoC completion
-if g:coc_enabled == 1
+if IsEnabled("coc")
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
 
@@ -221,7 +223,7 @@ endif
 
 function! LintMe()
   echo "Linting ..".&filetype
-  if g:coc_enabled == 1
+  if IsEnabled("coc")
     " Lint
     Format
   else
@@ -246,8 +248,8 @@ if !exists("*ReloadConfig")
     exec g:reload_config
     call RestartConfig()
     let config_message = has('nvim') ? "neo init.vm" : ".vimrc"
-    let coc_message = g:coc_enabled == 1 ? " with CoC" : ""
-    if g:coc_enabled != 1
+    let coc_message = IsEnabled("coc") ? " with CoC" : ""
+    if IsNotEnabled("coc")
       " only display message if CoC not enabled, it it is enabled, this extra
       " message causes overload in the 2 row command window
       echo "Reloaded ".config_message.coc_message" - level = ".g:config_level
@@ -255,12 +257,12 @@ if !exists("*ReloadConfig")
   endfunction
 endif
 
-if g:coc_enabled == 1
+if IsEnabled("coc")
   source ~/.config/vim/coc.vim
 endif
 
 function! RestartConfig()
-  if g:coc_enabled == 1
+  if IsEnabled("coc")
     CocRestart
   endif
 endfunction

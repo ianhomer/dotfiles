@@ -18,23 +18,25 @@ let g:config_level = exists('$VIM_CONFIG_LEVEL' ) ?
   \ $VIM_CONFIG_LEVEL : exists('g:config_level_session') ?
   \ g:config_level_session : 4
 
-let g:coc_enabled = exists('g:coc_enabled_session') ? g:coc_enabled_session : 0
+let g:toggles = get(g:, "toggles", {})
 
-" Toggle CoC mode
-if !exists("*CoCToggle")
-  function! CoCToggle()
-    let g:coc_enabled_session = exists('g:coc_enabled_session') ?
-      \ 1 - g:coc_enabled_session : 1
-    "if g:coc_enabled_session == 0
-    "  CocDisable
-    "end
+if !exists("*Toggle")
+  function! Toggle(feature)
+    let g:toggles[a:feature] = has_key(g:toggles, a:feature) ? !g:toggles[a:feature] : 1
+    echom a:feature . " " . (g:toggles[a:feature] ? "on" : "off")
     call ReloadConfig()
-    "if g:coc_enabled_session == 1
-    "  CocEnable
-    "end
   endfunction
-  nnoremap <silent> <leader>5 :call CoCToggle()<CR>
 endif
+
+function! IsEnabled(feature)
+  return has_key(g:toggles, a:feature) ? g:toggles[a:feature] : 0
+endfunction
+
+function! IsNotEnabled(feature)
+  return 1 - IsEnabled(a:feature)
+endfunction
+
+nnoremap <silent> <leader>5 :call Toggle("coc")<CR>
 
 nnoremap <silent> <leader>90 :call ConfigLevel(0)<CR>
 nnoremap <silent> <leader>91 :call ConfigLevel(1)<CR>
