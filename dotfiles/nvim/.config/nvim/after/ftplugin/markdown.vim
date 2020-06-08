@@ -14,7 +14,7 @@ inoremap <buffer> <silent> <Bar> <Bar><Esc>:call <SID>LintTable()<CR>$a
 nnoremap <buffer> <silent> <leader>y {j0i\|\|\|<CR>\|--\|--\|<CR><ESC>:call <SID>LintTable()<CR>
 
 " The rest of this filetype plugin is not relevant if we're using CoC
-if g:coc_enabled == 1
+if IsEnabled("coc")
   finish
 end
 
