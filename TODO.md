@@ -10,3 +10,5 @@
 - [ ] Upgrade brew cask on dotme <- how to handle some packages that need admin?
   Perhaps cherry pick casks that autoupdate. 
 - [ ] Report on outdated across all packaging tools.
+- [ ] Get file path completion working again in Markdown, how to get it showing
+  with tab, is that sensible? May be I don't really need tab doing a tab.

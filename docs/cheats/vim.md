@@ -130,6 +130,12 @@
 **:Tabularize /|** or \*\*space\*\*
 : Align paragraph on character
 
+### insert mode
+
+|                 |                      |
+| --              | --                   |
+| `Ctrl+x+Ctrl+f` | File name completion |
+
 ### Spell
 
 |          |                                           |
