@@ -13,4 +13,5 @@ let g:syntastic_style_warning_symbol = '⚠️'
 let g:syntastic_typescript_checkers = ['eslint']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_yaml_checkers = ['jsyaml']
+let g:syntastic_sh_checkers = ['sh']
 
