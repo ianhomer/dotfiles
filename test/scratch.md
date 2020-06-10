@@ -60,6 +60,10 @@ Todos
   and this.
 - [x] This too
 
+## Links
+
+[Diagrams](./diagrams.md).
+
 ## Definitions
 
 Long line definitions
