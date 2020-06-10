@@ -321,9 +321,6 @@ augroup dotme
 
   if g:config_level > 0
     autocmd BufNewFile,BufRead *.tsx set filetype=typescript
-    " Change local directory to current directory so that local file completion
-    " works
-    autocmd BufEnter * silent! lcd %:p:h
   endif
 
   if g:config_level > 2
