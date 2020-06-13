@@ -28,6 +28,7 @@ cat ~/.dotfiles/config/node/global.txt | grep -v '#' | grep '@' |
   xargs npm install --global
 
 npm -g outdated
+npm -g update
 
 echo
 echo "... Global node packages installed"

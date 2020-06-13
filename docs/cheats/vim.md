@@ -53,7 +53,7 @@
 | `:bn`         | next buffer                          |
 | `bufdo bd`    | close all buffers                    |
 | `space+b`     | Commits for current buffer           |
-| `space+5`     | Close all buffers except current one |
+| `space+o`     | Close all buffers except current one |
 | `space+space` | Show buffers                         |
 
 ### NERDTree
@@ -129,6 +129,12 @@
 
 **:Tabularize /|** or \*\*space\*\*
 : Align paragraph on character
+
+### insert mode
+
+|                 |                      |
+| --              | --                   |
+| `Ctrl+x+Ctrl+f` | File name completion |
 
 ### Spell
 

@@ -52,7 +52,7 @@
 **Ctrl+Fn+F2**
 : Use menu with arrow keys
 
-**Shift+Cmd bluetooth -> debug**
+**Shift+Opt bluetooth -> debug**
 : Reset bluetooth
 
 See System Preferences -> Keyboard -> Shortcuts for details
