@@ -10,7 +10,7 @@ endif
 let mapleader = "\<Space>"
 let maplocalleader = "\,"
 
-source ~/.config/vim/config-levels.vim
+source ~/.config/vim/toggle.vim
 
 if g:config_level > 0
   filetype plugin on
