@@ -8,7 +8,7 @@
 - [ ] Why Ctrl+Fn+F2 to enable menu only seems to work after Ctrl+Fn+F3
 - [ ] Improve mechanism to search for a word, e.g. ,star to search with :Ag
 - [ ] Upgrade brew cask on dotme <- how to handle some packages that need admin?
-  Perhaps cherry pick casks that autoupdate. 
+  Perhaps cherry pick casks that auto-update. 
 - [ ] Report on outdated across all packaging tools.
 - [ ] Get file path completion working again in Markdown, how to get it showing
   with tab, is that sensible? May be I don't really need tab doing a tab.
