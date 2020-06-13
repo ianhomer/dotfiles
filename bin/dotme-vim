@@ -23,6 +23,6 @@ if [ ! -d ~/.vim/swaps ] ; then
 fi
 
 # Update plugins used in power mode
-export VIM_SLIM=4
+export VIM_LEVEL=4
 vim +PlugUpgrade +PlugUpdate +qa
 nvim +PlugUpgrade +PlugUpdate +qa
