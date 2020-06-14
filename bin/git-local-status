@@ -17,26 +17,7 @@ function showDirectoryStatus {
   git status --porcelain
 }
 
-# Scan sub directories for git repository to report on
-function showDirectoryStatusWithFind {
-  if [ -d .git ] ; then
-    showDirectoryStatus
-  else
-   for d in */ ; do
-     if [ -d $d/.git ] ; then
-       (cd $d ; showDirectoryStatus)
-     fi
-   done
-  fi
-}
-
-# Show status of core repositories
-cd ~/.dotfiles
-showDirectoryStatus
-cd ~/projects/things
-showDirectoryStatusWithFind
-
 # Show status of recently entered directories
-for d in `fasd -ldR | head -n 10 | grep "$HOME/projects" | grep -v things` ; do
+for d in `get-git-directories` ; do
   (cd $d ; showDirectoryStatus)
 done

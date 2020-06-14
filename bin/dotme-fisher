@@ -9,5 +9,7 @@ if not test -f ~/.config/fish/functions/fisher.fish
     ~/.config/fish/functions/fisher.fish
 end
 
+fisher self-update
+
 fisher ls | grep fish-nvm || \
   fisher add jorgebucaran/fish-nvm
