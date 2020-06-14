@@ -26,7 +26,7 @@ To debug key pressess into kitty
 
 ## Reset Alfred Preferences
 
-To change alfred to use local preferences, not synced one :
+To change Alfred to use local preferences, not synced one :
 
     mv ~/Library/Application\ Support/Alfred/prefs.json ~/tmp/alfred-prefs.json
 
