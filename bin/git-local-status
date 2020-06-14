@@ -12,9 +12,8 @@ function showDirectoryStatus {
   git rev-parse --show-toplevel
   printf '\033[0;37m'
   git branch -v | grep "\[ahead\|\[behind"
-
   printf '\033[0m'
-  git status --porcelain
+  git status --porcelain 
 }
 
 # Show status of recently entered directories
