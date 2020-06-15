@@ -320,6 +320,8 @@ augroup dotme
   autocmd!
 
   if g:config_level > 0
+    "TODO : this should be typescriptreact and javascriptreact
+    autocmd bufnewfile,bufread *.jsx set filetype=javascript
     autocmd BufNewFile,BufRead *.tsx set filetype=typescript
   endif
 
