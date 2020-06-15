@@ -16,7 +16,7 @@ function addDirectory {
 }
 
 # Show status of recently entered directories
-for d in `fasd -ldR | head -n 10` ; do
+for d in `fasd -ldR | head -n 40` ; do
   if [ -d "$d/.git" ] ; then
     addDirectory $d
   else
