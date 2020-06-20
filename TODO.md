@@ -13,5 +13,3 @@
 - [ ] Get file path completion working again in Markdown, how to get it showing
   with tab, is that sensible? May be I don't really need tab doing a tab.
 - [ ] Enable jsx and tsx support - <https://github.com/MaxMEllon/vim-jsx-pretty>
-
-
