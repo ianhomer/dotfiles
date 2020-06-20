@@ -71,6 +71,10 @@ defaults write minimize-to-application -int 1
 # after applied)
 defaults write -g NSWindowShouldDragOnGesture -bool true
 
+# Disable DS Store files on remote drives
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
 # Hot corners
 # Possible values:
 #  0: no-op
