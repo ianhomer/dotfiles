@@ -241,6 +241,7 @@ function! LintMe()
 endfunction
 
 source ~/.config/vim/thingity.vim
+source ~/.config/vim/tabcomplete.vim
 
 " Reload vimrc, neo vimrc and CoC
 let g:config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"

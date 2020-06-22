@@ -30,7 +30,11 @@ nnoremap <silent> <leader>jT :Ag!<CR>'[\ ]
 
 " Make Ag match on just content, not including file path
 command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+  \ call fzf#vim#ag(<q-args>, {
+  \   'window': { 'width': 0.9, 'height': 0.9},
+  \   'options': '--delimiter : --nth 4..'
+  \ }, 
+  \ <bang>0)
 
 " hidden
 command! -bar -bang AgHidden
