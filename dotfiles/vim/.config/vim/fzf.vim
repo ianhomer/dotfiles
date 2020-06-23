@@ -19,7 +19,10 @@ nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':
 
 inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
     \ "find . -path '*/\.*' -prune -o -print \| sed '1d;s:^..::'",
-    \ fzf#wrap({'dir': expand('%:p:h')}))
+    \ fzf#wrap({
+    \   'dir': expand('%:p:h'),
+    \   'window': { 'width': 0.4, 'height': 0.3},
+    \ }))
 
 " exact
 nnoremap <silent> <leader>jj :Ag<CR>'
