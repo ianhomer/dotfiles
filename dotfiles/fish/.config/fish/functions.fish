@@ -39,6 +39,11 @@ function git-commit-and-push
   git push
 end
 
+function git-commit-and-push-no-verify
+  git commit -am "$argv"
+  git push --no-verify
+end
+
 function fish_user_key_bindings
   bind \cf forward-word
   bind \cb backward-word
