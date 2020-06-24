@@ -46,9 +46,7 @@ end
 
 # Open file in vi if set, otherwise no operation
 function vi_or_noop
-  if [ -n "$argv" ]
-    vi $argv
-  end
+  [ -n "$argv" ] ;and vi $argv
 end
 
 [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
