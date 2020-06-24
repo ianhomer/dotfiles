@@ -24,6 +24,7 @@ inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
     \   'window': { 'width': 0.4, 'height': 0.3},
     \ }))
 
+" coc
 " exact
 nnoremap <silent> <leader>jj :Ag<CR>'
 nnoremap <silent> <leader>jJ :Ag!<CR>'

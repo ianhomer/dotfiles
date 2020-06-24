@@ -44,6 +44,13 @@ function fish_user_key_bindings
   bind \cb backward-word
 end
 
+# Open file in vi if set, otherwise no operation
+function vi_or_noop
+  if [ -n "$argv" ]
+    vi $argv
+  end
+end
+
 [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
   echo "... Loaded ~/.config/fish/functions.fish"
 
