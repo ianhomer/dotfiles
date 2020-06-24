@@ -33,7 +33,7 @@ else
   # Attach to tmux session if exists, otherwise new
   alias tm="tmux attach || tmux new"
 
-  alias draw="open -a /Applications/draw.io.app/"
+  alias draw="/usr/bin/open -a /Applications/draw.io.app/"
 
   alias pass="lpass show --password -c"
   alias passes="lpass ls"
@@ -42,7 +42,6 @@ else
   # cat markdown files with a space between each
   alias catmd="findmd | xargs awk '(NR>1 && FNR==1){printf (\"\n\")};1'"
 
-  alias vif="vi_or_noop (fzf --preview 'bat {-1} --color=always')"
 
   [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
     echo "... Loaded ~/.config/fish/aliases.fish"
