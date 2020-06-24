@@ -48,24 +48,6 @@ function get-extension
   echo (string split -r -m1 . $argv)[2]
 end
 
-# Open file in appropriate tool
-function open
-  if [ -n "$argv" ]
-    set filename $argv
-  else
-    set filename (fzf --preview 'bat {-1} --color=always')
-  end
-
-  if [ -n "$filename]" ] 
-    set extension (get-extension $filename)
-    if test "$extension" = "svg"
-      /usr/bin/open -a /Applications/draw.io.app/ $filename
-    else 
-      vi $filename
-    end
-  end
-end
-
 [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
   echo "... Loaded ~/.config/fish/functions.fish"
 
