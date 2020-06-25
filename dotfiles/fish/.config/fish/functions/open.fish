@@ -6,7 +6,7 @@ function open
     set filename (fzf --preview 'bat {-1} --color=always')
   end
 
-  if [ -n "$filename]" ] 
+  if [ -n "$filename" ]
     set extension (get-extension $filename)
     if test "$extension" = "svg"
       /usr/bin/open -a /Applications/draw.io.app/ $filename
