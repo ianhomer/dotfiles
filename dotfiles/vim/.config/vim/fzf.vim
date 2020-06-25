@@ -44,8 +44,8 @@ nnoremap <silent> <leader>ja :FileSearch<CR>
 nnoremap <silent> <leader>jj :Ag<CR>'
 nnoremap <silent> <leader>jJ :Ag!<CR>'
 " todos
-nnoremap <silent> <leader>jt :Ag<CR>'[\ ]
-nnoremap <silent> <leader>jT :Ag!<CR>'[\ ]
+nnoremap <silent> <leader>jt :Ag \[\ \]<CR>
+nnoremap <silent> <leader>jT :Ag! \[\ \]<CR>
 
 " Make Ag match on just content, not including file path
 command! -bang -nargs=* Ag
