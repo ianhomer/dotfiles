@@ -24,6 +24,21 @@ inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
     \   'window': { 'width': 0.4, 'height': 0.3},
     \ }))
 
+
+function! s:FileSearch(query, fullscreen)
+  let command_fmt = 
+        \ 'rg --column --line-number --no-heading --color=always --smart-case -m 1 -- %s'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 
+        \ 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang FileSearch call s:FileSearch(<q-args>, <bang>0)
+
+nnoremap <silent> <leader>ja :FileSearch<CR>
+
 " coc
 " exact
 nnoremap <silent> <leader>jj :Ag<CR>'
