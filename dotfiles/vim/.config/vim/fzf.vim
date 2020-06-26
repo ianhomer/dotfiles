@@ -19,18 +19,41 @@ nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':
 
 inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
     \ "find . -path '*/\.*' -prune -o -print \| sed '1d;s:^..::'",
-    \ fzf#wrap({'dir': expand('%:p:h')}))
+    \ fzf#wrap({
+    \   'dir': expand('%:p:h'),
+    \   'window': { 'width': 0.4, 'height': 0.3},
+    \ }))
 
+
+function! s:FileSearch(query, fullscreen)
+  let command_fmt = 
+        \ 'rg --column --line-number --no-heading --color=always --smart-case -m 1 -- %s'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 
+        \ 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang FileSearch call s:FileSearch(<q-args>, <bang>0)
+
+nnoremap <silent> <leader>ja :FileSearch<CR>
+
+" coc
 " exact
 nnoremap <silent> <leader>jj :Ag<CR>'
 nnoremap <silent> <leader>jJ :Ag!<CR>'
 " todos
-nnoremap <silent> <leader>jt :Ag<CR>'[\ ]
-nnoremap <silent> <leader>jT :Ag!<CR>'[\ ]
+nnoremap <silent> <leader>jt :Ag \[\ \]<CR>
+nnoremap <silent> <leader>jT :Ag! \[\ \]<CR>
 
 " Make Ag match on just content, not including file path
 command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+  \ call fzf#vim#ag(<q-args>, {
+  \   'window': { 'width': 0.9, 'height': 0.9},
+  \   'options': '--delimiter : --nth 4..'
+  \ }, 
+  \ <bang>0)
 
 " hidden
 command! -bar -bang AgHidden

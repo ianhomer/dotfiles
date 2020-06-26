@@ -241,6 +241,7 @@ function! LintMe()
 endfunction
 
 source ~/.config/vim/thingity.vim
+source ~/.config/vim/tabcomplete.vim
 
 " Reload vimrc, neo vimrc and CoC
 let g:config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
@@ -320,6 +321,8 @@ augroup dotme
   autocmd!
 
   if g:config_level > 0
+    "TODO : this should be typescriptreact and javascriptreact
+    autocmd bufnewfile,bufread *.jsx set filetype=javascript
     autocmd BufNewFile,BufRead *.tsx set filetype=typescript
   endif
 
