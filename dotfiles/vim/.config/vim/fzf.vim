@@ -17,13 +17,18 @@ command! -bar -bang MapsInsert
 
 nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
 
-inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
+function! s:CompletePath() 
+  call fzf#vim#complete#path(
     \ "find . -path '*/\.*' -prune -o -print \| sed '1d;s:^..::'",
     \ fzf#wrap({
     \   'dir': expand('%:p:h'),
     \   'window': { 'width': 0.4, 'height': 0.3},
     \ }))
+endfunction
 
+command! -nargs=* -bang CompletePath call s:CompletePath()
+
+inoremap <expr> <c-x><c-f> :CompletePath<CR>
 
 function! s:FileSearch(query, fullscreen)
   let command_fmt = 

@@ -20,7 +20,7 @@ function! s:auto_complete()
   if (!has_period && !has_slash)
     return "\<C-X>\<C-P>"
   elseif ( has_slash )
-    return "\<C-X>\<C-F>"
+    return "\<C-O>:CompletePath\<CR>"
   else
     return "\<C-X>\<C-O>"
   endif
