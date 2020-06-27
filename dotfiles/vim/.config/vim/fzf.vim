@@ -49,7 +49,8 @@ nnoremap <silent> <leader>jT :Ag! \[\ \]<CR>
 
 " Make Ag match on just content, not including file path
 command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>, {
+  \ call fzf#vim#ag(<q-args>, 
+  \  '-p ~/.dotfiles/config/ag/.ignore', {
   \   'window': { 'width': 0.9, 'height': 0.9},
   \   'options': '--delimiter : --nth 4..'
   \ }, 
