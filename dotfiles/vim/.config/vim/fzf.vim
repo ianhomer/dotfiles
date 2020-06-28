@@ -52,7 +52,7 @@ command! -nargs=* -bang CompletePath call fzf#CompletePath()
 
 inoremap <expr> <c-x><c-f> fzf#CompletePath()
 
-function! s:FileSearch(query, fullscreen)
+function! fzf#SearchWithRipGrep(query, fullscreen)
   let command_fmt = 
         \ 'rg --column --line-number --no-heading --color=always --smart-case -m 1 -- %s'
   let initial_command = printf(command_fmt, shellescape(a:query))
@@ -62,20 +62,24 @@ function! s:FileSearch(query, fullscreen)
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
-command! -nargs=* -bang FileSearch call s:FileSearch(<q-args>, <bang>0)
+command! -nargs=* -bang Search call fzf#SearchWithRipGrep(<q-args>, <bang>0)
 
-nnoremap <silent> <leader>ja :FileSearch<CR>
+nnoremap <silent> <leader>ja :Search<CR>
 
-" coc
-" exact
-nnoremap <silent> <leader>jj :Ag<CR>'
-nnoremap <silent> <leader>jJ :Ag!<CR>'
+nnoremap <silent> <leader>jj :Ag<CR>
+nnoremap <silent> <leader>jJ :Ag!<CR>
 " todos
-nnoremap <silent> <leader>jt :Ag \[\ \]<CR>
-nnoremap <silent> <leader>jT :Ag! \[\ \]<CR>
+nnoremap <silent> <leader>jt :AgPopup \[\ \]<CR>
 
 " Make Ag match on just content, not including file path
 command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>, 
+  \  '-p ~/.dotfiles/config/ag/.ignore', {
+  \   'options': '--delimiter : --nth 4..'
+  \ }, 
+  \ <bang>0)
+
+command! -bang -nargs=* AgPopup
   \ call fzf#vim#ag(<q-args>, 
   \  '-p ~/.dotfiles/config/ag/.ignore', {
   \   'window': { 'width': 0.9, 'height': 0.9},
