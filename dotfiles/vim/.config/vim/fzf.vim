@@ -17,8 +17,8 @@ command! -bar -bang MapsInsert
 
 nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
 
-function! s:CompletePath() 
-  call fzf#vim#complete#path(
+function! fzf#CompletePath() 
+  return fzf#vim#complete#path(
     \ "find . -path '*/\.*' -prune -o -print \| sed '1d;s:^..::'",
     \ fzf#wrap({
     \   'dir': expand('%:p:h'),
@@ -26,9 +26,9 @@ function! s:CompletePath()
     \ }))
 endfunction
 
-command! -nargs=* -bang CompletePath call s:CompletePath()
+command! -nargs=* -bang CompletePath call fzf#CompletePath()
 
-inoremap <expr> <c-x><c-f> :CompletePath<CR>
+inoremap <expr> <c-x><c-f> fzf#CompletePath()
 
 function! s:FileSearch(query, fullscreen)
   let command_fmt = 

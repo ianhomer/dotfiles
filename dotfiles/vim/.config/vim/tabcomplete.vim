@@ -20,13 +20,14 @@ function! s:auto_complete()
   if (!has_period && !has_slash)
     return "\<C-X>\<C-P>"
   elseif ( has_slash )
+    " Use CompletePath from dotfiles fzf.vim
     return "\<C-O>:CompletePath\<CR>"
   else
     return "\<C-X>\<C-O>"
   endif
 endfunction
 
-" 
+" Map tab to auto complete
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>auto_complete()
