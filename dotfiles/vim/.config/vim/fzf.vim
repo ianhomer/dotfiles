@@ -17,12 +17,34 @@ command! -bar -bang MapsInsert
 
 nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
 
+let s:pop_rows = 10
+let s:pop_cols = 40
+
+function! fzf#GetHeight()
+  return 1.0 * s:pop_rows / &lines
+endfunction
+
+function! fzf#GetWidth()
+  return 1.0 * s:pop_cols / &columns
+endfunction
+
+function! fzf#GetY()
+  return 1.0 * (screenrow() - s:pop_rows/2 ) / &lines
+endfunction
+
+function! fzf#GetX()
+  return 1.0 * (screencol() + s:pop_cols/2) / &columns
+endfunction
+
 function! fzf#CompletePath() 
   return fzf#vim#complete#path(
     \ "find . -path '*/\.*' -prune -o -print \| sed '1d;s:^..::'",
     \ fzf#wrap({
     \   'dir': expand('%:p:h'),
-    \   'window': { 'width': 0.4, 'height': 0.3},
+    \   'window': { 
+    \     'width': fzf#GetWidth(), 'height': fzf#GetHeight(), 
+    \     'xoffset': fzf#GetX(), 'yoffset': fzf#GetY()
+    \    },
     \ }))
 endfunction
 
