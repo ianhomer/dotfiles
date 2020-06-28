@@ -10,7 +10,7 @@ function! s:auto_complete()
       \ coc#refresh()
   endif
   let line = getline('.')
-  let substr = strpart(line, -1, col('.')+1)
+  let substr = strpart(line, -1, col('.'))
   let substr = matchstr(substr, "[^ \t]*$")
   if (strlen(substr)==0)
     return "\<TAB>"

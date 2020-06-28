@@ -29,11 +29,11 @@ function! fzf#GetWidth()
 endfunction
 
 function! fzf#GetY()
-  return 1.0 * (screenrow() - s:pop_rows/2 ) / &lines
+  return 1.0 * (screenrow() + 1 + s:pop_rows/2 ) / &lines
 endfunction
 
 function! fzf#GetX()
-  return 1.0 * (screencol() + s:pop_cols/2) / &columns
+  return 1.0 * screencol() / &columns
 endfunction
 
 function! fzf#CompletePath() 
