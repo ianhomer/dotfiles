@@ -21,7 +21,7 @@ function! s:auto_complete()
     return "\<C-X>\<C-P>"
   elseif ( has_slash )
     " Use CompletePath from dotfiles fzf.vim
-    return "\<C-O>:CompletePath\<CR>"
+    return fzf#CompletePath()
   else
     return "\<C-X>\<C-O>"
   endif
