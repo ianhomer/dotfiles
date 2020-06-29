@@ -39,12 +39,21 @@ command! -nargs=* -bang FileSearch call s:FileSearch(<q-args>, <bang>0)
 
 nnoremap <silent> <leader>ja :FileSearch<CR>
 
+function! s:Todo(query, fullscreen)
+  call fzf#vim#ag('\[ \]', {
+  \   'window': { 'width': 0.9, 'height': 0.9 },
+  \   'options': '--delimiter : --nth 4..'
+  \ })  
+endfunction
+
+command! -nargs=* -bang Todo call s:Todo(<q-args>, <bang>0)
+
 " coc
 " exact
 nnoremap <silent> <leader>jj :Ag<CR>'
 nnoremap <silent> <leader>jJ :Ag!<CR>'
 " todos
-nnoremap <silent> <leader>jt :Ag \[\ \]<CR>
+nnoremap <silent> <leader>jt :Todo<CR>
 nnoremap <silent> <leader>jT :Ag! \[\ \]<CR>
 
 " Make Ag match on just content, not including file path
