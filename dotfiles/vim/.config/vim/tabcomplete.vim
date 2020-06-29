@@ -10,7 +10,7 @@ function! s:auto_complete()
       \ coc#refresh()
   endif
   let line = getline('.')
-  let substr = strpart(line, -1, col('.')+1)
+  let substr = strpart(line, -1, col('.'))
   let substr = matchstr(substr, "[^ \t]*$")
   if (strlen(substr)==0)
     return "\<TAB>"
@@ -20,13 +20,14 @@ function! s:auto_complete()
   if (!has_period && !has_slash)
     return "\<C-X>\<C-P>"
   elseif ( has_slash )
-    return "\<C-X>\<C-F>"
+    " Use CompletePath from dotfiles fzf.vim
+    return fzf#CompletePath()
   else
     return "\<C-X>\<C-O>"
   endif
 endfunction
 
-" 
+" Map tab to auto complete
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>auto_complete()

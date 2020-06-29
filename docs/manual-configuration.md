@@ -48,9 +48,8 @@ see [cheat sheet](./docs/cheats/) for my favourites.
 
 - Caps Lock -> Escape
 
-#### Keyboard - Mechanical
-
-To get <Shift-3> => #
+Use <Shift-3> for # and <Alt-3> for £. Feels more natural to me and aligns with
+mechanical keyboards.
 
 -> Keyboard -> Input Sources -> U.S.
 

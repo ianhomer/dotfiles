@@ -17,15 +17,42 @@ command! -bar -bang MapsInsert
 
 nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
 
-inoremap <expr> <c-x><c-f> fzf#vim#complete#path(
+let s:pop_rows = 10
+let s:pop_cols = 40
+
+function! fzf#GetHeight()
+  return 1.0 * s:pop_rows / &lines
+endfunction
+
+function! fzf#GetWidth()
+  return 1.0 * s:pop_cols / &columns
+endfunction
+
+function! fzf#GetY()
+  return 1.0 * (screenrow() + 1 + s:pop_rows/2 ) / &lines
+endfunction
+
+function! fzf#GetX()
+  return 1.0 * screencol() / &columns
+endfunction
+
+function! fzf#CompletePath() 
+  return fzf#vim#complete#path(
     \ "find . -path '*/\.*' -prune -o -print \| sed '1d;s:^..::'",
     \ fzf#wrap({
     \   'dir': expand('%:p:h'),
-    \   'window': { 'width': 0.4, 'height': 0.3},
+    \   'window': { 
+    \     'width': fzf#GetWidth(), 'height': fzf#GetHeight(), 
+    \     'xoffset': fzf#GetX(), 'yoffset': fzf#GetY()
+    \    },
     \ }))
+endfunction
 
+command! -nargs=* -bang CompletePath call fzf#CompletePath()
 
-function! s:FileSearch(query, fullscreen)
+inoremap <expr> <c-x><c-f> fzf#CompletePath()
+
+function! fzf#SearchWithRipGrep(query, fullscreen)
   let command_fmt = 
         \ 'rg --column --line-number --no-heading --color=always --smart-case -m 1 -- %s'
   let initial_command = printf(command_fmt, shellescape(a:query))
@@ -35,10 +62,11 @@ function! s:FileSearch(query, fullscreen)
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 
-command! -nargs=* -bang FileSearch call s:FileSearch(<q-args>, <bang>0)
+command! -nargs=* -bang Search call fzf#SearchWithRipGrep(<q-args>, <bang>0)
 
-nnoremap <silent> <leader>ja :FileSearch<CR>
+nnoremap <silent> <leader>ja :Search<CR>
 
+<<<<<<< HEAD
 function! s:Todo(query, fullscreen)
   call fzf#vim#ag('\[ \]', {
   \   'window': { 'width': 0.9, 'height': 0.9 },
@@ -55,10 +83,24 @@ nnoremap <silent> <leader>jJ :Ag!<CR>'
 " todos
 nnoremap <silent> <leader>jt :Todo<CR>
 nnoremap <silent> <leader>jT :Ag! \[\ \]<CR>
+=======
+nnoremap <silent> <leader>jj :Ag<CR>
+nnoremap <silent> <leader>jJ :Ag!<CR>
+" todos
+nnoremap <silent> <leader>jt :AgPopup \[\ \]<CR>
+>>>>>>> 9211b50b9d795381c23b2384768f3e83d99a1ded
 
 " Make Ag match on just content, not including file path
 command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>, {
+  \ call fzf#vim#ag(<q-args>, 
+  \  '-p ~/.dotfiles/config/ag/.ignore', {
+  \   'options': '--delimiter : --nth 4..'
+  \ }, 
+  \ <bang>0)
+
+command! -bang -nargs=* AgPopup
+  \ call fzf#vim#ag(<q-args>, 
+  \  '-p ~/.dotfiles/config/ag/.ignore', {
   \   'window': { 'width': 0.9, 'height': 0.9},
   \   'options': '--delimiter : --nth 4..'
   \ }, 
