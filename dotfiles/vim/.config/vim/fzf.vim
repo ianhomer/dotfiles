@@ -66,7 +66,6 @@ command! -nargs=* -bang Search call fzf#SearchWithRipGrep(<q-args>, <bang>0)
 
 nnoremap <silent> <leader>ja :Search<CR>
 
-<<<<<<< HEAD
 function! s:Todo(query, fullscreen)
   call fzf#vim#ag('\[ \]', {
   \   'window': { 'width': 0.9, 'height': 0.9 },
@@ -77,18 +76,13 @@ endfunction
 command! -nargs=* -bang Todo call s:Todo(<q-args>, <bang>0)
 
 " coc
-" exact
 nnoremap <silent> <leader>jj :Ag<CR>'
 nnoremap <silent> <leader>jJ :Ag!<CR>'
 " todos
 nnoremap <silent> <leader>jt :Todo<CR>
 nnoremap <silent> <leader>jT :Ag! \[\ \]<CR>
-=======
-nnoremap <silent> <leader>jj :Ag<CR>
-nnoremap <silent> <leader>jJ :Ag!<CR>
 " todos
 nnoremap <silent> <leader>jt :AgPopup \[\ \]<CR>
->>>>>>> 9211b50b9d795381c23b2384768f3e83d99a1ded
 
 " Make Ag match on just content, not including file path
 command! -bang -nargs=* Ag
