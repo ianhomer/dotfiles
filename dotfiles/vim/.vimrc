@@ -91,6 +91,8 @@ if g:config_level > 3
   nnoremap <silent> <leader>9s :call Toggle("syntastic")<CR>
   if IsEnabled("syntastic")
     Plug 'vim-syntastic/syntastic'
+    Plug 'yuezk/vim-js'
+    Plug 'maxmellon/vim-jsx-pretty'
     source ~/.config/vim/syntastic.vim
   endif
   " polyglot
