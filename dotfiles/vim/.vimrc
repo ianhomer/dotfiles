@@ -91,6 +91,7 @@ if g:config_level > 3
   nnoremap <silent> <leader>9s :call Toggle("syntastic")<CR>
   if IsEnabled("syntastic")
     Plug 'vim-syntastic/syntastic'
+    let g:vim_jsx_pretty_colorful_config = 1
     Plug 'yuezk/vim-js'
     Plug 'maxmellon/vim-jsx-pretty'
     source ~/.config/vim/syntastic.vim
