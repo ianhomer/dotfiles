@@ -15,7 +15,8 @@ let g:syntastic_markdown_checkers = []
 let g:syntastic_sh_checkers = ['sh']
 let g:syntastic_typescript_checkers = ['eslint']
 let g:syntastic_yaml_checkers = ['jsyaml']
-" Syntastic javac and checkstyle don't feel good enough, so we'll
+" Syntastic javac and checkstyle don't feel good enough (:h
+" syntastic-java-javac and syntastic-java-checkstyle), so we'll
 " go without. Enabled CoC with space-5 to get a better experience.
 let g:syntastic_java_checkers = []
 
