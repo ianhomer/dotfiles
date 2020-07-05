@@ -14,10 +14,15 @@ function! ResetMode()
   silent! nunmap <Left>
   silent! nunmap <Right>
 
-  silent! nunmap h
-  silent! nunmap j
-  silent! nunmap k
-  silent! nunmap l
+  silent! iunmap <Up>
+  silent! iunmap <Down>
+  silent! iunmap <Left>
+  silent! iunmap <Right>
+
+  silent! vunmap <Up>
+  silent! vunmap <Down>
+  silent! vunmap <Left>
+  silent! vunmap <Right>
 endfunction
 
 " 2 = personal dev mode
