@@ -10,7 +10,7 @@ endif
 let mapleader = "\<Space>"
 let maplocalleader = "\,"
 
-source ~/.config/vim/config-levels.vim
+source ~/.config/vim/toggle.vim
 
 if g:config_level > 0
   filetype plugin on
@@ -91,6 +91,9 @@ if g:config_level > 3
   nnoremap <silent> <leader>9s :call Toggle("syntastic")<CR>
   if IsEnabled("syntastic")
     Plug 'vim-syntastic/syntastic'
+    let g:vim_jsx_pretty_colorful_config = 1
+    Plug 'yuezk/vim-js'
+    Plug 'maxmellon/vim-jsx-pretty'
     source ~/.config/vim/syntastic.vim
   endif
   " polyglot
@@ -241,6 +244,7 @@ function! LintMe()
 endfunction
 
 source ~/.config/vim/thingity.vim
+source ~/.config/vim/tabcomplete.vim
 
 " Reload vimrc, neo vimrc and CoC
 let g:config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
@@ -320,6 +324,8 @@ augroup dotme
   autocmd!
 
   if g:config_level > 0
+    "TODO : this should be typescriptreact and javascriptreact
+    autocmd bufnewfile,bufread *.jsx set filetype=javascript
     autocmd BufNewFile,BufRead *.tsx set filetype=typescript
   endif
 

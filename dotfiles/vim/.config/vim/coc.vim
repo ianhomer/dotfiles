@@ -24,12 +24,12 @@ let g:coc_global_extensions = [
 call coc#config('cSpell.dictionaryDefinitions', [
       \ { "name" : "dotfiles",
       \   "path": expand("$HOME/.config/dictionaries/dotfiles.txt") },
-      \ { "name" : "dottech",
-      \   "path": expand("$HOME/.config/dictionaries/dottech.txt") },
-      \ { "name" : "dotinbox",
-      \   "path": expand("$HOME/.config/dictionaries/dotinbox.txt") },
-      \ { "name" : "doten",
-      \   "path": expand("$HOME/.config/dictionaries/doten.txt") }
+      \ { "name" : "tech",
+      \   "path": expand("$HOME/.config/dictionaries/tech.txt") },
+      \ { "name" : "inbox",
+      \   "path": expand("$HOME/.config/dictionaries/inbox.txt") },
+      \ { "name" : "enextra",
+      \   "path": expand("$HOME/.config/dictionaries/enextra.txt") }
       \])
 
 " set java home for coc-java

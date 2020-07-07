@@ -102,7 +102,7 @@ Term with multiple definitions and long lines
 
 ## Code
 
-```
+```bash
 fenced-block
 second-line
 ```
@@ -112,7 +112,7 @@ More code:
     unfenced-block
     second-line
 
-```
+```bash
 another-fenced-block
 second-line
 ```

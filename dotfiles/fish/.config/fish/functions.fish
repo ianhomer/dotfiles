@@ -44,6 +44,10 @@ function fish_user_key_bindings
   bind \cb backward-word
 end
 
+function get-extension
+  echo (string split -r -m1 . $argv)[2]
+end
+
 [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
   echo "... Loaded ~/.config/fish/functions.fish"
 
