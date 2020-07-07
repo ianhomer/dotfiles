@@ -1,6 +1,6 @@
 # My .dotfiles
 
-Configure my computers, to reduce distraction and more keyboard focused.
+Configure my computers to be more keyboard focused and reduce distraction.
 
 ## tl;dr
 
@@ -13,14 +13,18 @@ then update at any time with:
 
     dotme
 
-This gets local up to date, including pulling latest version of this repository,
-sets OSX defaults, updates brew including packages. This can be run anytime to
-just get onto latest.
+This gets local machine up to date, including pulling latest version of this
+repository, sets OSX defaults, updates brew including packages. This can be run
+anytime to just get onto latest.
+
+I remind myself of commands and shortcuts I use with:
+
+    cheat
 
 ## Why
 
-The configuration process in this repository provides me my preferred way of
-working to streamline distraction free coding. This includes:
+The configuration process in this repository provides me with my preferred way
+of working to streamline distraction free coding. This includes:
 
 **brew**
 : package manager
@@ -37,7 +41,7 @@ working to streamline distraction free coding. This includes:
 **tmux**
 : terminal multiplexer
 
-**neovim** with **Conquer of Completion**
+**neovim**
 : file editing
 
 **FiraCode Nerd Font**
@@ -54,8 +58,8 @@ MacOS with
 **[magnet](https://magnet.crowdcafe.com/)**
 : window manager
 
-Other tools woven into these dotfiles are **fzf**, **pandoc**, **cspell**,
-**node**, **java** and **python**.
+Other tools woven into these dotfiles include **ag**, **fzf**, **pandoc**,
+**cspell**, **fugitive**, **java**, **node** and **python**.
 
 ## How
 
@@ -81,7 +85,8 @@ However, particular thanks to:
 - [webpro](https://github.com/webpro/dotfiles)
 - [Mathias](https://github.com/mathiasbynens/dotfiles)
 - [Paul Irish](https://github.com/paulirish/dotfiles)
-- [Managing dotfiles with stow](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/)
+- [Managing dotfiles with
+  stow](https://alexpearce.me/2016/02/managing-dotfiles-with-stow/)
 - [egel](https://github.com/egel/dotfiles)
 - [Ultimate vim configuration](https://github.com/amix/vimrc)
 - [noctuid - keyboard-based workflows](https://github.com/noctuid/dotfiles)
