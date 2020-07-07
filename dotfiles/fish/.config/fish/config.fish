@@ -43,6 +43,9 @@ if status --is-login
 
   # Point OMF state to dotfiles
   set -g OMF_CONFIG ~/.dotfiles/config/omf
+
+  # Use fd for fzf by default
+  set -gx FZF_DEFAULT_COMMAND 'fd --type f'
 end
 
 if status --is-interactive

@@ -14,7 +14,8 @@ Open dozer and configure menu hiding.
 Open Alfred, set up privacy options, point configuration to a cloud storage of
 your choosing, and configure Alfred to your choosing.
 
-Alfred Preferences -> Advanced -> Set Preferences folder -> ~/.dotfiles/config/alfred
+Alfred Preferences -> Advanced -> Set Preferences folder ->
+~/.dotfiles/config/alfred
 
 ### Slack
 
@@ -25,10 +26,6 @@ Preferences -> Accessibility -> Allow animated images and emoji
 ### Keyboard Configuration - MacOS
 
 System preferences
-
--> Keyboard -> Modifier Keys -> For each keyboard :
-
-- Caps Lock -> Escape
 
 -> Keyboard -> Shortcuts ->
 
@@ -43,7 +40,18 @@ For a Microsoft keyboard :
 - Command Key -> Option
 
 And then use [keyboard shortcuts](https://support.google.com/mail/answer/6594) -
-see [Cheatsheet](./docs/cheats/) for my favourites.
+see [cheat sheet](./docs/cheats/) for my favourites.
+
+#### Keyboard - MacOS default
+
+-> Keyboard -> Modifier Keys -> For each keyboard :
+
+- Caps Lock -> Escape
+
+Use <Shift-3> for # and <Alt-3> for £. Feels more natural to me and aligns with
+mechanical keyboards.
+
+-> Keyboard -> Input Sources -> U.S.
 
 ### Spotlight
 

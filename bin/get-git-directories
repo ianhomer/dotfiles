@@ -1,0 +1,32 @@
+#!/bin/bash
+
+#
+# Get recently used local git directories
+#
+
+DIRS=""
+
+function addDirectory {
+  # Don't add dupes
+  if [[ $DIRS == *$1* ]] ; then
+    return
+  fi
+  DIRS="${DIRS}:$1"
+  echo $1
+}
+
+# Show status of recently entered directories
+for d in `fasd -ldR | head -n 40` ; do
+  if [ -d "$d/.git" ] ; then
+    addDirectory $d
+  else
+   # try direct children too
+   for child in ${d}/*/ ; do
+     c=${child%*/}
+     if [ -d "${c}/.git" ] ; then
+       addDirectory $c
+     fi
+   done
+  fi
+done
+
