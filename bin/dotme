@@ -19,6 +19,7 @@ DOTFILES_DIR="${REPOSITORY_DIR}/dotfiles"
 PATH=${SCRIPT_DIR}:${PATH}
 VERBOSE=0
 DRY=0
+QUICK=0
 
 #
 # Backup file before stowing.
@@ -101,14 +102,14 @@ command_install() {
   command_pull
   command_packages
   command_stow
-  [ $DRY -eq 0 ] && is-macos && dotme-osx-defaults
-  [ $DRY -eq 0 ] && dotme-omf
-  [ $DRY -eq 0 ] && dotme-pip
-  [ $DRY -eq 0 ] && dotme-gem
+  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && is-macos && dotme-osx-defaults
+  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-omf
+  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-pip
+  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-gem
   [ $DRY -eq 0 ] && dotme-vim
   [ $DRY -eq 0 ] && dotme-tmux
   [ $DRY -eq 0 ] && dotme-node
-  [ $DRY -eq 0 ] && dotme-jenv
+  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-jenv
   [ $DRY -eq 0 ] && dotme-fish
   [ $DRY -eq 0 ] && dotme-fisher
   command_clean
@@ -231,13 +232,15 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 # Initialize our own variables:
 VERBOSE=0
 
-while getopts "h?vd" opt; do
+while getopts "h?vdq" opt; do
   case "$opt" in
   h|\?)
     command_help
     exit 0
     ;;
   d) DRY=1
+    ;;
+  q) QUICK=1
     ;;
   v) VERBOSE=1
     ;;
