@@ -5,4 +5,4 @@ function! s:ThingityDateHeading()
   return heading . toupper(strftime("%a %d %b %Y"))
 endfunction
 
-nnoremap <silent> <leader>jd "=<SID>ThingityDateHeading()<CR>pj
+nnoremap <silent> <leader>jd "=<SID>ThingityDateHeading()<CR>po<ESC>o<ESC>
