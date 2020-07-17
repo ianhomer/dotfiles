@@ -18,7 +18,7 @@ let g:config_level = exists('$VIM_CONFIG_LEVEL' ) ?
   \ $VIM_CONFIG_LEVEL : exists('g:config_level_session') ?
   \ g:config_level_session : 4
 
-let g:toggles = get(g:, "toggles", {"syntastic":1})
+let g:toggles = get(g:, "toggles", {"syntastic":0})
 
 if !exists("*Toggle")
   function! Toggle(feature)
