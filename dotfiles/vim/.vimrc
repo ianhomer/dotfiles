@@ -177,6 +177,18 @@ nnoremap <silent> <leader>u :echo "u not mapped"<CR>
 nnoremap <silent> <leader>t :echo "t not mapped"<CR>
 nnoremap <silent> <leader>y :echo "y not mapped"<CR>
 
+" Thanks https://stackoverflow.com/questions/4545275/vim-close-all-buffers-but-this-one
+" This is better than the `%bd | e#` technique since it doesn't close the
+" current buffer at all. Closing the buffer and reopening file can trigger other
+" plugins that cause a slight delay
+function! CloseAllBuffersButCurrent()
+  let curr = bufnr("%")
+  let last = bufnr("$")
+
+  if curr > 1    | silent! execute "1,".(curr-1)."bd"     | endif
+  if curr < last | silent! execute (curr+1).",".last."bd" | endif
+endfunction
+
 " My shortcuts
 if g:config_level > 0
   nnoremap <silent> <leader><space> :Buffers<CR>
@@ -191,7 +203,7 @@ if g:config_level > 0
   " Hide all windows except the current one
   nnoremap <silent> <leader>O :only<CR>
   " Close all buffers except the current one and reopen NERDTree
-  nnoremap <silent> <leader>o mA<CR>:NERDTreeClose<bar>wall<bar>%bd!<bar>e#<bar>bd#<bar>:NERDTree<bar>:wincmd p<CR>`Ak<CR>
+  nnoremap <silent> <leader>o mA<CR>:NERDTreeClose<bar>wall<bar>:call CloseAllBuffersButCurrent()<bar>:NERDTree<bar>:wincmd p<CR>`Ak<CR>
 
   " close all buffers
   nnoremap <silent> <leader>x :bufdo bd<CR>
