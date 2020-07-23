@@ -191,11 +191,16 @@ if g:config_level > 0
   " Hide all windows except the current one
   nnoremap <silent> <leader>O :only<CR>
   " Close all buffers except the current one and reopen NERDTree
-  nnoremap <silent> <leader>o :NERDTreeClose<bar>wall<bar>%bd!<bar>e#<bar>bd#<bar>:NERDTree<bar>:wincmd p<CR>
+  nnoremap <silent> <leader>o mA<CR>:NERDTreeClose<bar>wall<bar>%bd!<bar>e#<bar>bd#<bar>:NERDTree<bar>:wincmd p<CR>`Ak<CR>
 
   " close all buffers
   nnoremap <silent> <leader>x :bufdo bd<CR>
-  
+
+  " Start / stop profiling
+  nnoremap <leader>.p :profile start ~/vim-performance.log<CR>:profile func*<CR>:profile file *<CR>
+  nnoremap <leader>.o :profile stop<CR>
+  nnoremap <leader>.i :profile dump<CR>
+
   if g:config_level > 2
     nnoremap <silent> <leader>b :BCommits<CR>
     nnoremap <silent> <leader>B :BCommits!<CR>
@@ -416,10 +421,11 @@ endif
 "
 
 if g:config_level > 3
-  "
+  " Less accurate highlighting, but improved performance
+  let g:airline_highlighting_cache = 1
   " Enable tab line
   let g:airline#extensions#tabline#enabled = 1
-  " Enable powerfonts giving angled tables
+  " Enable powerfonts giving angled tab
   let g:airline_powerline_fonts = 1
 endif
 
