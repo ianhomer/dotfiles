@@ -30,3 +30,13 @@ To change Alfred to use local preferences, not synced one :
 
     mv ~/Library/Application\ Support/Alfred/prefs.json ~/tmp/alfred-prefs.json
 
+## Troubleshoot Vim Performance
+
+    :profile start vim-performance.log
+    :profile file *
+    :profile func *
+    :profile stop
+
+Look at the bottom of the log file for a sorted summary
+
+
