@@ -15,15 +15,15 @@ function showDirectoryStatus {
   branchLines=$(echo $branches | tr -d '\n' | wc -c)
   status=$(git status --porcelain)
   statusLines=$(echo $status | tr -d '\n' | wc -c)
-  if [[ $branchlines -gt 0 || $statusLines -gt 0 ]] ; then
+  if [[ $branchLines -gt 0 || $statusLines -gt 0 ]] ; then
     git rev-parse --show-toplevel
-    if [[ $branchlines -gt 0 ]] ; then
+    if [[ $branchLines -gt 0 ]] ; then
       printf '\033[0;37m'
-      echo ${branches}
+      echo "${branches}"
     fi
     if [[ $statusLines -gt 0 ]] ; then 
       printf '\033[0m'
-      echo ${status}
+      echo "${status}"
     fi
   fi
   printf '\033[0;35m'
