@@ -4,6 +4,11 @@
 # Report on work in local git repositories that need pushing to remote
 #
 
+OPTIND=1
+while getopts "r" opt; do case "$opt" in
+  r) REMOTE=y ;;
+esac done
+
 NL=$'\n'
 count=0
 
@@ -16,6 +21,7 @@ function showDirectoryStatus {
   status=$(git status --porcelain)
   statusLines=$(echo $status | tr -d '\n' | wc -c)
   if [[ $branchLines -gt 0 || $statusLines -gt 0 ]] ; then
+    printf '\033[0;35m'
     git rev-parse --show-toplevel
     if [[ $branchLines -gt 0 ]] ; then
       printf '\033[0;37m'
@@ -26,11 +32,12 @@ function showDirectoryStatus {
       echo "${status}"
     fi
   fi
-  printf '\033[0;35m'
 }
 
 # Show status of recently entered directories
 for d in `git-get-directories` ; do
+  printf '\033[0;33m'
+  [[ "$REMOTE" == "y" ]] && git remote update
   (cd $d ; showDirectoryStatus)
   ((count++))
 done
