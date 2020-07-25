@@ -4,8 +4,8 @@
 # Report on work in local git repositories that need pushing to remote
 #
 
-OPTIND=1
-while getopts "r" opt; do case "$opt" in
+while getopts "n:r" o; do case "$o" in
+  n) MAX=$OPTARG ;;
   r) REMOTE=y ;;
 esac done
 
@@ -40,5 +40,6 @@ for d in `git-get-directories` ; do
   [[ "$REMOTE" == "y" ]] && git remote update
   (cd $d ; showDirectoryStatus)
   ((count++))
+  [[ -n "${MAX}" && ${count} -ge ${MAX} ]] && break
 done
 echo "Scanned ${count} Git directories"
