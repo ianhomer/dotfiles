@@ -8,7 +8,8 @@
 " The cleaning process also closes down fugitive and FZF windows, to allow you
 " to focus on the next thing you want to do.
 "
-" Thanks to https://stackoverflow.com/questions/4545275/vim-close-all-buffers-but-this-one
+" Thanks to
+" https://stackoverflow.com/questions/4545275/vim-close-all-buffers-but-this-one
 " for starting me down this route.  Originally I was using the `%bd | e#`
 " technique, but this
 " was performing badly for me - I had to move to the right window first, there'd
