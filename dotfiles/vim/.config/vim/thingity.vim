@@ -10,16 +10,14 @@ nnoremap <silent> <leader>jd "=<SID>ThingityDateHeading()<CR>po<ESC>o<ESC>
 " Search variations
 
 " just markdown files 
-nnoremap <silent> <leader>jm :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
+nnoremap <silent> <leader>jf :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
 
 command! -bang -nargs=* AgMarkdown
   \ call fzf#vim#ag(<q-args>, 
-  \  '-p ~/.dotfiles/config/ag/.ignore -G .md', {
-  \   'options': '--delimiter : --nth 4..'
-  \ }, 
+  \  '-p ~/.dotfiles/config/ag/.ignore -G .md',
   \ <bang>0)
 
-nnoremap <silent> <leader>jf :AgMarkdown<CR>
+nnoremap <silent> <leader>jm :AgMarkdown<CR>
 
 
 " Hidden search
