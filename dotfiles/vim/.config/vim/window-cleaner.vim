@@ -1,4 +1,5 @@
 "
+"
 " Clean vi windows so that we are left with one buffer open and NERDTree
 " focussed onto location of that file. The buffer we are left with is either the
 " current buffer if it's a modifiable file, otherwise we find the first buffer
@@ -33,7 +34,7 @@ function! s:CloseAllBuffersButCurrent()
   if current < last  | execute (current+1).",".last."bd"  | endif
 endfunction
 
-function! s:SwitchToFirstTextFile()
+function! s:SwitchToFirstEditableFile()
   let l:current = bufnr("%")
 
   if <SID>IsEditableFile(current)
@@ -45,7 +46,7 @@ function! s:SwitchToFirstTextFile()
   for l:buffer in filter(range(1, bufnr('$')), 'buflisted(v:val)')
     if <SID>IsEditableFile(l:buffer)
       echo l:buffer
-      let l:window = bufwinnr(bufname(l:buffer))
+      let l:window = bufwinnr(l:buffer)
       if l:window > 0
         execute l:window 'wincmd w'
       else
@@ -74,7 +75,7 @@ endfunction
 
 function! CloseOtherBuffers()
   wall
-  let l:buffer = <SID>SwitchToFirstTextFile()
+  let l:buffer = <SID>SwitchToFirstEditableFile()
   " Mark current cursor position
   normal mA:
   NERDTreeClose
@@ -82,7 +83,7 @@ function! CloseOtherBuffers()
   NERDTreeFind
   " Reset size of NERDTree
   normal 31<C-W>
-  " Switch to last buffer
+  " Switch back to last buffer, i.e. the one we want open
   wincmd p
   " Return to saved mark
   normal `A
