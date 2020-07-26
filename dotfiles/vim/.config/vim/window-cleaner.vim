@@ -18,9 +18,6 @@
 "
 
 function! s:CloseAllBuffersButCurrent()
-  " Close fugitive window if open
-  let l:gitWindow = bufwinnr(bufnr(".git/index"))
-  if l:gitWindow > 0 | execute l:gitWindow 'gq' | endif
   " Close FZF window if open
   let l:fzfWindow = bufwinnr(bufnr("fzf"))
   if l:fzfWindow > 0 | execute l:fzfWindow 'q' | endif
