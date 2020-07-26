@@ -100,7 +100,7 @@ command_install() {
   echo "Installing dotfiles ..."
   [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
   command_pull
-  command_packages
+  [ $QUICK -eq 0 ] && command_packages
   command_stow
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && is-macos && dotme-osx-defaults
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-omf
@@ -108,11 +108,11 @@ command_install() {
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-gem
   [ $DRY -eq 0 ] && dotme-vim
   [ $DRY -eq 0 ] && dotme-tmux
-  [ $DRY -eq 0 ] && dotme-node
+  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-node
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-jenv
   [ $DRY -eq 0 ] && dotme-fish
   [ $DRY -eq 0 ] && dotme-fisher
-  command_clean
+  [ $QUICK -eq 0 ]&& command_clean
   echo "... dotfiles installed and AOK"
 }
 
