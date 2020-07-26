@@ -15,38 +15,33 @@
 #
 if [[ $(grep "Host" ~/.ssh/config | grep "personal" | wc -l) -gt 0 ]]
 then
-  defaultContext="personal"
+  context="personal"
 else
-  defaultContext=""
+  context=""
 fi
 
-context=${1:-personal}
+OPTIND=1
+while getopts "c:v" o; do case "$o" in
+  c) context=$OPTARG ;;
+  v) verbose="y" ;;
+esac done
 
-echo "Context : $context"
-
-git remote show origin
+shift $((OPTIND-1))
+[ "${1:-}" = "--" ] && shift
+action=${1:-show}
 
 function setMyGitUrl {
   currentRemoteUrl=$(git config --get remote.origin.url)
-  echo "... current remote URL = $currentRemoteUrl"
   case $currentRemoteUrl in
-    *github.com*)
-      host="github.com"
-      ;;
-    *bitbucket.org*)
-      host="bitbucket.org"
-      ;;
+    *github.com*)    host="github.com"    ;;
+    *bitbucket.org*) host="bitbucket.org" ;;
     *)
       echo "Host for current remote URL not recognised"
       exit 1
       ;;
   esac
 
-  if [[ -z "${context}" ]] ; then
-    postFix="-${context}"
-  else 
-    postFix=""
-  fi
+  [[ -n "${context}" ]] && postFix="-${context}"
 
   if [[ "github.com" == "${host}" ]] ; then
     # Always use SSH for github
@@ -56,13 +51,18 @@ function setMyGitUrl {
   fi
   myRemoteUrl=${myRemoteUrl/${host}/${host}${postFix}}
 
-  echo "... my remote URL ${myRemoteUrl}"
-
   if [ ${currentRemoteUrl} != ${myRemoteUrl} ] ; then
-    git remote set-url origin $myRemoteUrl
-    echo "Changed repository remote URL to "$(git config --get remote.origin.url)
+    echo "current remote   $currentRemoteUrl"
+    echo "desired remote   ${myRemoteUrl}"
+    if [[ ${action} == "change" ]] ; then
+      git remote set-url origin $myRemoteUrl
+      echo "changed remote to "$(git config --get remote.origin.url)
+    else
+      echo " change remote with \"change\" action"
+    fi
   else
-    echo "Current repository already is using my URL"
+    [[ "${verbose}" == "y" ]] && echo "current remote   $currentRemoteUrl"
+    echo "    aok remote"
   fi
 }
 
