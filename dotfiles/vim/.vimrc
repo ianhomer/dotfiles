@@ -225,6 +225,7 @@ if g:config_level > 0
       nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
       nnoremap <silent> <leader>p :MarkdownPreview<CR>
+      nnoremap <silent> <leader>.m :!mind-map %:p<CR>
     endif
   endif
 

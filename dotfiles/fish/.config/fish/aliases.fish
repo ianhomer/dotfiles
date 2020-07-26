@@ -45,7 +45,7 @@ else
   # cat markdown files with a space between each
   alias catmd="findmd | xargs awk '(NR>1 && FNR==1){printf (\"\n\")};1'"
 
-
   [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
     echo "... Loaded ~/.config/fish/aliases.fish"
+
 end

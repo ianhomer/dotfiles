@@ -36,7 +36,7 @@ function! IsNotEnabled(feature)
   return 1 - IsEnabled(a:feature)
 endfunction
 
-nnoremap <silent> <leader>5 :call Toggle("coc")<CR>
+nnoremap <silent> <leader>9c :call Toggle("coc")<CR>
 
 nnoremap <silent> <leader>90 :call ConfigLevel(0)<CR>
 nnoremap <silent> <leader>91 :call ConfigLevel(1)<CR>
