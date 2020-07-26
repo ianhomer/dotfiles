@@ -205,7 +205,7 @@ if g:config_level > 0
   " Hide all windows except the current one
   nnoremap <silent> <leader>O :only<CR>
   " Close all buffers except the current one and reopen default sized NERDTree
-  nnoremap <silent> <leader>o mA<CR>:NERDTreeClose<bar>wall<bar>:call CloseAllBuffersButCurrent()<bar>:NERDTreeFind<CR>31<C-W><bar>:wincmd p<CR>`Ak<CR>
+  nnoremap <silent> <leader>o mA:NERDTreeClose<bar>wall<bar>:call CloseAllBuffersButCurrent()<bar>:NERDTreeFind<CR>31<C-W><bar>:wincmd p<CR>`A
 
   " close all buffers
   nnoremap <silent> <leader>x :bufdo bd<CR>
