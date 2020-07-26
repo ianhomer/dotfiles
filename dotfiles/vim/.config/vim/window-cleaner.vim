@@ -4,6 +4,9 @@
 " current buffer if it's a modifiable file, otherwise we find the first buffer
 " that is.
 "
+" The cleaning process also closes down fugitive and FZF windows, to allow you
+" to focus on the next thing you want to do.
+"
 " Thanks to https://stackoverflow.com/questions/4545275/vim-close-all-buffers-but-this-one
 " for starting me down this route.  Originally I was using the `%bd | e#`
 " technique, but this
@@ -14,10 +17,12 @@
 "
 
 function! s:CloseAllBuffersButCurrent()
+  " Close fugitive window if open
   let l:gitWindow = bufwinnr(bufnr(".git/index"))
   if l:gitWindow > 0 | execute l:gitWindow 'gq' | endif
+  " Close FZF window if open
   let l:fzfWindow = bufwinnr(bufnr("fzf"))
-  if l:fzfWindow > 0 | execute l:fzfWindow '<ESC>' | endif
+  if l:fzfWindow > 0 | execute l:fzfWindow 'q' | endif
 
   let current = bufnr("%")
   let buffers = filter(range(1, bufnr('$')), 'bufloaded(v:val)')
