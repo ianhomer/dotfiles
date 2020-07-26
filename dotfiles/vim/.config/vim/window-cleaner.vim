@@ -1,14 +1,23 @@
 "
-" Clean vi window
+" Clean vi windows so that we are left with one buffer open and NERDTree
+" focussed onto location of that file. The buffer we are left with is either the
+" current buffer if it's a modifiable file, otherwise we find the first buffer
+" that is.
+"
+" Thanks to https://stackoverflow.com/questions/4545275/vim-close-all-buffers-but-this-one
+" for starting me down this route.  Originally I was using the `%bd | e#`
+" technique, but this
+" was performing badly for me - I had to move to the right window first, there'd
+" be an annoying (but small delay) 
+" since it'd open and close the buffer and I'd loose my cursor position. 
+" Some non-modifiable windows weren't closed either e.g. help windows.
 "
 
-" Thanks https://stackoverflow.com/questions/4545275/vim-close-all-buffers-but-this-one
-" This is better than the `%bd | e#` technique since it doesn't close the
-" current buffer at all. Closing the buffer and reopening file can trigger other
-" plugins that cause a slight delay
 function! s:CloseAllBuffersButCurrent()
-  let l:gitBuffer = bufnr(".git/index")
-  if l:gitBuffer > 0 | execute l:gitBuffer 'gq' | endif
+  let l:gitWindow = bufwinnr(bufnr(".git/index"))
+  if l:gitWindow > 0 | execute l:gitWindow 'gq' | endif
+  let l:fzfWindow = bufwinnr(bufnr("fzf"))
+  if l:fzfWindow > 0 | execute l:fzfWindow '<ESC>' | endif
 
   let current = bufnr("%")
   let buffers = filter(range(1, bufnr('$')), 'bufloaded(v:val)')
@@ -74,4 +83,4 @@ function! CloseOtherBuffers()
   normal `A
 endfunction
 
-nnoremap <leader>o :call CloseOtherBuffers()<CR>
+nnoremap <silent> <leader>o :call CloseOtherBuffers()<CR>
