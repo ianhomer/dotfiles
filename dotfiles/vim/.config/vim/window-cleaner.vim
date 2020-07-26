@@ -7,6 +7,9 @@
 " current buffer at all. Closing the buffer and reopening file can trigger other
 " plugins that cause a slight delay
 function! s:CloseAllBuffersButCurrent()
+  let l:gitBuffer = bufnr(".git/index")
+  if l:gitBuffer > 0 | execute l:gitBuffer 'gq' | endif
+
   let current = bufnr("%")
   let buffers = filter(range(1, bufnr('$')), 'bufloaded(v:val)')
   let first = buffers[0]
@@ -14,9 +17,6 @@ function! s:CloseAllBuffersButCurrent()
 
   if current > first | execute first.",".(current-1)."bd" | endif
   if current < last  | execute (current+1).",".last."bd"  | endif
-
-  let l:gitBuffer = bufnr(".git/index")
-  if l:gitBuffer > 0 | execute l:gitBuffer 'gq' | endif
 endfunction
 
 function! s:SwitchToFirstTextFile()
@@ -31,7 +31,7 @@ function! s:SwitchToFirstTextFile()
   for l:buffer in filter(range(1, bufnr('$')), 'buflisted(v:val)')
     if <SID>IsEditableFile(l:buffer)
       echo l:buffer
-      let l:window = bufwinnr(pattern)
+      let l:window = bufwinnr(bufname(l:buffer))
       if l:window > 0
         execute l:window 'wincmd w'
       else
