@@ -16,9 +16,15 @@ function! CloseAllBuffersButCurrent()
   if curr < last  | execute (curr+1).",".last."bd"  | endif
 endfunction
 
-" Close all buffers except the current one and reopen default sized NERDTree
-nnoremap <silent> <leader>o mA:NERDTreeClose<bar>wall<bar>:call CloseAllBuffersButCurrent()<bar>:NERDTreeFind<CR>31<C-W><bar>:wincmd p<CR>`A
+function! CloseOtherBuffers()
+  normal mA:
+  NERDTreeClose
+  wall
+  :call CloseAllBuffersButCurrent()
+  NERDTreeFind
+  normal 31<C-W>
+  wincmd p
+  normal `A
+endfunction
 
-
-
-
+nnoremap <leader>o :call CloseOtherBuffers()<CR>
