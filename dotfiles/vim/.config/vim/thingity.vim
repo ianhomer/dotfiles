@@ -7,6 +7,9 @@ endfunction
 
 nnoremap <silent> <leader>jd "=<SID>ThingityDateHeading()<CR>po<ESC>o<ESC>
 
+" Open NERDTree on my things
+nnoremap <silent> <leader>jo :execute 'NERDTree ~/projects/things'<CR>
+
 " Search variations
 
 " just markdown files 

@@ -170,13 +170,6 @@ set clipboard=unnamed
 "
 source ~/.config/vim/modes.vim
 
-" Identify free leader mappings
-"
-nnoremap <silent> <leader>i :echo "i not mapped"<CR>
-nnoremap <silent> <leader>u :echo "u not mapped"<CR>
-nnoremap <silent> <leader>t :echo "t not mapped"<CR>
-nnoremap <silent> <leader>y :echo "y not mapped"<CR>
-
 " My shortcuts
 if g:config_level > 0
   nnoremap <silent> <leader><space> :Buffers<CR>
@@ -209,7 +202,6 @@ if g:config_level > 0
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
     if g:config_level > 3
-      nnoremap <silent> <leader>,j :execute 'NERDTree ~/projects/things'<CR>
       nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
       nnoremap <silent> <leader>p :MarkdownPreview<CR>
