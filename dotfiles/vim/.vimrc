@@ -240,7 +240,7 @@ if exists('*which_key#register')
   " since which keys is lazily loaded
   let g:which_key_map =  {}
   let g:which_key_map.c = { 'name' : '...Commenter' }
-  let g:which_key_map.j = { 'name' : '...FZF search' }
+  let g:which_key_map.j = { 'name' : '...Thingity' }
   let g:which_key_map['k'] = { 'name' : '...Bookmarks' }
   let g:which_key_map[','] = { 'name' : '...Misc' }
   let g:which_key_map['.'] = { 'name' : '...Experimental' }
