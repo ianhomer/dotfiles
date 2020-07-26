@@ -183,10 +183,12 @@ nnoremap <silent> <leader>y :echo "y not mapped"<CR>
 " plugins that cause a slight delay
 function! CloseAllBuffersButCurrent()
   let curr = bufnr("%")
-  let last = bufnr("$")
+  let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val)')
+  let first = buffers[0]
+  let last = buffers[-1]
 
-  if curr > 1    | silent! execute "1,".(curr-1)."bd"     | endif
-  if curr < last | silent! execute (curr+1).",".last."bd" | endif
+  if curr > first | execute first.",".(curr-1)."bd" | endif
+  if curr < last  | execute (curr+1).",".last."bd"  | endif
 endfunction
 
 " My shortcuts
