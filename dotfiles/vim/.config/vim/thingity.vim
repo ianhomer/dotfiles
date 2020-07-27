@@ -5,7 +5,13 @@ function! s:ThingityDateHeading()
   return heading . toupper(strftime("%a %d %b %Y"))
 endfunction
 
+function! s:ThingityNewThing()
+  let l:filename = getcwd()."/".toupper(strftime("%Y%m%d-%H%M%S")).".md"
+  execute "e ".l:filename
+endfunction
+
 nnoremap <silent> <leader>jd "=<SID>ThingityDateHeading()<CR>po<ESC>o<ESC>
+nnoremap <silent> <leader>jn :call <SID>ThingityNewThing()<CR>
 
 " Open NERDTree on my things
 nnoremap <silent> <leader>jo :execute 'NERDTree ~/projects/things'<CR>
@@ -21,7 +27,6 @@ command! -bang -nargs=* AgMarkdown
   \ <bang>0)
 
 nnoremap <silent> <leader>jm :AgMarkdown<CR>
-
 
 " Hidden search
 nnoremap <silent> <leader>jh :AgHidden<CR>
