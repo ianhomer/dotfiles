@@ -14,7 +14,6 @@ source ~/.config/vim/toggle.vim
 
 if g:config_level > 0
   filetype plugin on
-else
   filetype plugin off
 endif
 
@@ -320,6 +319,11 @@ endif
 "
 augroup dotme
   autocmd!
+
+  " auto changed
+  if g:config_level > 2
+    autocmd TextChanged,TextChangedI,TextChangedP <buffer> silent write
+  endif
 
   if g:config_level > 0
     "TODO : this should be typescriptreact and javascriptreact
