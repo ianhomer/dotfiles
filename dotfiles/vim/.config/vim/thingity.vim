@@ -5,9 +5,23 @@ function! s:ThingityDateHeading()
   return heading . toupper(strftime("%a %d %b %Y"))
 endfunction
 
+function! s:ThingityTime()
+  return strftime("%H:%M")
+endfunction
+
 function! s:ThingityNewThing()
-  let l:filename = getcwd()."/".toupper(strftime("%Y%m%d-%H%M%S")).".md"
+  let root = fnameescape(
+    \ fnamemodify(finddir('.git', escape(expand('%:p:h'), ' ').";"), ":h"))
+  if root == "" 
+   let root = getcwd() 
+  endif
+  close
+  let l:filename = l:root."/".toupper(strftime("%Y%m%d-%H%M%S")).".md"
   execute "e ".l:filename
+  execute "normal! a".<SID>ThingityDateHeading()." - ".<SID>ThingityTime()."\<ESC>2o\<ESC>"
+  write
+  NERDTreeFind
+  wincmd p
 endfunction
 
 nnoremap <silent> <leader>jd "=<SID>ThingityDateHeading()<CR>po<ESC>o<ESC>
