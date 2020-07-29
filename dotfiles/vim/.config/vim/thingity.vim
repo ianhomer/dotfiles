@@ -75,6 +75,9 @@ function! s:ThingityNewThing()
   wincmd p
 endfunction
 
+"
+" WIP : Auto archive things
+"
 function! s:ThingityArchive()
   let l:root = s:ThingityGetStreamRoot()
   if !isdirectory(l:root."/archive")
@@ -89,6 +92,10 @@ function! s:ThingityArchive()
     let l:datePartMatch = matchlist(log,'.*/\([0-9]*\)[\/]*.md')
     if len(l:datePartMatch) > 0
       let l:datePart = l:datePartMatch[1]
+      let fullDate = l:datePart
+      if len(l:datePart) == 4
+        let fullDate = strftime(%Y%).l:datePart
+      endif
       echo log
       echo "Date parts ".l:datePart
     endif
