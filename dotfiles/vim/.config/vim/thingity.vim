@@ -76,7 +76,8 @@ function! s:ThingityNewThing()
 endfunction
 
 "
-" WIP : Auto archive things
+" WIP : Auto archive things, ... perhaps I should just get proficient with netrw
+" ;)
 "
 function! s:ThingityArchive()
   let l:root = s:ThingityGetStreamRoot()
