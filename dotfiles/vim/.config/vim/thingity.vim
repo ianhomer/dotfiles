@@ -13,7 +13,6 @@ endfunction
 " Get the root of the project.
 "
 function! s:ThingityGetRoot()
-  echo "get root"
   let l:root = fnameescape(
     \ fnamemodify(finddir('.git', escape(expand('%:p:h'), ' ').";"), ":h"))
   if isdirectory(l:root."/.git")
@@ -24,7 +23,6 @@ function! s:ThingityGetRoot()
   " project and has a log directory
   "
   let l:dirs = filter(globpath(getcwd(), '*', 0, 1),"isdirectory(v:val.'/.git') && isdirectory(v:val.'/log')")
-  echo l:dirs
   if len(l:dirs) == 0
     return getcwd()
   elseif len(l:dirs) == 1
@@ -77,12 +75,29 @@ function! s:ThingityNewThing()
   wincmd p
 endfunction
 
-function! s:ThingityNewLog()
-
+function! s:ThingityArchive()
+  let l:root = s:ThingityGetStreamRoot()
+  if !isdirectory(l:root."/archive")
+    echo "... create log/archive directory to support archiving"
+  endif
+  let today = strftime("%m%d")
+  let archivePoint = today - 7
+  echo archivePoint
+  let l:logsToArchive = filter(globpath(l:root, '*.md', 0, 1),"fnamemodify(v:val, ':t') < archivePoint")
+  echo l:logsToArchive
+  for log in l:logsToArchive
+    let l:datePartMatch = matchlist(log,'.*/\([0-9]*\)[\/]*.md')
+    if len(l:datePartMatch) > 0
+      let l:datePart = l:datePartMatch[1]
+      echo log
+      echo "Date parts ".l:datePart
+    endif
+  endfor
 endfunction
 
 nnoremap <silent> <leader>jd "=<SID>ThingityDateHeading()<CR>po<ESC>o<ESC>
-nnoremap <leader>jn :call <SID>ThingityNewThing()<CR>
+nnoremap <silent> <leader>jn :call <SID>ThingityNewThing()<CR>
+nnoremap <silent> <leader>ja :call <SID>ThingityArchive()<CR>
 
 " Open NERDTree on my things
 nnoremap <silent> <leader>jo :execute 'NERDTree ~/projects/things'<CR>
@@ -102,7 +117,7 @@ nnoremap <silent> <leader>jm :AgMarkdown<CR>
 " Hidden search
 nnoremap <silent> <leader>jh :AgHidden<CR>
 " generic search (experimental alternative to Ag)
-nnoremap <silent> <leader>ja :Search<CR>
+nnoremap <silent> <leader>js :Search<CR>
 
 " todos
 nnoremap <silent> <leader>jT :Ag! \[\ \]<CR>
