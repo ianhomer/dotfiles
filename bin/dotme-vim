@@ -4,7 +4,7 @@
 # Install vim plug - vi plugin manager
 #
 
-should-run -m 1 $0 || exit
+should-run -m 7 $0 || exit
 
 if [ ! -f  ~/.vim/autoload/plug.vim ] ; then
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -29,4 +29,4 @@ export VIM_LEVEL=4
 vim +PlugUpgrade +PlugUpdate +qa
 nvim +PlugUpgrade +PlugUpdate +qa
 
-should-run -fu
+should-run -fu $0

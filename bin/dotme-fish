@@ -3,6 +3,8 @@
 # Configure fish
 #
 
+should-run -m 7 dotme-fish || exit
+
 #
 # Set up universal variables to improve shell start up times
 #
@@ -10,5 +12,7 @@
 . ~/.dotfiles/dotfiles/fish/.config/fish/functions/add-to-universal-path.fish
 
 add-to-universal-path ~/.dotfiles/bin ~/.jenv/bin ~/.jenv/shims ~/.rbenv/shims
+
+should-run -fu dotme-fish
 
 

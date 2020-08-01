@@ -32,8 +32,8 @@ Check if script needs to run
 
 Check if script needs to run, with expiry
 
-  should-run -m 1  || exit  # 1 day
-  should-run -m 1h || exit  # 1 hour
+  should-run -m 1 $0  || exit  # 1 day
+  should-run -m 1h $0 || exit  # 1 hour
 
 At end of script indicate that the script has run
 
@@ -63,8 +63,12 @@ fi
 
 shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
-scriptName=${1:-"should-run"}
-scriptName=${scriptName##*/}
+scriptName=${1##*/}
+
+if [[ -z "$scriptName" ]] ; then
+  printf "\e[33mPlease pass script name in as argument to \e[1m${0##*/}\e[0m\n"
+  exit 1
+fi
 
 [[ -n "$verbose" ]] && echo "Script : $scriptName"
 
@@ -108,7 +112,20 @@ if [[ "$update" == "y" ]] && [[ $shouldRun -eq 1 ]] ; then
 fi
 
 if [[ $shouldRun -eq 0 ]] ; then
+  if [[ -n "$modified" ]] ; then
+    notChangedMessage="already ran in last"
+    if [[ "$modified" == "1" ]]; then
+      notChangedMessage="$notChangedMessage day"
+    elif [[ "$modified" =~ ^[0-9]+$ ]] ; then
+      notChangedMessage="$notChangedMessage $modified days"
+    else
+      notChangedMessage="$notChangedMessage $modified"
+    fi
+  else
+    notChangedMessage="not changed since last run"
+  fi
   [[ -z "$silent" ]] && \
-    echo "Skipping $scriptName since not changed since last run"
+    printf "\e[37mskipping \e[1m%-20s\e[0;37m %s\e[0m\n" \
+      "$scriptName" "$notChangedMessage"
   exit 1
 fi

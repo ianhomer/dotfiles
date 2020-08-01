@@ -4,7 +4,7 @@
 # Install fisher, a package manager for fish
 #
 
-should-run -m 7 $0 || exit
+should-run -m 7 dotme-fisher || exit
 
 if not test -f ~/.config/fish/functions/fisher.fish
   curl https://git.io/fisher --create-dirs -sLo \
@@ -16,4 +16,4 @@ fisher self-update
 fisher ls | grep fish-nvm || \
   fisher add jorgebucaran/fish-nvm
 
-should-run -fu
+should-run -fu dotme-fisher

@@ -10,4 +10,4 @@ gem install neovim
 
 echo "... Installed ruby packages"
 
-should-run $0 || exit
+should-run -fu $0
