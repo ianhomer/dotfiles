@@ -120,7 +120,7 @@ if g:config_level > 3
   " goyo - Distraction free writing
   Plug 'junegunn/goyo.vim'
   " markdown preview
-  " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 endif
 
 " CoC completion
