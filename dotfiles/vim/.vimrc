@@ -37,9 +37,11 @@ if g:config_level > 0
   Plug 'tomasr/molokai'
   Plug 'jnurmine/zenburn'
 
-  " NERDTree - file explore
-  Plug 'preservim/nerdtree'
-  source ~/.config/vim/nerdtree.vim
+  if IsEnabled("nerdtree")
+    " NERDTree - file explore
+    Plug 'preservim/nerdtree'
+    source ~/.config/vim/nerdtree.vim
+  endif
 
   " fugitive - Git integration
   Plug 'tpope/vim-fugitive'
@@ -100,8 +102,12 @@ if g:config_level > 3
   if IsEnabled("polyglot") | Plug 'sheerun/vim-polyglot' | endif
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
   Plug 'preservim/nerdcommenter'
-  " NERDTree - show git changes
-  if g:config_level > 8 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
+  
+  if IsEnabled("nerdtree")
+    " NERDTree - show git changes
+    if g:config_level > 8 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
+  endif
+
   " gitgutter - Git change indicator to left of window
   Plug 'airblade/vim-gitgutter'
   let g:gitgutter_map_keys = 0
@@ -442,10 +448,7 @@ endif
 
 " source ~/.config/vim/netrw.vim
 
-if g:config_level > 3
-  "
-  " *** Scope : NERDTree ***
-  "
+if IsEnabled("nerdtree")
   let NERDTreeMinimalUI = 1
   let NERDTreeDirArrows = 1
   let NERDTreeAutoDeleteBuffer = 1
