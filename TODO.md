@@ -6,4 +6,3 @@
 - [ ] Upgrade brew cask on dotme <- how to handle some packages that need admin?
   Perhaps cherry pick casks that auto-update.
 - [ ] Report on outdated across all packaging tools
-- [ ] Enable jsx and tsx support - <https://github.com/MaxMEllon/vim-jsx-pretty>
