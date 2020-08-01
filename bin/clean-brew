@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+#
+# Clean brew packages
+#
+
+should-run -m 7 $0 || exit
+
+echo "Cleaning up brew caches"
+brew cleanup
+
+should-run -fu $0

@@ -16,10 +16,12 @@ function! s:auto_complete()
     return "\<TAB>"
   endif
   let has_period = match(substr, '\.') != -1
-  let has_slash = match(substr, '\/') != -1
-  if (!has_period && !has_slash)
+  " If substring has forward slash, but not preceded by a < (i.e. an XML close
+  " element, then we'll treat this a path
+  let is_path = match(substr, '\(<\)\@<!\/') != -1
+  if (!has_period && !is_path)
     return "\<C-X>\<C-P>"
-  elseif ( has_slash )
+  elseif ( is_path )
     " Use CompletePath from dotfiles fzf.vim
     return fzf#CompletePath()
   else

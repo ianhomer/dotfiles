@@ -8,13 +8,12 @@ endif
 
 " Leader is space
 let mapleader = "\<Space>"
-let maplocalleader = "\,"
+let maplocalleader = "\\"
 
 source ~/.config/vim/toggle.vim
 
 if g:config_level > 0
   filetype plugin on
-else
   filetype plugin off
 endif
 
@@ -38,9 +37,11 @@ if g:config_level > 0
   Plug 'tomasr/molokai'
   Plug 'jnurmine/zenburn'
 
-  " NERDTree - file explore
-  Plug 'preservim/nerdtree'
-  source ~/.config/vim/nerdtree.vim
+  if IsEnabled("nerdtree")
+    " NERDTree - file explore
+    Plug 'preservim/nerdtree'
+    source ~/.config/vim/nerdtree.vim
+  endif
 
   " fugitive - Git integration
   Plug 'tpope/vim-fugitive'
@@ -51,15 +52,16 @@ if g:config_level > 3
   "
   " Window and file management
   "
-
-  Plug 'ryanoasis/vim-devicons'
+  if IsEnabled("nerdtree") | Plug 'ryanoasis/vim-devicons' | endif
   " Vinegar - better file expore than NERD
   if g:config_level > 8 | Plug 'tpope/vim-vinegar' | endif
   " ack - Search files
   Plug 'mileszs/ack.vim'
-  " Airline - status bar
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
+  if IsEnabled("airline")
+    " Airline - status bar
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+  endif
   " editorconfig - Support standard editorconfig files
   if g:config_level > 6 | Plug 'editorconfig/editorconfig-vim' | endif
   " tmux - enable C-hjkl to move to across vim and tmux panes
@@ -88,7 +90,6 @@ if g:config_level > 3
   " endwise - auto close structure
   Plug 'tpope/vim-endwise'
 
-  nnoremap <silent> <leader>9s :call Toggle("syntastic")<CR>
   if IsEnabled("syntastic")
     Plug 'vim-syntastic/syntastic'
     let g:vim_jsx_pretty_colorful_config = 1
@@ -96,19 +97,32 @@ if g:config_level > 3
     Plug 'maxmellon/vim-jsx-pretty'
     source ~/.config/vim/syntastic.vim
   endif
+
+  if IsEnabled("ale")
+    Plug 'dense-analysis/ale'
+    source ~/.config/vim/ale.vim
+  endif
+
   " polyglot
   nnoremap <silent> <leader>9p :call Toggle("polyglot")<CR>
   if IsEnabled("polyglot") | Plug 'sheerun/vim-polyglot' | endif
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
   Plug 'preservim/nerdcommenter'
-  " NERDTree - show git changes
-  if g:config_level > 8 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
-  " gitgutter - Git change indicator to left of window
-  Plug 'airblade/vim-gitgutter'
+
+  if IsEnabled("nerdtree")
+    " NERDTree - show git changes
+    if g:config_level > 8 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
+  endif
+
+  if IsEnabled("gitgutter")
+    " gitgutter - Git change indicator to left of window
+    Plug 'airblade/vim-gitgutter'
+    let g:gitgutter_map_keys = 0
+    let g:gitgutter_highlight_linenrs = 1
+  endif
+
   " HTML
   if g:config_level > 8 | Plug 'mattn/emmet-vim' | endif
-  " Linting
-  if g:config_level > 8 | Plug 'dense-analysis/ale' | endif
   " Handy mappings
   if g:config_level > 8 | Plug 'tpope/vim-unimpaired' | endif
 
@@ -119,8 +133,10 @@ if g:config_level > 3
   Plug 'junegunn/goyo.vim'
   " markdown preview
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+  let g:mkdp_auto_close = 0
+  let g:mkdp_page_title = '${name}'
 endif
-  
+
 " CoC completion
 if IsEnabled("coc")
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -170,25 +186,6 @@ set clipboard=unnamed
 "
 source ~/.config/vim/modes.vim
 
-" Identify free leader mappings
-"
-nnoremap <silent> <leader>i :echo "i not mapped"<CR>
-nnoremap <silent> <leader>u :echo "u not mapped"<CR>
-nnoremap <silent> <leader>t :echo "t not mapped"<CR>
-nnoremap <silent> <leader>y :echo "y not mapped"<CR>
-
-" Thanks https://stackoverflow.com/questions/4545275/vim-close-all-buffers-but-this-one
-" This is better than the `%bd | e#` technique since it doesn't close the
-" current buffer at all. Closing the buffer and reopening file can trigger other
-" plugins that cause a slight delay
-function! CloseAllBuffersButCurrent()
-  let curr = bufnr("%")
-  let last = bufnr("$")
-
-  if curr > 1    | silent! execute "1,".(curr-1)."bd"     | endif
-  if curr < last | silent! execute (curr+1).",".last."bd" | endif
-endfunction
-
 " My shortcuts
 if g:config_level > 0
   nnoremap <silent> <leader><space> :Buffers<CR>
@@ -196,17 +193,14 @@ if g:config_level > 0
   nnoremap <silent> <leader>F :Files!<CR>
 
   " save all files
-  nnoremap <silent> <leader>s :wall<CR>
+  nnoremap <silent> <leader>s :silent! wall<CR>
   " reset things
   nnoremap <silent> <leader>z :noh<CR>
 
   " Hide all windows except the current one
   nnoremap <silent> <leader>O :only<CR>
-  " Close all buffers except the current one and reopen NERDTree
-  nnoremap <silent> <leader>o mA<CR>:NERDTreeClose<bar>wall<bar>:call CloseAllBuffersButCurrent()<bar>:NERDTree<bar>:wincmd p<CR>`Ak<CR>
 
-  " close all buffers
-  nnoremap <silent> <leader>x :bufdo bd<CR>
+  source ~/.config/vim/window-cleaner.vim
 
   " Start / stop profiling
   nnoremap <leader>.p :profile start ~/vim-performance.log<CR>:profile func*<CR>:profile file *<CR>
@@ -221,10 +215,10 @@ if g:config_level > 0
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
     if g:config_level > 3
-      nnoremap <silent> <leader>,j :execute 'NERDTree ~/projects/things'<CR>
-      nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+      nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
       nnoremap <silent> <leader>p :MarkdownPreview<CR>
+      nnoremap <silent> <leader>.m :!mind-map %:p<CR>
     endif
   endif
 
@@ -237,7 +231,7 @@ if exists('*which_key#register')
   " since which keys is lazily loaded
   let g:which_key_map =  {}
   let g:which_key_map.c = { 'name' : '...Commenter' }
-  let g:which_key_map.j = { 'name' : '...FZF search' }
+  let g:which_key_map.j = { 'name' : '...Thingity' }
   let g:which_key_map['k'] = { 'name' : '...Bookmarks' }
   let g:which_key_map[','] = { 'name' : '...Misc' }
   let g:which_key_map['.'] = { 'name' : '...Experimental' }
@@ -249,6 +243,11 @@ function! LintMe()
   if IsEnabled("coc")
     " Lint
     Format
+  elseif IsEnabled("ale")
+    ALEFix
+    if &filetype == "markdown"
+      normal magggqG`a
+    endif
   else
     if &filetype == "json"
       execute "%!jq ."
@@ -268,7 +267,7 @@ let g:config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
 let g:reload_config = "source ".g:config_file
 if !exists("*ReloadConfig")
   function! ReloadConfig()
-    wall
+    silent! wall
     exec g:reload_config
     call RestartConfig()
     let config_message = has('nvim') ? "neo init.vm" : ".vimrc"
@@ -309,7 +308,7 @@ function! TrimEndLines()
 endfunction
 
 if g:config_level > 2
-  nnoremap <leader>w :call PruneWhiteSpace()<CR><C-o>
+  nnoremap <leader>w ma:call PruneWhiteSpace()<CR>`a
 endif
 
 " Write all buffers before navigating from Vim to tmux pane
@@ -341,9 +340,8 @@ augroup dotme
   autocmd!
 
   if g:config_level > 0
-    "TODO : this should be typescriptreact and javascriptreact
-    autocmd bufnewfile,bufread *.jsx set filetype=javascript
-    autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+    autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+    autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
   endif
 
   if g:config_level > 2
@@ -354,21 +352,15 @@ augroup dotme
     autocmd InsertEnter,InsertLeave * set cul!
   endif
 
-  if g:config_level > 2
+  if IsEnabled("autosave")
     "
     " *** Scope : IO ***
     "
     " Auto reload when focus gained or buffer entered
-    autocmd FocusGained,BufEnter * :checktime
-  endif
+    autocmd FocusGained,WinEnter,BufEnter * :checktime
 
-  if g:config_level > 2
-    "
-    " *** Scope : Terminal ***
-    "
-    autocmd BufWinEnter,WinEnter,BufEnter *
-          \ if &buftype == 'terminal' | :startinsert | endif
-    " autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
+    " Auto write when saved
+    autocmd TextChanged,TextChangedI,TextChangedP * ++nested silent! write
   endif
 
   if g:config_level > 2
@@ -409,9 +401,12 @@ endif
 " *** Scope : IO ***
 "
 if g:config_level > 0
-  " Auto reload underlying file if it changes, although
-  " it only really reloads when external command run like :!ls
-  set autoread
+  if IsEnabled("autosave")
+    " Auto reload underlying file if it changes, although
+    " it only really reloads when external command run like :!ls
+    set autoread
+    set autowrite
+  endif
   " Allow hidden buffers without saving
   set hidden
   " No backups or backups during write
@@ -465,10 +460,7 @@ endif
 
 " source ~/.config/vim/netrw.vim
 
-if g:config_level > 3
-  "
-  " *** Scope : NERDTree ***
-  "
+if IsEnabled("nerdtree")
   let NERDTreeMinimalUI = 1
   let NERDTreeDirArrows = 1
   let NERDTreeAutoDeleteBuffer = 1

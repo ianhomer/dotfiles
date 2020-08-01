@@ -15,8 +15,6 @@ command! -bar -bang Maps
 command! -bar -bang MapsInsert
   \ call fzf#vim#maps("i", {'options': '--tiebreak=index'}, <bang>0)
 
-nnoremap <silent> <leader>,i :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
-
 let s:pop_rows = 10
 let s:pop_cols = 40
 
@@ -64,27 +62,12 @@ endfunction
 
 command! -nargs=* -bang Search call fzf#SearchWithRipGrep(<q-args>, <bang>0)
 
-nnoremap <silent> <leader>ja :Search<CR>
+nnoremap <silent> <leader>jj :Ag<CR>
+nnoremap <silent> <leader>jk :Ag<CR>'
+nnoremap <silent> <leader>jK :Ag!<CR>'
 
-function! s:Todo(query, fullscreen)
-  call fzf#vim#ag('\[ \]', {
-  \   'window': { 'width': 0.9, 'height': 0.9 },
-  \   'options': '--delimiter : --nth 4..'
-  \ })  
-endfunction
-
-command! -nargs=* -bang Todo call s:Todo(<q-args>, <bang>0)
-
-" coc
-nnoremap <silent> <leader>jj :Ag<CR>'
-nnoremap <silent> <leader>jJ :Ag!<CR>'
-" todos
-nnoremap <silent> <leader>jt :Todo<CR>
-nnoremap <silent> <leader>jT :Ag! \[\ \]<CR>
-" todos
-nnoremap <silent> <leader>jt :AgPopup \[\ \]<CR>
-
-" Make Ag match on just content, not including file path
+" Make Ag match on just content of file and not search on the 
+" not including file path name
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, 
   \  '-p ~/.dotfiles/config/ag/.ignore', {
@@ -101,9 +84,8 @@ command! -bang -nargs=* AgPopup
   \ <bang>0)
 
 " hidden
-command! -bar -bang AgHidden
+command! -bang -nargs=* AgHidden
   \ call fzf#vim#ag(<q-args>,'-m 0 --hidden --ignore .git', <bang>0)
-nnoremap <silent> <leader>jh :AgHidden<CR>
 
 nnoremap <silent> <leader>m :Maps<CR>
 nnoremap <silent> <leader>M :Maps!<CR>

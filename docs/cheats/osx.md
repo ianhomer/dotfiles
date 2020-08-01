@@ -20,7 +20,7 @@
 | `Ctrl+Fn+F3`          | Use dock with arrow keys                        |
 | `Ctrl+Fn+F2`          | Use menu with arrow keys                        |
 
-`Shift+Opt bluetooth -> debug`
+`Shift+Opt+ bluetooth -> debug`
 : Reset bluetooth
 
 See System Preferences -> Keyboard -> Shortcuts for details
