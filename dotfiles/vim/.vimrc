@@ -100,7 +100,7 @@ if g:config_level > 3
 
   if IsEnabled("ale")
     Plug 'dense-analysis/ale'
-    source ~/.config/vim/ale.vim 
+    source ~/.config/vim/ale.vim
   endif
 
   " polyglot
@@ -108,7 +108,7 @@ if g:config_level > 3
   if IsEnabled("polyglot") | Plug 'sheerun/vim-polyglot' | endif
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
   Plug 'preservim/nerdcommenter'
-  
+
   if IsEnabled("nerdtree")
     " NERDTree - show git changes
     if g:config_level > 8 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
@@ -243,6 +243,11 @@ function! LintMe()
   if IsEnabled("coc")
     " Lint
     Format
+  elseif IsEnabled("ale")
+    ALEFix
+    if &filetype == "markdown"
+      normal magggqG`a
+    endif
   else
     if &filetype == "json"
       execute "%!jq ."
