@@ -1,6 +1,5 @@
 # todo
 
-- [ ] Fix iterm window to front of screen
 - [ ] Surround leaders for bold double star, backtick wrap. If visual selection
   exists then wrap that otherwise wrap single word
 - [ ] Upgrade brew cask on dotme <- how to handle some packages that need admin?
