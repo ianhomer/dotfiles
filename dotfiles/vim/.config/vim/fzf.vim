@@ -62,9 +62,9 @@ endfunction
 
 command! -nargs=* -bang Search call fzf#SearchWithRipGrep(<q-args>, <bang>0)
 
-" coc
-nnoremap <silent> <leader>jj :Ag<CR>'
-nnoremap <silent> <leader>jJ :Ag!<CR>'
+nnoremap <silent> <leader>jj :Ag<CR>
+nnoremap <silent> <leader>jk :Ag<CR>'
+nnoremap <silent> <leader>jK :Ag!<CR>'
 
 " Make Ag match on just content of file and not search on the 
 " not including file path name
@@ -84,7 +84,7 @@ command! -bang -nargs=* AgPopup
   \ <bang>0)
 
 " hidden
-command! -bar -bang AgHidden
+command! -bang -nargs=* AgHidden
   \ call fzf#vim#ag(<q-args>,'-m 0 --hidden --ignore .git', <bang>0)
 
 nnoremap <silent> <leader>m :Maps<CR>

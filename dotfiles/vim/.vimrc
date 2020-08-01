@@ -179,7 +179,7 @@ if g:config_level > 0
   nnoremap <silent> <leader>F :Files!<CR>
 
   " save all files
-  nnoremap <silent> <leader>s :wall<CR>
+  nnoremap <silent> <leader>s :silent! wall<CR>
   " reset things
   nnoremap <silent> <leader>z :noh<CR>
 
