@@ -22,7 +22,7 @@ fi
 
 OPTIND=1
 while getopts "c:v" o; do case "$o" in
-  c) context=$OPTARG ;;
+  c) context=$OPTARG ;; # context of repository
   v) verbose="y" ;;
 esac done
 
@@ -62,9 +62,16 @@ function setMyGitUrl {
     fi
   else
     [[ "${verbose}" == "y" ]] && echo "current remote   $currentRemoteUrl"
-    echo "    aok remote"
+    printf "\e[36mremote \e[1mAOK\e[0m\n"
   fi
 }
 
 setMyGitUrl
+
+# Clear authentication agent
+
+[[ -n "${verbose}" ]] && echo "deleting identites from SSH agent"
+ssh-add -q -D
+
+[[ -n "${verbose}" ]] && ssh-add -l
 
