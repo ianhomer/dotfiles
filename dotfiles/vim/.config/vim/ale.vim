@@ -7,6 +7,8 @@ let g:ale_fixers = {
   \   'javascript': ['eslint'],
   \}
 
+let g:ale_jq_use_global = 1
+
 let g:ale_sign_error = '❕'
 let g:ale_sign_warning = '❔'
 
