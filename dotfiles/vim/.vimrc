@@ -8,7 +8,7 @@ endif
 
 " Leader is space
 let mapleader = "\<Space>"
-let maplocalleader = "\,"
+let maplocalleader = "\\"
 
 source ~/.config/vim/toggle.vim
 
@@ -203,7 +203,7 @@ if g:config_level > 0
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
     if g:config_level > 3
-      nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+      nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
       nnoremap <silent> <leader>p :MarkdownPreview<CR>
       nnoremap <silent> <leader>.m :!mind-map %:p<CR>
