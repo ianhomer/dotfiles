@@ -185,9 +185,6 @@ if g:config_level > 0
  
   source ~/.config/vim/window-cleaner.vim
 
-  " close all buffers
-  nnoremap <silent> <leader>x :bufdo bd<CR>
-
   " Start / stop profiling
   nnoremap <leader>.p :profile start ~/vim-performance.log<CR>:profile func*<CR>:profile file *<CR>
   nnoremap <leader>.o :profile stop<CR>
