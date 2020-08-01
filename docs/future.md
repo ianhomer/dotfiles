@@ -1,6 +1,6 @@
 # future
 
-A few areas are on my mind to improve. These are simply background hobby
+These areas are on my mind to improve. These are background hobby
 investigations.
 
 ## keyboard configuration

@@ -244,15 +244,9 @@ function! LintMe()
     " Lint
     Format
   elseif IsEnabled("ale")
-    if &filetype == "Xjson"
-      normal ma
-      execute "%!jq ."
-      normal `a
-    else
-      ALEFix
-      if &filetype == "markdown"
-        normal magggqG`a
-      endif
+    ALEFix
+    if &filetype == "markdown"
+      normal magggqG`a
     endif
   else
     if &filetype == "json"
