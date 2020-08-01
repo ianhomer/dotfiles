@@ -1,5 +1,21 @@
 " Insert time stamp - as markdown header
 function! s:ThingityDateHeading()
+  normal ma
+  " Insert line before if previous line is not empty
+  if getline(line('.') - 1) =~ '[^\s]'
+    execute "normal mbO\<ESC>`b"
+  endif
+
+  execute "normal! I".<SID>GetThingityDateHeading()."\<CR>"
+  " Insert line after if next line is not empty
+  if getline('.') =~ '[^\s]'
+    execute "normal mbO\<ESC>`b"
+  endif
+
+  normal `a
+endfunction
+
+function! s:GetThingityDateHeading()
   " Top level heading if first line
   let heading = line('.') == 1 ? "# " : "## "
   return heading . toupper(strftime("%a %d %b %Y"))
@@ -69,7 +85,7 @@ function! s:ThingityNewThing()
   endif
   close
   execute "e ".thingName
-  execute "normal! a".<SID>ThingityDateHeading().headingExtra."\<ESC>2o\<ESC>"
+  execute "normal! a".<SID>GetThingityDateHeading().headingExtra."\<ESC>2o\<ESC>"
   write
   NERDTreeFind
   wincmd p
@@ -103,7 +119,7 @@ function! s:ThingityArchive()
   endfor
 endfunction
 
-nnoremap <silent> <leader>jd "=<SID>ThingityDateHeading()<CR>po<ESC>o<ESC>
+nnoremap <silent> <leader>jd :call <SID>ThingityDateHeading()<CR>
 nnoremap <silent> <leader>jn :call <SID>ThingityNewThing()<CR>
 nnoremap <silent> <leader>ja :call <SID>ThingityArchive()<CR>
 
