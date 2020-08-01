@@ -1,0 +1,79 @@
+#!/usr/bin/env bash
+#
+# Check if script has run since file updated. This can help to optimise
+# the running of scripts that only need to run if the contents of the
+# script have changed
+#
+
+OPTIND=1
+while getopts "cflnsuv" o; do case "$o" in
+  c) clean="y" ;;    # Clean should run cache
+  f) force="y" ;;    # Force should run
+  l) list="y" ;;     # List should run files
+  n) noop="y" ;;     # No operation
+  s) silent="y" ;;   # Don't output message indicating what's done
+  u) update="y" ;;   # Update should run file
+  v) verbose="y" ;;  # Verbose output
+esac done
+
+shouldRunDir=~/.config/dotme/should-run
+[[ -n "$verbose" ]] && echo "Should run dir : $shouldRunDir"
+
+[[ -n "$list" ]] && noop="y" && \
+  ls -lt $shouldRunDir | awk '{$1=$2=$3=$4=$5=""; print $0}'
+
+if [[ -n "$clean" ]] ; then
+  noop="y"
+  if [[ -d $shouldRunDir ]] ; then
+    echo "Cleaning should run files in $shouldRunDir"
+    rm $shouldRunDir/last-run-*
+  else
+    echo "Directory $shouldRunDir does not exist, nothing to clean"
+  fi
+fi
+
+[[ -n "$noop" ]] && exit
+
+shift $((OPTIND-1))
+[ "${1:-}" = "--" ] && shift
+scriptName=${1:-"should-run"}
+scriptName=${scriptName##*/}
+
+[[ -n "$verbose" ]] && echo "Script : $scriptName"
+
+shouldRunFile=${shouldRunDir}/last-run-${scriptName}
+shouldRun=0
+
+#
+# Check whether script should run
+#
+if [[ -z "$force" ]] && [[ -f "$shouldRunFile" ]] ; then
+  fullScriptName=`which $scriptName`
+  [[ -z "$fullScriptName" ]] && \
+    echo "Cannot find scipt $scriptName to check whether it should run" && \
+    exit 1
+  [[ -n "$verbose" ]] && echo "Full script name : $fullScriptName"
+
+  if [[ $fullScriptName -nt $shouldRunFile ]] ; then
+    shouldRun=1
+  fi
+else
+  shouldRun=1
+fi
+
+[[ -n "$verbose" ]] && echo "Should run : $shouldRun"
+
+#
+# Update the should run file
+#
+if [[ "$update" == "y" ]] && [[ $shouldRun -eq 1 ]] ; then
+  [[ -n "$verbose" ]] && echo "Updating should run file : $shouldRunFile"
+  [[ ! -d $shouldRunDir ]] && mkdir -p $shouldRunDir
+  touch $shouldRunFile
+fi
+
+if [[ $shouldRun -eq 0 ]] ; then
+  [[ -z "$silent" ]] && \
+    echo "Skipping $scriptName since not changed since last run"
+  exit 1
+fi

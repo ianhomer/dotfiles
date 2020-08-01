@@ -112,7 +112,7 @@ command_install() {
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-jenv
   [ $DRY -eq 0 ] && dotme-fish
   [ $DRY -eq 0 ] && dotme-fisher
-  [ $QUICK -eq 0 ]&& command_clean
+  [ $QUICK -eq 0 ] && command_clean
   echo "... dotfiles installed and AOK"
 }
 

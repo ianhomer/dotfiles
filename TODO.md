@@ -11,8 +11,3 @@
   Perhaps cherry pick casks that auto-update.
 - [ ] Report on outdated across all packaging tools.
 - [ ] Enable jsx and tsx support - <https://github.com/MaxMEllon/vim-jsx-pretty>
-- [ ] Only run some scripts, e.g dotme-osx-defaults, if (1) file(s) changed since
-  last run (2) hasn't run for a while, (3) full install run again. Need a cache
-  of when each run.
-
-(Test Change)
