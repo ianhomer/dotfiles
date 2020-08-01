@@ -4,6 +4,8 @@
 # Install jenv versions
 #
 
+should-run $0 || exit
+
 jenv doctor
 for jdk in /Library/Java/JavaVirtualMachines/*/Contents/Home ; do
   echo "JDK installed : $jdk"
@@ -13,4 +15,6 @@ done
 
 echo "JDKs registered with jenv"
 jenv versions
+
+should-run -fu $0
 

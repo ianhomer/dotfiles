@@ -50,13 +50,14 @@
 
 ### misc
 
-|                            |                        |
-| --                         | --                     |
-| `Ctrl+a+t`                 | show time              |
-| `Ctrl+a+Ctrl-r`            | reload tmux state      |
-| `Ctrl+a+space`             | toggle between layouts |
-| `tmux ls`                  | list sessions          |
-| `tmux attach -tmy-session` | attach to session      |
+|                            |                           |
+| --                         | --                        |
+| `Ctrl+a+t`                 | show time                 |
+| `Ctrl+a+r`                 | reload tmux configuration |
+| `Ctrl+a+Ctrl+r`            | reload tmux state         |
+| `Ctrl+a+space`             | toggle between layouts    |
+| `tmux ls`                  | list sessions             |
+| `tmux attach -tmy-session` | attach to session         |
 
 hold option + mouse
 : bypass tmux mouse handling and do iterm action

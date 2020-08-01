@@ -9,6 +9,8 @@
 # since npx will normally be preferred.
 #
 
+should-run -m 14 $0 || exit
+
 #
 # Set up nvm
 #
@@ -32,3 +34,5 @@ npm -g update
 
 echo
 echo "... Global node packages installed"
+
+should-run -fu $0

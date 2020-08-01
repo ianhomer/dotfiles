@@ -97,10 +97,10 @@ command_help() {
 # Main entry point for installing dotfiles, and more, for a system.
 #
 command_install() {
-  echo "Installing dotfiles ..."
+  printf "\e[36mInstalling dotfiles\e[0m\n"
   [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
   command_pull
-  command_packages
+  [ $QUICK -eq 0 ] && command_packages
   command_stow
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && is-macos && dotme-osx-defaults
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-omf
@@ -108,21 +108,23 @@ command_install() {
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-gem
   [ $DRY -eq 0 ] && dotme-vim
   [ $DRY -eq 0 ] && dotme-tmux
-  [ $DRY -eq 0 ] && dotme-node
+  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-node
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-jenv
   [ $DRY -eq 0 ] && dotme-fish
   [ $DRY -eq 0 ] && dotme-fisher
-  command_clean
-  echo "... dotfiles installed and AOK"
+  [ $QUICK -eq 0 ] && command_clean
+  printf "\e[36mdotfiles installed and \e[1mAOK\e[0m\n"
 }
 
 #
 # Pull latest version of dotfiles
 #
 command_pull() {
-  echo "... pulling latest version of dotfiles"
+  printf "\e[36mpulling latest version of dotfiles\e[0m\n"
   cd $REPOSITORY_DIR
+  printf "\e[35m"
   [ $DRY -eq 0 ] && git pull
+  printf "\e[0m"
 }
 
 command_packages() {
@@ -137,7 +139,7 @@ command_packages() {
 
 # Just stow dotfiles, quicker than a full install.
 command_stow() {
-  echo "... stowing dotfiles"
+  printf "\e[36mstowing dotfiles\e[0\n"
   cd $DOTFILES_DIR
   for DIR in `ls -d */` ; do
     cd $DOTFILES_DIR/$DIR
@@ -164,8 +166,7 @@ command_update() {
 
 # Housekeeping and keeping things clean.
 command_clean() {
-  echo "Cleaning up caches"
-  brew cleanup
+  clean-brew
 }
 
 # Unistall dotfiles. Note that this does not (at this time), unstill brew

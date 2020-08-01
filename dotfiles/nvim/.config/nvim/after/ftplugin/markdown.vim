@@ -3,15 +3,40 @@ if g:config_level < 2
 endif
 
 function! s:LintTable()
+  let l:line = line('.')
+  
+  " Skip if not a table
+  if getline(l:line) !~ '|'
+    return
+  endif
+
+  " Add heading to table if not already there
+  " First check if next line is the header marker (in case we're on the 
+  " first line of the table
+  let l:foundTableHeader = getline(l:line+1) =~ '--'
+  " Then scan back for the header marker
+  while l:line > -1
+    if getline(l:line) !~ '[^\s]' | break | endif
+    if getline(l:line) =~ '--'
+      let l:foundTableHeader = 1
+      break
+    endif
+    let l:line -=1
+  endwhile
+  if !l:foundTableHeader
+    call s:AddTableHeader()
+  endif
   echo "Linting markdown table"
   Tabularize/|/l1
+endfunction
+
+function! s:AddTableHeader()
+  execute "normal! {j0i\|\|\|\<CR>\|--\|--\|\<CR>\<ESC>"
 endfunction
 
 nnoremap <buffer> <silent> <leader>t :call <SID>LintTable()<CR>
 " Auto lint when typing | in insert mode
 inoremap <buffer> <silent> <Bar> <Bar><Esc>:call <SID>LintTable()<CR>$a
-" Add table header (TODO - try to do this as part of the LintTable function if necessary)
-nnoremap <buffer> <silent> <leader>y {j0i\|\|\|<CR>\|--\|--\|<CR><ESC>:call <SID>LintTable()<CR>
 
 " The rest of this filetype plugin is not relevant if we're using CoC
 if IsEnabled("coc")

@@ -29,11 +29,6 @@ function fish_right_prompt
   #intentionally left blank
 end
 
-function git-reset-ssh-key
-  ssh-add -D
-  ssh-add -l
-end
-
 function git-commit-and-push
   git commit -am "$argv"
   git push

@@ -18,28 +18,28 @@
 
 ## Magnet
 
-**Ctrl+Alt+return**
+**Ctrl+Opt+return**
 : Full screen
 
-**Ctrl+Alt+left**
+**Ctrl+Opt+left**
 : Window to left half
 
-**Ctrl+Alt+right**
+**Ctrl+Opt+right**
 : Window to right half
 
-**Ctrl+Alt+up**
+**Ctrl+Opt+up**
 : Window to top half
 
-**Ctrl+Alt+down**
+**Ctrl+Opt+down**
 : Window to bottom half
 
-**Ctrl+Alt+uijk**
+**Ctrl+Opt+uijk**
 : Quarter screen
 
-**Ctrl+Alt+deftg**
+**Ctrl+Opt+deftg**
 : Thirds
 
-**Ctrl+Cmd+back**
+**Ctrl+Opt+back**
 : Back to manually set screen size
 
 ## iterm
@@ -58,8 +58,8 @@
 
 ## git
 
-**git-set-personal-url**
-: set the repository to push with personal credentials
+**git-remote-fix**
+: Fix git remote, e.g. use personal context, use SSH, reset SSH keys
 
 ## Document conversions
 

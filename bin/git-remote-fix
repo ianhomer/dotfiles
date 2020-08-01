@@ -1,0 +1,77 @@
+#!/bin/bash
+
+#
+# Set up repository for a specific user context. This covers alternative
+# remote orgin URLs for different user contexts, ensures SSH used,
+# resets SSH keys ... any things I tend do to get a repository hooked up
+# right.
+#
+
+#
+# If "personal" host is set up in .ssh config them that's the
+# default context, otherwise the default context is empty.
+# Normally I'll have a personal context set up on alternative machines,
+# however on personal machines then I'll only have personal set up.
+#
+if [[ $(grep "Host" ~/.ssh/config | grep "personal" | wc -l) -gt 0 ]]
+then
+  context="personal"
+else
+  context=""
+fi
+
+OPTIND=1
+while getopts "c:v" o; do case "$o" in
+  c) context=$OPTARG ;; # context of repository
+  v) verbose="y" ;;
+esac done
+
+shift $((OPTIND-1))
+[ "${1:-}" = "--" ] && shift
+action=${1:-show}
+
+function setMyGitUrl {
+  currentRemoteUrl=$(git config --get remote.origin.url)
+  case $currentRemoteUrl in
+    *github.com*)    host="github.com"    ;;
+    *bitbucket.org*) host="bitbucket.org" ;;
+    *)
+      echo "Host for current remote URL not recognised"
+      exit 1
+      ;;
+  esac
+
+  [[ -n "${context}" ]] && postFix="-${context}"
+
+  if [[ "github.com" == "${host}" ]] ; then
+    # Always use SSH for github
+    myRemoteUrl=${currentRemoteUrl/https:\/\/github\.com\//git@github.com:}
+  else
+    myRemoteUrl=${currentRemoteUrl}
+  fi
+  myRemoteUrl=${myRemoteUrl/${host}/${host}${postFix}}
+
+  if [ ${currentRemoteUrl} != ${myRemoteUrl} ] ; then
+    echo "current remote   $currentRemoteUrl"
+    echo "desired remote   ${myRemoteUrl}"
+    if [[ ${action} == "change" ]] ; then
+      git remote set-url origin $myRemoteUrl
+      echo "changed remote to "$(git config --get remote.origin.url)
+    else
+      echo " change remote with \"change\" action"
+    fi
+  else
+    [[ "${verbose}" == "y" ]] && echo "current remote   $currentRemoteUrl"
+    printf "\e[36mremote \e[1mAOK\e[0m\n"
+  fi
+}
+
+setMyGitUrl
+
+# Clear authentication agent
+
+[[ -n "${verbose}" ]] && echo "deleting identites from SSH agent"
+ssh-add -q -D
+
+[[ -n "${verbose}" ]] && ssh-add -l
+

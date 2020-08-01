@@ -1,0 +1,32 @@
+#!/bin/bash
+
+help() {
+  echo "Geneate mind maps from markdown"
+  exit
+}
+
+outDir="$HOME/tmp/mind-maps"
+
+OPTIND=1
+while getopts "ho:v" o; do case "$o" in
+  h) help ;;
+  o) outDir=$OPTARG ;;
+  v) verbose="y" ;;
+esac done
+
+shift $((OPTIND-1))
+[ "${1:-}" = "--" ] && shift
+file=${1:-README.md}
+
+if [[ "$verbose" == "y" ]] ; then
+  echo "File          : ${file}"
+  echo "Out Directory : ${outDir}"
+fi
+
+[[ ! -d $outDir ]] && mkdir $outDir
+
+# Gnerate mind maps from markdown
+
+npx markmap-lib -o $outDir/mind-map.html $file
+
+

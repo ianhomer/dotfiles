@@ -1,0 +1,144 @@
+#!/usr/bin/env bash
+#
+# Check if script has run since file updated. This can help to optimise
+# the running of scripts that only need to run if the contents of the
+# script have changed
+#
+
+OPTIND=1
+while getopts "cfhlnm:suv" o; do case "$o" in
+  c) clean="y" ;;    # Clean should run cache
+  f) force="y" ;;    # Force should run
+  h) help="y" ;; 
+  l) list="y" ;;     # List should run files
+  n) noop="y" ;;     # No operation
+  m) modified=$OPTARG ;; # Expiry time of should run file
+  s) silent="y" ;;   # Don't output message indicating what's done
+  u) update="y" ;;   # Update should run file
+  v) verbose="y" ;;  # Verbose output
+esac done
+
+shouldRunDir=~/.config/dotme/should-run
+[[ -n "$verbose" ]] && echo "Should run dir : $shouldRunDir"
+
+if [[ -n "$help" ]] ; then
+  noop="y"
+  cat <<EOF
+Usage
+
+Check if script needs to run 
+
+  should-run $0 || exit
+
+Check if script needs to run, with expiry
+
+  should-run -m 1 $0  || exit  # 1 day
+  should-run -m 1h $0 || exit  # 1 hour
+
+At end of script indicate that the script has run
+
+  should-run -fu $0
+
+Clean up run cache, forcing everything to be re-run
+
+  should-run -c
+
+EOF
+fi
+
+[[ -n "$list" ]] && noop="y" && \
+  ls -lt $shouldRunDir | awk '{$1=$2=$3=$4=$5=""; print $0}'
+
+if [[ -n "$clean" ]] ; then
+  noop="y"
+  if [[ -d $shouldRunDir ]] ; then
+    echo "Cleaning should run files in $shouldRunDir"
+    rm $shouldRunDir/last-run-*
+  else
+    echo "Directory $shouldRunDir does not exist, nothing to clean"
+  fi
+fi
+
+[[ -n "$noop" ]] && exit
+
+shift $((OPTIND-1))
+[ "${1:-}" = "--" ] && shift
+scriptName=${1##*/}
+shift
+otherFiles=$*
+
+if [[ -z "$scriptName" ]] ; then
+  printf "\e[33mPlease pass script name in as argument to \e[1m${0##*/}\e[0m\n"
+  exit 1
+fi
+
+[[ -n "$verbose" ]] && echo "Script : $scriptName"
+[[ -n "$verbose" ]] && [[ -n "${otherFiles}" ]] && \
+  echo "Other files : $otherFiles"
+
+shouldRunFile=${shouldRunDir}/last-run-${scriptName}
+shouldRun=0
+
+#
+# Check whether script should run
+#
+if [[ -z "$force" ]] && [[ -f "$shouldRunFile" ]] ; then
+  fullScriptName=`which $scriptName`
+  [[ -z "$fullScriptName" ]] && \
+    echo "Cannot find scipt $scriptName to check whether it should run" && \
+    exit 1
+  [[ -n "$verbose" ]] && echo "Full script name : $fullScriptName"
+
+  if [[ $fullScriptName -nt $shouldRunFile ]] ; then
+    shouldRun=1
+  fi
+
+  # Compare against any other files provided
+  if [[ $shouldRun -eq 0 ]] && [[ -n "$otherFiles" ]] ; then
+    for file in $otherFiles ; do
+      [[ $file -nt $shouldRunFile ]] && shouldRun=1
+    done
+  fi
+
+  if [[ $shouldRun -eq 0 ]] ; then
+    if [[ -n "$modified" ]] ; then
+      [[ -n "$verbose" ]] && echo "Checking modified $modified"
+      if [[ $(find "$shouldRunFile" -mtime +${modified} -print) ]]; then
+        shouldRun=1
+        [[ -n "$verbose" ]] && echo "Should run expired, older than ${modified}"
+      fi
+    fi
+  fi
+else
+  shouldRun=1
+fi
+
+[[ -n "$verbose" ]] && echo "Should run : $shouldRun"
+
+#
+# Update the should run file
+#
+if [[ "$update" == "y" ]] && [[ $shouldRun -eq 1 ]] ; then
+  [[ -n "$verbose" ]] && echo "Updating should run file : $shouldRunFile"
+  [[ ! -d $shouldRunDir ]] && mkdir -p $shouldRunDir
+  touch $shouldRunFile
+fi
+
+if [[ $shouldRun -eq 0 ]] ; then
+  if [[ -n "$modified" ]] ; then
+    notChangedMessage="already ran in last"
+    if [[ "$modified" == "1" ]]; then
+      notChangedMessage="$notChangedMessage day"
+    elif [[ "$modified" =~ ^[0-9]+$ ]] ; then
+      notChangedMessage="$notChangedMessage $modified days"
+    else
+      notChangedMessage="$notChangedMessage $modified"
+    fi
+  else
+    notChangedMessage="not changed since last run"
+  fi
+  [[ -z "$silent" ]] && \
+    printf "\e[37mskipping \e[1m%-20s\e[0;37m %s\e[0m\n" \
+      "$scriptName" "$notChangedMessage"
+  exit 1
+fi

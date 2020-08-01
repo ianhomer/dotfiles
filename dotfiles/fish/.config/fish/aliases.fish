@@ -11,6 +11,9 @@ else
   alias master="git checkout master && git pull"
   alias push="git push"
   alias pull="git pull"
+  alias branch="git branch"
+  alias checkout="git checkout"
+  alias branch-and-checkout="git checkout -b"
   alias g="git"
   alias git-commit-am="git commit -am"
   alias gs="git status"
@@ -42,7 +45,7 @@ else
   # cat markdown files with a space between each
   alias catmd="findmd | xargs awk '(NR>1 && FNR==1){printf (\"\n\")};1'"
 
-
   [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
     echo "... Loaded ~/.config/fish/aliases.fish"
+
 end
