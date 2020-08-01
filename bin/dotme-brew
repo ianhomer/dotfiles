@@ -4,10 +4,11 @@
 # Install brew packages
 #
 
-should-run -m 7 $0 || exit
-
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 PATH=${SCRIPT_DIR}:${PATH}
+BREW_DIR=$SCRIPT_DIR/../config/brew
+
+should-run -m 7 $0 $BREW_DIR/Brewfile || exit
 
 if ! is-executable brew ; then
   echo "... installing brew"

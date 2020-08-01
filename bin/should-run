@@ -64,6 +64,8 @@ fi
 shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
 scriptName=${1##*/}
+shift
+otherFiles=$*
 
 if [[ -z "$scriptName" ]] ; then
   printf "\e[33mPlease pass script name in as argument to \e[1m${0##*/}\e[0m\n"
@@ -71,6 +73,8 @@ if [[ -z "$scriptName" ]] ; then
 fi
 
 [[ -n "$verbose" ]] && echo "Script : $scriptName"
+[[ -n "$verbose" ]] && [[ -n "${otherFiles}" ]] && \
+  echo "Other files : $otherFiles"
 
 shouldRunFile=${shouldRunDir}/last-run-${scriptName}
 shouldRun=0
@@ -87,7 +91,16 @@ if [[ -z "$force" ]] && [[ -f "$shouldRunFile" ]] ; then
 
   if [[ $fullScriptName -nt $shouldRunFile ]] ; then
     shouldRun=1
-  else
+  fi
+
+  # Compare against any other files provided
+  if [[ $shouldRun -eq 0 ]] && [[ -n "$otherFiles" ]] ; then
+    for file in $otherFiles ; do
+      [[ $file -nt $shouldRunFile ]] && shouldRun=1
+    done
+  fi
+
+  if [[ $shouldRun -eq 0 ]] ; then
     if [[ -n "$modified" ]] ; then
       [[ -n "$verbose" ]] && echo "Checking modified $modified"
       if [[ $(find "$shouldRunFile" -mtime +${modified} -print) ]]; then
