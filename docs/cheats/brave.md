@@ -2,15 +2,15 @@
 
 ## Brave
 
-|                         |                                |
-| --                      | --                             |
-| `Cmd+l`                 | Jump to address bar            |
-| `Option+Cmd` left/right | Go to previous/next tab        |
-| `Cmd+w`                 | Close tab                      |
-| `Option+Cmd b`          | Open bookmarks                 |
-| `Ctrl+Tab`              | Forward to next tab            |
-| `Shift+Ctrl+Tab`        | Back to previous tab           |
-| `Shift+Fn+Delete`       | Delete suggestion from URL bar |
+|                      |                                |
+| --                   | --                             |
+| `Cmd+l`              | Jump to address bar            |
+| `Opt+Cmd+left/right` | Go to previous/next tab        |
+| `Cmd+w`              | Close tab                      |
+| `Opt+Cmd+b`          | Open bookmarks                 |
+| `Ctrl+Tab`           | Forward to next tab            |
+| `Shift+Ctrl+Tab`     | Back to previous tab           |
+| `Shift+Fn+Delete`    | Delete suggestion from URL bar |
 
 ### Surfkeys
 

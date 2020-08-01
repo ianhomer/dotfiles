@@ -53,7 +53,7 @@
 |                            |                        |
 | --                         | --                     |
 | `Ctrl+a+t`                 | show time              |
-| `Ctrl+a+Ctrl-r`            | reload tmux state      |
+| `Ctrl+a+Ctrl+r`            | reload tmux state      |
 | `Ctrl+a+space`             | toggle between layouts |
 | `tmux ls`                  | list sessions          |
 | `tmux attach -tmy-session` | attach to session      |

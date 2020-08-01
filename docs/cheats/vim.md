@@ -33,11 +33,11 @@
 | `gx`                  | open link in browser           |
 | `gt`                  | go to next tab                 |
 | `tabe`                | open file in new tab           |
-| `m` + letter          | set mark                       |
-| `'` + letter          | go to mark                     |
+| `m + letter`          | set mark                       |
+| `' + letter`          | go to mark                     |
 | `Ctrl+^`              | switch to previous buffer      |
-| `:tab h whatever`     | open help in a new tab         |
-| `Ctrl-w o`            | make pane the only visible one |
+| `:tab h foo`          | open help in a new tab         |
+| `Ctrl+w o`            | make pane the only visible one |
 | `:noh`                | clear last highlight           |
 | `"add`                | Delete line into registry a    |
 | `"ap`                 | Paste line from registry a     |
@@ -81,21 +81,21 @@
 
 ### motion
 
-|             |                                            |
-| --          | --                                         |
-| `0`         | beginning of line                          |
-| `\$`        | end of line                                |
-| `}`         | next block                                 |
-| `{`         | previous block                             |
-| `[[`        | next header                                |
-| `]]`        | previous header                            |
-| `:nn`       | line nn                                    |
-| `gg`        | beginning of file                          |
-| `GG`        | end of file                                |
-| `percent %` | next / previous bracket                    |
-| `,star`     | search for word under cursor               |
-| `Ctrl+o`    | Jump to previous cursor postion (jumplist) |
-| `Ctrl+i`    | Jump to next cursor position (jumplist)    |
+|             |                                                 |
+| --          | --                                              |
+| `0`         | beginning of line                               |
+| `\$`        | end of line                                     |
+| `}`         | next block                                      |
+| `{`         | previous block                                  |
+| `[[`        | next header                                     |
+| `]]`        | previous header                                 |
+| `:nn`       | line nn                                         |
+| `gg`        | beginning of file                               |
+| `GG`        | end of file                                     |
+| `percent %` | next / previous bracket                         |
+| `*`         | Search for next occurrence of word under cursor |
+| `Ctrl+o`    | Jump to previous cursor position (jumplist)     |
+| `Ctrl+i`    | Jump to next cursor position (jumplist)         |
 
 ### windows
 
@@ -123,7 +123,6 @@
 | `space+d`        | Open CoC diagnostics                            |
 | `:nu`            | Show line numbers                               |
 | `:set rnu`       | Show relative line numbers                      |
-| `star`           | Search for next occurrence of word under cursor |
 | `space+w`        | Clear white space at end of lines               |
 | `yaf`            | Yank all file                                   |
 
@@ -191,3 +190,10 @@
 | --        | --                         |
 | `space+p` | Toggle power configuration |
 | `space+v` | Reload vim configuration   |
+
+### fzf
+
+|          |                          |
+| --       | --                       |
+| `Ctrl+x` | Open in horizontal split |
+| `Ctrl+v` | Open in vertical split   |
