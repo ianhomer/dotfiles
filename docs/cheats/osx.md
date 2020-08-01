@@ -1,3 +1,5 @@
+# OSX Cheats
+
 ## OSX
 
 ### Windows
@@ -7,7 +9,7 @@
 | `Ctrl+Cmd+click+drag` | Move Window                                     |
 | `Ctrl+Cmd+space`      | Open special character window                   |
 | `Cmd+Tab`             | Switch Application. Shift reverses.             |
-| **Cmd+`**             | Switch between windows in app. Shift reverses.  |
+| **Cmd+backtick**      | Switch between windows in app. Shift reverses.  |
 | `Ctrl+Tab`            | Cycle through tabs in a window. Shift reverses. |
 | `Cmd+h`               | Hide window                                     |
 | `Cmd+c`               | Copy                                            |
@@ -19,6 +21,7 @@
 | `Cmd+Alt+d`           | Show or hide dock                               |
 | `Ctrl+Fn+F3`          | Use dock with arrow keys                        |
 | `Ctrl+Fn+F2`          | Use menu with arrow keys                        |
+| `Cmd+j`               | iterm window to front                           |
 
 `Shift+Opt+ bluetooth -> debug`
 : Reset bluetooth
@@ -33,4 +36,4 @@ See System Preferences -> Keyboard -> Shortcuts for details
 
 ## Links
 
-https://duckduckgo.com/?q=mac+shortcuts&t=brave&ia=cheatsheet&iax=1
+<https://duckduckgo.com/?q=mac+shortcuts&t=brave&ia=cheatsheet&iax=1>

@@ -50,7 +50,7 @@
 **git open**
 : Open git repository in web browser
 
-**z my-dir <tab>**
+`z my-dir <tab>`
 : find recently opened folder (using fasd)
 
 **z**
@@ -65,5 +65,3 @@
 
 **pandoc README.md -s -o ~/tmp/test.pdf**
 : convert markdown file to PDF
-
-

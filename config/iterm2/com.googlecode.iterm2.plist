@@ -477,8 +477,16 @@
 	<integer>4</integer>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
+	<key>NSColorPanelMode</key>
+	<string>6</string>
+	<key>NSColorPanelMode.modal</key>
+	<integer>6</integer>
+	<key>NSColorPanelToolbarIsShown.modal</key>
+	<integer>1</integer>
+	<key>NSColorPanelVisibleSwatchRows.modal</key>
+	<integer>2</integer>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Desktop</string>
+	<string>~/projects/opensource/gruvbox-contrib/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{799, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -522,18 +530,22 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame NSColorPanel</key>
+	<string>0 83 224 275 0 0 1680 922 </string>
+	<key>NSWindow Frame NSColorPanel.modal</key>
+	<string>728 509 224 275 0 0 1680 922 </string>
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
-	<string>1272 300 799 448 0 0 2560 1417 </string>
+	<string>624 510 799 448 0 0 2048 1129 </string>
+	<key>NSWindow Frame ProfilesPanel</key>
+	<string>499 301 735 382 0 0 2048 1152 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>324 224 1146 568 0 0 1920 1057 </string>
+	<string>333 178 1146 568 0 0 1680 922 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>324 402 1146 568 0 0 1920 1057 </string>
+	<string>276 178 1146 568 0 0 1680 922 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>480 369 957 531 0 0 1440 900 </string>
+	<string>961 111 570 379 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>480 9 957 531 0 0 1440 900 </string>
-	<key>NSWindow Frame iTerm Window 4</key>
-	<string>302 421 572 377 0 0 1440 900 </string>
+	<string>308 81 572 331 0 0 2048 1152 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -909,11 +921,11 @@
 			<key>HotKey Alternate Shortcuts</key>
 			<array/>
 			<key>HotKey Characters</key>
-			<string>y</string>
+			<string>j</string>
 			<key>HotKey Characters Ignoring Modifiers</key>
-			<string>y</string>
+			<string>j</string>
 			<key>HotKey Key Code</key>
-			<integer>16</integer>
+			<integer>38</integer>
 			<key>HotKey Modifier Activation</key>
 			<integer>0</integer>
 			<key>HotKey Modifier Flags</key>
@@ -2399,37 +2411,32 @@
 	<array>
 		<string>3.3.7</string>
 	</array>
+	<key>NoSyncBFPFavorites</key>
+	<array>
+		<string>FiraCode Nerd Font</string>
+	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
-		<string>FuraCode Nerd Font Mono</string>
-		<string>Monaco</string>
-		<string>FuraCode Nerd Font</string>
+		<string>FiraCode Nerd Font</string>
 		<string>Menlo</string>
 	</array>
-	<key>NoSyncFrame_SessionsPreferences</key>
-	<dict>
-		<key>screenFrame</key>
-		<string>{{0, 0}, {1440, 900}}</string>
-		<key>topLeft</key>
-		<string>{417, 804}</string>
-	</dict>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
-		<string>{{0, 0}, {2560, 1440}}</string>
+		<string>{{0, 0}, {1680, 945}}</string>
 		<key>topLeft</key>
-		<string>{1206, 826}</string>
+		<string>{433, 792}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
-	<string>82D5A7C5-08D8-4FB9-B6F5-00020E468A6A</string>
+	<string>2FD40B6B-A107-446B-BAF3-EAADC4881C10</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>41</integer>
+	<integer>53</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
-	<real>601853961.99852705</real>
+	<real>600903986.94516301</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
 	<true/>
 	<key>NoSyncPermissionToShowTip</key>
@@ -2931,7 +2938,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentSession.commandLine</string>
+				<string>currentSession.terminalIconName</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -2963,7 +2970,7 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>currentSession.terminalIconName</string>
+				<string>currentSession.commandLine</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3166,11 +3173,11 @@
 	</dict>
 	<key>NoSyncSearchHistory2</key>
 	<array>
-		<string>Ch``</string>
-		<string>sub_</string>
+		<string>alias</string>
+		<string>dotme</string>
 	</array>
 	<key>NoSyncTipOfTheDayEligibilityBeganTime</key>
-	<real>600551332.92971396</real>
+	<real>600431259.65796995</real>
 	<key>OpenTmuxWindowsIn</key>
 	<integer>0</integer>
 	<key>PassOnControlClick</key>
@@ -3215,9 +3222,13 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final_new.xml?shard=3</string>
+	<string>https://iterm2.com/appcasts/final_new.xml?shard=39</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
+	<key>SULastCheckTime</key>
+	<date>2020-01-11T10:50:27Z</date>
+	<key>SUSendProfileInfo</key>
+	<false/>
 	<key>ShowNewOutputIndicator</key>
 	<true/>
 	<key>ShowPaneTitles</key>
