@@ -104,6 +104,7 @@ if g:config_level > 3
   if g:config_level > 8 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
   " gitgutter - Git change indicator to left of window
   Plug 'airblade/vim-gitgutter'
+  let g:gitgutter_map_keys = 0
   " HTML
   if g:config_level > 8 | Plug 'mattn/emmet-vim' | endif
   " Linting
