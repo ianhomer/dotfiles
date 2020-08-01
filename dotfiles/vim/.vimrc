@@ -120,7 +120,7 @@ if g:config_level > 3
   " goyo - Distraction free writing
   Plug 'junegunn/goyo.vim'
   " markdown preview
-  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+  " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 endif
 
 " CoC completion
@@ -320,11 +320,6 @@ endif
 augroup dotme
   autocmd!
 
-  " auto changed
-  if g:config_level > 2
-    autocmd TextChanged,TextChangedI,TextChangedP <buffer> silent write
-  endif
-
   if g:config_level > 0
     "TODO : this should be typescriptreact and javascriptreact
     autocmd bufnewfile,bufread *.jsx set filetype=javascript
@@ -344,16 +339,10 @@ augroup dotme
     " *** Scope : IO ***
     "
     " Auto reload when focus gained or buffer entered
-    autocmd FocusGained,BufEnter * :checktime
-  endif
+    autocmd FocusGained,WinEnter,BufEnter * :checktime
 
-  if g:config_level > 2
-    "
-    " *** Scope : Terminal ***
-    "
-    autocmd BufWinEnter,WinEnter,BufEnter *
-          \ if &buftype == 'terminal' | :startinsert | endif
-    " autocmd BufWinEnter,WinEnter,BufEnter term://* startinsert
+    " Auto write when saved
+    autocmd TextChanged,TextChangedI,TextChangedP * silent! write
   endif
 
   if g:config_level > 2
@@ -397,6 +386,7 @@ if g:config_level > 0
   " Auto reload underlying file if it changes, although
   " it only really reloads when external command run like :!ls
   set autoread
+  set autowrite
   " Allow hidden buffers without saving
   set hidden
   " No backups or backups during write
