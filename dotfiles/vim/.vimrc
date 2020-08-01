@@ -105,6 +105,8 @@ if g:config_level > 3
   " gitgutter - Git change indicator to left of window
   Plug 'airblade/vim-gitgutter'
   let g:gitgutter_map_keys = 0
+  let g:gitgutter_highlight_linenrs = 1
+
   " HTML
   if g:config_level > 8 | Plug 'mattn/emmet-vim' | endif
   " Linting
@@ -120,7 +122,7 @@ if g:config_level > 3
   " markdown preview
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
 endif
-  
+
 " CoC completion
 if IsEnabled("coc")
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -183,7 +185,7 @@ if g:config_level > 0
 
   " Hide all windows except the current one
   nnoremap <silent> <leader>O :only<CR>
- 
+
   source ~/.config/vim/window-cleaner.vim
 
   " Start / stop profiling
@@ -287,7 +289,7 @@ function! TrimEndLines()
 endfunction
 
 if g:config_level > 2
-  nnoremap <leader>w :call PruneWhiteSpace()<CR><C-o>
+  nnoremap <leader>w ma:call PruneWhiteSpace()<CR>`a
 endif
 
 " Write all buffers before navigating from Vim to tmux pane
