@@ -52,15 +52,16 @@ if g:config_level > 3
   "
   " Window and file management
   "
-
-  Plug 'ryanoasis/vim-devicons'
+  if IsEnabled("nerdtree") | Plug 'ryanoasis/vim-devicons' | endif
   " Vinegar - better file expore than NERD
   if g:config_level > 8 | Plug 'tpope/vim-vinegar' | endif
   " ack - Search files
   Plug 'mileszs/ack.vim'
-  " Airline - status bar
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
+  if IsEnabled("airline")
+    " Airline - status bar
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+  endif
   " editorconfig - Support standard editorconfig files
   if g:config_level > 6 | Plug 'editorconfig/editorconfig-vim' | endif
   " tmux - enable C-hjkl to move to across vim and tmux panes
@@ -89,7 +90,6 @@ if g:config_level > 3
   " endwise - auto close structure
   Plug 'tpope/vim-endwise'
 
-  nnoremap <silent> <leader>9s :call Toggle("syntastic")<CR>
   if IsEnabled("syntastic")
     Plug 'vim-syntastic/syntastic'
     let g:vim_jsx_pretty_colorful_config = 1
@@ -97,6 +97,12 @@ if g:config_level > 3
     Plug 'maxmellon/vim-jsx-pretty'
     source ~/.config/vim/syntastic.vim
   endif
+
+  if IsEnabled("ale")
+    Plug 'dense-analysis/ale'
+    source ~/.config/vim/ale.vim 
+  endif
+
   " polyglot
   nnoremap <silent> <leader>9p :call Toggle("polyglot")<CR>
   if IsEnabled("polyglot") | Plug 'sheerun/vim-polyglot' | endif
@@ -108,15 +114,15 @@ if g:config_level > 3
     if g:config_level > 8 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
   endif
 
-  " gitgutter - Git change indicator to left of window
-  Plug 'airblade/vim-gitgutter'
-  let g:gitgutter_map_keys = 0
-  let g:gitgutter_highlight_linenrs = 1
+  if IsEnabled("gitgutter")
+    " gitgutter - Git change indicator to left of window
+    Plug 'airblade/vim-gitgutter'
+    let g:gitgutter_map_keys = 0
+    let g:gitgutter_highlight_linenrs = 1
+  endif
 
   " HTML
   if g:config_level > 8 | Plug 'mattn/emmet-vim' | endif
-  " Linting
-  if g:config_level > 8 | Plug 'dense-analysis/ale' | endif
   " Handy mappings
   if g:config_level > 8 | Plug 'tpope/vim-unimpaired' | endif
 
@@ -330,7 +336,7 @@ augroup dotme
 
   if g:config_level > 0
     "TODO : this should be typescriptreact and javascriptreact
-    autocmd bufnewfile,bufread *.jsx set filetype=javascript
+    autocmd BufNewFile,BufRead *.jsx set filetype=javascript
     autocmd BufNewFile,BufRead *.tsx set filetype=typescript
   endif
 
@@ -342,7 +348,7 @@ augroup dotme
     autocmd InsertEnter,InsertLeave * set cul!
   endif
 
-  if g:config_level > 2
+  if IsEnabled("autosave")
     "
     " *** Scope : IO ***
     "
@@ -350,7 +356,7 @@ augroup dotme
     autocmd FocusGained,WinEnter,BufEnter * :checktime
 
     " Auto write when saved
-    autocmd TextChanged,TextChangedI,TextChangedP * silent! write
+    autocmd TextChanged,TextChangedI,TextChangedP * ++nested silent! write
   endif
 
   if g:config_level > 2
@@ -391,10 +397,12 @@ endif
 " *** Scope : IO ***
 "
 if g:config_level > 0
-  " Auto reload underlying file if it changes, although
-  " it only really reloads when external command run like :!ls
-  set autoread
-  set autowrite
+  if IsEnabled("autosave")
+    " Auto reload underlying file if it changes, although
+    " it only really reloads when external command run like :!ls
+    set autoread
+    set autowrite
+  endif
   " Allow hidden buffers without saving
   set hidden
   " No backups or backups during write

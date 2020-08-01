@@ -18,7 +18,16 @@ let g:config_level = exists('$VIM_CONFIG_LEVEL' ) ?
   \ $VIM_CONFIG_LEVEL : exists('g:config_level_session') ?
   \ g:config_level_session : 4
 
-let g:toggles = get(g:, "toggles", {"syntastic":1,"nerdtree":0})
+let g:toggles = get(g:, "toggles", {
+  \   "ale":1,
+  \   "airline":1,
+  \   "autosave":1,
+  \   "coco":0,
+  \   "gitgutter":1, 
+  \   "nerdtree":1,
+  \   "polyglot":0,
+  \   "syntastic":0,
+  \ })
 
 if !exists("*Toggle")
   function! Toggle(feature)
@@ -36,8 +45,11 @@ function! IsNotEnabled(feature)
   return 1 - IsEnabled(a:feature)
 endfunction
 
+nnoremap <silent> <leader>9a :call Toggle("ale")<CR>
 nnoremap <silent> <leader>9c :call Toggle("coc")<CR>
 nnoremap <silent> <leader>9n :call Toggle("nerdtree")<CR>
+nnoremap <silent> <leader>9g :call Toggle("gitgutter")<CR>
+nnoremap <silent> <leader>9s :call Toggle("syntastic")<CR>
 
 nnoremap <silent> <leader>90 :call ConfigLevel(0)<CR>
 nnoremap <silent> <leader>91 :call ConfigLevel(1)<CR>
