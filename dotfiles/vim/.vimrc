@@ -248,7 +248,7 @@ let g:config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
 let g:reload_config = "source ".g:config_file
 if !exists("*ReloadConfig")
   function! ReloadConfig()
-    wall
+    silent! wall
     exec g:reload_config
     call RestartConfig()
     let config_message = has('nvim') ? "neo init.vm" : ".vimrc"

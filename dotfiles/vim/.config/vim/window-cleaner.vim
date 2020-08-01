@@ -28,8 +28,8 @@ function! s:CloseAllBuffersButCurrent()
   let first = buffers[0]
   let last = buffers[-1]
 
-  if current > first | execute first.",".(current-1)."bd" | endif
-  if current < last  | execute (current+1).",".last."bd"  | endif
+  if current > first | silent! execute first.",".(current-1)."bd" | endif
+  if current < last  | silent! execute (current+1).",".last."bd"  | endif
 endfunction
 
 function! s:SwitchToFirstEditableFile()
