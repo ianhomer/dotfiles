@@ -6,11 +6,13 @@
 #
 
 OPTIND=1
-while getopts "cflnsuv" o; do case "$o" in
+while getopts "cfhlnm:suv" o; do case "$o" in
   c) clean="y" ;;    # Clean should run cache
   f) force="y" ;;    # Force should run
+  h) help="y" ;; 
   l) list="y" ;;     # List should run files
   n) noop="y" ;;     # No operation
+  m) modified=$OPTARG ;; # Expiry time of should run file
   s) silent="y" ;;   # Don't output message indicating what's done
   u) update="y" ;;   # Update should run file
   v) verbose="y" ;;  # Verbose output
@@ -18,6 +20,31 @@ esac done
 
 shouldRunDir=~/.config/dotme/should-run
 [[ -n "$verbose" ]] && echo "Should run dir : $shouldRunDir"
+
+if [[ -n "$help" ]] ; then
+  noop="y"
+  cat <<EOF
+Usage
+
+Check if script needs to run 
+
+  should-run $0 || exit
+
+Check if script needs to run, with expiry
+
+  should-run -m 1  || exit  # 1 day
+  should-run -m 1h || exit  # 1 hour
+
+At end of script indicate that the script has run
+
+  should-run -fu $0
+
+Clean up run cache, forcing everything to be re-run
+
+  should-run -c
+
+EOF
+fi
 
 [[ -n "$list" ]] && noop="y" && \
   ls -lt $shouldRunDir | awk '{$1=$2=$3=$4=$5=""; print $0}'
@@ -56,6 +83,14 @@ if [[ -z "$force" ]] && [[ -f "$shouldRunFile" ]] ; then
 
   if [[ $fullScriptName -nt $shouldRunFile ]] ; then
     shouldRun=1
+  else
+    if [[ -n "$modified" ]] ; then
+      [[ -n "$verbose" ]] && echo "Checking modified $modified"
+      if [[ $(find "$shouldRunFile" -mtime +${modified} -print) ]]; then
+        shouldRun=1
+        [[ -n "$verbose" ]] && echo "Should run expired, older than ${modified}"
+      fi
+    fi
   fi
 else
   shouldRun=1

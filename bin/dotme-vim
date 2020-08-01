@@ -4,6 +4,8 @@
 # Install vim plug - vi plugin manager
 #
 
+should-run -m 1 $0 || exit
+
 if [ ! -f  ~/.vim/autoload/plug.vim ] ; then
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -26,3 +28,5 @@ fi
 export VIM_LEVEL=4
 vim +PlugUpgrade +PlugUpdate +qa
 nvim +PlugUpgrade +PlugUpdate +qa
+
+should-run -fu
