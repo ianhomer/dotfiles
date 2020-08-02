@@ -236,6 +236,7 @@ if exists('*which_key#register')
   let g:which_key_map.c = { 'name' : '...Commenter' }
   let g:which_key_map.j = { 'name' : '...Thingity' }
   let g:which_key_map['k'] = { 'name' : '...Bookmarks' }
+  let g:which_key_map['9'] = { 'name' : '...Toggle' }
   let g:which_key_map[','] = { 'name' : '...Misc' }
   let g:which_key_map['.'] = { 'name' : '...Experimental' }
   call which_key#register('<Space>', "g:which_key_map")
