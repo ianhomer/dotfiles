@@ -9,7 +9,7 @@ First time clone repository and install:
     git clone git@github.com:ianhomer/dotfiles.git ~/.dotfiles
     ~/.dotfiles/bin/dotme
 
-then update at any time with:
+Update at any time with:
 
     dotme
 
