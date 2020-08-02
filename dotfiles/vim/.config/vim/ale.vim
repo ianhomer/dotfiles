@@ -1,7 +1,3 @@
-let g:ale_linters = {
-  \   'javascript': ['eslint'],
-  \}
-
 let markdown_linters = ['markdownlint']
 
 " Enable markdown linters that help with good writing
@@ -16,6 +12,8 @@ endif
 
 let g:ale_linters = {
   \   'javascript': ['eslint'],
+  \   'json': ['jsonlint'],
+  \   'typescript': ['eslint'],
   \   'markdown': markdown_linters
   \}
 
@@ -43,4 +41,4 @@ let g:ale_lint_delay = 1000
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_info_str = 'I'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_echo_msg_format = '%s [%linter%] [%severity%]'
