@@ -124,7 +124,7 @@ if g:config_level > 3
   " HTML
   if g:config_level > 8 | Plug 'mattn/emmet-vim' | endif
   " Handy mappings
-  if g:config_level > 8 | Plug 'tpope/vim-unimpaired' | endif
+  Plug 'tpope/vim-unimpaired'
 
   "
   " Writing
@@ -214,6 +214,9 @@ if g:config_level > 0
     nnoremap <silent> <leader>E :Commits!<CR>
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
+    nnoremap <silent> <leader>k :call ToggleQuickFix()<CR>
+    nnoremap <silent> <leader>i :call ToggleLocationList()<CR>
+
     if g:config_level > 3
       nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
@@ -256,6 +259,24 @@ function! LintMe()
       call PruneWhiteSpace()
       normal `a
     endif
+  endif
+endfunction
+
+function! ToggleQuickFix()
+  let l:currentWindow = winnr('$')
+  cwindow
+  let l:quickFixWindow = winnr('$')
+  if l:currentWindow == l:quickFixWindow
+    cclose
+  endif
+endfunction
+
+function! ToggleLocationList()
+  let l:currentWindow = winnr('$')
+  lwindow
+  let l:locationListWindow = winnr('$')
+  if l:currentWindow == l:locationListWindow
+    lclose
   endif
 endfunction
 
@@ -484,7 +505,7 @@ if g:config_level > 0
   set splitbelow
 endif
 
-"source ~/.config/vim/terminal.vim
+source ~/.config/vim/terminal.vim
 
 "
 " *** Scope : Markdown ***

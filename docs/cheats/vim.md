@@ -37,7 +37,7 @@
 | `' + letter`          | go to mark                     |
 | `Ctrl+^`              | switch to previous buffer      |
 | `:tab h foo`          | open help in a new tab         |
-| `Ctrl+w o`            | make pane the only visible one |
+| `Ctrl+w o`            | make pane the visible one |
 | `:noh`                | clear last highlight           |
 | `"add`                | Delete line into registry a    |
 | `"ap`                 | Paste line from registry a     |
@@ -146,7 +146,6 @@
 | `Ctrl+n` | In insert mode, complete options previous |
 | `Ctrl+p` | In insert mode, complete options next     |
 
-
 ### Git
 
 |            |                                        |
@@ -170,8 +169,16 @@
 | `cw` | Change commit message for selected commit       |
 | `gq` | Quit fugitive window                            |
 
+### Quickfix
+
+|      |                |
+| --   | --             |
+| `]q` | Next quick fix |
+
 ### Markdown
 
+|             |                  |
+| --          | --               |
 | `viWS+`     | make a word bold |
 | `zR`        | open all folds   |
 | `zM`        | close all folds  |

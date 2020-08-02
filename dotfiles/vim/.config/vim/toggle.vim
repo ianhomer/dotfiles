@@ -27,6 +27,7 @@ let g:toggles = get(g:, "toggles", {
   \   "nerdtree":1,
   \   "polyglot":0,
   \   "syntastic":0,
+  \   "writegood":0
   \ })
 
 if !exists("*Toggle")
@@ -34,6 +35,8 @@ if !exists("*Toggle")
     let g:toggles[a:feature] = has_key(g:toggles, a:feature) ? !g:toggles[a:feature] : 1
     echom a:feature . " " . (g:toggles[a:feature] ? "on" : "off")
     call ReloadConfig()
+    " Reload current buffer
+    silent edit
   endfunction
 endif
 
@@ -50,6 +53,8 @@ nnoremap <silent> <leader>9c :call Toggle("coc")<CR>
 nnoremap <silent> <leader>9n :call Toggle("nerdtree")<CR>
 nnoremap <silent> <leader>9g :call Toggle("gitgutter")<CR>
 nnoremap <silent> <leader>9s :call Toggle("syntastic")<CR>
+nnoremap <silent> <leader>9w :call Toggle("writegood")<CR>
+
 
 nnoremap <silent> <leader>90 :call ConfigLevel(0)<CR>
 nnoremap <silent> <leader>91 :call ConfigLevel(1)<CR>

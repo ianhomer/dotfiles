@@ -50,26 +50,36 @@ Clean up run cache, forcing everything to be re-run
 EOF
 fi
 
+shift $((OPTIND-1))
+[ "${1:-}" = "--" ] && shift
+scriptName=${1##*/}
+shift
+otherFiles=$*
+shouldRunFile=${shouldRunDir}/last-run-${scriptName}
+
 [[ -n "$list" ]] && noop="y" && \
   ls -lt $shouldRunDir | awk '{$1=$2=$3=$4=$5=""; print $0}'
 
 if [[ -n "$clean" ]] ; then
   noop="y"
   if [[ -d $shouldRunDir ]] ; then
-    echo "Cleaning should run files in $shouldRunDir"
-    rm $shouldRunDir/last-run-*
+    if [[ -n "$scriptName" ]] ; then
+      if [[ -f $shouldRunFile ]] ; then
+        echo "Cleaning should run file $scriptName in $shouldRunDir"
+        rm $shouldRunDir/last-run-$scriptName
+      else
+        echo "Should run file for $scriptName already deleted"
+      fi
+    else
+      echo "Cleaning should run files in $shouldRunDir"
+      rm $shouldRunDir/last-run-*
+    fi
   else
     echo "Directory $shouldRunDir does not exist, nothing to clean"
   fi
 fi
 
 [[ -n "$noop" ]] && exit
-
-shift $((OPTIND-1))
-[ "${1:-}" = "--" ] && shift
-scriptName=${1##*/}
-shift
-otherFiles=$*
 
 if [[ -z "$scriptName" ]] ; then
   printf "\e[33mPlease pass script name in as argument to \e[1m${0##*/}\e[0m\n"
@@ -80,7 +90,6 @@ fi
 [[ -n "$verbose" ]] && [[ -n "${otherFiles}" ]] && \
   echo "Other files : $otherFiles"
 
-shouldRunFile=${shouldRunDir}/last-run-${scriptName}
 shouldRun=0
 
 #

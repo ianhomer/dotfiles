@@ -76,12 +76,13 @@ nmap <buffer> <silent> <leader>kr 0ds*cs*`Jf:r\|I\|\|<ESC>jj
 
 setlocal spell
 
-" Find local spell file
+" A local spell file for the current file should be located in a .vim directory
+" in one of the parent directories.
 function! AddLocalSpellFile(directory, depth)
   if a:depth < 10 && a:directory != "/"
     let l:localvimdir = a:directory . "/.vim"
     if isdirectory(l:localvimdir)
-      " Add all *.add files found in parent .vim directory to to local spellfile
+      " Add all *.add files found in parent .vim directory to local spellfile
       for l:localspellfile in split(glob(l:localvimdir . "/*.add"))
         if &l:spellfile !~ l:localspellfile
           let &l:spellfile = l:localspellfile . "," . &l:spellfile
