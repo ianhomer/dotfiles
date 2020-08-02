@@ -9,15 +9,18 @@ if IsEnabled("writegood")
   let markdown_linters += [
         \ 'alex',
         \ 'languagetool',
-        \ 'writegood',
-        \ 'proselint'
+        \ 'proselint',
+        \ 'writegood'
         \]
 endif
 
 let g:ale_linters = {
   \   'javascript': ['eslint'],
+  \   'json': ['jsonlint'],
+  \   'markdown': markdown_linters,
+  \   'python': ['flake8'],
   \   'typescript': ['eslint'],
-  \   'markdown': markdown_linters
+  \   'yaml': ['yamllint']
   \}
 
 let g:ale_fixers = {
