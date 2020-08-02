@@ -11,9 +11,4 @@ else
   setlocal foldlevel=0
 endif
 
-" Hide filename and location
-syntax match ConcealedDetails /\v^[^|]*\|[^|]*\| / conceal
-set conceallevel=2
-set concealcursor=nvic
-
 setlocal nowrap
