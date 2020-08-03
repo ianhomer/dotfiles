@@ -386,7 +386,8 @@ augroup dotme
     " Auto reload when focus gained or buffer entered
     autocmd FocusGained,WinEnter,BufEnter * :checktime
 
-    " Auto write when saved
+    " Auto write when text changes using debouncing for insert mode
+    " to wait for pause in text entry
     autocmd TextChangedI,TextChangedP * ++nested silent! call s:DebouncedSave()
     autocmd TextChanged * ++nested silent! write
   endif
