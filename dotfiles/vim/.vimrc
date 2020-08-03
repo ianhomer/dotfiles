@@ -353,6 +353,11 @@ if g:config_level < 2
   nnoremap <leader>q :<c-u>bp <bar> bd #<cr>
 endif
 
+function! s:DebouncedSave() abort
+  call timer_stop( s:debouncedSaveTimer )
+  let s:debouncedSaveTimer = timer_start(1000, { timerId -> execute('write') })
+endf
+
 "
 " Group all autocmds together to improve reloadability (reloads of vimrc
 " replace, not add to, existing commands) and source tacking (we know that
@@ -382,7 +387,8 @@ augroup dotme
     autocmd FocusGained,WinEnter,BufEnter * :checktime
 
     " Auto write when saved
-    autocmd TextChanged,TextChangedI,TextChangedP * ++nested silent! write
+    autocmd TextChangedI,TextChangedP * ++nested silent! call s:DebouncedSave()
+    autocmd TextChanged * ++nested silent! write
   endif
 
   if g:config_level > 2

@@ -7,3 +7,6 @@
 - [ ] Report on outdated across all packaging tools
 - [ ] FZF - ESC Should close window
 - [ ] FZF - Open should never open in NERDTree window
+- [ ] How to list all spelling mistakes across all files
+- [ ] Review keyboard short cuts to help optimise for ones most used / one
+  handers
