@@ -96,6 +96,11 @@
 | `*`         | Search for next occurrence of word under cursor |
 | `Ctrl+o`    | Jump to previous cursor position (jumplist)     |
 | `Ctrl+i`    | Jump to next cursor position (jumplist)         |
+| `Crtl+u`    | Scroll up                                       |
+| `Ctrl+d`    | Scroll down                                     |
+| `zz`        | Scroll window center current line               |
+| `zt`        | Scroll down with current line at top            |
+| `zb`        | Scroll up with current line at bottom           |
 
 ### windows
 
