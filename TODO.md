@@ -5,7 +5,6 @@
 - [ ] Upgrade brew cask on dotme <- how to handle some packages that need admin?
   Perhaps cherry pick casks that auto-update.
 - [ ] Report on outdated across all packaging tools
-- [ ] FZF - Open should never open in NERDTree window
 - [ ] How to list all spelling mistakes across all files
 - [ ] Review keyboard short cuts to help optimise for ones most used / one
   handers
