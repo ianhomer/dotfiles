@@ -538,7 +538,3 @@ endif
 if g:config_level > 8
   source ~/.config/vim/experimental.vim
 endif
-
-" Allow per project vimrc files
-set exrc
-set secure
