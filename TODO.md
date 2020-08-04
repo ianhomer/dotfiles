@@ -7,4 +7,6 @@
 - [ ] Report on outdated across all packaging tools
 - [ ] How to list all spelling mistakes across all files
 - [ ] Review keyboard short cuts to help optimise for ones most used / one
-  handers
+  handers would have just dwarfed. isn't
+
+ 
