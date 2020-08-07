@@ -78,11 +78,14 @@ function! CloseOtherBuffers()
   normal mA:
   NERDTreeClose
   :call <SID>CloseAllBuffersButCurrent()
-  NERDTreeFind
-  " Reset size of NERDTree
-  normal 31<C-W>
-  " Switch back to last buffer, i.e. the one we want open
-  wincmd p
+  " Open NERDTree if there is space for it
+  if winwidth('%') > 112
+    NERDTreeFind
+    " Reset size of NERDTree
+    normal 31<C-W>
+    " Switch back to last buffer, i.e. the one we want open
+    wincmd p
+  endif
   " Return to saved mark
   normal `A
 endfunction
