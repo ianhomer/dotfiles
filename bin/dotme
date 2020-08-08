@@ -112,6 +112,7 @@ command_install() {
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-jenv
   [ $DRY -eq 0 ] && dotme-fish
   [ $DRY -eq 0 ] && dotme-fisher
+  [ $DRY -eq 0 ] && dotme-gitme
   [ $QUICK -eq 0 ] && command_clean
   printf "\e[36mdotfiles installed and \e[1mAOK\e[0m\n"
 }

@@ -10,4 +10,5 @@
   handers would have just dwarfed.
 - [ ] Term should open in directory of file.
 - [ ] Display fugitive output, e.g. output whilst pushing.
-- [ ] Explore more fugitive commands
+- [ ] Explore more fugitive commands.
+- [ ] Add gitme -r to dotme commands (every week).
