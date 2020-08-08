@@ -45,6 +45,8 @@ if g:config_level > 0
 
   " fugitive - Git integration
   Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb'
+
 endif
 
 if g:config_level > 3
@@ -215,7 +217,7 @@ if g:config_level > 0
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
     nnoremap <silent> <leader>k :call ToggleQuickFix()<CR>
-    nnoremap <silent> <leader>i :call ToggleLocationList()<CR>
+    nnoremap <silent> <leader>K :call ToggleLocationList()<CR>
 
     if g:config_level > 3
       nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>

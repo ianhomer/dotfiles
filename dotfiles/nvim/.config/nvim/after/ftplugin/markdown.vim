@@ -4,14 +4,14 @@ endif
 
 function! s:LintTable()
   let l:line = line('.')
-  
+
   " Skip if not a table
   if getline(l:line) !~ '|'
     return
   endif
 
   " Add heading to table if not already there
-  " First check if next line is the header marker (in case we're on the 
+  " First check if next line is the header marker (in case we're on the
   " first line of the table
   let l:foundTableHeader = getline(l:line+1) =~ '--'
   " Then scan back for the header marker
@@ -94,6 +94,3 @@ function! AddLocalSpellFile(directory, depth)
 endfunction
 
 call AddLocalSpellFile(expand('%:p:h'), 0)
-
-
-
