@@ -10,3 +10,5 @@
   handers would have just dwarfed.
 - [ ] Term should open in directory of file.
 - [ ] Display fugitive output, e.g. output whilst pushing.
+- [ ] Explore more fugitive commands
+
