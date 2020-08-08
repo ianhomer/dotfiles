@@ -5,9 +5,13 @@
 
 should-run -m 7 $0 || exit
 
-# Clear directories from the fasd cache that have no value
+# Clear directories from the fasd cache that have no value in fasd cache
 
-fasd -D /Users/ian/.config/nvim/plugged
+fasd -D                        \
+  $HOME/.config/nvim/plugged   \
+  $HOME/.config/nvim/plugged\* \
+  $HOME/.config/vim/plugged    \
+  $HOME/.config/vim/plugged\*
 
 gitme -r
 
