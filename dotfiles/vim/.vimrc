@@ -195,7 +195,7 @@ if g:config_level > 0
   nnoremap <silent> <leader>F :Files!<CR>
 
   " save all files
-  nnoremap <silent> <leader>s :silent! wall<CR>
+  nnoremap <silent> <leader>w :silent! wall<CR>
   " reset things
   nnoremap <silent> <leader>z :noh<CR>
 
@@ -210,10 +210,10 @@ if g:config_level > 0
   nnoremap <leader>.i :profile dump<CR>
 
   if g:config_level > 2
-    nnoremap <silent> <leader>b :BCommits<CR>
-    nnoremap <silent> <leader>B :BCommits!<CR>
-    nnoremap <silent> <leader>e :Commits<CR>
-    nnoremap <silent> <leader>E :Commits!<CR>
+    nnoremap <silent> <leader>y :BCommits<CR>
+    nnoremap <silent> <leader>Y :BCommits!<CR>
+    nnoremap <silent> <leader>t :Commits<CR>
+    nnoremap <silent> <leader>T :Commits!<CR>
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
     nnoremap <silent> <leader>k :call ToggleQuickFix()<CR>
@@ -332,7 +332,7 @@ function! TrimEndLines()
 endfunction
 
 if g:config_level > 2
-  nnoremap <leader>w ma:call PruneWhiteSpace()<CR>`a
+  nnoremap <leader>L ma:call PruneWhiteSpace()<CR>`a
 endif
 
 " Write all buffers before navigating from Vim to tmux pane
@@ -342,7 +342,7 @@ let g:tmux_navigator_save_on_switch = 2
 
 " Goyo distraction free writing
 if g:config_level > 3
-  nnoremap <leader>g :Goyo<CR>
+  nnoremap <leader>jg :Goyo<CR>
   let g:goyo_width = 85
 endif
 

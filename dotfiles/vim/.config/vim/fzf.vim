@@ -62,7 +62,7 @@ endfunction
 
 command! -nargs=* -bang Search call fzf#SearchWithRipGrep(<q-args>, <bang>0)
 
-nnoremap <silent> <leader>jj :Ag<CR>
+nnoremap <silent> <leader>s :Ag<CR>
 nnoremap <silent> <leader>jk :Ag<CR>'
 nnoremap <silent> <leader>jK :Ag!<CR>'
 
@@ -87,6 +87,6 @@ command! -bang -nargs=* AgPopup
 command! -bang -nargs=* AgHidden
   \ call fzf#vim#ag(<q-args>,'-m 0 --hidden --ignore .git', <bang>0)
 
-nnoremap <silent> <leader>m :Maps<CR>
-nnoremap <silent> <leader>M :Maps!<CR>
+nnoremap <silent> <leader>,m :Maps<CR>
+nnoremap <silent> <leader>,M :Maps!<CR>
 nnoremap <silent> <leader>,mi :MapsInsert<CR>

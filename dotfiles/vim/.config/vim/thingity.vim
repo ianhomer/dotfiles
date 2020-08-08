@@ -139,7 +139,7 @@ command! -bang -nargs=* AgMarkdown
 nnoremap <silent> <leader>jm :AgMarkdown<CR>
 
 " Hidden search
-nnoremap <silent> <leader>jh :AgHidden<CR>
+nnoremap <silent> <leader>S :AgHidden<CR>
 " generic search (experimental alternative to Ag)
 nnoremap <silent> <leader>js :Search<CR>
 
