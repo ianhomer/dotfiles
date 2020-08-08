@@ -9,6 +9,6 @@ function! OpenTerminal()
   startinsert
 endfunction
 
-nnoremap <silent> <leader>t :call OpenTerminal()<CR>
+nnoremap <silent> <leader> :call OpenTerminal()<CR>
 
 tnoremap <Esc> <C-\><C-n>
