@@ -60,19 +60,19 @@ set comments=fb:*,fb:-,fb:+,n:>,se:---,se:```
 
 " Markdown surrounds
 " bold
-nmap <buffer> <leader>kb ysiWb
+nmap <buffer> <leader>jb ysiWb
 " italic
-nmap <buffer> <leader>ki ysiW*
+nmap <buffer> <leader>ji ysiW*
 " link
-nmap <buffer> <leader>kl EBysiW(i[]<C-o>h
+nmap <buffer> <leader>jl EBysiW(i[]<C-o>h
 " bare link
-nmap <buffer> <leader>kL ysiW<
+nmap <buffer> <leader>jL ysiW<
 
 " Convert bold to backtick, move to next row
-nmap <buffer> <silent> <leader>kc 0f*ds*cs*`j
+nmap <buffer> <silent> <leader>jc 0f*ds*cs*`j
 
 " Convert defintion list to table, move to next definition
-nmap <buffer> <silent> <leader>kr 0ds*cs*`Jf:r\|I\|\|<ESC>jj
+nmap <buffer> <silent> <leader>jr 0ds*cs*`Jf:r\|I\|\|<ESC>jj
 
 setlocal spell
 
