@@ -12,3 +12,4 @@
 - [ ] Display fugitive output, e.g. output whilst pushing.
 - [ ] Explore more fugitive commands.
 - [ ] Make leader G toggle fugitive
+- [ ] If output from git push can be visible then close 
