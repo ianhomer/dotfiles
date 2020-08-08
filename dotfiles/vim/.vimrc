@@ -219,7 +219,7 @@ if g:config_level > 0
     nnoremap <silent> <leader>k :call ToggleQuickFix()<CR>
     nnoremap <silent> <leader>K :call ToggleLocationList()<CR>
     nnoremap <silent> <leader>g :call ToggleFugitive()<CR>
-    nnoremap <silent> <leader>b :Git push<CR>
+    nnoremap <silent> <leader>b :Git -P push -v<CR>
 
     if g:config_level > 3
       nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
