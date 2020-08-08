@@ -6,7 +6,4 @@
   Perhaps cherry pick casks that auto-update.
 - [ ] Report on outdated across all packaging tools
 - [ ] How to list all spelling mistakes across all files
-- [ ] Display fugitive output, e.g. output whilst pushing.
 - [ ] Explore more fugitive commands.
-- [ ] If output from git push can be visible then close fugitive window when
-  pushed
