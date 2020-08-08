@@ -218,7 +218,7 @@ if g:config_level > 0
     nnoremap <silent> <leader>r :reg<CR>
     nnoremap <silent> <leader>k :call ToggleQuickFix()<CR>
     nnoremap <silent> <leader>K :call ToggleLocationList()<CR>
-    nnoremap <silent> <leader>g :G<CR>
+    nnoremap <silent> <leader>g :call ToggleFugitive()<CR>
     nnoremap <silent> <leader>b :Git push<CR>
 
     if g:config_level > 3
@@ -245,6 +245,21 @@ if exists('*which_key#register')
   let g:which_key_map['.'] = { 'name' : '...Experimental' }
   call which_key#register('<Space>', "g:which_key_map")
 endif
+
+function! CloseWindows(type)
+  let l:window = bufwinnr(bufnr(a:type))
+  if l:window > 0
+    execute l:window 'q'
+    return 1
+  endif
+  return 0
+endfunction
+
+function! ToggleFugitive() 
+  if !CloseWindows(".git/index")
+    Gstatus 
+  endif
+endfunction
 
 function! LintMe()
   echo "Linting ..".&filetype
