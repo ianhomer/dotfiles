@@ -139,7 +139,7 @@ fi
 
 if [[ $shouldRun -eq 0 ]] ; then
   if [[ -n "$modified" ]] ; then
-    notChangedMessage="already ran in last"
+    notChangedMessage="ran in last"
     if [[ "$modified" == "1" ]]; then
       notChangedMessage="$notChangedMessage day"
     elif [[ "$modified" =~ ^[0-9]+$ ]] ; then
@@ -151,7 +151,7 @@ if [[ $shouldRun -eq 0 ]] ; then
     notChangedMessage="not changed since last run"
   fi
   [[ -z "$silent" ]] && \
-    printf "\e[37mskipping \e[1m%-20s\e[0;37m %s\e[0m\n" \
+    printf "\e[37mskip \e[1m%-20s\e[0;37m %s\e[0m\n" \
       "$scriptName" "$notChangedMessage"
   exit 1
 fi
