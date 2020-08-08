@@ -219,7 +219,7 @@ if g:config_level > 0
     nnoremap <silent> <leader>k :call ToggleQuickFix()<CR>
     nnoremap <silent> <leader>K :call ToggleLocationList()<CR>
     nnoremap <silent> <leader>g :call ToggleFugitive()<CR>
-    nnoremap <silent> <leader>b :Git -P push -v<CR>
+    nnoremap <silent> <leader>b :call GitPush()<CR>
 
     if g:config_level > 3
       nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
@@ -255,8 +255,17 @@ function! CloseWindows(type)
   return 0
 endfunction
 
+function! CloseFugitiveWindow()
+  return CloseWindows(".git/index") 
+endfunction
+
+function! GitPush()
+  call CloseFugitiveWindow()
+  Git -P push -v
+endfunction
+
 function! ToggleFugitive() 
-  if !CloseWindows(".git/index")
+  if !CloseFugitiveWindow()
     Gstatus 
   endif
 endfunction
