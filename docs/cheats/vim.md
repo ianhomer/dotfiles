@@ -163,16 +163,17 @@
 
 ### Fugitive
 
-|      |                                                 |
-| --   | --                                              |
-| `=`  | Show diff for selected file                     |
-| `-`  | Stage of selected file (toggle)                 |
-| `-`  | Push current commit or HEAD if on unpushed line |
-| `s`  | Stage selected file                             |
-| `X`  | Discard changes on selected file                |
-| `cc` | Commit staged files                             |
-| `cw` | Change commit message for selected commit       |
-| `gq` | Quit fugitive window                            |
+|       |                                                 |
+| --    | --                                              |
+| `=`   | Show diff for selected file                     |
+| `-`   | Stage of selected file (toggle)                 |
+| `-`   | Push current commit or HEAD if on unpushed line |
+| `s`   | Stage selected file                             |
+| `X`   | Discard changes on selected file                |
+| `cc`  | Commit staged files                             |
+| `cw`  | Change commit message for selected commit       |
+| `gq`  | Quit fugitive window                            |
+| `gpa` | Go to unpushed and push                         |
 
 ### Quickfix
 
