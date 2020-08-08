@@ -3,12 +3,13 @@
 "
 
 function! OpenTerminal()
+  let $VIM_DIR=expand('%:p:h')
   split
   term
   resize 10
   startinsert
 endfunction
 
-nnoremap <silent> <leader>m :call OpenTerminal()<CR>
+nnoremap <silent> <leader>m :call OpenTerminal()<CR>cd $VIM_DIR && pwd<CR>
 
 tnoremap <Esc> <C-\><C-n>

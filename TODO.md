@@ -8,7 +8,6 @@
 - [ ] How to list all spelling mistakes across all files
 - [ ] Review keyboard short cuts to help optimise for ones most used / one
   handers would have just dwarfed.
-- [ ] Term should open in directory of file.
 - [ ] Display fugitive output, e.g. output whilst pushing.
 - [ ] Explore more fugitive commands.
 - [ ] Make leader G toggle fugitive
