@@ -17,7 +17,6 @@
 " since it'd open and close the buffer and I'd loose my cursor position. 
 " Some non-modifiable windows weren't closed either e.g. help windows.
 "
-
 function! s:CloseAllBuffersButCurrent()
   " Close FZF window if open
   let l:fzfWindow = bufwinnr(bufnr("fzf"))

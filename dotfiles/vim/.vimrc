@@ -218,6 +218,8 @@ if g:config_level > 0
     nnoremap <silent> <leader>r :reg<CR>
     nnoremap <silent> <leader>k :call ToggleQuickFix()<CR>
     nnoremap <silent> <leader>K :call ToggleLocationList()<CR>
+    nnoremap <silent> <leader>g :G<CR>
+    nnoremap <silent> <ledaer>b :Git push<CR>
 
     if g:config_level > 3
       nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
