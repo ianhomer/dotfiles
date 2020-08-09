@@ -1,12 +1,10 @@
 if has('nvim')
   " Store nvim plugins in isolated location
-
   let g:vim_dir = "~/.config/nvim"
 else
   let g:vim_dir = "~/.vim"
 endif
 
-" Leader is space
 let mapleader = "\<Space>"
 let maplocalleader = "\\"
 
@@ -17,9 +15,7 @@ if g:config_level > 0
   filetype plugin off
 endif
 
-"
 " Load plugins
-"
 call plug#begin(g:vim_dir."/plugged")
 if g:config_level > 0
   "
@@ -29,6 +25,10 @@ if g:config_level > 0
   Plug 'junegunn/fzf'
   Plug 'git@github.com:ianhomer/fzf.vim.git', { 'branch' : 'fix/maps-comment' }
   source ~/.config/vim/fzf.vim
+
+  " fugitive - Git integration
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb'
 
   "
   " Style
@@ -42,10 +42,6 @@ if g:config_level > 0
     Plug 'preservim/nerdtree'
     source ~/.config/vim/nerdtree.vim
   endif
-
-  " fugitive - Git integration
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-rhubarb'
 
 endif
 
