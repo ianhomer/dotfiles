@@ -272,9 +272,10 @@ function! LintMe()
     " Lint
     Format
   elseif IsEnabled("ale")
-    ALEFix
     if &filetype == "markdown"
       normal magggqG`a
+    else
+      ALEFix
     endif
   else
     if &filetype == "json"
