@@ -34,7 +34,7 @@ function! s:AddTableHeader()
   execute "normal! {j0i\|\|\|\<CR>\|--\|--\|\<CR>\<ESC>"
 endfunction
 
-nnoremap <buffer> <silent> <leader>t :call <SID>LintTable()<CR>
+nnoremap <buffer> <silent> <leader>jr :call <SID>LintTable()<CR>
 " Auto lint when typing | in insert mode
 inoremap <buffer> <silent> <Bar> <Bar><Esc>:call <SID>LintTable()<CR>$a
 
