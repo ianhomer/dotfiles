@@ -65,6 +65,13 @@ Todos
 
 [Diagrams](./diagrams.md).
 
+## Quotes
+
+> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+> tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+> quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+> consequat.
+
 ## Definitions
 
 Long line definitions
@@ -117,7 +124,3 @@ More code:
 another-fenced-block
 second-line
 ```
-
-## Scratch
-
-Hello world!

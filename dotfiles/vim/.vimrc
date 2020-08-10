@@ -242,6 +242,8 @@ if exists('*which_key#register')
   call which_key#register('<Space>', "g:which_key_map")
 endif
 
+source ~/.config/vim/thingity.vim
+
 function! CloseWindows(type)
   let l:window = bufwinnr(bufnr(a:type))
   if l:window > 0
@@ -252,7 +254,7 @@ function! CloseWindows(type)
 endfunction
 
 function! CloseFugitiveWindow()
-  return CloseWindows(".git/index") 
+  return CloseWindows(".git/index")
 endfunction
 
 function! GitPush()
@@ -260,30 +262,24 @@ function! GitPush()
   Git -P push -v
 endfunction
 
-function! ToggleFugitive() 
+function! ToggleFugitive()
   if !CloseFugitiveWindow()
-    Gstatus 
+    Gstatus
   endif
 endfunction
 
 function! LintMe()
   echo "Linting ..".&filetype
-  if IsEnabled("coc")
+  if &filetype == "markdown"
+    call LintMarkdown()
+  elseif IsEnabled("coc")
     " Lint
     Format
   elseif IsEnabled("ale")
-    if &filetype == "markdown"
-      normal magggqG`a
-    else
-      ALEFix
-    endif
+    ALEFix
   else
     if &filetype == "json"
       execute "%!jq ."
-    elseif &filetype == "markdown"
-      normal magggqG
-      call PruneWhiteSpace()
-      normal `a
     endif
   endif
 endfunction
@@ -306,7 +302,6 @@ function! ToggleLocationList()
   endif
 endfunction
 
-source ~/.config/vim/thingity.vim
 source ~/.config/vim/tabcomplete.vim
 
 " Reload vimrc, neo vimrc and CoC
