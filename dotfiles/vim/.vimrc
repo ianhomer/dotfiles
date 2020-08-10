@@ -244,19 +244,6 @@ endif
 
 source ~/.config/vim/thingity.vim
 
-function! CloseWindows(type)
-  let l:window = bufwinnr(bufnr(a:type))
-  if l:window > 0
-    execute l:window 'q'
-    return 1
-  endif
-  return 0
-endfunction
-
-function! CloseFugitiveWindow()
-  return CloseWindows(".git/index")
-endfunction
-
 function! GitPush()
   call CloseFugitiveWindow()
   Git -P push -v
@@ -277,10 +264,8 @@ function! LintMe()
     Format
   elseif IsEnabled("ale")
     ALEFix
-  else
-    if &filetype == "json"
-      execute "%!jq ."
-    endif
+  elseif &filetype == "json"
+    execute "%!jq ."
   endif
 endfunction
 

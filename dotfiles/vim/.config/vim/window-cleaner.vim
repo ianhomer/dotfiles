@@ -17,10 +17,22 @@
 " since it'd open and close the buffer and I'd loose my cursor position. 
 " Some non-modifiable windows weren't closed either e.g. help windows.
 "
+
+function! CloseWindows(type)
+  let l:window = bufwinnr(bufnr(a:type))
+  if l:window > 0
+    execute l:window 'q'
+    return 1
+  endif
+  return 0
+endfunction
+
+function! CloseFugitiveWindow()
+  return CloseWindows(".git/index")
+endfunction
+
 function! s:CloseAllBuffersButCurrent()
-  " Close FZF window if open
-  let l:fzfWindow = bufwinnr(bufnr("fzf"))
-  if l:fzfWindow > 0 | execute l:fzfWindow 'q' | endif
+  call CloseWindows("fzf")
 
   let current = bufnr("%")
   let buffers = filter(range(1, bufnr('$')), 'bufloaded(v:val)')
