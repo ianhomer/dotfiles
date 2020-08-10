@@ -6,7 +6,4 @@
   Perhaps cherry pick casks that auto-update.
 - [ ] Report on outdated across all packaging tools
 - [ ] How to list all spelling mistakes across all files
-
-```vim
-%v/\v```[a-z]+\_[^`]*```\_./s
-```
+- [ ] Leader o should open up last buffer from history if none open

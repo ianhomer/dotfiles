@@ -191,7 +191,8 @@ if g:config_level > 0
   nnoremap <silent> <leader>F :Files!<CR>
 
   " save all files
-  nnoremap <silent> <leader>w :silent! wall<CR>
+  if !IsEnabled("autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | endif
+
   " reset things
   nnoremap <silent> <leader>z :noh<CR>
 
