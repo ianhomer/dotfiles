@@ -34,6 +34,7 @@ if g:config_level > 0
   " Style
   "
   Plug 'morhetz/gruvbox'
+  Plug 'ayu-theme/ayu-vim'
   Plug 'tomasr/molokai'
   Plug 'jnurmine/zenburn'
 
@@ -66,6 +67,12 @@ if g:config_level > 3
   Plug 'christoomey/vim-tmux-navigator'
   " Improved path support
   Plug 'tpope/vim-apathy'
+  " Indent line
+  Plug 'Yggdroot/indentLine'
+  " Don't switch it on by default as it can be a little brutle, rely on syntax
+  " setting conceal level as desired
+  let g:indentLine_setConceal = 0
+  let g:indentLine_char = '┊'
 
   "
   " Help
@@ -502,8 +509,13 @@ if IsEnabled("nerdtree")
 endif
 
 if g:config_level > 0
-  colorscheme gruvbox
-  set bg=dark
+  if IsEnabled("dark")
+    colorscheme gruvbox
+    set bg=dark
+  else
+    colorscheme ayu
+    let ayucolor="light"
+  endif
 endif
 
 if g:config_level > 2

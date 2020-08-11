@@ -23,6 +23,7 @@ let g:toggles = get(g:, "toggles", {
   \   "airline":1,
   \   "autosave":1,
   \   "coco":0,
+  \   "dark":1,
   \   "gitgutter":1, 
   \   "nerdtree":1,
   \   "polyglot":0,
@@ -50,6 +51,7 @@ endfunction
 
 nnoremap <silent> <leader>9a :call Toggle("ale")<CR>
 nnoremap <silent> <leader>9c :call Toggle("coc")<CR>
+nnoremap <silent> <leader>9d :call Toggle("dark")<CR>
 nnoremap <silent> <leader>9n :call Toggle("nerdtree")<CR>
 nnoremap <silent> <leader>9g :call Toggle("gitgutter")<CR>
 nnoremap <silent> <leader>9s :call Toggle("syntastic")<CR>
