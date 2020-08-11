@@ -106,6 +106,7 @@ command_install() {
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-omf
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-pip
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-gem
+  [ $DRY -eq 0 ] && clean-vim
   [ $DRY -eq 0 ] && dotme-vim
   [ $DRY -eq 0 ] && dotme-tmux
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-node
