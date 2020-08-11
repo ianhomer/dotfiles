@@ -10,6 +10,7 @@
 - [ ] Add vim thesaurus
 
 Try
+
 - reedes/vim-lexical
 - ervandew/supertab
 - reedes/vim-pencil
