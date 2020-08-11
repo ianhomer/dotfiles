@@ -506,6 +506,7 @@ if g:config_level > 3
   let g:airline#extensions#tabline#enabled = 1
   " Enable powerfonts giving angled tab
   let g:airline_powerline_fonts = 1
+  let g:airline_skip_empty_sections = 1
   let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 endif
 
