@@ -44,6 +44,24 @@ if g:config_level > 0
 
 endif
 
+function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" same as above, but show untracked files, honouring .gitignore
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" Read ~/.NERDTreeBookmarks file and takes its second column
+function! s:nerdtreeBookmarks()
+    let bookmarks = systemlist("cut -d' ' -f 2 ~/.NERDTreeBookmarks")
+    let bookmarks = bookmarks[0:-2] " Slices an empty last line
+    return map(bookmarks, "{'line': v:val, 'path': v:val}")
+endfunction
+
 if g:config_level > 3
 
   "
@@ -71,6 +89,20 @@ if g:config_level > 3
   " setting conceal level as desired
   let g:indentLine_setConceal = 0
   let g:indentLine_char = '┊'
+
+  Plug 'mhinz/vim-startify'
+  let g:startify_custom_header = ""
+  let g:startify_session_autoload = 0
+  let g:startify_change_to_dir = 0
+  let g:startify_lists = [
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']}
+        \ ]
 
   "
   " Help
@@ -507,7 +539,7 @@ if IsEnabled("nerdtree")
 endif
 
 if g:config_level > 0
-  if IsEnabled("dark")
+  if !IsEnabled("light")
     colorscheme gruvbox
     set bg=dark
   else
@@ -515,9 +547,9 @@ if g:config_level > 0
     colorscheme one
     set bg=light
     let g:one_allow_italics = 1
-    call one#highlight('Normal', '0c0c0c', '', 'none')
-    call one#highlight('markdownH1', '000', '', 'bold')
-    call one#highlight('markdownH2', '000', '', 'bold')
+    call one#highlight('Normal', '000000', '', 'none')
+    call one#highlight('markdownH1', '000000', '', 'bold')
+    call one#highlight('markdownH2', '000000', '', 'bold')
   endif
 endif
 
