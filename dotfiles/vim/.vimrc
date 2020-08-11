@@ -547,9 +547,9 @@ if g:config_level > 0
     colorscheme one
     set bg=light
     let g:one_allow_italics = 1
-    call one#highlight('Normal', '000000', '', 'none')
-    call one#highlight('markdownH1', '000000', '', 'bold')
-    call one#highlight('markdownH2', '000000', '', 'bold')
+    call one#highlight('Normal', '000000', 'ffffff', 'none')
+    call one#highlight('markdownH1', '000000', 'ffffff', 'bold')
+    call one#highlight('markdownH2', '000000', 'ffffff', 'bold')
   endif
 endif
 
