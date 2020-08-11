@@ -34,9 +34,7 @@ if g:config_level > 0
   " Style
   "
   Plug 'morhetz/gruvbox'
-  Plug 'ayu-theme/ayu-vim'
-  Plug 'tomasr/molokai'
-  Plug 'jnurmine/zenburn'
+  Plug 'rakr/vim-one'
 
   if IsEnabled("nerdtree")
     " NERDTree - file explore
@@ -513,8 +511,13 @@ if g:config_level > 0
     colorscheme gruvbox
     set bg=dark
   else
-    colorscheme ayu
-    let ayucolor="light"
+    " Light scheme primarily used for writing content
+    colorscheme one
+    set bg=light
+    let g:one_allow_italics = 1
+    call one#highlight('Normal', '0c0c0c', '', 'none')
+    call one#highlight('markdownH1', '000', '', 'bold')
+    call one#highlight('markdownH2', '000', '', 'bold')
   endif
 endif
 
