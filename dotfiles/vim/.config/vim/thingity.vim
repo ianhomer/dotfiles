@@ -1,5 +1,7 @@
 function! LintMarkdown()
-  normal magg
+  normal ma
+  call PruneWhiteSpace()
+  normal gg
   " Do not format fenced blocks. I can't find a way to configure the default vim
   " formatting to not join lines in fenced blocks, so instead we'll only format
   " up to the fenced block and then continue after. Note that a fenced block

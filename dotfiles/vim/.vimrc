@@ -308,6 +308,10 @@ function! LintMe()
     ALEFix
   elseif &filetype == "json"
     execute "%!jq ."
+  else
+    normal ma
+    call PruneWhiteSpace()
+    normal `a
   endif
 endfunction
 
