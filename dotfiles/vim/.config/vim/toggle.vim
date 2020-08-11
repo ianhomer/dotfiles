@@ -24,6 +24,7 @@ let g:toggles = get(g:, "toggles", {
   \   "autosave":1,
   \   "coco":0,
   \   "light": $ITERM_PROFILE == 'oh-my' ? 1 : 0,
+  \   "mincmd": $ITERM_PROFILE == 'oh-my' ? 1 : 0, 
   \   "gitgutter":1, 
   \   "nerdtree":1,
   \   "polyglot":0,

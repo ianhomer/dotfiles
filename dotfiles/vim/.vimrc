@@ -206,7 +206,11 @@ endif
 set shortmess=catI
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
-set cmdheight=2
+if IsEnabled("mincmd")
+  set cmdheight=1
+else
+  set cmdheight=2
+endif
 " Tab support with 2 spaces
 set tabstop=2
 set shiftwidth=2
