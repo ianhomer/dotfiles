@@ -360,10 +360,12 @@
 	</dict>
 	<key>Default Bookmark Guid</key>
 	<string>341AAE3B-2313-4C59-9717-F45C79A571E6</string>
+	<key>DimBackgroundWindows</key>
+	<true/>
 	<key>DisableFullscreenTransparency</key>
 	<false/>
 	<key>EnableDivisionView</key>
-	<true/>
+	<false/>
 	<key>EnableProxyIcon</key>
 	<false/>
 	<key>GlobalKeyMap</key>
@@ -469,6 +471,10 @@
 	</dict>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
+	<key>HideFromDockAndAppSwitcher</key>
+	<true/>
+	<key>HideMenuBarInFullscreen</key>
+	<false/>
 	<key>HideScrollbar</key>
 	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
@@ -486,9 +492,13 @@
 	<key>NSColorPanelVisibleSwatchRows.modal</key>
 	<integer>2</integer>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/projects/opensource/gruvbox-contrib/iterm2</string>
+	<string>~/Documents</string>
+	<key>NSNavLastUserSetHideExtensionButtonState</key>
+	<false/>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{799, 448}</string>
+	<key>NSNavPanelExpandedSizeForSaveMode</key>
+	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -535,15 +545,15 @@
 	<key>NSWindow Frame NSColorPanel.modal</key>
 	<string>728 509 224 275 0 0 1680 922 </string>
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
-	<string>624 510 799 448 0 0 2048 1129 </string>
+	<string>850 711 347 181 0 0 2048 1129 </string>
 	<key>NSWindow Frame ProfilesPanel</key>
 	<string>499 301 735 382 0 0 2048 1152 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1271 37 740 419 0 0 2048 1129 </string>
+	<string>922 233 1018 560 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>596 588 1020 538 0 0 2048 1129 </string>
+	<string>857 311 1018 537 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>961 111 570 379 0 0 2048 1129 </string>
+	<string>961 0 1018 536 0 0 2048 1129 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>308 81 572 331 0 0 2048 1152 </string>
 	<key>New Bookmarks</key>
@@ -2422,17 +2432,24 @@
 		<string>Inconsolata Nerd Font</string>
 		<string>Inconsolata</string>
 	</array>
+	<key>NoSyncFrame_SessionsPreferences</key>
+	<dict>
+		<key>screenFrame</key>
+		<string>{{0, 0}, {2048, 1152}}</string>
+		<key>topLeft</key>
+		<string>{721, 976}</string>
+	</dict>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
 		<string>{{0, 0}, {2048, 1152}}</string>
 		<key>topLeft</key>
-		<string>{296, 675}</string>
+		<string>{152, 704}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>2FD40B6B-A107-446B-BAF3-EAADC4881C10</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>65</integer>
+	<integer>69</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -3173,6 +3190,8 @@
 			</dict>
 		</array>
 	</dict>
+	<key>NoSyncSaveDocumentAsPathSet_saveDocumentAs:</key>
+	<true/>
 	<key>NoSyncSearchHistory2</key>
 	<array>
 		<string>alias</string>
@@ -3184,10 +3203,14 @@
 	<false/>
 	<key>OpenArrangementAtStartup</key>
 	<false/>
+	<key>OpenBookmark</key>
+	<false/>
 	<key>OpenNoWindowsAtStartup</key>
 	<false/>
 	<key>OpenTmuxWindowsIn</key>
 	<integer>0</integer>
+	<key>PMPrintingExpandedStateForPrint2</key>
+	<false/>
 	<key>PassOnControlClick</key>
 	<true/>
 	<key>PointerActions</key>
@@ -3225,6 +3248,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>~/.dotfiles/config/iterm2</string>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>SUEnableAutomaticChecks</key>
@@ -3245,10 +3270,12 @@
 	<true/>
 	<key>SoundForEsc</key>
 	<false/>
+	<key>SplitPaneDimmingAmount</key>
+	<real>0.11097905585106395</real>
 	<key>StatusBarPosition</key>
 	<integer>0</integer>
 	<key>TabStyleWithAutomaticOption</key>
-	<integer>4</integer>
+	<integer>1</integer>
 	<key>TabViewType</key>
 	<integer>0</integer>
 	<key>ThreeFingerEmulates</key>
@@ -3258,11 +3285,11 @@
 		<string>Recent Directories</string>
 	</array>
 	<key>UseBorder</key>
-	<true/>
+	<false/>
 	<key>VisualIndicatorForEsc</key>
 	<false/>
 	<key>WindowNumber</key>
-	<true/>
+	<false/>
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
