@@ -6,7 +6,7 @@ unlet b:current_syntax
 syntax include @Yaml syntax/yaml.vim
 syntax region yamlFrontmatter start=/\%^---$/ end=/^---$/ keepend contains=@Yaml
 
-set conceallevel=1
+set conceallevel=2
 set concealcursor=nc
 
 " Markdown table rendering
