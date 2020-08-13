@@ -9,7 +9,7 @@ source "$fasd_cache"
 unset fasd_cache
 
 # Initialise broot
-if ~/.dotfiles/bin/is-pc; then
+if [[ ! "$OSTYPE" =~ ^linux-android ]]; then
   source ~/Library/Preferences/org.dystroy.broot/launcher/bash/br
   source /Users/ian/Library/Preferences/org.dystroy.broot/launcher/bash/br
 fi
