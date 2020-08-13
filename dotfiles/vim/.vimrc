@@ -560,6 +560,7 @@ if g:config_level > 0
     call one#highlight('Normal', '000000', 'ffffff', 'none')
     call one#highlight('markdownH1', '000000', 'ffffff', 'bold')
     call one#highlight('markdownH2', '000000', 'ffffff', 'bold')
+    call one#highlight('Directory', '222222', '', 'bold')
   endif
 endif
 
