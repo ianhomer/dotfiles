@@ -259,6 +259,8 @@ if g:config_level > 0
     nnoremap <silent> <leader>g :call ToggleFugitive()<CR>
     nnoremap <silent> <leader>b :call GitPush()<CR>
 
+    nnoremap <silent> <leader>q :q<CR>
+
     if g:config_level > 3
       nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
