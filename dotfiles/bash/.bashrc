@@ -13,3 +13,5 @@ if [[ ! "$OSTYPE" =~ ^linux-android ]]; then
   source ~/Library/Preferences/org.dystroy.broot/launcher/bash/br
   source /Users/ian/Library/Preferences/org.dystroy.broot/launcher/bash/br
 fi
+
+alias vi="nvim"
