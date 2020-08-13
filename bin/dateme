@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Cross platform execution of GNU coreutils date
+
+if is-macos ; then
+  gdate $*
+else
+  date $*
+fi
+

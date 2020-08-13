@@ -3,7 +3,7 @@ status --is-login; and set CONFIG_LOG_LEVEL 1
 
 if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
   set_color grey
-  set SHELL_START_DATE (gdate +%s%3N)
+  set SHELL_START_DATE (dateme +%s%3N)
 end
 
 if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
@@ -13,7 +13,7 @@ end
 
 function time-me
   if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
-    set DATE (gdate +%s%3N)
+    set DATE (dateme +%s%3N)
     printf "    TIME : %20s : %s\n" $argv[1] (expr $DATE - $SHELL_START_DATE)
   end
 end
@@ -53,7 +53,7 @@ if status --is-interactive
   source ~/.config/fish/aliases.fish
   time-me "AFTER aliases"
   source ~/.config/fish/functions.fish
-  set DATE (gdate +%s%3N)
+  set DATE (dateme +%s%3N)
   time-me "AFTER functions"
 
   #
@@ -99,7 +99,7 @@ if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
 end
 [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and echo "... Loaded ~/.config/fish/config.fish"
 if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
-  set DATE (gdate +%s%3N)
+  set DATE (dateme +%s%3N)
   echo "... Initialised in "(expr $DATE - $SHELL_START_DATE)"ms"
   set_color normal
 end
