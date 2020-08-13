@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+#
+# Install pkg packages
+#
+
+should-run -m 7 $0 || exit
+
+pkg install fzf
+pkg install fasd
+pkg install keybase
+
+should-run -fu $0

@@ -102,15 +102,15 @@ command_install() {
   command_pull
   [ $QUICK -eq 0 ] && command_packages
   command_stow
-  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && is-macos && dotme-osx-defaults
+  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && is-macos && dotme-osx
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-omf
-  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-pip
-  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-gem
+  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && is-pc && dotme-pip
+  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && is-pc && dotme-gem
   [ $DRY -eq 0 ] && clean-vim
   [ $DRY -eq 0 ] && dotme-vim
-  [ $DRY -eq 0 ] && dotme-tmux
-  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-node
-  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-jenv
+  [ $DRY -eq 0 ] && is-pc && dotme-tmux
+  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && is-pc && dotme-node
+  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && is-pc && dotme-jenv
   [ $DRY -eq 0 ] && dotme-fish
   [ $DRY -eq 0 ] && dotme-fisher
   [ $DRY -eq 0 ] && dotme-gitme
@@ -133,6 +133,8 @@ command_packages() {
   if [[ $DRY -eq 0 ]] ; then
     if is-macos ; then
       dotme-brew
+    elif is-android ; then
+      dotme-pkg
     elif has-pacman ; then
       has-pacman
     fi
