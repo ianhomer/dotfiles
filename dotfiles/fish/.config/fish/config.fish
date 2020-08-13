@@ -87,7 +87,6 @@ if status --is-login
   # red-green color blind friendly, red on dark background not good for me
   set fish_color_error 14b77b
 
-
   #
   # Set terminal for GPG to allow signining of git commits
   #
