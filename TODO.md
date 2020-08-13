@@ -8,7 +8,12 @@
 - [ ] How to list all spelling mistakes across all files
 - [ ] Leader o should open up last buffer from history if none open
 - [ ] Add vim thesaurus
+<<<<<<< HEAD
 - [ ] Make history relative to current project root
+- [ ] optimise dotfiles for termux on android
+  - [ ] keybase setup
+  - [ ] dotme bootstrap
+  - [ ] core task on screen keyboard
 
 Try
 
