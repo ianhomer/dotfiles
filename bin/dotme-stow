@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+#
+# Stow files
+#
+
+DOTFILES_DIR=~/.dotfiles/dotfiles
+while getopts "d:v" o; do case "$o" in
+  d) DOTFILES_DIR=$OPTARG ;;
+  r) DRY="y" ;;
+  v) VERBOSE="y" ;;
+esac done
+
+should-run -m 7 $0 $DOTFILES_DIR || exit
+
+cd $DOTFILES_DIR
+printf "\e[36mstowing dotfiles\e[0\n"
+for DIR in `ls -d */` ; do
+  cd $DOTFILES_DIR/$DIR
+  for FILE in `find . -type f -print` ; do
+    [[ -n $DRY ]] && backup $FILE
+  done
+  [[ -n $VERBOSE ]] && echo "... stowing $DIR"
+  # Copy directory structure so that stow links files NOT directories
+  find . -mindepth 1 -type d -exec mkdir -p $HOME/{} \;
+  [[ -n $DRY ]] && stow -v --ignore=.swp --ignore=.bak -t $HOME .
+  [[ -n $DRY ]] && stow --simulate -v --ignore=.swp --ignore=.bak -t $HOME .
+done
+
+should-run -fu $0
+

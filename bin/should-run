@@ -109,7 +109,14 @@ if [[ -z "$force" ]] && [[ -f "$shouldRunFile" ]] ; then
   # Compare against any other files provided
   if [[ $shouldRun -eq 0 ]] && [[ -n "$otherFiles" ]] ; then
     for file in $otherFiles ; do
-      [[ $file -nt $shouldRunFile ]] && shouldRun=1
+      if [[ -d $file ]] ; then
+        # If other file is a directory then we should run if we find any files
+        # newer than the should run file.
+        newerFileCount=`find $file -type f -newer $shouldRunFile -print | wc -l`
+        [[ $newerFileCount -gt 0 ]] && shouldRun=1
+      else
+        [[ $file -nt $shouldRunFile ]] && shouldRun=1
+      fi
     done
   fi
 

@@ -101,7 +101,7 @@ command_install() {
   [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
   command_pull
   [ $QUICK -eq 0 ] && command_packages
-  command_stow
+  dotme-stow -d $DOTFILES_DIR
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && is-macos && dotme-osx
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-omf
   [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && is-pc && dotme-pip
@@ -139,23 +139,6 @@ command_packages() {
       has-pacman
     fi
   fi
-}
-
-# Just stow dotfiles, quicker than a full install.
-command_stow() {
-  printf "\e[36mstowing dotfiles\e[0\n"
-  cd $DOTFILES_DIR
-  for DIR in `ls -d */` ; do
-    cd $DOTFILES_DIR/$DIR
-    for FILE in `find . -type f -print` ; do
-      [ $DRY -eq 0 ] && backup $FILE
-    done
-    [ $VERBOSE -eq 1 ] && echo "... stowing $DIR"
-    # Copy directory structure so that stow links files NOT directories
-    find . -mindepth 1 -type d -exec mkdir -p $HOME/{} \;
-    [ $DRY -eq 0 ] && stow -v --ignore=.swp --ignore=.bak -t $HOME .
-    [ $DRY -eq 1 ] && stow --simulate -v --ignore=.swp --ignore=.bak -t $HOME .
-  done
 }
 
 # Just update system, assuming it's already been installed.
