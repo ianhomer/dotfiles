@@ -6,5 +6,6 @@ echo "... running .bash_profile from dotfiles"
 
 PATH=$PATH:~/.dotfiles/bin
 
-source /Users/ian/Library/Preferences/org.dystroy.broot/launcher/bash/br
-
+if is-pc; then
+  source /Users/ian/Library/Preferences/org.dystroy.broot/launcher/bash/br
+fi
