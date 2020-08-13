@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ "$OSTYPE" =~ ^android ]]; then
+if [[ "$OSTYPE" =~ ^linux-android ]]; then
   exit 0
 else
   exit 1
