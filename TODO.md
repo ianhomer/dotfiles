@@ -11,7 +11,6 @@
 - [ ] Make history relative to current project root
 - [ ] optimise dotfiles for termux on android
   - [ ] keybase setup
-  - [ ] dotme bootstrap
   - [ ] core task on screen keyboard
 - [ ] Leader f should only include (some) hidden files in dotfiles project.
   e.g. Leader f should list only the markdown files in a thing project

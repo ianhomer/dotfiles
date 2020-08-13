@@ -89,6 +89,7 @@ if g:config_level > 3
   " setting conceal level as desired
   let g:indentLine_setConceal = 0
   let g:indentLine_char = '┊'
+  let g:indentLine_fileTypeExclude = ['json', 'markdown']
 
   Plug 'mhinz/vim-startify'
   let g:startify_custom_header = ""

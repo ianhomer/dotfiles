@@ -1,1 +1,1 @@
-set conceallevel=2 concealcursor=inc
+set conceallevel=2 concealcursor=nc
