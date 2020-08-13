@@ -11,7 +11,7 @@ while getopts "d:v" o; do case "$o" in
   v) VERBOSE="y" ;;
 esac done
 
-should-run -m 7 $0 $DOTFILES_DIR || exit
+should-run $0 $DOTFILES_DIR || exit
 
 cd $DOTFILES_DIR
 printf "\e[36mstowing dotfiles\e[0\n"
