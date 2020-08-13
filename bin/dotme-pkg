@@ -6,8 +6,15 @@
 
 should-run -m 7 $0 || exit
 
-pkg install fzf
 pkg install fasd
+pkg install fish
+pkg install fzf
+pkg install git
 pkg install keybase
+pkg install neovim
+pkg install openssh
+pkg install silversearcher-ag
+pkg install stow
+pkg install termux-api
 
 should-run -fu $0

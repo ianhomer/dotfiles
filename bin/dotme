@@ -153,7 +153,7 @@ command_update() {
 
 # Housekeeping and keeping things clean.
 command_clean() {
-  clean-brew
+  is_macos && clean-brew
 }
 
 # Unistall dotfiles. Note that this does not (at this time), unstill brew
