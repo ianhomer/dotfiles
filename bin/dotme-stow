@@ -4,8 +4,6 @@
 # Stow files
 #
 
-echo "test"
-
 DOTFILES_DIR=~/.dotfiles/dotfiles
 while getopts "d:v" o; do case "$o" in
   d) DOTFILES_DIR=$OPTARG ;;
