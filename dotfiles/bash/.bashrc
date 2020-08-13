@@ -9,7 +9,7 @@ source "$fasd_cache"
 unset fasd_cache
 
 # Initialise broot
-if is-pc; then
+if ~/.dotfiles/bin/is-pc; then
   source ~/Library/Preferences/org.dystroy.broot/launcher/bash/br
   source /Users/ian/Library/Preferences/org.dystroy.broot/launcher/bash/br
 fi
