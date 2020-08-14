@@ -105,7 +105,9 @@ if !exists("*ApplyLayers")
   " Apply feature toggles for all layers
   function! ApplyLayers()
     for [layer,enabled] in items(g:layers)
-      call ApplyLayer(layer, enabled)
+      if enabled
+        call ApplyLayer(layer, enabled)
+      endif
     endfor
   endfunction
   " Apply all layers during initialisation

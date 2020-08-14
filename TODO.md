@@ -9,11 +9,8 @@
 - [ ] Leader o should open up last buffer from history if none open
 - [ ] Add vim thesaurus
 - [ ] Make history relative to current project root
-- [ ] optimise dotfiles for termux on android
-  - [ ] keybase setup
-  - [ ] core task on screen keyboard
-- [ ] Leader f should only include (some) hidden files in dotfiles project.
-  e.g. Leader f should list only the markdown files in a thing project
+- [ ] Command to start keybase if not running prior to git push
+- [ ] Reduce clicks do things on mobile 
 
 Try
 
