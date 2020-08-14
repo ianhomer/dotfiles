@@ -57,7 +57,7 @@ let g:layer_features = {
 " Default state of layers
 " iTerm used for notes layer
 let g:layers = get(g:, "layers",{
-  \   "mobile": 0,
+  \   "mobile": $ANDROID_DATA == '/data' ? 1 : 0,
   \   "notes": $ITERM_PROFILE == 'oh-my' ? 1 : 0   
   \ })
 
