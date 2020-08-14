@@ -356,6 +356,12 @@ if !exists("*ReloadConfig")
       " message causes overload in the 2 row command window
       echo "Reloaded ".config_message.coc_message" - level = ".g:config_level
     endif
+    if expand('%:p') != ""
+      normal ma
+      " Reload current buffer
+      silent edit
+      normal `a
+    endif
   endfunction
 endif
 

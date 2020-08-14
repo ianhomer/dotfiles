@@ -64,20 +64,10 @@ let g:layers = get(g:, "layers",{
 " Set default state of feature toggles
 let g:toggles = get(g:, "toggles", g:default_toggles)
 
-if !exists("*ReloadConfigAfterToggle")
-  function ReloadConfigAfterToggle()
-    call ReloadConfig()
-    if expand('%:p') != ""
-      " Reload current buffer
-      silent edit
-    endif
-  endfunction
-endif
-
 if !exists("*ToggleFeature")
   function ToggleFeature(feature)
     call SetFeature(a:feature, has_key(g:toggles, a:feature) ? !g:toggles[a:feature] : 1)
-    call ReloadConfigAfterToggle()
+    call ReloadConfig()
   endfunction
 endif
 
@@ -85,7 +75,7 @@ if !exists("*ToggleLayer")
   function ToggleLayer(layer)
     let g:layers[a:layer] = !g:layers[a:layer]
     call ApplyLayer(a:layer, g:layers[a:layer])
-    call ReloadConfigAfterToggle()
+    call ReloadConfig()
   endfunction
 endif
 
@@ -95,7 +85,7 @@ if !exists("*ConfigLevel")
     if g:config_level == 0
       set all&
     endif
-    call <SID>ReloadConfig()
+    call ReloadConfig()
   endfunction
 endif
 

@@ -68,13 +68,11 @@ endfunction
 
 function s:CarriageReturn()
   if getline(".") =~ '\v-\s\[\s\]\s\w+'
-    normal ma
     s/\[\s\]/[x]/
-    normal `a
+    normal ``
   elseif getline(".") =~ '\v-\s\[x\]\s\w+'
-    normal ma
     s/\[x\]/[ ]/
-    normal `a
+    normal ``
   else
     normal j
   endif
