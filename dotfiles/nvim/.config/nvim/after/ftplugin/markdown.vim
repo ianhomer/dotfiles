@@ -82,7 +82,9 @@ inoremap <buffer> <silent> <Bar> <Bar><Esc>:call <SID>LintTable()<CR>$a
 " Auto continuation on carriage return
 inoremap <buffer> <silent> <CR> <CR><C-R>=<SID>NextLine()<C-M>
 
-nnoremap <buffer> <silent> <CR> :call <SID>CarriageReturn()<CR>
+if IsEnabled("markdown.flow")
+  nnoremap <buffer> <silent> <CR> :call <SID>CarriageReturn()<CR>
+endif
 
 " The rest of this filetype plugin is not relevant if we're using CoC
 if IsEnabled("coc")

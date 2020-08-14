@@ -29,7 +29,10 @@ let g:default_toggles = {
   \   "autosave":1,
   \   "coco":0,
   \   "compactcmd":0,
-  \   "markflow":0,
+  \   "markdown.flow":0,
+  \   "markdown.conceal.full":0,
+  \   "markdown.syntax.list":0,
+  \   "markdown.syntax.table":1,
   \   "gitgutter":1, 
   \   "nerdtree":1,
   \   "polyglot":0,
@@ -40,11 +43,14 @@ let g:default_toggles = {
 " Feature toggles triggered by each layer
 let g:layer_features = {
   \    "mobile":{
-  \      "markflow":1
+  \      "markdown.flow":1,
+  \      "markdown.conceal.full":1,
+  \      "markdown.syntax.list":1
   \    },
   \    "notes":{
   \       "compactcmd":1,
-  \       "light":1
+  \       "light":1,
+  \       "markdown.flow":1,
   \    }
   \  }
 
