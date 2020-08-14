@@ -33,7 +33,7 @@ endfunction
 
 function! s:GetThingityDateHeading()
   " Top level heading if first line
-  let heading = line('.') == 1 ? "# HELLO DH " : "## "
+  let heading = line('.') == 1 ? "# '!' :) DH " : "## "
   return heading . toupper(strftime("%a %d %b %Y"))
 endfunction
 
