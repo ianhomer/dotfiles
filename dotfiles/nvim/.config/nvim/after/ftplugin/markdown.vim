@@ -70,7 +70,7 @@ nnoremap <buffer> <silent> <leader>jr :call <SID>LintTable()<CR>
 " Auto lint when typing | in insert mode
 inoremap <buffer> <silent> <Bar> <Bar><Esc>:call <SID>LintTable()<CR>$a
 " Auto continuation on carriage return
-inoremap <buffer> <CR> <CR><C-R>=<SID>NextLine()<C-M>
+inoremap <buffer> <silent> <CR> <CR><C-R>=<SID>NextLine()<C-M>
 
 " The rest of this filetype plugin is not relevant if we're using CoC
 if IsEnabled("coc")
