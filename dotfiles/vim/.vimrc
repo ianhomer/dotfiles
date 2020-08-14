@@ -208,7 +208,7 @@ endif
 set shortmess=catI
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
-if IsEnabled("notes")
+if IsEnabled("compactcmd")
   set cmdheight=1
 else
   set cmdheight=2
