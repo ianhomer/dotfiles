@@ -99,11 +99,12 @@ function! s:ThingityNewThing()
     let thingName = l:root."/".toupper(strftime("%Y%m%d-%H%M%S")).".md"
     let headingExtra = " - ".s:ThingityTime()
   endif
-  close
-  execute "e ".thingName
+  " Close current buffer so that new thing opens up with focus
+  silent! close
+  execute "silent e ".thingName
   execute "normal! a".<SID>GetThingityDateHeading().headingExtra."\<ESC>2o\<ESC>"
   write
-  NERDTreeFind
+  call NERDTreeFindIfRoom()
   wincmd p
 endfunction
 
