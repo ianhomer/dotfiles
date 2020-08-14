@@ -88,6 +88,7 @@ if g:config_level > 3
   " Don't switch it on by default as it can be a little brutle, rely on syntax
   " setting conceal level as desired
   let g:indentLine_setConceal = 0
+  let g:indentLine_setColors = 0
   let g:indentLine_char = '┊'
   let g:indentLine_fileTypeExclude = ['json', 'markdown']
 

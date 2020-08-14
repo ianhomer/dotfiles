@@ -2,6 +2,8 @@ if g:config_level < 2
   finish
 endif
 
+hi clear Conceal
+
 unlet b:current_syntax
 syntax include @Yaml syntax/yaml.vim
 syntax region yamlFrontmatter start=/\%^---$/ end=/^---$/ keepend contains=@Yaml
@@ -14,11 +16,8 @@ syntax match mdList /^-\s.*/ contains=mdListBullet
 syntax match mdListBullet /\v^\zs-\ze/ contained conceal cchar=●
 syntax match mdTodo /\v^\zs-\s\[.+\]\ze/ contains=mdTodoStart,mdTodoDone,mdTodoNotDone
 syntax match mdTodoStart /\v^\zs-\ze/ contained conceal nextgroup=mdTodoDone,mdTodoNotDone
-syntax match mdTodoNotDone /\v\[\s\]/ contained cchar=◻︎ conceal
-syntax match mdTodoDone /\v\[x\]/ contained cchar=☑︎ conceal
-
-hi mdTodoDone term=bold
-hi mdListBullet term=bold ctermfg=black
+syntax match mdTodoNotDone /\v\s\[\s\]/ contained cchar=◻︎ conceal
+syntax match mdTodoDone /\v\s\[x\]/ contained cchar=☑︎ conceal
 
 " Markdown table rendering
 syntax match mdTableRow /\v^\|.*\|/ contains=mdTableColumn
