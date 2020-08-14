@@ -56,7 +56,7 @@ function! s:NextLine()
         call setline(l:previousLineNumber,'')
       endif
     endif
-  elseif l:previous =~ '\v\|'
+  elseif l:previous =~ '|'
     if l:previous =~ '\v\|\s\w+'
       return '| '
     else 
