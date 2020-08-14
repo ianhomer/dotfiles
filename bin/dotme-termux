@@ -6,9 +6,12 @@
 
 should-run -m 7 $0 || exit
 
-curl -fLo ~/.termux/font.ttf \
-  https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Inconsolata/complete/Inconsolata%20Regular%20Nerd%20Font%20Complete.ttf
+if [[ ! -f ~/.termux/font.ttf ]] ; then
+  curl -fLo ~/.termux/font.ttf \
+    https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Inconsolata/complete/Inconsolata%20Regular%20Nerd%20Font%20Complete.ttf
+fi
 
 termux-reload-settings
+am broadcast --user 0 -a com.termux.app.reload_style com.termux > /dev/null
 
 should-run -fu $0
