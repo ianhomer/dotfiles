@@ -12,11 +12,11 @@ set conceallevel=2
 set concealcursor=nc
 
 " Markdown list rendering
-syntax match mdList /^-\s.*/ contains=mdListBullet
-syntax match mdListBullet /\v^\zs-\ze/ contained conceal cchar=●
-syntax match mdTodo /\v^\zs-\s\[.+\]\ze/ contains=mdTodoStart,mdTodoDone,mdTodoNotDone
-syntax match mdTodoStart /\v^\zs-\ze/ contained conceal nextgroup=mdTodoDone,mdTodoNotDone
-syntax match mdTodoNotDone /\v\s\[\s\]/ contained cchar=◻︎ conceal
+syntax match mdList /^\s*-\s.*/ contains=mdListBullet
+syntax match mdListBullet /\v^\s*\zs-\ze/ contained conceal cchar=•
+syntax match mdTodo /\v^\zs\s*-\s\[.+\]\ze/ contains=mdTodoStart,mdTodoDone,mdTodoNotDone
+syntax match mdTodoStart /\v^\s*\zs-\ze/ contained conceal nextgroup=mdTodoDone,mdTodoNotDone
+syntax match mdTodoNotDone /\v\s\[\s\]/ contained cchar=☐ conceal
 syntax match mdTodoDone /\v\s\[x\]/ contained cchar=☑︎ conceal
 
 " Markdown table rendering
