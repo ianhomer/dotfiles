@@ -43,14 +43,15 @@ let g:default_toggles = {
 " Feature toggles triggered by each layer
 let g:layer_features = {
   \    "mobile":{
+  \      "compactcmd":1,
   \      "markdown.flow":1,
   \      "markdown.conceal.full":1,
   \      "markdown.syntax.list":1
   \    },
   \    "notes":{
-  \       "compactcmd":1,
-  \       "light":1,
-  \       "markdown.flow":1,
+  \      "compactcmd":1,
+  \      "light":1,
+  \      "markdown.flow":1,
   \    }
   \  }
 
