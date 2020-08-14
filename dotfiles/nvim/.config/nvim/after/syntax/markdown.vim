@@ -9,14 +9,25 @@ syntax region yamlFrontmatter start=/\%^---$/ end=/^---$/ keepend contains=@Yaml
 set conceallevel=2
 set concealcursor=nc
 
+" Markdown list rendering
+syntax match mdList /^-\s.*/ contains=mdListBullet
+syntax match mdListBullet /\v^\zs-\ze/ contained conceal cchar=●
+syntax match mdTodo /\v^\zs-\s\[.+\]\ze/ contains=mdTodoStart,mdTodoDone,mdTodoNotDone
+syntax match mdTodoStart /\v^\zs-\ze/ contained conceal nextgroup=mdTodoDone,mdTodoNotDone
+syntax match mdTodoNotDone /\v\[\s\]/ contained cchar=◻︎ conceal
+syntax match mdTodoDone /\v\[x\]/ contained cchar=☑︎ conceal
+
+hi mdTodoDone term=bold
+hi mdListBullet term=bold ctermfg=black
+
 " Markdown table rendering
-syntax match markdownTableRow /\v^(\zs\|.*\|\ze)/ contains=markdownTableColumn
-syntax match markdownTableColumn /\v\|/ contained conceal cchar=│
-syntax match markdownTableHeader /\v^\|\s--.*\|/ contains=markdownTableHeaderStart,markdownTableHeaderEnd,markdownTableHeaderMiddle,markdownTableHeaderMinus,markdownTableHeaderSpace
-syntax match markdownTableHeaderEnd /\v\zs\|\ze$/ contained conceal cchar=┤
-syntax match markdownTableHeaderMiddle /\v\zs\|\ze\s/ contained conceal cchar=┼
-syntax match markdownTableHeaderStart /\v^\zs\|\ze\s+-/ contained conceal cchar=├
-syntax match markdownTableHeaderMinus /-/ contained conceal cchar=─
-syntax match markdownTableHeaderMinus /\s/ contained conceal cchar=─
+syntax match mdTableRow /\v^\|.*\|/ contains=mdTableColumn
+syntax match mdTableColumn /\v\|/ contained conceal cchar=│
+syntax match mdTableHeader /\v^\|\s--.*\|/ contains=mdTableHeaderStart,mdTableHeaderEnd,mdTableHeaderMiddle,mdTableHeaderMinus,mdTableHeaderSpace
+syntax match mdTableHeaderEnd /\v\zs\|\ze$/ contained conceal cchar=┤
+syntax match mdTableHeaderMiddle /\v\zs\|\ze\s/ contained conceal cchar=┼
+syntax match mdTableHeaderStart /\v^\zs\|\ze\s+-/ contained conceal cchar=├
+syntax match mdTableHeaderMinus /-/ contained conceal cchar=─
+syntax match mdTableHeaderMinus /\s/ contained conceal cchar=─
 
 
