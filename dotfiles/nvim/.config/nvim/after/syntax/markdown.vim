@@ -10,9 +10,9 @@ set conceallevel=2
 set concealcursor=nc
 
 " Markdown table rendering
-syntax match markdownTableRow /\v^(\zs\|[^-]+\|\ze)/ contains=markdownTableColumn
+syntax match markdownTableRow /\v^(\zs\|.*\|\ze)/ contains=markdownTableColumn
 syntax match markdownTableColumn /\v\|/ contained conceal cchar=│
-syntax match markdownTableHeader /\v^\|.*--.*\|/ contains=markdownTableHeaderStart,markdownTableHeaderEnd,markdownTableHeaderMiddle,markdownTableHeaderMinus,markdownTableHeaderSpace
+syntax match markdownTableHeader /\v^\|\s--.*\|/ contains=markdownTableHeaderStart,markdownTableHeaderEnd,markdownTableHeaderMiddle,markdownTableHeaderMinus,markdownTableHeaderSpace
 syntax match markdownTableHeaderEnd /\v\zs\|\ze$/ contained conceal cchar=┤
 syntax match markdownTableHeaderMiddle /\v\zs\|\ze\s/ contained conceal cchar=┼
 syntax match markdownTableHeaderStart /\v^\zs\|\ze\s+-/ contained conceal cchar=├
