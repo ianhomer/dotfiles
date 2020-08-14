@@ -111,6 +111,7 @@ command_inner() {
   command_packages
   dotme-stow -d $DOTFILES_DIR
   [ $DRY -eq 0 ] && is-macos && dotme-osx
+  [ $DRY -eq 0 ] && is-android && dotme-termux
   [ $DRY -eq 0 ] && dotme-omf
   [ $DRY -eq 0 ] && is-pc && dotme-pip
   [ $DRY -eq 0 ] && is-pc && dotme-gem
