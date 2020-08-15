@@ -219,6 +219,8 @@ set shiftwidth=2
 set expandtab
 " 80 characters default width
 set textwidth=80
+" Softbreak on space between words
+set linebreak
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
@@ -535,18 +537,6 @@ if g:config_level > 0
   set backspace=indent,eol,start
 endif
 
-" CR insert line without leaving normal mode. Note that this
-" has special case to append CR at end of line as this feels more
-" natural - disabled since non-vi.
-" nmap <expr> <CR> getpos('.')[2]==strlen(getline('.')) ?
-" "a<CR><Esc>" : "i<CR><Esc>"
-
-" Backspace to delete space without leaving normal mode. At the
-" beginning of the line it joins line to previous - disabled since non-vi.
-" nmap <expr> <BS> getpos('.')[2]==1 ? "k$gJ" : "hx<Esc>"
-
-" Tab without leaving normal mode
-" nnoremap <s-tab> <<
 " inoremap <s-tab> <C-d>
 " vnoremap <s-tab> <<
 " nnoremap <tab> >>
