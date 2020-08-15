@@ -14,7 +14,9 @@
 - [ ] only run dotme stow when new files added
 - [ ] set linebreak to not soft wrap in middle of word
 - [ ] git config name during setup and remove from dotfile on mobile
-- [ ] fresh reset on mobile and refine reinstalll
+- [ ] fresh reset on mobile and refine reinstall
+- [ ] name sessions in termux things and dotfiles
+- [ ] refine bookmark flow including share to termux on mobile
 
 Try
 
