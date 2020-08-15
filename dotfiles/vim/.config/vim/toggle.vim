@@ -44,6 +44,7 @@ let g:default_toggles = {
 let g:layer_features = {
   \    "mobile":{
   \      "compactcmd":1,
+  \      "light":1,
   \      "markdown.flow":1,
   \      "markdown.conceal.full":1,
   \      "markdown.syntax.list":1
