@@ -6,7 +6,8 @@
 
 should-run $0 || exit
 
-# ~/.gitconfig is used
+# Make sure ~/.gitconfig is in place before setting git config so that personal
+# settings end up in that config file
 gitConfigFile=~/.gitconfig
 if [[ ! -f $gitConfigFile ]] ; then
   echo "Creating $gitConfigFile" 
