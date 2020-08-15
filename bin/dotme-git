@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+#
+# Configure git
+#
+
+should-run $0 || exit
+
+# ~/.gitconfig is used
+gitConfigFile=~/.gitconfig
+if [[ ! -f $gitConfigFile ]] ; then
+  echo "Creating $gitConfigFile" 
+  touch $gitConfigFile
+fi
+
+git config user.email > /dev/null ||
+  git config --global user.email "ian@purplepip.com"
+
+git config user.name > /dev/null ||
+  git config --global user.name "ian"
+
+should-run -fu $0
