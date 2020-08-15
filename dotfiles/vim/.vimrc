@@ -537,7 +537,6 @@ if g:config_level > 0
   set backspace=indent,eol,start
 endif
 
-" inoremap <s-tab> <C-d>
 " vnoremap <s-tab> <<
 " nnoremap <tab> >>
 " vnoremap <tab> >>
