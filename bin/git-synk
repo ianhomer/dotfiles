@@ -49,7 +49,6 @@ if [[ $changes -gt 0 ]] ; then
   fi
 fi
 
-echo "Fetching"
 git fetch --quiet
 
 leftRight=$(git rev-list --count --left-right $remoteName/$branchName...HEAD)
@@ -57,12 +56,10 @@ left=$(echo $leftRight | awk '{print $1}')
 right=$(echo $leftRight | awk '{print $2}')
 
 if [[ $left -gt 0 ]] ; then
-  echo "Rebasing"
   git rebase --quiet
 fi
 
 if [[ $right -gt 0 ]] ; then
-  echo "Pushing"
   git push --quiet --porcelain
 fi
 
