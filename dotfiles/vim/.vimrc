@@ -262,6 +262,7 @@ if g:config_level > 0
     nnoremap <silent> <leader>K :call ToggleLocationList()<CR>
     nnoremap <silent> <leader>g :call ToggleFugitive()<CR>
     nnoremap <silent> <leader>b :call GitPush()<CR>
+    nnoremap <silent> <leader>e :!git sync<CR>
 
     " Quit and save/close are handy leaders for use on mobile and limited keyboard
     nnoremap <silent> <leader>q :q<CR>
