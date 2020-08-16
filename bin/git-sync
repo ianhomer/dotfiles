@@ -26,6 +26,8 @@ while getopts "ahu" o; do case "$o" in
   h) help && exit 1 ;;
 esac done
 
+echo "Git syncing ..."
+
 # Make sure in git repository
 git rev-parse
 
