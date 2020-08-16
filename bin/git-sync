@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+#
+# Safe synchronisation of git repository.
+#
+
+set -e
+
+# Make sure in git repository
+git rev-parse
+
+git pull -r
+
+git push
+
+originUrl=$(git config --get remote.origin.url)
+
+echo "Synced $originUrl"
