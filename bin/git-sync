@@ -6,13 +6,42 @@
 
 set -e
 
+help() {
+  cat <<EOF
+
+    git sync -a  # autocommit
+    git sync -u  # unset autocommmit
+
+EOF
+}
+
+OPTIND=1
+while getopts "ahu" o; do case "$o" in
+  a) git config core.autocommit true ;;
+  u) git config --unset core.autocommit ;;
+  h) help && exit 1 ;;
+esac done
+
 # Make sure in git repository
 git rev-parse
+
+fullBranchName=$(git symbolic-ref -q HEAD)
+branchName=${fullBranchName##refs/heads/}
+originUrl=$(git config --get remote.origin.url)
+
+if ! git diff --no-ext-diff --quiet --exit-code ; then
+  if [[ "true" == `git config core.autocommit` ]] ; then
+    # Handle dirty state
+    git add -A ; git commit -m "sync"
+  else
+    echo "Cannot sync - local changes and autocommit not set"
+    exit 128
+  fi
+fi
 
 git pull -r
 
 git push
 
-originUrl=$(git config --get remote.origin.url)
 
-echo "Synced $originUrl"
+echo "Synced $branchName on $originUrl"
