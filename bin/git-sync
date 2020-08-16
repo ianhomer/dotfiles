@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 #
-# Safe synchronisation of git repository.
+# Safe synchronisation of git repository. Auto-commits can be enabled by setting
+# the git config core.autocommit, i.e. run the following once in the repository
+# directory
+#
+#    git sync -a
 #
 
 set -e
@@ -31,7 +35,7 @@ originUrl=$(git config --get remote.origin.url)
 
 if ! git diff --no-ext-diff --quiet --exit-code ; then
   if [[ "true" == `git config core.autocommit` ]] ; then
-    # Handle dirty state
+    # Handle dirty state only if autocommit flag set
     git add -A ; git commit -m "sync"
   else
     echo "Cannot sync - local changes and autocommit not set"
@@ -42,6 +46,5 @@ fi
 git pull -r
 
 git push
-
 
 echo "Synced $branchName on $originUrl"
