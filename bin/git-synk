@@ -5,16 +5,18 @@
 # the git config core.autocommit, i.e. run the following once in the repository
 # directory
 #
-#    git sync -a
+#    git synk -a
 #
+# Autocommitting should only be enabled when the commit messages are of limited
+# value, for example personal / note style repositories.
 
 set -e
 
 help() {
   cat <<EOF
 
-    git sync -a  # autocommit
-    git sync -u  # unset autocommmit
+    git synk -a  # autocommit
+    git synk -u  # unset autocommmit
 
 EOF
 }
@@ -26,8 +28,6 @@ while getopts "ahu" o; do case "$o" in
   h) help && exit 1 ;;
 esac done
 
-echo "Git syncing ..."
-
 # Make sure in git repository
 git rev-parse
 
@@ -35,7 +35,9 @@ fullBranchName=$(git symbolic-ref -q HEAD)
 branchName=${fullBranchName##refs/heads/}
 originUrl=$(git config --get remote.origin.url)
 
-if ! git diff --no-ext-diff --quiet --exit-code ; then
+changes=$(git status --porcelain | wc -l)
+
+if [[ $changes -gt 0 ]] ; then
   if [[ "true" == `git config core.autocommit` ]] ; then
     # Handle dirty state only if autocommit flag set
     git add -A ; git commit -m "sync"
@@ -45,8 +47,8 @@ if ! git diff --no-ext-diff --quiet --exit-code ; then
   fi
 fi
 
-git pull -r
+git pull -r --quiet
 
-git push
+git push --porcelain
 
 echo "Synced $branchName on $originUrl"
