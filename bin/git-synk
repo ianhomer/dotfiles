@@ -34,21 +34,48 @@ git rev-parse
 fullBranchName=$(git symbolic-ref -q HEAD)
 branchName=${fullBranchName##refs/heads/}
 originUrl=$(git config --get remote.origin.url)
+remoteName=$(git config --get branch.$branchName.remote)
 
 changes=$(git status --porcelain | wc -l)
 
 if [[ $changes -gt 0 ]] ; then
   if [[ "true" == `git config core.autocommit` ]] ; then
     # Handle dirty state only if autocommit flag set
-    git add -A ; git commit -m "sync"
+    echo "Committing "$changes" change"$([[ $changes -gt 1 ]] && echo s)
+    git add -A ; git commit --quiet -m "sync"
   else
     echo "Cannot sync - local changes and autocommit not set"
     exit 128
   fi
 fi
 
-git pull -r --quiet
+echo "Fetching"
+git fetch --quiet
 
-git push --porcelain
+leftRight=$(git rev-list --count --left-right $remoteName/$branchName...HEAD)
+left=$(echo $leftRight | awk '{print $1}')
+right=$(echo $leftRight | awk '{print $2}')
 
-echo "Synced $branchName on $originUrl"
+if [[ $left -gt 0 ]] ; then
+  echo "Rebasing"
+  git rebase --quiet
+fi
+
+if [[ $right -gt 0 ]] ; then
+  echo "Pushing"
+  git push --quiet --porcelain
+fi
+
+if [[ $left -gt 0 ]] ; then
+  if [[ $right -gt 0 ]] ; then
+    action="↑ $left ↓ $right"
+  else
+    action="↑ $right"
+  fi
+elif [[ $right -gt 0 ]] ; then
+  action="↓ $right"
+else
+  action="≡"
+fi
+
+echo "$action $branchName on $originUrl"
