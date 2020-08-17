@@ -83,11 +83,6 @@ if g:config_level > 3
   Plug 'christoomey/vim-tmux-navigator'
   " Improved path support
   Plug 'tpope/vim-apathy'
-  " Indent line
-  Plug 'Yggdroot/indentLine'
-  " Don't switch it on by default as it can be a little brutle, rely on syntax
-  " setting conceal level as desired
-  let g:indentLine_setConceal = 0
   let g:indentLine_char = '┊'
 
   Plug 'mhinz/vim-startify'
