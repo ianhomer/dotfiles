@@ -6,16 +6,19 @@
 #
 
 OPTIND=1
-while getopts "cfhlnm:suv" o; do case "$o" in
-  c) clean="y" ;;    # Clean should run cache
-  f) force="y" ;;    # Force should run
+while getopts "cfhlm:norsuvz" o; do case "$o" in
+  c) clean="y" ;;      # Clean should run cache
+  f) force="y" ;;      # Force should run
   h) help="y" ;; 
-  l) list="y" ;;     # List should run files
-  n) noop="y" ;;     # No operation
+  l) list="y" ;;       # List should run files
   m) modified=$OPTARG ;; # Expiry time of should run file
-  s) silent="y" ;;   # Don't output message indicating what's done
-  u) update="y" ;;   # Update should run file
-  v) verbose="y" ;;  # Verbose output
+  n) noop="y" ;;       # No operation
+  o) otheronly="y" ;;  # Only check other files for modified
+  r) outrunfile="y" ;; # Return the name of th should run file
+  s) silent="y" ;;     # Don't output message indicating what's done
+  u) update="y" ;;     # Update should run file
+  v) verbose="y" ;;    # Verbose output
+  z) changed="y" ;;    # Check whether other files status changed since last run
 esac done
 
 shouldRunDir=~/.config/dotme/should-run
@@ -56,6 +59,11 @@ scriptName=${1##*/}
 shift
 otherFiles=$*
 shouldRunFile=${shouldRunDir}/last-run-${scriptName}
+
+if [[ -n "$outrunfile" ]] ; then
+  echo $shouldRunFile
+  exit 0
+fi
 
 [[ -n "$list" ]] && noop="y" && \
   ls -lt $shouldRunDir | awk '{$1=$2=$3=$4=$5=""; print $0}'
@@ -102,14 +110,25 @@ if [[ -z "$force" ]] && [[ -f "$shouldRunFile" ]] ; then
     exit 1
   [[ -n "$verbose" ]] && echo "Full script name : $fullScriptName"
 
-  if [[ $fullScriptName -nt $shouldRunFile ]] ; then
+  if [[ -z "$otheronly" ]] && [[ $fullScriptName -nt $shouldRunFile ]] ; then
     shouldRun=1
   fi
 
   # Compare against any other files provided
   if [[ $shouldRun -eq 0 ]] && [[ -n "$otherFiles" ]] ; then
     for file in $otherFiles ; do
-      [[ $file -nt $shouldRunFile ]] && shouldRun=1
+      if [[ -d $file ]] ; then
+        # If other file is a directory then we should run if we find any files
+        # newer than the should run file.
+        if [[ -n "$created" ]] ; then
+          newerFileCount=`find $file -type f -cnewer $shouldRunFile -print | wc -l`
+        else
+          newerFileCount=`find $file -type f -newer $shouldRunFile -print | wc -l`
+        fi
+        [[ $newerFileCount -gt 0 ]] && shouldRun=1
+      else
+        [[ $file -nt $shouldRunFile ]] && shouldRun=1
+      fi
     done
   fi
 
@@ -151,7 +170,7 @@ if [[ $shouldRun -eq 0 ]] ; then
     notChangedMessage="not changed since last run"
   fi
   [[ -z "$silent" ]] && \
-    printf "\e[37mskip \e[1m%-20s\e[0;37m %s\e[0m\n" \
+    printf "\e[37mskip \e[1m%-15s\e[0;37m %s\e[0m\n" \
       "$scriptName" "$notChangedMessage"
   exit 1
 fi

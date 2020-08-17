@@ -1,5 +1,7 @@
 function! LintMarkdown()
-  normal magg
+  normal ma
+  call PruneWhiteSpace()
+  normal gg
   " Do not format fenced blocks. I can't find a way to configure the default vim
   " formatting to not join lines in fenced blocks, so instead we'll only format
   " up to the fenced block and then continue after. Note that a fenced block
@@ -97,11 +99,12 @@ function! s:ThingityNewThing()
     let thingName = l:root."/".toupper(strftime("%Y%m%d-%H%M%S")).".md"
     let headingExtra = " - ".s:ThingityTime()
   endif
-  close
-  execute "e ".thingName
+  " Close current buffer so that new thing opens up with focus
+  silent! close
+  execute "silent e ".thingName
   execute "normal! a".<SID>GetThingityDateHeading().headingExtra."\<ESC>2o\<ESC>"
   write
-  NERDTreeFind
+  call NERDTreeFindIfRoom()
   wincmd p
 endfunction
 

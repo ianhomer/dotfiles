@@ -1,4 +1,4 @@
-# Manual Configuration
+# Manual Configuration OSX
 
 I've not worked out how to automate all configuration. Until I do, this is what
 I manually do on each environment.

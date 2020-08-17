@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+#
+# Safe synchronisation of git repository. Auto-commits can be enabled by setting
+# the git config core.autocommit, i.e. run the following once in the repository
+# directory
+#
+#    git synk -a
+#
+# Autocommitting should only be enabled when the commit messages are of limited
+# value, for example personal / note style repositories.
+
+set -e
+
+help() {
+  cat <<EOF
+
+    git synk -a  # autocommit
+    git synk -u  # unset autocommmit
+
+EOF
+}
+
+OPTIND=1
+while getopts "ahu" o; do case "$o" in
+  a) git config core.autocommit true ;;
+  u) git config --unset core.autocommit ;;
+  h) help && exit 1 ;;
+esac done
+
+# Make sure in git repository
+git rev-parse
+
+fullBranchName=$(git symbolic-ref -q HEAD)
+branchName=${fullBranchName##refs/heads/}
+originUrl=$(git config --get remote.origin.url)
+remoteName=$(git config --get branch.$branchName.remote)
+
+changes=$(git status --porcelain | wc -l)
+
+if [[ $changes -gt 0 ]] ; then
+  if [[ "true" == `git config core.autocommit` ]] ; then
+    # Handle dirty state only if autocommit flag set
+    echo "Committing "$changes" change"$([[ $changes -gt 1 ]] && echo s)
+    git add -A ; git commit --quiet -m "sync"
+  else
+    echo "Cannot sync - local changes and autocommit not set"
+    exit 128
+  fi
+fi
+
+git fetch --quiet
+
+leftRight=$(git rev-list --count --left-right $remoteName/$branchName...HEAD)
+left=$(echo $leftRight | awk '{print $1}')
+right=$(echo $leftRight | awk '{print $2}')
+
+if [[ $left -gt 0 ]] ; then
+  git rebase --quiet
+fi
+
+if [[ $right -gt 0 ]] ; then
+  git push --quiet --porcelain
+fi
+
+if [[ $left -gt 0 ]] ; then
+  if [[ $right -gt 0 ]] ; then
+    action="↑ $left ↓ $right"
+  else
+    action="↑ $right"
+  fi
+elif [[ $right -gt 0 ]] ; then
+  action="↓ $right"
+else
+  action="≡"
+fi
+
+echo "$action $branchName in $originUrl"

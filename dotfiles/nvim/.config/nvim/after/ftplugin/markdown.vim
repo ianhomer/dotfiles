@@ -34,9 +34,59 @@ function! s:AddTableHeader()
   execute "normal! {j0i\|\|\|\<CR>\|--\|--\|\<CR>\<ESC>"
 endfunction
 
+" Auto insert of next line
+function! s:NextLine()
+  let l:previousLineNumber = line(".") - 1
+  let l:previous = getline(l:previousLineNumber)
+  " Continuation of bullet list
+  if l:previous =~ '-\s'
+    " Continuation of todo list
+    if l:previous =~ '\v-\s\[.+\]\s'
+      if l:previous =~ '\v-\s\[.+\]\s\w+'
+        return "- [ ] "
+      else
+        " Previous item was enter so clear and stop list
+        call setline(l:previousLineNumber,'')
+      endif
+    else
+      if l:previous =~ '\v-\s\w+'
+        return "- "
+      else
+        " Previous item was enter so clear and stop list
+        call setline(l:previousLineNumber,'')
+      endif
+    endif
+  elseif l:previous =~ '|'
+    if l:previous =~ '\v\|\s\w+'
+      return '| '
+    else 
+      call setline(l:previousLineNumber,'')
+    endif
+  endif
+  return ""
+endfunction
+
+function s:CarriageReturn()
+  if getline(".") =~ '\v-\s\[\s\]\s\w+'
+    s/\[\s\]/[x]/
+    normal ``
+  elseif getline(".") =~ '\v-\s\[x\]\s\w+'
+    s/\[x\]/[ ]/
+    normal ``
+  else
+    normal j
+  endif
+endfunction
+
 nnoremap <buffer> <silent> <leader>jr :call <SID>LintTable()<CR>
 " Auto lint when typing | in insert mode
 inoremap <buffer> <silent> <Bar> <Bar><Esc>:call <SID>LintTable()<CR>$a
+" Auto continuation on carriage return
+inoremap <buffer> <silent> <CR> <CR><C-R>=<SID>NextLine()<C-M>
+
+if IsEnabled("markdown.flow")
+  nnoremap <buffer> <silent> <CR> :call <SID>CarriageReturn()<CR>
+endif
 
 " The rest of this filetype plugin is not relevant if we're using CoC
 if IsEnabled("coc")

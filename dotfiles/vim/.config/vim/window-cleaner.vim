@@ -82,14 +82,8 @@ function! s:IsEditableFile(buffer)
   return 1
 endfunction
 
-function! CloseOtherBuffers()
-  wall
-  let l:buffer = <SID>SwitchToFirstEditableFile()
-  " Mark current cursor position
-  normal mA:
-  NERDTreeClose
-  :call <SID>CloseAllBuffersButCurrent()
-  " Open NERDTree if there is space for it
+" Open NERDTree if there is space for it
+function! NERDTreeFindIfRoom()
   if winwidth('%') > 112
     NERDTreeFind
     " Reset size of NERDTree
@@ -97,6 +91,16 @@ function! CloseOtherBuffers()
     " Switch back to last buffer, i.e. the one we want open
     wincmd p
   endif
+endfunction
+
+function! CloseOtherBuffers()
+  wall
+  let l:buffer = <SID>SwitchToFirstEditableFile()
+  " Mark current cursor position
+  normal mA:
+  NERDTreeClose
+  call <SID>CloseAllBuffersButCurrent()
+  call NERDTreeFindIfRoom()
   " Return to saved mark
   normal `A
 endfunction

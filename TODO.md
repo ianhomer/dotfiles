@@ -8,6 +8,16 @@
 - [ ] How to list all spelling mistakes across all files
 - [ ] Leader o should open up last buffer from history if none open
 - [ ] Add vim thesaurus
+- [ ] Make history relative to current project root
+- [ ] Command to start keybase if not running prior to git push
+- [ ] Reduce clicks do things on mobile
+- [ ] fresh reset on mobile and refine reinstall
+- [ ] name sessions in termux things and dotfiles
+- [ ] refine bookmark flow including share to termux on mobile
+- [ ] gitme -r fail in termux if not in root of git project
+- [ ] automatically start todo with -[ on start of line
+- [ ] Syntax for greyed vertical dots on leading double spaces (and remove
+  indentLine)
 
 Try
 

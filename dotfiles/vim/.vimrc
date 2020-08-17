@@ -83,7 +83,6 @@ if g:config_level > 3
   Plug 'christoomey/vim-tmux-navigator'
   " Improved path support
   Plug 'tpope/vim-apathy'
-  let g:indentLine_char = '┊'
 
   Plug 'mhinz/vim-startify'
   let g:startify_custom_header = ""
@@ -201,7 +200,7 @@ endif
 set shortmess=catI
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
-if IsEnabled("notes")
+if IsEnabled("compactcmd")
   set cmdheight=1
 else
   set cmdheight=2
@@ -212,6 +211,8 @@ set shiftwidth=2
 set expandtab
 " 80 characters default width
 set textwidth=80
+" Softbreak on space between words
+set linebreak
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
@@ -253,6 +254,11 @@ if g:config_level > 0
     nnoremap <silent> <leader>K :call ToggleLocationList()<CR>
     nnoremap <silent> <leader>g :call ToggleFugitive()<CR>
     nnoremap <silent> <leader>b :call GitPush()<CR>
+    nnoremap <silent> <leader>e :Git synk<CR>
+
+    " Quit and save/close are handy leaders for use on mobile and limited keyboard
+    nnoremap <silent> <leader>q :q<CR>
+    nnoremap <silent> <leader>x :x<CR>
 
     if g:config_level > 3
       nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
@@ -303,6 +309,10 @@ function! LintMe()
     ALEFix
   elseif &filetype == "json"
     execute "%!jq ."
+  else
+    normal ma
+    call PruneWhiteSpace()
+    normal `a
   endif
 endfunction
 
@@ -340,6 +350,12 @@ if !exists("*ReloadConfig")
       " only display message if CoC not enabled, it it is enabled, this extra
       " message causes overload in the 2 row command window
       echo "Reloaded ".config_message.coc_message" - level = ".g:config_level
+    endif
+    if expand('%:p') != ""
+      normal ma
+      " Reload current buffer
+      silent edit
+      normal `a
     endif
   endfunction
 endif
@@ -514,19 +530,6 @@ if g:config_level > 0
   set backspace=indent,eol,start
 endif
 
-" CR insert line without leaving normal mode. Note that this
-" has special case to append CR at end of line as this feels more
-" natural - disabled since non-vi.
-" nmap <expr> <CR> getpos('.')[2]==strlen(getline('.')) ?
-" "a<CR><Esc>" : "i<CR><Esc>"
-
-" Backspace to delete space without leaving normal mode. At the
-" beginning of the line it joins line to previous - disabled since non-vi.
-" nmap <expr> <BS> getpos('.')[2]==1 ? "k$gJ" : "hx<Esc>"
-
-" Tab without leaving normal mode
-" nnoremap <s-tab> <<
-" inoremap <s-tab> <C-d>
 " vnoremap <s-tab> <<
 " nnoremap <tab> >>
 " vnoremap <tab> >>
@@ -551,6 +554,7 @@ if g:config_level > 0
     call one#highlight('Normal', '000000', 'ffffff', 'none')
     call one#highlight('markdownH1', '000000', 'ffffff', 'bold')
     call one#highlight('markdownH2', '000000', 'ffffff', 'bold')
+    call one#highlight('Directory', '222222', '', 'bold')
   endif
 endif
 
