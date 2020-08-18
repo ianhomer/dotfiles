@@ -39,17 +39,17 @@ function! s:NextLine()
   let l:previousLineNumber = line(".") - 1
   let l:previous = getline(l:previousLineNumber)
   " Continuation of bullet list
-  if l:previous =~ '-\s'
+  if l:previous =~ '\v^-\s'
     " Continuation of todo list
-    if l:previous =~ '\v-\s\[.+\]\s'
-      if l:previous =~ '\v-\s\[.+\]\s\w+'
+    if l:previous =~ '\v^\s*-\s\[.+\]\s'
+      if l:previous =~ '\v^\s*-\s+\[.+\]\s*\w+'
         return "- [ ] "
       else
-        " Previous item was enter so clear and stop list
+        " Previous item was empty so clear and stop list
         call setline(l:previousLineNumber,'')
       endif
     else
-      if l:previous =~ '\v-\s\w+'
+      if l:previous =~ '\v^\s*-\s+\w+'
         return "- "
       else
         " Previous item was enter so clear and stop list
