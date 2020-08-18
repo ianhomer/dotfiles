@@ -552,7 +552,9 @@ if g:config_level > 0
     set bg=light
     let g:one_allow_italics = 1
     call one#highlight('Normal', '000000', 'ffffff', 'none')
-    call one#highlight('markdownH1', '000000', 'ffffff', 'bold')
+    for i in [1,2,3,4,5,6]
+      call one#highlight('markdownH'.i, '000000', 'ffffff', 'bold')
+    endfor
     call one#highlight('markdownH2', '000000', 'ffffff', 'bold')
     call one#highlight('Directory', '222222', '', 'bold')
   endif
