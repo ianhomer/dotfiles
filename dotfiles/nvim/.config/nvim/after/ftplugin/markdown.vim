@@ -2,6 +2,14 @@ if g:config_level < 2
   finish
 endif
 
+function! s:LintTodo()
+  let l:line = line('.')
+
+  if getline(l:line) =~ '^-\s*[\s*$'
+    call setline(l:line,'- [ ] ')
+  endif
+endfunction
+
 function! s:LintTable()
   let l:line = line('.')
 
@@ -81,11 +89,13 @@ endfunction
 nnoremap <buffer> <silent> <leader>jr :call <SID>LintTable()<CR>
 " Auto lint when typing | in insert mode
 inoremap <buffer> <silent> <Bar> <Bar><Esc>:call <SID>LintTable()<CR>$a
+" Auto todo when typing - [ in insert mode
 " Auto continuation on carriage return
 inoremap <buffer> <silent> <CR> <CR><C-R>=<SID>NextLine()<C-M>
 
 if IsEnabled("markdown.flow")
   nnoremap <buffer> <silent> <CR> :call <SID>CarriageReturn()<CR>
+  inoremap <buffer> <silent> [ [<Esc>:call <SID>LintTodo()<CR>$a
 endif
 
 " The rest of this filetype plugin is not relevant if we're using CoC
