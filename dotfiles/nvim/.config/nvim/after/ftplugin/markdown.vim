@@ -39,28 +39,28 @@ function! s:NextLine()
   let l:previousLineNumber = line(".") - 1
   let l:previous = getline(l:previousLineNumber)
   " Continuation of bullet list
-  if l:previous =~ '\v^-\s'
+  if l:previous =~ '\v^\s*-\s'
     " Continuation of todo list
     if l:previous =~ '\v^\s*-\s\[.+\]\s'
-      if l:previous =~ '\v^\s*-\s+\[.+\]\s*\w+'
-        return "- [ ] "
-      else
+      if l:previous =~ '\v^\s*-\s*\[.+\]\s*$'
         " Previous item was empty so clear and stop list
         call setline(l:previousLineNumber,'')
+      else
+        return "- [ ] "
       endif
     else
-      if l:previous =~ '\v^\s*-\s+\w+'
-        return "- "
-      else
+      if l:previous =~ '\v^\s*-\s*$'
         " Previous item was enter so clear and stop list
         call setline(l:previousLineNumber,'')
+      else
+        return "- "
       endif
     endif
-  elseif l:previous =~ '|'
-    if l:previous =~ '\v\|\s\w+'
-      return '| '
-    else 
+  elseif l:previous =~ '\v^\|'
+    if l:previous =~ '\v^\|\s*$'
       call setline(l:previousLineNumber,'')
+    else 
+      return '| '
     endif
   endif
   return ""
