@@ -48,6 +48,7 @@ def transformCommand(command):
     .replace("Shift+",SHIFT_CHAR) \
     .replace("Ctrl+",CONTROL_CHAR) \
     .replace("Opt+",OPTION_CHAR) \
+    .replace("Alt+",OPTION_CHAR) \
     .replace("space+",SPACE_CHAR)
 
 def parse(line):

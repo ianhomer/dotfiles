@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#
+# Refresh locally clone git repositories
+#
+
+should-run -m 7 $0 || exit
+
+# Clear directories from the fasd cache that have no value in fasd cache
+
+fasd -D                        \
+  $HOME/.config/nvim/plugged   \
+  $HOME/.config/nvim/plugged\* \
+  $HOME/.config/vim/plugged    \
+  $HOME/.config/vim/plugged\*
+
+gitme -r
+
+should-run -fu $0
+
+

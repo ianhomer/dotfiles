@@ -62,7 +62,7 @@ endfunction
 
 command! -nargs=* -bang Search call fzf#SearchWithRipGrep(<q-args>, <bang>0)
 
-nnoremap <silent> <leader>jj :Ag<CR>
+nnoremap <silent> <leader>s :Ag<CR>
 nnoremap <silent> <leader>jk :Ag<CR>'
 nnoremap <silent> <leader>jK :Ag!<CR>'
 
@@ -70,7 +70,7 @@ nnoremap <silent> <leader>jK :Ag!<CR>'
 " not including file path name
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, 
-  \  '-p ~/.dotfiles/config/ag/.ignore', {
+  \  '--hidden -p ~/.dotfiles/config/ag/.ignore', {
   \   'options': '--delimiter : --nth 4..'
   \ }, 
   \ <bang>0)
@@ -83,10 +83,6 @@ command! -bang -nargs=* AgPopup
   \ }, 
   \ <bang>0)
 
-" hidden
-command! -bang -nargs=* AgHidden
-  \ call fzf#vim#ag(<q-args>,'-m 0 --hidden --ignore .git', <bang>0)
-
-nnoremap <silent> <leader>m :Maps<CR>
-nnoremap <silent> <leader>M :Maps!<CR>
+nnoremap <silent> <leader>,m :Maps<CR>
+nnoremap <silent> <leader>,M :Maps!<CR>
 nnoremap <silent> <leader>,mi :MapsInsert<CR>

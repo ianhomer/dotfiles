@@ -1,9 +1,11 @@
-#!/usr/local/bin/fish
+#!/usr/bin/env fish
 #
 # Configure fish
 #
 
 should-run -m 7 dotme-fish || exit
+
+printf "\e[36mConfiguring fish shell\e[0m\n"
 
 #
 # Set up universal variables to improve shell start up times

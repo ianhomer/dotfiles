@@ -3,10 +3,13 @@
 "
 
 function! OpenTerminal()
+  let $VIM_DIR=expand('%:p:h')
   split
   term
   resize 10
+  startinsert
 endfunction
-nnoremap <silent> <leader>t :call OpenTerminal()<CR>
-" Map escape in terminal mode to enter normal mode
+
+nnoremap <silent> <leader>m :call OpenTerminal()<CR>cd $VIM_DIR && pwd<CR>
+
 tnoremap <Esc> <C-\><C-n>

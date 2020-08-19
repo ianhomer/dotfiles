@@ -9,23 +9,23 @@ keyboard with
 sudo mv /Library/Preferences/com.apple.keyboardtype.plist ~/tmp
 ```
 
-and then restart my machine, to go through the keyboard re-initialisation. It
-then remapped the ~ AOK. Not sure why it got it wrong first time.
+Then restart my machine, to go through the keyboard re-initialisation. It then
+remapped the ~ AOK. Not sure why it got it wrong first time.
 
 ## keyboard troubleshooting
 
-In vi -> i -> <C-v> -> <key> combo => vi prints raw code.
+In vi -> i -> `Ctrl+v` -> `key` combo => vi prints raw code.
 
 Install keycastr to see key presses on screen
 
     brew cask install keycastr
 
-To debug key pressess into kitty
+To debug key presses into kitty
 
     kitty --debug-keyboard
 
 ## Reset Alfred Preferences
- 
+
 To change Alfred to use local preferences, not synced one :
 
     mv ~/Library/Application\ Support/Alfred/prefs.json ~/tmp/alfred-prefs.json
@@ -38,5 +38,3 @@ To change Alfred to use local preferences, not synced one :
     :profile stop
 
 Look at the bottom of the log file for a sorted summary
-
-

@@ -18,10 +18,21 @@
 " Some non-modifiable windows weren't closed either e.g. help windows.
 "
 
+function! CloseWindows(type)
+  let l:window = bufwinnr(bufnr(a:type))
+  if l:window > 0
+    execute l:window 'q'
+    return 1
+  endif
+  return 0
+endfunction
+
+function! CloseFugitiveWindow()
+  return CloseWindows(".git/index")
+endfunction
+
 function! s:CloseAllBuffersButCurrent()
-  " Close FZF window if open
-  let l:fzfWindow = bufwinnr(bufnr("fzf"))
-  if l:fzfWindow > 0 | execute l:fzfWindow 'q' | endif
+  call CloseWindows("fzf")
 
   let current = bufnr("%")
   let buffers = filter(range(1, bufnr('$')), 'bufloaded(v:val)')
@@ -54,6 +65,9 @@ function! s:SwitchToFirstEditableFile()
     endif
   endfor
 
+  " Open up last file editted
+  execute "normal! `0"
+
   " Can't find a suitable buffer to switch to, so carry on with current as best
   " option.
 endfunction
@@ -71,18 +85,25 @@ function! s:IsEditableFile(buffer)
   return 1
 endfunction
 
+" Open NERDTree if there is space for it
+function! NERDTreeFindIfRoom()
+  if winwidth('%') > 112
+    NERDTreeFind
+    " Reset size of NERDTree
+    normal 31<C-W>
+    " Switch back to last buffer, i.e. the one we want open
+    wincmd p
+  endif
+endfunction
+
 function! CloseOtherBuffers()
   wall
   let l:buffer = <SID>SwitchToFirstEditableFile()
   " Mark current cursor position
   normal mA:
   NERDTreeClose
-  :call <SID>CloseAllBuffersButCurrent()
-  NERDTreeFind
-  " Reset size of NERDTree
-  normal 31<C-W>
-  " Switch back to last buffer, i.e. the one we want open
-  wincmd p
+  call <SID>CloseAllBuffersButCurrent()
+  call NERDTreeFindIfRoom()
   " Return to saved mark
   normal `A
 endfunction

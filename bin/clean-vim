@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+should-run -m 7 $0 || exit
+
+printf "\e[36mCleaning vim swaps\e[0m\n"
+
+# Clean swap files older than 2 days ago
+
+find ~/.vim/swaps -type f -mtime +2 -exec rm -v {} \;
+
+should-run -fu $0

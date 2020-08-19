@@ -1,3 +1,19 @@
+function! LintMarkdown()
+  normal ma
+  call PruneWhiteSpace()
+  normal gg
+  " Do not format fenced blocks. I can't find a way to configure the default vim
+  " formatting to not join lines in fenced blocks, so instead we'll only format
+  " up to the fenced block and then continue after. Note that a fenced block
+  " must specify a language which is used to anchor this skipping.
+  while search('```','n',line('$')) > 0
+    silent execute "normal v/```[a-z]\\+\<CR>gq\<ESC>"
+    silent execute "normal /```\<CR>j"
+  endwhile
+  normal gqG
+  normal `a
+endfunction
+
 " Insert time stamp - as markdown header
 function! s:ThingityDateHeading()
   normal ma
@@ -58,7 +74,7 @@ function! s:ThingityGetRoot()
   return dir
 endfunction
 
-" 
+"
 " Get the thing string root, i.e. log directory if it exists or root otherwise.
 function! s:ThingityGetStreamRoot()
   let l:root = s:ThingityGetRoot()
@@ -74,7 +90,7 @@ endfunction
 " The file name of the new thing will be date stamped file in the stream
 " root. If it's the first of the day then it'll simply be MMDD. If that already
 " exists then a file name with full date time will be created.
-" 
+"
 function! s:ThingityNewThing()
   let l:root = s:ThingityGetStreamRoot()
   let thingName = l:root."/".strftime("%m%d").".md"
@@ -83,11 +99,12 @@ function! s:ThingityNewThing()
     let thingName = l:root."/".toupper(strftime("%Y%m%d-%H%M%S")).".md"
     let headingExtra = " - ".s:ThingityTime()
   endif
-  close
-  execute "e ".thingName
+  " Close current buffer so that new thing opens up with focus
+  silent! close
+  execute "silent e ".thingName
   execute "normal! a".<SID>GetThingityDateHeading().headingExtra."\<ESC>2o\<ESC>"
   write
-  NERDTreeFind
+  call NERDTreeFindIfRoom()
   wincmd p
 endfunction
 
@@ -128,18 +145,16 @@ nnoremap <silent> <leader>jo :execute 'NERDTree ~/projects/things'<CR>
 
 " Search variations
 
-" just markdown files 
+" just markdown files
 nnoremap <silent> <leader>jf :call fzf#vim#files('~/projects/things', {'source':'fd -L .md'})<CR>
 
 command! -bang -nargs=* AgMarkdown
-  \ call fzf#vim#ag(<q-args>, 
+  \ call fzf#vim#ag(<q-args>,
   \  '-p ~/.dotfiles/config/ag/.ignore -G .md',
   \ <bang>0)
 
 nnoremap <silent> <leader>jm :AgMarkdown<CR>
 
-" Hidden search
-nnoremap <silent> <leader>jh :AgHidden<CR>
 " generic search (experimental alternative to Ag)
 nnoremap <silent> <leader>js :Search<CR>
 
@@ -147,5 +162,3 @@ nnoremap <silent> <leader>js :Search<CR>
 nnoremap <silent> <leader>jT :Ag! \[\ \]<CR>
 " todos
 nnoremap <silent> <leader>jt :AgPopup \[\ \]<CR>
-
-

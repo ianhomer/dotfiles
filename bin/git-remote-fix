@@ -49,7 +49,8 @@ function setMyGitUrl {
   else
     myRemoteUrl=${currentRemoteUrl}
   fi
-  myRemoteUrl=${myRemoteUrl/${host}/${host}${postFix}}
+
+  myRemoteUrl=${myRemoteUrl/${host}:/${host}${postFix}:}
 
   if [ ${currentRemoteUrl} != ${myRemoteUrl} ] ; then
     echo "current remote   $currentRemoteUrl"
