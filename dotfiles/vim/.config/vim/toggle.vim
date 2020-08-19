@@ -31,6 +31,7 @@ let g:default_toggles = {
   \   "compactcmd":0,
   \   "markdown.flow":0,
   \   "markdown.conceal.full":0,
+  \   "markdown.conceal.partial":0,
   \   "markdown.syntax.list":0,
   \   "markdown.syntax.table":1,
   \   "gitgutter":1, 
@@ -53,6 +54,7 @@ let g:layer_features = {
   \      "compactcmd":1,
   \      "light":1,
   \      "markdown.flow":1,
+  \      "markdown.conceal.partial":1
   \    }
   \  }
 

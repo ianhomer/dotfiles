@@ -9,9 +9,14 @@ syntax include @Yaml syntax/yaml.vim
 syntax region yamlFrontmatter start=/\%^---$/ end=/^---$/ keepend contains=@Yaml
 
 if IsEnabled("markdown.conceal.full")
+  " e.g. mobile
   set conceallevel=2
-else
+elseif IsEnabled("markdown.conceal.partial")
+  " e.g. note taking
   set conceallevel=1
+else
+  " e.g coding
+  set conceallevel=0
 endif
 set concealcursor=nc
 
