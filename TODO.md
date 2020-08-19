@@ -9,7 +9,6 @@
 - [ ] Add vim thesaurus
 - [ ] Make history relative to current project root
 - [ ] Command to start keybase if not running prior to git push
-- [ ] Reduce clicks do things on mobile
 - [ ] fresh reset on mobile and refine reinstall
 - [ ] name sessions in termux things and dotfiles
 - [ ] refine bookmark flow including share to termux on mobile
