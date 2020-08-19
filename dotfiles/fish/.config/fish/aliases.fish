@@ -47,5 +47,4 @@ else
 
   [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
     echo "... Loaded ~/.config/fish/aliases.fish"
-
 end

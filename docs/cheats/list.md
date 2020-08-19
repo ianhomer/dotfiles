@@ -1,3 +1,5 @@
+# List of Cheats
+
 | Shortcut   | P  | App | Context  | Action
 | --         | -- | --  | --       | --
 | Alt-Space  |    | OSX | Window   | Open Kitty
@@ -21,5 +23,3 @@
 | space-y    | *  | vi  | Markdown | Add table header
 | space-s    |    | vi  | File     | Save
 | space-m    |    | vi  | Keys     | Mapped keys
-
-

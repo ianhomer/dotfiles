@@ -8,6 +8,7 @@ tap "AdoptOpenJDK/openjdk"
 #
 cask "font-firacode-nerd-font"
 cask "font-jetbrainsmono-nerd-font"
+cask "font-inconsolata-nerd-font"
 
 #
 # core tools
@@ -33,7 +34,6 @@ brew "fish"
 brew "gnupg"
 brew "lastpass-cli"
 brew "mas"
-brew "navi"
 brew "neovim"
 brew "nmap"
 brew "ripgrep"
@@ -43,12 +43,18 @@ brew "switchaudio-osx"
 brew "the_silver_searcher"
 brew "tmux"
 brew "vim"
-brew "yamllint"
 brew "watch"
 
 cask "iterm2"
 cask "kitty"
 cask "keybase"
+
+#
+# linitng tools
+#
+
+brew "yamllint"
+brew "languagetool"
 
 #
 # supporting tools

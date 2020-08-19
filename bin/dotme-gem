@@ -6,8 +6,8 @@
 
 should-run $0 || exit
 
-gem install neovim
+printf "\e[36mInstalling gem packages\e[0m\n"
 
-echo "... Installed ruby packages"
+gem install neovim
 
 should-run -fu $0

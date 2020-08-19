@@ -19,7 +19,6 @@ DOTFILES_DIR="${REPOSITORY_DIR}/dotfiles"
 PATH=${SCRIPT_DIR}:${PATH}
 VERBOSE=0
 DRY=0
-QUICK=0
 
 #
 # Backup file before stowing.
@@ -100,22 +99,33 @@ command_install() {
   printf "\e[36mInstalling dotfiles\e[0m\n"
   [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
   command_pull
-  [ $QUICK -eq 0 ] && command_packages
-  command_stow
-  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && is-macos && dotme-osx-defaults
-  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-omf
-  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-pip
-  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-gem
-  [ $DRY -eq 0 ] && dotme-vim
-  [ $DRY -eq 0 ] && dotme-tmux
-  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-node
-  [ $DRY -eq 0 ] && [ $QUICK -eq 0 ] && dotme-jenv
-  [ $DRY -eq 0 ] && dotme-fish
-  [ $DRY -eq 0 ] && dotme-fisher
-  [ $QUICK -eq 0 ] && command_clean
+  # Call inner part of install as command onto a new execution of dotme so that
+  # updates pulled in are taken into account
+  arguments=""
+  [ $DRY -eq 1 ] && arguments="$arguments -d"
+  $SCRIPT_DIR/dotme $arguments inner
   printf "\e[36mdotfiles installed and \e[1mAOK\e[0m\n"
 }
 
+command_inner() {
+  command_packages
+  dotme-stow -d $DOTFILES_DIR
+  [ $DRY -eq 0 ] && dotme-git
+  [ $DRY -eq 0 ] && is-macos && dotme-osx
+  [ $DRY -eq 0 ] && is-android && dotme-termux
+  [ $DRY -eq 0 ] && dotme-omf
+  [ $DRY -eq 0 ] && is-pc && dotme-pip
+  [ $DRY -eq 0 ] && is-pc && dotme-gem
+  [ $DRY -eq 0 ] && clean-vim
+  [ $DRY -eq 0 ] && dotme-vim
+  [ $DRY -eq 0 ] && is-pc && dotme-tmux
+  [ $DRY -eq 0 ] && is-pc && dotme-node
+  [ $DRY -eq 0 ] && is-pc && dotme-jenv
+  [ $DRY -eq 0 ] && dotme-fish
+  [ $DRY -eq 0 ] && dotme-fisher
+  [ $DRY -eq 0 ] && dotme-gitme
+  command_clean
+}
 #
 # Pull latest version of dotfiles
 #
@@ -131,27 +141,12 @@ command_packages() {
   if [[ $DRY -eq 0 ]] ; then
     if is-macos ; then
       dotme-brew
+    elif is-android ; then
+      dotme-pkg
     elif has-pacman ; then
       has-pacman
     fi
   fi
-}
-
-# Just stow dotfiles, quicker than a full install.
-command_stow() {
-  printf "\e[36mstowing dotfiles\e[0\n"
-  cd $DOTFILES_DIR
-  for DIR in `ls -d */` ; do
-    cd $DOTFILES_DIR/$DIR
-    for FILE in `find . -type f -print` ; do
-      [ $DRY -eq 0 ] && backup $FILE
-    done
-    [ $VERBOSE -eq 1 ] && echo "... stowing $DIR"
-    # Copy directory structure so that stow links files NOT directories
-    find . -mindepth 1 -type d -exec mkdir -p $HOME/{} \;
-    [ $DRY -eq 0 ] && stow -v --ignore=.swp --ignore=.bak -t $HOME .
-    [ $DRY -eq 1 ] && stow --simulate -v --ignore=.swp --ignore=.bak -t $HOME .
-  done
 }
 
 # Just update system, assuming it's already been installed.
@@ -166,7 +161,7 @@ command_update() {
 
 # Housekeeping and keeping things clean.
 command_clean() {
-  clean-brew
+  is-macos && clean-brew
 }
 
 # Unistall dotfiles. Note that this does not (at this time), unstill brew
@@ -233,15 +228,13 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 # Initialize our own variables:
 VERBOSE=0
 
-while getopts "h?vdq" opt; do
+while getopts "h?vd" opt; do
   case "$opt" in
   h|\?)
     command_help
     exit 0
     ;;
   d) DRY=1
-    ;;
-  q) QUICK=1
     ;;
   v) VERBOSE=1
     ;;

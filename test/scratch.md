@@ -17,8 +17,9 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
 nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
-Join these lines to make this is a long line, this is a long line, this is a long line, this is a long
-line, this is a long line, this is a long line, this is a long line
+Join these lines to make this is a long line, this is a long line, this is a
+long line, this is a long line, this is a long line, this is a long line, this
+is a long line
 
 This is a spellingmistake.
 
@@ -36,7 +37,7 @@ Long line lists
 - Lorem ipsum
 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis
+  quis.
 
 Nested lists
 
@@ -63,6 +64,13 @@ Todos
 ## Links
 
 [Diagrams](./diagrams.md).
+
+## Quotes
+
+> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+> tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+> quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+> consequat.
 
 ## Definitions
 
@@ -116,7 +124,3 @@ More code:
 another-fenced-block
 second-line
 ```
-
-## Scratch
-
-Hello world!

@@ -1,10 +1,12 @@
-#!/usr/local/bin/fish
+#!/usr/bin/env fish
 
 #
 # Install fisher, a package manager for fish
 #
 
 should-run -m 7 dotme-fisher || exit
+
+printf "\e[36mInstalling fisher packages\e[0m\n"
 
 if not test -f ~/.config/fish/functions/fisher.fish
   curl https://git.io/fisher --create-dirs -sLo \

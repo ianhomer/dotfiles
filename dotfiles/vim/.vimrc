@@ -1,12 +1,10 @@
 if has('nvim')
   " Store nvim plugins in isolated location
-
   let g:vim_dir = "~/.config/nvim"
 else
   let g:vim_dir = "~/.vim"
 endif
 
-" Leader is space
 let mapleader = "\<Space>"
 let maplocalleader = "\\"
 
@@ -17,9 +15,7 @@ if g:config_level > 0
   filetype plugin off
 endif
 
-"
 " Load plugins
-"
 call plug#begin(g:vim_dir."/plugged")
 if g:config_level > 0
   "
@@ -30,12 +26,15 @@ if g:config_level > 0
   Plug 'git@github.com:ianhomer/fzf.vim.git', { 'branch' : 'fix/maps-comment' }
   source ~/.config/vim/fzf.vim
 
+  " fugitive - Git integration
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb'
+
   "
   " Style
   "
   Plug 'morhetz/gruvbox'
-  Plug 'tomasr/molokai'
-  Plug 'jnurmine/zenburn'
+  Plug 'rakr/vim-one'
 
   if IsEnabled("nerdtree")
     " NERDTree - file explore
@@ -43,9 +42,25 @@ if g:config_level > 0
     source ~/.config/vim/nerdtree.vim
   endif
 
-  " fugitive - Git integration
-  Plug 'tpope/vim-fugitive'
 endif
+
+function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" same as above, but show untracked files, honouring .gitignore
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" Read ~/.NERDTreeBookmarks file and takes its second column
+function! s:nerdtreeBookmarks()
+  let bookmarks = systemlist("cut -d' ' -f 2 ~/.NERDTreeBookmarks")
+  let bookmarks = bookmarks[0:-2] " Slices an empty last line
+  return map(bookmarks, "{'line': v:val, 'path': v:val}")
+endfunction
 
 if g:config_level > 3
 
@@ -68,6 +83,20 @@ if g:config_level > 3
   Plug 'christoomey/vim-tmux-navigator'
   " Improved path support
   Plug 'tpope/vim-apathy'
+
+  Plug 'mhinz/vim-startify'
+  let g:startify_custom_header = ""
+  let g:startify_session_autoload = 0
+  let g:startify_change_to_dir = 0
+  let g:startify_lists = [
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']}
+        \ ]
 
   "
   " Help
@@ -124,7 +153,7 @@ if g:config_level > 3
   " HTML
   if g:config_level > 8 | Plug 'mattn/emmet-vim' | endif
   " Handy mappings
-  if g:config_level > 8 | Plug 'tpope/vim-unimpaired' | endif
+  Plug 'tpope/vim-unimpaired'
 
   "
   " Writing
@@ -171,13 +200,19 @@ endif
 set shortmess=catI
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
-set cmdheight=2
+if IsEnabled("compactcmd")
+  set cmdheight=1
+else
+  set cmdheight=2
+endif
 " Tab support with 2 spaces
 set tabstop=2
 set shiftwidth=2
 set expandtab
 " 80 characters default width
 set textwidth=80
+" Softbreak on space between words
+set linebreak
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
@@ -193,7 +228,8 @@ if g:config_level > 0
   nnoremap <silent> <leader>F :Files!<CR>
 
   " save all files
-  nnoremap <silent> <leader>s :silent! wall<CR>
+  if !IsEnabled("autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | endif
+
   " reset things
   nnoremap <silent> <leader>z :noh<CR>
 
@@ -208,12 +244,22 @@ if g:config_level > 0
   nnoremap <leader>.i :profile dump<CR>
 
   if g:config_level > 2
-    nnoremap <silent> <leader>b :BCommits<CR>
-    nnoremap <silent> <leader>B :BCommits!<CR>
-    nnoremap <silent> <leader>e :Commits<CR>
-    nnoremap <silent> <leader>E :Commits!<CR>
+    nnoremap <silent> <leader>y :BCommits<CR>
+    nnoremap <silent> <leader>Y :BCommits!<CR>
+    nnoremap <silent> <leader>t :Commits<CR>
+    nnoremap <silent> <leader>T :Commits!<CR>
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
+    nnoremap <silent> <leader>k :call ToggleQuickFix()<CR>
+    nnoremap <silent> <leader>K :call ToggleLocationList()<CR>
+    nnoremap <silent> <leader>g :call ToggleFugitive()<CR>
+    nnoremap <silent> <leader>b :call GitPush()<CR>
+    nnoremap <silent> <leader>e :Git synk<CR>
+
+    " Quit and save/close are handy leaders for use on mobile and limited keyboard
+    nnoremap <silent> <leader>q :q<CR>
+    nnoremap <silent> <leader>x :x<CR>
+
     if g:config_level > 3
       nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
@@ -233,33 +279,61 @@ if exists('*which_key#register')
   let g:which_key_map.c = { 'name' : '...Commenter' }
   let g:which_key_map.j = { 'name' : '...Thingity' }
   let g:which_key_map['k'] = { 'name' : '...Bookmarks' }
+  let g:which_key_map['9'] = { 'name' : '...Toggle' }
   let g:which_key_map[','] = { 'name' : '...Misc' }
   let g:which_key_map['.'] = { 'name' : '...Experimental' }
   call which_key#register('<Space>', "g:which_key_map")
 endif
 
+source ~/.config/vim/thingity.vim
+
+function! GitPush()
+  call CloseFugitiveWindow()
+  Git -P push -v
+endfunction
+
+function! ToggleFugitive()
+  if !CloseFugitiveWindow()
+    Gstatus
+  endif
+endfunction
+
 function! LintMe()
   echo "Linting ..".&filetype
-  if IsEnabled("coc")
+  if &filetype == "markdown"
+    call LintMarkdown()
+  elseif IsEnabled("coc")
     " Lint
     Format
   elseif IsEnabled("ale")
     ALEFix
-    if &filetype == "markdown"
-      normal magggqG`a
-    endif
+  elseif &filetype == "json"
+    execute "%!jq ."
   else
-    if &filetype == "json"
-      execute "%!jq ."
-    elseif &filetype == "markdown"
-      normal magggqG
-      call PruneWhiteSpace()
-      normal `a
-    endif
+    normal ma
+    call PruneWhiteSpace()
+    normal `a
   endif
 endfunction
 
-source ~/.config/vim/thingity.vim
+function! ToggleQuickFix()
+  let l:currentWindow = winnr('$')
+  cwindow
+  let l:quickFixWindow = winnr('$')
+  if l:currentWindow == l:quickFixWindow
+    cclose
+  endif
+endfunction
+
+function! ToggleLocationList()
+  let l:currentWindow = winnr('$')
+  lwindow
+  let l:locationListWindow = winnr('$')
+  if l:currentWindow == l:locationListWindow
+    lclose
+  endif
+endfunction
+
 source ~/.config/vim/tabcomplete.vim
 
 " Reload vimrc, neo vimrc and CoC
@@ -276,6 +350,12 @@ if !exists("*ReloadConfig")
       " only display message if CoC not enabled, it it is enabled, this extra
       " message causes overload in the 2 row command window
       echo "Reloaded ".config_message.coc_message" - level = ".g:config_level
+    endif
+    if expand('%:p') != ""
+      normal ma
+      " Reload current buffer
+      silent edit
+      normal `a
     endif
   endfunction
 endif
@@ -308,7 +388,7 @@ function! TrimEndLines()
 endfunction
 
 if g:config_level > 2
-  nnoremap <leader>w ma:call PruneWhiteSpace()<CR>`a
+  nnoremap <leader>L ma:call PruneWhiteSpace()<CR>`a
 endif
 
 " Write all buffers before navigating from Vim to tmux pane
@@ -318,7 +398,7 @@ let g:tmux_navigator_save_on_switch = 2
 
 " Goyo distraction free writing
 if g:config_level > 3
-  nnoremap <leader>g :Goyo<CR>
+  nnoremap <leader>jg :Goyo<CR>
   let g:goyo_width = 85
 endif
 
@@ -330,6 +410,11 @@ if g:config_level < 2
   " Close the current buffer and move to the previous one
   nnoremap <leader>q :<c-u>bp <bar> bd #<cr>
 endif
+
+function! s:DebouncedSave() abort
+  call timer_stop( s:debouncedSaveTimer )
+  let s:debouncedSaveTimer = timer_start(1000, { timerId -> execute('write') })
+endf
 
 "
 " Group all autocmds together to improve reloadability (reloads of vimrc
@@ -359,8 +444,10 @@ augroup dotme
     " Auto reload when focus gained or buffer entered
     autocmd FocusGained,WinEnter,BufEnter * :checktime
 
-    " Auto write when saved
-    autocmd TextChanged,TextChangedI,TextChangedP * ++nested silent! write
+    " Auto write when text changes using debouncing for insert mode
+    " to wait for pause in text entry
+    autocmd TextChangedI,TextChangedP * ++nested silent! call s:DebouncedSave()
+    autocmd TextChanged * ++nested silent! write
   endif
 
   if g:config_level > 2
@@ -434,6 +521,8 @@ if g:config_level > 3
   let g:airline#extensions#tabline#enabled = 1
   " Enable powerfonts giving angled tab
   let g:airline_powerline_fonts = 1
+  let g:airline_skip_empty_sections = 1
+  let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 endif
 
 " Backspace support
@@ -441,19 +530,6 @@ if g:config_level > 0
   set backspace=indent,eol,start
 endif
 
-" CR insert line without leaving normal mode. Note that this
-" has special case to append CR at end of line as this feels more
-" natural - disabled since non-vi.
-" nmap <expr> <CR> getpos('.')[2]==strlen(getline('.')) ?
-" "a<CR><Esc>" : "i<CR><Esc>"
-
-" Backspace to delete space without leaving normal mode. At the
-" beginning of the line it joins line to previous - disabled since non-vi.
-" nmap <expr> <BS> getpos('.')[2]==1 ? "k$gJ" : "hx<Esc>"
-
-" Tab without leaving normal mode
-" nnoremap <s-tab> <<
-" inoremap <s-tab> <C-d>
 " vnoremap <s-tab> <<
 " nnoremap <tab> >>
 " vnoremap <tab> >>
@@ -467,8 +543,21 @@ if IsEnabled("nerdtree")
 endif
 
 if g:config_level > 0
-  colorscheme gruvbox
-  set bg=dark
+  if !IsEnabled("light")
+    colorscheme gruvbox
+    set bg=dark
+  else
+    " Light scheme primarily used for writing content
+    colorscheme one
+    set bg=light
+    let g:one_allow_italics = 1
+    call one#highlight('Normal', '000000', 'ffffff', 'none')
+    for i in [1,2,3,4,5,6]
+      call one#highlight('markdownH'.i, '000000', 'ffffff', 'bold')
+    endfor
+    call one#highlight('markdownH2', '000000', 'ffffff', 'bold')
+    call one#highlight('Directory', '222222', '', 'bold')
+  endif
 endif
 
 if g:config_level > 2
@@ -484,7 +573,7 @@ if g:config_level > 0
   set splitbelow
 endif
 
-"source ~/.config/vim/terminal.vim
+source ~/.config/vim/terminal.vim
 
 "
 " *** Scope : Markdown ***
@@ -509,7 +598,3 @@ endif
 if g:config_level > 8
   source ~/.config/vim/experimental.vim
 endif
-
-" Allow per project vimrc files
-set exrc
-set secure

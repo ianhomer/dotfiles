@@ -20,7 +20,7 @@ function showDirectoryStatus {
   branchLines=$(echo $branches | tr -d '\n' | wc -c)
   status=$(git status --porcelain)
   statusLines=$(echo $status | tr -d '\n' | wc -c)
-  if [[ $branchLines -gt 0 || $statusLines -gt 0 ]] ; then
+  if [[ $branchLines -gt 0 || $statusLines -gt 0 || "$REMOTE" == "y" ]] ; then
     printf '\033[0;35m'
     git rev-parse --show-toplevel
     if [[ $branchLines -gt 0 ]] ; then

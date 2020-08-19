@@ -37,7 +37,7 @@
 | `' + letter`          | go to mark                     |
 | `Ctrl+^`              | switch to previous buffer      |
 | `:tab h foo`          | open help in a new tab         |
-| `Ctrl+w o`            | make pane the only visible one |
+| `Ctrl+w o`            | make pane the visible one |
 | `:noh`                | clear last highlight           |
 | `"add`                | Delete line into registry a    |
 | `"ap`                 | Paste line from registry a     |
@@ -96,6 +96,11 @@
 | `*`         | Search for next occurrence of word under cursor |
 | `Ctrl+o`    | Jump to previous cursor position (jumplist)     |
 | `Ctrl+i`    | Jump to next cursor position (jumplist)         |
+| `Crtl+u`    | Scroll up                                       |
+| `Ctrl+d`    | Scroll down                                     |
+| `zz`        | Scroll window center current line               |
+| `zt`        | Scroll down with current line at top            |
+| `zb`        | Scroll up with current line at bottom           |
 
 ### windows
 
@@ -146,7 +151,6 @@
 | `Ctrl+n` | In insert mode, complete options previous |
 | `Ctrl+p` | In insert mode, complete options next     |
 
-
 ### Git
 
 |            |                                        |
@@ -159,19 +163,28 @@
 
 ### Fugitive
 
-|      |                                                 |
-| --   | --                                              |
-| `=`  | Show diff for selected file                     |
-| `-`  | Stage of selected file (toggle)                 |
-| `-`  | Push current commit or HEAD if on unpushed line |
-| `s`  | Stage selected file                             |
-| `X`  | Discard changes on selected file                |
-| `cc` | Commit staged files                             |
-| `cw` | Change commit message for selected commit       |
-| `gq` | Quit fugitive window                            |
+|       |                                                 |
+| --    | --                                              |
+| `=`   | Show diff for selected file                     |
+| `-`   | Stage of selected file (toggle)                 |
+| `-`   | Push current commit or HEAD if on unpushed line |
+| `s`   | Stage selected file                             |
+| `X`   | Discard changes on selected file                |
+| `cc`  | Commit staged files                             |
+| `cw`  | Change commit message for selected commit       |
+| `gq`  | Quit fugitive window                            |
+| `gpa` | Go to unpushed and push                         |
+
+### Quickfix
+
+|      |                |
+| --   | --             |
+| `]q` | Next quick fix |
 
 ### Markdown
 
+|             |                  |
+| --          | --               |
 | `viWS+`     | make a word bold |
 | `zR`        | open all folds   |
 | `zM`        | close all folds  |

@@ -9,7 +9,8 @@
 # since npx will normally be preferred.
 #
 
-should-run -m 14 $0 || exit
+NODE_GLOBAL=~/.dotfiles/config/node/global.txt
+should-run -m 14 $0 $NODE_GLOBAL || exit
 
 #
 # Set up nvm
@@ -24,7 +25,7 @@ npm list --global --depth=0
 
 # Install missing packages
 
-cat ~/.dotfiles/config/node/global.txt | grep -v '#' | grep '@' |
+cat $NODE_GLOBAL | grep -v '#' | grep '@' |
   grep -F -v "`npm list --global --depth=0 | grep "@" |
   sed 's/.* \([^@]*\).*/\1/'`" |
   xargs npm install --global

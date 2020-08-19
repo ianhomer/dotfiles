@@ -1,0 +1,3 @@
+date=`date '+%Y%m%d-%H%M%S'`
+echo $1 > ~/storage/shared/projects/things/my-stream/$date.url
+termux-open-url $1
