@@ -47,6 +47,9 @@ of working to streamline distraction free coding. This includes:
 **FiraCode Nerd Font**
 : ligatures, powerline and more
 
+**termux**
+: Android support
+
 MacOS with
 
 **[alfred](https://www.alfredapp.com/)**
