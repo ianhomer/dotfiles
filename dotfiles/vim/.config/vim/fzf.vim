@@ -70,7 +70,7 @@ nnoremap <silent> <leader>jK :Ag!<CR>'
 " not including file path name
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, 
-  \  '-p ~/.dotfiles/config/ag/.ignore', {
+  \  '--hidden -p ~/.dotfiles/config/ag/.ignore', {
   \   'options': '--delimiter : --nth 4..'
   \ }, 
   \ <bang>0)
@@ -82,10 +82,6 @@ command! -bang -nargs=* AgPopup
   \   'options': '--delimiter : --nth 4..'
   \ }, 
   \ <bang>0)
-
-" hidden
-command! -bang -nargs=* AgHidden
-  \ call fzf#vim#ag(<q-args>,'-m 0 --hidden --ignore .git', <bang>0)
 
 nnoremap <silent> <leader>,m :Maps<CR>
 nnoremap <silent> <leader>,M :Maps!<CR>

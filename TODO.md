@@ -15,7 +15,6 @@
 - [ ] name sessions in termux things and dotfiles
 - [ ] refine bookmark flow including share to termux on mobile
 - [ ] gitme -r fail in termux if not in root of git project
-- [ ] automatically start todo with -[ on start of line
 
 Try
 
