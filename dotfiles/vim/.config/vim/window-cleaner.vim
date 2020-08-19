@@ -65,6 +65,9 @@ function! s:SwitchToFirstEditableFile()
     endif
   endfor
 
+  " Open up last file editted
+  execute "normal! `0"
+
   " Can't find a suitable buffer to switch to, so carry on with current as best
   " option.
 endfunction

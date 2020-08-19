@@ -6,7 +6,6 @@
   Perhaps cherry-pick casks that auto-update.
 - [ ] Report on outdated across all packaging tools
 - [ ] How to list all spelling mistakes across all files
-- [ ] Leader o should open up last buffer from history if none open
 - [ ] Add vim thesaurus
 - [ ] Make history relative to current project root
 - [ ] Command to start keybase if not running prior to git push
