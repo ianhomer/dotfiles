@@ -11,8 +11,14 @@
 - [ ] Command to start keybase if not running prior to git push
 - [ ] fresh reset on mobile and refine reinstall
 - [ ] name sessions in termux things and dotfiles
-- [ ] refine bookmark flow including share to termux on mobile
+- [ ] refine bookmark flow including share to termux on mobile, can we take
+  bookmarks from brave bookmark sync
 - [ ] gitme -r fail in termux if not in root of git project
+- [ ] 1. etc lists should line wrap with indent in markdown lint
+- [ ] Make numbered lists continue in markdown
+- [ ] Make git synk only output one line of text for happy flow
+- [ ] Make "-[" more efficient in markdown, feels a little slow
+- [ ] Short jj to open current log note for the day
 
 Try
 
