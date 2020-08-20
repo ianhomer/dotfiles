@@ -35,13 +35,13 @@ fullBranchName=$(git symbolic-ref -q HEAD)
 branchName=${fullBranchName##refs/heads/}
 originUrl=$(git config --get remote.origin.url)
 remoteName=$(git config --get branch.$branchName.remote)
+protocol=${originUrl%%\://*}
 
 changes=$(git status --porcelain | wc -l)
 
 if [[ $changes -gt 0 ]] ; then
   if [[ "true" == `git config core.autocommit` ]] ; then
     # Handle dirty state only if autocommit flag set
-    echo "Committing "$changes" change"$([[ $changes -gt 1 ]] && echo s)
     git add -A ; git commit --quiet -m "sync"
   else
     echo "Cannot sync - local changes and autocommit not set"
@@ -49,19 +49,30 @@ if [[ $changes -gt 0 ]] ; then
   fi
 fi
 
-git fetch --quiet
+#
+# Execute git quietly ... keybase output messages in stderr
+# this function safely removes these known errors, but 
+# keeps unknown errors
+#
+function gitQuiet() {
+  if [[ "$protocol" == "keybase" ]] ; then
+    # Strip out noise from Keybase
+    output=$(git $1 --quiet 2>&1)
+    printf "$output"                   \
+      | grep -v 'Initializing Keybase' \
+      | grep -v 'Syncing with Keybase' \
+      | grep -v '^Done$'               \
+      || :
+  else
+    git $1 --quiet
+  fi
+}
+
+gitQuiet fetch
 
 leftRight=$(git rev-list --count --left-right $remoteName/$branchName...HEAD)
 left=$(echo $leftRight | awk '{print $1}')
 right=$(echo $leftRight | awk '{print $2}')
-
-if [[ $left -gt 0 ]] ; then
-  git rebase --quiet
-fi
-
-if [[ $right -gt 0 ]] ; then
-  git push --quiet --porcelain
-fi
 
 if [[ $left -gt 0 ]] ; then
   if [[ $right -gt 0 ]] ; then
@@ -75,4 +86,12 @@ else
   action="≡"
 fi
 
-echo "$action $branchName in $originUrl"
+echo "$action $branchName in $protocol $originUrl"
+
+if [[ $left -gt 0 ]] ; then
+  gitQuiet rebase
+fi
+
+if [[ $right -gt 0 ]] ; then
+  gitQuiet "push --porcelain"
+fi
