@@ -118,6 +118,8 @@ if g:config_level > 3
   Plug 'tpope/vim-repeat'
   " endwise - auto close structure
   Plug 'tpope/vim-endwise'
+  " Aysynchronous
+  Plug 'tpope/vim-dispatch'
 
   if IsEnabled("syntastic")
     Plug 'vim-syntastic/syntastic'

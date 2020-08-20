@@ -86,12 +86,17 @@ else
   action="≡"
 fi
 
-echo "$action $branchName in $protocol $originUrl"
+printf "$action $branchName in $protocol $originUrl"
 
 if [[ $left -gt 0 ]] ; then
+  printf " ↓"
   gitQuiet rebase
 fi
 
 if [[ $right -gt 0 ]] ; then
+  # Run in background
+  printf " ↑"
   gitQuiet "push --porcelain"
 fi
+
+printf " DONE"
