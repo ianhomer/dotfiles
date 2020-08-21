@@ -35,7 +35,7 @@ fullBranchName=$(git symbolic-ref -q HEAD)
 branchName=${fullBranchName##refs/heads/}
 originUrl=$(git config --get remote.origin.url)
 remoteName=$(git config --get branch.$branchName.remote)
-protocol=${originUrl%%\://*}
+protocol=${originUrl%%\:*}
 
 changes=$(git status --porcelain | wc -l)
 
