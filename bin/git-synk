@@ -61,7 +61,6 @@ function gitQuiet() {
     printf "$output"                   \
       | grep -v 'Initializing Keybase' \
       | grep -v 'Syncing with Keybase' \
-      | grep -v '^Done$'               \
       || :
   else
     git $1 --quiet
@@ -86,7 +85,7 @@ else
   action="≡"
 fi
 
-printf "$action $branchName in $protocol $originUrl"
+printf "$action $branchName $originUrl"
 
 if [[ $left -gt 0 ]] ; then
   printf " ↓"
@@ -96,7 +95,7 @@ fi
 if [[ $right -gt 0 ]] ; then
   # Run in background
   printf " ↑"
-  gitQuiet "push --porcelain"
+  gitQuiet "push"
 fi
 
-printf " DONE"
+printf " ☆"

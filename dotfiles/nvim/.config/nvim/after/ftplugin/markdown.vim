@@ -64,6 +64,14 @@ function! s:NextLine()
         return "- "
       endif
     endif
+  elseif l:previous =~ '\v^[0-9]+\.'
+    " Numbered list
+    if l:previous =~ '\v^[0-9]+\.\s*$'
+      call setline(l:previousLineNumber,'')
+    else
+      let value=matchstr(l:previous, '\v^\zs[0-9]+\ze\.')
+      return (value + 1).'. '
+    endif
   elseif l:previous =~ '\v^\|'
     if l:previous =~ '\v^\|\s*$'
       call setline(l:previousLineNumber,'')
