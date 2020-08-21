@@ -255,8 +255,8 @@ if g:config_level > 0
     nnoremap <silent> <leader>k :call ToggleQuickFix()<CR>
     nnoremap <silent> <leader>K :call ToggleLocationList()<CR>
     nnoremap <silent> <leader>g :call ToggleFugitive()<CR>
-    nnoremap <silent> <leader>b :call GitPush()<CR>
-    nnoremap <silent> <leader>e :Git synk<CR>
+    nnoremap <silent> <leader>b :call GitSynk(1)<CR>
+    nnoremap <silent> <leader>e :call GitSynk(0)<CR>
 
     " Quit and save/close are handy leaders for use on mobile and limited keyboard
     nnoremap <silent> <leader>q :q<CR>
@@ -289,9 +289,13 @@ endif
 
 source ~/.config/vim/thingity.vim
 
-function! GitPush()
+function! GitSynk(onlyPush)
   call CloseFugitiveWindow()
-  Git -P push -v
+  if a:onlyPush
+    Git -P push -v
+  else
+    Git synk
+  endif
 endfunction
 
 function! ToggleFugitive()
