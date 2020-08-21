@@ -525,6 +525,7 @@ if g:config_level > 3
   let g:airline_powerline_fonts = 1
   let g:airline_skip_empty_sections = 1
   let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+  let g:airline_detect_spell = 0
 endif
 
 " Backspace support

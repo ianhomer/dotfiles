@@ -17,8 +17,6 @@
 - [ ] 1. etc lists should line wrap with indent in markdown lint
 - [ ] Make numbered lists continue in markdown
 - [ ] Make git synk only output one line of text for happy flow
-- [ ] Make "-[" more efficient in markdown, feels a little slow
-- [ ] Short jj to open current log note for the day
 
 Try
 

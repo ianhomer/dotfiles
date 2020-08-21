@@ -116,8 +116,8 @@ function! s:ThingityNewThing(createNew)
 endfunction
 
 "
-" WIP : Auto archive things, ... perhaps I should just get proficient with netrw
-" ;)
+" TODO : ThingityArchive should be moved to a python script that does a full
+" organisations of things.
 "
 function! s:ThingityArchive()
   let l:root = s:ThingityGetStreamRoot()
