@@ -32,7 +32,7 @@ endif
 
 " Markdown table rendering
 if IsEnabled("markdown.syntax.table")
-  syntax match mdTableRow /\v^\|.*\|/ contains=mdTableColumn
+  syntax match mdTableRow /\v^\|.*/ contains=mdTableColumn
   syntax match mdTableColumn /\v\|/ contained conceal cchar=│
   syntax match mdTableHeader /\v^\|\s--.*\|/ contains=mdTableHeaderStart,mdTableHeaderEnd,mdTableHeaderMiddle,mdTableHeaderMinus,mdTableHeaderSpace
   syntax match mdTableHeaderEnd /\v\zs\|\ze$/ contained conceal cchar=┤
