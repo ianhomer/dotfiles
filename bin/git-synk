@@ -76,12 +76,12 @@ right=$(echo $leftRight | awk '{print $2}')
 
 if [[ $left -gt 0 ]] ; then
   if [[ $right -gt 0 ]] ; then
-    action="↑ $left ↓ $right"
+    action="↓ $left ↑ $right"
   else
-    action="↑ $right"
+    action="↓ $left"
   fi
 elif [[ $right -gt 0 ]] ; then
-  action="↓ $right"
+  action="↑ $right"
 else
   action="≡"
 fi

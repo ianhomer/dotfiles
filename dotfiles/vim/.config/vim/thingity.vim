@@ -91,19 +91,26 @@ endfunction
 " root. If it's the first of the day then it'll simply be MMDD. If that already
 " exists then a file name with full date time will be created.
 "
-function! s:ThingityNewThing()
+function! s:ThingityNewThing(createNew)
   let l:root = s:ThingityGetStreamRoot()
   let thingName = l:root."/".strftime("%m%d").".md"
   let headingExtra = ""
+  let isNew = 1
   if filereadable(thingName)
-    let thingName = l:root."/".toupper(strftime("%Y%m%d-%H%M%S")).".md"
-    let headingExtra = " - ".s:ThingityTime()
+    if a:createNew
+      let thingName = l:root."/".toupper(strftime("%Y%m%d-%H%M%S")).".md"
+      let headingExtra = " - ".s:ThingityTime()
+    else
+      let isNew = 0
+    endif
   endif
   " Close current buffer so that new thing opens up with focus
   silent! close
   execute "silent e ".thingName
-  execute "normal! a".<SID>GetThingityDateHeading().headingExtra."\<ESC>2o\<ESC>"
-  write
+  if isNew
+    execute "normal! a".<SID>GetThingityDateHeading().headingExtra."\<ESC>2o\<ESC>"
+    write
+  endif
   call NERDTreeFindIfRoom()
   wincmd p
 endfunction
@@ -137,7 +144,8 @@ function! s:ThingityArchive()
 endfunction
 
 nnoremap <silent> <leader>jd :call <SID>ThingityDateHeading()<CR>
-nnoremap <silent> <leader>jn :call <SID>ThingityNewThing()<CR>
+nnoremap <silent> <leader>jn :call <SID>ThingityNewThing(1)<CR>
+nnoremap <silent> <leader>jj :call <SID>ThingityNewThing(0)<CR>
 nnoremap <silent> <leader>ja :call <SID>ThingityArchive()<CR>
 
 " Open NERDTree on my things
