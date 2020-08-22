@@ -305,7 +305,7 @@ function! ToggleFugitive()
 endfunction
 
 function! LintMe()
-  echo "Linting ..".&filetype
+  echo "Linted ".&filetype
   if &filetype == "markdown"
     call LintMarkdown()
   elseif IsEnabled("coc")

@@ -26,7 +26,8 @@ fi
 
 # Update plugins used in power mode
 export VIM_LEVEL=4
-vim +PlugUpgrade +PlugUpdate +qa
+
+# update neovim
 nvim +PlugUpgrade +PlugUpdate +qa
 
 should-run -fu $0
