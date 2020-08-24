@@ -185,7 +185,7 @@ set wildmenu
 set cursorline
 " Ignore case of searches
 set ignorecase
-" Highlight dynamically as pattern is typed
+" Highelight dynamically as pattern is typed
 set incsearch
 " Default updatetime is 4000 and too slow
 set updatetime=300
@@ -564,6 +564,10 @@ if g:config_level > 0
     endfor
     call one#highlight('markdownH2', '000000', 'ffffff', 'bold')
     call one#highlight('Directory', '222222', '', 'bold')
+    highlight Cursor guibg=grey
+    highlight iCursor guibg=black
+    set guicursor=n-v-c:block-Cursor
+    set guicursor+=i:ver100-iCursor
   endif
 endif
 
