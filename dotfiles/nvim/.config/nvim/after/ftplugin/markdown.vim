@@ -103,8 +103,8 @@ inoremap <buffer> <silent> <CR> <CR><C-R>=<SID>NextLine()<C-M>
 
 if IsEnabled("markdown.flow")
   nnoremap <buffer> <silent> <CR> :call <SID>CarriageReturn()<CR>
+  inoremap <buffer> <silent> [ [<C-O>:call <SID>LintTodo()<CR><C-O>$
 endif
-inoremap <buffer> <silent> [ [<C-O>:call <SID>LintTodo()<CR><C-O>$
 
 " The rest of this filetype plugin is not relevant if we're using CoC
 if IsEnabled("coc")

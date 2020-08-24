@@ -14,6 +14,7 @@
 - [ ] refine bookmark flow including share to termux on mobile, can we take
   bookmarks from brave bookmark sync
 - [ ] gitme -r fail in termux if not in root of git project
+- [ ] Toggle for [ completion only on mobil
 
 Try
 
