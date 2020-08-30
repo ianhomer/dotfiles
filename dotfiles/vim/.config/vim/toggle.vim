@@ -53,7 +53,6 @@ let g:layer_features = {
   \    "notes":{
   \      "compactcmd":1,
   \      "light":1,
-  \      "markdown.flow":1,
   \      "markdown.conceal.partial":1
   \    }
   \  }
