@@ -16,8 +16,11 @@
 - [ ] gitme -r fail in termux if not in root of git project
 - [ ] Toggle for [ completion only on mobile
 - [ ] Change log dir to stream for things
-- [ ] harden space jj to open todays note
+- [ ] harden space jj to open today's note make work from anywhere. maybe map to
+  one key press.
+- [ ] 
 - [ ] create flow for specific day note e.g. sundown
+- [ ] shorten git synk output to fit under 40 chars and fit on small screen
 - [ ] 
 
 Try
