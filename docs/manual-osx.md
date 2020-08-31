@@ -3,6 +3,14 @@
 I've not worked out how to automate all configuration. Until I do, this is what
 I manually do on each environment.
 
+Login Items
+
+- Alfred 4
+- Keybase
+- Magnet
+- Todoist - Hide
+- iTerm - Hide
+
 ## Initialise a few desktop apps
 
 ### Dozer
