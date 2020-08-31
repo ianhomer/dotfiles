@@ -63,7 +63,7 @@ function! s:ThingityGetRoot()
   " Find default thing project, which is the first subdirectory that is a git
   " project or has a stream directory
   "
-  let l:dirs = filter(globpath(getcwd(), '*', 0, 1),"isdirectory(v:val.'/.git') || isdirectory(v:val.'/stream')")
+  let l:dirs = filter(globpath(getcwd(), '*', 0, 1),"isdirectory(v:val.'/.git') && isdirectory(v:val.'/stream')")
   if len(l:dirs) == 0
     return getcwd()
   elseif len(l:dirs) == 1
