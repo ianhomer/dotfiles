@@ -42,19 +42,28 @@ function! s:ThingityTime()
 endfunction
 
 "
-" Get the root of the project.
+" Get the root of the thing project.
 "
 function! s:ThingityGetRoot()
+  " First try to find git root
   let l:root = fnameescape(
     \ fnamemodify(finddir('.git', escape(expand('%:p:h'), ' ').";"), ":h"))
   if isdirectory(l:root."/.git")
     return l:root
   endif
+
+  " Then try to find the stream directory
+  let l:root = fnameescape(
+    \ fnamemodify(finddir('stream', escape(expand('%:p:h'), ' ').";"), ":h"))
+  if isdirectory(l:root."/stream")
+    return l:root
+  endif
+
   "
   " Find default thing project, which is the first subdirectory that is a git
-  " project and has a log directory
+  " project or has a stream directory
   "
-  let l:dirs = filter(globpath(getcwd(), '*', 0, 1),"isdirectory(v:val.'/.git') && isdirectory(v:val.'/log')")
+  let l:dirs = filter(globpath(getcwd(), '*', 0, 1),"isdirectory(v:val.'/.git') || isdirectory(v:val.'/stream')")
   if len(l:dirs) == 0
     return getcwd()
   elseif len(l:dirs) == 1
@@ -75,11 +84,11 @@ function! s:ThingityGetRoot()
 endfunction
 
 "
-" Get the thing string root, i.e. log directory if it exists or root otherwise.
+" Get the thing string root, i.e. stream directory if it exists or root otherwise.
 function! s:ThingityGetStreamRoot()
   let l:root = s:ThingityGetRoot()
-  if isdirectory(l:root."/log")
-    return l:root."/log"
+  if isdirectory(l:root."/stream")
+    return l:root."/stream"
   endif
   return l:root
 endfunction
@@ -122,7 +131,7 @@ endfunction
 function! s:ThingityArchive()
   let l:root = s:ThingityGetStreamRoot()
   if !isdirectory(l:root."/archive")
-    echo "... create log/archive directory to support archiving"
+    echo "... create stream/archive directory to support archiving"
   endif
   let today = strftime("%m%d")
   let archivePoint = today - 7
