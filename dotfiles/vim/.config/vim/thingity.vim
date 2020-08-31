@@ -121,7 +121,7 @@ function! s:ThingityNewThing(createNew)
     write
   endif
   call NERDTreeFindIfRoom()
-  wincmd p
+  wincmd l
 endfunction
 
 "
