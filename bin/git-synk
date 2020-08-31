@@ -85,8 +85,9 @@ else
   action="≡"
 fi
 
-reducedBranchName=${branchName//[a-z]+/}
-reducedOriginUrl=`echo $originUrl | sed -e 's|\([a-z]\)[\.a-z]*\([\/@\:]\)|\1\2|g'`
+reducer='s|\([a-z]\)[\.a-z]*\([\/@\:]\)|\1\2|g'
+reducedBranchName=`echo $branchName | sed -e $reducer`
+reducedOriginUrl=`echo $originUrl | sed -e $reducer`
 
 printf "$action $reducedBranchName $reducedOriginUrl"
 
