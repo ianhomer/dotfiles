@@ -18,7 +18,6 @@
 - [ ] harden space jj to open today's note make work from anywhere. maybe map to
   one key press.
 - [ ] create flow for specific day note e.g. sundown
-- [ ] shorten git synk output to fit under 40 chars and fit on small screen
 
 Try
 
