@@ -292,7 +292,7 @@ source ~/.config/vim/thingity.vim
 function! GitSynk(onlyPush)
   call CloseFugitiveWindow()
   if a:onlyPush
-    Git -P push -v
+    Git -P push
   else
     Git synk
   endif
