@@ -28,27 +28,6 @@ while getopts "ahu" o; do case "$o" in
   h) help && exit 1 ;;
 esac done
 
-# Make sure in git repository
-git rev-parse
-
-fullBranchName=$(git symbolic-ref -q HEAD)
-branchName=${fullBranchName##refs/heads/}
-originUrl=$(git config --get remote.origin.url)
-remoteName=$(git config --get branch.$branchName.remote)
-protocol=${originUrl%%\:*}
-
-changes=$(git status --porcelain | wc -l)
-
-if [[ $changes -gt 0 ]] ; then
-  if [[ "true" == `git config core.autocommit` ]] ; then
-    # Handle dirty state only if autocommit flag set
-    git add -A ; git commit --quiet -m "sync"
-  else
-    echo "Cannot sync - local changes and autocommit not set"
-    exit 128
-  fi
-fi
-
 #
 # Execute git quietly ... keybase output messages in stderr
 # this function safely removes these known errors, but 
@@ -67,39 +46,63 @@ function gitQuiet() {
   fi
 }
 
-gitQuiet fetch
+function gitSynk() {
+  # Make sure in git repository
+  git rev-parse
+  
+  fullBranchName=$(git symbolic-ref -q HEAD)
+  branchName=${fullBranchName##refs/heads/}
+  originUrl=$(git config --get remote.origin.url)
+  remoteName=$(git config --get branch.$branchName.remote)
+  protocol=${originUrl%%\:*}
 
-leftRight=$(git rev-list --count --left-right $remoteName/$branchName...HEAD)
-left=$(echo $leftRight | awk '{print $1}')
-right=$(echo $leftRight | awk '{print $2}')
+  changes=$(git status --porcelain | wc -l)
 
-if [[ $left -gt 0 ]] ; then
-  if [[ $right -gt 0 ]] ; then
-    action="↓ $left ↑ $right"
-  else
-    action="↓ $left"
+  if [[ $changes -gt 0 ]] ; then
+    if [[ "true" == `git config core.autocommit` ]] ; then
+      # Handle dirty state only if autocommit flag set
+      git add -A ; git commit --quiet -m "sync"
+    else
+      echo "Cannot sync - local changes and autocommit not set"
+      exit 128
+    fi
   fi
-elif [[ $right -gt 0 ]] ; then
-  action="↑ $right"
-else
-  action="≡"
-fi
 
-reducer='s|\([a-z]\)[\.a-z]*\([\/@\:]\)|\1\2|g'
-reducedBranchName=`echo $branchName | sed -e $reducer`
-reducedOriginUrl=`echo $originUrl | sed -e $reducer`
+  gitQuiet fetch
 
-printf "$action $reducedBranchName $reducedOriginUrl"
+  leftRight=$(git rev-list --count --left-right $remoteName/$branchName...HEAD)
+  left=$(echo $leftRight | awk '{print $1}')
+  right=$(echo $leftRight | awk '{print $2}')
 
-if [[ $left -gt 0 ]] ; then
-  printf " ↓"
-  gitQuiet rebase
-fi
+  if [[ $left -gt 0 ]] ; then
+    if [[ $right -gt 0 ]] ; then
+      action="↓ $left ↑ $right"
+    else
+      action="↓ $left"
+    fi
+  elif [[ $right -gt 0 ]] ; then
+    action="↑ $right"
+  else
+    action="≡"
+  fi
 
-if [[ $right -gt 0 ]] ; then
-  # Run in background
-  printf " ↑"
-  gitQuiet "push"
-fi
+  reducer='s|\([a-z]\)[\.a-z]*\([\/@\:]\)|\1\2|g'
+  reducedBranchName=`echo $branchName | sed -e $reducer`
+  reducedOriginUrl=`echo $originUrl | sed -e $reducer`
 
+  printf "$action $reducedBranchName $reducedOriginUrl"
+
+  if [[ $left -gt 0 ]] ; then
+    printf " ↓"
+    gitQuiet rebase
+  fi
+
+  if [[ $right -gt 0 ]] ; then
+    # Run in background
+    printf " ↑"
+    gitQuiet "push"
+  fi
+}
+
+gitSynk
 printf " ☆"
