@@ -60,6 +60,13 @@ function gitSynk() {
   remoteName=$(git config --get branch.$branchName.remote)
   protocol=${originUrl%%\:*}
 
+  current=`pwd | sed 's|.*/||g'`
+
+  if git rebase --show-current-patch 2>&1>/dev/null ; then
+    echo "$current - rebase in progress"
+    return 1
+  fi
+
   changes=$(git status --porcelain | wc -l)
 
   if [[ $changes -gt 0 ]] ; then
@@ -69,8 +76,7 @@ function gitSynk() {
     else
       # Otherwise if there are local changes and the autocommit is not set then
       # we bomb
-      current=`pwd`
-      echo "Not syncing ${current##*/} - local changes and autocommit not set"
+      echo "$current - local changes and autocommit not set"
       return 128
     fi
   fi
