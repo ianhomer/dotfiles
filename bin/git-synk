@@ -53,6 +53,7 @@ function gitSynk() {
   # Make sure in git repository
   git rev-parse
 
+  printf "▻ "
   fullBranchName=$(git symbolic-ref -q HEAD)
   branchName=${fullBranchName##refs/heads/}
   originUrl=$(git config --get remote.origin.url)
@@ -97,7 +98,7 @@ function gitSynk() {
   reducedBranchName=`echo $branchName | sed -e $reducer`
   reducedOriginUrl=`echo $originUrl | sed -e $reducer`
 
-  printf "$action $reducedBranchName $reducedOriginUrl"
+  printf "$action $reducedBranchName ${reducedOriginUrl%%.git}"
 
   if [[ $left -gt 0 ]] ; then
     printf " ↓"
