@@ -9,6 +9,9 @@
 export LOG=~/.speedtest.log
 # Get WIFI SID without leading spaces
 ssid=`/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep " SSID" | sed -e 's/^[[:space:]]*//'`
-# CSV output with decimal places removed
-csv=`/usr/local/bin/speedtest-cli --csv | sed -e 's/\.[^,]*//g'`
+#
+# CSV output with date, ping, download and upload decimal places removed
+# Note that location values in CSV can have a comma, so use a safer delimiter
+#
+csv=`/usr/local/bin/speedtest-cli --csv --csv-delimiter '|' | sed -e 's/\.[^|]*//g' | awk 'BEGIN {FS="|"; OFS=","} {print $4, $5, $7, $8}'`
 echo "${ssid},${csv}" >> ${LOG}
