@@ -1,10 +1,14 @@
 #!/bin/bash
 #
 # brew install speedtest-cli
+# crontab -e
 #
+# 0 * * * * /path/log-speedtest.sh   # hourly
+# */5 * * * * /path/log-speedtest.sh # every 5 minutes
 
 export LOG=~/.speedtest.log
-echo "----" >> ${LOG}
-date >> ${LOG}
-/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep " SSID" >> ${LOG}
-/usr/local/bin/speedtest-cli --simple >> ${LOG}
+# Get WIFI SID without leading spaces
+ssid=`/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep " SSID" | sed -e 's/^[[:space:]]*//'`
+# CSV output with decimal places removed
+csv=`/usr/local/bin/speedtest-cli --csv | sed -e 's/\.[^,]*//g'`
+echo "${ssid},${csv}" >> ${LOG}
