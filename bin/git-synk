@@ -62,7 +62,7 @@ function gitSynk() {
 
   current=`pwd | sed 's|.*/||g'`
 
-  if git rebase --show-current-patch 2>&1>/dev/null ; then
+  if git rebase --show-current-patch > /dev/null 2>&1 ; then
     echo "$current - rebase in progress"
     return 1
   fi
