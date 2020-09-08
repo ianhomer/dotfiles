@@ -63,7 +63,7 @@ function gitSynk() {
   current=`pwd | sed 's|.*/||g'`
 
   if git rebase --show-current-patch > /dev/null 2>&1 ; then
-    echo "$current - rebase in progress"
+    printf "$current - rebase in progress"
     return 1
   fi
 
@@ -76,7 +76,7 @@ function gitSynk() {
     else
       # Otherwise if there are local changes and the autocommit is not set then
       # we bomb
-      echo "$current - local changes and autocommit not set"
+      printf "$current - local changes and autocommit not set"
       return 128
     fi
   fi
@@ -126,11 +126,11 @@ if git rev-parse 2>/dev/null  ; then
 else
   # We're not in a git directory, loop over child directories and if a child is
   # git directory then synk
-  current=`pwd`
+  root=`pwd`
   first=1
   error=0
   for child in */ ; do
-   cd ${current}
+   cd ${root}
    if [ -d "${child}.git" ] ; then
      # Each subsequence synk on a new line
      [[ first -eq 0 ]] && printf "\n"
