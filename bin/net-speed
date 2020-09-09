@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# brew install speedtest-cli
+
+logFile=~/.net-speed.log
+
+while getopts "l" o; do case "$o" in
+  l) LOGOUT=y ;;
+esac done
+
+if [[ "y" == "$LOGOUT" ]] ; then
+  /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep " SSID" >> $logFile
+
+  /usr/local/bin/speedtest-cli --csv --csv-delimiter '|' >> $logFile
+else
+  if [[ -f $logFile ]] ; then
+    grep "|" $logFile | sed -e 's/\.[^|]*//g' | awk 'BEGIN {FS="|"; OFS=","} {print $4, $5, $7, $8}'
+  else
+    echo "net-speed file $logFile not yet created"
+  fi
+fi
+
+
