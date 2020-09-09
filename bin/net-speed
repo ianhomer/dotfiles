@@ -14,7 +14,7 @@ if [[ "y" == "$LOGOUT" ]] ; then
   /usr/local/bin/speedtest-cli --csv --csv-delimiter '|' >> $logFile
 else
   if [[ -f $logFile ]] ; then
-    grep "|" $logFile | sed -e 's/\.[^|]*//g' | awk 'BEGIN {FS="|"; OFS=","} {print $4, $5, $7, $8}'
+    grep "|" $logFile | sed -e 's/\.[^|]*//g' | awk 'BEGIN {FS="|"} {printf "%s %sms ↑%0.fMbs ↓%0.fMbs\n", $4, $5, $7/1048576, $8/1048576}'
   else
     echo "net-speed file $logFile not yet created"
   fi
