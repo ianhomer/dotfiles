@@ -3,8 +3,8 @@
 # brew install speedtest-cli
 # crontab -e
 #
-# 0 * * * * /path/log-speedtest.sh   # hourly
-# */5 * * * * /path/log-speedtest.sh # every 5 minutes
+# 0 * * * * /path/log-speedtest   # hourly
+# */10 * * * * /path/log-speedtest # every 5 minutes
 
 export LOG=~/.speedtest.log
 # Get WIFI SID without leading spaces
