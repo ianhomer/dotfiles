@@ -14,7 +14,6 @@
 - [ ] refine bookmark flow including share to termux on mobile, can we take
   bookmarks from brave bookmark sync
 - [ ] gitme -r fail in termux if not in root of git project
-- [ ] Toggle for [ completion only on mobile
 - [ ] harden space jj to open today's note make work from anywhere. maybe map to
   one key press.
 - [ ] create flow for specific day note e.g. sundown
