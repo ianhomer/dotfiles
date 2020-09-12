@@ -418,8 +418,10 @@ if g:config_level < 2
 endif
 
 function! s:DebouncedSave() abort
-  call timer_stop( s:debouncedSaveTimer )
-  let s:debouncedSaveTimer = timer_start(1000, { timerId -> execute('write') })
+  if &buftype #== ""
+    call timer_stop( s:debouncedSaveTimer )
+    let s:debouncedSaveTimer = timer_start(1000, { timerId -> execute('write') })
+  endif
 endf
 
 "
