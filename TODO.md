@@ -16,7 +16,6 @@
 - [ ] harden space jj to open today's note make work from anywhere. maybe map to
   one key press.
 - [ ] create flow for specific day note e.g. sundown
-- [ ] Try buku for bookmark management
 
 Try
 
