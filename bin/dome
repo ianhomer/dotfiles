@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+#
+# dome => Do Me => What to do next?
+#
+
+limit=10
+while getopts "l:" o; do case "$o" in
+  l) limit=$OPTARG ;;
+esac done
+
+if ! git rev-parse ; then
+  echo "Not a git directory"
+  exit 1
+fi
+
+root=`git rev-parse --show-toplevel`
+gh issue list --limit $limit --label do
+
+if [ -f TODO.md ] ; then
+  echo
+  # Ignore all lines after first heading 2 and strip all headings
+  cat TODO.md | sed '/##/,$d' | grep -v "^#" | head -n $limit
+fi
+
