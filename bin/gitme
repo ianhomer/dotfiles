@@ -37,7 +37,7 @@ function showDirectoryStatus {
 # Show status of recently entered directories
 for d in `git-get-directories` ; do
   printf '\033[0;33m'
-  [[ "$REMOTE" == "y" ]] && git remote update
+  [[ "$REMOTE" == "y" ]] && (cd $d ; git remote update)
   (cd $d ; showDirectoryStatus)
   ((count++))
   [[ -n "${MAX}" && ${count} -ge ${MAX} ]] && break
