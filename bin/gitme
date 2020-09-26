@@ -22,7 +22,7 @@ function showDirectoryStatus {
   statusLines=$(echo $status | tr -d '\n' | wc -c)
   if [[ $branchLines -gt 0 || $statusLines -gt 0 || "$REMOTE" == "y" ]] ; then
     printf '\033[0;35m'
-    git rev-parse --show-toplevel
+    [[ "$REMOTE" != "y" ]] && git rev-parse --show-toplevel
     if [[ $branchLines -gt 0 ]] ; then
       printf '\033[0;37m'
       echo "${branches}"
@@ -36,8 +36,14 @@ function showDirectoryStatus {
 
 # Show status of recently entered directories
 for d in `git-get-directories` ; do
-  printf '\033[0;33m'
-  [[ "$REMOTE" == "y" ]] && (cd $d ; git remote update)
+  [[ "$REMOTE" == "y" ]] && (
+    cd $d
+    printf '\033[0;35m'
+    git rev-parse --show-toplevel
+    printf '\033[0;33m'
+    git remote update
+    git pull
+  )
   (cd $d ; showDirectoryStatus)
   ((count++))
   [[ -n "${MAX}" && ${count} -ge ${MAX} ]] && break
