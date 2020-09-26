@@ -118,6 +118,8 @@ if g:config_level > 3
   Plug 'tpope/vim-repeat'
   " endwise - auto close structure
   Plug 'tpope/vim-endwise'
+  " Aysynchronous
+  Plug 'tpope/vim-dispatch'
 
   if IsEnabled("syntastic")
     Plug 'vim-syntastic/syntastic'
@@ -183,7 +185,7 @@ set wildmenu
 set cursorline
 " Ignore case of searches
 set ignorecase
-" Highlight dynamically as pattern is typed
+" Highelight dynamically as pattern is typed
 set incsearch
 " Default updatetime is 4000 and too slow
 set updatetime=300
@@ -253,8 +255,8 @@ if g:config_level > 0
     nnoremap <silent> <leader>k :call ToggleQuickFix()<CR>
     nnoremap <silent> <leader>K :call ToggleLocationList()<CR>
     nnoremap <silent> <leader>g :call ToggleFugitive()<CR>
-    nnoremap <silent> <leader>b :call GitPush()<CR>
-    nnoremap <silent> <leader>e :Git synk<CR>
+    nnoremap <silent> <leader>b :call GitSynk(1)<CR>
+    nnoremap <silent> <leader>e :call GitSynk(0)<CR>
 
     " Quit and save/close are handy leaders for use on mobile and limited keyboard
     nnoremap <silent> <leader>q :q<CR>
@@ -287,9 +289,13 @@ endif
 
 source ~/.config/vim/thingity.vim
 
-function! GitPush()
+function! GitSynk(onlyPush)
   call CloseFugitiveWindow()
-  Git -P push -v
+  if a:onlyPush
+    Git -P push
+  else
+    Git synk
+  endif
 endfunction
 
 function! ToggleFugitive()
@@ -299,7 +305,7 @@ function! ToggleFugitive()
 endfunction
 
 function! LintMe()
-  echo "Linting ..".&filetype
+  echo "Linted ".&filetype
   if &filetype == "markdown"
     call LintMarkdown()
   elseif IsEnabled("coc")
@@ -412,8 +418,10 @@ if g:config_level < 2
 endif
 
 function! s:DebouncedSave() abort
-  call timer_stop( s:debouncedSaveTimer )
-  let s:debouncedSaveTimer = timer_start(1000, { timerId -> execute('write') })
+  if &buftype == ""
+    call timer_stop( s:debouncedSaveTimer )
+    let s:debouncedSaveTimer = timer_start(1000, { timerId -> execute('write') })
+  endif
 endf
 
 "
@@ -523,6 +531,7 @@ if g:config_level > 3
   let g:airline_powerline_fonts = 1
   let g:airline_skip_empty_sections = 1
   let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+  let g:airline_detect_spell = 0
 endif
 
 " Backspace support
@@ -557,6 +566,10 @@ if g:config_level > 0
     endfor
     call one#highlight('markdownH2', '000000', 'ffffff', 'bold')
     call one#highlight('Directory', '222222', '', 'bold')
+    highlight Cursor guibg=grey
+    highlight iCursor guibg=black
+    set guicursor=n-v-c:block-Cursor
+    set guicursor+=i:ver100-iCursor
   endif
 endif
 

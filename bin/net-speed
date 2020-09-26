@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+# brew install speedtest-cli
+# */5 * * * * /path/.dotfiles/bin/net-speed -l # every 5 minutes
+
+logFile=~/.net-speed.log
+
+while getopts "cdl" o; do case "$o" in
+  c) CRON=y ;;
+  d) DELETE_CRON=y ;;
+  l) LOGOUT=y ;;
+esac done
+
+if [[ "y" == "$LOGOUT" ]] ; then
+  /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep " SSID" >> $logFile
+
+  /usr/local/bin/speedtest-cli --csv --csv-delimiter '|' >> $logFile
+elif [[ "y" == "$CRON" ]] ; then
+  (crontab -l 2>/dev/null | grep -v "net-speed"; echo "*/10 * * * * $HOME/.dotfiles/bin/net-speed -l") | crontab -
+  echo "Added net-speed to cron"
+  crontab -l
+elif [[ "y" == "$DELETE_CRON" ]] ; then
+  (crontab -l 2>/dev/null | grep -v "net-speed") | crontab -
+  echo "Removed net-speed from cron"
+  crontab -l
+else
+  if [[ -f $logFile ]] ; then
+    grep "|" $logFile | sed -e 's/\.[^|]*//g' | awk 'BEGIN {FS="|"} {printf "%s %sms ↑%0.fMbs ↓%0.fMbs\n", $4, $5, $7/1048576, $8/1048576}'
+  else
+    echo "net-speed file $logFile not yet created"
+  fi
+fi
+
+
+

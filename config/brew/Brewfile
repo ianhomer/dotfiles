@@ -1,5 +1,4 @@
 tap "homebrew/cask-fonts"
-tap "AdoptOpenJDK/openjdk"
 
 #
 # The awesome Hack Nerd fonts combining the Hack source code font
@@ -93,21 +92,24 @@ cask "drawio"
 #
 
 brew "docker-compose"
+brew "gh"
 brew "git"
 brew "gradle"
 brew "jenv"
 brew "jq"
+brew "k9s"
+
 brew "maven"
 brew "neofetch"
 brew "nvm"
 brew "rbenv"
 brew "node"
-brew "terraform"
+brew "warrensbox/tap/tfswitch"
 brew "yarn"
 
 cask "docker"
 cask "google-cloud-sdk"
-cask "java11"
+cask "lens"
 cask "visual-studio-code"
 
 #

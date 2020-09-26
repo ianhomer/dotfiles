@@ -16,7 +16,12 @@ if ! is-executable brew ; then
     | ruby
 fi
 
+adminFormula="java11"
+
 echo "... updating brew"
+
+# Pin formula that need password to upgrade
+brew pin $adminFormula > /dev/null 2>&1
 
 # Use latest version of brew
 brew update
@@ -28,6 +33,7 @@ cd $SCRIPT_DIR/../config/brew
 brew bundle
 
 if [[ "$1" == "with-admin" ]] ; then
+  brew update $adminFormula
   echo "... installing admin packages"
   cd $SCRIPT_DIR/../config/brew/admin
   brew bundle

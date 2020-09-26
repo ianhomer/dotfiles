@@ -8,11 +8,12 @@
 
 ### sessions
 
-|            |                     |
-| --         | --                  |
-| `Ctrl+a+$` | rename session      |
-| `Ctrl+a+s` | choose session      |
-| `Ctrl+a+d` | detach from session |
+|               |                     |
+| --            | --                  |
+| `Ctrl+a+$`    | rename session      |
+| `Ctrl+a+s`    | choose session      |
+| `Ctrl+a+d`    | detach from session |
+| `Ctrl+a :new` | create new session  |
 
 ### windows
 

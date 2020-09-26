@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+#
+# Utils around buku a bookmark manager
+#
+
+while getopts "vw" o; do case "$o" in
+  v) VERBOSE=y ;;
+  w) WEB=y;;
+esac done
+
+if [[ -n "$WEB" ]] ; then
+  bukuserver run
+else
+  #
+  # Import bookmarks from vivaldi
+  #
+  echo "Importing Vivaldi bookmarks"
+  OUT=${TMPDIR}vivaldi-bookmarks.json
+  for file in ~/Library/Application\ Support/Vivaldi/Profile\ */Bookmarks ; do
+    jq '{ title:"bookme",typeCode:2,children:[{typeCode:2,title:"bookme",children:[ ..|select(.type?=="url")|{uri:.url,title:.name,typeCode:1,tags:"vivaldi"} ]}]}' \
+      "$file" > $OUT
+    args=""
+    if [[ -n "$VERBOSE" ]] ; then
+      echo "Bookmarks : $OUT"
+      args=" -z"
+    fi
+    buku --tacit $args -i $OUT 2>&1 \
+      | grep -v "already exists at index"
+  done
+  count=`buku --nc -p | grep "^[0-9]\+\." | wc -l`
+  echo "... Imported Vivaldi bookmarks : count = ${count}"
+fi
+
