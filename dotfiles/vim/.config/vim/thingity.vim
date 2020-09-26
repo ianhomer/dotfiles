@@ -164,7 +164,7 @@ nnoremap <silent> <leader>jd :call <SID>ThingityDateHeading()<CR>
 nnoremap <silent> <leader>jn :call <SID>ThingityNewThing(1,"")<CR>
 nnoremap <silent> <leader>jj :call <SID>ThingityNewThing(0,"")<CR>
 nnoremap <silent> <leader>jk :call <SID>ThingityNewThing(0,"sunrise")<CR>
-nnoremap <silent> <leader>jl :call <SID>ThingityNewThing(0,"sunset")<CR>
+nnoremap <silent> <leader>jh :call <SID>ThingityNewThing(0,"sunset")<CR>
 nnoremap <silent> <leader>ja :call <SID>ThingityArchive()<CR>
 
 " Open NERDTree on my things
