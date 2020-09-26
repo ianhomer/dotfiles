@@ -64,6 +64,14 @@ function! s:NextLine()
         return "- "
       endif
     endif
+  elseif l:previous =~ '\v^[0-9]+\.'
+    " Numbered list
+    if l:previous =~ '\v^[0-9]+\.\s*$'
+      call setline(l:previousLineNumber,'')
+    else
+      let value=matchstr(l:previous, '\v^\zs[0-9]+\ze\.')
+      return (value + 1).'. '
+    endif
   elseif l:previous =~ '\v^\|'
     if l:previous =~ '\v^\|\s*$'
       call setline(l:previousLineNumber,'')
@@ -95,7 +103,7 @@ inoremap <buffer> <silent> <CR> <CR><C-R>=<SID>NextLine()<C-M>
 
 if IsEnabled("markdown.flow")
   nnoremap <buffer> <silent> <CR> :call <SID>CarriageReturn()<CR>
-  inoremap <buffer> <silent> [ [<Esc>:call <SID>LintTodo()<CR>$a
+  inoremap <buffer> <silent> [ [<C-O>:call <SID>LintTodo()<CR><C-O>$
 endif
 
 " The rest of this filetype plugin is not relevant if we're using CoC

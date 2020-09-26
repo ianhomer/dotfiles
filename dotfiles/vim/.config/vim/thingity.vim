@@ -42,19 +42,28 @@ function! s:ThingityTime()
 endfunction
 
 "
-" Get the root of the project.
+" Get the root of the thing project.
 "
 function! s:ThingityGetRoot()
+  " First try to find git root
   let l:root = fnameescape(
     \ fnamemodify(finddir('.git', escape(expand('%:p:h'), ' ').";"), ":h"))
   if isdirectory(l:root."/.git")
     return l:root
   endif
+
+  " Then try to find the stream directory
+  let l:root = fnameescape(
+    \ fnamemodify(finddir('stream', escape(expand('%:p:h'), ' ').";"), ":h"))
+  if isdirectory(l:root."/stream")
+    return l:root
+  endif
+
   "
   " Find default thing project, which is the first subdirectory that is a git
-  " project and has a log directory
+  " project or has a stream directory
   "
-  let l:dirs = filter(globpath(getcwd(), '*', 0, 1),"isdirectory(v:val.'/.git') && isdirectory(v:val.'/log')")
+  let l:dirs = filter(globpath(getcwd(), '*', 0, 1),"isdirectory(v:val.'/.git') && isdirectory(v:val.'/stream')")
   if len(l:dirs) == 0
     return getcwd()
   elseif len(l:dirs) == 1
@@ -75,11 +84,11 @@ function! s:ThingityGetRoot()
 endfunction
 
 "
-" Get the thing string root, i.e. log directory if it exists or root otherwise.
+" Get the thing string root, i.e. stream directory if it exists or root otherwise.
 function! s:ThingityGetStreamRoot()
   let l:root = s:ThingityGetRoot()
-  if isdirectory(l:root."/log")
-    return l:root."/log"
+  if isdirectory(l:root."/stream")
+    return l:root."/stream"
   endif
   return l:root
 endfunction
@@ -91,31 +100,38 @@ endfunction
 " root. If it's the first of the day then it'll simply be MMDD. If that already
 " exists then a file name with full date time will be created.
 "
-function! s:ThingityNewThing()
+function! s:ThingityNewThing(createNew)
   let l:root = s:ThingityGetStreamRoot()
   let thingName = l:root."/".strftime("%m%d").".md"
   let headingExtra = ""
+  let isNew = 1
   if filereadable(thingName)
-    let thingName = l:root."/".toupper(strftime("%Y%m%d-%H%M%S")).".md"
-    let headingExtra = " - ".s:ThingityTime()
+    if a:createNew
+      let thingName = l:root."/".toupper(strftime("%Y%m%d-%H%M%S")).".md"
+      let headingExtra = " - ".s:ThingityTime()
+    else
+      let isNew = 0
+    endif
   endif
   " Close current buffer so that new thing opens up with focus
   silent! close
   execute "silent e ".thingName
-  execute "normal! a".<SID>GetThingityDateHeading().headingExtra."\<ESC>2o\<ESC>"
-  write
+  if isNew
+    execute "normal! a".<SID>GetThingityDateHeading().headingExtra."\<ESC>2o\<ESC>"
+    write
+  endif
   call NERDTreeFindIfRoom()
-  wincmd p
+  wincmd l
 endfunction
 
 "
-" WIP : Auto archive things, ... perhaps I should just get proficient with netrw
-" ;)
+" TODO : ThingityArchive should be moved to a python script that does a full
+" organisations of things.
 "
 function! s:ThingityArchive()
   let l:root = s:ThingityGetStreamRoot()
   if !isdirectory(l:root."/archive")
-    echo "... create log/archive directory to support archiving"
+    echo "... create stream/archive directory to support archiving"
   endif
   let today = strftime("%m%d")
   let archivePoint = today - 7
@@ -137,7 +153,8 @@ function! s:ThingityArchive()
 endfunction
 
 nnoremap <silent> <leader>jd :call <SID>ThingityDateHeading()<CR>
-nnoremap <silent> <leader>jn :call <SID>ThingityNewThing()<CR>
+nnoremap <silent> <leader>jn :call <SID>ThingityNewThing(1)<CR>
+nnoremap <silent> <leader>jj :call <SID>ThingityNewThing(0)<CR>
 nnoremap <silent> <leader>ja :call <SID>ThingityArchive()<CR>
 
 " Open NERDTree on my things
