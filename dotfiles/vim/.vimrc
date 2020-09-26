@@ -259,7 +259,7 @@ if g:config_level > 0
     nnoremap <silent> <leader>e :call GitSynk(0)<CR>
 
     " Quit and save/close are handy leaders for use on mobile and limited keyboard
-    nnoremap <silent> <leader>q :q<CR>
+    nnoremap <silent> <leader>q :call CloseMe()<CR>
     nnoremap <silent> <leader>x :x<CR>
 
     if g:config_level > 3
@@ -295,6 +295,14 @@ function! GitSynk(onlyPush)
     Git -P push
   else
     Git synk
+  endif
+endfunction
+
+function! CloseMe()
+  if &filetype == "startify" || winnr('$') > 1
+    quit
+  else
+    execute ":Startify"
   endif
 endfunction
 
