@@ -172,6 +172,11 @@ command_uninstall() {
   echo "... uninstalled"
 }
 
+# Stow dotfiles.
+command_stow() {
+  dotme-stow
+}
+
 # Unstow dotfiles.
 command_unstow() {
   echo "... unstowing files"

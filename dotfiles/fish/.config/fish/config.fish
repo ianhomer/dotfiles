@@ -103,3 +103,4 @@ if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
   echo "... Initialised in "(expr $DATE - $SHELL_START_DATE)"ms"
   set_color normal
 end
+

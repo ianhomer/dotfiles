@@ -10,7 +10,6 @@ else
   # git
   alias master="git checkout master && git pull"
   alias push="git push"
-  alias pull="git pull"
   alias branch="git branch"
   alias checkout="git checkout"
   alias branch-and-checkout="git checkout -b"
@@ -46,6 +45,8 @@ else
   alias catmd="findmd | xargs awk '(NR>1 && FNR==1){printf (\"\n\")};1'"
 
   alias b='buku --suggest'
+
+  alias fck="fuck"
 
   [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
     echo "... Loaded ~/.config/fish/aliases.fish"

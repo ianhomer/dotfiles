@@ -41,6 +41,10 @@ function get-extension
   echo (string split -r -m1 . $argv)[2]
 end
 
+function pull
+  git pull
+end
+
 [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
   echo "... Loaded ~/.config/fish/functions.fish"
 
