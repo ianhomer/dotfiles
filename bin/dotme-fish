@@ -13,7 +13,13 @@ printf "\e[36mConfiguring fish shell\e[0m\n"
 
 . ~/.dotfiles/dotfiles/fish/.config/fish/functions/add-to-universal-path.fish
 
-add-to-universal-path ~/.dotfiles/bin ~/.jenv/bin ~/.jenv/shims ~/.rbenv/shims
+#
+# Set up path note that this include
+#
+# - ~/.dotfiles/bin <- scripts from this dotfiles
+# - ~/bin           <- local overrides
+#
+add-to-universal-path ~/.dotfiles/bin ~/bin ~/.jenv/bin ~/.jenv/shims ~/.rbenv/shims
 
 should-run -fu dotme-fish
 
