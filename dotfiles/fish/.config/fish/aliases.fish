@@ -8,7 +8,6 @@ else
   alias vi="nvim"
 
   # git
-  alias master="git checkout master && git pull"
   alias push="git push"
   alias branch="git branch"
   alias checkout="git checkout"
@@ -47,6 +46,8 @@ else
   alias b='buku --suggest'
 
   alias fck="fuck"
+  alias nnn="nnn -e"
+  alias n="nnn -e"
 
   [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
     echo "... Loaded ~/.config/fish/aliases.fish"

@@ -46,6 +46,13 @@ if status --is-login
 
   # Use fd for fzf by default
   set -gx FZF_DEFAULT_COMMAND 'fd --type f'
+
+  # nnn set up
+
+  set -x NNN_FCOLORS 'E63100'
+  set NNN_PLUG ''
+  set -x NNN_FIFO "/tmp/nnn.fifo"
+  set -x VISUAL ewrap
 end
 
 if status --is-interactive
