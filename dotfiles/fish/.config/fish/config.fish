@@ -52,6 +52,7 @@ if status --is-login
   set -x NNN_FCOLORS 'E63100'
   set NNN_PLUG ''
   set -x NNN_FIFO "/tmp/nnn.fifo"
+  set -x VISUAL ewrap
 end
 
 if status --is-interactive
