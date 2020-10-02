@@ -124,8 +124,10 @@ command_inner() {
   [ $DRY -eq 0 ] && dotme-fish
   [ $DRY -eq 0 ] && dotme-fisher
   [ $DRY -eq 0 ] && dotme-gitme
+  [ $DRY -eq 0 ] && dotme-nnn
   command_clean
 }
+
 #
 # Pull latest version of dotfiles
 #
