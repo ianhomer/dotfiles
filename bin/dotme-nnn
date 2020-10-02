@@ -1,12 +1,33 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 #
 # Configure nnn
 #
+# Based on https://github.com/jarun/nnn/blob/master/plugins/getplugs
+#
 
 should-run $0 || exit
 
-echo "TODO : download nnn plugins"
+CONFIG_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/nnn/
+PLUGIN_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins
+
+VER=$(nnn -V)
+ARCHIVE_URL=https://github.com/jarun/nnn/releases/download/v"$VER"/nnn-v"$VER".tar.gz
+
+mkdir -p "$PLUGIN_DIR"
+cd "$CONFIG_DIR" || exit 1
+DOWNLOAD_FILE=nnn-"$VER".tar.gz
+
+if [[ ! -f $DOWNLOAD_FILE ]] ; then
+  curl -Ls "$ARCHIVE_URL" -o $DOWNLOAD_FILE
+fi
+if [[ ! -d nnn-"$VER" ]] ; then
+  tar -zxf nnn-"$VER".tar.gz
+fi
+cd nnn-"$VER"/plugins || exit 1
+
+ls
+echo "TODO : install nnn plugins"
 
 should-run -fu $0
 
