@@ -11,6 +11,7 @@ should-run $0 || exit
 printf "\e[36mConfiguring nnn\e[0m\n"
 
 CONFIG_DIR=${XDG_CONFIG_HOME:-"$HOME/.config"}/nnn
+BOOKMARKS_DIR=${XDG_CACHE_HOME:-"$HOME/.cache"}/nnn/bookmarks
 PLUGIN_DIR=${CONFIG_DIR}/plugins
 
 VER=`nnn -V`
@@ -28,10 +29,14 @@ if [[ ! -d nnn-"$VER" ]] ; then
 fi
 cd nnn-"$VER"/plugins || exit 1
 
-plugins="bookmarks fzopen preview-tui"
+plugins=".nnn-plugin-helper bookmarks fzcd fzopen preview-tui"
 ignore=""
 for plugin in $plugins ; do ignore="${ignore}(?<!${plugin})" ; done
 
 stow -v -t $PLUGIN_DIR --ignore $ignore .
+
+[[ ! -d $BOOKMARKS_DIR ]] && mkdir -p $BOOKMARKS_DIR
+cd $BOOKMARKS_DIR
+[[ ! -f downloads ]] && ln -s ~/Downlads downloads
 
 should-run -fu $0

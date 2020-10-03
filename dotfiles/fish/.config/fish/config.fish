@@ -50,7 +50,7 @@ if status --is-login
   # nnn set up
 
   set -x NNN_FCOLORS 'E63100'
-  set -x NNN_PLUG 'b:bookmarks;p:preview-tui;f:fzopen'
+  set -x NNN_PLUG 'b:bookmarks;c:fzcd;p:preview-tui;f:fzopen'
   set -x NNN_FIFO "/tmp/nnn.fifo"
   set -x VISUAL ewrap
 end
