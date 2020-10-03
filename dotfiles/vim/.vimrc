@@ -69,7 +69,7 @@ if g:config_level > 3
   "
   Plug 'mcchrish/nnn.vim'
   let g:nnn#set_default_mappings = 0
-  let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Debug' } }
+  let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6  } }
   nnoremap <silent> <leader>m :NnnPicker<CR>
 
   if IsEnabled("nerdtree") | Plug 'ryanoasis/vim-devicons' | endif
