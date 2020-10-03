@@ -13,30 +13,33 @@ printf "\e[36mConfiguring nnn\e[0m\n"
 CONFIG_DIR=${XDG_CONFIG_HOME:-"$HOME/.config"}/nnn
 BOOKMARKS_DIR=${XDG_CACHE_HOME:-"$HOME/.cache"}/nnn/bookmarks
 PLUGIN_DIR=${CONFIG_DIR}/plugins
+SOURCE_DIR=~/projects/opensource/nnn
 
-VER=`nnn -V`
-ARCHIVE_URL=https://github.com/jarun/nnn/releases/download/v"$VER"/nnn-v"$VER".tar.gz
+if [[ ! -d $SOURCE_DIR ]] ; then
+  git clone git@github.com:ianhomer/nnn.git
+else
+  cd $SOURCE_DIR
+  git pull
+fi
 
 mkdir -p "$PLUGIN_DIR"
-cd "$CONFIG_DIR" || exit 1
-DOWNLOAD_FILE=nnn-"$VER".tar.gz
-
-if [[ ! -f $DOWNLOAD_FILE ]] ; then
-  curl -Ls "$ARCHIVE_URL" -o $DOWNLOAD_FILE
-fi
-if [[ ! -d nnn-"$VER" ]] ; then
-  tar -zxf nnn-"$VER".tar.gz
-fi
-cd nnn-"$VER"/plugins || exit 1
 
 plugins=".nnn-plugin-helper bookmarks fzcd fzopen preview-tui"
 ignore=""
 for plugin in $plugins ; do ignore="${ignore}(?<!${plugin})" ; done
 
+cd $SOURCE_DIR/plugins
 stow -v -t $PLUGIN_DIR --ignore $ignore .
 
 [[ ! -d $BOOKMARKS_DIR ]] && mkdir -p $BOOKMARKS_DIR
 cd $BOOKMARKS_DIR
-[[ ! -f downloads ]] && ln -s ~/Downlads downloads
+
+bookmark() {
+  [[ ! -L $2 ]] && ( echo "Bookmark : $2 -> $2" ; ln -s $1 $2 )
+}
+
+bookmark ~/Downloads downloads
+bookmark ~/Desktop desktop
+bookmark ~/projects/opensource/nnn nnn
 
 should-run -fu $0
