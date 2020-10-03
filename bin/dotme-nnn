@@ -38,8 +38,18 @@ bookmark() {
   [[ ! -L $2 ]] && ( echo "Bookmark : $2 -> $2" ; ln -s $1 $2 )
 }
 
-bookmark ~/Downloads downloads
 bookmark ~/Desktop desktop
+bookmark ~/.dotfiles dotfiles
+bookmark ~/Downloads downloads
 bookmark ~/projects/opensource/nnn nnn
+bookmark ~/projects projects
+bookmark ~/projects/things things
+
+# Configure cd on quit
+
+FISH_FUNCTION=~/.config/fish/functions/n.fish
+[[ ! -L $FISH_FUNCTION ]] && \
+  ( echo "Linking n.fish" ;  \
+    ln -s $SOURCE_DIR/misc/quitcd/quitcd.fish $FISH_FUNCTION )
 
 should-run -fu $0

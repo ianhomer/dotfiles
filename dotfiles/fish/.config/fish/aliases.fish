@@ -47,7 +47,6 @@ else
 
   alias fck="fuck"
   alias nnn="nnn -e"
-  alias n="nnn -e"
 
   [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
     echo "... Loaded ~/.config/fish/aliases.fish"
