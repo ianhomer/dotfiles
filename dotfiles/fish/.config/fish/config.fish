@@ -50,7 +50,7 @@ if status --is-login
   # nnn set up
 
   set -x NNN_FCOLORS 'E63100'
-  set NNN_PLUG ''
+  set -x NNN_PLUG 'b:bookmarks;p:preview-tui;f:fzopen'
   set -x NNN_FIFO "/tmp/nnn.fifo"
   set -x VISUAL ewrap
 end
@@ -104,7 +104,9 @@ if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
   time-me "END"
   echo "PATH = $PATH"
 end
+
 [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and echo "... Loaded ~/.config/fish/config.fish"
+
 if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
   set DATE (dateme +%s%3N)
   echo "... Initialised in "(expr $DATE - $SHELL_START_DATE)"ms"

@@ -8,10 +8,12 @@
 
 should-run $0 || exit
 
-CONFIG_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/nnn/
-PLUGIN_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/nnn/plugins
+printf "\e[36mConfiguring nnn\e[0m\n"
 
-VER=$(nnn -V)
+CONFIG_DIR=${XDG_CONFIG_HOME:-"$HOME/.config"}/nnn
+PLUGIN_DIR=${CONFIG_DIR}/plugins
+
+VER=`nnn -V`
 ARCHIVE_URL=https://github.com/jarun/nnn/releases/download/v"$VER"/nnn-v"$VER".tar.gz
 
 mkdir -p "$PLUGIN_DIR"
@@ -26,9 +28,10 @@ if [[ ! -d nnn-"$VER" ]] ; then
 fi
 cd nnn-"$VER"/plugins || exit 1
 
-ls
-echo "TODO : install nnn plugins"
+plugins="bookmarks fzopen preview-tui"
+ignore=""
+for plugin in $plugins ; do ignore="${ignore}(?<!${plugin})" ; done
+
+stow -v -t $PLUGIN_DIR --ignore $ignore .
 
 should-run -fu $0
-
-
