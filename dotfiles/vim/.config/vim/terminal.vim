@@ -10,6 +10,6 @@ function! OpenTerminal()
   startinsert
 endfunction
 
-nnoremap <silent> <leader>m :call OpenTerminal()<CR>cd $VIM_DIR && pwd<CR>
+nnoremap <silent> <leader>a :call OpenTerminal()<CR>cd $VIM_DIR && pwd<CR>
 
 tnoremap <Esc> <C-\><C-n>
