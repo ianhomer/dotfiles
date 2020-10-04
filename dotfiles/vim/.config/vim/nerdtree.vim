@@ -3,7 +3,13 @@ let g:NERDTreeIgnore = [ '^node_modules$' ]
 
 function! NERDTreeFindOrToggle()
   if g:NERDTree.IsOpen() || @% == ""
-    NERDTreeToggle
+    if winnr('$') > 1
+      NERDTreeToggle
+    else
+      " NERDTree doesn't like closing itself if it's the last window, so we'll
+      " use the CloseMe function which will drop back to Startify
+      call CloseMe()
+    endif
   else
     NERDTreeFind
   endif
