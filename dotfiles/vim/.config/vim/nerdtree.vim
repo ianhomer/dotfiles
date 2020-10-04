@@ -1,6 +1,14 @@
 let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeIgnore = [ '^node_modules$' ]
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 0
+let NERDTreeAutoDeleteBuffer = 1
+
+let NERDTreeDirArrowExpandable=""
+let NERDTreeDirArrowCollapsible=""
+" Don't shrink menu
+let NERDTreeMinimalMenu = 0
 
 function! NERDTreeFindOrToggle()
   if g:NERDTree.IsOpen() || @% == ""
