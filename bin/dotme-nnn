@@ -14,12 +14,29 @@ CONFIG_DIR=${XDG_CONFIG_HOME:-"$HOME/.config"}/nnn
 BOOKMARKS_DIR=${XDG_CACHE_HOME:-"$HOME/.cache"}/nnn/bookmarks
 PLUGIN_DIR=${CONFIG_DIR}/plugins
 SOURCE_DIR=~/projects/opensource/nnn
+LOCAL_NNN=~/bin/nnn
+
+if [[ -f $LOCAL_NNN ]] ; then
+  NNN_CHANGED=0
+else
+  NNN_CHANGED=1
+fi
 
 if [[ ! -d $SOURCE_DIR ]] ; then
+  NNN_CHANGED=1
   git clone git@github.com:ianhomer/nnn.git
 else
+  if [[ `git status --porcelain` ]]; then
+    NNN_CHANGED=1
+  fi
   cd $SOURCE_DIR
   git pull
+fi
+
+if [[ $NNN_CHANGED -eq 1 ]] ; then
+  cd $SOURCE_DIR
+  make O_NERD=1
+  mv nnn ~/bin
 fi
 
 mkdir -p "$PLUGIN_DIR"
