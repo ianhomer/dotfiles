@@ -266,6 +266,8 @@ if g:config_level > 0
     " Quit and save/close are handy leaders for use on mobile and limited keyboard
     nnoremap <silent> <leader>q :call CloseMe()<CR>
     nnoremap <silent> <leader>x :x<CR>
+    " I don't use macros, q to quit is more convenient for me
+    nnoremap <silent> q :call CloseMe()<CR>
 
     if g:config_level > 3
       nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
