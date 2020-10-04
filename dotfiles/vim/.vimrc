@@ -268,6 +268,10 @@ if g:config_level > 0
     nnoremap <silent> <leader>x :x<CR>
     " I don't use macros, q to quit is more convenient for me
     nnoremap <silent> q :call CloseMe()<CR>
+    " ... and let this q mapping apply for NERDTree
+    let NERDTreeMapQuit='qq'
+
+    "nnoremap <silent> q :echo "q disabled"<CR>
 
     if g:config_level > 3
       nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
@@ -308,8 +312,11 @@ endfunction
 function! CloseMe()
   if &filetype == "startify" || winnr('$') > 1
     quit
+  elseif &filetype == "nerdtree" && winnr('$') > 1
+    NERDTreeClose
   else
     execute ":Startify"
+    call CloseAllBuffersButCurrent()
   endif
 endfunction
 
