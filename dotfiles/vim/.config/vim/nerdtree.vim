@@ -1,3 +1,4 @@
+let g:NERDTreeAutoDeleteBuffer = 1
 let g:NERDTreeRespectWildIgnore = 1
 let g:NERDTreeIgnore = [ '^node_modules$' ]
 
