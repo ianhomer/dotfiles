@@ -567,12 +567,6 @@ endif
 
 " source ~/.config/vim/netrw.vim
 
-if IsEnabled("nerdtree")
-  let NERDTreeMinimalUI = 1
-  let NERDTreeDirArrows = 1
-  let NERDTreeAutoDeleteBuffer = 1
-endif
-
 if g:config_level > 0
   if !IsEnabled("light")
     colorscheme gruvbox
