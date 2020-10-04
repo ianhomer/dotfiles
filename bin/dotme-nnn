@@ -43,7 +43,7 @@ fi
 
 mkdir -p "$PLUGIN_DIR"
 
-plugins=".nnn-plugin-helper bookmarks fzcd fzopen preview-tui"
+plugins=".cbcp .nmv .nnn-plugin-helper .ntfy bookmarks fzcd fzopen preview-tui"
 ignore=""
 for plugin in $plugins ; do ignore="${ignore}(?<!${plugin})" ; done
 
