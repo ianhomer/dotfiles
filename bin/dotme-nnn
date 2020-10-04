@@ -35,6 +35,7 @@ fi
 
 if [[ $NNN_CHANGED -eq 1 ]] ; then
   cd $SOURCE_DIR
+  # Compile from source with nerd icons
   make O_NERD=1
   mv nnn ~/bin
 fi
