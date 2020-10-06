@@ -26,10 +26,10 @@ if [[ ! -d $SOURCE_DIR ]] ; then
   NNN_CHANGED=1
   git clone git@github.com:ianhomer/nnn.git
 else
+  cd $SOURCE_DIR
   if [[ `git status --porcelain` ]]; then
     NNN_CHANGED=1
   fi
-  cd $SOURCE_DIR
   git pull
 fi
 
@@ -54,12 +54,13 @@ stow -v -t $PLUGIN_DIR --ignore $ignore .
 cd $BOOKMARKS_DIR
 
 bookmark() {
-  [[ ! -L $2 ]] && ( echo "Bookmark : $2 -> $2" ; ln -s $1 $2 )
+  [[ ! -L $2 ]] && [[ -d "$1" ]] && ( echo "Bookmark : $2 -> $1" ; ln -s "$1" $2 )
 }
 
 bookmark ~/Desktop desktop
 bookmark ~/.dotfiles dotfiles
 bookmark ~/Downloads downloads
+bookmark ~/Google\ Drive\ File\ Stream/My\ Drive/incoming/ incoming
 bookmark ~/projects/opensource/nnn nnn
 bookmark ~/projects projects
 bookmark ~/projects/things things
