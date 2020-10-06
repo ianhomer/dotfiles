@@ -1,5 +1,9 @@
 # todo
 
+- [ ] Test MarkdownPreview
+- [ ] Continuation after empty markdown list should delete empty line. Otherwise
+  2 blank lines remain.
+
 ## backlog
 
 - [ ] Surround leaders for bold double star, backtick wrap. If visual selection
