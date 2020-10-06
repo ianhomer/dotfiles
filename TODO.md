@@ -1,7 +1,5 @@
 # todo
 
-- [ ] Test MarkdownPreview
-
 ## backlog
 
 - [ ] Surround leaders for bold double star, backtick wrap. If visual selection
