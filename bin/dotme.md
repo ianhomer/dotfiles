@@ -62,5 +62,8 @@ installed with brew will remain.
 -v
 : verbose mode
 
+-f module
+: force dotme module to run
+
 -d
 : dry run
