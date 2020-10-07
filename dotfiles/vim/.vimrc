@@ -513,6 +513,12 @@ source ~/.config/vim/spell.vim
 if g:config_level > 2
   let g:surround_{char2nr('b')} = "**\r**"
   let g:surround_{char2nr('<')} = "<\r>"
+  " Short cuts for surround word
+  nmap '" ysiW"
+  nmap "" ysiW"
+  nmap '' ysiW'
+  nmap '` ysiW`
+  nmap 'b ysiWb
 endif
 
 " *** Scope : IO ***

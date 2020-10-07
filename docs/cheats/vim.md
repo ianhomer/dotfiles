@@ -113,23 +113,24 @@
 
 ### edit
 
-|                  |                                                 |
-| --               | --                                              |
-| `space+g`        | distraction free coding with Goyo               |
-| `gw{motion}`     | reformat content                                |
-| `select+gw`      | reformat content                                |
-| `select+S"`      | surround selected **area** with quotes          |
-| `ysiW"`          | surround word with quotes                       |
-| `ysiWb`          | surround double star - bold                     |
-| `Ctrl+v`         | select visual block, e.g. column                |
-| `:%!jq .`        | reformat JSON                                   |
-| `count+space+cc` | comment out the next count lines                |
-| `:Format`        | Format current buffer                           |
-| `space+d`        | Open CoC diagnostics                            |
-| `:nu`            | Show line numbers                               |
-| `:set rnu`       | Show relative line numbers                      |
-| `space+w`        | Clear white space at end of lines               |
-| `yaf`            | Yank all file                                   |
+|                  |                                        |
+| --               | --                                     |
+| `space+g`        | distraction free coding with Goyo      |
+| `gw{motion}`     | reformat content                       |
+| `select+gw`      | reformat content                       |
+| `select+S"`      | surround selected **area** with quotes |
+| `ysiW"`          | surround word with quotes              |
+| `ysiWb`          | surround double star - bold            |
+| `visual+S`       | surround visual selection              |
+| `Ctrl+v`         | select visual block, e.g. column       |
+| `:%!jq .`        | reformat JSON                          |
+| `count+space+cc` | comment out the next count lines       |
+| `:Format`        | Format current buffer                  |
+| `space+d`        | Open CoC diagnostics                   |
+| `:nu`            | Show line numbers                      |
+| `:set rnu`       | Show relative line numbers             |
+| `space+w`        | Clear white space at end of lines      |
+| `yaf`            | Yank all file                          |
 
 **:Tabularize /|** or \*\*space\*\*
 : Align paragraph on character
