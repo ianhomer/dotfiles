@@ -296,6 +296,7 @@ if exists('*which_key#register')
   let g:which_key_map[','] = { 'name' : '...Misc' }
   let g:which_key_map['.'] = { 'name' : '...Experimental' }
   call which_key#register('<Space>', "g:which_key_map")
+  call which_key#register('\'', "g:which_key_map")
 endif
 
 source ~/.config/vim/thingity.vim
@@ -514,6 +515,7 @@ if g:config_level > 2
   let g:surround_{char2nr('b')} = "**\r**"
   let g:surround_{char2nr('<')} = "<\r>"
   " Short cuts for surround word
+  nnoremap <silent> ' :WhichKey "'"<CR>
   nmap '" ysiW"
   nmap "" ysiW"
   nmap '' ysiW'
