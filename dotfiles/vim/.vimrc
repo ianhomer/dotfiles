@@ -103,6 +103,9 @@ if g:config_level > 3
         \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']}
         \ ]
 
+  Plug 'ludovicchabant/vim-gutentags'
+  let g:gutentags_cache_dir = expand('~/.cache/tags')
+
   "
   " Help
   "
