@@ -24,6 +24,10 @@ if [ ! -d ~/.vim/swaps ] ; then
   mkdir ~/.vim/swaps
 fi
 
+if [ ! -d ~/.cache/tags ] ; then
+  mkdir ~/.cache/tags
+fi
+
 # Update plugins used in power mode
 export VIM_LEVEL=4
 

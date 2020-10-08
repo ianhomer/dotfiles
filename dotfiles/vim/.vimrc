@@ -104,6 +104,7 @@ if g:config_level > 3
         \ ]
 
   Plug 'ludovicchabant/vim-gutentags'
+  let g:gutentags_cache_dir = expand('~/.cache/tags')
 
   "
   " Help
