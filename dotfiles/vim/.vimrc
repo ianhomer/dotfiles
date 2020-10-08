@@ -103,6 +103,8 @@ if g:config_level > 3
         \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']}
         \ ]
 
+  Plug 'ludovicchabant/vim-gutentags'
+
   "
   " Help
   "
