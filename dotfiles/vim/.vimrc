@@ -299,7 +299,7 @@ if exists('*which_key#register')
   let g:which_key_map[','] = { 'name' : '...Misc' }
   let g:which_key_map['.'] = { 'name' : '...Experimental' }
   call which_key#register('<Space>', "g:which_key_map")
-  call which_key#register('\'', "g:which_key_map")
+  call which_key#register("'", "g:which_key_map")
 endif
 
 source ~/.config/vim/thingity.vim
@@ -307,7 +307,7 @@ source ~/.config/vim/thingity.vim
 function! GitSynk(onlyPush)
   call CloseFugitiveWindow()
   if a:onlyPush
-    Git -P push
+    Gpush
   else
     Git synk
   endif
