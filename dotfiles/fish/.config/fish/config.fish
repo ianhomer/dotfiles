@@ -104,7 +104,7 @@ end
 if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
   set DATE (dateme +%s%3N)
   echo "... initialised in "(expr $DATE - $SHELL_START_DATE)"ms"
-  set_color normal
+  status --is-interactive; and set_color normal
 end
 
 
