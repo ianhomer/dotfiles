@@ -1,13 +1,15 @@
-if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
-  set DATE (dateme +%s%3N)
-  echo "... in config.fish @ "(expr $DATE - $SHELL_START_DATE)"ms"
-end
-
 function time-me
-  if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
+  if [ {$PROFILE_TIME} -gt 0 ]
     set DATE (dateme +%s%3N)
     printf "    TIME : %20s : %s\n" $argv[1] (expr $DATE - $SHELL_START_DATE)
   end
+end
+
+time-me "START config.fish"
+
+if [ {$CONFIG_LOG_LEVEL} -gt 1 ]
+  set DATE (dateme +%s%3N)
+  echo "... in config.fish @ "(expr $DATE - $SHELL_START_DATE)"ms"
 end
 
 if [ {$CONFIG_LOG_LEVEL} -gt 3 ]
