@@ -2,7 +2,9 @@
 if test -f ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
   source ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
 else if test -f ~/Library/Application\ Support/org.dystroy.broot/launcher/fish/br.fish
-  echo "WARN : broot alias loaded from alternative location"
+  if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
+    echo "... WARN : broot alias loaded from alternative location"
+  end
   source ~/Library/Application\ Support/org.dystroy.broot/launcher/fish/br.fish
 end
 
