@@ -101,8 +101,10 @@ end
 
 if [ {$DOT_LOG_LEVEL} -gt 0 ]
   set DATE (dateme +%s%3N)
-  echo "◎ up in "(expr $DATE - $SHELL_START_DATE)"ms"
+  echo "◎ up in "(math $DATE - $SHELL_START_DATE)"ms"
   status --is-interactive; and set_color normal
 end
+
+time-me "END config.fish"
 
 

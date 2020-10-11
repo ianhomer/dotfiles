@@ -5,7 +5,7 @@ set DOT_FUNCTIONS 0
 # Log levels
 set DOT_LOG_LEVEL 0
 # Report on time profiling
-set DOT_TIME 0
+set DOT_TIME 1
 # 1 => skip some ; 2 => skip all
 set DOT_SKIP 0
 
@@ -25,8 +25,9 @@ end
 
 if [ {$DOT_LOG_LEVEL} -gt 0 ]
   status --is-interactive; and set_color grey
-  set SHELL_START_DATE (dateme +%s%3N)
 end
+
+[ {$DOT_TIME} ]; and set SHELL_START_DATE (dateme +%s%3N)
 
 [ {$DOT_SKIP} -eq 2 ]; and exit
 
@@ -43,9 +44,9 @@ switch (uname)
 end
 
 function time-me
-  if [ {$DOT_TIME} -gt 0 ]
+  if [ {$DOT_TIME} -eq 1 ]
     set DATE (dateme +%s%3N)
-    printf "⨂ %20s : %4sms\n" $argv[1] (expr $DATE - $SHELL_START_DATE)
+    printf "⨂ %-20s : %4sms\n" $argv[1] (math $DATE - $SHELL_START_DATE)
   end
 end
 
