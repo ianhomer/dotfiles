@@ -1,15 +1,10 @@
-function time-me
-  if [ {$DOT_TIME} -gt 0 ]
-    set DATE (dateme +%s%3N)
-    printf "    TIME : %20s : %s\n" $argv[1] (expr $DATE - $SHELL_START_DATE)
-  end
-end
+[ {$DOT_SKIP} -eq 2 ]; and exit
 
 time-me "START config.fish"
 
 if [ {$DOT_LOG_LEVEL} -gt 1 ]
   set DATE (dateme +%s%3N)
-  echo "... in config.fish @ "(expr $DATE - $SHELL_START_DATE)"ms"
+  echo "◎ in config.fish @ "(expr $DATE - $SHELL_START_DATE)"ms"
 end
 
 if [ {$DOT_LOG_LEVEL} -gt 3 ]
@@ -75,6 +70,8 @@ if status --is-interactive
   set -g fish_escape_delay_ms 200
 end
 
+time-me "AFTER bindings"
+
 if status --is-login
   #
   # Tweak colors for me - noise reduction, red/green color blind and
@@ -94,16 +91,17 @@ if status --is-login
   set -x GPG_TTY (tty)
 end
 
+time-me "AFTER colors"
+
 if [ {$DOT_LOG_LEVEL} -gt 2 ]
-  time-me "END"
   echo "PATH = $PATH"
 end
 
-[ {$DOT_LOG_LEVEL} -gt 1 ] ;and echo "... Loaded ~/.config/fish/config.fish"
+[ {$DOT_LOG_LEVEL} -gt 1 ] ;and echo "◎ loaded ~/.config/fish/config.fish"
 
 if [ {$DOT_LOG_LEVEL} -gt 0 ]
   set DATE (dateme +%s%3N)
-  echo "◎ initialised in "(expr $DATE - $SHELL_START_DATE)"ms"
+  echo "◎ up in "(expr $DATE - $SHELL_START_DATE)"ms"
   status --is-interactive; and set_color normal
 end
 
