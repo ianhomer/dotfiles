@@ -128,6 +128,8 @@ if g:config_level > 3
   Plug 'tpope/vim-endwise'
   " Aysynchronous
   Plug 'tpope/vim-dispatch'
+  let g:dispatch_no_tmux_make = 1
+  let g:dispatch_quickfix_height = 4
 
   if IsEnabled("syntastic")
     Plug 'vim-syntastic/syntastic'
