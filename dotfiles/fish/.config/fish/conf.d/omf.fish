@@ -1,7 +1,7 @@
 if status --is-interactive
-  if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
+  if [ {$DOT_LOG_LEVEL} -gt 0 ]
     set DATE (dateme +%s%3N)
-    echo "... in omf.fish @ "(expr $DATE - $SHELL_START_DATE)"ms"
+    echo "◎ omf.fish @ "(expr $DATE - $SHELL_START_DATE)"ms"
   end
 
   # Path to Oh My Fish install.

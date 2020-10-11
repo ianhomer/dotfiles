@@ -2,8 +2,8 @@
 if test -f ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
   source ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
 else if test -f ~/Library/Application\ Support/org.dystroy.broot/launcher/fish/br.fish
-  if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
-    echo "... WARN : broot alias loaded from alternative location"
+  if [ {$DOT_LOG_LEVEL} -gt 0 ]
+    echo "‼︎ broot alias loaded from alternative location"
   end
   source ~/Library/Application\ Support/org.dystroy.broot/launcher/fish/br.fish
 end
@@ -67,6 +67,5 @@ function feature
   end
 end
 
-[ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
+[ {$DOT_LOG_LEVEL} -gt 1 ] ;and \
   echo "... Loaded ~/.config/fish/functions.fish"
-

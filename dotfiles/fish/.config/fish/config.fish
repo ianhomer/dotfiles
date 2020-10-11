@@ -1,5 +1,5 @@
 function time-me
-  if [ {$PROFILE_TIME} -gt 0 ]
+  if [ {$DOT_TIME} -gt 0 ]
     set DATE (dateme +%s%3N)
     printf "    TIME : %20s : %s\n" $argv[1] (expr $DATE - $SHELL_START_DATE)
   end
@@ -7,12 +7,12 @@ end
 
 time-me "START config.fish"
 
-if [ {$CONFIG_LOG_LEVEL} -gt 1 ]
+if [ {$DOT_LOG_LEVEL} -gt 1 ]
   set DATE (dateme +%s%3N)
   echo "... in config.fish @ "(expr $DATE - $SHELL_START_DATE)"ms"
 end
 
-if [ {$CONFIG_LOG_LEVEL} -gt 3 ]
+if [ {$DOT_LOG_LEVEL} -gt 3 ]
   status --is-interactive; and echo "... INTERACTIVE shell"
   status --is-login; and echo "... LOGIN shell"
 end
@@ -94,16 +94,16 @@ if status --is-login
   set -x GPG_TTY (tty)
 end
 
-if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
+if [ {$DOT_LOG_LEVEL} -gt 2 ]
   time-me "END"
   echo "PATH = $PATH"
 end
 
-[ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and echo "... Loaded ~/.config/fish/config.fish"
+[ {$DOT_LOG_LEVEL} -gt 1 ] ;and echo "... Loaded ~/.config/fish/config.fish"
 
-if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
+if [ {$DOT_LOG_LEVEL} -gt 0 ]
   set DATE (dateme +%s%3N)
-  echo "... initialised in "(expr $DATE - $SHELL_START_DATE)"ms"
+  echo "◎ initialised in "(expr $DATE - $SHELL_START_DATE)"ms"
   status --is-interactive; and set_color normal
 end
 

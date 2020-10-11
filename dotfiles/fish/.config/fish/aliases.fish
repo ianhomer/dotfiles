@@ -6,7 +6,7 @@ if type which-dotme-aliases 2>/dev/null
 else
   alias which-dotme-aliases="echo '~/.config/fish/aliases.fish'"
 
-  if [ {$ENABLE_ALIASES} -gt 0 ]
+  if [ {$DOT_ALIASES} -gt 0 ]
     alias vi="nvim"
 
     # git
@@ -51,6 +51,6 @@ else
     alias nnn="nnn -e"
   end
 
-  [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
+  [ {$DOT_LOG_LEVEL} -gt 1 ] ;and \
     echo "... Loaded ~/.config/fish/aliases.fish"
 end
