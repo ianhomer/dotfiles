@@ -42,7 +42,9 @@ of working to streamline distraction free coding. This includes:
 : terminal multiplexer
 
 **neovim**
-: file editing
+: file editing - with plugins airline ; ale ; dispatch ; endwise ; fugitive ;
+  fzf.vim ; markdown-preview ; nerdtree ; polyglot ; repeat ; startify ;
+  surround ; tabular ; which-key ; surround ; syntastic
 
 **FiraCode Nerd Font**
 : ligatures, powerline and more
