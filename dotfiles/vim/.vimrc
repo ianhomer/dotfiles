@@ -311,7 +311,7 @@ function! GitSynk(onlyPush)
   if a:onlyPush
     Gpush
   else
-    Git synk
+    Dispatch! Git synk
   endif
 endfunction
 
