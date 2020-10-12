@@ -30,7 +30,7 @@ of working to streamline distraction free coding. This includes:
 : package manager
 
 **fish**
-: friendly interactive shell
+: friendly interactive shell with oh-my-fish
 
 **git**
 : source control
@@ -39,12 +39,15 @@ of working to streamline distraction free coding. This includes:
 : slick terminal
 
 **tmux**
-: terminal multiplexer
+: terminal multiplexer with plugins - tmux-continuum ; tmux-resurrect ; vim-tmux-navigator
 
 **neovim**
-: file editing - with plugins airline ; ale ; dispatch ; endwise ; fugitive ;
+: file editing with plugins - airline ; ale ; dispatch ; endwise ; fugitive ;
   fzf.vim ; markdown-preview ; nerdtree ; polyglot ; repeat ; startify ;
   surround ; tabular ; which-key ; surround ; syntastic
+
+**nnn** and **broot**
+: file explorers
 
 **FiraCode Nerd Font**
 : ligatures, powerline and more
