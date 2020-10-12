@@ -1,6 +1,7 @@
 # My .dotfiles
 
-Configure my computers to be more keyboard focused and reduce distraction.
+Configure my computers to be more keyboard focused and reduce distraction. Make
+coding and text editing a breeze.
 
 ## tl;dr
 
@@ -15,7 +16,8 @@ Update at any time with:
 
 This gets local machine up to date, including pulling latest version of this
 repository, sets OSX defaults, updates brew including packages. Run this at any
-time to update to latest.
+time to update to latest. It only updates what's changed or out of date, so
+it's quick, painless and pretty.
 
 I remind myself of commands and shortcuts I use with:
 
