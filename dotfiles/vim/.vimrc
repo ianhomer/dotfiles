@@ -525,6 +525,7 @@ if g:config_level > 2
   nmap "" ysiW"
   nmap '' ysiW'
   nmap '` ysiW`
+  nmap '< ysiW<
   nmap 'b ysiWb
 endif
 
