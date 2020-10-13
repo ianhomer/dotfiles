@@ -1,6 +1,7 @@
 # My .dotfiles
 
-Configure my computers to be more keyboard focused and reduce distraction.
+Configure my computers to be more keyboard focused and reduce distraction. Make
+coding and text editing a breeze.
 
 ## tl;dr
 
@@ -15,7 +16,8 @@ Update at any time with:
 
 This gets local machine up to date, including pulling latest version of this
 repository, sets OSX defaults, updates brew including packages. Run this at any
-time to update to latest.
+time to update to latest. It only updates what's changed or out of date, so
+it's quick, painless and pretty.
 
 I remind myself of commands and shortcuts I use with:
 
@@ -30,7 +32,7 @@ of working to streamline distraction free coding. This includes:
 : package manager
 
 **fish**
-: friendly interactive shell
+: friendly interactive shell with oh-my-fish
 
 **git**
 : source control
@@ -39,10 +41,15 @@ of working to streamline distraction free coding. This includes:
 : slick terminal
 
 **tmux**
-: terminal multiplexer
+: terminal multiplexer with plugins - tmux-continuum ; tmux-resurrect ; vim-tmux-navigator
 
 **neovim**
-: file editing
+: file editing with plugins - airline ; ale ; dispatch ; endwise ; fugitive ;
+  fzf.vim ; markdown-preview ; nerdtree ; polyglot ; repeat ; startify ;
+  surround ; tabular ; which-key ; surround ; syntastic
+
+**nnn** and **broot**
+: file explorers
 
 **FiraCode Nerd Font**
 : ligatures, powerline and more

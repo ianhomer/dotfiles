@@ -12,4 +12,4 @@ endfunction
 
 nnoremap <silent> <leader>a :call OpenTerminal()<CR>cd $VIM_DIR && pwd<CR>
 
-tnoremap <Esc> <C-\><C-n>
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
