@@ -228,6 +228,9 @@ set linebreak
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
+" I don't use modelines
+set nomodeline
+
 "
 " Command remapping
 "
