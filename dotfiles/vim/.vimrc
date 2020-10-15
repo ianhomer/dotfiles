@@ -67,6 +67,11 @@ if g:config_level > 3
   "
   " Window and file management
   "
+  Plug 'mcchrish/nnn.vim'
+  let g:nnn#set_default_mappings = 0
+  let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6  } }
+  nnoremap <silent> <leader>m :NnnPicker<CR>
+
   if IsEnabled("nerdtree") | Plug 'ryanoasis/vim-devicons' | endif
   " Vinegar - better file expore than NERD
   if g:config_level > 8 | Plug 'tpope/vim-vinegar' | endif
@@ -98,6 +103,9 @@ if g:config_level > 3
         \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']}
         \ ]
 
+  Plug 'ludovicchabant/vim-gutentags'
+  let g:gutentags_cache_dir = expand('~/.cache/tags')
+
   "
   " Help
   "
@@ -120,6 +128,8 @@ if g:config_level > 3
   Plug 'tpope/vim-endwise'
   " Aysynchronous
   Plug 'tpope/vim-dispatch'
+  let g:dispatch_no_tmux_make = 1
+  let g:dispatch_quickfix_height = 4
 
   if IsEnabled("syntastic")
     Plug 'vim-syntastic/syntastic'
@@ -218,6 +228,9 @@ set linebreak
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
+" I don't use modelines
+set nomodeline
+
 "
 " Command remapping
 "
@@ -259,8 +272,14 @@ if g:config_level > 0
     nnoremap <silent> <leader>e :call GitSynk(0)<CR>
 
     " Quit and save/close are handy leaders for use on mobile and limited keyboard
-    nnoremap <silent> <leader>q :q<CR>
+    nnoremap <silent> <leader>q :call CloseMe()<CR>
     nnoremap <silent> <leader>x :x<CR>
+    " I don't use macros, q to quit is more convenient for me
+    nnoremap <silent> q :call CloseMe()<CR>
+    " ... and let this q mapping apply for NERDTree
+    let NERDTreeMapQuit='qq'
+
+    "nnoremap <silent> q :echo "q disabled"<CR>
 
     if g:config_level > 3
       nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
@@ -285,6 +304,7 @@ if exists('*which_key#register')
   let g:which_key_map[','] = { 'name' : '...Misc' }
   let g:which_key_map['.'] = { 'name' : '...Experimental' }
   call which_key#register('<Space>', "g:which_key_map")
+  call which_key#register("'", "g:which_key_map")
 endif
 
 source ~/.config/vim/thingity.vim
@@ -292,9 +312,20 @@ source ~/.config/vim/thingity.vim
 function! GitSynk(onlyPush)
   call CloseFugitiveWindow()
   if a:onlyPush
-    Git -P push
+    Gpush
   else
-    Git synk
+    Dispatch! Git synk
+  endif
+endfunction
+
+function! CloseMe()
+  if &filetype == "startify" || winnr('$') > 1
+    quit
+  elseif &filetype == "nerdtree" && winnr('$') > 1
+    NERDTreeClose
+  else
+    execute ":Startify"
+    call CloseAllBuffersButCurrent()
   endif
 endfunction
 
@@ -491,6 +522,14 @@ source ~/.config/vim/spell.vim
 if g:config_level > 2
   let g:surround_{char2nr('b')} = "**\r**"
   let g:surround_{char2nr('<')} = "<\r>"
+  " Short cuts for surround word
+  nnoremap <silent> ' :WhichKey "'"<CR>
+  nmap '" ysiW"
+  nmap "" ysiW"
+  nmap '' ysiW'
+  nmap '` ysiW`
+  nmap '< ysiW<
+  nmap 'b ysiWb
 endif
 
 " *** Scope : IO ***
@@ -544,12 +583,6 @@ endif
 " vnoremap <tab> >>
 
 " source ~/.config/vim/netrw.vim
-
-if IsEnabled("nerdtree")
-  let NERDTreeMinimalUI = 1
-  let NERDTreeDirArrows = 1
-  let NERDTreeAutoDeleteBuffer = 1
-endif
 
 if g:config_level > 0
   if !IsEnabled("light")

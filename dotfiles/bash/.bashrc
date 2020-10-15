@@ -14,8 +14,12 @@ if [[ ! "$OSTYPE" =~ ^linux-android ]]; then
   source /Users/ian/Library/Preferences/org.dystroy.broot/launcher/bash/br
 fi
 
+eval "$(thefuck --alias)"
+
 # FZF better with fd
 export FZF_DEFAULT_COMMAND='fd --type f'
 
 # neovim is the new vim
 alias vi="nvim"
+alias pull="git pull"
+alias fck="fuck"

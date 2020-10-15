@@ -31,7 +31,7 @@ function! CloseFugitiveWindow()
   return CloseWindows(".git/index")
 endfunction
 
-function! s:CloseAllBuffersButCurrent()
+function! CloseAllBuffersButCurrent()
   call CloseWindows("fzf")
 
   let current = bufnr("%")
@@ -102,7 +102,7 @@ function! CloseOtherBuffers()
   " Mark current cursor position
   normal mA:
   NERDTreeClose
-  call <SID>CloseAllBuffersButCurrent()
+  call CloseAllBuffersButCurrent()
   call NERDTreeFindIfRoom()
   " Return to saved mark
   normal `A

@@ -1,12 +1,4 @@
-# Load broot alias
-if test -f ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
-  source ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
-else if test -f ~/Library/Application\ Support/org.dystroy.broot/launcher/fish/br.fish
-  echo "WARN : broot alias loaded from alternative location"
-  source ~/Library/Application\ Support/org.dystroy.broot/launcher/fish/br.fish
-end
-
-time-me "AFTER broot"
+[ {$DOT_SKIP} -eq 2 ]; and exit
 
 if not status --is-login
   function fish_greeting
@@ -27,20 +19,24 @@ function fish_right_prompt
   #intentionally left blank
 end
 
-function git-commit-and-push
-  git commit -am "$argv"
-  git push
+[ {$DOT_FUNCTIONS} -eq 0 ]; and exit
+
+# Load broot alias
+if test -f ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
+  source ~/Library/Preferences/org.dystroy.broot/launcher/fish/br
+else if test -f ~/Library/Application\ Support/org.dystroy.broot/launcher/fish/br.fish
+  if [ {$DOT_LOG_LEVEL} -gt 0 ]
+    echo "‼︎ broot alias loaded from alternative location"
+  end
+  source ~/Library/Application\ Support/org.dystroy.broot/launcher/fish/br.fish
 end
+
+time-me "AFTER broot"
 
 function fish_user_key_bindings
   bind \cf forward-word
   bind \cb backward-word
 end
 
-function get-extension
-  echo (string split -r -m1 . $argv)[2]
-end
-
-[ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
-  echo "... Loaded ~/.config/fish/functions.fish"
-
+[ {$DOT_LOG_LEVEL} -gt 1 ] ;and \
+  echo "◎ loaded ~/.config/fish/functions.fish"

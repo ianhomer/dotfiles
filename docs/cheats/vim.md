@@ -96,11 +96,13 @@
 | `*`         | Search for next occurrence of word under cursor |
 | `Ctrl+o`    | Jump to previous cursor position (jumplist)     |
 | `Ctrl+i`    | Jump to next cursor position (jumplist)         |
-| `Crtl+u`    | Scroll up                                       |
+| `Ctrl+u`    | Scroll up                                       |
 | `Ctrl+d`    | Scroll down                                     |
 | `zz`        | Scroll window center current line               |
 | `zt`        | Scroll down with current line at top            |
 | `zb`        | Scroll up with current line at bottom           |
+| `Ctrl+]`    | Go to definition                                |
+| `Ctrl+t`    | Go back up call stack                           |
 
 ### windows
 
@@ -113,23 +115,24 @@
 
 ### edit
 
-|                  |                                                 |
-| --               | --                                              |
-| `space+g`        | distraction free coding with Goyo               |
-| `gw{motion}`     | reformat content                                |
-| `select+gw`      | reformat content                                |
-| `select+S"`      | surround selected **area** with quotes          |
-| `ysiW"`          | surround word with quotes                       |
-| `ysiWb`          | surround double star - bold                     |
-| `Ctrl+v`         | select visual block, e.g. column                |
-| `:%!jq .`        | reformat JSON                                   |
-| `count+space+cc` | comment out the next count lines                |
-| `:Format`        | Format current buffer                           |
-| `space+d`        | Open CoC diagnostics                            |
-| `:nu`            | Show line numbers                               |
-| `:set rnu`       | Show relative line numbers                      |
-| `space+w`        | Clear white space at end of lines               |
-| `yaf`            | Yank all file                                   |
+|                  |                                        |
+| --               | --                                     |
+| `space+g`        | distraction free coding with Goyo      |
+| `gw{motion}`     | reformat content                       |
+| `select+gw`      | reformat content                       |
+| `select+S"`      | surround selected **area** with quotes |
+| `ysiW"`          | surround word with quotes              |
+| `ysiWb`          | surround double star - bold            |
+| `visual+S`       | surround visual selection              |
+| `Ctrl+v`         | select visual block, e.g. column       |
+| `:%!jq .`        | reformat JSON                          |
+| `count+space+cc` | comment out the next count lines       |
+| `:Format`        | Format current buffer                  |
+| `space+d`        | Open CoC diagnostics                   |
+| `:nu`            | Show line numbers                      |
+| `:set rnu`       | Show relative line numbers             |
+| `space+w`        | Clear white space at end of lines      |
+| `yaf`            | Yank all file                          |
 
 **:Tabularize /|** or \*\*space\*\*
 : Align paragraph on character

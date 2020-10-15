@@ -1,16 +1,18 @@
+[ {$DOT_SKIP} -eq 2 ]; and exit
+[ {$DOT_ALIASES} -eq 0 ]; and exit
+
 # Shortcuts
 
 if type which-dotme-aliases 2>/dev/null
-  echo "... WARN : dotme aliases have already been defined"
+  echo "‼︎ dotme aliases have already been defined"
   which-dotme-aliases
 else
   alias which-dotme-aliases="echo '~/.config/fish/aliases.fish'"
+
   alias vi="nvim"
 
   # git
-  alias master="git checkout master && git pull"
-  alias push="git push"
-  alias pull="git pull"
+  alias push "git push"
   alias branch="git branch"
   alias checkout="git checkout"
   alias branch-and-checkout="git checkout -b"
@@ -47,6 +49,9 @@ else
 
   alias b='buku --suggest'
 
-  [ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and \
-    echo "... Loaded ~/.config/fish/aliases.fish"
+  alias fck="fuck"
+  alias nnn="nnn -e"
+
+  [ {$DOT_LOG_LEVEL} -gt 1 ] ;and \
+    echo "◎ loaded ~/.config/fish/aliases.fish"
 end
