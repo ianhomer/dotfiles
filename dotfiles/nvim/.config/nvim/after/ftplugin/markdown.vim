@@ -6,7 +6,7 @@ function! s:LintTodo()
   let l:line = line('.')
 
   if getline(l:line) =~ '^-\s*[\s*$'
-    call setline(l:line,'- [ ] ')
+call setline(l:line,'- [ ] ')
   endif
 endfunction
 
@@ -52,14 +52,14 @@ function! s:NextLine()
     if l:previous =~ '\v^\s*-\s\[.+\]\s'
       if l:previous =~ '\v^\s*-\s*\[.+\]\s*$'
         " Previous item was empty so clear and stop list
-        call setline(l:previousLineNumber,'')
+        normal k"_ddj
       else
         return "- [ ] "
       endif
     else
       if l:previous =~ '\v^\s*-\s*$'
         " Previous item was enter so clear and stop list
-        call setline(l:previousLineNumber,'')
+        normal k"_ddj
       else
         return "- "
       endif
@@ -67,14 +67,14 @@ function! s:NextLine()
   elseif l:previous =~ '\v^[0-9]+\.'
     " Numbered list
     if l:previous =~ '\v^[0-9]+\.\s*$'
-      call setline(l:previousLineNumber,'')
+      normal k"_ddj
     else
       let value=matchstr(l:previous, '\v^\zs[0-9]+\ze\.')
       return (value + 1).'. '
     endif
   elseif l:previous =~ '\v^\|'
     if l:previous =~ '\v^\|\s*$'
-      call setline(l:previousLineNumber,'')
+      normal k"_ddj
     else 
       return '| '
     endif

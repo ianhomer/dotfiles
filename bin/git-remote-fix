@@ -59,7 +59,7 @@ function setMyGitUrl {
       git remote set-url origin $myRemoteUrl
       echo "changed remote to "$(git config --get remote.origin.url)
     else
-      echo " change remote with \"change\" action"
+      echo "change remote with \"change\" action"
     fi
   else
     [[ "${verbose}" == "y" ]] && echo "current remote   $currentRemoteUrl"

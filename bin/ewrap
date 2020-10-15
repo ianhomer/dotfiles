@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+#
+# Edit file in a new window
+#
+if ! { [ "$TERM" = "screen-256color" ] && [ -n "$TMUX" ]; } then
+  kitty "vim \"$*\""
+else
+  # tmux session running
+  tmux split-window -v "vim \"$*\""
+fi

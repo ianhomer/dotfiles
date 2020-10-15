@@ -40,9 +40,13 @@ for d in `git-get-directories` ; do
     cd $d
     printf '\033[0;35m'
     git rev-parse --show-toplevel
-    printf '\033[0;33m'
-    git remote update
-    git pull
+    if [[ `git remote | wc -l` -eq 0 ]] ; then
+      echo "no remote"
+    else
+      printf '\033[0;33m'
+      git remote update
+      git pull
+    fi
   )
   (cd $d ; showDirectoryStatus)
   ((count++))

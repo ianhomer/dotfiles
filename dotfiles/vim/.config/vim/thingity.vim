@@ -100,9 +100,14 @@ endfunction
 " root. If it's the first of the day then it'll simply be MMDD. If that already
 " exists then a file name with full date time will be created.
 "
-function! s:ThingityNewThing(createNew)
+function! s:ThingityNewThing(createNew,type)
   let l:root = s:ThingityGetStreamRoot()
-  let thingName = l:root."/".strftime("%m%d").".md"
+  if a:type == ""
+    let postFix = ""
+  else
+    let postFix = "-".a:type
+  endif
+  let thingName = l:root."/".strftime("%m%d").postFix.".md"
   let headingExtra = ""
   let isNew = 1
   if filereadable(thingName)
@@ -112,6 +117,9 @@ function! s:ThingityNewThing(createNew)
     else
       let isNew = 0
     endif
+  endif
+  if a:type != ""
+    let headingExtra = headingExtra." - ".a:type
   endif
   " Close current buffer so that new thing opens up with focus
   silent! close
@@ -153,8 +161,10 @@ function! s:ThingityArchive()
 endfunction
 
 nnoremap <silent> <leader>jd :call <SID>ThingityDateHeading()<CR>
-nnoremap <silent> <leader>jn :call <SID>ThingityNewThing(1)<CR>
-nnoremap <silent> <leader>jj :call <SID>ThingityNewThing(0)<CR>
+nnoremap <silent> <leader>jn :call <SID>ThingityNewThing(1,"")<CR>
+nnoremap <silent> <leader>jj :call <SID>ThingityNewThing(0,"")<CR>
+nnoremap <silent> <leader>jk :call <SID>ThingityNewThing(0,"sunrise")<CR>
+nnoremap <silent> <leader>jh :call <SID>ThingityNewThing(0,"sunset")<CR>
 nnoremap <silent> <leader>ja :call <SID>ThingityArchive()<CR>
 
 " Open NERDTree on my things

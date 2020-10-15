@@ -124,8 +124,10 @@ command_inner() {
   [ $DRY -eq 0 ] && dotme-fish
   [ $DRY -eq 0 ] && dotme-fisher
   [ $DRY -eq 0 ] && dotme-gitme
+  [ $DRY -eq 0 ] && is-pc && dotme-nnn
   command_clean
 }
+
 #
 # Pull latest version of dotfiles
 #
@@ -170,6 +172,11 @@ command_uninstall() {
   echo "Uninstalling dotfiles ..."
   command_unstow
   echo "... uninstalled"
+}
+
+# Stow dotfiles.
+command_stow() {
+  dotme-stow
 }
 
 # Unstow dotfiles.
@@ -228,13 +235,15 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 # Initialize our own variables:
 VERBOSE=0
 
-while getopts "h?vd" opt; do
+while getopts "h?vdf:" opt; do
   case "$opt" in
   h|\?)
     command_help
     exit 0
     ;;
   d) DRY=1
+    ;;
+  f) FORCE=$OPTARG
     ;;
   v) VERBOSE=1
     ;;
@@ -246,6 +255,8 @@ shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
 
 COMMAND=${1:-install}
+
+[[ -n "$FORCE" ]] && should-run -c "dotme-$FORCE"
 
 command_${COMMAND} $@
 if [ $? = 127 ]; then

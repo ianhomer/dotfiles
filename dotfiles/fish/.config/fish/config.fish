@@ -1,24 +1,13 @@
-set CONFIG_LOG_LEVEL 0
-status --is-login; and set CONFIG_LOG_LEVEL 1
+[ {$DOT_SKIP} -eq 2 ]; and exit
 
-if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
-  set_color grey
-  set SHELL_START_DATE (dateme +%s%3N)
+time-me "START config.fish"
+
+if [ {$DOT_LOG_LEVEL} -gt 1 ]
+  set DATE (dateme +%s%3N)
+  echo "◎ in config.fish @ "(expr $DATE - $SHELL_START_DATE)"ms"
 end
 
-if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
-  echo "START : $SHELL_START_DATE"
-  echo "PATH  : $PATH"
-end
-
-function time-me
-  if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
-    set DATE (dateme +%s%3N)
-    printf "    TIME : %20s : %s\n" $argv[1] (expr $DATE - $SHELL_START_DATE)
-  end
-end
-
-if [ {$CONFIG_LOG_LEVEL} -gt 3 ]
+if [ {$DOT_LOG_LEVEL} -gt 3 ]
   status --is-interactive; and echo "... INTERACTIVE shell"
   status --is-login; and echo "... LOGIN shell"
 end
@@ -46,6 +35,13 @@ if status --is-login
 
   # Use fd for fzf by default
   set -gx FZF_DEFAULT_COMMAND 'fd --type f'
+
+  # nnn set up
+
+  set -x NNN_FCOLORS 'E63100'
+  set -x NNN_PLUG 'b:bookmarks;c:fzcd;p:preview-tui;f:fzopen'
+  set -x NNN_FIFO "/tmp/nnn.fifo"
+  set -x VISUAL ewrap
 end
 
 if status --is-interactive
@@ -74,6 +70,8 @@ if status --is-interactive
   set -g fish_escape_delay_ms 200
 end
 
+time-me "AFTER bindings"
+
 if status --is-login
   #
   # Tweak colors for me - noise reduction, red/green color blind and
@@ -93,13 +91,20 @@ if status --is-login
   set -x GPG_TTY (tty)
 end
 
-if [ {$CONFIG_LOG_LEVEL} -gt 2 ]
-  time-me "END"
+time-me "AFTER colors"
+
+if [ {$DOT_LOG_LEVEL} -gt 2 ]
   echo "PATH = $PATH"
 end
-[ {$CONFIG_LOG_LEVEL} -gt 1 ] ;and echo "... Loaded ~/.config/fish/config.fish"
-if [ {$CONFIG_LOG_LEVEL} -gt 0 ]
+
+[ {$DOT_LOG_LEVEL} -gt 1 ] ;and echo "◎ loaded ~/.config/fish/config.fish"
+
+if [ {$DOT_LOG_LEVEL} -gt 0 ]
   set DATE (dateme +%s%3N)
-  echo "... Initialised in "(expr $DATE - $SHELL_START_DATE)"ms"
-  set_color normal
+  echo "◎ up in "(math $DATE - $SHELL_START_DATE)"ms"
+  status --is-interactive; and set_color normal
 end
+
+time-me "END config.fish"
+
+

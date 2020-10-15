@@ -1,0 +1,79 @@
+#!/usr/bin/env sh
+
+#
+# Configure nnn
+#
+# Based on https://github.com/jarun/nnn/blob/master/plugins/getplugs
+#
+
+should-run $0 || exit
+
+printf "\e[36mConfiguring nnn\e[0m\n"
+
+CONFIG_DIR=${XDG_CONFIG_HOME:-"$HOME/.config"}/nnn
+BOOKMARKS_DIR=${XDG_CACHE_HOME:-"$HOME/.cache"}/nnn/bookmarks
+PLUGIN_DIR=${CONFIG_DIR}/plugins
+SOURCE_DIR=~/projects/opensource/nnn
+LOCAL_NNN=~/bin/nnn
+
+if [[ -f $LOCAL_NNN ]] ; then
+  NNN_CHANGED=0
+else
+  NNN_CHANGED=1
+fi
+
+if [[ ! -d $SOURCE_DIR ]] ; then
+  NNN_CHANGED=1
+  git clone git@github.com:ianhomer/nnn.git
+else
+  cd $SOURCE_DIR
+  if [[ `git status --porcelain` ]]; then
+    NNN_CHANGED=1
+  fi
+  git pull
+fi
+
+if [[ $NNN_CHANGED -eq 1 ]] ; then
+  cd $SOURCE_DIR
+  # Compile from source with nerd icons
+  make O_NERD=1
+  # Don't auto move into place until reliably tested
+  # mv nnn ~/bin
+fi
+
+mkdir -p "$PLUGIN_DIR"
+
+plugins=".cbcp .nmv .nnn-plugin-helper .ntfy bookmarks fzcd fzopen preview-tui"
+ignore=""
+for plugin in $plugins ; do ignore="${ignore}(?<!${plugin})" ; done
+
+cd $SOURCE_DIR/plugins
+stow -v -t $PLUGIN_DIR --ignore $ignore .
+
+[[ ! -d $BOOKMARKS_DIR ]] && mkdir -p $BOOKMARKS_DIR
+cd $BOOKMARKS_DIR
+
+bookmark() {
+  [[ ! -L $2 ]] && [[ -d "$1" ]] && ( echo "Bookmark : $2 -> $1" ; ln -s "$1" $2 )
+}
+
+bookmark ~/Desktop desktop
+bookmark ~/.dotfiles dotfiles
+bookmark ~/Downloads downloads
+bookmark ~/Google\ Drive\ File\ Stream/My\ Drive/incoming/ incoming
+bookmark ~/projects/opensource/nnn nnn
+bookmark ~/projects projects
+bookmark ~/projects/things things
+
+# Configure cd on quit
+
+FISH_FUNCTION=~/.config/fish/functions/n.fish
+[[ ! -L $FISH_FUNCTION ]] && \
+  ( echo "Linking n.fish" ;  \
+    ln -s $SOURCE_DIR/misc/quitcd/quitcd.fish $FISH_FUNCTION )
+FISH_COMPLETION=~/.config/fish/completions/nnn.fish
+[[ ! -L $FISH_COMPLETION ]] && \
+  ( echo "Linking completion nnn.fish" ;  \
+    ln -s $SOURCE_DIR/misc/auto-completion/nnn.fish $FISH_COMPLETION )
+
+should-run -fu $0
