@@ -6,6 +6,7 @@
 
 should-run -m 7 $0 || exit
 
+pkg install ctags
 pkg install fasd
 pkg install fish
 pkg install fzf
