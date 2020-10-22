@@ -1,5 +1,6 @@
 function! LintMarkdown()
   normal ma
+  let currentLine=line("'a")
   call PruneWhiteSpace()
   normal gg
   " Do not format fenced blocks. I can't find a way to configure the default vim
@@ -11,7 +12,13 @@ function! LintMarkdown()
     silent execute "normal /```\<CR>j"
   endwhile
   normal gqG
-  normal `a
+  " Safely jump mark only it exists. If we don't do this then the mark jump will
+  " error
+  if currentLine == 0
+    normal gg
+  elseif line("'a") > 0
+    normal `a
+  endif
 endfunction
 
 " Insert time stamp - as markdown header
