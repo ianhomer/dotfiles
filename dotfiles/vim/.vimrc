@@ -592,6 +592,7 @@ if g:config_level > 0
     " Light scheme primarily used for writing content
     colorscheme one
     set bg=light
+    let $BG_MODE="light"
     let g:one_allow_italics = 1
     call one#highlight('Normal', '000000', 'ffffff', 'none')
     for i in [1,2,3,4,5,6]
