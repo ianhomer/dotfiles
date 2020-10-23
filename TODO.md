@@ -5,6 +5,7 @@
 - [ ] q should save, e.g on fugitive commit
 - [ ] try remind
 - [ ] When markdown todo ends in square bracketed thing then line deleted on CR
+- [ ] Auto remote fix `git-remote-fix` when broken
 
 ## backlog
 
