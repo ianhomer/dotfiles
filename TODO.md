@@ -4,6 +4,7 @@
 - [ ] review whether I need omf anymore
 - [ ] q should save, e.g on fugitive commit
 - [ ] try remind
+- [ ] When markdown todo ends in square bracketed thing then line deleted on CR
 
 ## backlog
 
