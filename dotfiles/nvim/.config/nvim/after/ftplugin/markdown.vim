@@ -49,9 +49,9 @@ function! s:NextLine()
   " Continuation of bullet list
   if l:previous =~ '\v^\s*-\s'
     " Continuation of todo list
-    if l:previous =~ '\v^\s*-\s\[.+\]\s'
-      if l:previous =~ '\v^\s*-\s*\[.+\]\s*$'
-        " Previous item was empty so clear and stop list
+    if l:previous =~ '\v^\s*-\s\[.\]\s'
+      if l:previous =~ '\v^\s*-\s\[.\]\s*$'
+        " Previous item was empty todo so clear and stop list
         normal k"_ddj
       else
         return "- [ ] "
