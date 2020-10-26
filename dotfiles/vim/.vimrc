@@ -23,13 +23,13 @@ if g:config_level > 0
   "
   " fzf - Fuzzy Finder
   Plug 'junegunn/fzf'
-  Plug 'git@github.com:ianhomer/fzf.vim.git', { 'branch' : 'fix/maps-comment' }
+  Plug 'junegunn/fzf.vim'
   source ~/.config/vim/fzf.vim
 
   " fugitive - Git integration
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
-  Plug 'git@github.com:rhysd/conflict-marker.vim.git'
+  Plug 'rhysd/conflict-marker.vim'
   autocmd ColorScheme * highlight Info gui=bold guifg=#504945 guibg=#83a598
   let g:conflict_marker_highlight_group="Info"
 
