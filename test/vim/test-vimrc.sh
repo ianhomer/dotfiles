@@ -9,17 +9,21 @@ echo "Running tests with : $COMMAND"
 
 case $COMMAND in
   vim)
-    PLUGIN_DIR=$HOME/.config/$COMMAND
+    PLUGIN_DIR=.config/$COMMAND
     ;;
   nvim)
-    PLUGIN_DIR=$HOME/.config/$COMMAND/plugged
+    PLUGIN_DIR=.config/$COMMAND/plugged
     ;;
   *)
     echo "Vim variant $COMMAND not recognised"
     exit 1
 esac
 
-ls $HOME
+# use local plugin directory if it exists, otherwise assume it's relative to
+# home.
+if [[ ! -d $PLUGIN_DIR ]] ; then
+  PLUGIN_DIR=$HOME/$PLUGIN_DIR
+fi
 echo $PLUGIN_DIR
 ls $PLUGIN_DIR
 
