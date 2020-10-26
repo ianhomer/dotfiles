@@ -8,6 +8,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+      - name: Checkout vader.vim
+        uses: actions/checkout@v2
+        with:
+          repository: junegunn/vader.vim
+          path: .config/nvim/plugged/vader.vim
       - uses: rhysd/action-setup-vim@v1
         with:
           neovim: true
