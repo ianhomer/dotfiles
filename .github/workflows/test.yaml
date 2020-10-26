@@ -8,6 +8,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
+      - uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
       - name: test
         run: |
           test/vim/test-vimrc.sh
