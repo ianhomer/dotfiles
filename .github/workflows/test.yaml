@@ -15,7 +15,7 @@ jobs:
           path: .config/nvim/plugged/vader.vim
       - uses: rhysd/action-setup-vim@v1
         with:
-          neovim: true
+          neovim: false
       - name: test
         run: |
           make test
