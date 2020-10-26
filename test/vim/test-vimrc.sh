@@ -28,6 +28,7 @@ if [[ ! -d $PLUGIN_DIR ]] ; then
 fi
 echo $PLUGIN_DIR
 ls $PLUGIN_DIR
+ls $PLUGIN_DIR/vader.vim
 
 $COMMAND -Nu <(cat << EOF
 filetype off
