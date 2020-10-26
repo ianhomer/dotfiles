@@ -3,7 +3,7 @@ name: test
 on: [push, workflow_dispatch]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -13,4 +13,4 @@ jobs:
           neovim: true
       - name: test
         run: |
-          test/vim/test-vimrc.sh
+          ./test/vim/test-vimrc.sh
