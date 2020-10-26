@@ -12,17 +12,7 @@ esac done
 
 echo "Running tests with : $COMMAND"
 
-case ${COMMAND##*/} in
-  vim)
-    PLUGIN_DIR=.config/nvim/plugged
-    ;;
-  nvim)
-    PLUGIN_DIR=.config/nvim/plugged
-    ;;
-  *)
-    echo "Vim variant $COMMAND not recognised"
-    exit 1
-esac
+PLUGIN_DIR=./tmp/vim/plugins
 
 # use local plugin directory if it exists, otherwise assume it's relative to
 # home.
