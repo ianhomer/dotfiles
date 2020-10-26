@@ -9,6 +9,7 @@ jobs:
     strategy:
       matrix:
         neovim: [false, true]
+      fail-fast: false
 
     steps:
       - uses: actions/checkout@v1
