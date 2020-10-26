@@ -29,6 +29,9 @@ if g:config_level > 0
   " fugitive - Git integration
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
+  Plug 'git@github.com:rhysd/conflict-marker.vim.git'
+  autocmd ColorScheme * highlight Info gui=bold guifg=#504945 guibg=#83a598
+  let g:conflict_marker_highlight_group="Info"
 
   "
   " Style
@@ -268,6 +271,9 @@ if g:config_level > 0
     nnoremap <silent> <leader>k :call ToggleQuickFix()<CR>
     nnoremap <silent> <leader>K :call ToggleLocationList()<CR>
     nnoremap <silent> <leader>g :call ToggleFugitive()<CR>
+    nnoremap <silent> <leader>gd :Gvdiff!<CR>
+    nnoremap gdh :diffget //2<CR>
+    nnoremap gdl :diffget //3<CR>
     nnoremap <silent> <leader>b :call GitSynk(1)<CR>
     nnoremap <silent> <leader>e :call GitSynk(0)<CR>
 
