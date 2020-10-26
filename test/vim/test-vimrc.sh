@@ -37,6 +37,6 @@ set rtp+=after
 filetype plugin indent on
 syntax enable
 EOF
-) -c 'Vader! ./test/vim/*.vader' > vader.log 
+) -c 'Vader! ./test/vim/*.vader' > vader.log
 
 cat vader.log
