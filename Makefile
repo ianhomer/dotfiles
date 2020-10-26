@@ -1,4 +1,4 @@
 vimrctest:
-	./test/vim/test-vimrc.sh	
+	./test/vim/test-vimrc.sh
 
 test: vimrctest
