@@ -2,7 +2,10 @@
 
 set -e
 
-COMMAND=nvim
+echo $VIM_COMMAND
+
+COMMAND=${VIM_COMMAND:-nvim}
+
 while getopts "c:" o; do case "$o" in
   c) COMMAND=$OPTARG ;;
 esac done

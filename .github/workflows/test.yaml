@@ -6,6 +6,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        neovim: [false, true]
+
     steps:
       - uses: actions/checkout@v1
       - name: Checkout vader.vim
@@ -15,8 +19,10 @@ jobs:
           path: .config/nvim/plugged/vader.vim
       - uses: rhysd/action-setup-vim@v1
         with:
-          neovim: true
+          neovim: ${{ matrix.neovim }}
       - name: test
+        env:
+          VIM_COMMAND: ${{ steps.vim.outputs.executable }}
         run: |
           make test
       - name: report on fail
