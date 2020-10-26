@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 COMMAND=nvim
 while getopts "c:" o; do case "$o" in
   c) COMMAND=$OPTARG ;;
