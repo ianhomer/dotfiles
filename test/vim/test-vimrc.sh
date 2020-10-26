@@ -30,6 +30,7 @@ echo $PLUGIN_DIR
 ls $PLUGIN_DIR
 ls $PLUGIN_DIR/vader.vim
 
+$COMMAND --version
 $COMMAND -Nu <(cat << EOF
 filetype off
 set rtp+=$PLUGIN_DIR/vader.vim
