@@ -2,7 +2,10 @@
 
 echo "Running tests"
 
-#PLUGIN_DIR=~/.config/nvim/plugged
+PLUGIN_DIR=$HOME/.config/nvim/plugged
+
+ls $HOME
+echo $PLUGIN_DIR
 
 #vim -Nu <(cat << VIMRC
 #filetype off
