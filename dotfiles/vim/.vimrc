@@ -179,6 +179,9 @@ if g:config_level > 3
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
   let g:mkdp_auto_close = 0
   let g:mkdp_page_title = '${name}'
+
+  " Vim testing
+  Plug 'junegunn/vader.vim'
 endif
 
 " CoC completion
