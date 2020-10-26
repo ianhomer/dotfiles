@@ -13,4 +13,4 @@ jobs:
           neovim: true
       - name: test
         run: |
-          ./test/vim/test-vimrc.sh
+          make test
