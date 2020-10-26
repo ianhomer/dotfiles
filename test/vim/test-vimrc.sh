@@ -29,6 +29,7 @@ set rtp+=.
 set rtp+=after
 filetype plugin indent on
 syntax enable
-VIMRC) -c 'quit'
+VIMRC
+) -c 'quit'
 
 # Vader! test/vim/*.vader' > /dev/null
