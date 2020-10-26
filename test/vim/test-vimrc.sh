@@ -11,10 +11,10 @@ echo "Running tests with : $COMMAND"
 
 case $COMMAND in
   vim)
-    PLUGIN_DIR=.config/$COMMAND
+    PLUGIN_DIR=.config/nvim/plugged
     ;;
   nvim)
-    PLUGIN_DIR=.config/$COMMAND/plugged
+    PLUGIN_DIR=.config/nvim/plugged
     ;;
   *)
     echo "Vim variant $COMMAND not recognised"
