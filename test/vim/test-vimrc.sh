@@ -21,6 +21,7 @@ esac
 
 ls $HOME
 echo $PLUGIN_DIR
+ls $PLUGIN_DIR
 
 $COMMAND -Nu <(cat << EOF
 filetype off
