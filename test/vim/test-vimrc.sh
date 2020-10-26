@@ -28,8 +28,8 @@ $COMMAND -Nu <(cat << EOF
 filetype off
 set rtp+=$PLUGIN_DIR/vader.vim
 filetype plugin indent on
-syntax enable
 EOF
-) -c 'Vader! ./test/vim/*.vader' > vader.log
+) -c "Vader! ./test/vim/*.vader" > vader.log
+
 
 cat vader.log
