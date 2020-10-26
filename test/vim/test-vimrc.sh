@@ -12,7 +12,7 @@ esac done
 
 echo "Running tests with : $COMMAND"
 
-case $COMMAND in
+case ${COMMAND##*/} in
   vim)
     PLUGIN_DIR=.config/nvim/plugged
     ;;
