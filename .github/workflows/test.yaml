@@ -22,4 +22,6 @@ jobs:
       - name: report on fail
         if: ${{ failure() }}
         run: |
+          ls
+          pwd
           cat vader.log
