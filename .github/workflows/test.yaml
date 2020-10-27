@@ -12,10 +12,9 @@ jobs:
         neovim: [false, true]
         include:
           - neovim: true
-            vesion: 0.4.3
-            experimental: true
+            version: 0.4.3
           - neovim: true
-            vesion: nightly
+            version: nightly
 
       fail-fast: false
 
