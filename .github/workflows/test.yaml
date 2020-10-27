@@ -12,8 +12,6 @@ jobs:
         neovim: [false, true]
         include:
           - neovim: true
-            version: v0.3.3
-          - neovim: true
             version: nightly
 
       fail-fast: false
