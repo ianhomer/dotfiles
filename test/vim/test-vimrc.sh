@@ -112,5 +112,5 @@ cat tmp-vimrc.vim
 
 $COMMAND -Nu <(cat << EOF
 filetype off
-EOF) +'redir! > vim-out.log' +'echo "hello7"' +quit > /dev/null
-
+EOF) +'redir! > vim-out.log' +'echo "hello7"' +quit
+echo 
