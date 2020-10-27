@@ -116,6 +116,5 @@ set rtp+=$PLUGIN_DIR/vader.vim
 set rtp+=.
 set rtp+=after
 filetype plugin indent on
-syntax enable
 EOF) -c 'quit'
 
