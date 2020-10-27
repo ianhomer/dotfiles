@@ -112,9 +112,5 @@ cat tmp-vimrc.vim
 
 $COMMAND -Nu <(cat << EOF
 filetype off
-set rtp+=$PLUGIN_DIR/vader.vim
-set rtp+=.
-set rtp+=after
-filetype plugin indent on
 EOF) -c 'quit'
 
