@@ -8,8 +8,8 @@ jobs:
 
     strategy:
       matrix:
-        version: [stable]
         neovim: [false, true]
+        version: [stable]
         include:
           - neovim: true
             version: nightly
