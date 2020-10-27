@@ -26,10 +26,10 @@ ls $PLUGIN_DIR/vader.vim
 $COMMAND --version
 $COMMAND -Nu <(cat << EOF
 filetype off
-set rtp+=$PLUGIN_DIR/vader.vim
 filetype plugin indent on
 EOF
 ) -c "quit" > vader.log
+# set rtp+=$PLUGIN_DIR/vader.vim
 #) -c "Vader! ./test/vim/*.vader" > vader.log
 
 
