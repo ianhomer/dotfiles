@@ -42,19 +42,20 @@ $COMMAND -Nu <(cat << EOF
 EOF) +'redir! > vim-out.log' +'echo "hello4"' +quit
 cat vim-out.log
 
+cat << EOF > tmp-vimrc.vim
+filetype off
+EOF
+
+echo "tmp vimrc"
+$COMMAND -Nu tmp-vimrc.vim +'redir! > vim-out.log' +'echo "hello7"' +quit > /dev/null
+cat vim-out.log
+
 echo "cat EOF 2"
 $COMMAND -Nu <(cat << EOF
 filetype off
 EOF) +'redir! > vim-out.log' +'echo "hello5"' +quit > /dev/null
 cat vim-out.log
 
-cat << EOF > tmp-vimrc.vim
-filetype off
-EOF
-
-echo "tmp vimrc"
-$COMMAND -Nu tmp-vimrc.vim +'redir! > vim-out.log' +'echo "hello6"' +quit > /dev/null
-cat vim-out.log
 
 echo "cat EOF 3"
 $COMMAND -Nu <(cat << EOF
