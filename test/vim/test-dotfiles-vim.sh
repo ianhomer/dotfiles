@@ -19,13 +19,10 @@ if [[ ! -d $PLUGIN_DIR ]] ; then
 fi
 echo $PLUGIN_DIR
 
-$COMMAND --version
-
-echo "Running Vader tests"
-
 $COMMAND -Nu <(cat << EOF
 filetype off
 set rtp+=$PLUGIN_DIR/vader.vim
 filetype plugin indent on
 EOF) 'redir! > vim-out.log' +'Vader! ./test/vim/*.vader' 2>vim-error.log
+cat vim-out.log
 cat vim-error.log
