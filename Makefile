@@ -6,7 +6,7 @@ $(vader):
 
 dependencies: $(vader)
 
-vimrctest:
-	./test/vim/test-vimrc.sh
+testdotfilesvim:
+	./test/vim/test-dotfiles-vim.sh
 
-test: dependencies vimrctest
+test: dependencies testdotfilesvim:vimrctest

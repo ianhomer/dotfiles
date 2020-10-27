@@ -1,3 +1,3 @@
-# Test for Vim Configuration
+# dotfiles vim tests
 
-Vim tests.
+Tests for dotfiles vim scripts.
