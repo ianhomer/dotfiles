@@ -9,4 +9,4 @@ dependencies: $(vader)
 testdotfilesvim:
 	./test/vim/test-dotfiles-vim.sh
 
-test: dependencies testdotfilesvim:vimrctest
+test: dependencies testdotfilesvim
