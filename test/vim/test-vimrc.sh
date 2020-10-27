@@ -43,7 +43,7 @@ EOF) +'redir! > vim-out.log' +'echo "hello4"' +quit
 cat vim-out.log
 
 cat << EOF > tmp-vimrc.vim
-set rtp+=$PLUGIN_DIR/vader.vim
+set ignorecase
 EOF
 
 cat tmp-vimrc.vim
