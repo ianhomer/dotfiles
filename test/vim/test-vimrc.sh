@@ -46,6 +46,8 @@ cat << EOF > tmp-vimrc.vim
 set rtp+=$PLUGIN_DIR/vader.vim
 EOF
 
+cat tmp-vimrc.vim
+
 echo "tmp vimrc"
 $COMMAND -Nu tmp-vimrc.vim +'redir! > vim-out.log' +'echo "hello7"' +quit > /dev/null
 cat vim-out.log
