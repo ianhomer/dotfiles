@@ -48,10 +48,18 @@ filetype off
 EOF) +'redir! > vim-out.log' +'echo "hello5"' +quit > /dev/null
 cat vim-out.log
 
+cat << EOF > tmp-vimrc.vim
+filetype off
+EOF
+
+echo "tmp vimrc"
+$COMMAND -Nu tmp-vimrc.vim +'redir! > vim-out.log' +'echo "hello6"' +quit > /dev/null
+cat vim-out.log
+
 echo "cat EOF 3"
 $COMMAND -Nu <(cat << EOF
 set rtp+=$PLUGIN_DIR/vader.vim
-EOF) +'redir! > vim-out.log' +'echo "hello5"' +quit > /dev/null
+EOF) +'redir! > vim-out.log' +'echo "hello7"' +quit > /dev/null
 cat vim-out.log
 
 echo "rtp"
@@ -59,7 +67,7 @@ $COMMAND -Nu <(cat << EOF
 filetype off
 set rtp+=$PLUGIN_DIR/vader.vim
 filetype plugin indent on
-EOF) +'redir! > vim-out.log' +'echo "hello6"' +quit > /dev/null
+EOF) +'redir! > vim-out.log' +'echo "hello8"' +quit > /dev/null
 cat vim-out.log
 
 echo "Vader"
