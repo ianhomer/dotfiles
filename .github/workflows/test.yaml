@@ -8,7 +8,14 @@ jobs:
 
     strategy:
       matrix:
+        version: [stable]
         neovim: [false, true]
+        include:
+          - neovim: true
+            vesion: 0.4.3
+          - neovim: true
+            vesion: nightly
+
       fail-fast: false
 
     steps:
