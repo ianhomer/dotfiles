@@ -31,7 +31,7 @@ jobs:
         id: vim
         with:
           neovim: ${{ matrix.neovim }}
-          version: ${{ matrix.vesion }}
+          version: ${{ matrix.version }}
       - name: test
         env:
           VIM_COMMAND: ${{ steps.vim.outputs.executable }}
