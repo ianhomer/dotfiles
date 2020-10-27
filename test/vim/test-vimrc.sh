@@ -60,14 +60,14 @@ $COMMAND -Nu tmp-vimrc.vim +'redir! > vim-out.log' +'echo "hello7"' +quit > /dev
 cat vim-out.log
 
 echo "cat EOF 2"
-$COMMAND -Nu <(cat << EOF
+$COMMAND -u <(cat << EOF
 filetype off
 EOF) +'redir! > vim-out.log' +'echo "hello8"' +quit > /dev/null
 cat vim-out.log
 
 
 echo "cat EOF 3"
-$COMMAND -Nu <(cat << EOF
+$COMMAND -u <(cat << EOF
 set rtp+=$PLUGIN_DIR/vader.vim
 EOF) +'redir! > vim-out.log' +'echo "hello7"' +quit > /dev/null
 cat vim-out.log
