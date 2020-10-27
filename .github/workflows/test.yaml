@@ -13,6 +13,7 @@ jobs:
         include:
           - neovim: true
             vesion: 0.4.3
+            experimental: true
           - neovim: true
             vesion: nightly
 
@@ -35,9 +36,3 @@ jobs:
         run: |
           echo $VIM_COMMAND
           make test
-      - name: report on fail
-        if: ${{ failure() }}
-        run: |
-          ls
-          pwd
-          cat vader.log

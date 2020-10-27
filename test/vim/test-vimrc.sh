@@ -30,6 +30,3 @@ filetype plugin indent on
 EOF) -c "quit" > /dev/null
 # set rtp+=$PLUGIN_DIR/vader.vim
 #) -c "Vader! ./test/vim/*.vader" > vader.log
-
-
-cat vader.log
