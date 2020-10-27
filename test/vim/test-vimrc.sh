@@ -53,6 +53,8 @@ EOF
 
 cat tmp-vimrc.vim
 
+od -x tmp-vimrc.vim
+
 echo "tmp vimrc"
 $COMMAND -Nu tmp-vimrc.vim +'redir! > vim-out.log' +'echo "hello7"' +quit > /dev/null
 cat vim-out.log
