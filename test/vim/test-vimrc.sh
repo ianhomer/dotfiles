@@ -53,62 +53,62 @@ EOF
 
 cat tmp-vimrc.vim
 
-od -x tmp-vimrc.vim
+#od -x tmp-vimrc.vim
 
-echo "tmp vimrc"
-$COMMAND -u tmp-vimrc.vim +'redir! > vim-out.log' +'echo "hello7"' +quit > /dev/null
-cat vim-out.log
-
-echo "cat EOF 2"
-$COMMAND -u <(cat << EOF
-filetype off
-EOF) +'redir! > vim-out.log' +'echo "hello8"' +quit > /dev/null
-cat vim-out.log
-
-
-echo "cat EOF 3"
-$COMMAND -u <(cat << EOF
-set rtp+=$PLUGIN_DIR/vader.vim
-EOF) +'redir! > vim-out.log' +'echo "hello7"' +quit > /dev/null
-cat vim-out.log
-
-echo "rtp"
-$COMMAND -Nu <(cat << EOF
-filetype off
-set rtp+=$PLUGIN_DIR/vader.vim
-filetype plugin indent on
-EOF) +'redir! > vim-out.log' +'echo "hello8"' +quit > /dev/null
-cat vim-out.log
-
-echo "Vader"
-$COMMAND -Nu <(cat << EOF
-filetype off
-set rtp+=$PLUGIN_DIR/vader.vim
-filetype plugin indent on
-EOF) +'redir! > vim-out.log' +'Vader! ./test/vim/*.vader' > /dev/null
-cat vim-out.log
-
-echo "quit (pre-old way)"
-$COMMAND -Nu <(cat << EOF
-filetype off
-set rtp+=$PLUGIN_DIR/vader.vim
-filetype plugin indent on
-EOF) +'redir! > vim-out.log' +quit > /dev/null
-cat vim-out.log
-
-echo "quit (old way)"
-$COMMAND -Nu <(cat << EOF
-filetype off
-set rtp+=$PLUGIN_DIR/vader.vim
-filetype plugin indent on
-EOF) +quit > /dev/null
-
-echo "vader (old way)"
-$COMMAND -Nu <(cat << EOF
-filetype off
-set rtp+=$PLUGIN_DIR/vader.vim
-filetype plugin indent on
-EOF) -c "Vader! ./test/vim/*.vader" > /dev/null
+#echo "tmp vimrc"
+#$COMMAND -u tmp-vimrc.vim +'redir! > vim-out.log' +'echo "hello7"' +quit > /dev/null
+#cat vim-out.log
+#
+#echo "cat EOF 2"
+#$COMMAND -u <(cat << EOF
+#filetype off
+#EOF) +'redir! > vim-out.log' +'echo "hello8"' +quit > /dev/null
+#cat vim-out.log
+#
+#
+#echo "cat EOF 3"
+#$COMMAND -u <(cat << EOF
+#set rtp+=$PLUGIN_DIR/vader.vim
+#EOF) +'redir! > vim-out.log' +'echo "hello7"' +quit > /dev/null
+#cat vim-out.log
+#
+#echo "rtp"
+#$COMMAND -Nu <(cat << EOF
+#filetype off
+#set rtp+=$PLUGIN_DIR/vader.vim
+#filetype plugin indent on
+#EOF) +'redir! > vim-out.log' +'echo "hello8"' +quit > /dev/null
+#cat vim-out.log
+#
+#echo "Vader"
+#$COMMAND -Nu <(cat << EOF
+#filetype off
+#set rtp+=$PLUGIN_DIR/vader.vim
+#filetype plugin indent on
+#EOF) +'redir! > vim-out.log' +'Vader! ./test/vim/*.vader' > /dev/null
+#cat vim-out.log
+#
+#echo "quit (pre-old way)"
+#$COMMAND -Nu <(cat << EOF
+#filetype off
+#set rtp+=$PLUGIN_DIR/vader.vim
+#filetype plugin indent on
+#EOF) +'redir! > vim-out.log' +quit > /dev/null
+#cat vim-out.log
+#
+#echo "quit (old way)"
+#$COMMAND -Nu <(cat << EOF
+#filetype off
+#set rtp+=$PLUGIN_DIR/vader.vim
+#filetype plugin indent on
+#EOF) +quit > /dev/null
+#
+#echo "vader (old way)"
+#$COMMAND -Nu <(cat << EOF
+#filetype off
+#set rtp+=$PLUGIN_DIR/vader.vim
+#filetype plugin indent on
+#EOF) -c "Vader! ./test/vim/*.vader" > /dev/null
 
 $COMMAND -Nu <(cat << VIMRC
 filetype off
