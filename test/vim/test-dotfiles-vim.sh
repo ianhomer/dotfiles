@@ -27,4 +27,5 @@ $COMMAND -Nu <(cat << EOF
 filetype off
 set rtp+=$PLUGIN_DIR/vader.vim
 filetype plugin indent on
-EOF) +'Vader! ./test/vim/*.vader' > /dev/null
+EOF) 'redir! > vim-out.log' +'Vader! ./test/vim/*.vader' 2>vim-error.log
+cat vim-error.log
