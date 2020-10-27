@@ -27,7 +27,7 @@ $COMMAND --version
 $COMMAND -Nu <(cat << EOF
 filetype off
 filetype plugin indent on
-EOF) -c "quit" > vader.log
+EOF) -c "quit" > /dev/null
 # set rtp+=$PLUGIN_DIR/vader.vim
 #) -c "Vader! ./test/vim/*.vader" > vader.log
 
