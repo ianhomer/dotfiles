@@ -45,7 +45,12 @@ cat vim-out.log
 echo "cat EOF 2"
 $COMMAND -Nu <(cat << EOF
 filetype off
-filetype plugin indent on
+EOF) +'redir! > vim-out.log' +'echo "hello5"' +quit > /dev/null
+cat vim-out.log
+
+echo "cat EOF 3"
+$COMMAND -Nu <(cat << EOF
+set rtp+=$PLUGIN_DIR/vader.vim
 EOF) +'redir! > vim-out.log' +'echo "hello5"' +quit > /dev/null
 cat vim-out.log
 
