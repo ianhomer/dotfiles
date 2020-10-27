@@ -43,7 +43,7 @@ EOF) +'redir! > vim-out.log' +'echo "hello4"' +quit
 cat vim-out.log
 
 echo "echo vimrc"
-$COMMAND -Nu <(echo "set ignorecare")\
+$COMMAND -Nu <(echo "set ignorecase")\
   +'redir! > vim-out.log' +'echo "hello4a"' +quit
 cat vim-out.log
 
