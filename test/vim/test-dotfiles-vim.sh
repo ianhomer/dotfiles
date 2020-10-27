@@ -21,6 +21,8 @@ echo $PLUGIN_DIR
 
 $COMMAND --version
 
+echo "Running Vader tests"
+
 $COMMAND -Nu <(cat << EOF
 filetype off
 set rtp+=$PLUGIN_DIR/vader.vim
