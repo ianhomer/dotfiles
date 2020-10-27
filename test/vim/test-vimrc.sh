@@ -27,6 +27,23 @@ $COMMAND --version
 $COMMAND -u NONE +'redir > vim-out.log' +'echo "hello"' +quit
 cat vim-out.log
 
+$COMMAND -Nu NONE +'redir > vim-out.log' +'echo "hello"' +quit
+cat vim-out.log
+
+$COMMAND -Nu <(cat << EOF
+EOF) +'redir > vim-out.log' +'echo "hello"' +quit
+cat vim-out.log
+
+$COMMAND -Nu <(cat << EOF
+EOF) +'redir > vim-out.log' +'echo "hello"' +quit
+cat vim-out.log
+
+$COMMAND -Nu <(cat << EOF
+filetype off
+filetype plugin indent on
+EOF) +'redir > vim-out.log' +'echo "hello"' +quit
+cat vim-out.log
+
 #$COMMAND -Nu <(cat << EOF
 #filetype off
 #filetype plugin indent on
