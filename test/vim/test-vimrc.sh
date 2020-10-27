@@ -112,5 +112,5 @@ cat tmp-vimrc.vim
 
 $COMMAND -Nu <(cat << EOF
 filetype off
-EOF) -c 'quit'
+EOF) +quit
 
