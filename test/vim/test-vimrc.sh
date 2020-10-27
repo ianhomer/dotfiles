@@ -44,6 +44,7 @@ filetype plugin indent on
 EOF) +'redir! > vim-out.log' +'echo "hello"' +quit
 cat vim-out.log
 
+echo "rtp"
 $COMMAND -Nu <(cat << EOF
 filetype off
 set rtp+=$PLUGIN_DIR/vader.vim
@@ -51,6 +52,7 @@ filetype plugin indent on
 EOF) +'redir! > vim-out.log' +'echo "hello"' +quit
 cat vim-out.log
 
+echo "Vader"
 $COMMAND -Nu <(cat << EOF
 filetype off
 set rtp+=$PLUGIN_DIR/vader.vim
