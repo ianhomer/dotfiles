@@ -19,6 +19,14 @@ if [[ ! -d $PLUGIN_DIR ]] ; then
 fi
 echo $PLUGIN_DIR
 
+#
+# Run vim (or neovim) with the given configuration
+# Note that we redirect output with redir since directing nvim output to
+# /dev/null as per vader documentation leads to a core dump in Github actions.
+# We also capture stderr into a file and cat that because without it 
+# we don't see the output when run locally.
+#
+
 $COMMAND -Nu <(cat << EOF
 filetype off
 set rtp+=$PLUGIN_DIR/vader.vim
