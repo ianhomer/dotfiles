@@ -110,12 +110,12 @@ cat tmp-vimrc.vim
 #filetype plugin indent on
 #EOF) -c "Vader! ./test/vim/*.vader" > /dev/null
 
-$COMMAND -Nu <(cat << VIMRC
+$COMMAND -Nu <(cat << EOF
 filetype off
 set rtp+=$PLUGIN_DIR/vader.vim
 set rtp+=.
 set rtp+=after
 filetype plugin indent on
 syntax enable
-VIMRC) -c 'quit'
+EOF) -c 'quit'
 
