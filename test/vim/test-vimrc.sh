@@ -112,5 +112,6 @@ cat tmp-vimrc.vim
 
 $COMMAND -Nu <(cat << EOF
 filetype off
-EOF) +'redir! > vim-out.log' +'echo "hello7"' +quit
-echo 
+set rtp+=$PLUGIN_DIR/vader.vim
+filetype plugin indent on
+EOF) +'Vader! ./test/vim/*.vader' +quit
