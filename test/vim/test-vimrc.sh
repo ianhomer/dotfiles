@@ -44,7 +44,7 @@ cat vim-out.log
 $COMMAND -Nu <(cat << EOF
 filetype off
 filetype plugin indent on
-EOF) +'redir! > vim-out.log' +'echo "hello"' +quit
+EOF) +'redir! > vim-out.log' +'echo "hello"' +quit > /dev/null
 cat vim-out.log
 
 echo "rtp"
@@ -52,7 +52,7 @@ $COMMAND -Nu <(cat << EOF
 filetype off
 set rtp+=$PLUGIN_DIR/vader.vim
 filetype plugin indent on
-EOF) +'redir! > vim-out.log' +'echo "hello"' +quit
+EOF) +'redir! > vim-out.log' +'echo "hello"' +quit > /dev/null
 cat vim-out.log
 
 echo "Vader"
@@ -60,12 +60,20 @@ $COMMAND -Nu <(cat << EOF
 filetype off
 set rtp+=$PLUGIN_DIR/vader.vim
 filetype plugin indent on
-EOF) +'redir! > vim-out.log' +'Vader! ./test/vim/*.vader'
+EOF) +'redir! > vim-out.log' +'Vader! ./test/vim/*.vader' > /dev/null
 cat vim-out.log
 
-#$COMMAND -Nu <(cat << EOF
-#filetype off
-#filetype plugin indent on
-#EOF) -c "quit" > /dev/null
-#) -c "Vader! ./test/vim/*.vader" > vader.log
+echo "quit (old way)"
+$COMMAND -Nu <(cat << EOF
+filetype off
+set rtp+=$PLUGIN_DIR/vader.vim
+filetype plugin indent on
+EOF) +quit> /dev/null
+
+echo "quit (old way)"
+$COMMAND -Nu <(cat << EOF
+filetype off
+set rtp+=$PLUGIN_DIR/vader.vim
+filetype plugin indent on
+EOF) -c "Vader! ./test/vim/*.vader" > /dev/null
 
