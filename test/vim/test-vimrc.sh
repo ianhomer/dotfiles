@@ -110,3 +110,12 @@ set rtp+=$PLUGIN_DIR/vader.vim
 filetype plugin indent on
 EOF) -c "Vader! ./test/vim/*.vader" > /dev/null
 
+$COMMAND -Nu <(cat << VIMRC
+filetype off
+set rtp+=$PLUGIN_DIR/vader.vim
+set rtp+=.
+set rtp+=after
+filetype plugin indent on
+syntax enable
+VIMRC) -c 'quit'
+
