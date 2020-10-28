@@ -29,19 +29,13 @@ function! s:ThingityDateHeading()
     execute "normal mbO\<ESC>`b"
   endif
 
-  execute "normal! I".<SID>GetThingityDateHeading()."\<CR>"
+  execute "normal! I".thingity#GetThingityDateHeading()."\<CR>"
   " Insert line after if next line is not empty
   if getline('.') =~ '[^\s]'
     execute "normal mbO\<ESC>`b"
   endif
 
   normal `a
-endfunction
-
-function! s:GetThingityDateHeading()
-  " Top level heading if first line
-  let heading = line('.') == 1 ? "# " : "## "
-  return heading . toupper(strftime("%a %d %b %Y"))
 endfunction
 
 function! s:ThingityTime()
@@ -132,7 +126,7 @@ function! s:ThingityNewThing(createNew,type)
   silent! close
   execute "silent e ".thingName
   if isNew
-    execute "normal! a".<SID>GetThingityDateHeading().headingExtra."\<ESC>2o\<ESC>"
+    execute "normal! a".thingity#GetThingityDateHeading().headingExtra."\<ESC>2o\<ESC>"
     write
   endif
   call NERDTreeFindIfRoom()
