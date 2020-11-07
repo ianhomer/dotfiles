@@ -64,16 +64,19 @@ EXCLUDE+="|package-lock.json"
 
 deepChangeText() {
   echo "changing text : $1 : $2 : $3"
-  # w => write changes to stdout
+  # Allow suffixes to be seperated by a comma
+  IFS=", "
   for suffix in $2 ; do
-    echo $suffix
     [[ -z "$FIND_NAME" ]]                  \
-      && FIND_NAME="-name *$suffix" \
+      && FIND_NAME="-type f ( -name *$suffix" \
       || FIND_NAME+=" -o -name *$suffix"
   done
+  FIND_NAME+=" )"
 
-  # Disable glob expansion so that * goes through to find
+  # Disable glob expansion so that * goes through to find without being expanded
+  # into file list by the shell
   set -o noglob
+  # w => write changes to stdout
   find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} -print | egrep -v $EXCLUDE | \
     xargs -t -n 1 -P 10 sed -i '' "$3 w /dev/stdout"
   set +o noglob
