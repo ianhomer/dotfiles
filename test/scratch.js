@@ -5,5 +5,5 @@ function foo(a) {
     console.log("It's true");
   }
 
-  console.log("Hello, world!");
+  console.log("Hello, World!");
 }

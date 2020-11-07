@@ -43,19 +43,35 @@ git -C "${directory}" rev-parse || exit
 [ -z "$files" ] && echo "No files" && exit
 [ -z "$change" ] && echo "No change" && exit
 
+
+EXCLUDE_DIRECTORIES="node_modules dist"
+for dir in $EXCLUDE_DIRECTORIES ; do
+  [[ -z "$FIND_PRUNE" ]]                  \
+    && FIND_PRUNE="-name $dir" \
+    || FIND_PRUNE+=" -o -name $dir"
+done
+FIND_PRUNE+=" -prune -false"
+echo $FIND_PRUNE
+
 # File name exclusion for deep scan
 EXCLUDE="node_modules/|dist/|package-lock.json"
 
 deepChangeText() {
   echo "changing text : $1 : $2 : $3"
-  find "$1" -name "*$2" -print | egrep -v $EXCLUDE | \
+  find "$1" $FIND_PRUNE -o -name "*$2" -print | egrep -v $EXCLUDE | \
     xargs -n 1 -P 10 sed -i '' $3
+}
+
+deepChangeDry() {
+  echo "dry run for : $1 : $2 : $3"
+  find "$1" ${FIND_PRUNE[@]} -o -name "*$2" -print | egrep -v $EXCLUDE
 }
 
 changeJson() {
   change=$1
   file=$2
   echo "changing json : $file : $change"
+  # Inline json change with jq
   TJQ=$(jq --indent "$INDENT" --sort-keys "$change" < $file)
   [[ $? == 0 ]] && echo "${TJQ}" >| $file
 }
@@ -71,7 +87,7 @@ deepChangeJson() {
     CHANGE="$3" xargs -n 1 -P 10 -I {} bash -c 'changeJson "$CHANGE" "$@"' _ {}
 }
 
-mode="sed"
+mode="dry"
 if [[ "${change:0:2}" = "s#" ]] ; then
   mode="sed"
 elif [[ "${files: -5}" = ".json" ]] ; then
@@ -79,6 +95,7 @@ elif [[ "${files: -5}" = ".json" ]] ; then
 fi
 
 case "$mode" in
+  dry) deepChangeDry "$directory" "$files" "$change" ;;
   sed) deepChangeText "$directory" "$files" "$change" ;;
   jq)  deepChangeJson "$directory" "$files" "$change" ;;
 esac
