@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Testing of change-files script
+
+change-files . .md s#x#y#g
+change-files . .json '.author = "anon"'
+
+

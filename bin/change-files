@@ -5,7 +5,13 @@
 #
 # e.g.
 #
-#    change-my-files . .md s#x#y#g
+# Default with sed syntax
+#
+#    change-files . .md s#x#y#g
+#
+# JSON updates with jq syntax
+#
+#    change-files . .json '.author = "anon"'
 #
 # Only works in a git directory. This gives a level of protection against
 # undesired changes.
@@ -22,7 +28,7 @@ esac done
 shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
 
-printf "\e[37mchanging my files\e[0m\n"
+printf "\e[37mchanging files\e[0m\n"
 [ -z "$QUICK" ] || echo "Quick run"
 [ -z "$DRY" ] || echo "Dry run"
 
@@ -31,15 +37,17 @@ files=$2
 change=$3
 
 [ -z "$directory" ] && echo "No directory" && exit
+git -C "${directory}" rev-parse || exit
 [ -z "$files" ] && echo "No files" && exit
 [ -z "$change" ] && echo "No change" && exit
 
-EXCLUDE="node_modules|dist"
+# File name exclusion for deep scan
+EXCLUDE="node_modules/|dist/"
 
 deepChangeText() {
   echo "changing text : $1 : $2 : $3"
   find "$1" -name "*$2" -print | egrep -v $EXCLUDE | \
-    xargs sed -i '' $3
+    xargs -n 1 -P 10 sed -i '' $3
 }
 
 changeJson() {
@@ -49,12 +57,16 @@ changeJson() {
   TJQ=$(jq "$change" < $file)
   [[ $? == 0 ]] && echo "${TJQ}" >| $file
 }
+# Export function so that it is available to bash from deepChangeJson xargs
 export -f changeJson
 
 deepChangeJson() {
   echo "changing json : $1 : $2 : $3"
+  # Export change so that it can be passed into xargs bash
+  # -P 10 => parallel 10
+  # -n 1 => only take one argument (i.e. the file name from the stream)
   find "$1" -name "*$2" -print | egrep -v $EXCLUDE | \
-    CHANGE="$3" xargs -t -n 1 -P 10 -I {} bash -c 'changeJson "$CHANGE" "$@"' _ {}
+    CHANGE="$3" xargs -n 1 -P 10 -I {} bash -c 'changeJson "$CHANGE" "$@"' _ {}
 }
 
 mode="sed"
