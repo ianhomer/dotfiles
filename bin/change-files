@@ -66,14 +66,17 @@ deepChangeText() {
   echo "changing text : $1 : $2 : $3"
   # w => write changes to stdout
   for suffix in $2 ; do
+    echo $suffix
     [[ -z "$FIND_NAME" ]]                  \
-      && FIND_NAME='-name "*$suffix"' \
-      || FIND_PRUNE+=' -o -name "*$suffix"'
+      && FIND_NAME='-name "*'$suffix'"' \
+      || FIND_PRUNE+=' -o -name "*'$suffix'"'
   done
   echo "$FIND_NAME"
 
   find "$1" ${FIND_PRUNE[@]} -o -name "*$2" -print | egrep -v $EXCLUDE | \
     xargs -t -n 1 -P 10 sed -i '' "$3 w /dev/stdout"
+  #find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} -print | egrep -v $EXCLUDE | \
+  #  xargs -t -n 1 -P 10 sed -i '' "$3 w /dev/stdout"
 }
 
 deepChangeDry() {

@@ -7,9 +7,9 @@ tag: bar
 
 ## Heading 1
 
-This is **Bold**.
+That is **Bold**.
 
-This is _Emphasis_.
+That is _Emphasis_.
 
 ~~Strike Through~~
 
@@ -21,7 +21,7 @@ Join these lines to make this is a long line, this is a long line, this is a
 long line, this is a long line, this is a long line, this is a long line, this
 is a long line
 
-This is a spellingmistake.
+That is a spellingmistake.
 
 ## Lists
 
@@ -59,7 +59,7 @@ Todos
 - [ ] And this, and this, and this, and this, and this, and this, and this, and
   this, and this, and this, and this, and this, and this, and this, and this,
   and this.
-- [x] This too
+- [x] That too
 
 ## Links
 
