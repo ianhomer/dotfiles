@@ -3,6 +3,7 @@
 # Testing of change-files script
 
 change-files . .md s#world#World#g
-change-files . .json '.author = "anon"'
+change-files . package.json '.author = "anon"'
+change-files . scratch.json '.author = "anon"'
 
 

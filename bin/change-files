@@ -74,7 +74,7 @@ deepChangeJson() {
 mode="sed"
 if [[ "${change:0:2}" = "s#" ]] ; then
   mode="sed"
-elif [[ "$files" = ".json" ]] ; then
+elif [[ "${files: -5}" = ".json" ]] ; then
   mode="jq"
 fi
 
