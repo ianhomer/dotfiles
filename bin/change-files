@@ -3,6 +3,10 @@
 #
 # Change files in a given directory.
 #
+# e.g.
+#
+#    change-my-files . .md s#x#y#g
+#
 # Only works in a git directory. This gives a level of protection against
 # undesired changes.
 #
@@ -10,14 +14,27 @@
 # shifted as needed.
 #
 
+OPTIND=1
 while getopts "dq" o; do case "$o" in
   q) QUICK=y ;;
   d) DRY=y ;;
 esac done
+shift $((OPTIND-1))
+[ "${1:-}" = "--" ] && shift
 
 printf "\e[37mchanging my files\e[0m\n"
-[[ ! -z "$QUICK" ]] && echo "Quick run"
-[[ ! -z "$DRY" ]] && echo "Dry run"
+[ -z "$QUICK" ] || echo "Quick run"
+[ -z "$DRY" ] || echo "Dry run"
+
+root=$1
+files=$2
+change=$3
+
+[ -z "$root" ] && echo "No root" && exit
+[ -z "$files" ] && echo "No files" && exit
+[ -z "$change" ] && echo "No change" && exit
+
+echo "changing : $root : $files : $change"
 
 
 
