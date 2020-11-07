@@ -21,7 +21,9 @@
 #
 
 OPTIND=1
-while getopts "dq" o; do case "$o" in
+export INDENT=2
+while getopts "i:dq" o; do case "$o" in
+  i) export INDENT=$OPTARG ;;
   q) QUICK=y ;;
   d) DRY=y ;;
 esac done
@@ -54,7 +56,7 @@ changeJson() {
   change=$1
   file=$2
   echo "changing json : $file : $change"
-  TJQ=$(jq "$change" < $file)
+  TJQ=$(jq --indent "$INDENT" --sort-keys "$change" < $file)
   [[ $? == 0 ]] && echo "${TJQ}" >| $file
 }
 # Export function so that it is available to bash from deepChangeJson xargs
