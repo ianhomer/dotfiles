@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+#
+# Change files in a given directory.
+#
+# Only works in a git directory. This gives a level of protection against
+# undesired changes.
+#
+# This is also a pattern library for auto changing files which can be lift and
+# shifted as needed.
+#
+
+while getopts "dq" o; do case "$o" in
+  q) QUICK=y ;;
+  d) DRY=y ;;
+esac done
+
+printf "\e[37mchanging my files\e[0m\n"
+[[ ! -z "$QUICK" ]] && echo "Quick run"
+[[ ! -z "$DRY" ]] && echo "Dry run"
+
+
+
