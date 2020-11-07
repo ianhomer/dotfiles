@@ -42,7 +42,7 @@ git -C "${directory}" rev-parse || exit
 [ -z "$change" ] && echo "No change" && exit
 
 # File name exclusion for deep scan
-EXCLUDE="node_modules/|dist/"
+EXCLUDE="node_modules/|dist/|package-lock.json"
 
 deepChangeText() {
   echo "changing text : $1 : $2 : $3"
