@@ -22,10 +22,11 @@
 
 OPTIND=1
 export INDENT=2
-while getopts "i:dq" o; do case "$o" in
+while getopts "di:qv" o; do case "$o" in
   i) export INDENT=$OPTARG ;;
   q) QUICK=y ;;
   d) DRY=y ;;
+  v) VERBOSE=y ;;
 esac done
 shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
@@ -76,16 +77,21 @@ deepChangeDry() {
 changeJson() {
   change=$1
   file=$2
-  echo "changing json : $file : $change"
   # Inline json change with jq
+  ORIGINAL=$(cat $file)
   TJQ=$(jq --indent "$INDENT" --sort-keys "$change" < $file)
+  if [[ "${ORIGINAL}" == "${TJQ}" ]] ; then
+    echo "no change json : $file : $change"
+    return
+  fi
+  echo "changing json : $file : $change"
   [[ $? == 0 ]] && echo "${TJQ}" >| $file
 }
 # Export function so that it is available to bash from deepChangeJson xargs
 export -f changeJson
 
 deepChangeJson() {
-  echo "changing json : $1 : $2 : $3"
+  [[ -z "$VERBOSE" ]] || echo "changing json : $1 : $2 : $3"
   # Export change so that it can be passed into xargs bash
   # -P 10 => parallel 10
   # -n 1 => only take one argument (i.e. the file name from the stream)
