@@ -36,13 +36,13 @@ printf "\e[37mchanging files\e[0m\n"
 [ -z "$DRY" ] || echo "Dry run"
 
 directory=$1
-files=$2
+fileSuffixes=$2
 change=$3
 
 [ -z "$directory" ] && echo "No directory" && exit
 git -C "${directory}" rev-parse || exit
-[ -z "$files" ] && echo "No files" && exit
-[ -z "$change" ] && echo "No change" && exit
+[ -z "$fileSuffixes" ] && echo "No files" && exit
+[ -z "$change" ] && DRY=y
 
 
 EXCLUDE_DIRECTORIES="node_modules dist"
@@ -65,6 +65,13 @@ EXCLUDE+="|package-lock.json"
 deepChangeText() {
   echo "changing text : $1 : $2 : $3"
   # w => write changes to stdout
+  for suffix in $2 ; do
+    [[ -z "$FIND_NAME" ]]                  \
+      && FIND_NAME="-name '*$suffix'" \
+      || FIND_PRUNE+=" -o -name '*$suffix'"
+  done
+  echo "$FIND_NAME"
+
   find "$1" $FIND_PRUNE -o -name "*$2" -print | egrep -v $EXCLUDE | \
     xargs -t -n 1 -P 10 sed -i '' "$3 w /dev/stdout"
 }
@@ -103,15 +110,12 @@ deepChangeJson() {
 mode="dry"
 if [[ "${change:0:1}" = "#" || "${change:0:2}" = "s#" ]] ; then
   mode="sed"
-elif [[ "${files: -5}" = ".json" ]] ; then
+elif [[ "${fileSuffixes: -5}" = ".json" ]] ; then
   mode="jq"
 fi
 
 case "$mode" in
-  dry) deepChangeDry "$directory" "$files" "$change" ;;
-  sed) deepChangeText "$directory" "$files" "$change" ;;
-  jq)  deepChangeJson "$directory" "$files" "$change" ;;
+  dry) deepChangeDry "$directory" "$fileSuffixes" "$change" ;;
+  sed) deepChangeText "$directory" "$fileSuffixes" "$change" ;;
+  jq)  deepChangeJson "$directory" "$fileSuffixes" "$change" ;;
 esac
-
-
-
