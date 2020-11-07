@@ -63,8 +63,9 @@ EXCLUDE+="|package-lock.json"
 
 deepChangeText() {
   echo "changing text : $1 : $2 : $3"
+  # w => write changes to stdout
   find "$1" $FIND_PRUNE -o -name "*$2" -print | egrep -v $EXCLUDE | \
-    xargs -t -n 1 -P 10 sed -i '' $3
+    xargs -t -n 1 -P 10 sed -i '' "$3 w /dev/stdout"
 }
 
 deepChangeDry() {
@@ -89,7 +90,8 @@ deepChangeJson() {
   # -P 10 => parallel 10
   # -n 1 => only take one argument (i.e. the file name from the stream)
   find "$1" -name "*$2" -print | egrep -v $EXCLUDE | \
-    CHANGE="$3" xargs -n 1 -P 10 -I {} bash -c 'changeJson "$CHANGE" "$@"' _ {}
+    CHANGE="$3" xargs -n 1 -P 10 -I {}               \
+    bash -c 'changeJson "$CHANGE" "$@"' _ {}
 }
 
 mode="dry"
