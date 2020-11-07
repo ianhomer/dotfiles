@@ -48,7 +48,7 @@ git -C "${directory}" rev-parse || exit
 EXCLUDE_DIRECTORIES="node_modules dist"
 for dir in $EXCLUDE_DIRECTORIES ; do
   [[ -z "$FIND_PRUNE" ]]                  \
-    && FIND_PRUNE="-name $dir" \
+    && FIND_PRUNE="-type d ( -name $dir" \
     || FIND_PRUNE+=" -o -name $dir"
   [[ -z "$EXCLUDE" ]]                  \
     && EXCLUDE="$dir" \
@@ -57,7 +57,7 @@ done
 
 # Find prune is a more efficient way for directories since it stops the find
 # scan
-FIND_PRUNE+=" -prune -false"
+FIND_PRUNE+=" ) -prune -false"
 
 # File name exclusion for deep scan
 EXCLUDE+="|package-lock.json"
@@ -72,14 +72,14 @@ deepChangeText() {
   done
   echo "$FIND_NAME"
 
-  find "$1" $FIND_PRUNE -o ${FIND_NAME[@]} -print | egrep -v $EXCLUDE | \
+  find "$1" ${FIND_PRUNE[@]} -o -name "*$2" -print | egrep -v $EXCLUDE | \
     xargs -t -n 1 -P 10 sed -i '' "$3 w /dev/stdout"
 }
 
 deepChangeDry() {
   echo "dry run for : $1 : $2 : $3"
-  find "$1" -type d \( -name node_modules -o -name dist \) -prune -false -o -name "*$2" -print 
-  #find "$1" "${FIND_PRUNE[@]}" -o -name "*$2" -print
+  #find "$1" -type d \( -name node_modules -o -name dist \) -prune -false -o -name "*$2" -print 
+  find "$1" ${FIND_PRUNE[@]} -o -name "*$2" -print
 }
 
 changeJson() {
