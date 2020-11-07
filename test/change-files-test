@@ -17,7 +17,7 @@ change-files . .js s#world#World#g
 if [[ -z "$REVERSE" ]] ; then
   change-files . .md s#This#That#g
 else
-  change-files . .md s#That#This#g
+  change-files . .md "s#That#This#g"
 fi
 change-files . package.json '.author = "anon"'
 change-files . scratch.json '.author = "anon"'

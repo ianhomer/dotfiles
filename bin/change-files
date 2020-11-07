@@ -64,7 +64,7 @@ EXCLUDE+="|package-lock.json"
 deepChangeText() {
   echo "changing text : $1 : $2 : $3"
   find "$1" $FIND_PRUNE -o -name "*$2" -print | egrep -v $EXCLUDE | \
-    xargs -n 1 -P 10 sed -i '' $3
+    xargs -t -n 1 -P 10 sed -i '' $3
 }
 
 deepChangeDry() {
@@ -93,7 +93,7 @@ deepChangeJson() {
 }
 
 mode="dry"
-if [[ "${change:0:2}" = "s#" ]] ; then
+if [[ "${change:0:1}" = "#" || "${change:0:2}" = "s#" ]] ; then
   mode="sed"
 elif [[ "${files: -5}" = ".json" ]] ; then
   mode="jq"
