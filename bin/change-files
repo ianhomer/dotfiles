@@ -49,12 +49,17 @@ for dir in $EXCLUDE_DIRECTORIES ; do
   [[ -z "$FIND_PRUNE" ]]                  \
     && FIND_PRUNE="-name $dir" \
     || FIND_PRUNE+=" -o -name $dir"
+  [[ -z "$EXCLUDE" ]]                  \
+    && EXCLUDE="$dir" \
+    || EXCLUDE+="|$dir"
 done
+
+# Find prune is a more efficient way for directories since it stops the find
+# scan
 FIND_PRUNE+=" -prune -false"
-echo $FIND_PRUNE
 
 # File name exclusion for deep scan
-EXCLUDE="node_modules/|dist/|package-lock.json"
+EXCLUDE+="|package-lock.json"
 
 deepChangeText() {
   echo "changing text : $1 : $2 : $3"
