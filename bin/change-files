@@ -26,15 +26,48 @@ printf "\e[37mchanging my files\e[0m\n"
 [ -z "$QUICK" ] || echo "Quick run"
 [ -z "$DRY" ] || echo "Dry run"
 
-root=$1
+directory=$1
 files=$2
 change=$3
 
-[ -z "$root" ] && echo "No root" && exit
+[ -z "$directory" ] && echo "No directory" && exit
 [ -z "$files" ] && echo "No files" && exit
 [ -z "$change" ] && echo "No change" && exit
 
-echo "changing : $root : $files : $change"
+EXCLUDE="node_modules|dist"
+
+deepChangeText() {
+  echo "changing text : $1 : $2 : $3"
+  find "$1" -name "*$2" -print | egrep -v $EXCLUDE | \
+    xargs sed -i '' $3
+}
+
+changeJson() {
+  change=$1
+  file=$2
+  echo "changing json : $file : $change"
+  TJQ=$(jq "$change" < $file)
+  [[ $? == 0 ]] && echo "${TJQ}" >| $file
+}
+export -f changeJson
+
+deepChangeJson() {
+  echo "changing json : $1 : $2 : $3"
+  find "$1" -name "*$2" -print | egrep -v $EXCLUDE | \
+    CHANGE="$3" xargs -t -n 1 -P 10 -I {} bash -c 'changeJson "$CHANGE" "$@"' _ {}
+}
+
+mode="sed"
+if [[ "${change:0:2}" = "s#" ]] ; then
+  mode="sed"
+elif [[ "$files" = ".json" ]] ; then
+  mode="jq"
+fi
+
+case "$mode" in
+  sed) deepChangeText "$directory" "$files" "$change" ;;
+  jq)  deepChangeJson "$directory" "$files" "$change" ;;
+esac
 
 
 
