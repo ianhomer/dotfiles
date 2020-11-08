@@ -20,6 +20,9 @@
 # shifted as needed.
 #
 
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+. ${SCRIPT_DIR}/functions/join-array.sh
+
 OPTIND=1
 export INDENT=2
 while getopts "di:qv" o; do case "$o" in
@@ -46,18 +49,11 @@ git -C "${directory}" rev-parse || exit
 
 
 EXCLUDE_DIRECTORIES="node_modules dist"
-for dir in $EXCLUDE_DIRECTORIES ; do
-  [[ -z "$FIND_PRUNE" ]]                  \
-    && FIND_PRUNE="-type d ( -name $dir" \
-    || FIND_PRUNE+=" -o -name $dir"
-  [[ -z "$EXCLUDE" ]]                  \
-    && EXCLUDE="$dir" \
-    || EXCLUDE+="|$dir"
-done
-
 # Find prune is a more efficient way for directories since it stops the find
 # scan
+FIND_PRUNE="-type d ( -name "$(join-array " -o -name " $EXCLUDE_DIRECTORIES)
 FIND_PRUNE+=" ) -prune -false"
+EXCLUDE=$(join-array "|" $EXCLUDE_DIRECTORIES)
 
 # File name exclusion for deep scan
 EXCLUDE+="|package-lock.json"
