@@ -67,19 +67,24 @@ EXCLUDE=$(join-array "|" $EXCLUDE_DIRECTORIES)
 EXCLUDE+="|package-lock.json"
 
 deepChangeText() {
-  needle=$(echo $3 | cut -d'#' -f 2)
-  printf "\e[33mchanging text for : %s : %s : %s : %s\e[0m\n" $1 "$2" $needle $3
+  change=$3
+  needle=$(echo $change | cut -d'#' -f 2)
+  printf "\e[33mchanging text for : %s : %s : %s : %s\e[0m\n" \
+    $1 "$2" $needle $change
   FIND_NAME="-type f ( -name *"$(join-array " -o -name *" $2)" )"
   # w => write changes to stdout
   find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} -print | egrep -v $EXCLUDE | \
-    xargs -t -n 1 -P 10 sed -i '' "$3 w /dev/stdout"
+    xargs -t -n 1 -P 10 sed -i '' "$change w /dev/stdout"
 }
 
 deepChangeDry() {
   needle=$(echo $3 | cut -d'#' -f 2)
-  printf "\e[33mdry run change for : %s : %s : %s : %s\e[0m\n" $1 "$2" $needle $3
+  printf "\e[33mdry run change for : %s : %s : %s : %s\e[0m\n" \
+    $1 "$2" "$needle" "$3"
   FIND_NAME="-type f ( -name *"$(join-array " -o -name *" $2)" )"
-  [[ -z "$needle" ]] && FIND_CMD="-print" || FIND_CMD="-exec grep -l $needle {} ;"
+  [[ -z "$needle" ]] && FIND_CMD="-print" || \
+    FIND_CMD="-exec grep -l ${needle/ /\\s} {} ;"
+  echo $FIND_CMD
   # w => write changes to stdout
   find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} ${FIND_CMD[@]} | egrep -v $EXCLUDE | \
     xargs -t -n 1 -P 10 sed -n "/$needle/ w /dev/stdout"
