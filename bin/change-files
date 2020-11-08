@@ -62,12 +62,8 @@ deepChangeText() {
   echo "changing text : $1 : $2 : $3"
   # Allow suffixes to be seperated by a comma
   IFS=", "
-  for suffix in $2 ; do
-    [[ -z "$FIND_NAME" ]]                  \
-      && FIND_NAME="-type f ( -name *$suffix" \
-      || FIND_NAME+=" -o -name *$suffix"
-  done
-  FIND_NAME+=" )"
+  FIND_NAME="-type f ( -name *"$(join-array " -o -name *" $2)" )"
+  echo $FIND_NAME
 
   # Disable glob expansion so that * goes through to find without being expanded
   # into file list by the shell
@@ -80,8 +76,11 @@ deepChangeText() {
 
 deepChangeDry() {
   echo "dry run for : $1 : $2 : $3"
-  #find "$1" -type d \( -name node_modules -o -name dist \) -prune -false -o -name "*$2" -print 
-  find "$1" ${FIND_PRUNE[@]} -o -name "*$2" -print
+  IFS=", "
+  set -o noglob
+  FIND_NAME="-type f ( -name *"$(join-array " -o -name *" $2)" )"
+  find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} -print
+  set +o noglob
 }
 
 changeJson() {
