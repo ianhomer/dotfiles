@@ -5,11 +5,11 @@
 #
 # e.g.
 #
-# Default with sed syntax
+# Default with sed syntax, e.g. change This to That in all markdown files
 #
-#    change-files . .md s#x#y#g
+#    change-files . .md s#This#That#g
 #
-# JSON updates with jq syntax
+# JSON updates with jq syntax, .e.g. set author to anon in all json files
 #
 #    change-files . .json '.author = "anon"'
 #
@@ -43,8 +43,9 @@ esac done
 shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
 
-[ -z "$QUICK" ] || echo "Quick run"
-[ -z "$DRY" ] || echo "Dry run"
+[ -z "$QUICK" ] || printf "\e[34mQuick run\e[0m\n"
+[ -z "$DRY" ] || printf "\e[34mDry run\e[0m\n"
+[ -z "$VERBOSE" ] || printf "\e[34mVerbose run\e[0m\n"
 
 directory=$1
 suffixes=$2
@@ -85,13 +86,18 @@ deepChangeText() {
   fi
   [[ -z "$needle" ]] && FIND_CMD="-print" || \
     FIND_CMD="-exec grep -l ${needle/ /\\s} {} ;"
-  echo $FIND_CMD
   if [[ -z "$DRY" ]] ; then
-    printf "\e[33mchanging text for : %s : %s : %s : %s\e[0m\n" \
+    printf "\e[33m\e[1mchanging \e[2mfiles in %s -> %s files change \e[36m%s \e[33mwith %s\e[0m\n" \
       $1 "$2" $needle $change
   else
-    printf "\e[33mdry run change : %s : %s : %s : %s\e[0m\n" \
+    printf "\e[33m\e[1mdry \e[2mrun in %s -> %s files change \e[36m%s \e[33mwith %s\e[0m\n" \
       $1 "$2" $needle $change
+    if [[ ! -z $VERBOSE ]] ; then
+      printf "\e[37mfind $1 ${FIND_PRUNE[@]} |    \\ 
+        -o ${FIND_NAME[@]} ${FIND_CMD[@]} | \\ 
+        egrep -v \"$EXCLUDE\" |                 \\
+        xargs -t -n 1 -P 10 sed -i \'\' \"$3 w /dev/stdout\"\e[0m\n"
+    fi
   fi
   # w => write changes to stdout
   find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} ${FIND_CMD[@]} | egrep -v $EXCLUDE | \
