@@ -76,11 +76,13 @@ deepChangeText() {
 }
 
 deepChangeDry() {
-  needle=$3
-  printf "\e[33mdry run for : %s : %s : %s\e[0m\n" $1 "$2" $3
+  needle=$(echo $3 | cut -d'#' -f 2)
+  printf "\e[33mdry run change for : %s : %s : %s : %s\e[0m\n" $1 "$2" $needle $3
   FIND_NAME="-type f ( -name *"$(join-array " -o -name *" $2)" )"
   [[ -z "$needle" ]] && FIND_CMD="-print" || FIND_CMD="-exec grep -l $needle {} ;"
-  find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} ${FIND_CMD[@]}
+  # w => write changes to stdout
+  find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} ${FIND_CMD[@]} | egrep -v $EXCLUDE | \
+    xargs -t -n 1 -P 10 sed -n "/$needle/ w /dev/stdout"
 }
 
 changeJson() {
