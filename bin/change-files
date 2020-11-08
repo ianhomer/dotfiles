@@ -72,8 +72,13 @@ deepChangeText() {
   printf "\e[33mchanging text for : %s : %s : %s : %s\e[0m\n" \
     $1 "$2" $needle $change
   FIND_NAME="-type f ( -name *"$(join-array " -o -name *" $2)" )"
-  [[ -z "$DRY" ]] && SED_ARGS=("-i" "") || SED_ARGS="-n"
-  [[ -z "$DRY" ]] || change="/$needle/" 
+  if [[ -z "$DRY" ]] ; then
+    SED_ARGS=("-i" '')
+    SED_ARGS[2]=''
+  else
+    SED_ARGS="-n"
+    change="/$needle/"
+  fi
   [[ -z "$needle" ]] && FIND_CMD="-print" || \
     FIND_CMD="-exec grep -l ${needle/ /\\s} {} ;"
   echo $FIND_CMD
