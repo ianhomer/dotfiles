@@ -68,23 +68,29 @@ if status --is-interactive
   #   fish_default_key_bindings
   # Time between escape key press and subsequent character
   set -g fish_escape_delay_ms 200
-end
-
-time-me "AFTER bindings"
-
-if status --is-login
+  
   #
   # Tweak colors for me - noise reduction, red/green color blind and
   # long-sighted.
   #
   # execute `set | grep fish_color` to see colors in use in shell
   #
-  set theme_color_scheme dark
-  # Command in white for clarity on dark background
-  set fish_color_command ffffff
-  # red-green color blind friendly, red on dark background not good for me
-  set fish_color_error 14b77b
+  if [ "$BG_MODE" = "light" ]
+    echo "Light Mode"
+    set fish_color_command 000000
+  else
+    echo "Dark Mode"
+    set theme_color_scheme dark
+    # Command in white for clarity on dark background
+    set fish_color_command ffffff
+    # red-green color blind friendly, red on dark background not good for me
+    set fish_color_error 14b77b
+  end
+end
 
+time-me "AFTER bindings"
+
+if status --is-login
   #
   # Set terminal for GPG to allow signining of git commits
   #

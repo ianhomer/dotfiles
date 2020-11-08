@@ -10,6 +10,9 @@ else
   alias which-dotme-aliases="echo '~/.config/fish/aliases.fish'"
 
   alias vi="nvim"
+  alias v="nvim"
+
+  alias d="docker"
 
   # git
   alias push "git push"

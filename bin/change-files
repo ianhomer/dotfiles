@@ -1,0 +1,147 @@
+#!/usr/bin/env bash
+
+#
+# Change files in a given directory.
+#
+# e.g.
+#
+# Default with sed syntax, e.g. change This to That in all markdown files
+#
+#    change-files . .md s#This#That#g
+#
+# JSON updates with jq syntax, .e.g. set author to anon in all json files
+#
+#    change-files . .json '.author = "anon"'
+#
+# Only works in a git directory. This gives a level of protection against
+# undesired changes.
+#
+# This is also a pattern library for auto changing files which can be lift and
+# shifted as needed.
+#
+
+set -e
+
+# Disable glob expansion so that * goes through to find without being expanded
+# into file list by the shell
+set -o noglob
+
+# Comma is thing separator in input variables, e.g. suffixes = .js,.jsx
+IFS=", "
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+. ${SCRIPT_DIR}/functions/join-array.sh
+
+OPTIND=1
+export INDENT=2
+while getopts "di:qv" o; do case "$o" in
+  i) export INDENT=$OPTARG ;;
+  q) QUICK=y ;;
+  d) DRY=y ;;
+  v) VERBOSE=y ;;
+esac done
+shift $((OPTIND-1))
+[ "${1:-}" = "--" ] && shift
+
+[ -z "$QUICK" ] || printf "\e[34mQuick run\e[0m\n"
+[ -z "$DRY" ] || printf "\e[34mDry run\e[0m\n"
+[ -z "$VERBOSE" ] || printf "\e[34mVerbose run\e[0m\n"
+
+directory=$1
+suffixes=$2
+change=$3
+
+[ -z "$directory" ] && echo "No root directory provided" && exit
+git -C "${directory}" rev-parse || exit
+[ -z "$suffixes" ] && echo "No file suffixes provided" && exit
+[ -z "$change" ] && DRY=y
+
+
+EXCLUDE_DIRECTORIES="node_modules dist"
+# Find prune is a more efficient way for directories since it stops the find
+# scan
+FIND_PRUNE="-type d ( -name "$(join-array " -o -name " $EXCLUDE_DIRECTORIES)
+FIND_PRUNE+=" ) -prune -false"
+EXCLUDE=$(join-array "|" $EXCLUDE_DIRECTORIES)
+
+# File name exclusion for deep scan
+EXCLUDE+="|package-lock.json"
+
+deepChangeText() {
+  change=$3
+  needle=$(echo $change | cut -d'#' -f 2)
+  FIND_NAME="-type f ( -name *"$(join-array " -o -name *" $2)" )"
+  if [[ -z $change ]] ; then
+    # Dry run, just list files
+    printf "\e[33mdry run : %s : %s\e[0m\n" $1 "$2"
+    find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} ${FIND_CMD[@]} | egrep -v $EXCLUDE
+    return
+  fi
+  if [[ -z "$DRY" ]] ; then
+    SED_ARGS=("-i" '')
+    SED_ARGS[2]=''
+  else
+    SED_ARGS="-n"
+    change="/$needle/"
+  fi
+  [[ -z "$needle" ]] && FIND_CMD="-print" || \
+    FIND_CMD="-exec grep -l ${needle/ /\\s} {} ;"
+  if [[ -z "$DRY" ]] ; then
+    printf "\e[33m\e[1mchanging \e[2mfiles in %s -> %s files change \e[36m%s \e[33mwith %s\e[0m\n" \
+      $1 "$2" $needle $change
+  else
+    printf "\e[33m\e[1mdry \e[2mrun in %s -> %s files change \e[36m%s \e[33mwith %s\e[0m\n" \
+      $1 "$2" $needle $change
+    if [[ ! -z $VERBOSE ]] ; then
+      echo "Command is roughly as follows, sorry, but it may be missing some quotes and backslashes".
+      printf "\e[37mfind $1 ${FIND_PRUNE[@]} |    \\ 
+        -o ${FIND_NAME[@]} ${FIND_CMD[@]} | \\ 
+        egrep -v \"$EXCLUDE\" |                 \\
+        xargs -t -n 1 -P 10 sed -i \'\' \"$3 w /dev/stdout\"\e[0m\n"
+    fi
+  fi
+  # w => write changes to stdout
+  find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} ${FIND_CMD[@]} | egrep -v $EXCLUDE | \
+    xargs -t -n 1 -P 10 sed ${SED_ARGS[@]} "$change w /dev/stdout"
+}
+
+changeJson() {
+  change=$1
+  file=$2
+  # Inline json change with jq
+  ORIGINAL=$(cat $file)
+  TJQ=$(jq --indent "$INDENT" --sort-keys "$change" < $file)
+  if [[ "${ORIGINAL}" == "${TJQ}" ]] ; then
+    echo "no change json : $file : $change"
+    return
+  fi
+  printf "\e[33mchanging json : %s : %s\e[0m\n", $file, $change
+  [[ $? == 0 ]] && echo "${TJQ}" >| $file
+}
+# Export function so that it is available to bash from deepChangeJson xargs
+export -f changeJson
+
+deepChangeJson() {
+  [[ -z "$VERBOSE" ]] || echo "changing json : $1 : $2 : $3"
+  # Export change so that it can be passed into xargs bash
+  # -P 10 => parallel 10
+  # -n 1 => only take one argument (i.e. the file name from the stream)
+  find "$1" -name "*$2" -print | egrep -v $EXCLUDE | \
+    CHANGE="$3" xargs -n 1 -P 10 -I {}               \
+    bash -c 'changeJson "$CHANGE" "$@"' _ {}
+}
+
+mode="dry"
+if [[ "${change:0:2}" = "s#" ]] ; then
+  mode="sed"
+elif [[ "${suffixes: -5}" = ".json" ]] ; then
+  mode="jq"
+else
+  DRY="y"
+fi
+
+case "$mode" in
+  dry) deepChangeText "$directory" "$suffixes" "$change" ;;
+  sed) deepChangeText "$directory" "$suffixes" "$change" ;;
+  jq)  deepChangeJson "$directory" "$suffixes" "$change" ;;
+esac

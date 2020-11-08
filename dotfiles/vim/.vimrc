@@ -23,12 +23,15 @@ if g:config_level > 0
   "
   " fzf - Fuzzy Finder
   Plug 'junegunn/fzf'
-  Plug 'git@github.com:ianhomer/fzf.vim.git', { 'branch' : 'fix/maps-comment' }
+  Plug 'junegunn/fzf.vim'
   source ~/.config/vim/fzf.vim
 
   " fugitive - Git integration
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
+  Plug 'rhysd/conflict-marker.vim'
+  autocmd ColorScheme * highlight Info gui=bold guifg=#504945 guibg=#83a598
+  let g:conflict_marker_highlight_group="Info"
 
   "
   " Style
@@ -176,6 +179,9 @@ if g:config_level > 3
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
   let g:mkdp_auto_close = 0
   let g:mkdp_page_title = '${name}'
+
+  " Vim testing
+  Plug 'junegunn/vader.vim'
 endif
 
 " CoC completion
@@ -268,6 +274,9 @@ if g:config_level > 0
     nnoremap <silent> <leader>k :call ToggleQuickFix()<CR>
     nnoremap <silent> <leader>K :call ToggleLocationList()<CR>
     nnoremap <silent> <leader>g :call ToggleFugitive()<CR>
+    nnoremap <silent> <leader>gd :Gvdiff!<CR>
+    nnoremap gdh :diffget //2<CR>
+    nnoremap gdl :diffget //3<CR>
     nnoremap <silent> <leader>b :call GitSynk(1)<CR>
     nnoremap <silent> <leader>e :call GitSynk(0)<CR>
 
@@ -592,6 +601,7 @@ if g:config_level > 0
     " Light scheme primarily used for writing content
     colorscheme one
     set bg=light
+    let $BG_MODE="light"
     let g:one_allow_italics = 1
     call one#highlight('Normal', '000000', 'ffffff', 'none')
     for i in [1,2,3,4,5,6]

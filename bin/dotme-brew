@@ -16,7 +16,7 @@ if ! is-executable brew ; then
     | ruby
 fi
 
-adminFormula="java11"
+adminFormula="adoptopenjdk8 adoptopenjdk11 java11"
 
 echo "... updating brew"
 
