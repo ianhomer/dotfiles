@@ -69,9 +69,13 @@ EXCLUDE+="|package-lock.json"
 deepChangeText() {
   change=$3
   needle=$(echo $change | cut -d'#' -f 2)
-  printf "\e[33mchanging text for : %s : %s : %s : %s\e[0m\n" \
-    $1 "$2" $needle $change
   FIND_NAME="-type f ( -name *"$(join-array " -o -name *" $2)" )"
+  if [[ -z $change ]] ; then
+    # Dry run, just list files
+    printf "\e[33mdry run : %s : %s\e[0m\n" $1 "$2"
+    find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} ${FIND_CMD[@]} | egrep -v $EXCLUDE
+    return
+  fi
   if [[ -z "$DRY" ]] ; then
     SED_ARGS=("-i" '')
     SED_ARGS[2]=''
@@ -82,21 +86,13 @@ deepChangeText() {
   [[ -z "$needle" ]] && FIND_CMD="-print" || \
     FIND_CMD="-exec grep -l ${needle/ /\\s} {} ;"
   echo $FIND_CMD
-  # w => write changes to stdout
-  find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} ${FIND_CMD[@]} | egrep -v $EXCLUDE | \
-    xargs -t -n 1 -P 10 sed ${SED_ARGS[@]} "$change w /dev/stdout"
-}
-
-deepChangeDry() {
-  needle=$(echo $3 | cut -d'#' -f 2)
-  printf "\e[33mdry run change for : %s : %s : %s : %s\e[0m\n" \
-    $1 "$2" "$needle" "$3"
-  FIND_NAME="-type f ( -name *"$(join-array " -o -name *" $2)" )"
-  [[ -z "$DRY" ]] && SED_ARGS="-i ''" || SED_ARGS="-n"
-  [[ -z "$DRY" ]] || change="/$needle/" 
-  [[ -z "$needle" ]] && FIND_CMD="-print" || \
-    FIND_CMD="-exec grep -l ${needle/ /\\s} {} ;"
-  echo $FIND_CMD
+  if [[ -z "$DRY" ]] ; then
+    printf "\e[33mchanging text for : %s : %s : %s : %s\e[0m\n" \
+      $1 "$2" $needle $change
+  else
+    printf "\e[33mdry run change : %s : %s : %s : %s\e[0m\n" \
+      $1 "$2" $needle $change
+  fi
   # w => write changes to stdout
   find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} ${FIND_CMD[@]} | egrep -v $EXCLUDE | \
     xargs -t -n 1 -P 10 sed ${SED_ARGS[@]} "$change w /dev/stdout"
@@ -138,7 +134,7 @@ else
 fi
 
 case "$mode" in
-  dry) deepChangeDry "$directory" "$suffixes" "$change" ;;
+  dry) deepChangeText "$directory" "$suffixes" "$change" ;;
   sed) deepChangeText "$directory" "$suffixes" "$change" ;;
   jq)  deepChangeJson "$directory" "$suffixes" "$change" ;;
 esac
