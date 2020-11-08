@@ -67,7 +67,8 @@ EXCLUDE=$(join-array "|" $EXCLUDE_DIRECTORIES)
 EXCLUDE+="|package-lock.json"
 
 deepChangeText() {
-  printf "\e[33mchanging text for : %s : %s : %s\e[0m\n" $1 "$2" $3
+  needle=$(echo $3 | cut -d'#' -f 2)
+  printf "\e[33mchanging text for : %s : %s : %s : %s\e[0m\n" $1 "$2" $needle $3
   FIND_NAME="-type f ( -name *"$(join-array " -o -name *" $2)" )"
   # w => write changes to stdout
   find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} -print | egrep -v $EXCLUDE | \
@@ -75,9 +76,11 @@ deepChangeText() {
 }
 
 deepChangeDry() {
-  printf "\e[33mdry run for : %s : %s\e[0m\n" $1 "$2"
+  needle=$3
+  printf "\e[33mdry run for : %s : %s : %s\e[0m\n" $1 "$2" $3
   FIND_NAME="-type f ( -name *"$(join-array " -o -name *" $2)" )"
-  find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} -print
+  [[ -z "$needle" ]] && FIND_CMD="-print" || FIND_CMD="-exec grep -l $needle {} ;"
+  find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} ${FIND_CMD[@]}
 }
 
 changeJson() {
@@ -107,7 +110,7 @@ deepChangeJson() {
 }
 
 mode="dry"
-if [[ "${change:0:1}" = "#" || "${change:0:2}" = "s#" ]] ; then
+if [[ "${change:0:2}" = "s#" ]] ; then
   mode="sed"
 elif [[ "${suffixes: -5}" = ".json" ]] ; then
   mode="jq"

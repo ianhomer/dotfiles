@@ -14,9 +14,9 @@ shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
 
 change-files . ".[jt]s,.[jt]sx"
-change-files . ".[jt]s,.[jt]sx" s#world#World#g
+change-files . ".[jt]s,.[jt]sx" "s#world#World#g"
 if [[ -z "$REVERSE" ]] ; then
-  change-files . .md s#This#That#g
+  change-files . .md "s#This#That#g"
 else
   change-files . .md "s#That#This#g"
 fi
