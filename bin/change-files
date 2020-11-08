@@ -82,12 +82,13 @@ deepChangeDry() {
   printf "\e[33mdry run change for : %s : %s : %s : %s\e[0m\n" \
     $1 "$2" "$needle" "$3"
   FIND_NAME="-type f ( -name *"$(join-array " -o -name *" $2)" )"
+  [[ -z "$DRY" ]] && SED_ARGS="-i ''" || SED_ARGS="-n"
+  [[ -z "$DRY" ]] || change="/$needle/" 
   [[ -z "$needle" ]] && FIND_CMD="-print" || \
     FIND_CMD="-exec grep -l ${needle/ /\\s} {} ;"
-  echo $FIND_CMD
   # w => write changes to stdout
   find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} ${FIND_CMD[@]} | egrep -v $EXCLUDE | \
-    xargs -t -n 1 -P 10 sed -n "/$needle/ w /dev/stdout"
+    xargs -t -n 1 -P 10 sed ${SED_ARGS[@]} "$change w /dev/stdout"
 }
 
 changeJson() {
@@ -121,6 +122,8 @@ if [[ "${change:0:2}" = "s#" ]] ; then
   mode="sed"
 elif [[ "${suffixes: -5}" = ".json" ]] ; then
   mode="jq"
+else
+  DRY="y"
 fi
 
 case "$mode" in
