@@ -93,6 +93,7 @@ deepChangeText() {
     printf "\e[33m\e[1mdry \e[2mrun in %s -> %s files change \e[36m%s \e[33mwith %s\e[0m\n" \
       $1 "$2" $needle $change
     if [[ ! -z $VERBOSE ]] ; then
+      echo "Command is roughly as follows, sorry, but it may be missing some quotes and backslashes".
       printf "\e[37mfind $1 ${FIND_PRUNE[@]} |    \\ 
         -o ${FIND_NAME[@]} ${FIND_CMD[@]} | \\ 
         egrep -v \"$EXCLUDE\" |                 \\
