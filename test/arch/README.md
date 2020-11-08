@@ -17,4 +17,3 @@ Copy public deploy key into deploy key for repository
     git clone git@github.com:ianhomer/dotfiles.git ~/.dotfiles
     cd ~/.dotfiles
     git checkout feature/jelly
-

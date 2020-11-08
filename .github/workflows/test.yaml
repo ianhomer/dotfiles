@@ -1,0 +1,36 @@
+name: test
+
+on: [push, workflow_dispatch]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        neovim: [false, true]
+        version: [stable]
+        include:
+          - neovim: true
+            version: nightly
+
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Checkout vader.vim
+        uses: actions/checkout@v2
+        with:
+          repository: junegunn/vader.vim
+          path: tmp/vim/plugins/vader.vim
+      - uses: rhysd/action-setup-vim@v1
+        id: vim
+        with:
+          neovim: ${{ matrix.neovim }}
+          version: ${{ matrix.version }}
+      - name: test
+        env:
+          VIM_COMMAND: ${{ steps.vim.outputs.executable }}
+        run: |
+          echo $VIM_COMMAND
+          make test

@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Testing of change-files script
+#
+# Reverse (some changes) with
+#
+#    ./change-files-test -r
+
+OPTIND=1
+while getopts "r" o; do case "$o" in
+  r) REVERSE=y ;;
+esac done
+shift $((OPTIND-1))
+[ "${1:-}" = "--" ] && shift
+
+change-files . ".[jt]s,.[jt]sx"
+change-files . ".[jt]s,.[jt]sx" "s#world#World#g"
+if [[ -z "$REVERSE" ]] ; then
+  change-files -d . .md "s#This#That#g"
+  change-files . .md "s#This#That#g"
+else
+  change-files -d . .md "s#That#This#g"
+  change-files . .md "s#That#This#g"
+fi
+change-files . package.json '.author = "anon"'
+change-files . scratch.json '.author = "anon"'
