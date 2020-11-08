@@ -13,8 +13,7 @@ esac done
 shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
 
-change-files . ".[jt]s"
-change-files . ".js"
+change-files . ".[jt]s,.[jt]sx"
 change-files . ".[jt]s,.[jt]sx" s#world#World#g
 if [[ -z "$REVERSE" ]] ; then
   change-files . .md s#This#That#g

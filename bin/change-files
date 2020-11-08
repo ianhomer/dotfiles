@@ -20,6 +20,15 @@
 # shifted as needed.
 #
 
+set -e
+
+# Disable glob expansion so that * goes through to find without being expanded
+# into file list by the shell
+set -o noglob
+
+# Comma is thing separator in input variables, e.g. suffixes = .js,.jsx
+IFS=", "
+
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 . ${SCRIPT_DIR}/functions/join-array.sh
 
@@ -34,17 +43,16 @@ esac done
 shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
 
-printf "\e[37mchanging files\e[0m\n"
 [ -z "$QUICK" ] || echo "Quick run"
 [ -z "$DRY" ] || echo "Dry run"
 
 directory=$1
-fileSuffixes=$2
+suffixes=$2
 change=$3
 
-[ -z "$directory" ] && echo "No directory" && exit
+[ -z "$directory" ] && echo "No root directory provided" && exit
 git -C "${directory}" rev-parse || exit
-[ -z "$fileSuffixes" ] && echo "No files" && exit
+[ -z "$suffixes" ] && echo "No file suffixes provided" && exit
 [ -z "$change" ] && DRY=y
 
 
@@ -59,28 +67,17 @@ EXCLUDE=$(join-array "|" $EXCLUDE_DIRECTORIES)
 EXCLUDE+="|package-lock.json"
 
 deepChangeText() {
-  echo "changing text : $1 : $2 : $3"
-  # Allow suffixes to be seperated by a comma
-  IFS=", "
+  printf "\e[33mchanging text for : %s : %s : %s\e[0m\n" $1 "$2" $3
   FIND_NAME="-type f ( -name *"$(join-array " -o -name *" $2)" )"
-  echo $FIND_NAME
-
-  # Disable glob expansion so that * goes through to find without being expanded
-  # into file list by the shell
-  set -o noglob
   # w => write changes to stdout
   find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} -print | egrep -v $EXCLUDE | \
     xargs -t -n 1 -P 10 sed -i '' "$3 w /dev/stdout"
-  set +o noglob
 }
 
 deepChangeDry() {
-  echo "dry run for : $1 : $2 : $3"
-  IFS=", "
-  set -o noglob
+  printf "\e[33mdry run for : %s : %s\e[0m\n" $1 "$2"
   FIND_NAME="-type f ( -name *"$(join-array " -o -name *" $2)" )"
   find "$1" ${FIND_PRUNE[@]} -o ${FIND_NAME[@]} -print
-  set +o noglob
 }
 
 changeJson() {
@@ -93,7 +90,7 @@ changeJson() {
     echo "no change json : $file : $change"
     return
   fi
-  echo "changing json : $file : $change"
+  printf "\e[33mchanging json : %s : %s\e[0m\n", $file, $change
   [[ $? == 0 ]] && echo "${TJQ}" >| $file
 }
 # Export function so that it is available to bash from deepChangeJson xargs
@@ -112,12 +109,12 @@ deepChangeJson() {
 mode="dry"
 if [[ "${change:0:1}" = "#" || "${change:0:2}" = "s#" ]] ; then
   mode="sed"
-elif [[ "${fileSuffixes: -5}" = ".json" ]] ; then
+elif [[ "${suffixes: -5}" = ".json" ]] ; then
   mode="jq"
 fi
 
 case "$mode" in
-  dry) deepChangeDry "$directory" "$fileSuffixes" "$change" ;;
-  sed) deepChangeText "$directory" "$fileSuffixes" "$change" ;;
-  jq)  deepChangeJson "$directory" "$fileSuffixes" "$change" ;;
+  dry) deepChangeDry "$directory" "$suffixes" "$change" ;;
+  sed) deepChangeText "$directory" "$suffixes" "$change" ;;
+  jq)  deepChangeJson "$directory" "$suffixes" "$change" ;;
 esac
