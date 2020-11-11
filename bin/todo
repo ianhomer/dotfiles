@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo 
+
+ag --nofilename --nocolor --nobreak '\- \[ \]' ~/projects/things/ | sort
+
+echo
