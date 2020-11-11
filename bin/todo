@@ -1,7 +1,31 @@
 #!/bin/bash
 
-echo 
+todo="$@"
 
-ag --nofilename --nocolor --nobreak '\- \[ \]' ~/projects/things/ | sort
+if [[ -z "$todo" ]] ; then
 
-echo
+  echo 
+  ag --nofilename --nocolor --nobreak '\- \[ \]' ~/projects/things/ | sort
+  echo
+
+else
+
+  todayLog=~/projects/things/my-notes/stream/`date +%m%d`.md
+  if [[ ! -f "$todayLog" ]] ; then
+    date=`date '+%a %d %b %Y' | tr [:lower:] [:upper:]`
+    printf "# %s\n\n\n" "${date}" >> $todayLog
+  fi
+  
+  if [[ `wc -l < $todayLog` -lt 3 ]] ; then
+    echo >> $todayLog
+    if [[ `wc -l < $todayLog` -lt 3 ]] ; then
+      echo >> $todayLog
+      if [[ `wc -l < $todayLog` -lt 3 ]] ; then
+        echo >> $todayLog
+      fi
+    fi
+  fi
+  gsed -i "3i- [ ] ${todo}" $todayLog
+fi
+
+
