@@ -35,7 +35,7 @@ function! s:ThingityDateHeading()
     execute "normal mbO\<ESC>`b"
   endif
 
-  normal `a
+  normal `ajo
 endfunction
 
 function! s:ThingityTime()

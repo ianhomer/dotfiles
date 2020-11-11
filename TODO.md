@@ -1,6 +1,5 @@
 # todo
 
-- [ ] space jd should move cursor into sensible place ready for typing
 - [ ] Harden git synk when both incoming and outgoing - merge / merge conflict
 - [ ] review whether I need omf anymore
 - [ ] q should save, e.g on fugitive commit
