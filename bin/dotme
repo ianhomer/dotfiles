@@ -235,7 +235,7 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 # Initialize our own variables:
 VERBOSE=0
 
-while getopts "h?vdf:" opt; do
+while getopts "?df:Fhv" opt; do
   case "$opt" in
   h|\?)
     command_help
@@ -244,6 +244,8 @@ while getopts "h?vdf:" opt; do
   d) DRY=1
     ;;
   f) FORCE=$OPTARG
+    ;;
+  F) FORCE_ALL=1
     ;;
   v) VERBOSE=1
     ;;
@@ -254,9 +256,16 @@ shift $((OPTIND-1))
 
 [ "${1:-}" = "--" ] && shift
 
+if [[ -n "$FORCE_ALL" ]] ; then
+  for f in ~/.dotfiles/bin/dotme-* ; do
+    should-run -c ${f##*/}
+  done
+elif [[ -n "$FORCE" ]] ; then
+  should-run -c "dotme-$FORCE"
+fi
+
 COMMAND=${1:-install}
 
-[[ -n "$FORCE" ]] && should-run -c "dotme-$FORCE"
 
 command_${COMMAND} $@
 if [ $? = 127 ]; then
