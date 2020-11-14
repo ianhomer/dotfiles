@@ -62,13 +62,14 @@ endfunction
 
 command! -nargs=* -bang Search call fzf#SearchWithRipGrep(<q-args>, <bang>0)
 
-nnoremap <silent> <leader>s :Ag<CR>
+nnoremap <silent> <leader>s :AgWithOutFileName!<CR>
+nnoremap <silent> <leader>S :Ag!<CR>
 nnoremap <silent> <leader>jk :Ag<CR>'
 nnoremap <silent> <leader>jK :Ag!<CR>'
 
 " Make Ag match on just content of file and not search on the 
 " not including file path name
-command! -bang -nargs=* Ag
+command! -bang -nargs=* AgWithOutFileName
   \ call fzf#vim#ag(<q-args>, 
   \  '--hidden -p ~/.dotfiles/config/ag/.ignore', {
   \   'options': '--delimiter : --nth 4..'
