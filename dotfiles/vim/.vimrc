@@ -245,7 +245,7 @@ source ~/.config/vim/modes.vim
 " My shortcuts
 if g:config_level > 0
   nnoremap <silent> <leader><space> :Buffers<CR>
-  nnoremap <silent> <leader>f :Files<CR>
+  nnoremap <silent> <leader>f :call SearchFiles()<CR>
   nnoremap <silent> <leader>F :Files!<CR>
 
   " save all files
@@ -317,6 +317,11 @@ if exists('*which_key#register')
 endif
 
 source ~/.config/vim/thingity.vim
+
+function! SearchFiles() 
+  call SwitchToFirstEditableFile()
+  Files
+endfunction
 
 function! GitSynk(onlyPush)
   call CloseFugitiveWindow()

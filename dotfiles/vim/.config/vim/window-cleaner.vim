@@ -43,7 +43,7 @@ function! CloseAllBuffersButCurrent()
   if current < last  | silent! execute (current+1).",".last."bd"  | endif
 endfunction
 
-function! s:SwitchToFirstEditableFile()
+function! SwitchToFirstEditableFile()
   let l:current = bufnr("%")
 
   if <SID>IsEditableFile(current)
@@ -98,7 +98,7 @@ endfunction
 
 function! CloseOtherBuffers()
   wall
-  let l:buffer = <SID>SwitchToFirstEditableFile()
+  let l:buffer = SwitchToFirstEditableFile()
   " Mark current cursor position
   normal mA:
   NERDTreeClose
