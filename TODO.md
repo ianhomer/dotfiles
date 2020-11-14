@@ -5,7 +5,6 @@
 - [ ] try vim-test
 - [ ] try vim-themis
 - [ ] Auto remote fix `git-remote-fix` when broken
-- [ ] If space f when focus on nerd tree then ensure file opened in main window
 
 ## backlog
 
