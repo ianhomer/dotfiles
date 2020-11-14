@@ -22,6 +22,9 @@ EOF
 }
 
 OPTIND=1
+# Time in seconds when not to re-fetch
+FETCH_WINDOW=600
+
 while getopts "ahu" o; do case "$o" in
   a) git config core.autocommit true ;;
   u) git config --unset core.autocommit ;;
@@ -95,7 +98,13 @@ function gitSynk() {
     fi
   fi
 
-  gitQuiet fetch
+  now=`date +%s`
+  lastModified=`stat -f '%c' .git/FETCH_HEAD`
+  if [[ $((lastModified + FETCH_WINDOW)) < $now ]] ; then
+    gitQuiet fetch
+  else
+    printf "∷ "
+  fi
 
   leftRight=$(git rev-list --count --left-right $remoteName/$branchName...HEAD)
   left=$(echo $leftRight | awk '{print $1}')

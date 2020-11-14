@@ -1,21 +1,4 @@
 #!/bin/bash
 
 cd ~/projects/things
-
-now=`date +%s`
-echo $now
-
-for d in */ ; do
-  cd $d
-  if [[ -f .git/FETCH_HEAD ]] ; then
-    lastModified=`stat -f '%c' .git/FETCH_HEAD`
-    date -r $lastModified '+%a %d %b %m:%S' | tr [:lower:] [:upper:]
-  else 
-    echo "Warning : no git head in $d"
-  fi
-  git synk
-  echo
-  cd ..
-done
-
-
+git synk
