@@ -91,6 +91,8 @@ if g:config_level > 3
   Plug 'christoomey/vim-tmux-navigator'
   " Improved path support
   Plug 'tpope/vim-apathy'
+  " UNIX-like shell commands
+  Plug 'tpope/vim-eunuch'
 
   Plug 'mhinz/vim-startify'
   let g:startify_custom_header = ""
