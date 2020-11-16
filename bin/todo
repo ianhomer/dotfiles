@@ -16,7 +16,9 @@ if [[ -z "$todo" ]] ; then
   else
     pattern="\- \[[ ]\]"
   fi
-  ag --nofilename --nocolor --nobreak "$pattern" ~/projects/things/ | sort
+  ag --nofilename --nocolor --nobreak "$pattern" ~/projects/things/ |
+    cut -c 3- | 
+    sort
   echo
 else
   # Create a todo
