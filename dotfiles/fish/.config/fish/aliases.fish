@@ -13,6 +13,7 @@ else
   alias v="nvim"
 
   alias d="docker"
+  alias do="todo"
 
   # git
   alias push "git push"
