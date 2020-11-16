@@ -1,15 +1,25 @@
 #!/bin/bash
 
+OPTIND=1
+while getopts "a" o; do case "$o" in
+  a) ALL=y ;;
+esac done
+shift $((OPTIND-1))
+
 todo="$@"
 
 if [[ -z "$todo" ]] ; then
-
-  echo 
-  ag --nofilename --nocolor --nobreak '\- \[ \]' ~/projects/things/ | sort
+  # List todos
   echo
-
+  if [[ -n "$ALL" ]] ; then
+    pattern="\- \[[^ox]\]"
+  else
+    pattern="\- \[[ ]\]"
+  fi
+  ag --nofilename --nocolor --nobreak "$pattern" ~/projects/things/ | sort
+  echo
 else
-
+  # Create a todo
   todayLog=~/projects/things/my-notes/stream/`date +%m%d`.md
   if [[ ! -f "$todayLog" ]] ; then
     date=`date '+%a %d %b %Y' | tr [:lower:] [:upper:]`
