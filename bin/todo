@@ -1,8 +1,18 @@
 #!/bin/bash
 
+help() {
+  cat << EOF
+- [ ] Todo
+- [.] Backlog
+- [-] Aligment
+- [^] Goal
+EOF
+}
+
 OPTIND=1
-while getopts "a" o; do case "$o" in
+while getopts "ah" o; do case "$o" in
   a) ALL=y ;;
+  h) help && exit 0 ;;
 esac done
 shift $((OPTIND-1))
 
