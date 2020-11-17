@@ -6,7 +6,12 @@
 
 should-run $0 || exit
 
-jenv doctor
+# Refresh / rehash jenv vonfiguration
+
+jenv rehash 2>/dev/null
+jenv refresh-plugins
+
+set -e JAVA
 for jdk in /Library/Java/JavaVirtualMachines/*/Contents/Home ; do
   echo "JDK installed : $jdk"
   $jdk/bin/java -version
