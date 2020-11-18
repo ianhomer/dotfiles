@@ -4,9 +4,12 @@
 # Report on work in local git repositories that need pushing to remote
 #
 
-while getopts "n:r" o; do case "$o" in
+FETCH_WINDOW=600
+
+while getopts "n:rw:" o; do case "$o" in
   n) MAX=$OPTARG ;;
   r) REMOTE=y ;;
+  w) FETCH_WINDOW=$OPTARG ;;
 esac done
 
 NL=$'\n'
@@ -41,11 +44,17 @@ for d in `git-get-directories` ; do
     printf '\033[0;35m'
     git rev-parse --show-toplevel
     if [[ `git remote | wc -l` -eq 0 ]] ; then
-      echo "no remote"
+      printf "\e[0;37mno remote\n"
     else
-      printf '\033[0;33m'
-      git remote update
-      git pull
+      now=`date +%s`
+      lastModified=`stat -f '%c' .git/FETCH_HEAD`
+      if [[ $((lastModified + FETCH_WINDOW)) < $now ]] ; then
+        printf '\033[0;33m'
+        git remote update
+        git pull
+      else
+        printf "\e[0;37m∷ Fetched %ss ago\n" $((now - lastModified))
+      fi
     fi
   )
   (cd $d ; showDirectoryStatus)
