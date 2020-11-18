@@ -7,4 +7,8 @@
 _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 . ${_DIR}/functions/log.sh
 
-logInfo logInfo OK
+_ message
+o_o message
+_ info with multiple words
+_ status OK status
+_ error with $(bold message)

@@ -66,7 +66,7 @@ function setMyGitUrl {
     fi
   else
     [[ "${verbose}" == "y" ]] && echo "current remote   $currentRemoteUrl"
-    logInfo remote AOK
+    o_o remote AOK
   fi
 }
 
@@ -85,10 +85,10 @@ function fixMain() {
         echo "No master or main in remote"
       fi
     else
-      logInfo master NOK
+      _status master NOK
     fi
   elif [[ "$branch" == "main" ]] ; then
-    logInfo $branch AOK
+    _status $branch AOK
   fi
 }
 
