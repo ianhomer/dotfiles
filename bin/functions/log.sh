@@ -9,6 +9,8 @@ function o_o() {
     error) shift && _error ${@} ;;
     skip) shift && _skip ${@} ;;
     status) shift && _status ${@} ;;
+    OK) shift && _status OK ${@} ;;
+    NOK) shift && _status NOK ${@} ;;
     *) _info ${@}
   esac
 }

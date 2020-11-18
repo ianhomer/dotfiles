@@ -9,6 +9,7 @@ _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 _ message
 o_o message
-_ info with multiple words
-_ status OK status
+_ "info with multiple words"
+_ OK status
 _ error with $(bold message)
+_ skip this that
