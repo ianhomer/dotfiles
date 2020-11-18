@@ -48,3 +48,44 @@ function _skip() {
 function bold() {
   printf "\e[1m$*\e[0m"
 }
+
+function dim() {
+  printf "\e[2m$*\e[0m"
+}
+
+function invert() {
+  printf "\e[7m$*\e[0m"
+}
+
+function _palette() {
+  printf "\e[39m%10s\e[0m" default
+  printf "\e[30m%10s\e[0m" black
+  printf "\e[90m%10s\e[0m" "d grey"
+  printf "\e[37m%10s\e[0m" "l grey"
+  printf "\e[97m%10s\e[0m\n" "white"
+  printf "\e[31m%10s\e[0m" red
+  printf "\e[91m%10s\e[0m" "l red"
+  printf "\e[32m%10s\e[0m" green
+  printf "\e[92m%10s\e[0m\n" "l green"
+  printf "\e[33m%10s\e[0m" yellow
+  printf "\e[93m%10s\e[0m" "l yellow"
+  printf "\e[34m%10s\e[0m" blue
+  printf "\e[94m%10s\e[0m\n" "l blue"
+  printf "\e[35m%10s\e[0m" magneta
+  printf "\e[95m%10s\e[0m" "l magneta"
+  printf "\e[36m%10s\e[0m" cyan
+  printf "\e[96m%10s\e[0m\n" "l cyan"
+  invert invert
+  dim dim
+  printf "\e[37m"
+  dim dim light grey
+  printf "\e[0m\n"
+  printf "\e[38;5;238m%10s\e[0m\n" "very light grey"
+  printf "\e[48;5;238m%10s\e[0m\n" "very light grey"
+  for i in {1..7} ; do for j in {1..31} ; do 
+    printf "\e[38;5;$(( i*32 + j))m─\e[0m" ;
+  done ; printf "\n" ; done ; echo
+  for i in {0..7} ; do for j in {0..31} ; do
+    printf "\e[48;5;$(( i*32 + j))m \e[0m" ;
+  done ; printf "\n" ; done ; echo
+}
