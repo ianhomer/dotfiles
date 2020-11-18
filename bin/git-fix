@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #
 # Set up repository for a specific user context. This covers alternative
@@ -6,6 +6,9 @@
 # resets SSH keys ... any things I tend do to get a repository hooked up
 # right.
 #
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+. ${SCRIPT_DIR}/functions/log.sh
 
 #
 # If "personal" host is set up in .ssh config them that's the
@@ -63,13 +66,13 @@ function setMyGitUrl {
     fi
   else
     [[ "${verbose}" == "y" ]] && echo "current remote   $currentRemoteUrl"
-    printf "\e[36mremote \e[1mAOK\e[0m\n"
+    logInfo remote AOK
   fi
 }
 
 function fixMain() {
-  branchName=$(git rev-parse --abbrev-ref HEAD)
-  if [[ "$branchName" == "master" ]] ; then
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  if [[ "$branch" == "master" ]] ; then
     git fetch --prune
     if ! git show-ref --quiet --verify -- "refs/remotes/origin/master" ; then
       if git show-ref --quiet --verify -- "refs/remotes/origin/main" ; then
@@ -82,10 +85,10 @@ function fixMain() {
         echo "No master or main in remote"
       fi
     else
-      printf "\e[36mmaster \e[1mNOK\e[0m\n"
+      logInfo master NOK
     fi
-  else
-    printf "\e[36m%s   \e[1mAOK\e[0m\n" "$branchName"
+  elif [[ "$branch" == "main" ]] ; then
+    logInfo $branch AOK
   fi
 }
 
