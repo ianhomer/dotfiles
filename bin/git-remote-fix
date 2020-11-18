@@ -55,11 +55,11 @@ function setMyGitUrl {
   if [ ${currentRemoteUrl} != ${myRemoteUrl} ] ; then
     echo "current remote   $currentRemoteUrl"
     echo "desired remote   ${myRemoteUrl}"
-    if [[ ${action} == "change" ]] ; then
+    if [[ ${action} == "context" ]] ; then
       git remote set-url origin $myRemoteUrl
       echo "changed remote to "$(git config --get remote.origin.url)
     else
-      echo "change remote with \"change\" action"
+      echo "change remote with \"context\" action"
     fi
   else
     [[ "${verbose}" == "y" ]] && echo "current remote   $currentRemoteUrl"
@@ -67,12 +67,35 @@ function setMyGitUrl {
   fi
 }
 
+function fixMain() {
+  branchName=$(git rev-parse --abbrev-ref HEAD)
+  if [[ "$branchName" == "master" ]] ; then
+    git fetch --prune
+    if ! git show-ref --quiet --verify -- "refs/remotes/origin/master" ; then
+      if git show-ref --quiet --verify -- "refs/remotes/origin/main" ; then
+        if [[ "${action}" == "main" ]] ; then
+          git checkout main
+        else
+          echo "No master in remote - use \"main\" action to fix"
+        fi
+      else
+        echo "No master or main in remote"
+      fi
+    else
+      printf "\e[36mmaster \e[1mNOK\e[0m\n"
+    fi
+  else
+    printf "\e[36m%s   \e[1mAOK\e[0m\n" "$branchName"
+  fi
+}
+
 setMyGitUrl
+fixMain
 
 # Clear authentication agent
 
 [[ -n "${verbose}" ]] && echo "deleting identites from SSH agent"
 ssh-add -q -D
-
 [[ -n "${verbose}" ]] && ssh-add -l
 
+exit 0
