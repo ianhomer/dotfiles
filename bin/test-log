@@ -8,7 +8,8 @@ _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 . ${_DIR}/functions/log.sh
 
 _ message
-o_o message
+o_o "a log message"
+o_o another log message
 _ "info with multiple words"
 _ OK status
 _ error with $(bold message)
