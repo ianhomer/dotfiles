@@ -7,8 +7,8 @@
 # right.
 #
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-. ${SCRIPT_DIR}/functions/log.sh
+_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+. ${_DIR}/functions/log.sh
 
 #
 # If "personal" host is set up in .ssh config them that's the
@@ -79,7 +79,7 @@ function fixMain() {
         if [[ "${action}" == "main" ]] ; then
           git checkout main
         else
-          echo "No master in remote - use \"main\" action to fix"
+          echo "Repository uses main not master - use \"main\" action to fix"
         fi
       else
         echo "No master or main in remote"
