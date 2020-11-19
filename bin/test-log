@@ -14,5 +14,10 @@ _ "info with multiple words"
 _ OK status
 _ error with $(bold message)
 _ skip this that
+o_o box this that
+o_o box "a long message, a long message, a long message" that
+o_box this "a long message, a long message, a long message"
+trim 15 "a long message, a long message"
+trim 15 "short"
 
-o_palette
+# o_palette

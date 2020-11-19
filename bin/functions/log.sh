@@ -6,6 +6,7 @@
 function o_o() {
   mode=$1
   case $mode in
+    box) shift && o_box ${@} ;;
     error) shift && o_error ${@} ;;
     skip) shift && o_action skip ${@} ;;
     status) shift && o_status ${@} ;;
@@ -22,6 +23,20 @@ function o_o() {
 
 function _() {
   o_o $@
+}
+
+function trim() {
+  width=$1
+  (( ${#2} > $width )) && printf "${2:0:$((width-3))}..." || printf $2
+}
+
+function o_box() {
+  cols=`tput cols`
+  left=$((cols / 2))
+  right=$((cols - left))
+  one=`trim $left "$1"`
+  two=`trim $right "$2"`
+  printf "\e[0;35m%-${left}s\e[36m%${right}s\e[0m\n" "$one" "$two"
 }
 
 #
