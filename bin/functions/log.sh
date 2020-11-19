@@ -10,6 +10,7 @@ function o_o() {
     skip) shift && _skip ${@} ;;
     status) shift && _status ${@} ;;
     OK) shift && _status OK ${@} ;;
+    AOK) shift && _status AOK ${@} ;;
     NOK) shift && _status NOK ${@} ;;
     *) _info ${@}
   esac
@@ -24,7 +25,9 @@ function _() {
 }
 
 function _status() {
-  printf "\e[36m%-10s \e[1m%s\e[0m\n" "$2" "$1"
+  status=$1
+  [[ "$status" == "NOK" ]] && color="33" || color="36"
+  printf "\e[36m%-10s \e[${color}m \e[1m%-5s\e[38;5;238m%s\e[0m\n" "$2" "$1" "$3"
 }
 
 function _info() {
