@@ -6,13 +6,13 @@
 function o_o() {
   mode=$1
   case $mode in
-    error) shift && _error ${@} ;;
-    skip) shift && _skip ${@} ;;
-    status) shift && _status ${@} ;;
-    OK) shift && _status OK ${@} ;;
-    AOK) shift && _status AOK ${@} ;;
-    NOK) shift && _status NOK ${@} ;;
-    *) _info ${@}
+    error) shift && o_error ${@} ;;
+    skip) shift && o_action skip ${@} ;;
+    status) shift && o_status ${@} ;;
+    OK) shift && o_status OK ${@} ;;
+    AOK) shift && o_status AOK ${@} ;;
+    NOK) shift && o_status NOK ${@} ;;
+    *) o_info ${@}
   esac
 }
 
@@ -25,9 +25,9 @@ function _() {
 }
 
 #
-# Output status of a thing
+# Report the status of a thing
 #
-function _status() {
+function o_status() {
   status=$1
   thing=$2
   message=$3
@@ -36,22 +36,28 @@ function _status() {
     "$status" "$message"
 }
 
-function _info() {
+function o_info() {
   printf "\e[36m$*\e[0m\n"
 }
 
-function _error() {
+function o_error() {
   printf "\e[33m$*\e[0m\n"
 }
 
 # Error and exit
-function _x() {
+function o_x() {
   _error $@
   exit 1
 }
 
-function _skip() {
-  printf "\e[37mskip \e[1m%-15s\e[0;37m %s\e[0m\n" "$1" "${*:2}"
+#
+# Report that an action has taken place on a thing
+#
+function o_action() {
+  action=$1
+  thing=$2
+  message=${*:3}
+  printf "\e[37m${action} \e[1m%-15s\e[0;37m %s\e[0m\n" "$thing" "$message"
 }
 
 function bold() {
@@ -66,7 +72,7 @@ function invert() {
   printf "\e[7m$*\e[0m"
 }
 
-function _palette() {
+function o_palette() {
   printf "\e[39m%10s\e[0m" default
   printf "\e[30m%10s\e[0m" black
   printf "\e[90m%10s\e[0m" "d grey"
