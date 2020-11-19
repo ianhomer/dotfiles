@@ -92,13 +92,13 @@ function fixMain() {
   fi
 }
 
+[[ -n "${verbose}" ]] && echo "deleting identites from SSH agent"
+ssh-add -q -D
+[[ -n "${verbose}" ]] && ssh-add -l
+
 setMyGitUrl
 fixMain
 
 # Clear authentication agent
-
-[[ -n "${verbose}" ]] && echo "deleting identites from SSH agent"
-ssh-add -q -D
-[[ -n "${verbose}" ]] && ssh-add -l
 
 exit 0
