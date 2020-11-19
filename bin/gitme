@@ -44,10 +44,12 @@ function showDirectoryStatus {
 for d in `git-get-directories` ; do
   [[ "$REMOTE" == "y" ]] && (
     cd $d
-    printf '\033[0;35m'
-    git rev-parse --show-toplevel
+    root=`git rev-parse --show-toplevel`
+    root=${root/$HOME/\~}
+    root=${root/\/projects\//\/ℙ\/}
+    printf '\033[0;35m%s ' $root
     if [[ `git remote | wc -l` -eq 0 ]] ; then
-      printf "\e[0;37mno remote\n"
+      o_o "no remote"
     else
       now=`date +%s`
       lastModified=`stat -f '%c' .git/FETCH_HEAD`
@@ -56,7 +58,7 @@ for d in `git-get-directories` ; do
         git remote update
         git pull
       else
-        o_o "∷ Fetched $((now - lastModified))s ago"
+        o_o "∷ fetched $((now - lastModified))s ago"
       fi
     fi
   )
