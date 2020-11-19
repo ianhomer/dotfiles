@@ -24,10 +24,16 @@ function _() {
   o_o $@
 }
 
+#
+# Output status of a thing
+#
 function _status() {
   status=$1
+  thing=$2
+  message=$3
   [[ "$status" == "NOK" ]] && color="33" || color="36"
-  printf "\e[36m%-10s \e[${color}m \e[1m%-5s\e[38;5;238m%s\e[0m\n" "$2" "$1" "$3"
+  printf "\e[36m%-10s \e[${color}m \e[1m%-5s\e[38;5;238m%s\e[0m\n" "$thing" \
+    "$status" "$message"
 }
 
 function _info() {
