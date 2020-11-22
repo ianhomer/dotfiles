@@ -6,19 +6,23 @@
 
 should-run $0 || exit
 
+_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+. ${_DIR}/functions/log.sh
+
 # Refresh / rehash jenv vonfiguration
 
 jenv rehash 2>/dev/null
 jenv refresh-plugins
 
 set -e JAVA
+o_o "JDKs installed"
 for jdk in /Library/Java/JavaVirtualMachines/*/Contents/Home ; do
-  echo "JDK installed : $jdk"
-  $jdk/bin/java -version
-  jenv add $jdk | grep -v "skip"
+  o_o "$jdk"
+  JAVA_VERSION=$($jdk/bin/java -version 2>&1 | sed -n ';s/.* version "\([^"]*\)".*/\1/p;')
+  jenv add $jdk | grep -v "skip" || o_o OK "$JAVA_VERSION" "already added to jenv"
 done
 
-echo "JDKs registered with jenv"
+o_o "JDKs registered with jenv"
 jenv versions
 
 should-run -fu $0

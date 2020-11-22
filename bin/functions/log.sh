@@ -10,7 +10,7 @@ function o_o() {
     error) shift && o_error ${@} ;;
     skip) shift && o_action skip ${@} ;;
     status) shift && o_status ${@} ;;
-    OK) shift && o_status OK ${@} ;;
+    OK) shift && o_status OK "${@}" ;;
     AOK) shift && o_status AOK ${@} ;;
     NOK) shift && o_status NOK ${@} ;;
     *) o_info ${@}
