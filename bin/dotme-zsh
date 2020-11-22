@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+#
+# Configure zsh
+#
+
+should-run -m 7 dotme-zsh || exit
+
+_DIR="$(cd "$(dirname "${ZSH_ARGZERO}")" >/dev/null 2>&1 && pwd)"
+. ${_DIR}/functions/log.sh
+
+o_o "Configuring zsh shell"
+
+if [[ ! -d ~/.oh-my-zsh ]] ; then
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
+should-run -fu dotme-zsh

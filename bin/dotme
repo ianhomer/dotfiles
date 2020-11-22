@@ -124,6 +124,7 @@ command_inner() {
   [ $DRY -eq 0 ] && is-pc && dotme-jenv
   [ $DRY -eq 0 ] && dotme-fish
   [ $DRY -eq 0 ] && dotme-fisher
+  [ $DRY -eq 0 ] && is-pc && dotme-zsh
   [ $DRY -eq 0 ] && dotme-gitme
   [ $DRY -eq 0 ] && is-pc && dotme-nnn
   command_clean
