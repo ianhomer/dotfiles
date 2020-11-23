@@ -11,6 +11,11 @@ else
 
   alias vi="nvim"
   alias v="nvim"
+  # search for file in directory and open in vi
+  alias o="fd | fzf | xargs nvim -c ':cd %:h'"
+  alias oh="fd -H | fzf | xargs nvim -c ':cd %:h'"
+  alias oi="fd -I | fzf | xargs nvim -c ':cd %:h'"
+  alias ohi="fd -HI | fzf | xargs nvim -c ':cd %:h'"
 
   alias d="docker"
   alias do="todo"
