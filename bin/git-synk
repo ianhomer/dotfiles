@@ -25,11 +25,15 @@ OPTIND=1
 # Time in seconds when not to re-fetch
 FETCH_WINDOW=600
 
-while getopts "ahu" o; do case "$o" in
+while getopts "ahuw:" o; do case "$o" in
   a) git config core.autocommit true ;;
   u) git config --unset core.autocommit ;;
+  w) FETCH_WINDOW=$OPTARG ;;
   h) help && exit 1 ;;
 esac done
+
+_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+. ${_DIR}/functions/log.sh
 
 #
 # Execute git quietly ... keybase output messages in stderr
@@ -59,7 +63,14 @@ function gitQuiet() {
       | grep -v 'Syncing with Keybase' \
       || :
   else
-    git $1 --quiet
+    if ! git $1 --quiet ; then
+      # Sometimes git fetch will fail if we have the 
+      # wrong SSH key cached, just clearing the 
+      # ssh cache seems to fix it.
+      printf "!"
+      ssh-add -q -D
+      git $1 --quiet
+    fi
   fi
 }
 
@@ -101,7 +112,9 @@ function gitSynk() {
   now=`date +%s`
   lastModified=`stat -f '%c' .git/FETCH_HEAD`
   if [[ $((lastModified + FETCH_WINDOW)) < $now ]] ; then
+    printf "."
     gitQuiet fetch
+    printf "."
   else
     printf "∷ "
   fi
