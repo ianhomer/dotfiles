@@ -3,16 +3,20 @@
 help() {
   cat << EOF
 - [ ] Todo
-- [.] Backlog
-- [-] Aligment
-- [^] Goal
+- [ ] . Backlog
+- [ ] - Aligment
+- [ ] ^ Goal
+- [ ] ^ ABC Goal for ABC context
 EOF
 }
 
 OPTIND=1
-while getopts "ah" o; do case "$o" in
+while getopts "ac:hox" o; do case "$o" in
   a) ALL=y ;;
+  c) CONTEXT=" $OPTARG" ;;
   h) help && exit 0 ;;
+  o) CANCELLED=y ;;
+  x) DONE=y ;;
 esac done
 shift $((OPTIND-1))
 
@@ -22,9 +26,13 @@ if [[ -z "$todo" ]] ; then
   # List todos
   echo
   if [[ -n "$ALL" ]] ; then
-    pattern="\- \[[^ox]\]"
+    pattern="\- \[[^ox]\]( [\.~\^])?$CONTEXT"
+  elif [[ -n "$CANCELLED" ]] ; then
+    pattern="\- \[o\]$CONTEXT"
+  elif [[ -n "$DONE" ]] ; then
+    pattern="\- \[x\]$CONTEXT"
   else
-    pattern="\- \[[ ]\]"
+    pattern="\- \[ \]( [^\.~\^])?$CONTEXT"
   fi
   ag --nofilename --nocolor --nobreak "$pattern" ~/projects/things/ |
     cut -c 3- | 
