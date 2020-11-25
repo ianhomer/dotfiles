@@ -4,7 +4,6 @@
 - [ ] review whether I need omf anymore
 - [ ] try vim-test
 - [ ] try vim-themis
-- [ ] Auto remote fix `git-remote-fix` when broken
 - [ ] Handle other do variations ; backlog ; alignment ; wish
 
 ## backlog
