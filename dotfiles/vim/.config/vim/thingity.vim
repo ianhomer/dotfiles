@@ -188,5 +188,5 @@ nnoremap <silent> <leader>js :Search<CR>
 
 " todos
 nnoremap <silent> <leader>jT :Ag! \[\ \]<CR>
-" todos
-nnoremap <silent> <leader>jt :AgPopup \[\ \]<CR>
+" todos (aligned with task filtering in bin/todo)
+nnoremap <silent> <leader>jt :AgPopup \[\ \](?! [\.-~\^])<CR>

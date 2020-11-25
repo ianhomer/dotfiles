@@ -3,17 +3,22 @@
 help() {
   cat << EOF
 - [ ] Todo
+- [x] Done
 - [ ] . Backlog
-- [ ] - Aligment
+- [ ] - Near aligment
+- [ ] ~ Far alignment
 - [ ] ^ Goal
 - [ ] ^ ABC Goal for ABC context
+- [ ] ! Cancelled
 EOF
 }
 
 OPTIND=1
-while getopts "ac:hox" o; do case "$o" in
+while getopts "abc:hgox" o; do case "$o" in
   a) ALL=y ;;
+  b) BACKLOG=y ;;
   c) CONTEXT=" $OPTARG" ;;
+  g) GOAL=y ;;
   h) help && exit 0 ;;
   o) CANCELLED=y ;;
   x) DONE=y ;;
@@ -22,17 +27,27 @@ shift $((OPTIND-1))
 
 todo="$@"
 
+# If todo is just three characters then it's a context to list
+if [[ ${#todo} == 3 ]] ; then
+  CONTEXT=" $todo"
+  todo=""
+fi
+
 if [[ -z "$todo" ]] ; then
   # List todos
   echo
   if [[ -n "$ALL" ]] ; then
-    pattern="\- \[[^ox]\]( [\.~\^])?$CONTEXT"
+    pattern="\- \[[^ox]\]( [\.-~\^])?$CONTEXT"
   elif [[ -n "$CANCELLED" ]] ; then
-    pattern="\- \[o\]$CONTEXT"
+    pattern="\- \[x\] !$CONTEXT"
   elif [[ -n "$DONE" ]] ; then
     pattern="\- \[x\]$CONTEXT"
+  elif [[ -n "$BACKLOG" ]] ; then
+    pattern="\- \[ \]( \.)$CONTEXT"
+  elif [[ -n "$GOAL" ]] ; then
+    pattern="\- \[ \]( [-~\^])$CONTEXT"
   else
-    pattern="\- \[ \]( [^\.~\^])?$CONTEXT"
+    pattern="\- \[ \](?! [\.~\^])$CONTEXT"
   fi
   ag --nofilename --nocolor --nobreak "$pattern" ~/projects/things/ |
     cut -c 3- | 
