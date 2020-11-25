@@ -580,8 +580,14 @@ endif
 if g:config_level > 3
   " Less accurate highlighting, but improved performance
   let g:airline_highlighting_cache = 1
-  " Enable tab line
-  let g:airline#extensions#tabline#enabled = 1
+  " Explicit airline extensions for quicker start up
+  let g:airline_extensions = [
+         \ "ale",
+         \ "branch",
+         \ "tabline",
+         \ "whitespace",
+         \ "wordcount"
+         \ ]
   " Enable powerfonts giving angled tab
   let g:airline_powerline_fonts = 1
   let g:airline_skip_empty_sections = 1
