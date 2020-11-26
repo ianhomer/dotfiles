@@ -340,7 +340,9 @@ function! CloseMe()
   elseif &filetype == "nerdtree" && winnr('$') > 1
     NERDTreeClose
   else
-    execute ":Startify"
+    if exists('*Startify')
+      execute ":Startify"
+    endif
     call CloseAllBuffersButCurrent()
   endif
 endfunction
