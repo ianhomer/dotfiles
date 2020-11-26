@@ -69,7 +69,7 @@ endfunction
 
 if g:config_level > 3
 
-  if g:config_level > 5
+  if IsEnabled("nnn")
     "
     " Window and file management
     "
@@ -94,9 +94,9 @@ if g:config_level > 3
   " tmux - enable C-hjkl to move to across vim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
   " Improved path support
-  Plug 'tpope/vim-apathy'
+  if IsEnabled("apathy") | Plug 'tpope/vim-apathy' | endif
   " UNIX-like shell commands
-  Plug 'tpope/vim-eunuch'
+  if IsEnabled("eunuch") | Plug 'tpope/vim-eunuch' | endif
 
   if IsEnabled("startify")
     Plug 'mhinz/vim-startify'
@@ -130,19 +130,15 @@ if g:config_level > 3
   "
 
   " tabular - Lining up columns
-  if IsEnabled("tabular")
-    Plug 'godlygeek/tabular'
-  endif
+  if IsEnabled("tabular") | Plug 'godlygeek/tabular' | endif
   " symlink - Follow symlink when opening file
   Plug 'aymericbeaumet/vim-symlink'
   " surround - Surround with brackets etc
-  Plug 'tpope/vim-surround'
+  if IsEnabled("surround") | Plug 'tpope/vim-surround' | endif
   " repeat - Repeat with mapped commands with . not just the native command
   Plug 'tpope/vim-repeat'
-  if IsEnabled("endwise")
-    " endwise - auto close structure
-    Plug 'tpope/vim-endwise'
-  endif
+  " endwise - auto close structure
+  if IsEnabled("endwise") | Plug 'tpope/vim-endwise' | endif
   " Aysynchronous
   Plug 'tpope/vim-dispatch'
   let g:dispatch_no_tmux_make = 1
@@ -156,7 +152,7 @@ if g:config_level > 3
     source ~/.config/vim/syntastic.vim
   endif
 
-  if g:config_level > 4 && IsEnabled("ale")
+  if IsEnabled("ale")
     Plug 'dense-analysis/ale'
     source ~/.config/vim/ale.vim
   endif

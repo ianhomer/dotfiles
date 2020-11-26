@@ -24,7 +24,6 @@ let g:config_level = exists('$VIM_CONFIG_LEVEL' ) ?
 
 " Default values for the feature toggles
 let g:default_toggles = {
-  \   "ale":1,
   \   "airline":1,
   \   "coco":0,
   \   "compactcmd":0,
@@ -41,12 +40,17 @@ let g:default_toggles = {
 
 " Config levels at which features are enabled
 let g:level_features = {
+  \   "ale":5,
+  \   "apathy":5,
   \   "autosave":4,
   \   "endwise":5,
+  \   "eunuch":5,
   \   "conflict-marker":7,
   \   "gitgutter":5,
   \   "nerdtree":5,
+  \   "nnn":6,
   \   "startify":5,
+  \   "surround":5,
   \   "tabular":5
   \ }
 
