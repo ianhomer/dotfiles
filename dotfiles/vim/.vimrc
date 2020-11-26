@@ -67,19 +67,21 @@ endfunction
 
 if g:config_level > 3
 
-  "
-  " Window and file management
-  "
-  Plug 'mcchrish/nnn.vim'
-  let g:nnn#set_default_mappings = 0
-  let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6  } }
-  nnoremap <silent> <leader>m :NnnPicker<CR>
+  if g:config_level > 5
+    "
+    " Window and file management
+    "
+    Plug 'mcchrish/nnn.vim'
+    let g:nnn#set_default_mappings = 0
+    let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6  } }
+    nnoremap <silent> <leader>m :NnnPicker<CR>
+  endif
 
   if IsEnabled("nerdtree") | Plug 'ryanoasis/vim-devicons' | endif
   " Vinegar - better file expore than NERD
   if g:config_level > 8 | Plug 'tpope/vim-vinegar' | endif
   " ack - Search files
-  Plug 'mileszs/ack.vim'
+  if g:config_level > 5 | Plug 'mileszs/ack.vim' | endif
   if IsEnabled("airline")
     " Airline - status bar
     Plug 'vim-airline/vim-airline'
@@ -176,14 +178,14 @@ if g:config_level > 3
   " Writing
   "
   " goyo - Distraction free writing
-  Plug 'junegunn/goyo.vim'
+  if g:config_level > 5 | Plug 'junegunn/goyo.vim' | endif
   " markdown preview
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
   let g:mkdp_auto_close = 0
   let g:mkdp_page_title = '${name}'
 
   " Vim testing
-  Plug 'junegunn/vader.vim'
+  if g:config_level > 5 | Plug 'junegunn/vader.vim' | endif
 endif
 
 " CoC completion
