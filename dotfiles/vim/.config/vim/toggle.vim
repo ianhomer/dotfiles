@@ -26,20 +26,28 @@ let g:config_level = exists('$VIM_CONFIG_LEVEL' ) ?
 let g:default_toggles = {
   \   "ale":1,
   \   "airline":1,
-  \   "autosave":1,
   \   "coco":0,
   \   "compactcmd":0,
+  \   "conflict-marker":0,
   \   "markdown.flow":0,
   \   "markdown.conceal.full":0,
   \   "markdown.conceal.partial":0,
   \   "markdown.syntax.list":0,
   \   "markdown.syntax.table":1,
-  \   "gitgutter":1, 
-  \   "nerdtree":1,
   \   "polyglot":0,
   \   "syntastic":0,
-  \   "startify": 1,
   \   "writegood":0
+  \ }
+
+" Config levels at which features are enabled
+let g:level_features = {
+  \   "autosave":4,
+  \   "endwise":5,
+  \   "conflict-marker":7,
+  \   "gitgutter":5,
+  \   "nerdtree":5,
+  \   "startify":5,
+  \   "tabular":5
   \ }
 
 " Feature toggles triggered by each layer
@@ -57,6 +65,7 @@ let g:layer_features = {
   \      "markdown.conceal.partial":1
   \    }
   \  }
+
 
 " Default state of layers
 " iTerm used for notes layer
@@ -89,6 +98,7 @@ if !exists("*ConfigLevel")
     if g:config_level == 0
       set all&
     endif
+    call ApplyLevels()
     call ReloadConfig()
   endfunction
 endif
@@ -117,12 +127,28 @@ if !exists("*ApplyLayers")
   silent call ApplyLayers()
 endif
 
+if !exists("*ApplyLevels")
+  " Apply feature toggles for all layers
+  function! ApplyLevels()
+    for [feature,level] in items(g:level_features)
+      call SetFeature(feature,
+        \ (level <= g:config_level ? 1 : 0))
+    endfor
+  endfunction
+  " Apply all levels during initialisation
+  silent call ApplyLevels()
+endif
+
 function! IsEnabled(feature)
   return has_key(g:toggles, a:feature) ? g:toggles[a:feature] : 0
 endfunction
 
 function! IsNotEnabled(feature)
   return 1 - IsEnabled(a:feature)
+endfunction
+
+function! Toggles()
+  echo g:toggles
 endfunction
 
 

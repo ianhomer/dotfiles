@@ -29,7 +29,9 @@ if g:config_level > 0
   " fugitive - Git integration
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
-  Plug 'rhysd/conflict-marker.vim'
+  if IsEnabled("conflict-marker")
+    Plug 'rhysd/conflict-marker.vim'
+  endif
   autocmd ColorScheme * highlight Info gui=bold guifg=#504945 guibg=#83a598
   let g:conflict_marker_highlight_group="Info"
 
@@ -82,7 +84,7 @@ if g:config_level > 3
   if g:config_level > 8 | Plug 'tpope/vim-vinegar' | endif
   " ack - Search files
   if g:config_level > 5 | Plug 'mileszs/ack.vim' | endif
-  if IsEnabled("airline")
+  if g:config_level > 4 && IsEnabled("airline")
     " Airline - status bar
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -112,8 +114,10 @@ if g:config_level > 3
           \ ]
   endif
 
-  Plug 'ludovicchabant/vim-gutentags'
-  let g:gutentags_cache_dir = expand('~/.cache/tags')
+  if g:config_level > 4
+    Plug 'ludovicchabant/vim-gutentags'
+    let g:gutentags_cache_dir = expand('~/.cache/tags')
+  endif
 
   "
   " Help
@@ -126,15 +130,19 @@ if g:config_level > 3
   "
 
   " tabular - Lining up columns
-  Plug 'godlygeek/tabular'
+  if IsEnabled("tabular")
+    Plug 'godlygeek/tabular'
+  endif
   " symlink - Follow symlink when opening file
   Plug 'aymericbeaumet/vim-symlink'
   " surround - Surround with brackets etc
   Plug 'tpope/vim-surround'
   " repeat - Repeat with mapped commands with . not just the native command
   Plug 'tpope/vim-repeat'
-  " endwise - auto close structure
-  Plug 'tpope/vim-endwise'
+  if IsEnabled("endwise")
+    " endwise - auto close structure
+    Plug 'tpope/vim-endwise'
+  endif
   " Aysynchronous
   Plug 'tpope/vim-dispatch'
   let g:dispatch_no_tmux_make = 1
@@ -148,7 +156,7 @@ if g:config_level > 3
     source ~/.config/vim/syntastic.vim
   endif
 
-  if IsEnabled("ale")
+  if g:config_level > 4 && IsEnabled("ale")
     Plug 'dense-analysis/ale'
     source ~/.config/vim/ale.vim
   endif
@@ -157,7 +165,7 @@ if g:config_level > 3
   nnoremap <silent> <leader>9p :call Toggle("polyglot")<CR>
   if IsEnabled("polyglot") | Plug 'sheerun/vim-polyglot' | endif
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
-  Plug 'preservim/nerdcommenter'
+  if g:config_level > 4 | Plug 'preservim/nerdcommenter' | endif
 
   if IsEnabled("nerdtree")
     " NERDTree - show git changes
@@ -180,11 +188,14 @@ if g:config_level > 3
   " Writing
   "
   " goyo - Distraction free writing
-  if g:config_level > 5 | Plug 'junegunn/goyo.vim' | endif
-  " markdown preview
-  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-  let g:mkdp_auto_close = 0
-  let g:mkdp_page_title = '${name}'
+  if g:config_level > 4 | Plug 'junegunn/goyo.vim' | endif
+
+  if g:config_level > 4 
+    " markdown preview
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+    let g:mkdp_auto_close = 0
+    let g:mkdp_page_title = '${name}'
+  endif
 
   " Vim testing
   if g:config_level > 5 | Plug 'junegunn/vader.vim' | endif
@@ -471,7 +482,7 @@ if g:config_level < 2
 endif
 
 function! s:DebouncedSave() abort
-  if &buftype == ""
+  if &buftype == "" && @% != ""
     call timer_stop( s:debouncedSaveTimer )
     let s:debouncedSaveTimer = timer_start(1000, { timerId -> execute('write') })
   endif
