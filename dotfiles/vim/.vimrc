@@ -96,19 +96,21 @@ if g:config_level > 3
   " UNIX-like shell commands
   Plug 'tpope/vim-eunuch'
 
-  Plug 'mhinz/vim-startify'
-  let g:startify_custom_header = ""
-  let g:startify_session_autoload = 0
-  let g:startify_change_to_dir = 0
-  let g:startify_lists = [
-        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-        \ { 'type': 'sessions',  'header': ['   Sessions']       },
-        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
-        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
-        \ { 'type': 'commands',  'header': ['   Commands']       },
-        \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']}
-        \ ]
+  if IsEnabled("startify")
+    Plug 'mhinz/vim-startify'
+    let g:startify_custom_header = ""
+    let g:startify_session_autoload = 0
+    let g:startify_change_to_dir = 0
+    let g:startify_lists = [
+          \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+          \ { 'type': 'sessions',  'header': ['   Sessions']       },
+          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+          \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+          \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+          \ { 'type': 'commands',  'header': ['   Commands']       },
+          \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']}
+          \ ]
+  endif
 
   Plug 'ludovicchabant/vim-gutentags'
   let g:gutentags_cache_dir = expand('~/.cache/tags')

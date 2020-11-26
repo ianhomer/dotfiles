@@ -38,6 +38,7 @@ let g:default_toggles = {
   \   "nerdtree":1,
   \   "polyglot":0,
   \   "syntastic":0,
+  \   "startify": 1,
   \   "writegood":0
   \ }
 
