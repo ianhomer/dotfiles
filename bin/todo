@@ -71,7 +71,7 @@ else
     fi
   fi
   gsed -i "3i- [ ] ${todo}" $todayLog
-  ag --nofilename --nocolor --nobreak '\- \[ \]' ~/projects/things/ | wc -l
+  ag --nofilename --nocolor --nobreak '\- \[ \](?! [\.~\^])' ~/projects/things/ | wc -l
 fi
 
 
