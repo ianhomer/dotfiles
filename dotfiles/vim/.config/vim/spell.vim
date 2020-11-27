@@ -1,4 +1,4 @@
-if g:config_level < 1
+if !IsEnabled("spelling")
   finish
 endif
 
@@ -45,5 +45,8 @@ function! UpdateSpelling()
     exec 'mkspell! ' . l:spelldir . '/' . l:localSpell . ' ' . l:allDictionaries
   endif
 endfunction
-call UpdateSpelling()
+
+if IsEnabled("update-spelling") 
+  call UpdateSpelling()
+endif
 

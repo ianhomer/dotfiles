@@ -122,8 +122,11 @@ if g:config_level > 3
   "
   " Help
   "
-  " vim-which-key - guidance on what keys do
-  Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+  " vim-which-key - guidance on what keys do\
+  if IsEnabled("which-key")
+    Plug 'liuchengxu/vim-which-key', 
+    \ { 'on': ['WhichKey', 'WhichKey!'] }
+  endif
 
   "
   " Coding
@@ -545,7 +548,9 @@ if g:config_level > 0
   vnoremap > >gv
 endif
 
-source ~/.config/vim/spell.vim
+if IsEnabled("spelling")
+  source ~/.config/vim/spell.vim
+endif
 
 " Surround customisation
 if g:config_level > 2

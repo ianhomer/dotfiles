@@ -49,9 +49,12 @@ let g:level_features = {
   \   "gitgutter":5,
   \   "nerdtree":5,
   \   "nnn":6,
+  \   "spelling":5,
   \   "startify":5,
   \   "surround":5,
-  \   "tabular":5
+  \   "tabular":5,
+  \   "update-spelling":5,
+  \   "which-keys":5
   \ }
 
 " Feature toggles triggered by each layer
@@ -155,6 +158,7 @@ function! Toggles()
   echo g:toggles
 endfunction
 
+command! -nargs=0 Toggles :call Toggles()
 
 nnoremap <silent> <leader>9a :call ToggleFeature("ale")<CR>
 nnoremap <silent> <leader>9c :call ToggleFeature("coc")<CR>
@@ -165,7 +169,6 @@ nnoremap <silent> <leader>9n :call ToggleFeature("nerdtree")<CR>
 nnoremap <silent> <leader>9g :call ToggleFeature("gitgutter")<CR>
 nnoremap <silent> <leader>9s :call ToggleFeature("syntastic")<CR>
 nnoremap <silent> <leader>9w :call ToggleFeature("writegood")<CR>
-
 
 nnoremap <silent> <leader>90 :call ConfigLevel(0)<CR>
 nnoremap <silent> <leader>91 :call ConfigLevel(1)<CR>
