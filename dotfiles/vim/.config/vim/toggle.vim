@@ -42,19 +42,26 @@ let g:default_toggles = {
 let g:level_features = {
   \   "ale":5,
   \   "apathy":5,
+  \   "airline":5,
   \   "autosave":4,
   \   "endwise":5,
   \   "eunuch":5,
   \   "conflict-marker":7,
   \   "gitgutter":5,
+  \   "goyo":5,
   \   "nerdtree":5,
+  \   "modes":5,
   \   "nnn":6,
   \   "spelling":5,
   \   "startify":5,
   \   "surround":5,
+  \   "tabcomplete":5,
   \   "tabular":5,
+  \   "thingity":5,
+  \   "unimpaired":5,
   \   "update-spelling":5,
-  \   "which-keys":5
+  \   "which-keys":5,
+  \   "window-cleaner":5
   \ }
 
 " Feature toggles triggered by each layer

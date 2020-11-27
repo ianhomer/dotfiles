@@ -84,7 +84,7 @@ if g:config_level > 3
   if g:config_level > 8 | Plug 'tpope/vim-vinegar' | endif
   " ack - Search files
   if g:config_level > 5 | Plug 'mileszs/ack.vim' | endif
-  if g:config_level > 4 && IsEnabled("airline")
+  if IsEnabled("airline")
     " Airline - status bar
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -181,7 +181,9 @@ if g:config_level > 3
   " HTML
   if g:config_level > 8 | Plug 'mattn/emmet-vim' | endif
   " Handy mappings
-  Plug 'tpope/vim-unimpaired'
+  if IsEnabled("unimpaired")
+    Plug 'tpope/vim-unimpaired'
+  endif
 
   "
   " Writing
@@ -256,7 +258,9 @@ set nomodeline
 "
 " Command remapping
 "
-source ~/.config/vim/modes.vim
+if IsEnabled("modes") 
+  source ~/.config/vim/modes.vim
+endif
 
 " My shortcuts
 if g:config_level > 0
@@ -273,7 +277,9 @@ if g:config_level > 0
   " Hide all windows except the current one
   nnoremap <silent> <leader>O :only<CR>
 
-  source ~/.config/vim/window-cleaner.vim
+  if IsEnabled("window-cleaner")
+    source ~/.config/vim/window-cleaner.vim
+  endif
 
   " Start / stop profiling
   nnoremap <leader>.p :profile start ~/vim-performance.log<CR>:profile func*<CR>:profile file *<CR>
@@ -332,7 +338,9 @@ if exists('*which_key#register')
   call which_key#register("'", "g:which_key_map")
 endif
 
-source ~/.config/vim/thingity.vim
+if IsEnabled("thingity")
+  source ~/.config/vim/thingity.vim
+endif
 
 function! SearchFiles() 
   call SwitchToFirstEditableFile()
@@ -403,7 +411,9 @@ function! ToggleLocationList()
   endif
 endfunction
 
-source ~/.config/vim/tabcomplete.vim
+if IsEnabled("tabcomplete")
+  source ~/.config/vim/tabcomplete.vim
+endif
 
 " Reload vimrc, neo vimrc and CoC
 let g:config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
@@ -466,7 +476,7 @@ let g:tmux_navigator_save_on_switch = 2
 " *** Scope : Writing ***
 
 " Goyo distraction free writing
-if g:config_level > 3
+if IsEnabled("goyo")
   nnoremap <leader>jg :Goyo<CR>
   let g:goyo_width = 85
 endif
@@ -595,7 +605,7 @@ endif
 " *** Scope : Status Bar ***
 "
 
-if g:config_level > 3
+if IsEnabled("airline")
   " Less accurate highlighting, but improved performance
   let g:airline_highlighting_cache = 1
   " Explicit airline extensions for quicker start up
