@@ -12,7 +12,7 @@ window:
 #  dynamic_title: false
 #  decorations: false
 
-draw_bold_text_with_bright_colors: true
+draw_bold_text_with_bright_colors: false
 
 scrolling:
   history: 10000
@@ -20,21 +20,21 @@ scrolling:
 
 font:
   normal:
-    family: FiraCode Nerd Font
-    style: Regular
+    family: FiraCode Nerd Font Mono
+    style: Retina
   bold:
-    family: FiraCode Nerd Font
+    family: FiraCode Nerd Font Mono
     style: Bold
   italic:
-    family: FiraCode Nerd Font
-    style: Regular
+    family: FiraCode Nerd Font Mono
+    style: Regular,Regular
   size: 14.0
   offset:
     x: 1
-    y: 1
+    y: 2
   glyph_offset:
-    x: 1
-    y: 1
+    x: -1
+    y: 0
   use_thin_strokes: true
 
 # debug:
