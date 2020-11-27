@@ -24,7 +24,6 @@ let g:config_level = exists('$VIM_CONFIG_LEVEL' ) ?
 
 " Default values for the feature toggles
 let g:default_toggles = {
-  \   "airline":1,
   \   "coco":0,
   \   "compactcmd":0,
   \   "conflict-marker":0,
@@ -44,9 +43,12 @@ let g:level_features = {
   \   "apathy":5,
   \   "airline":5,
   \   "autosave":4,
+  \   "conflict-marker":7,
+  \   "dispatch":5,
   \   "endwise":5,
   \   "eunuch":5,
-  \   "conflict-marker":7,
+  \   "fugitive":5,
+  \   "fzf":5,
   \   "gitgutter":5,
   \   "goyo":5,
   \   "nerdtree":5,
@@ -60,7 +62,7 @@ let g:level_features = {
   \   "thingity":5,
   \   "unimpaired":5,
   \   "update-spelling":5,
-  \   "which-keys":5,
+  \   "which-key":5,
   \   "window-cleaner":5
   \ }
 

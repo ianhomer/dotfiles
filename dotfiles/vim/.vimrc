@@ -11,8 +11,9 @@ let maplocalleader = "\\"
 source ~/.config/vim/toggle.vim
 
 if g:config_level > 0
-  filetype plugin on
-  filetype plugin off
+  " why?
+  "filetype plugin on
+  "filetype plugin off
 endif
 
 " Load plugins
@@ -22,18 +23,22 @@ if g:config_level > 0
   " Core essentials
   "
   " fzf - Fuzzy Finder
-  Plug 'junegunn/fzf'
-  Plug 'junegunn/fzf.vim'
-  source ~/.config/vim/fzf.vim
+  if IsEnabled("fzf")
+    Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf.vim'
+    source ~/.config/vim/fzf.vim
+  endif
 
   " fugitive - Git integration
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-rhubarb'
+  if IsEnabled("fugitive")
+    Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-rhubarb'
+  endif
   if IsEnabled("conflict-marker")
     Plug 'rhysd/conflict-marker.vim'
+    autocmd ColorScheme * highlight Info gui=bold guifg=#504945 guibg=#83a598
+    let g:conflict_marker_highlight_group="Info"
   endif
-  autocmd ColorScheme * highlight Info gui=bold guifg=#504945 guibg=#83a598
-  let g:conflict_marker_highlight_group="Info"
 
   "
   " Style
@@ -143,9 +148,11 @@ if g:config_level > 3
   " endwise - auto close structure
   if IsEnabled("endwise") | Plug 'tpope/vim-endwise' | endif
   " Aysynchronous
-  Plug 'tpope/vim-dispatch'
-  let g:dispatch_no_tmux_make = 1
-  let g:dispatch_quickfix_height = 4
+  if IsEnabled("dispatch")
+    Plug 'tpope/vim-dispatch'
+    let g:dispatch_no_tmux_make = 1
+    let g:dispatch_quickfix_height = 4
+  endif
 
   if IsEnabled("syntastic")
     Plug 'vim-syntastic/syntastic'
@@ -349,7 +356,7 @@ endfunction
 
 function! GitSynk(onlyPush)
   call CloseFugitiveWindow()
-  if a:onlyPush
+  if a:onlyPush || !IsEnabled("dispatch")
     Gpush
   else
     Dispatch! Git synk
