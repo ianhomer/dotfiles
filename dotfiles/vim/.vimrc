@@ -43,8 +43,11 @@ if g:config_level > 0
   "
   " Style
   "
-  Plug 'morhetz/gruvbox'
-  Plug 'rakr/vim-one'
+  if IsEnabled("light")
+    Plug 'rakr/vim-one'
+  else
+    Plug 'morhetz/gruvbox'
+  endif
 
   if IsEnabled("nerdtree")
     " NERDTree - file explore
