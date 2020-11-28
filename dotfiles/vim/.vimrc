@@ -74,65 +74,41 @@ endif
 
 " Load plugins
 call plug#begin(g:vim_dir."/plugged")
-if g:config_level > 0
-  "
-  " Core essentials
-  "
-  " fzf - Fuzzy Finder
-  if IsEnabled("fzf")
-    Plug 'junegunn/fzf'
-    Plug 'junegunn/fzf.vim'
-    source ~/.config/vim/fzf.vim
-  endif
-
-  " fugitive - Git integration
-  if IsEnabled("fugitive")
-    Plug 'tpope/vim-fugitive'
-    Plug 'tpope/vim-rhubarb'
-  endif
-  if IsEnabled("conflict-marker")
-    Plug 'rhysd/conflict-marker.vim'
-    autocmd ColorScheme * highlight Info gui=bold guifg=#504945 guibg=#83a598
-    let g:conflict_marker_highlight_group="Info"
-  endif
-
-  "
-  " Style
-  "
-  if IsEnabled("light")
-    Plug 'rakr/vim-one'
-  else
-    Plug 'morhetz/gruvbox'
-  endif
-
-  if IsEnabled("nerdtree")
-    " NERDTree - file explore
-    Plug 'preservim/nerdtree'
-    source ~/.config/vim/nerdtree.vim
-  endif
+"
+" Core essentials
+"
+" fzf - Fuzzy Finder
+if IsEnabled("fzf")
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
+  source ~/.config/vim/fzf.vim
 endif
 
-if g:config_level < 3
-  finish
+" fugitive - Git integration
+if IsEnabled("fugitive")
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-rhubarb'
+endif
+if IsEnabled("conflict-marker")
+  Plug 'rhysd/conflict-marker.vim'
+  autocmd ColorScheme * highlight Info gui=bold guifg=#504945 guibg=#83a598
+  let g:conflict_marker_highlight_group="Info"
 endif
 
-function! s:gitModified()
-    let files = systemlist('git ls-files -m 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
-endfunction
+"
+" Style
+"
+if IsEnabled("light")
+  Plug 'rakr/vim-one'
+else
+  Plug 'morhetz/gruvbox'
+endif
 
-" same as above, but show untracked files, honouring .gitignore
-function! s:gitUntracked()
-    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
-endfunction
-
-" Read ~/.NERDTreeBookmarks file and takes its second column
-function! s:nerdtreeBookmarks()
-  let bookmarks = systemlist("cut -d' ' -f 2 ~/.NERDTreeBookmarks")
-  let bookmarks = bookmarks[0:-2] " Slices an empty last line
-  return map(bookmarks, "{'line': v:val, 'path': v:val}")
-endfunction
+if IsEnabled("nerdtree")
+  " NERDTree - file explore
+  Plug 'preservim/nerdtree'
+  source ~/.config/vim/nerdtree.vim
+endif
 
 if g:config_level > 3
 
@@ -277,6 +253,49 @@ if IsEnabled("coc")
 endif
 
 call plug#end()
+
+if !IsEnabled("light")
+  colorscheme gruvbox
+  set bg=dark
+else
+  " Light scheme primarily used for writing content
+  colorscheme one
+  set bg=light
+  let $BG_MODE="light"
+  let g:one_allow_italics = 1
+  call one#highlight('Normal', '000000', 'ffffff', 'none')
+  for i in [1,2,3,4,5,6]
+    call one#highlight('markdownH'.i, '000000', 'ffffff', 'bold')
+  endfor
+  call one#highlight('markdownH2', '000000', 'ffffff', 'bold')
+  call one#highlight('Directory', '222222', '', 'bold')
+  highlight Cursor guibg=grey
+  highlight iCursor guibg=black
+  set guicursor=n-v-c:block-Cursor
+  set guicursor+=i:ver100-iCursor
+endif
+
+if g:config_level < 3
+  finish
+endif
+
+function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" same as above, but show untracked files, honouring .gitignore
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" Read ~/.NERDTreeBookmarks file and takes its second column
+function! s:nerdtreeBookmarks()
+  let bookmarks = systemlist("cut -d' ' -f 2 ~/.NERDTreeBookmarks")
+  let bookmarks = bookmarks[0:-2] " Slices an empty last line
+  return map(bookmarks, "{'line': v:val, 'path': v:val}")
+endfunction
 
 "
 " Command remapping
@@ -656,29 +675,6 @@ endif
 " vnoremap <tab> >>
 
 " source ~/.config/vim/netrw.vim
-
-if g:config_level > 0
-  if !IsEnabled("light")
-    colorscheme gruvbox
-    set bg=dark
-  else
-    " Light scheme primarily used for writing content
-    colorscheme one
-    set bg=light
-    let $BG_MODE="light"
-    let g:one_allow_italics = 1
-    call one#highlight('Normal', '000000', 'ffffff', 'none')
-    for i in [1,2,3,4,5,6]
-      call one#highlight('markdownH'.i, '000000', 'ffffff', 'bold')
-    endfor
-    call one#highlight('markdownH2', '000000', 'ffffff', 'bold')
-    call one#highlight('Directory', '222222', '', 'bold')
-    highlight Cursor guibg=grey
-    highlight iCursor guibg=black
-    set guicursor=n-v-c:block-Cursor
-    set guicursor+=i:ver100-iCursor
-  endif
-endif
 
 if g:config_level > 2
   " Thanks to Damian Conway                                                         test long line
