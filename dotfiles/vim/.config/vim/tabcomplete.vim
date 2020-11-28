@@ -4,7 +4,7 @@ function! s:check_back_space() abort
 endfunction
 
 function! s:auto_complete()
-  if IsEnabled("coc")
+  if Knob("coc")
     " Hand control to CoC
     return <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
