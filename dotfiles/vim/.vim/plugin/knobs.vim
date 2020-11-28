@@ -41,13 +41,13 @@ nnoremap <silent> <leader>9g :call knobs#ToggleFeature("gitgutter")<CR>
 nnoremap <silent> <leader>9s :call knobs#ToggleFeature("syntastic")<CR>
 nnoremap <silent> <leader>9w :call knobs#ToggleFeature("writegood")<CR>
 
-nnoremap <silent> <leader>90 :call knobs#Level(0)<CR>
-nnoremap <silent> <leader>91 :call knobs#Level(1)<CR>
-nnoremap <silent> <leader>92 :call knobs#Level(2)<CR>
-nnoremap <silent> <leader>93 :call knobs#Level(3)<CR>
-nnoremap <silent> <leader>94 :call knobs#Level(4)<CR>
-nnoremap <silent> <leader>95 :call knobs#Level(5)<CR>
-nnoremap <silent> <leader>96 :call knobs#Level(6)<CR>
-nnoremap <silent> <leader>97 :call knobs#Level(7)<CR>
-nnoremap <silent> <leader>98 :call knobs#Level(8)<CR>
-nnoremap <silent> <leader>99 :call knobs#Level(9)<CR>
+nnoremap <silent> <leader>90 :call knobs#SetLevel(0)<CR>
+nnoremap <silent> <leader>91 :call knobs#SetLevel(1)<CR>
+nnoremap <silent> <leader>92 :call knobs#SetLevel(2)<CR>
+nnoremap <silent> <leader>93 :call knobs#SetLevel(3)<CR>
+nnoremap <silent> <leader>94 :call knobs#SetLevel(4)<CR>
+nnoremap <silent> <leader>95 :call knobs#SetLevel(5)<CR>
+nnoremap <silent> <leader>96 :call knobs#SetLevel(6)<CR>
+nnoremap <silent> <leader>97 :call knobs#SetLevel(7)<CR>
+nnoremap <silent> <leader>98 :call knobs#SetLevel(8)<CR>
+nnoremap <silent> <leader>99 :call knobs#SetLevel(9)<CR>

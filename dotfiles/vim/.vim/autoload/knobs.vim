@@ -14,7 +14,7 @@ function knobs#ToggleLayer(layer)
   call knobs#ReloadConfig()
 endfunction
 
-function knobs#Level(level)
+function knobs#SetLevel(level)
   let g:config_level_session=a:level
   if g:config_level == 0
     set all&
