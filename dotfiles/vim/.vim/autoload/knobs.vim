@@ -86,13 +86,11 @@ function! knobs#RestartConfig()
   endif
 endfunction
 
-function! knobs#Initialise()
+function! knobs#Init()
   if exists('g:knobs_initialised')
     return
   endif
   let g:knobs_initialised = 1
-
-  call knobs#core#Bootstrap()
 
   " Apply all levels during initialisation
   call knobs#ApplyLevels()

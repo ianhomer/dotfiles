@@ -70,12 +70,4 @@ let g:layers = get(g:, "layers",{
   \   "notes": $ITERM_PROFILE == 'oh-my' ? 1 : 0   
   \ })
 
-"
-" Quick finish if config level is 0
-"
-call knobs#core#Bootstrap()
-if !KnobAt(1)
-  finish
-endif
-
-silent call knobs#Initialise()
+call knobs#core#Init()
