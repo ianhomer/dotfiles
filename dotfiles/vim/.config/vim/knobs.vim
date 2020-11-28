@@ -57,6 +57,7 @@ let g:level_features = {
   \   "nnn":6,
   \   "spelling":5,
   \   "startify":5,
+  \   "startuptime":5,
   \   "surround":5,
   \   "tabcomplete":5,
   \   "tabular":5,

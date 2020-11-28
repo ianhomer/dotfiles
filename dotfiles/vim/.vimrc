@@ -143,18 +143,6 @@ if g:config_level > 3
 
   if IsEnabled("startify")
     Plug 'mhinz/vim-startify'
-    let g:startify_custom_header = ""
-    let g:startify_session_autoload = 0
-    let g:startify_change_to_dir = 0
-    let g:startify_lists = [
-          \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-          \ { 'type': 'sessions',  'header': ['   Sessions']       },
-          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-          \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
-          \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
-          \ { 'type': 'commands',  'header': ['   Commands']       },
-          \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']}
-          \ ]
   endif
 
   if g:config_level > 4
@@ -245,6 +233,11 @@ if g:config_level > 3
 
   " Vim testing
   if g:config_level > 5 | Plug 'junegunn/vader.vim' | endif
+
+  if IsEnabled("startuptime")
+    Plug 'tweekmonster/startuptime.vim'
+  endif
+
 endif
 
 " CoC completion
@@ -296,6 +289,21 @@ function! s:nerdtreeBookmarks()
   let bookmarks = bookmarks[0:-2] " Slices an empty last line
   return map(bookmarks, "{'line': v:val, 'path': v:val}")
 endfunction
+
+if IsEnabled("startify")
+  let g:startify_custom_header = ""
+  let g:startify_session_autoload = 0
+  let g:startify_change_to_dir = 0
+  let g:startify_lists = [
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']}
+        \ ]
+endif
 
 "
 " Command remapping
