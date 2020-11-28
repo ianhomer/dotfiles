@@ -51,6 +51,7 @@ let g:level_features = {
   \   "fugitive":5,
   \   "fzf":5,
   \   "gitgutter":5,
+  \   "gruvbox":5,
   \   "goyo":5,
   \   "nerdtree":5,
   \   "modes":5,
@@ -176,7 +177,13 @@ function! Toggles()
   echo g:toggles
 endfunction
 
+function ListFeatures(ArgLead, CmdLind, CursorPos)
+  return sort(keys(g:toggles))
+endfunction
+
 command! -nargs=0 Toggles :call Toggles()
+command! -nargs=1 -complete=customlist,ListFeatures
+  \ ToggleFeature :call ToggleFeature(<args>)
 
 nnoremap <silent> <leader>9a :call ToggleFeature("ale")<CR>
 nnoremap <silent> <leader>9c :call ToggleFeature("coc")<CR>

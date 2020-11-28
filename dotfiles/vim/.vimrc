@@ -100,8 +100,10 @@ endif
 "
 if IsEnabled("light")
   Plug 'rakr/vim-one'
-else
+elseif IsEnabled("gruvbox")
   Plug 'morhetz/gruvbox'
+else
+  Plug 'lifepillar/vim-gruvbox8'
 endif
 
 if IsEnabled("nerdtree")
@@ -234,10 +236,10 @@ if g:config_level > 3
   " Vim testing
   if g:config_level > 5 | Plug 'junegunn/vader.vim' | endif
 
-  if IsEnabled("startuptime")
-    Plug 'tweekmonster/startuptime.vim'
-  endif
+endif
 
+if IsEnabled("startuptime")
+  Plug 'tweekmonster/startuptime.vim'
 endif
 
 " CoC completion
@@ -248,7 +250,11 @@ endif
 call plug#end()
 
 if !IsEnabled("light")
-  colorscheme gruvbox
+  if IsEnabled("gruvbox")
+    colorscheme gruvbox
+  else 
+    colorscheme gruvbox8
+  endif
   set bg=dark
 else
   " Light scheme primarily used for writing content
