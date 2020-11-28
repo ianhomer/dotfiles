@@ -21,16 +21,12 @@ function! knobs#core#Bootstrap()
   let g:toggles = get(g:, "toggles", g:default_toggles)
 
   " Shortcuts to functions
-  function! IsEnabled(feature)
+  function! Knob(feature)
     return knobs#core#IsEnabled(a:feature)
   endfunction
 
-  function! IsNotEnabled(feature)
-    return 1 - IsEnabled(a:feature)
-  endfunction
-
-  function! KnobLevel()
-    return knobs#core#Level()
+  function! KnobAt(level)
+    return g:config_level >= a:level
   endfunction
 endfunction
 

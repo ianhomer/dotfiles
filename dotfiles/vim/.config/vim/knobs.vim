@@ -74,7 +74,7 @@ let g:layers = get(g:, "layers",{
 " Quick finish if config level is 0
 "
 call knobs#core#Bootstrap()
-if knobs#core#Level() == 0
+if !KnobAt(1)
   finish
 endif
 

@@ -1,4 +1,4 @@
-if !IsEnabled("spelling")
+if !Knob("spelling")
   finish
 endif
 
@@ -46,7 +46,7 @@ function! UpdateSpelling()
   endif
 endfunction
 
-if IsEnabled("update-spelling") 
+if Knob("update-spelling") 
   call UpdateSpelling()
 endif
 

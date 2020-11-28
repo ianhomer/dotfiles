@@ -8,10 +8,10 @@ unlet b:current_syntax
 syntax include @Yaml syntax/yaml.vim
 syntax region yamlFrontmatter start=/\%^---$/ end=/^---$/ keepend contains=@Yaml
 
-if IsEnabled("markdown.conceal.full")
+if Knob("markdown.conceal.full")
   " e.g. mobile
   set conceallevel=2
-elseif IsEnabled("markdown.conceal.partial")
+elseif Knob("markdown.conceal.partial")
   " e.g. note taking
   set conceallevel=1
 else
@@ -21,7 +21,7 @@ endif
 set concealcursor=nc
 
 " Markdown list rendering
-if IsEnabled("markdown.syntax.list")
+if Knob("markdown.syntax.list")
   syntax match mdList /^\s*-\s.*/ contains=mdListBullet
   syntax match mdListBullet /\v^\s*\zs-\ze/ contained conceal cchar=•
   syntax match mdTodo /\v^\zs\s*-\s\[.+\]\ze/ contains=mdTodoStart,mdTodoDone,mdTodoNotDone
@@ -31,7 +31,7 @@ if IsEnabled("markdown.syntax.list")
 endif
 
 " Markdown table rendering
-if IsEnabled("markdown.syntax.table")
+if Knob("markdown.syntax.table")
   syntax match mdTableRow /\v^\|.*/ contains=mdTableColumn
   syntax match mdTableColumn /\v\|/ contained conceal cchar=│
   syntax match mdTableHeader /\v^\|\s--.*\|/ contains=mdTableHeaderStart,mdTableHeaderEnd,mdTableHeaderMiddle,mdTableHeaderMinus,mdTableHeaderSpace

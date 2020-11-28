@@ -56,13 +56,13 @@ set nomodeline
 
 source ~/.config/vim/knobs.vim
 
-if KnobLevel() == 0
+if !KnobAt(1)
   finish
 endif
 
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
-if IsEnabled("compactcmd")
+if Knob("compactcmd")
   set cmdheight=1
 else
   set cmdheight=2
@@ -78,18 +78,18 @@ call plug#begin(g:vim_dir."/plugged")
 " Core essentials
 "
 " fzf - Fuzzy Finder
-if IsEnabled("fzf")
+if Knob("fzf")
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   source ~/.config/vim/fzf.vim
 endif
 
 " fugitive - Git integration
-if IsEnabled("fugitive")
+if Knob("fugitive")
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
 endif
-if IsEnabled("conflict-marker")
+if Knob("conflict-marker")
   Plug 'rhysd/conflict-marker.vim'
   autocmd ColorScheme * highlight Info gui=bold guifg=#504945 guibg=#83a598
   let g:conflict_marker_highlight_group="Info"
@@ -98,23 +98,23 @@ endif
 "
 " Style
 "
-if IsEnabled("light")
+if Knob("light")
   Plug 'rakr/vim-one'
-elseif IsEnabled("gruvbox")
+elseif Knob("gruvbox")
   Plug 'morhetz/gruvbox'
 else
   Plug 'lifepillar/vim-gruvbox8'
 endif
 
-if IsEnabled("nerdtree")
+if Knob("nerdtree")
   " NERDTree - file explore
   Plug 'preservim/nerdtree'
   source ~/.config/vim/nerdtree.vim
 endif
 
-if KnobLevel() > 3
+if KnobAt(4)
 
-  if IsEnabled("nnn")
+  if Knob("nnn")
     "
     " Window and file management
     "
@@ -124,30 +124,30 @@ if KnobLevel() > 3
     nnoremap <silent> <leader>m :NnnPicker<CR>
   endif
 
-  if IsEnabled("nerdtree") | Plug 'ryanoasis/vim-devicons' | endif
+  if Knob("nerdtree") | Plug 'ryanoasis/vim-devicons' | endif
   " Vinegar - better file expore than NERD
-  if KnobLevel() > 8 | Plug 'tpope/vim-vinegar' | endif
+  if KnobAt(9) | Plug 'tpope/vim-vinegar' | endif
   " ack - Search files
-  if KnobLevel() > 5 | Plug 'mileszs/ack.vim' | endif
-  if IsEnabled("airline")
+  if KnobAt(6) | Plug 'mileszs/ack.vim' | endif
+  if Knob("airline")
     " Airline - status bar
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
   endif
   " editorconfig - Support standard editorconfig files
-  if KnobLevel() > 6 | Plug 'editorconfig/editorconfig-vim' | endif
+  if KnobAt(7) | Plug 'editorconfig/editorconfig-vim' | endif
   " tmux - enable C-hjkl to move to across vim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
   " Improved path support
-  if IsEnabled("apathy") | Plug 'tpope/vim-apathy' | endif
+  if Knob("apathy") | Plug 'tpope/vim-apathy' | endif
   " UNIX-like shell commands
-  if IsEnabled("eunuch") | Plug 'tpope/vim-eunuch' | endif
+  if Knob("eunuch") | Plug 'tpope/vim-eunuch' | endif
 
-  if IsEnabled("startify")
+  if Knob("startify")
     Plug 'mhinz/vim-startify'
   endif
 
-  if KnobLevel() > 4
+  if KnobAt(5)
     Plug 'ludovicchabant/vim-gutentags'
     let g:gutentags_cache_dir = expand('~/.cache/tags')
   endif
@@ -156,7 +156,7 @@ if KnobLevel() > 3
   " Help
   "
   " vim-which-key - guidance on what keys do\
-  if IsEnabled("which-key")
+  if Knob("which-key")
     Plug 'liuchengxu/vim-which-key', 
     \ { 'on': ['WhichKey', 'WhichKey!'] }
   endif
@@ -166,23 +166,23 @@ if KnobLevel() > 3
   "
 
   " tabular - Lining up columns
-  if IsEnabled("tabular") | Plug 'godlygeek/tabular' | endif
+  if Knob("tabular") | Plug 'godlygeek/tabular' | endif
   " symlink - Follow symlink when opening file
   Plug 'aymericbeaumet/vim-symlink'
   " surround - Surround with brackets etc
-  if IsEnabled("surround") | Plug 'tpope/vim-surround' | endif
+  if Knob("surround") | Plug 'tpope/vim-surround' | endif
   " repeat - Repeat with mapped commands with . not just the native command
   Plug 'tpope/vim-repeat'
   " endwise - auto close structure
-  if IsEnabled("endwise") | Plug 'tpope/vim-endwise' | endif
+  if Knob("endwise") | Plug 'tpope/vim-endwise' | endif
   " Aysynchronous
-  if IsEnabled("dispatch")
+  if Knob("dispatch")
     Plug 'tpope/vim-dispatch'
     let g:dispatch_no_tmux_make = 1
     let g:dispatch_quickfix_height = 4
   endif
 
-  if IsEnabled("syntastic")
+  if Knob("syntastic")
     Plug 'vim-syntastic/syntastic'
     let g:vim_jsx_pretty_colorful_config = 1
     Plug 'yuezk/vim-js'
@@ -190,23 +190,23 @@ if KnobLevel() > 3
     source ~/.config/vim/syntastic.vim
   endif
 
-  if IsEnabled("ale")
+  if Knob("ale")
     Plug 'dense-analysis/ale'
     source ~/.config/vim/ale.vim
   endif
 
   " polyglot
   nnoremap <silent> <leader>9p :call Toggle("polyglot")<CR>
-  if IsEnabled("polyglot") | Plug 'sheerun/vim-polyglot' | endif
+  if Knob("polyglot") | Plug 'sheerun/vim-polyglot' | endif
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
   if g:config_level > 4 | Plug 'preservim/nerdcommenter' | endif
 
-  if IsEnabled("nerdtree")
+  if Knob("nerdtree")
     " NERDTree - show git changes
     if g:config_level > 8 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
   endif
 
-  if IsEnabled("gitgutter")
+  if Knob("gitgutter")
     " gitgutter - Git change indicator to left of window
     Plug 'airblade/vim-gitgutter'
     let g:gitgutter_map_keys = 0
@@ -214,9 +214,9 @@ if KnobLevel() > 3
   endif
 
   " HTML
-  if KnobLevel() > 8 | Plug 'mattn/emmet-vim' | endif
+  if KnobAt(9) | Plug 'mattn/emmet-vim' | endif
   " Handy mappings
-  if IsEnabled("unimpaired")
+  if Knob("unimpaired")
     Plug 'tpope/vim-unimpaired'
   endif
 
@@ -224,9 +224,9 @@ if KnobLevel() > 3
   " Writing
   "
   " goyo - Distraction free writing
-  if KnobLevel() > 4 | Plug 'junegunn/goyo.vim' | endif
+  if KnobAt(5) | Plug 'junegunn/goyo.vim' | endif
 
-  if KnobLevel() > 4 
+  if KnobAt(5) 
     " markdown preview
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
     let g:mkdp_auto_close = 0
@@ -234,23 +234,23 @@ if KnobLevel() > 3
   endif
 
   " Vim testing
-  if KnobLevel() > 5 | Plug 'junegunn/vader.vim' | endif
+  if KnobAt(6) | Plug 'junegunn/vader.vim' | endif
 
 endif
 
-if IsEnabled("startuptime")
+if Knob("startuptime")
   Plug 'tweekmonster/startuptime.vim'
 endif
 
 " CoC completion
-if IsEnabled("coc")
+if Knob("coc")
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
 
 call plug#end()
 
-if !IsEnabled("light")
-  if IsEnabled("gruvbox")
+if !Knob("light")
+  if Knob("gruvbox")
     colorscheme gruvbox
   else 
     colorscheme gruvbox8
@@ -274,7 +274,7 @@ else
   set guicursor+=i:ver100-iCursor
 endif
 
-if KnobLevel() < 3
+if !KnobAt(3)
   finish
 endif
 
@@ -296,7 +296,7 @@ function! s:nerdtreeBookmarks()
   return map(bookmarks, "{'line': v:val, 'path': v:val}")
 endfunction
 
-if IsEnabled("startify")
+if Knob("startify")
   let g:startify_custom_header = ""
   let g:startify_session_autoload = 0
   let g:startify_change_to_dir = 0
@@ -314,18 +314,18 @@ endif
 "
 " Command remapping
 "
-if IsEnabled("modes") 
+if Knob("modes") 
   source ~/.config/vim/modes.vim
 endif
 
 " My shortcuts
-if KnobLevel() > 0
+if KnobAt(1)
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :call SearchFiles()<CR>
   nnoremap <silent> <leader>F :Files!<CR>
 
   " save all files
-  if !IsEnabled("autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | endif
+  if !Knob("autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | endif
 
   " reset things
   nnoremap <silent> <leader>z :noh<CR>
@@ -333,7 +333,7 @@ if KnobLevel() > 0
   " Hide all windows except the current one
   nnoremap <silent> <leader>O :only<CR>
 
-  if IsEnabled("window-cleaner")
+  if Knob("window-cleaner")
     source ~/.config/vim/window-cleaner.vim
   endif
 
@@ -368,7 +368,7 @@ if KnobLevel() > 0
 
     "nnoremap <silent> q :echo "q disabled"<CR>
 
-    if KnobLevel() > 3
+    if KnobAt(4)
       nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
       nnoremap <silent> <leader>p :MarkdownPreview<CR>
@@ -394,7 +394,7 @@ if exists('*which_key#register')
   call which_key#register("'", "g:which_key_map")
 endif
 
-if IsEnabled("thingity")
+if Knob("thingity")
   source ~/.config/vim/thingity.vim
 endif
 
@@ -405,7 +405,7 @@ endfunction
 
 function! GitSynk(onlyPush)
   call CloseFugitiveWindow()
-  if a:onlyPush || !IsEnabled("dispatch")
+  if a:onlyPush || !Knob("dispatch")
     Gpush
   else
     Dispatch! Git synk
@@ -435,10 +435,10 @@ function! LintMe()
   echo "Linted ".&filetype
   if &filetype == "markdown"
     call LintMarkdown()
-  elseif IsEnabled("coc")
+  elseif Knob("coc")
     " Lint
     Format
-  elseif IsEnabled("ale")
+  elseif Knob("ale")
     ALEFix
   elseif &filetype == "json"
     execute "%!jq ."
@@ -467,11 +467,11 @@ function! ToggleLocationList()
   endif
 endfunction
 
-if IsEnabled("tabcomplete")
+if Knob("tabcomplete")
   source ~/.config/vim/tabcomplete.vim
 endif
 
-if IsEnabled("coc")
+if Knob("coc")
   source ~/.config/vim/coc.vim
 endif
 
@@ -500,7 +500,7 @@ let g:tmux_navigator_save_on_switch = 2
 " *** Scope : Writing ***
 
 " Goyo distraction free writing
-if IsEnabled("goyo")
+if Knob("goyo")
   nnoremap <leader>jg :Goyo<CR>
   let g:goyo_width = 85
 endif
@@ -542,7 +542,7 @@ augroup dotme
     autocmd InsertEnter,InsertLeave * set cul!
   endif
 
-  if IsEnabled("autosave")
+  if Knob("autosave")
     "
     " *** Scope : IO ***
     "
@@ -582,7 +582,7 @@ if g:config_level > 0
   vnoremap > >gv
 endif
 
-if IsEnabled("spelling")
+if Knob("spelling")
   source ~/.config/vim/spell.vim
 endif
 
@@ -603,7 +603,7 @@ endif
 " *** Scope : IO ***
 "
 if g:config_level > 0
-  if IsEnabled("autosave")
+  if Knob("autosave")
     " Auto reload underlying file if it changes, although
     " it only really reloads when external command run like :!ls
     set autoread
@@ -629,7 +629,7 @@ endif
 " *** Scope : Status Bar ***
 "
 
-if IsEnabled("airline")
+if Knob("airline")
   " Less accurate highlighting, but improved performance
   let g:airline_highlighting_cache = 1
   " Explicit airline extensions for quicker start up
