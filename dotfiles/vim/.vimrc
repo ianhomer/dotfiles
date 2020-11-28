@@ -56,7 +56,7 @@ set nomodeline
 
 source ~/.config/vim/knobs.vim
 
-if g:config_level == 0
+if KnobLevel() == 0
   finish
 endif
 
@@ -112,7 +112,7 @@ if IsEnabled("nerdtree")
   source ~/.config/vim/nerdtree.vim
 endif
 
-if g:config_level > 3
+if KnobLevel() > 3
 
   if IsEnabled("nnn")
     "
@@ -126,16 +126,16 @@ if g:config_level > 3
 
   if IsEnabled("nerdtree") | Plug 'ryanoasis/vim-devicons' | endif
   " Vinegar - better file expore than NERD
-  if g:config_level > 8 | Plug 'tpope/vim-vinegar' | endif
+  if KnobLevel() > 8 | Plug 'tpope/vim-vinegar' | endif
   " ack - Search files
-  if g:config_level > 5 | Plug 'mileszs/ack.vim' | endif
+  if KnobLevel() > 5 | Plug 'mileszs/ack.vim' | endif
   if IsEnabled("airline")
     " Airline - status bar
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
   endif
   " editorconfig - Support standard editorconfig files
-  if g:config_level > 6 | Plug 'editorconfig/editorconfig-vim' | endif
+  if KnobLevel() > 6 | Plug 'editorconfig/editorconfig-vim' | endif
   " tmux - enable C-hjkl to move to across vim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
   " Improved path support
@@ -147,7 +147,7 @@ if g:config_level > 3
     Plug 'mhinz/vim-startify'
   endif
 
-  if g:config_level > 4
+  if KnobLevel() > 4
     Plug 'ludovicchabant/vim-gutentags'
     let g:gutentags_cache_dir = expand('~/.cache/tags')
   endif
@@ -214,7 +214,7 @@ if g:config_level > 3
   endif
 
   " HTML
-  if g:config_level > 8 | Plug 'mattn/emmet-vim' | endif
+  if KnobLevel() > 8 | Plug 'mattn/emmet-vim' | endif
   " Handy mappings
   if IsEnabled("unimpaired")
     Plug 'tpope/vim-unimpaired'
@@ -224,9 +224,9 @@ if g:config_level > 3
   " Writing
   "
   " goyo - Distraction free writing
-  if g:config_level > 4 | Plug 'junegunn/goyo.vim' | endif
+  if KnobLevel() > 4 | Plug 'junegunn/goyo.vim' | endif
 
-  if g:config_level > 4 
+  if KnobLevel() > 4 
     " markdown preview
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
     let g:mkdp_auto_close = 0
@@ -234,7 +234,7 @@ if g:config_level > 3
   endif
 
   " Vim testing
-  if g:config_level > 5 | Plug 'junegunn/vader.vim' | endif
+  if KnobLevel() > 5 | Plug 'junegunn/vader.vim' | endif
 
 endif
 
@@ -274,7 +274,7 @@ else
   set guicursor+=i:ver100-iCursor
 endif
 
-if g:config_level < 3
+if KnobLevel() < 3
   finish
 endif
 
@@ -319,7 +319,7 @@ if IsEnabled("modes")
 endif
 
 " My shortcuts
-if g:config_level > 0
+if KnobLevel() > 0
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :call SearchFiles()<CR>
   nnoremap <silent> <leader>F :Files!<CR>
@@ -368,7 +368,7 @@ if g:config_level > 0
 
     "nnoremap <silent> q :echo "q disabled"<CR>
 
-    if g:config_level > 3
+    if KnobLevel() > 3
       nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
       nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
       nnoremap <silent> <leader>p :MarkdownPreview<CR>

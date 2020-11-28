@@ -1,6 +1,4 @@
-let g:config_level = exists('$VIM_CONFIG_LEVEL' ) ?
-  \ $VIM_CONFIG_LEVEL : exists('g:config_level_session') ?
-  \ g:config_level_session : 2
+let g:knobs_default_level = 2
 
 " Default values for the feature toggles
 let g:default_toggles = {
@@ -75,8 +73,8 @@ let g:layers = get(g:, "layers",{
 "
 " Quick finish if config level is 0
 "
+call knobs#core#Bootstrap()
 if knobs#core#Level() == 0
-  call knobs#core#Bootstrap()
   finish
 endif
 

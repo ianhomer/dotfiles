@@ -59,10 +59,6 @@ function! knobs#IsNotEnabled(feature)
   return 1 - knobs#core#IsEnabled(a:feature)
 endfunction
 
-function! knobs#Level()
-  return g:config_level
-endfunction
-
 " Reload vimrc, neo vimrc and CoC
 function! knobs#ReloadConfig()
   silent! wall

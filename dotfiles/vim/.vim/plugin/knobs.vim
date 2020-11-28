@@ -25,7 +25,7 @@ let g:knobs_loaded = 1
 "
 
 command! -nargs=0 Knobs :call knobs#Toggles()
-command! -nargs=0 KnobLevel :echo knobs#Level()
+command! -nargs=0 KnobLevel :echo knobs#core#Level()
 command! -nargs=1 -complete=customlist,knobs#ListFeatures
   \ KnobToggle :call knobs#Toggle(<q-args>)
 
