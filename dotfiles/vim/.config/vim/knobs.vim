@@ -72,25 +72,12 @@ let g:layers = get(g:, "layers",{
   \   "notes": $ITERM_PROFILE == 'oh-my' ? 1 : 0   
   \ })
 
-" Set default state of feature toggles
-let g:toggles = get(g:, "toggles", g:default_toggles)
-
-function! IsEnabled(feature)
-  return has_key(g:toggles, a:feature) ? g:toggles[a:feature] : 0
-endfunction
-
-function! IsNotEnabled(feature)
-  return 1 - IsEnabled(a:feature)
-endfunction
-
-function! MasterLevel()
-  return g:config_level
-endfunction
-
 "
 " Quick finish if config level is 0
 "
-if MasterLevel() == 0
+if knobs#core#Level() == 0
+  call knobs#core#Bootstrap()
   finish
 endif
 
+silent call knobs#Initialise()

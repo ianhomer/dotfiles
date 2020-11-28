@@ -1,7 +1,7 @@
-if exists('g:loaded_knobs')
+if exists('g:knobs_loaded')
   finish
 endif
-let g:loaded_knobs = 1
+let g:knobs_loaded = 1
 
 "
 " Toggle features and layers. Layers are typically triggered by the environment
@@ -24,15 +24,12 @@ let g:loaded_knobs = 1
 " configuration and plugins with control.
 "
 
-command! -nargs=0 Toggles :call knobs#Toggles()
+command! -nargs=0 Knobs :call knobs#Toggles()
+command! -nargs=0 KnobLevel :echo knobs#Level()
 command! -nargs=1 -complete=customlist,knobs#ListFeatures
-  \ ToggleFeature :call ToggleFeature(<q-args>)
+  \ KnobToggle :call knobs#Toggle(<q-args>)
 
-" Apply all levels during initialisation
-silent call knobs#ApplyLevels()
-
-" Apply all layers during initialisation
-silent call knobs#ApplyLayers()
+nnoremap <silent> <leader>v :call knobs#ReloadConfig()<CR>
 
 nnoremap <silent> <leader>9a :call knobs#ToggleFeature("ale")<CR>
 nnoremap <silent> <leader>9c :call knobs#ToggleFeature("coc")<CR>
@@ -44,13 +41,13 @@ nnoremap <silent> <leader>9g :call knobs#ToggleFeature("gitgutter")<CR>
 nnoremap <silent> <leader>9s :call knobs#ToggleFeature("syntastic")<CR>
 nnoremap <silent> <leader>9w :call knobs#ToggleFeature("writegood")<CR>
 
-nnoremap <silent> <leader>90 :call knobs#ConfigLevel(0)<CR>
-nnoremap <silent> <leader>91 :call knobs#ConfigLevel(1)<CR>
-nnoremap <silent> <leader>92 :call knobs#ConfigLevel(2)<CR>
-nnoremap <silent> <leader>93 :call knobs#ConfigLevel(3)<CR>
-nnoremap <silent> <leader>94 :call knobs#ConfigLevel(4)<CR>
-nnoremap <silent> <leader>95 :call knobs#ConfigLevel(5)<CR>
-nnoremap <silent> <leader>96 :call knobs#ConfigLevel(6)<CR>
-nnoremap <silent> <leader>97 :call knobs#ConfigLevel(7)<CR>
-nnoremap <silent> <leader>98 :call knobs#ConfigLevel(8)<CR>
-nnoremap <silent> <leader>99 :call knobs#ConfigLevel(9)<CR>
+nnoremap <silent> <leader>90 :call knobs#Level(0)<CR>
+nnoremap <silent> <leader>91 :call knobs#Level(1)<CR>
+nnoremap <silent> <leader>92 :call knobs#Level(2)<CR>
+nnoremap <silent> <leader>93 :call knobs#Level(3)<CR>
+nnoremap <silent> <leader>94 :call knobs#Level(4)<CR>
+nnoremap <silent> <leader>95 :call knobs#Level(5)<CR>
+nnoremap <silent> <leader>96 :call knobs#Level(6)<CR>
+nnoremap <silent> <leader>97 :call knobs#Level(7)<CR>
+nnoremap <silent> <leader>98 :call knobs#Level(8)<CR>
+nnoremap <silent> <leader>99 :call knobs#Level(9)<CR>
