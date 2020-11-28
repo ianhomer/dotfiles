@@ -178,12 +178,12 @@ function! Toggles()
 endfunction
 
 function ListFeatures(ArgLead, CmdLind, CursorPos)
-  return sort(keys(g:toggles))
+  return sort(filter(keys(g:toggles), 'stridx(v:val,"'.a:ArgLead.'") == 0'))
 endfunction
 
 command! -nargs=0 Toggles :call Toggles()
 command! -nargs=1 -complete=customlist,ListFeatures
-  \ ToggleFeature :call ToggleFeature(<args>)
+  \ ToggleFeature :call ToggleFeature(<q-args>)
 
 nnoremap <silent> <leader>9a :call ToggleFeature("ale")<CR>
 nnoremap <silent> <leader>9c :call ToggleFeature("coc")<CR>

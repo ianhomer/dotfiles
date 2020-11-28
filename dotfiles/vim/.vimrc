@@ -274,6 +274,38 @@ else
   set guicursor+=i:ver100-iCursor
 endif
 
+" Reload vimrc, neo vimrc and CoC
+let g:config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
+let g:reload_config = "source ".g:config_file
+if !exists("*ReloadConfig")
+  function! ReloadConfig()
+    silent! wall
+    exec g:reload_config
+    call RestartConfig()
+    let config_message = has('nvim') ? "neo init.vm" : ".vimrc"
+    let coc_message = IsEnabled("coc") ? " with CoC" : ""
+    if IsNotEnabled("coc")
+      " only display message if CoC not enabled, it it is enabled, this extra
+      " message causes overload in the 2 row command window
+      echo "Reloaded ".config_message.coc_message" - level = ".g:config_level
+    endif
+    if expand('%:p') != ""
+      normal ma
+      " Reload current buffer
+      silent edit
+      normal `a
+    endif
+  endfunction
+endif
+
+function! RestartConfig()
+  if IsEnabled("coc")
+    CocRestart
+  endif
+endfunction
+
+nnoremap <silent> <leader>v :call ReloadConfig()<CR>
+
 if g:config_level < 3
   finish
 endif
@@ -471,41 +503,9 @@ if IsEnabled("tabcomplete")
   source ~/.config/vim/tabcomplete.vim
 endif
 
-" Reload vimrc, neo vimrc and CoC
-let g:config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
-let g:reload_config = "source ".g:config_file
-if !exists("*ReloadConfig")
-  function! ReloadConfig()
-    silent! wall
-    exec g:reload_config
-    call RestartConfig()
-    let config_message = has('nvim') ? "neo init.vm" : ".vimrc"
-    let coc_message = IsEnabled("coc") ? " with CoC" : ""
-    if IsNotEnabled("coc")
-      " only display message if CoC not enabled, it it is enabled, this extra
-      " message causes overload in the 2 row command window
-      echo "Reloaded ".config_message.coc_message" - level = ".g:config_level
-    endif
-    if expand('%:p') != ""
-      normal ma
-      " Reload current buffer
-      silent edit
-      normal `a
-    endif
-  endfunction
-endif
-
 if IsEnabled("coc")
   source ~/.config/vim/coc.vim
 endif
-
-function! RestartConfig()
-  if IsEnabled("coc")
-    CocRestart
-  endif
-endfunction
-
-nnoremap <silent> <leader>v :call ReloadConfig()<CR>
 
 " Clear whitespace
 function! PruneWhiteSpace()
