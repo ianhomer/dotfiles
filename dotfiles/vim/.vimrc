@@ -5,16 +5,76 @@ else
   let g:vim_dir = "~/.vim"
 endif
 
+"
+" CORE Configuration - START
+"
 let mapleader = "\<Space>"
 let maplocalleader = "\\"
 
+" Enable mouse support
+set mouse=a
+" Disable error bells
+set noerrorbells
+" Enhance command-line completion
+set wildmenu
+" Highlight current line
+set cursorline
+" Ignore case of searches
+set ignorecase
+" Highelight dynamically as pattern is typed
+set incsearch
+" Default updatetime is 4000 and too slow
+set updatetime=300
+" Quicker timeout between key presses
+set timeoutlen=500
+" Always show sign column to stop flip-flopping
+set signcolumn=yes
+if has("nvim")
+  " Support true color in nvim only, this feature causes colours to not render
+  " in vim in tmux
+  set termguicolors
+endif
+" Keep messages short and don't give ins-completion-messages (c)
+set shortmess=catI
+" Tab support with 2 spaces
+set tabstop=2
+set shiftwidth=2
+set expandtab
+" 80 characters default width
+set textwidth=80
+" Softbreak on space between words
+set linebreak
+" Use the OS clipboard by default (on versions compiled with `+clipboard`)
+set clipboard=unnamed
+
+" I don't use modelines
+set nomodeline
+
+"
+" CORE Configuration - END
+"
+
+if !exists('$VIM_CONFIG_LEVEL' )
+  finish
+endif
+
 source ~/.config/vim/toggle.vim
 
-if g:config_level > 0
-  " why?
-  "filetype plugin on
-  "filetype plugin off
+" Provide more space for command output (e.g. fugitive) - with it this you may
+" need to press ENTER after fugitive commands
+if IsEnabled("compactcmd")
+  set cmdheight=1
+else
+  set cmdheight=2
 endif
+
+if g:config_level == 0
+  finish
+endif
+
+" why?
+"filetype plugin on
+"filetype plugin off
 
 " Load plugins
 call plug#begin(g:vim_dir."/plugged")
@@ -54,7 +114,10 @@ if g:config_level > 0
     Plug 'preservim/nerdtree'
     source ~/.config/vim/nerdtree.vim
   endif
+endif
 
+if g:config_level < 3
+  finish
 endif
 
 function! s:gitModified()
@@ -218,52 +281,6 @@ if IsEnabled("coc")
 endif
 
 call plug#end()
-
-" Enable mouse support
-set mouse=a
-" Disable error bells
-set noerrorbells
-" Enhance command-line completion
-set wildmenu
-" Highlight current line
-set cursorline
-" Ignore case of searches
-set ignorecase
-" Highelight dynamically as pattern is typed
-set incsearch
-" Default updatetime is 4000 and too slow
-set updatetime=300
-" Quicker timeout between key presses
-set timeoutlen=500
-" Always show sign column to stop flip-flopping
-set signcolumn=yes
-if has("nvim")
-  " Support true color in nvim only, this feature causes colours to not render
-  " in vim in tmux
-  set termguicolors
-endif
-" Keep messages short and don't give ins-completion-messages (c)
-set shortmess=catI
-" Provide more space for command output (e.g. fugitive) - with it this you may
-" need to press ENTER after fugitive commands
-if IsEnabled("compactcmd")
-  set cmdheight=1
-else
-  set cmdheight=2
-endif
-" Tab support with 2 spaces
-set tabstop=2
-set shiftwidth=2
-set expandtab
-" 80 characters default width
-set textwidth=80
-" Softbreak on space between words
-set linebreak
-" Use the OS clipboard by default (on versions compiled with `+clipboard`)
-set clipboard=unnamed
-
-" I don't use modelines
-set nomodeline
 
 "
 " Command remapping
@@ -681,10 +698,6 @@ if g:config_level > 0
 endif
 
 source ~/.config/vim/terminal.vim
-
-"
-" *** Scope : Markdown ***
-"
 
 " Surround Customisations
 " This doesn't work for me -

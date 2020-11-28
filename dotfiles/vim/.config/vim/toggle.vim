@@ -20,7 +20,7 @@
 "
 let g:config_level = exists('$VIM_CONFIG_LEVEL' ) ?
   \ $VIM_CONFIG_LEVEL : exists('g:config_level_session') ?
-  \ g:config_level_session : 4
+  \ g:config_level_session : 0
 
 " Default values for the feature toggles
 let g:default_toggles = {
