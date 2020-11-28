@@ -54,11 +54,11 @@ set nomodeline
 " CORE Configuration - END
 "
 
-if !exists('$VIM_CONFIG_LEVEL' )
+source ~/.config/vim/knobs.vim
+
+if g:config_level == 0
   finish
 endif
-
-source ~/.config/vim/toggle.vim
 
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
@@ -66,10 +66,6 @@ if IsEnabled("compactcmd")
   set cmdheight=1
 else
   set cmdheight=2
-endif
-
-if g:config_level == 0
-  finish
 endif
 
 " why?

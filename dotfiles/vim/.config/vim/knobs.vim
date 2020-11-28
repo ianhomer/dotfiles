@@ -18,6 +18,7 @@
 " between configurations and plugins. It can also be used to introduce new
 " configuration and plugins with control.
 "
+
 let g:config_level = exists('$VIM_CONFIG_LEVEL' ) ?
   \ $VIM_CONFIG_LEVEL : exists('g:config_level_session') ?
   \ g:config_level_session : 0
@@ -93,6 +94,17 @@ let g:layers = get(g:, "layers",{
 " Set default state of feature toggles
 let g:toggles = get(g:, "toggles", g:default_toggles)
 
+function! IsEnabled(feature)
+  return has_key(g:toggles, a:feature) ? g:toggles[a:feature] : 0
+endfunction
+
+"
+" Quick finish if config level is 0
+"
+if g:config_level == 0
+  finish
+endif
+
 if !exists("*ToggleFeature")
   function ToggleFeature(feature)
     call SetFeature(a:feature, has_key(g:toggles, a:feature) ? !g:toggles[a:feature] : 1)
@@ -154,10 +166,6 @@ if !exists("*ApplyLevels")
   " Apply all levels during initialisation
   silent call ApplyLevels()
 endif
-
-function! IsEnabled(feature)
-  return has_key(g:toggles, a:feature) ? g:toggles[a:feature] : 0
-endfunction
 
 function! IsNotEnabled(feature)
   return 1 - IsEnabled(a:feature)
