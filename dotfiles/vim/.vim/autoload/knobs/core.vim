@@ -1,3 +1,8 @@
+if exists('g:knobs_core_autoloaded')
+  finish
+endif
+let g:knobs_core_autoloaded = 1
+
 function knobs#core#ListFeatures(ArgLead, CmdLind, CursorPos)
   return sort(filter(keys(g:toggles), 'stridx(v:val,"'.a:ArgLead.'") == 0'))
 endfunction
@@ -15,17 +20,17 @@ function knobs#core#ToggleLayer(layer)
 endfunction
 
 function knobs#core#SetLevel(level)
-  let g:config_level_session=a:level
-  if g:config_level == 0
+  if a:level == 0
     set all&
   endif
+  let g:config_level_session=a:level
+  let g:config_level=a:level
   call knobs#core#ApplyLevels()
   call knobs#core#ReloadConfig()
 endfunction
 
 function! knobs#core#SetFeature(feature, value)
   let g:toggles[a:feature] = a:value
-  echom a:feature . " " . (g:toggles[a:feature] ? "on" : "off")
 endfunction
 
 function! knobs#core#ApplyLayer(layer, enabled)
@@ -46,8 +51,7 @@ endfunction
 " Apply feature toggles for all layers
 function! knobs#core#ApplyLevels()
   for [feature,level] in items(g:level_features)
-    call knobs#core#SetFeature(feature,
-      \ (level <= g:config_level ? 1 : 0))
+    call knobs#core#SetFeature(feature, knobs#At(level))
   endfor
 endfunction
 
@@ -56,7 +60,7 @@ function! knobs#core#Toggles()
 endfunction
 
 function! knobs#core#IsNotEnabled(feature)
-  return 1 - knobs#core#core#IsEnabled(a:feature)
+  return 1 - knobs#IsEnabled(a:feature)
 endfunction
 
 " Reload vimrc, neo vimrc and CoC
@@ -66,7 +70,7 @@ function! knobs#core#ReloadConfig()
   exec "source ".config_file
   call knobs#core#RestartConfig()
   let config_message = has('nvim') ? "neo init.vm" : ".vimrc"
-  let coc_message = knobs#core#core#IsEnabled("coc") ? " with CoC" : ""
+  let coc_message = knobs#IsEnabled("coc") ? " with CoC" : ""
   if knobs#core#IsNotEnabled("coc")
     " only display message if CoC not enabled, it it is enabled, this extra
     " message causes overload in the 2 row command window
@@ -81,7 +85,7 @@ function! knobs#core#ReloadConfig()
 endfunction
 
 function! knobs#core#RestartConfig()
-  if knobs#core#core#IsEnabled("coc")
+  if knobs#IsEnabled("coc")
     CocRestart
   endif
 endfunction

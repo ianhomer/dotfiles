@@ -2,6 +2,12 @@
 " Core functions for knobs that are loaded early and can support a very minimal
 " set up
 "
+
+if exists('g:knobs_autoloaded')
+  finish
+endif
+let g:knobs_autoloaded = 1
+
 function! knobs#Level()
   return g:config_level
 endfunction
@@ -21,14 +27,19 @@ function! knobs#Init()
   let g:toggles = get(g:, "toggles", g:default_toggles)
 
   " Shortcuts to functions
-  function! Knob(feature)
-    return knobs#IsEnabled(a:feature)
-  endfunction
+  if !exists("*Knob") 
+    function! Knob(feature)
+      return knobs#IsEnabled(a:feature)
+    endfunction
+  endif
 
-  function! KnobAt(level)
-    return g:config_level >= a:level
-  endfunction
+  if !exists("*KnobAt") 
+    function! KnobAt(level)
+      return knobs#At(a:level)
+    endfunction
+  endif
 
+  " Do full initialisation if config level greater than zero
   if KnobAt(1)
     silent call knobs#core#Init()
   endif
@@ -40,5 +51,13 @@ endfunction
 
 function! knobs#Level()
   return g:config_level
+endfunction
+
+function! knobs#At(level)
+  if exists("g:config_level")
+    return g:config_level >= a:level
+  else
+    return 0
+  endif
 endfunction
 
