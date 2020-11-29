@@ -66,22 +66,22 @@ function! knobs#core#ReloadConfig()
   exec "source ".config_file
   call knobs#core#RestartConfig()
   let config_message = has('nvim') ? "neo init.vm" : ".vimrc"
-  let coc_message = knobs#("coc") ? " with CoC" : ""
-  if !knobs#("coc")
+  let extra_message = exists("*CocRestart") ? " with CoC" : ""
+  if !exists(":CocRestart")
     " only display message if CoC not enabled, it it is enabled, this extra
     " message causes overload in the 2 row command window
-    echo "Reloaded ".config_message.coc_message" - level = ".g:knobs_level
+    echo "Reloaded ".config_message.extra_message" - level = ".g:knobs_level
   endif
-  if expand('%:p') != ""
+  if &modifiable && expand('%:p') != ""
     normal ma
-    " Reload current buffer
+    " Reload current buffer to allow any filetype plugins to take effect
     silent edit
     normal `a
   endif
 endfunction
 
 function! knobs#core#RestartConfig()
-  if knobs#("coc")
+  if exists(":CocRestart")
     CocRestart
   endif
 endfunction
