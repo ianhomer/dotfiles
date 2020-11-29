@@ -20,7 +20,7 @@ function! knobs#Init()
 
   let g:config_level = exists('$VIM_KNOB' ) ?
     \ $VIM_KNOB : exists('g:config_level_session') ?
-    \ g:config_level_session : 
+    \ g:config_level_session :
     \ exists('g:knobs_default_level') ? g:knobs_default_level : 0
 
   " Set default state of feature toggles
@@ -29,7 +29,7 @@ function! knobs#Init()
   call s:DefineCommands()
 
   " Do full initialisation if config level greater than zero
-  if KnobAt(1)
+  if knobs#At(1)
     silent call knobs#core#Init()
   endif
 endfunction
@@ -39,17 +39,16 @@ endfunction
 " should be defined in plugin/knobs.vim.
 "
 function! s:DefineCommands()
-
   command! -nargs=+ -bar IfKnob call knobs#If(<f-args>)
 
   " Shortcuts to functions
-  if !exists("*Knob") 
+  if !exists("*Knob")
     function! Knob(feature)
       return knobs#(a:feature)
     endfunction
   endif
 
-  if !exists("*KnobAt") 
+  if !exists("*KnobAt")
     function! KnobAt(level)
       return knobs#At(a:level)
     endfunction
@@ -78,3 +77,5 @@ function! knobs#At(level)
     return 0
   endif
 endfunction
+
+call knobs#Init()

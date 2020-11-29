@@ -24,8 +24,6 @@ let g:knobs_loaded = 1
 " configuration and plugins with control.
 "
 
-call knobs#Init()
-
 command! -nargs=0 Knobs :call knobs#core#Toggles()
 command! -nargs=0 KnobLevel :echo knobs#Level()
 command! -nargs=1 -complete=customlist,knobs#core#ListFeatures
