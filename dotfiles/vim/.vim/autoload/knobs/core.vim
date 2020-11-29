@@ -55,8 +55,8 @@ function! knobs#core#ApplyLevels()
   endfor
 endfunction
 
-function! knobs#core#Toggles()
-  echo g:knobs
+function! knobs#core#Knobs()
+  echo sort(filter(keys(g:knobs),'g:knobs[v:val]'))
 endfunction
 
 " Reload vimrc, neo vimrc and CoC

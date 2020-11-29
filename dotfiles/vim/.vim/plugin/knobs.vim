@@ -24,22 +24,22 @@ let g:knobs_loaded = 1
 " configuration and plugins with control.
 "
 
-command! -nargs=0 Knobs :call knobs#core#Toggles()
+command! -nargs=0 Knobs :call knobs#core#Knobs()
 command! -nargs=0 KnobLevel :echo knobs#Level()
 command! -nargs=1 -complete=customlist,knobs#core#ListKnobs
   \ KnobToggle :call knobs#core#Toggle(<q-args>)
 
 nnoremap <silent> <leader>v :call knobs#core#ReloadConfig()<CR>
 
-nnoremap <silent> <leader>9a :call knobs#core#ToggleKnob("ale")<CR>
-nnoremap <silent> <leader>9c :call knobs#core#ToggleKnob("coc")<CR>
+nnoremap <silent> <leader>9a :call knobs#core#Toggle("ale")<CR>
+nnoremap <silent> <leader>9c :call knobs#core#Toggle("coc")<CR>
 nnoremap <silent> <leader>9j :call knobs#core#ToggleLayer("notes")<CR>
-nnoremap <silent> <leader>9l :call knobs#core#ToggleKnob("light")<CR>
+nnoremap <silent> <leader>9l :call knobs#core#Toggle("light")<CR>
 nnoremap <silent> <leader>9m :call knobs#core#ToggleLayer("mobile")<CR>
-nnoremap <silent> <leader>9n :call knobs#core#ToggleKnob("nerdtree")<CR>
-nnoremap <silent> <leader>9g :call knobs#core#ToggleKnob("gitgutter")<CR>
-nnoremap <silent> <leader>9s :call knobs#core#ToggleKnob("syntastic")<CR>
-nnoremap <silent> <leader>9w :call knobs#core#ToggleKnob("writegood")<CR>
+nnoremap <silent> <leader>9n :call knobs#core#Toggle("nerdtree")<CR>
+nnoremap <silent> <leader>9g :call knobs#core#Toggle("gitgutter")<CR>
+nnoremap <silent> <leader>9s :call knobs#core#Toggle("syntastic")<CR>
+nnoremap <silent> <leader>9w :call knobs#core#Toggle("writegood")<CR>
 
 nnoremap <silent> <leader>90 :call knobs#core#SetLevel(0)<CR>
 nnoremap <silent> <leader>91 :call knobs#core#SetLevel(1)<CR>
