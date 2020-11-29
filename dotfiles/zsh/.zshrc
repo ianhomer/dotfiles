@@ -97,3 +97,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias vi="VIM_KNOB=5 nvim"
+alias v="VIM_KNOB=5 nvim"
+
