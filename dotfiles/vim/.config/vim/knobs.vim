@@ -2,9 +2,7 @@ let g:knobs_default_level = 2
 
 " Default values for the feature toggles
 let g:default_toggles = {
-  \   "coco":0,
   \   "compactcmd":0,
-  \   "conflict-marker":0,
   \   "markdown.flow":0,
   \   "markdown.conceal.full":0,
   \   "markdown.conceal.partial":0,
@@ -12,8 +10,7 @@ let g:default_toggles = {
   \   "markdown.syntax.table":1,
   \   "polyglot":0,
   \   "syntastic":0,
-  \   "startuptime":0,
-  \   "writegood":0
+  \   "startuptime":0
   \ }
 
 " Config levels at which features are enabled
@@ -45,7 +42,8 @@ let g:level_features = {
   \   "unimpaired":5,
   \   "update-spelling":5,
   \   "which-key":5,
-  \   "window-cleaner":5
+  \   "window-cleaner":5,
+  \   "writegood":8
   \ }
 
 " Feature toggles triggered by each layer
@@ -69,7 +67,7 @@ let g:layer_features = {
 " iTerm used for notes layer
 let g:layers = get(g:, "layers",{
   \   "mobile": $ANDROID_DATA == '/data' ? 1 : 0,
-  \   "notes": $ITERM_PROFILE == 'oh-my' ? 1 : 0   
+  \   "notes": $ITERM_PROFILE == 'oh-my' ? 1 : 0
   \ })
 
 call knobs#Init()
