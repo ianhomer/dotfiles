@@ -1,7 +1,6 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.dotfiles/bin:$PATH
 
-# Path to your oh-my-zsh installation.
+# Path to oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
@@ -98,6 +97,4 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias vi="VIM_KNOB=5 nvim"
-alias v="VIM_KNOB=5 nvim"
-
+. ~/.config/sh/aliases.sh
