@@ -73,6 +73,7 @@ else
       fi
     fi
   fi
+  echo $todayLog
   if [[ "$OSTYPE" =~ ^darwin ]] ; then
     gsed -i "3i- [ ] ${todo}" $todayLog
   else
@@ -80,5 +81,3 @@ else
   fi
   ag --nofilename --nocolor --nobreak '\- \[ \](?! [\.~\^])' $THINGS | wc -l
 fi
-
-
