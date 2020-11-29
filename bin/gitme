@@ -4,9 +4,15 @@
 # Report on work in local git repositories that need pushing to remote
 #
 
-while getopts "n:r" o; do case "$o" in
+_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+. ${_DIR}/functions/log.sh
+
+FETCH_WINDOW=3600
+
+while getopts "n:rw:" o; do case "$o" in
   n) MAX=$OPTARG ;;
   r) REMOTE=y ;;
+  w) FETCH_WINDOW=$OPTARG ;;
 esac done
 
 NL=$'\n'
@@ -38,14 +44,22 @@ function showDirectoryStatus {
 for d in `git-get-directories` ; do
   [[ "$REMOTE" == "y" ]] && (
     cd $d
-    printf '\033[0;35m'
-    git rev-parse --show-toplevel
+    root=`git rev-parse --show-toplevel`
+    root=${root/$HOME/\~}
+    root=${root/\/projects\//\/ℙ\/}
+    printf '\033[0;35m%s ' $root
     if [[ `git remote | wc -l` -eq 0 ]] ; then
-      echo "no remote"
+      o_o "no remote"
     else
-      printf '\033[0;33m'
-      git remote update
-      git pull
+      now=`date +%s`
+      lastModified=`stat -f '%c' .git/FETCH_HEAD`
+      if [[ $((lastModified + FETCH_WINDOW)) < $now ]] ; then
+        printf '\033[0;33m'
+        git remote update
+        git pull
+      else
+        o_o "∷ fetched $((now - lastModified))s ago"
+      fi
     fi
   )
   (cd $d ; showDirectoryStatus)

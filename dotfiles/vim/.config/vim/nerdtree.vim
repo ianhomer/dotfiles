@@ -12,7 +12,7 @@ let NERDTreeMinimalMenu = 0
 
 function! NERDTreeFindOrToggle()
   if g:NERDTree.IsOpen() || @% == ""
-    if winnr('$') > 1 || &filetype == "startify" 
+    if winnr('$') > 0 || &filetype == "startify" 
       NERDTreeToggle
     else
       " NERDTree doesn't like closing itself if it's the last window, so we'll

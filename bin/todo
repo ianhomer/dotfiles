@@ -1,0 +1,77 @@
+#!/bin/bash
+
+help() {
+  cat << EOF
+- [ ] Todo
+- [x] Done
+- [ ] . Backlog
+- [ ] - Near aligment
+- [ ] ~ Far alignment
+- [ ] ^ Goal
+- [ ] ^ ABC Goal for ABC context
+- [ ] ! Cancelled
+EOF
+}
+
+OPTIND=1
+while getopts "abc:hgox" o; do case "$o" in
+  a) ALL=y ;;
+  b) BACKLOG=y ;;
+  c) CONTEXT=" $OPTARG" ;;
+  g) GOAL=y ;;
+  h) help && exit 0 ;;
+  o) CANCELLED=y ;;
+  x) DONE=y ;;
+esac done
+shift $((OPTIND-1))
+
+todo="$@"
+
+# If todo is just three characters then it's a context to list
+if [[ ${#todo} == 3 ]] ; then
+  CONTEXT=" $todo"
+  todo=""
+fi
+
+if [[ -z "$todo" ]] ; then
+  # List todos
+  echo
+  if [[ -n "$ALL" ]] ; then
+    pattern="\- \[[^ox]\]( [\.-~\^])?$CONTEXT"
+  elif [[ -n "$CANCELLED" ]] ; then
+    pattern="\- \[x\] !$CONTEXT"
+  elif [[ -n "$DONE" ]] ; then
+    pattern="\- \[x\]$CONTEXT"
+  elif [[ -n "$BACKLOG" ]] ; then
+    pattern="\- \[ \]( \.)$CONTEXT"
+  elif [[ -n "$GOAL" ]] ; then
+    pattern="\- \[ \]( [-~\^])$CONTEXT"
+  else
+    pattern="\- \[ \](?! [\.~\^])$CONTEXT"
+  fi
+  ag --nofilename --nocolor --nobreak "$pattern" ~/projects/things/ |
+    cut -c 3- |
+    sort
+  echo
+else
+  # Create a todo
+  todayLog=~/projects/things/my-notes/stream/`date +%m%d`.md
+  if [[ ! -f "$todayLog" ]] ; then
+    date=`date '+%a %d %b %Y' | tr [:lower:] [:upper:]`
+    printf "# %s\n\n\n" "${date}" >> $todayLog
+  fi
+  
+  if [[ `wc -l < $todayLog` -lt 3 ]] ; then
+    echo >> $todayLog
+    if [[ `wc -l < $todayLog` -lt 3 ]] ; then
+      echo >> $todayLog
+      if [[ `wc -l < $todayLog` -lt 3 ]] ; then
+        echo >> $todayLog
+      fi
+    fi
+  fi
+  gsed -i "3i- [ ] ${todo}" $todayLog
+  ag --nofilename --nocolor --nobreak '\- \[ \](?! [\.~\^])' ~/projects/things/ | wc -l
+fi
+
+

@@ -12,11 +12,12 @@
 # is for macOS only.
 #
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-REPOSITORY_DIR="$( cd "$SCRIPT_DIR" ; cd .. && pwd )"
+_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+. ${_DIR}/functions/log.sh
+REPOSITORY_DIR="$( cd "$_DIR" ; cd .. && pwd )"
 DOTFILES_DIR="${REPOSITORY_DIR}/dotfiles"
 
-PATH=${SCRIPT_DIR}:${PATH}
+PATH=${_DIR}:${PATH}
 VERBOSE=0
 DRY=0
 
@@ -96,15 +97,15 @@ command_help() {
 # Main entry point for installing dotfiles, and more, for a system.
 #
 command_install() {
-  printf "\e[36mInstalling dotfiles\e[0m\n"
+  _ Installing dotfiles
   [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
   command_pull
   # Call inner part of install as command onto a new execution of dotme so that
   # updates pulled in are taken into account
   arguments=""
   [ $DRY -eq 1 ] && arguments="$arguments -d"
-  $SCRIPT_DIR/dotme $arguments inner
-  printf "\e[36mdotfiles installed and \e[1mAOK\e[0m\n"
+  $_DIR/dotme $arguments inner
+  _ dotfiles installed and $(bold AOK)
 }
 
 command_inner() {
@@ -123,6 +124,7 @@ command_inner() {
   [ $DRY -eq 0 ] && is-pc && dotme-jenv
   [ $DRY -eq 0 ] && dotme-fish
   [ $DRY -eq 0 ] && dotme-fisher
+  [ $DRY -eq 0 ] && is-pc && dotme-zsh
   [ $DRY -eq 0 ] && dotme-gitme
   [ $DRY -eq 0 ] && is-pc && dotme-nnn
   command_clean
@@ -235,7 +237,7 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 # Initialize our own variables:
 VERBOSE=0
 
-while getopts "h?vdf:" opt; do
+while getopts "?df:Fhv" opt; do
   case "$opt" in
   h|\?)
     command_help
@@ -244,6 +246,8 @@ while getopts "h?vdf:" opt; do
   d) DRY=1
     ;;
   f) FORCE=$OPTARG
+    ;;
+  F) FORCE_ALL=1
     ;;
   v) VERBOSE=1
     ;;
@@ -254,9 +258,15 @@ shift $((OPTIND-1))
 
 [ "${1:-}" = "--" ] && shift
 
-COMMAND=${1:-install}
+if [[ -n "$FORCE_ALL" ]] ; then
+  for f in ~/.dotfiles/bin/dotme-* ; do
+    should-run -c ${f##*/}
+  done
+elif [[ -n "$FORCE" ]] ; then
+  should-run -c "dotme-$FORCE"
+fi
 
-[[ -n "$FORCE" ]] && should-run -c "dotme-$FORCE"
+COMMAND=${1:-install}
 
 command_${COMMAND} $@
 if [ $? = 127 ]; then

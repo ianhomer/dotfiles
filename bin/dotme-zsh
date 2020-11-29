@@ -1,0 +1,35 @@
+#!/usr/bin/env zsh
+#
+# Configure zsh
+#
+
+should-run -m 7 dotme-zsh || exit
+
+_DIR="$(cd "$(dirname "${ZSH_ARGZERO}")" >/dev/null 2>&1 && pwd)"
+. ${_DIR}/functions/log.sh
+
+o_o "Configuring zsh shell"
+
+ZSH=~/.oh-my-zsh
+
+if [[ ! -d ~/.oh-my-zsh ]] ; then
+  #
+  # oh my zsh is installed by cloning repo. References to 
+  # oh my zsh are in the .zshrc dotfile. This is instead of the
+  # default install script since it is more focussed, but is 
+  # effectively the same thing.
+  #
+  git clone -c core.eol=lf -c core.autocrlf=false \
+    -c fsck.zeroPaddedFilemode=ignore             \
+    -c fetch.fsck.zeroPaddedFilemode=ignore       \
+    -c receive.fsck.zeroPaddedFilemode=ignore     \
+    --depth=1 --branch "master"                   \
+    "https://github.com/ohmyzsh/ohmyzsh.git" "$ZSH"
+fi
+
+env ZSH="$ZSH" sh "$ZSH/tools/upgrade.sh"
+zmodload zsh/datetime
+echo "LAST_EPOCH=$(( EPOCHSECONDS / 60 / 60 / 24 ))" >| "${ZSH}/cache/.zsh-update"
+command rm -rf "$ZSH/log/update.lock"
+
+should-run -fu dotme-zsh

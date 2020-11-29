@@ -8,9 +8,59 @@
         }
       },
       "adoptopenjdk11": {
-        "version": "11.0.7,10",
+        "version": "11.0.9,11",
         "options": {
           "full_name": "adoptopenjdk11"
+        }
+      },
+      "adoptopenjdk8": {
+        "version": "8,275:b01",
+        "options": {
+          "full_name": "adoptopenjdk8"
+        }
+      },
+      "java11": {
+        "version": "11.0.2,9",
+        "options": {
+          "full_name": "java11"
+        }
+      },
+      "powershell": {
+        "version": "7.1.0",
+        "options": {
+          "full_name": "powershell"
+        }
+      }
+    },
+    "tap": {
+      "adoptopenjdk/openjdk": {
+        "revision": "7226e432d84bd2479b0b35997ec79540662ff053"
+      }
+    },
+    "brew": {
+      "openjdk@11": {
+        "version": "11.0.9",
+        "bottle": {
+          "cellar": ":any",
+          "prefix": "/usr/local",
+          "files": {
+            "big_sur": {
+              "url": "https://homebrew.bintray.com/bottles/openjdk%4011-11.0.9.big_sur.bottle.tar.gz",
+              "sha256": "610ed0bd964812cdce0f6e1a4b8c06fd867861c72be7ebff9f674362ba48b7b9"
+            },
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/openjdk%4011-11.0.9.catalina.bottle.tar.gz",
+              "sha256": "c640eade77c3ad69fef4d66872bbccc2e8782fcd5beee84ecb6c5b7dbb28081b"
+            },
+            "mojave": {
+              "url": "https://homebrew.bintray.com/bottles/openjdk%4011-11.0.9.mojave.bottle.tar.gz",
+              "sha256": "facf3c10d2f0183c5f55c2e7aad5bc9ad28da3979712a7fee342bb00b5dbdd5a"
+            },
+            "high_sierra": {
+              "url": "https://homebrew.bintray.com/bottles/openjdk%4011-11.0.9.high_sierra.bottle.tar.gz",
+              "sha256": "4e92d71376b9e07198245e434ba86c8caa95521f6dcec8454c726cec5a16c0d1"
+            }
+          }
         }
       }
     }
@@ -18,12 +68,12 @@
   "system": {
     "macos": {
       "catalina": {
-        "HOMEBREW_VERSION": "2.2.13",
+        "HOMEBREW_VERSION": "2.5.11",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "0f98a1534f9c4c9eb6d196742cc5c26fad299b87",
+        "Homebrew/homebrew-core": "187755c815cc2e89cb41fa6ca2d80fa9a973dd6e",
         "CLT": "11.0.33.17",
-        "Xcode": "11.4.1",
-        "macOS": "10.15.3"
+        "Xcode": "12.1",
+        "macOS": "10.15.7"
       }
     }
   }

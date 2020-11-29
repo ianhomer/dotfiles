@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #
 # Set up repository for a specific user context. This covers alternative
@@ -6,6 +6,9 @@
 # resets SSH keys ... any things I tend do to get a repository hooked up
 # right.
 #
+
+_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+. ${_DIR}/functions/log.sh
 
 #
 # If "personal" host is set up in .ssh config them that's the
@@ -55,24 +58,47 @@ function setMyGitUrl {
   if [ ${currentRemoteUrl} != ${myRemoteUrl} ] ; then
     echo "current remote   $currentRemoteUrl"
     echo "desired remote   ${myRemoteUrl}"
-    if [[ ${action} == "change" ]] ; then
+    if [[ ${action} == "context" ]] ; then
       git remote set-url origin $myRemoteUrl
       echo "changed remote to "$(git config --get remote.origin.url)
     else
-      echo "change remote with \"change\" action"
+      echo "change remote with \"context\" action"
     fi
   else
     [[ "${verbose}" == "y" ]] && echo "current remote   $currentRemoteUrl"
-    printf "\e[36mremote \e[1mAOK\e[0m\n"
+    o_o AOK remote $currentRemoteUrl
   fi
 }
 
-setMyGitUrl
-
-# Clear authentication agent
+function fixMain() {
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  if [[ "$branch" == "master" ]] ; then
+    git fetch --prune
+    if ! git show-ref --quiet --verify -- "refs/remotes/origin/master" ; then
+      if git show-ref --quiet --verify -- "refs/remotes/origin/main" ; then
+        if [[ "${action}" == "main" ]] ; then
+          git checkout main
+        else
+          echo "Repository uses main not master - use \"main\" action to fix"
+        fi
+      else
+        echo "No master or main in remote"
+      fi
+    else
+      o_o NOK master
+    fi
+  elif [[ "$branch" == "main" ]] ; then
+    o_o AOK $branch
+  fi
+}
 
 [[ -n "${verbose}" ]] && echo "deleting identites from SSH agent"
 ssh-add -q -D
-
 [[ -n "${verbose}" ]] && ssh-add -l
 
+setMyGitUrl
+fixMain
+
+# Clear authentication agent
+
+exit 0

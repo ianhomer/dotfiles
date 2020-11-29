@@ -1,7 +1,7 @@
 let markdown_linters = ['markdownlint']
 
 " Enable markdown linters that help with good writing
-if IsEnabled("writegood")
+if Knob("writegood")
   let markdown_linters += [
         \ 'alex',
         \ 'languagetool',
