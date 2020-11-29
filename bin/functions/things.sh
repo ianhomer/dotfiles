@@ -3,7 +3,7 @@
 #
 
 if [[ "$OSTYPE" =~ ^linux-android ]]; then
-  THINGS=/storage/emulated/0/projects/things
+  THINGS=$HOME/storage/shared/projects/things
 else
   THINGS=$HOME/projects/things
 fi
