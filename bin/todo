@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+. ${_DIR}/functions/things.sh
+
 help() {
   cat << EOF
 - [ ] Todo
@@ -49,13 +52,13 @@ if [[ -z "$todo" ]] ; then
   else
     pattern="\- \[ \](?! [\.~\^])$CONTEXT"
   fi
-  ag --nofilename --nocolor --nobreak "$pattern" ~/projects/things/ |
+  ag --nofilename --nocolor --nobreak "$pattern" $THINGS |
     cut -c 3- |
     sort
   echo
 else
   # Create a todo
-  todayLog=~/projects/things/my-notes/stream/`date +%m%d`.md
+  todayLog=$THINGS/my-notes/stream/`date +%m%d`.md
   if [[ ! -f "$todayLog" ]] ; then
     date=`date '+%a %d %b %Y' | tr [:lower:] [:upper:]`
     printf "# %s\n\n\n" "${date}" >> $todayLog
@@ -70,8 +73,11 @@ else
       fi
     fi
   fi
-  gsed -i "3i- [ ] ${todo}" $todayLog
-  ag --nofilename --nocolor --nobreak '\- \[ \](?! [\.~\^])' ~/projects/things/ | wc -l
+  echo $todayLog
+  if [[ "$OSTYPE" =~ ^darwin ]] ; then
+    gsed -i "3i- [ ] ${todo}" $todayLog
+  else
+    sed -i "3i- [ ] ${todo}" $todayLog
+  fi
+  ag --nofilename --nocolor --nobreak '\- \[ \](?! [\.~\^])' $THINGS | wc -l
 fi
-
-

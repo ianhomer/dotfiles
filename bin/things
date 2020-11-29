@@ -1,9 +1,14 @@
 #!/bin/bash
 
+set -e
+
+_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+. ${_DIR}/functions/things.sh
+
 FETCH_WINDOW=600
 while getopts "w:" o; do case "$o" in
   w) FETCH_WINDOW=$OPTARG ;;
 esac done
 
-cd ~/projects/things
+cd $THINGS
 git synk -w $FETCH_WINDOW
