@@ -52,7 +52,7 @@ if [[ -z "$todo" ]] ; then
   else
     pattern="\- \[ \](?! [\.~\^])$CONTEXT"
   fi
-  ag --nofilename --nocolor --nobreak "$pattern" ~/projects/things/ |
+  ag --nofilename --nocolor --nobreak "$pattern" $THINGS |
     cut -c 3- |
     sort
   echo
