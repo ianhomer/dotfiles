@@ -70,4 +70,4 @@ let g:layers = get(g:, "layers",{
   \   "notes": $ITERM_PROFILE == 'oh-my' ? 1 : 0   
   \ })
 
-call knobs#core#Init()
+call knobs#Init()

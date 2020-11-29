@@ -31,7 +31,7 @@ command! -nargs=1 -complete=customlist,knobs#ListFeatures
 
 nnoremap <silent> <leader>v :call knobs#ReloadConfig()<CR>
 
-nnoremap <silent> <leader>9a :call knobs#ToggleFeature("ale")<CR>
+nnoremap <silent> <leader>9a :call knobs#core#ToggleFeature("ale")<CR>
 nnoremap <silent> <leader>9c :call knobs#ToggleFeature("coc")<CR>
 nnoremap <silent> <leader>9j :call knobs#ToggleLayer("notes")<CR>
 nnoremap <silent> <leader>9l :call knobs#ToggleFeature("light")<CR>
