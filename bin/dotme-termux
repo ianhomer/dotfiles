@@ -12,6 +12,6 @@ if [[ ! -f ~/.termux/font.ttf ]] ; then
 fi
 
 termux-reload-settings
-chsh -s $(which zsh)
+chsh -s zsh
 
 should-run -fu $0
