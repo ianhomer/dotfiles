@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+#
+# Output shell script that can be sourced as a shim for the environment
+#
+
+LOCAL_SHIM=$HOME/.config/dotme/.shim
+
+if [[ $# -eq 0 ]] && [[ -f "$LOCAL_SHIM" ]] ; then
+  cat $LOCAL_SHIM
+  exit 0
+fi
+
+OPTIND=1
+while getopts "o:" o; do case "$o" in
+  o) OS=$OPTARG
+esac done
+shift $((OPTIND-1))
+
+
+
+
