@@ -43,7 +43,7 @@ function! CloseAllBuffersButCurrent()
   if current < last  | silent! execute (current+1).",".last."bd"  | endif
 endfunction
 
-function! s:SwitchToFirstEditableFile()
+function! SwitchToFirstEditableFile()
   let l:current = bufnr("%")
 
   if <SID>IsEditableFile(current)
@@ -53,7 +53,8 @@ function! s:SwitchToFirstEditableFile()
 
   " Find a more appropriate buffer to switch to
   for l:buffer in filter(range(1, bufnr('$')), 'buflisted(v:val)')
-    if <SID>IsEditableFile(l:buffer)
+    " Is buffer in active window and editable?
+    if bufwinnr(l:buffer) > -1 && <SID>IsEditableFile(l:buffer)
       echo l:buffer
       let l:window = bufwinnr(l:buffer)
       if l:window > 0
@@ -98,7 +99,7 @@ endfunction
 
 function! CloseOtherBuffers()
   wall
-  let l:buffer = <SID>SwitchToFirstEditableFile()
+  let l:buffer = SwitchToFirstEditableFile()
   " Mark current cursor position
   normal mA:
   NERDTreeClose

@@ -5,6 +5,10 @@ tap "AdoptOpenJDK/openjdk"
 #
 # Development
 #
+brew "openjdk@11"
+
+cask "adoptopenjdk8"
 cask "adoptopenjdk11"
 cask "java11"
+cask "powershell"
 

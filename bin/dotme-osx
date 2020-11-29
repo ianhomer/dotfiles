@@ -69,6 +69,9 @@ defaults write com.apple.Dock show-recents -int 0
 # Minise applications into the application icon in the dock
 defaults write minimize-to-application -int 1
 
+# Dock on left
+defaults write com.apple.dock orientation left
+
 # Ctrl+Cmd & click and drag any where in window to move window (reboot required
 # after applied)
 defaults write -g NSWindowShouldDragOnGesture -bool true
@@ -127,7 +130,7 @@ defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 ############################################################################
 
 for app in "Dock" "Finder" \ ; do
-	killall "${app}" &> /dev/null
+  killall "${app}" &> /dev/null
 done
 
 echo "... ... DONE - OSX defaults have been configured"

@@ -9,10 +9,16 @@ if type which-dotme-aliases 2>/dev/null
 else
   alias which-dotme-aliases="echo '~/.config/fish/aliases.fish'"
 
-  alias vi="nvim"
-  alias v="nvim"
+  alias vi="VIM_KNOB=5 nvim"
+  alias v="VIM_KNOB=5 nvim"
+  # search for file in directory and open in vi
+  alias o="fd | fzf | xargs nvim -c ':cd %:h'"
+  alias oh="fd -H | fzf | xargs nvim -c ':cd %:h'"
+  alias oi="fd -I | fzf | xargs nvim -c ':cd %:h'"
+  alias ohi="fd -HI | fzf | xargs nvim -c ':cd %:h'"
 
   alias d="docker"
+  alias do="todo"
 
   # git
   alias push "git push"

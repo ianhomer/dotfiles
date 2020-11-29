@@ -13,6 +13,15 @@ Login Items
 
 ## Initialise a few desktop apps
 
+### Magnet
+
+Change key board shortcuts.
+
+|              |                  |
+| --           | --               |
+| `Ctrl-Alt-,` | Previous Display |
+| `Ctrl-Alt-.  | Next Display     |
+
 ### Dozer
 
 Open dozer and configure menu hiding.

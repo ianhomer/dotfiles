@@ -4,11 +4,17 @@
 # Install brew packages
 #
 
+while getopts "a" o; do case "$o" in
+  a) ADMIN=y ;;
+esac done
+
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 PATH=${SCRIPT_DIR}:${PATH}
 BREW_DIR=$SCRIPT_DIR/../config/brew
 
-should-run -m 7 $0 $BREW_DIR/Brewfile || exit
+if [[ "$ADMIN" != "y" ]] ; then
+  should-run -m 7 $0 $BREW_DIR/Brewfile || exit
+fi
 
 if ! is-executable brew ; then
   echo "... installing brew"
@@ -16,12 +22,19 @@ if ! is-executable brew ; then
     | ruby
 fi
 
-adminFormula="adoptopenjdk8 adoptopenjdk11 java11"
+adminFormula="adoptopenjdk8 adoptopenjdk11 java11 openjdk@11 powershell"
 
 echo "... updating brew"
 
-# Pin formula that need password to upgrade
-brew pin $adminFormula > /dev/null 2>&1
+# Pin formula that need password to upgrade if not in admin mode
+for formula in $adminFormula ; do
+  if [[ "$ADMIN" == "y" ]] ; then
+    echo "unpinning $formula"
+    brew unpin $formula > /dev/null 2>&1
+  else
+    brew pin $formula > /dev/null 2>&1
+  fi
+done
 
 # Use latest version of brew
 brew update
@@ -32,8 +45,7 @@ brew upgrade
 cd $SCRIPT_DIR/../config/brew
 brew bundle
 
-if [[ "$1" == "with-admin" ]] ; then
-  brew update $adminFormula
+if [[ "$ADMIN" == "y" ]] ; then
   echo "... installing admin packages"
   cd $SCRIPT_DIR/../config/brew/admin
   brew bundle

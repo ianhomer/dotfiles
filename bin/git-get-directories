@@ -16,7 +16,8 @@ function addDirectory {
 }
 
 # Show status of recently entered directories
-for d in `fasd -ldR | head -n 40` ; do
+for d in \
+  `fasd -ldR | head -n 40 | egrep -v '.vim|.config'` ; do
   if [ -d "$d/.git" ] ; then
     addDirectory $d
   else
