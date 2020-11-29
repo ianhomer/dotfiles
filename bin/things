@@ -2,13 +2,12 @@
 
 set -e
 
-_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-. ${_DIR}/functions/things.sh
+source <(shim)
 
 FETCH_WINDOW=600
 while getopts "w:" o; do case "$o" in
   w) FETCH_WINDOW=$OPTARG ;;
 esac done
 
-cd $THINGS
+cd $THINGS_DIR
 git synk -w $FETCH_WINDOW

@@ -110,7 +110,7 @@ function gitSynk() {
   fi
 
   now=`date +%s`
-  lastModified=`stat -f '%c' .git/FETCH_HEAD`
+  lastModified=`stat -c '%Y' .git/FETCH_HEAD`
   if [[ $((lastModified + FETCH_WINDOW)) < $now ]] ; then
     printf "."
     gitQuiet fetch
