@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+#
+# Configure environment shim
+#
+
+should-run -m 7 $0 || exit
+
+shim > $HOME/.config/dotme/.shim 
+
+should-run -fu $0

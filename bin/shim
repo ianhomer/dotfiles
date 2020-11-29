@@ -10,12 +10,50 @@ if [[ $# -eq 0 ]] && [[ -f "$LOCAL_SHIM" ]] ; then
   exit 0
 fi
 
+help() {
+  cat << EOF
+  -o (termux|macos)
+EOF
+}
+
 OPTIND=1
-while getopts "o:" o; do case "$o" in
+while getopts "ho:" o; do case "$o" in
+  h) help && exit 0 ;;
   o) OS=$OPTARG
 esac done
 shift $((OPTIND-1))
 
+#
+# Imply the OS value from the underlying OSTYPE
+#
+if [[ -z "$OS" ]] ; then
+  case $OSTYPE in
+    linux-android)
+      OS="termux"
+      ;;
+    darwin*)
+      OS="macos"
+      ;;
+    *)
+      OS="$OSTYPE"
+      ;;
+  esac
+fi
 
+if [[ "$OS" = "termux" ]] ; then
+  THINGS_DIR=$HOME/storage/shared/projects/things
+else
+  THINGS_DIR=$HOME/projects/things
+fi
 
+if [[ "$OS" = "macos" ]] ; then
+  SED="gsed"
+else
+  SED="sed"
+fi
 
+cat <<EOF
+export OS=$OS
+export THINGS_DIR=$THINGS_DIR
+export SED=$SED
+EOF
