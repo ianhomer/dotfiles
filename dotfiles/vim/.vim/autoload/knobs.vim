@@ -39,7 +39,9 @@ endfunction
 " should be defined in plugin/knobs.vim.
 "
 function! s:DefineCommands()
-  command! -nargs=+ -bar IfKnob call knobs#If(<f-args>)
+  if !exists("*IfKnob")
+    command! -nargs=+ -bar IfKnob call knobs#If(<f-args>)
+  endif
 
   " Shortcuts to functions
   if !exists("*Knob")
