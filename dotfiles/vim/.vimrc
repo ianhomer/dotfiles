@@ -7,8 +7,8 @@ endif
 
 let g:knobs_default_level = 2
 
-" Default values for the feature toggles
-let g:default_toggles = {
+" Default values for knobs
+let g:knobs_defaults = {
   \   "compactcmd":0,
   \   "markdown.flow":0,
   \   "markdown.conceal.full":0,
@@ -20,8 +20,8 @@ let g:default_toggles = {
   \   "startuptime":0
   \ }
 
-" Config levels at which features are enabled
-let g:level_features = {
+" Levels at which knobs are enabled
+let g:knobs_levels = {
   \   "ale":5,
   \   "apathy":5,
   \   "airline":5,
@@ -54,7 +54,7 @@ let g:level_features = {
   \ }
 
 " Feature toggles triggered by each layer
-let g:layer_features = {
+let g:knobs_layers_map = {
   \    "mobile":{
   \      "compactcmd":1,
   \      "light":1,
@@ -71,7 +71,7 @@ let g:layer_features = {
 
 " Default state of layers
 " iTerm used for notes layer
-let g:layers = get(g:, "layers",{
+let g:knobs_layers = get(g:, "layers",{
   \   "mobile": $ANDROID_DATA == '/data' ? 1 : 0,
   \   "notes": $ITERM_PROFILE == 'oh-my' ? 1 : 0
   \ })
@@ -266,11 +266,11 @@ if KnobAt(4)
   nnoremap <silent> <leader>9p :call Toggle("polyglot")<CR>
   if Knob("polyglot") | Plug 'sheerun/vim-polyglot' | endif
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
-  if g:config_level > 4 | Plug 'preservim/nerdcommenter' | endif
+  if KnobAt(5) | Plug 'preservim/nerdcommenter' | endif
 
   if Knob("nerdtree")
     " NERDTree - show git changes
-    if g:config_level > 8 | Plug 'xuyuanp/nerdtree-git-plugin' | endif
+    if KnobAt(9) | Plug 'xuyuanp/nerdtree-git-plugin' | endif
   endif
 
   if Knob("gitgutter")
@@ -409,7 +409,7 @@ if KnobAt(1)
   nnoremap <leader>.o :profile stop<CR>
   nnoremap <leader>.i :profile dump<CR>
 
-  if g:config_level > 2
+  if KnobAt(3)
     nnoremap <silent> <leader>y :BCommits<CR>
     nnoremap <silent> <leader>Y :BCommits!<CR>
     nnoremap <silent> <leader>t :Commits<CR>
@@ -557,7 +557,7 @@ function! TrimEndLines()
   silent! %s#\($\n\s*\)\+\%$##
 endfunction
 
-if g:config_level > 2
+if KnobAt(3)
   nnoremap <leader>L ma:call PruneWhiteSpace()<CR>`a
 endif
 
@@ -575,7 +575,7 @@ endif
 "
 " *** Scope : Windows ***
 "
-if g:config_level < 2
+if KnobAt(3)
   " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
   " Close the current buffer and move to the previous one
   nnoremap <leader>q :<c-u>bp <bar> bd #<cr>
@@ -596,12 +596,10 @@ endf
 augroup dotme
   autocmd!
 
-  if g:config_level > 0
-    autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
-    autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
-  endif
+  autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+  autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 
-  if g:config_level > 2
+  if KnobAt(3)
     "
     " *** Scope : Editing ***
     "
@@ -622,7 +620,7 @@ augroup dotme
     autocmd TextChanged * ++nested silent! write
   endif
 
-  if g:config_level > 2
+  if KnobAt(3)
     "
     " *** Scope : Python ***
     "
@@ -637,7 +635,7 @@ augroup end
 "
 
 " Show white space
-if g:config_level > 0
+if KnobAt(1)
   exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
   set list
 
@@ -654,7 +652,7 @@ if Knob("spelling")
 endif
 
 " Surround customisation
-if g:config_level > 2
+if KnobAt(3)
   let g:surround_{char2nr('b')} = "**\r**"
   let g:surround_{char2nr('<')} = "<\r>"
   " Short cuts for surround word
@@ -669,7 +667,7 @@ endif
 
 " *** Scope : IO ***
 "
-if g:config_level > 0
+if KnobAt(1)
   if Knob("autosave")
     " Auto reload underlying file if it changes, although
     " it only really reloads when external command run like :!ls
@@ -715,7 +713,7 @@ if Knob("airline")
 endif
 
 " Backspace support
-if g:config_level > 0
+if KnobAt(1)
   set backspace=indent,eol,start
 endif
 
@@ -725,7 +723,7 @@ endif
 
 " source ~/.config/vim/netrw.vim
 
-if g:config_level > 2
+if KnobAt(3)
   " Thanks to Damian Conway                                                         test long line
   set colorcolumn=""
   highlight ColorColumn ctermbg=magenta
@@ -733,10 +731,8 @@ if g:config_level > 2
 endif
 
 " Open new splits to the right and below
-if g:config_level > 0
-  set splitright
-  set splitbelow
-endif
+set splitright
+set splitbelow
 
 source ~/.config/vim/terminal.vim
 
@@ -748,7 +744,7 @@ source ~/.config/vim/terminal.vim
 " Don't conceal any syntax
 set conceallevel=0
 
-if g:config_level > 3
+if KnobAt(4)
   " Markdown syntax
   " Enable folding
   let g:markdown_folding = 1
@@ -756,6 +752,6 @@ if g:config_level > 3
   set foldlevelstart=20
 endif
 
-if g:config_level > 8
+if KnobAt(9)
   source ~/.config/vim/experimental.vim
 endif

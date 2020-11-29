@@ -9,7 +9,7 @@ endif
 let g:knobs_autoloaded = 1
 
 function! knobs#Level()
-  return g:config_level
+  return g:knobs_level
 endfunction
 
 function! knobs#Init()
@@ -18,13 +18,13 @@ function! knobs#Init()
   endif
   let g:knobs_initialised = 1
 
-  let g:config_level = exists('$VIM_KNOB' ) ?
-    \ $VIM_KNOB : exists('g:config_level_session') ?
-    \ g:config_level_session :
+  let g:knobs_level = exists('$VIM_KNOB' ) ?
+    \ $VIM_KNOB : exists('g:knobs_session_level') ?
+    \ g:knobs_level_session :
     \ exists('g:knobs_default_level') ? g:knobs_default_level : 0
 
   " Set default state of feature toggles
-  let g:toggles = get(g:, "toggles", g:default_toggles)
+  let g:knobs = get(g:, "knobs", g:knobs_defaults)
 
   call s:DefineCommands()
 
@@ -57,24 +57,23 @@ function! s:DefineCommands()
   endif
 endfunction
 
-function! knobs#(feature)
-  return has_key(g:toggles, a:feature) ? g:toggles[a:feature] : 0
+function! knobs#(knob)
+  return has_key(g:knobs, a:knob) ? g:knobs[a:knob] : 0
 endfunction
 
-function! knobs#If(feature, ...)
-  if knobs#(trim(a:feature,"'"))
-    "echo join(a:000)
+function! knobs#If(knob, ...)
+  if knobs#(trim(a:knob,"'"))
     execute join(a:000)
   endif
 endfunction
 
 function! knobs#Level()
-  return g:config_level
+  return g:knobs_level
 endfunction
 
 function! knobs#At(level)
-  if exists("g:config_level")
-    return g:config_level >= a:level
+  if exists("g:knobs_level")
+    return g:knobs_level >= a:level
   else
     return 0
   endif

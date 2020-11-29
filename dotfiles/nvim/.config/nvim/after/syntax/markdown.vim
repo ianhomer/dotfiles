@@ -1,4 +1,4 @@
-if g:config_level < 2
+if !KnobAt(3)
   finish
 endif
 
