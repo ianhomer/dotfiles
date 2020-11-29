@@ -6,6 +6,21 @@
 
 should-run -m 7 $0 || exit
 
-shim > $HOME/.config/dotme/.shim 
+_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+. ${_DIR}/functions/log.sh
+
+o_o "Configuring environment shim"
+
+LOCAL_SHIM=$HOME/.config/dotme/.shim
+if [[ -f "$LOCAL_SHIM" ]] ; then
+  CURRENT_SHIM=$(cat $LOCAL_SHIM)
+fi
+NEW_SHIM=$(shim)
+if [[ "${CURRENT_SHIM}" != "${NEW_SHIM}" ]] ; then
+  echo "Updating local shim"
+  cat <<EOF > $LOCAL_SHIM
+$NEW_SHIM
+EOF
+fi
 
 should-run -fu $0
