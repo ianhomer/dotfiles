@@ -59,10 +59,6 @@ function! knobs#core#Toggles()
   echo g:toggles
 endfunction
 
-function! knobs#core#IsNotEnabled(feature)
-  return 1 - knobs#IsEnabled(a:feature)
-endfunction
-
 " Reload vimrc, neo vimrc and CoC
 function! knobs#core#ReloadConfig()
   silent! wall
@@ -70,8 +66,8 @@ function! knobs#core#ReloadConfig()
   exec "source ".config_file
   call knobs#core#RestartConfig()
   let config_message = has('nvim') ? "neo init.vm" : ".vimrc"
-  let coc_message = knobs#IsEnabled("coc") ? " with CoC" : ""
-  if knobs#core#IsNotEnabled("coc")
+  let coc_message = knobs#("coc") ? " with CoC" : ""
+  if !knobs#("coc")
     " only display message if CoC not enabled, it it is enabled, this extra
     " message causes overload in the 2 row command window
     echo "Reloaded ".config_message.coc_message" - level = ".g:config_level
@@ -85,7 +81,7 @@ function! knobs#core#ReloadConfig()
 endfunction
 
 function! knobs#core#RestartConfig()
-  if knobs#IsEnabled("coc")
+  if knobs#("coc")
     CocRestart
   endif
 endfunction

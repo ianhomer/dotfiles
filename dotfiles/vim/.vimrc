@@ -56,13 +56,13 @@ set nomodeline
 
 source ~/.config/vim/knobs.vim
 
-if !KnobAt(1)
+if !knobs#At(1)
   finish
 endif
 
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
-if Knob("compactcmd")
+if knobs#("compactcmd")
   set cmdheight=1
 else
   set cmdheight=2
@@ -78,17 +78,18 @@ call plug#begin(g:vim_dir."/plugged")
 " Core essentials
 "
 " fzf - Fuzzy Finder
-if Knob("fzf")
+if knobs#("fzf")
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   source ~/.config/vim/fzf.vim
 endif
 
 " fugitive - Git integration
-if Knob("fugitive")
+if knobs#("fugitive")
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
 endif
+
 if Knob("conflict-marker")
   Plug 'rhysd/conflict-marker.vim'
   autocmd ColorScheme * highlight Info gui=bold guifg=#504945 guibg=#83a598
@@ -100,11 +101,10 @@ endif
 "
 if Knob("light")
   Plug 'rakr/vim-one'
-elseif Knob("gruvbox")
-  Plug 'morhetz/gruvbox'
-elseif Knob("gruvbox8")
-  Plug 'lifepillar/vim-gruvbox8'
 endif
+
+IfKnob 'gruvbox'  Plug 'morhetz/gruvbox'
+IfKnob 'gruvbox8' Plug 'lifepillar/vim-gruvbox8'
 
 if Knob("nerdtree")
   " NERDTree - file explore
@@ -143,9 +143,7 @@ if KnobAt(4)
   " UNIX-like shell commands
   if Knob("eunuch") | Plug 'tpope/vim-eunuch' | endif
 
-  if Knob("startify")
-    Plug 'mhinz/vim-startify'
-  endif
+  IfKnob("startify") Plug 'mhinz/vim-startify'
 
   if KnobAt(5)
     Plug 'ludovicchabant/vim-gutentags'
