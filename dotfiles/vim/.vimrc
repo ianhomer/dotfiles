@@ -124,7 +124,7 @@ if KnobAt(4)
     nnoremap <silent> <leader>m :NnnPicker<CR>
   endif
 
-  if Knob("nerdtree") | Plug 'ryanoasis/vim-devicons' | endif
+  IfKnob 'nerdtree' Plug 'ryanoasis/vim-devicons'
   " Vinegar - better file expore than NERD
   if KnobAt(9) | Plug 'tpope/vim-vinegar' | endif
   " ack - Search files
@@ -143,7 +143,7 @@ if KnobAt(4)
   " UNIX-like shell commands
   if Knob("eunuch") | Plug 'tpope/vim-eunuch' | endif
 
-  IfKnob("startify") Plug 'mhinz/vim-startify'
+  IfKnob 'startify' Plug 'mhinz/vim-startify'
 
   if KnobAt(5)
     Plug 'ludovicchabant/vim-gutentags'
@@ -153,7 +153,7 @@ if KnobAt(4)
   "
   " Help
   "
-  " vim-which-key - guidance on what keys do\
+  " vim-which-key - guidance on what keys do
   if Knob("which-key")
     Plug 'liuchengxu/vim-which-key', 
     \ { 'on': ['WhichKey', 'WhichKey!'] }
