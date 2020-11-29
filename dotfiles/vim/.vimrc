@@ -102,7 +102,7 @@ if Knob("light")
   Plug 'rakr/vim-one'
 elseif Knob("gruvbox")
   Plug 'morhetz/gruvbox'
-else
+elseif Knob("gruvbox8")
   Plug 'lifepillar/vim-gruvbox8'
 endif
 
@@ -252,7 +252,7 @@ call plug#end()
 if !Knob("light")
   if Knob("gruvbox")
     colorscheme gruvbox
-  else 
+  elseif Knob("gruvbox8")
     colorscheme gruvbox8
   endif
   set bg=dark

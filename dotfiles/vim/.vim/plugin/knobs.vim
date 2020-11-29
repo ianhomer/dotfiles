@@ -28,7 +28,7 @@ call knobs#Init()
 
 command! -nargs=0 Knobs :call knobs#core#Toggles()
 command! -nargs=0 KnobLevel :echo knobs#Level()
-command! -nargs=1 -complete=customlist,knobs#ListFeatures
+command! -nargs=1 -complete=customlist,knobs#core#ListFeatures
   \ KnobToggle :call knobs#core#Toggle(<q-args>)
 
 nnoremap <silent> <leader>v :call knobs#core#ReloadConfig()<CR>

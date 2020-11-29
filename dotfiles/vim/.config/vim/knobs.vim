@@ -12,6 +12,7 @@ let g:default_toggles = {
   \   "markdown.syntax.table":1,
   \   "polyglot":0,
   \   "syntastic":0,
+  \   "startuptime":0,
   \   "writegood":0
   \ }
 
@@ -29,6 +30,7 @@ let g:level_features = {
   \   "fzf":5,
   \   "gitgutter":5,
   \   "gruvbox":5,
+  \   "gruvbox8":2,
   \   "goyo":5,
   \   "nerdtree":5,
   \   "modes":5,
