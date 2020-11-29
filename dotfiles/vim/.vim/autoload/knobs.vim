@@ -18,8 +18,8 @@ function! knobs#Init()
   endif
   let g:knobs_initialised = 1
 
-  let g:config_level = exists('$VIM_CONFIG_LEVEL' ) ?
-    \ $VIM_CONFIG_LEVEL : exists('g:config_level_session') ?
+  let g:config_level = exists('$VIM_KNOB' ) ?
+    \ $VIM_KNOB : exists('g:config_level_session') ?
     \ g:config_level_session : 
     \ exists('g:knobs_default_level') ? g:knobs_default_level : 0
 
@@ -44,6 +44,7 @@ function! knobs#Init()
     silent call knobs#core#Init()
   endif
 endfunction
+
 
 function! knobs#IsEnabled(feature)
   return has_key(g:toggles, a:feature) ? g:toggles[a:feature] : 0

@@ -9,8 +9,8 @@ if type which-dotme-aliases 2>/dev/null
 else
   alias which-dotme-aliases="echo '~/.config/fish/aliases.fish'"
 
-  alias vi="VIM_CONFIG_LEVEL=5 nvim"
-  alias v="VIM_CONFIG_LEVEL=5 nvim"
+  alias vi="VIM_KNOB=5 nvim"
+  alias v="VIM_KNOB=5 nvim"
   # search for file in directory and open in vi
   alias o="fd | fzf | xargs nvim -c ':cd %:h'"
   alias oh="fd -H | fzf | xargs nvim -c ':cd %:h'"
