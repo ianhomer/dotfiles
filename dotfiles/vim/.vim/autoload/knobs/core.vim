@@ -3,12 +3,12 @@ if exists('g:knobs_core_autoloaded')
 endif
 let g:knobs_core_autoloaded = 1
 
-function knobs#core#ListFeatures(ArgLead, CmdLind, CursorPos)
+function knobs#core#ListKnobs(ArgLead, CmdLind, CursorPos)
   return sort(filter(keys(g:knobs), 'stridx(v:val,"'.a:ArgLead.'") == 0'))
 endfunction
 
 function knobs#core#Toggle(knob)
-  call knobs#core#SetFeature(a:knob, 
+  call knobs#core#SetKnob(a:knob, 
         \ has_key(g:knobs, a:knob) ? !g:knobs[a:knob] : 1)
   call knobs#core#ReloadConfig()
 endfunction
@@ -29,13 +29,13 @@ function knobs#core#SetLevel(level)
   call knobs#core#ReloadConfig()
 endfunction
 
-function! knobs#core#SetFeature(knob, value)
+function! knobs#core#SetKnob(knob, value)
   let g:knobs[a:knob] = a:value
 endfunction
 
 function! knobs#core#ApplyLayer(layer, enabled)
   for [feature,value] in items(g:knobs_layers_map[a:layer])
-    call knobs#core#SetFeature(feature, a:enabled ? value : 1 - value)
+    call knobs#core#SetKnob(feature, a:enabled ? value : 1 - value)
   endfor
 endfunction
 
@@ -51,7 +51,7 @@ endfunction
 " Apply feature toggles for all layers
 function! knobs#core#ApplyLevels()
   for [knob,level] in items(g:knobs_levels)
-    call knobs#core#SetFeature(knob, knobs#At(level))
+    call knobs#core#SetKnob(knob, knobs#At(level))
   endfor
 endfunction
 
