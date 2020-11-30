@@ -11,16 +11,6 @@ _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 
 o_o "Configuring environment shim"
 
-LOCAL_SHIM=$HOME/.config/dotme/.shim
-if [[ -f "$LOCAL_SHIM" ]] ; then
-  CURRENT_SHIM=$(cat $LOCAL_SHIM)
-fi
-NEW_SHIM=$(shim -f)
-if [[ "${CURRENT_SHIM}" != "${NEW_SHIM}" ]] ; then
-  echo "Updating local shim"
-  cat <<EOF > $LOCAL_SHIM
-$NEW_SHIM
-EOF
-fi
+shim -u
 
 should-run -fu $0

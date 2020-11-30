@@ -12,17 +12,41 @@ fi
 
 help() {
   cat << EOF
+  -f force dynamic shim (not from cache)
+  -h this help
   -o (termux|macos)
+  -u update local shim cache
 EOF
 }
 
 OPTIND=1
-while getopts "fho:" o; do case "$o" in
-  h) help && exit 0 ;;
+while getopts "fho:u" o; do case "$o" in
   f) FORCE=y ;;
+  h) help && exit 0 ;;
   o) OS=$OPTARG ;;
+  u) UPDATE=y ;;
 esac done
 shift $((OPTIND-1))
+
+#
+# Update local shim cache
+#
+if [[ "$UPDATE" = "y" ]] ; then
+  _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+. ${_DIR}/functions/log.sh
+  LOCAL_SHIM=$HOME/.config/dotme/.shim
+  if [[ -f "$LOCAL_SHIM" ]] ; then
+    CURRENT_SHIM=$(cat $LOCAL_SHIM)
+  fi
+  NEW_SHIM=$(shim -f)
+  if [[ "${CURRENT_SHIM}" != "${NEW_SHIM}" ]] ; then
+    o_o "Updating local shim"
+    cat <<EOF > $LOCAL_SHIM
+$NEW_SHIM
+EOF
+  fi
+  exit 0
+fi
 
 #
 # Imply the OS value from the underlying OSTYPE
@@ -55,9 +79,16 @@ else
   STAT="stat"
 fi
 
+if command -v dotme &> /dev/null ; then
+  DOTFILES_BIN="$(cd "$(dirname `command -v dotme`)" >/dev/null 2>&1 && pwd)"
+else
+  DOTFILES_BIN="$HOME/.dotfiles/bin"
+fi
+
 cat <<EOF
+export DOTFILES_BIN=$DOTFILES_BIN
 export OS=$OS
-export THINGS_DIR=$THINGS_DIR
 export SED=$SED
 export STAT=$STAT
+export THINGS_DIR=$THINGS_DIR
 EOF
