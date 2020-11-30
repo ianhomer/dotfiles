@@ -75,6 +75,12 @@ else
     fi
   fi
   echo $relativeTodayLog
-  $SHIM_SED -i "3i- [ ] ${todo}" $todayLog
+  if [[ "$SHIM_OS" = "termux" ]] ; then
+    # sed -i gives a permission error on termux, not sure why
+    # for now, just append to end which is good enough
+    echo "- [ ] ${todo}" >> $todayLog
+  else
+    $SHIM_SED -i "3i- [ ] ${todo}" $todayLog
+  fi
   ag --nofilename --nocolor --nobreak '\- \[ \](?! [\.~\^])' $THINGS | wc -l
 fi
