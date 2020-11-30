@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 $(shim)
-. ${DOTFILES_BIN}/functions/things.sh
 
 help() {
   cat << EOF
@@ -52,14 +51,14 @@ if [[ -z "$todo" ]] ; then
   else
     pattern="\- \[ \](?! [\.~\^])$CONTEXT"
   fi
-  ag --nofilename --nocolor --nobreak "$pattern" $THINGS |
+  ag --nofilename --nocolor --nobreak "$pattern" $THINGS_DIR |
     cut -c 3- |
     sort
   echo
 else
   # Create a todo
   relativeTodayLog=my-notes/stream/`date +%m%d`.md
-  todayLog=$THINGS/$relativeTodayLog
+  todayLog=$THINGS_DIR/$relativeTodayLog
   if [[ ! -f "$todayLog" ]] ; then
     date=`date '+%a %d %b %Y' | tr [:lower:] [:upper:]`
     printf "# %s\n\n\n" "${date}" >> $todayLog
@@ -82,5 +81,5 @@ else
   else
     $SHIM_SED -i "3i- [ ] ${todo}" $todayLog
   fi
-  ag --nofilename --nocolor --nobreak '\- \[ \](?! [\.~\^])' $THINGS | wc -l
+  ag --nofilename --nocolor --nobreak '\- \[ \](?! [\.~\^])' $THINGS_DIR | wc -l
 fi
