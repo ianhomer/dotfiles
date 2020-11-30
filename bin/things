@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e
 
-source <(shim)
+$(shim)
 
 FETCH_WINDOW=600
 while getopts "w:" o; do case "$o" in

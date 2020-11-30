@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-. ${_DIR}/functions/things.sh
+$(shim)
+. ${DOTFILES_BIN}/functions/things.sh
 
 help() {
   cat << EOF
@@ -58,7 +58,8 @@ if [[ -z "$todo" ]] ; then
   echo
 else
   # Create a todo
-  todayLog=$THINGS/my-notes/stream/`date +%m%d`.md
+  relativeTodayLog=my-notes/stream/`date +%m%d`.md
+  todayLog=$THINGS/$relativeTodayLog
   if [[ ! -f "$todayLog" ]] ; then
     date=`date '+%a %d %b %Y' | tr [:lower:] [:upper:]`
     printf "# %s\n\n\n" "${date}" >> $todayLog
@@ -73,11 +74,7 @@ else
       fi
     fi
   fi
-  echo $todayLog
-  if [[ "$OSTYPE" =~ ^darwin ]] ; then
-    gsed -i "3i- [ ] ${todo}" $todayLog
-  else
-    sed -i "3i- [ ] ${todo}" $todayLog
-  fi
+  echo $relativeTodayLog
+  $SHIM_SED -i "3i- [ ] ${todo}" $todayLog
   ag --nofilename --nocolor --nobreak '\- \[ \](?! [\.~\^])' $THINGS | wc -l
 fi

@@ -32,8 +32,8 @@ while getopts "ahuw:" o; do case "$o" in
   h) help && exit 1 ;;
 esac done
 
-_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-. ${_DIR}/functions/log.sh
+$(shim)
+. ${DOTFILES_BIN}/functions/log.sh
 
 #
 # Execute git quietly ... keybase output messages in stderr
@@ -110,7 +110,7 @@ function gitSynk() {
   fi
 
   now=`date +%s`
-  lastModified=`gstat -c '%Y' .git/FETCH_HEAD`
+  lastModified=`$SHIM_STAT -c '%Y' .git/FETCH_HEAD`
   if [[ $((lastModified + FETCH_WINDOW)) < $now ]] ; then
     printf "."
     gitQuiet fetch

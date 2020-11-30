@@ -54,29 +54,26 @@ fi
 if [[ -z "$OS" ]] ; then
   case $OSTYPE in
     linux-android)
-      OS="termux"
-      ;;
+      SHIM_OS="termux"  ;;
     darwin*)
-      OS="macos"
-      ;;
+      SHIM_OS="macos"   ;;
     *)
-      OS="$OSTYPE"
-      ;;
+      SHIM_OS="$OSTYPE" ;;
   esac
 fi
 
-if [[ "$OS" = "termux" ]] ; then
+if [[ "$SHIM_OS" = "termux" ]] ; then
   THINGS_DIR=$HOME/storage/shared/projects/things
 else
   THINGS_DIR=$HOME/projects/things
 fi
 
-if [[ "$OS" = "macos" ]] ; then
-  SED="gsed"
-  STAT="gstat"
+if [[ "$SHIM_OS" = "macos" ]] ; then
+  SHIM_SED="gsed"
+  SHIM_STAT="gstat"
 else
-  SED="sed"
-  STAT="stat"
+  SHIM_SED="sed"
+  SHIM_STAT="stat"
 fi
 
 if command -v dotme &> /dev/null ; then
@@ -87,8 +84,8 @@ fi
 
 cat <<EOF
 export DOTFILES_BIN=$DOTFILES_BIN
-export OS=$OS
-export SED=$SED
-export STAT=$STAT
+export SHIM_OS=$SHIM_OS
+export SHIM_SED=$SHIM_SED
+export SHIM_STAT=$SHIM_STAT
 export THINGS_DIR=$THINGS_DIR
 EOF

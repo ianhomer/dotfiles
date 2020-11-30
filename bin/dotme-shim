@@ -4,10 +4,10 @@
 # Configure environment shim
 #
 
-should-run -m 7 $0 || exit
+should-run -m 7 $0 ~/.dotfiles/bin/shim || exit
 
-_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-. ${_DIR}/functions/log.sh
+$(shim)
+. ${DOTFILES_BIN}/functions/log.sh
 
 o_o "Configuring environment shim"
 
