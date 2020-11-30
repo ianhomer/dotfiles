@@ -11,24 +11,18 @@ else
 
   . ~/.config/sh/aliases.sh
 
-  alias d="docker"
-
   # git
-  alias push "git push"
   alias branch="git branch"
   alias checkout="git checkout"
   alias branch-and-checkout="git checkout -b"
   alias g="git"
   alias git-commit-am="git commit -am"
-  alias gs="git status"
   alias gsv="git status -v"
   alias gits="git status"
-  alias gd="git diff"
   alias gds="git diff --staged"
   alias gdc="git diff --cached"
   alias git-diff="git diff"
   alias git-diff-head~="git diff HEAD~"
-  alias gd~="git diff HEAD~"
   alias gita="git add"
   alias gitc="git commit"
   # count changes - thx https://preslav.me/2020/03/01/use-the-git-history/
@@ -36,9 +30,6 @@ else
 
   alias git-whoami="git config user.name ; git config user.email"
   alias git-config-personal="git config user.email ian@purplepip.com"
-
-  # Attach to tmux session if exists, otherwise new
-  alias tm="tmux attach || tmux new"
 
   alias draw="/usr/bin/open -a /Applications/draw.io.app/"
 
