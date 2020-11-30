@@ -79,4 +79,8 @@ function! knobs#At(level)
   endif
 endfunction
 
+if !exists("g:knobs_default_level")
+  let g:knobs_default_level = 1
+endif
+
 call knobs#Init()

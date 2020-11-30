@@ -5,8 +5,6 @@ else
   let g:vim_dir = "~/.vim"
 endif
 
-let g:knobs_default_level = 1
-
 " Default values for knobs
 let g:knobs_defaults = {
   \   "compactcmd":0,
