@@ -5,7 +5,7 @@ else
   let g:vim_dir = "~/.vim"
 endif
 
-let g:knobs_default_level = 2
+let g:knobs_default_level = 1
 
 " Default values for knobs
 let g:knobs_defaults = {
@@ -34,7 +34,7 @@ let g:knobs_levels = {
   \   "fzf":5,
   \   "gitgutter":5,
   \   "gruvbox":5,
-  \   "gruvbox8":2,
+  \   "gruvbox8":1,
   \   "goyo":5,
   \   "nerdtree":5,
   \   "modes":5,

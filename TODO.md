@@ -5,6 +5,8 @@
 - [ ] try vim-test
 - [ ] try vim-themis
 - [ ] Handle other do variations ; backlog ; alignment ; wish
+- [ ] Provide auto process to update tmux plugins
+- [ ] dotme update all vim plugins (even optional knob ones)
 
 ## backlog
 
