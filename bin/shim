@@ -17,9 +17,10 @@ EOF
 }
 
 OPTIND=1
-while getopts "ho:" o; do case "$o" in
+while getopts "fho:" o; do case "$o" in
   h) help && exit 0 ;;
-  o) OS=$OPTARG
+  f) FORCE=y ;;
+  o) OS=$OPTARG ;;
 esac done
 shift $((OPTIND-1))
 
@@ -48,12 +49,15 @@ fi
 
 if [[ "$OS" = "macos" ]] ; then
   SED="gsed"
+  STAT="gstat"
 else
   SED="sed"
+  STAT="stat"
 fi
 
 cat <<EOF
 export OS=$OS
 export THINGS_DIR=$THINGS_DIR
 export SED=$SED
+export STAT=$STAT
 EOF

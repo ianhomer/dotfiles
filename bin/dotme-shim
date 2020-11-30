@@ -15,7 +15,7 @@ LOCAL_SHIM=$HOME/.config/dotme/.shim
 if [[ -f "$LOCAL_SHIM" ]] ; then
   CURRENT_SHIM=$(cat $LOCAL_SHIM)
 fi
-NEW_SHIM=$(shim)
+NEW_SHIM=$(shim -f)
 if [[ "${CURRENT_SHIM}" != "${NEW_SHIM}" ]] ; then
   echo "Updating local shim"
   cat <<EOF > $LOCAL_SHIM
