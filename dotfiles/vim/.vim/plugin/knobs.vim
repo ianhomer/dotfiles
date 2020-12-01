@@ -11,11 +11,11 @@ let g:knobs_loaded = 1
 " - 0 => core config
 " - 1 => core plugins - recommended default level
 " - 2 => useful config
-" - 3 => useful plugins - recommended when opening a specific file
+" - 3 => useful plugins
 " - 4 => power config
 " - 5 => power plugins - recommended when opening vim explicitly
-" - 6 => trial config
-"   7 => trial plugins
+" - 6 => extra config
+"   7 => extra plugins
 " - 8 => experimental config
 " - 9 => experimental plugins
 "

@@ -46,7 +46,7 @@ let g:knobs_levels = {
   \   "thingity":5,
   \   "unimpaired":5,
   \   "update-spelling":5,
-  \   "which-key":5,
+  \   "which-key":7,
   \   "window-cleaner":5,
   \   "writegood":8
   \ }
@@ -125,6 +125,9 @@ set nomodeline
 
 if !knobs#At(1)
   finish
+endif
+if !knobs#("nerdtree")
+  nnoremap <silent> <leader>n :call knobs#core#SetLevel(5)<CR>
 endif
 
 " Provide more space for command output (e.g. fugitive) - with it this you may
@@ -221,7 +224,7 @@ if KnobAt(4)
   " Help
   "
   " vim-which-key - guidance on what keys do
-  if Knob("which-key")
+  if knobs#("which-key")
     Plug 'liuchengxu/vim-which-key', 
     \ { 'on': ['WhichKey', 'WhichKey!'] }
   endif
@@ -434,8 +437,10 @@ if KnobAt(1)
     "nnoremap <silent> q :echo "q disabled"<CR>
 
     if KnobAt(4)
-      nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
-      nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+      if knobs#("which-key")
+        nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
+        nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+      endif
       nnoremap <silent> <leader>p :MarkdownPreview<CR>
       nnoremap <silent> <leader>.m :!mind-map %:p<CR>
     endif
@@ -654,7 +659,9 @@ if KnobAt(3)
   let g:surround_{char2nr('b')} = "**\r**"
   let g:surround_{char2nr('<')} = "<\r>"
   " Short cuts for surround word
-  nnoremap <silent> ' :WhichKey "'"<CR>
+  if knobs#("which-key")
+    nnoremap <silent> ' :WhichKey "'"<CR>
+  endif
   nmap '" ysiW"
   nmap "" ysiW"
   nmap '' ysiW'
