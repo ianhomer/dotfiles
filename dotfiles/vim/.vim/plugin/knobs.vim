@@ -8,8 +8,8 @@ let g:knobs_loaded = 1
 " and can be used to toggle multiple features.
 "
 " Raise config level to enable more configuration
-" - 0 => core config
-" - 1 => core plugins - recommended default level
+" - 0 => basic config
+" - 1 => core config - recommended default level
 " - 2 => useful config
 " - 3 => useful plugins
 " - 4 => power config
