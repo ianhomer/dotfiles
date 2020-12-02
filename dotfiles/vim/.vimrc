@@ -138,6 +138,25 @@ else
   set cmdheight=2
 endif
 
+" Start / stop profiling
+nnoremap <leader>.p :profile start ~/vim-performance.log<CR>:profile func*<CR>:profile file *<CR>
+nnoremap <leader>.o :profile stop<CR>
+nnoremap <leader>.i :profile dump<CR>
+
+" save all files
+if !Knob("autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | endif
+
+" reset highlighting
+nnoremap <silent> <leader>z :noh<CR>
+
+if knobs#("modes")
+  " Numbered modes of configuration
+  nnoremap <silent> <leader>1 :call modes#ResetMode()<CR>
+  nnoremap <silent> <leader>2 :call modes#PersonalDevMode()<CR>
+  nnoremap <silent> <leader>3 :call modes#MobbingMode()<CR>
+  nnoremap <silent> <leader>4 :call modes#TrainingMode()<CR>
+endif
+
 " why?
 "filetype plugin on
 "filetype plugin off
@@ -379,24 +398,11 @@ if Knob("startify")
         \ ]
 endif
 
-"
-" Command remapping
-"
-if Knob("modes") 
-  source ~/.config/vim/modes.vim
-endif
-
 " My shortcuts
 if KnobAt(1)
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :call SearchFiles()<CR>
   nnoremap <silent> <leader>F :Files!<CR>
-
-  " save all files
-  if !Knob("autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | endif
-
-  " reset things
-  nnoremap <silent> <leader>z :noh<CR>
 
   " Hide all windows except the current one
   nnoremap <silent> <leader>O :only<CR>
@@ -404,11 +410,6 @@ if KnobAt(1)
   if Knob("window-cleaner")
     source ~/.config/vim/window-cleaner.vim
   endif
-
-  " Start / stop profiling
-  nnoremap <leader>.p :profile start ~/vim-performance.log<CR>:profile func*<CR>:profile file *<CR>
-  nnoremap <leader>.o :profile stop<CR>
-  nnoremap <leader>.i :profile dump<CR>
 
   if KnobAt(3)
     nnoremap <silent> <leader>y :BCommits<CR>
