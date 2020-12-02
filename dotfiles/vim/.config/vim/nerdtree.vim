@@ -17,7 +17,7 @@ function! NERDTreeFindOrToggle()
     else
       " NERDTree doesn't like closing itself if it's the last window, so we'll
       " use the CloseMe function which will drop back to Startify
-      call CloseMe()
+      call window#cleaner#CloseMe()
     endif
   else
     NERDTreeFind
