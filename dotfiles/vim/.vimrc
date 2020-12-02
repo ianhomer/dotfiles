@@ -429,7 +429,7 @@ if KnobAt(1)
     nnoremap <silent> <leader>r :reg<CR>
     nnoremap <silent> <leader>k :call ToggleQuickFix()<CR>
     nnoremap <silent> <leader>K :call ToggleLocationList()<CR>
-    nnoremap <silent> <leader>g :call ToggleFugitive()<CR>
+    nnoremap <silent> <leader>g :call window#ToggleFugitive()<CR>
     nnoremap <silent> <leader>gd :Gvdiff!<CR>
     nnoremap gdh :diffget //2<CR>
     nnoremap gdl :diffget //3<CR>

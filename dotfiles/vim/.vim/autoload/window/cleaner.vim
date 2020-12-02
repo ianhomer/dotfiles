@@ -63,24 +63,23 @@ function window#cleaner#CloseOtherBuffers()
 endfunction
 
 function window#cleaner#CloseMe()
-  if &filetype == "startify" || winnr('$') > 1
+  if &filetype == "startify"
     quit
   elseif &filetype == "nerdtree" && winnr('$') > 1
     NERDTreeClose
-  elseif bufname("%") == "" && len(getbufinfo({'buflisted':1})) == 1
-    execute ":q"
-  else
-    if exists('*Startify')
+  elseif winnr('$') > 1
+    call window#cleaner#CloseOtherBuffers()
+  elseif len(getbufinfo({'buflisted':1})) == 1
+    if exists(':Startify')
+      execute ":bd"
       execute ":Startify"
+    elseif bufname("%") == ""
+      execute ":q"
+    else
+      execute ":bd"
     endif
-    call window#cleaner#CloseAllBuffersButCurrent()
-    execute ":bd"
-  endif
-endfunction
-
-function window#cleaner#ToggleFugitive()
-  if !window#cleaner#CloseFugitiveWindow()
-    Gstatus
+  else
+    echo "No windows closed"
   endif
 endfunction
 

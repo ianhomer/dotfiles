@@ -57,3 +57,10 @@ function s:IsEditableFile(buffer)
   " ... otherwise looks good for primary file to leave open
   return 1
 endfunction
+
+function window#ToggleFugitive()
+  if !window#cleaner#CloseFugitive()
+    Gstatus
+  endif
+endfunction
+
