@@ -479,7 +479,7 @@ function! SearchFiles()
 endfunction
 
 function! GitSynk(onlyPush)
-  call window#cleaner#CloseFugitiveWindow()
+  call window#cleaner#CloseFugitive()
   if a:onlyPush || !Knob("dispatch")
     Gpush
   else
