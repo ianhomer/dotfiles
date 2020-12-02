@@ -416,10 +416,6 @@ if KnobAt(1)
   " Hide all windows except the current one
   nnoremap <silent> <leader>O :only<CR>
 
-  if Knob("window-cleaner")
-    source ~/.config/vim/window-cleaner.vim
-  endif
-
   if KnobAt(3)
     nnoremap <silent> <leader>y :BCommits<CR>
     nnoremap <silent> <leader>Y :BCommits!<CR>

@@ -67,19 +67,15 @@ function window#cleaner#CloseMe()
     quit
   elseif &filetype == "nerdtree" && winnr('$') > 1
     NERDTreeClose
-  elseif winnr('$') > 1
+  elseif len(getbufinfo({'buflisted':1})) > 1
     call window#cleaner#CloseOtherBuffers()
-  elseif len(getbufinfo({'buflisted':1})) == 1
-    if exists(':Startify')
-      execute ":bd"
-      execute ":Startify"
-    elseif bufname("%") == ""
-      execute ":q"
-    else
-      execute ":bd"
-    endif
+  elseif exists(':Startify')
+    execute ":bd"
+    execute ":Startify"
+  elseif bufname("%") == ""
+    execute ":q"
   else
-    echo "No windows closed"
+    execute ":bd"
   endif
 endfunction
 
