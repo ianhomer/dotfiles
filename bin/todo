@@ -39,7 +39,7 @@ if [[ -z "$todo" ]] ; then
   # List todos
   echo
   if [[ -n "$ALL" ]] ; then
-    pattern="\- \[[^ox]\]( [\.-~\^])?$CONTEXT"
+    pattern="\- \[[^ox]\]( [\.\-~\^])?$CONTEXT"
   elif [[ -n "$CANCELLED" ]] ; then
     pattern="\- \[x\] !$CONTEXT"
   elif [[ -n "$DONE" ]] ; then
@@ -49,11 +49,11 @@ if [[ -z "$todo" ]] ; then
   elif [[ -n "$GOAL" ]] ; then
     pattern="\- \[ \]( [-~\^])$CONTEXT"
   else
-    pattern="\- \[ \](?! [\.~\^])$CONTEXT"
+    pattern="\- \[ \](?! [\.\-~\^])$CONTEXT"
   fi
   ag --nofilename --nocolor --nobreak "$pattern" $THINGS_DIR |
     cut -c 3- |
-    sort
+    sort | cut -c -$(tput cols)
   echo
 else
   # Create a todo
