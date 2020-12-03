@@ -29,7 +29,7 @@ if [ ! -d ~/.cache/tags ] ; then
 fi
 
 # Update plugins used in power mode
-export VIM_LEVEL=4
+export VIM_KNOB=6
 
 # update neovim
 nvim +PlugUpgrade +PlugUpdate +qa

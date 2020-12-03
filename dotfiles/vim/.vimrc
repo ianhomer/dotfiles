@@ -127,7 +127,9 @@ if !knobs#At(1)
   finish
 endif
 if !knobs#("nerdtree")
+  nnoremap <silent> <leader>f :call knobs#core#SetLevel(5)<CR>
   nnoremap <silent> <leader>n :call knobs#core#SetLevel(5)<CR>
+  nnoremap <silent> <leader>s :call knobs#core#SetLevel(5)<CR>
 endif
 
 " Provide more space for command output (e.g. fugitive) - with it this you may
@@ -156,6 +158,13 @@ if knobs#("modes")
   nnoremap <silent> <leader>3 :call modes#MobbingMode()<CR>
   nnoremap <silent> <leader>4 :call modes#TrainingMode()<CR>
 endif
+
+" Quit and save/close are handy leaders for use on mobile and limited keyboard
+nnoremap <silent> <leader>q :call window#cleaner#CloseMe()<CR>
+nnoremap <silent> <leader>x :x<CR>
+" I don't use macros, q to quit is more convenient for me
+nnoremap <silent> q :call window#cleaner#CloseMe()<CR>
+
 
 " why?
 "filetype plugin on
@@ -407,10 +416,6 @@ if KnobAt(1)
   " Hide all windows except the current one
   nnoremap <silent> <leader>O :only<CR>
 
-  if Knob("window-cleaner")
-    source ~/.config/vim/window-cleaner.vim
-  endif
-
   if KnobAt(3)
     nnoremap <silent> <leader>y :BCommits<CR>
     nnoremap <silent> <leader>Y :BCommits!<CR>
@@ -420,18 +425,13 @@ if KnobAt(1)
     nnoremap <silent> <leader>r :reg<CR>
     nnoremap <silent> <leader>k :call ToggleQuickFix()<CR>
     nnoremap <silent> <leader>K :call ToggleLocationList()<CR>
-    nnoremap <silent> <leader>g :call ToggleFugitive()<CR>
+    nnoremap <silent> <leader>g :call window#ToggleFugitive()<CR>
     nnoremap <silent> <leader>gd :Gvdiff!<CR>
     nnoremap gdh :diffget //2<CR>
     nnoremap gdl :diffget //3<CR>
     nnoremap <silent> <leader>b :call GitSynk(1)<CR>
     nnoremap <silent> <leader>e :call GitSynk(0)<CR>
 
-    " Quit and save/close are handy leaders for use on mobile and limited keyboard
-    nnoremap <silent> <leader>q :call CloseMe()<CR>
-    nnoremap <silent> <leader>x :x<CR>
-    " I don't use macros, q to quit is more convenient for me
-    nnoremap <silent> q :call CloseMe()<CR>
     " ... and let this q mapping apply for NERDTree
     let NERDTreeMapQuit='qq'
 
@@ -470,35 +470,16 @@ if Knob("thingity")
 endif
 
 function! SearchFiles() 
-  call SwitchToFirstEditableFile()
+  call window#SwitchToFirstEditableFile()
   Files
 endfunction
 
 function! GitSynk(onlyPush)
-  call CloseFugitiveWindow()
+  call window#cleaner#CloseFugitive()
   if a:onlyPush || !Knob("dispatch")
     Gpush
   else
     Dispatch! Git synk
-  endif
-endfunction
-
-function! CloseMe()
-  if &filetype == "startify" || winnr('$') > 1
-    quit
-  elseif &filetype == "nerdtree" && winnr('$') > 1
-    NERDTreeClose
-  else
-    if exists('*Startify')
-      execute ":Startify"
-    endif
-    call CloseAllBuffersButCurrent()
-  endif
-endfunction
-
-function! ToggleFugitive()
-  if !CloseFugitiveWindow()
-    Gstatus
   endif
 endfunction
 
