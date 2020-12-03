@@ -62,13 +62,30 @@ function window#cleaner#CloseOtherBuffers()
   normal `A
 endfunction
 
+"
+" Close current window
+"
 function window#cleaner#CloseMe()
   if &filetype == "startify"
+    " On startify window 
+    "   => close vi
     quit
-  elseif &filetype == "nerdtree" && winnr('$') > 1
+  elseif &filetype == "nerdtree"
+    if exists(':Startify') && winnr('$') == 1
+      " Last window and Startify available
+      "   => Open startify before closing NERDTree
+      execute ":Startify"
+    endif
     NERDTreeClose
   elseif len(getbufinfo({'buflisted':1})) > 1
-    call window#cleaner#CloseOtherBuffers()
+    " More than one buffer open
+    "   => close buffer and switch to next
+    execute ":bd"
+    call window#SwitchToFirstEditableFile()
+  elseif exists("g:NERDTree") && g:NERDTree.IsOpen()
+    " NERDTree open 
+    "   => close buffer and leave NERDTree open
+    execute ":q"
   elseif exists(':Startify')
     execute ":bd"
     execute ":Startify"

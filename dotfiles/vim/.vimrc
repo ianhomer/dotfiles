@@ -560,12 +560,6 @@ endif
 "
 " *** Scope : Windows ***
 "
-if KnobAt(3)
-  " Thanks - https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
-  " Close the current buffer and move to the previous one
-  nnoremap <leader>q :<c-u>bp <bar> bd #<cr>
-endif
-
 function! s:DebouncedSave() abort
   if &buftype == "" && @% != ""
     call timer_stop( s:debouncedSaveTimer )
