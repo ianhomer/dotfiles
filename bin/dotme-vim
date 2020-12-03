@@ -28,8 +28,8 @@ if [ ! -d ~/.cache/tags ] ; then
   mkdir ~/.cache/tags
 fi
 
-# Update plugins used in power mode
-export VIM_KNOB=6
+# Update plugins at 11
+export VIM_KNOB=11
 
 # update neovim
 nvim +PlugUpgrade +PlugUpdate +qa

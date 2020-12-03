@@ -58,8 +58,12 @@ function! s:DefineCommands()
 endfunction
 
 function! knobs#(knob)
+  " https://en.wikipedia.org/wiki/Up_to_eleven - everything on
+  if g:knobs_level == 11
+    return 1
+  endif
   return has_key(g:knobs, a:knob) ? g:knobs[a:knob] : 0
-endfunction
+endfunction f
 
 function! knobs#If(knob, ...)
   if knobs#(trim(a:knob,"'"))
