@@ -476,7 +476,7 @@ endfunction
 
 function! GitSynk(onlyPush)
   call window#cleaner#CloseFugitive()
-  if a:onlyPush || !Knob("dispatch")
+  if a:onlyPush || !knobs#("dispatch")
     Gpush
   else
     Dispatch! Git synk
@@ -486,11 +486,11 @@ endfunction
 function! LintMe()
   echo "Linted ".&filetype
   if &filetype == "markdown"
-    call LintMarkdown()
-  elseif Knob("coc")
+    call thingity#LintMarkdown()
+  elseif knobs#("coc")
     " Lint
     Format
-  elseif Knob("ale")
+  elseif knobs#("ale")
     ALEFix
   elseif &filetype == "json"
     execute "%!jq ."
