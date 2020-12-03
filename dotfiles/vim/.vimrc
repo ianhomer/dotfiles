@@ -469,7 +469,7 @@ if Knob("thingity")
   source ~/.config/vim/thingity.vim
 endif
 
-function! SearchFiles() 
+function! SearchFiles()
   call window#SwitchToFirstEditableFile()
   Files
 endfunction

@@ -18,7 +18,7 @@ endfunction
 function window#SwitchToFirstEditableFile()
   let l:current = bufnr("%")
 
-  if <SID>IsEditableFile(current)
+  if <SID>IsEditableFile(current) || winnr('$') == 1 
     " Current buffer is good for one to stay open
     return l:current
   endif
