@@ -4,8 +4,6 @@
 - [ ] review whether I need omf anymore
 - [ ] try vim-test
 - [ ] try vim-themis
-- [ ] Handle other do variations ; backlog ; alignment ; wish
-- [ ] Provide auto process to update tmux plugins
 
 ## backlog
 
