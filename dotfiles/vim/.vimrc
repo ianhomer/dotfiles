@@ -508,7 +508,7 @@ augroup dotme
     " entry. If we save too often then tools that watch for change will get too
     " busy.
     autocmd TextChangedI,TextChangedP * ++nested silent!
-      \ call s:DebouncedSave(5000)
+      \ call my#DebouncedSave(3000)
     autocmd TextChanged * ++nested silent! call my#DebouncedSave(1000)
   endif
 
