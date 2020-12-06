@@ -238,9 +238,9 @@ if KnobAt(4)
   " tmux - enable C-hjkl to move to across vim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
   " Improved path support
-  IfKnob("apathy") Plug 'tpope/vim-apathy'
+  IfKnob 'apathy' Plug 'tpope/vim-apathy'
   " UNIX-like shell commands
-  IfKnob("eunuch") Plug 'tpope/vim-eunuch'
+  IfKnob 'eunuch' Plug 'tpope/vim-eunuch'
 
   IfKnob 'startify' Plug 'mhinz/vim-startify'
 
@@ -263,15 +263,15 @@ if KnobAt(4)
   "
 
   " tabular - Lining up columns
-  IfKnob("tabular") Plug 'godlygeek/tabular'
+  IfKnob 'tabular' Plug 'godlygeek/tabular'
   " symlink - Follow symlink when opening file
   Plug 'aymericbeaumet/vim-symlink'
   " surround - Surround with brackets etc
-  IfKnob("surround") Plug 'tpope/vim-surround'
+  IfKnob 'surround' Plug 'tpope/vim-surround'
   " repeat - Repeat with mapped commands with . not just the native command
   Plug 'tpope/vim-repeat'
   " endwise - auto close structure
-  IfKnob("endwise") Plug 'tpope/vim-endwise'
+  IfKnob 'endwise' Plug 'tpope/vim-endwise'
   " Aysynchronous
   if Knob("dispatch")
     Plug 'tpope/vim-dispatch'
@@ -293,7 +293,7 @@ if KnobAt(4)
   endif
 
   " polyglot
-  IfKnob("polyglot") Plug 'sheerun/vim-polyglot'
+  IfKnob 'polyglot' Plug 'sheerun/vim-polyglot'
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
   if KnobAt(5) | Plug 'preservim/nerdcommenter' | endif
 
