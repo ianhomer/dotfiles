@@ -1,5 +1,11 @@
 # Testing
 
+## Testing autosave
+
+Watch file and then edit it
+
+    watch -n 1 -d cat test/scratch.md
+
 ## Test on a docker image
 
 Run image

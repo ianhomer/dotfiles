@@ -32,6 +32,7 @@ command! -nargs=1 -complete=customlist,knobs#core#ListKnobs
 nnoremap <silent> <leader>v :call knobs#core#ReloadConfig()<CR>
 
 nnoremap <silent> <leader>9a :call knobs#core#Toggle("ale")<CR>
+nnoremap <silent> <leader>9b :call knobs#core#Toggle("autosave")<CR>
 nnoremap <silent> <leader>9c :call knobs#core#Toggle("coc")<CR>
 nnoremap <silent> <leader>9j :call knobs#core#ToggleLayer("notes")<CR>
 nnoremap <silent> <leader>9l :call knobs#core#Toggle("light")<CR>

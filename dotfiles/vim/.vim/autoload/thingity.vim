@@ -1,3 +1,8 @@
+if exists('g:thingity_autoloaded')
+  finish
+endif
+let g:thingity_autoloaded = 1
+
 function thingity#GetThingityDateHeading()
   " Top level heading if first line
   let heading = line('.') == 1 ? "# " : "## "
