@@ -37,6 +37,7 @@ let g:knobs_levels = {
   \   "nerdtree":5,
   \   "modes":1,
   \   "nnn":6,
+  \   "polyglot":5,
   \   "spelling":5,
   \   "startify":5,
   \   "startuptime":5,
@@ -292,7 +293,6 @@ if KnobAt(4)
   endif
 
   " polyglot
-  nnoremap <silent> <leader>9p :call Toggle("polyglot")<CR>
   IfKnob("polyglot") Plug 'sheerun/vim-polyglot'
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
   if KnobAt(5) | Plug 'preservim/nerdcommenter' | endif

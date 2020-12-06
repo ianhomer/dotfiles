@@ -70,6 +70,12 @@ function window#cleaner#CloseMe()
     " On startify window 
     "   => close vi
     quit
+  elseif len(getbufinfo({'buflisted':1})) > 1 
+        \ || (&filetype == "nerdtree" && len(getbufinfo({'buflisted':1})) == 1)
+    " More than one buffer open or on nerdtree and one buffer open
+    "   => close buffer and switch to next
+    execute ":bd"
+    call window#SwitchToFirstEditableFile()
   elseif &filetype == "nerdtree"
     if exists(':Startify') && winnr('$') == 1
       " Last window and Startify available
@@ -77,11 +83,6 @@ function window#cleaner#CloseMe()
       execute ":Startify"
     endif
     NERDTreeClose
-  elseif len(getbufinfo({'buflisted':1})) > 1
-    " More than one buffer open
-    "   => close buffer and switch to next
-    execute ":bd"
-    call window#SwitchToFirstEditableFile()
   elseif exists("g:NERDTree") && g:NERDTree.IsOpen()
     " NERDTree open 
     "   => close buffer and leave NERDTree open
