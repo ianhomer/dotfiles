@@ -293,7 +293,11 @@ if KnobAt(4)
   endif
 
   " polyglot
-  IfKnob 'polyglot' Plug 'sheerun/vim-polyglot'
+  if Knob("polyglot")
+    let g:polyglot_disabled = ['markdown']
+    Plug 'sheerun/vim-polyglot'
+  endif
+
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
   if KnobAt(5) | Plug 'preservim/nerdcommenter' | endif
 
