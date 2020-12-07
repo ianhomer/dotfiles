@@ -22,6 +22,6 @@ fisher update jorgebucaran/fisher
 fisher update
 
 fisher ls | grep fish-nvm || \
-  fisher add jorgebucaran/fish-nvm
+  fisher install jorgebucaran/fish-nvm
 
 should-run -fu dotme-fisher
