@@ -37,6 +37,7 @@ let g:knobs_levels = {
   \   "nerdtree":5,
   \   "modes":1,
   \   "nnn":6,
+  \   "polyglot":5,
   \   "spelling":5,
   \   "startify":5,
   \   "startuptime":5,
@@ -237,9 +238,9 @@ if KnobAt(4)
   " tmux - enable C-hjkl to move to across vim and tmux panes
   Plug 'christoomey/vim-tmux-navigator'
   " Improved path support
-  if Knob("apathy") | Plug 'tpope/vim-apathy' | endif
+  IfKnob 'apathy' Plug 'tpope/vim-apathy'
   " UNIX-like shell commands
-  if Knob("eunuch") | Plug 'tpope/vim-eunuch' | endif
+  IfKnob 'eunuch' Plug 'tpope/vim-eunuch'
 
   IfKnob 'startify' Plug 'mhinz/vim-startify'
 
@@ -253,7 +254,7 @@ if KnobAt(4)
   "
   " vim-which-key - guidance on what keys do
   if knobs#("which-key")
-    Plug 'liuchengxu/vim-which-key', 
+    Plug 'liuchengxu/vim-which-key',
     \ { 'on': ['WhichKey', 'WhichKey!'] }
   endif
 
@@ -262,15 +263,15 @@ if KnobAt(4)
   "
 
   " tabular - Lining up columns
-  if Knob("tabular") | Plug 'godlygeek/tabular' | endif
+  IfKnob 'tabular' Plug 'godlygeek/tabular'
   " symlink - Follow symlink when opening file
   Plug 'aymericbeaumet/vim-symlink'
   " surround - Surround with brackets etc
-  if Knob("surround") | Plug 'tpope/vim-surround' | endif
+  IfKnob 'surround' Plug 'tpope/vim-surround'
   " repeat - Repeat with mapped commands with . not just the native command
   Plug 'tpope/vim-repeat'
   " endwise - auto close structure
-  if Knob("endwise") | Plug 'tpope/vim-endwise' | endif
+  IfKnob 'endwise' Plug 'tpope/vim-endwise'
   " Aysynchronous
   if Knob("dispatch")
     Plug 'tpope/vim-dispatch'
@@ -292,8 +293,7 @@ if KnobAt(4)
   endif
 
   " polyglot
-  nnoremap <silent> <leader>9p :call Toggle("polyglot")<CR>
-  if Knob("polyglot") | Plug 'sheerun/vim-polyglot' | endif
+  IfKnob 'polyglot' Plug 'sheerun/vim-polyglot'
   " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
   if KnobAt(5) | Plug 'preservim/nerdcommenter' | endif
 
@@ -322,7 +322,7 @@ if KnobAt(4)
   " goyo - Distraction free writing
   if KnobAt(5) | Plug 'junegunn/goyo.vim' | endif
 
-  if KnobAt(5) 
+  if KnobAt(5)
     " markdown preview
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
     let g:mkdp_auto_close = 0
@@ -374,24 +374,6 @@ if !KnobAt(3)
   finish
 endif
 
-function! s:gitModified()
-    let files = systemlist('git ls-files -m 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
-endfunction
-
-" same as above, but show untracked files, honouring .gitignore
-function! s:gitUntracked()
-    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
-    return map(files, "{'line': v:val, 'path': v:val}")
-endfunction
-
-" Read ~/.NERDTreeBookmarks file and takes its second column
-function! s:nerdtreeBookmarks()
-  let bookmarks = systemlist("cut -d' ' -f 2 ~/.NERDTreeBookmarks")
-  let bookmarks = bookmarks[0:-2] " Slices an empty last line
-  return map(bookmarks, "{'line': v:val, 'path': v:val}")
-endfunction
-
 if Knob("startify")
   let g:startify_custom_header = ""
   let g:startify_session_autoload = 0
@@ -400,17 +382,18 @@ if Knob("startify")
         \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
         \ { 'type': 'sessions',  'header': ['   Sessions']       },
         \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
-        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+        \ { 'type': function('my#gitModified'),  'header': ['   git modified']},
+        \ { 'type': function('my#gitUntracked'), 'header': ['   git untracked']},
         \ { 'type': 'commands',  'header': ['   Commands']       },
-        \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']}
+        \ { 'type': function('my#nerdtreeBookmarks'),
+        \ 'header': ['   NERDTree Bookmarks']}
         \ ]
 endif
 
 " My shortcuts
 if KnobAt(1)
   nnoremap <silent> <leader><space> :Buffers<CR>
-  nnoremap <silent> <leader>f :call SearchFiles()<CR>
+  nnoremap <silent> <leader>f :call my#SearchFiles()<CR>
   nnoremap <silent> <leader>F :Files!<CR>
 
   " Hide all windows except the current one
@@ -423,14 +406,14 @@ if KnobAt(1)
     nnoremap <silent> <leader>T :Commits!<CR>
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
-    nnoremap <silent> <leader>k :call ToggleQuickFix()<CR>
-    nnoremap <silent> <leader>K :call ToggleLocationList()<CR>
+    nnoremap <silent> <leader>k :call my#ToggleQuickFix()<CR>
+    nnoremap <silent> <leader>K :call my#ToggleLocationList()<CR>
     nnoremap <silent> <leader>g :call window#ToggleFugitive()<CR>
     nnoremap <silent> <leader>gd :Gvdiff!<CR>
     nnoremap gdh :diffget //2<CR>
     nnoremap gdl :diffget //3<CR>
-    nnoremap <silent> <leader>b :call GitSynk(1)<CR>
-    nnoremap <silent> <leader>e :call GitSynk(0)<CR>
+    nnoremap <silent> <leader>b :call my#GitSynk(1)<CR>
+    nnoremap <silent> <leader>e :call my#GitSynk(0)<CR>
 
     " ... and let this q mapping apply for NERDTree
     let NERDTreeMapQuit='qq'
@@ -447,7 +430,7 @@ if KnobAt(1)
     endif
   endif
 
-  nnoremap <silent> <leader>l :call LintMe()<CR>
+  nnoremap <silent> <leader>l :call my#LintMe()<CR>
   nnoremap <leader>.e <C-W><C-=>
 endif
 
@@ -469,56 +452,6 @@ if Knob("thingity")
   source ~/.config/vim/thingity.vim
 endif
 
-function! SearchFiles()
-  call window#SwitchToFirstEditableFile()
-  Files
-endfunction
-
-function! GitSynk(onlyPush)
-  call window#cleaner#CloseFugitive()
-  if a:onlyPush || !knobs#("dispatch")
-    Gpush
-  else
-    Dispatch! Git synk
-  endif
-endfunction
-
-function! LintMe()
-  echo "Linted ".&filetype
-  if &filetype == "markdown"
-    call thingity#LintMarkdown()
-  elseif knobs#("coc")
-    " Lint
-    Format
-  elseif knobs#("ale")
-    ALEFix
-  elseif &filetype == "json"
-    execute "%!jq ."
-  else
-    normal ma
-    call PruneWhiteSpace()
-    normal `a
-  endif
-endfunction
-
-function! ToggleQuickFix()
-  let l:currentWindow = winnr('$')
-  cwindow
-  let l:quickFixWindow = winnr('$')
-  if l:currentWindow == l:quickFixWindow
-    cclose
-  endif
-endfunction
-
-function! ToggleLocationList()
-  let l:currentWindow = winnr('$')
-  lwindow
-  let l:locationListWindow = winnr('$')
-  if l:currentWindow == l:locationListWindow
-    lclose
-  endif
-endfunction
-
 if Knob("tabcomplete")
   source ~/.config/vim/tabcomplete.vim
 endif
@@ -527,23 +460,8 @@ if Knob("coc")
   source ~/.config/vim/coc.vim
 endif
 
-" Clear whitespace
-function! PruneWhiteSpace()
-  %s/\s\+$//ge
-  call ReduceBlankLines()
-endfunction
-
-function! ReduceBlankLines()
-  call TrimEndLines()
-  v/\S/,//-j
-endfunction
-
-function! TrimEndLines()
-  silent! %s#\($\n\s*\)\+\%$##
-endfunction
-
 if KnobAt(3)
-  nnoremap <leader>L ma:call PruneWhiteSpace()<CR>`a
+  nnoremap <leader>L ma:call my#PruneWhiteSpace()<CR>`a
 endif
 
 " Write all buffers before navigating from Vim to tmux pane
@@ -560,13 +478,6 @@ endif
 "
 " *** Scope : Windows ***
 "
-function! s:DebouncedSave() abort
-  if &buftype == "" && @% != ""
-    call timer_stop( s:debouncedSaveTimer )
-    let s:debouncedSaveTimer = timer_start(1000, { timerId -> execute('write') })
-  endif
-endf
-
 "
 " Group all autocmds together to improve reloadability (reloads of vimrc
 " replace, not add to, existing commands) and source tacking (we know that
@@ -593,10 +504,12 @@ augroup dotme
     " Auto reload when focus gained or buffer entered
     autocmd FocusGained,WinEnter,BufEnter * :checktime
 
-    " Auto write when text changes using debouncing for insert mode
-    " to wait for pause in text entry
-    autocmd TextChangedI,TextChangedP * ++nested silent! call s:DebouncedSave()
-    autocmd TextChanged * ++nested silent! write
+    " Auto write when text changes using debouncing to wait for pause in text
+    " entry. If we save too often then tools that watch for change will get too
+    " busy.
+    autocmd TextChangedI,TextChangedP * ++nested silent!
+      \ call my#DebouncedSave(3000)
+    autocmd TextChanged * ++nested silent! call my#DebouncedSave(1000)
   endif
 
   if KnobAt(3)

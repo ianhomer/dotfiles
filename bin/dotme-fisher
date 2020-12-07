@@ -13,7 +13,13 @@ if not test -f ~/.config/fish/functions/fisher.fish
     ~/.config/fish/functions/fisher.fish
 end
 
-fisher self-update
+# Update fisher itself, once all environments on latest version
+# fisher update if sufficient.
+fisher update jorgebucaran/fisher
+
+# Update all fisher plugins
+
+fisher update
 
 fisher ls | grep fish-nvm || \
   fisher add jorgebucaran/fish-nvm

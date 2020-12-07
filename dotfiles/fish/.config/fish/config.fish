@@ -68,7 +68,7 @@ if status --is-interactive
   #   fish_default_key_bindings
   # Time between escape key press and subsequent character
   set -g fish_escape_delay_ms 200
-  
+
   #
   # Tweak colors for me - noise reduction, red/green color blind and
   # long-sighted.
