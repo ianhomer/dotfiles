@@ -27,7 +27,6 @@ function window#SwitchToFirstEditableFile()
   for l:buffer in filter(range(1, bufnr('$')), 'buflisted(v:val)')
     " Is buffer in active window and editable?
     if bufwinnr(l:buffer) > -1 && <SID>IsEditableFile(l:buffer)
-      echo l:buffer
       let l:window = bufwinnr(l:buffer)
       if l:window > 0
         execute l:window 'wincmd w'
