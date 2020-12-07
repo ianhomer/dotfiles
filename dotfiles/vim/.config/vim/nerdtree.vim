@@ -25,6 +25,7 @@ function! NERDTreeFindOrToggle()
 endfunction
 
 nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
+nnoremap <silent> <leader>m :NERDTreeFind<CR>
 
 " https://github.com/preservim/nerdtree/wiki
 " If more than one window and previous buffer was NERDTree, go back to it.
