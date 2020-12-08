@@ -15,8 +15,9 @@ set -e
 help() {
   cat <<EOF
 
-    git synk -a  # autocommit
-    git synk -u  # unset autocommmit
+    git synk -a    # autocommit
+    git synk -u    # unset autocommmit
+    git synk -w 5  # fetch window of 5 seconds
 
 EOF
 }
@@ -64,12 +65,17 @@ function gitQuiet() {
       || :
   else
     if ! git $1 --quiet ; then
-      # Sometimes git fetch will fail if we have the 
-      # wrong SSH key cached, just clearing the 
-      # ssh cache seems to fix it.
-      printf "!"
-      ssh-add -q -D
-      git $1 --quiet
+      if [[ "$1" == "fetch" ]] ; then
+        # Sometimes git fetch will fail if we have the 
+        # wrong SSH key cached, just clearing the 
+        # ssh cache seems to fix it.
+        printf "!"
+        ssh-add -q -D
+        git $1 --quiet
+      else
+        printf ' ! '
+        return 1
+      fi
     fi
   fi
 }
@@ -91,8 +97,9 @@ function gitSynk() {
   current=`pwd | sed 's|.*/||g'`
 
   if git rebase --show-current-patch > /dev/null 2>&1 ; then
-    printf "$current - rebase in progress"
-    return 1
+    echo "$current - rebase in progress"
+    git rebase
+    return 128
   fi
 
   changes=$(git status --porcelain | wc -l)
@@ -144,7 +151,21 @@ function gitSynk() {
 
   if [[ $left -gt 0 ]] ; then
     printf " ↓"
-    gitQuiet rebase
+    if ! gitQuiet rebase ; then
+      echo
+      o_o "START DIFF"
+      git diff --diff-filter=U
+      o_o "END   DIFF"
+      git rebase --abort
+      cat <<EOF
+Could not rebase, please rebase manually with:
+
+    cd $(pwd)
+    git rebase
+
+EOF
+      exit
+    fi
   fi
 
   if [[ $right -gt 0 ]] ; then
