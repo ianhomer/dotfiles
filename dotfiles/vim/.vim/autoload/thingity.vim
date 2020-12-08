@@ -140,7 +140,7 @@ function! thingity#NewThing(createNew,type)
     execute "normal! a".thingity#GetThingityDateHeading().headingExtra."\<ESC>2o\<ESC>"
     write
   endif
-  call NERDTreeFindIfRoom()
+  call window#NERDTreeFindIfRoom()
   wincmd l
 endfunction
 
