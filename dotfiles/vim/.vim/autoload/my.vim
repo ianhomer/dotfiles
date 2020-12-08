@@ -68,10 +68,18 @@ function my#TrimEndLines()
   silent! %s#\($\n\s*\)\+\%$##
 endfunction
 
+"
+" Save all changed buffers in the given wait period. If this function is
+" subsequently called in the given period then first request to save is
+" cancelled. This allows the last save to win, without the system burden of
+" multiple saves. Note that is also saves all buffers since this brings the
+" advantage of (1) making sure all buffers are saved (2) allows saving of buffer
+" in background even if you've quickly switched to another buffer.
+"
 function my#DebouncedSave(wait) abort
   if &buftype == "" && @% != ""
     call timer_stop( s:debouncedSaveTimer )
-    let s:debouncedSaveTimer = timer_start(a:wait, { timerId -> execute('write') })
+    let s:debouncedSaveTimer = timer_start(a:wait, { timerId -> execute('wall') })
   endif
 endf
 

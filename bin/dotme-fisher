@@ -21,7 +21,16 @@ fisher update jorgebucaran/fisher
 
 fisher update
 
-fisher ls | grep fish-nvm || \
-  fisher add jorgebucaran/fish-nvm
+set packages                  \
+  edc/bass                    \
+  fishgretel/fasd             \
+  jorgebucaran/fish-nvm       \
+  oh-my-fish/theme-bobthefish
+
+for package in $packages
+  fisher ls | grep "$package" || \
+     fisher install "$package"
+  echo $package
+end
 
 should-run -fu dotme-fisher
