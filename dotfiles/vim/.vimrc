@@ -65,6 +65,9 @@ let g:knobs_layers_map = {
   \      "compactcmd":1,
   \      "light":1,
   \      "markdown.conceal.partial":1
+  \    },
+  \    "nvim-0.5":{
+  \      "lsp":1
   \    }
   \  }
 
@@ -72,7 +75,8 @@ let g:knobs_layers_map = {
 " iTerm used for notes layer
 let g:knobs_layers = get(g:, "layers",{
   \   "mobile": $ANDROID_DATA == '/data' ? 1 : 0,
-  \   "notes": $ITERM_PROFILE == 'oh-my' ? 1 : 0
+  \   "notes": $ITERM_PROFILE == 'oh-my' ? 1 : 0,
+  \   "nvim-0.5": has('nvim-0.5') ? 1 : 0
   \ })
 
 "
@@ -342,12 +346,27 @@ if Knob("startuptime")
   Plug 'tweekmonster/startuptime.vim'
 endif
 
+if Knob("lsp")
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/completion-nvim'
+  Plug 'nvim-lua/diagnostic-nvim'
+endif
+
 " CoC completion
 if Knob("coc")
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
 
 call plug#end()
+
+if Knob("lsp")
+  lua require'lspconfig'.bashls.setup{}
+  lua require'lspconfig'.jsonls.setup{}
+  lua require'lspconfig'.pyls.setup{}
+  lua require'lspconfig'.tsserver.setup{}
+  lua require'lspconfig'.vimls.setup{}
+  lua require'lspconfig'.yamlls.setup{}
+endif
 
 if !Knob("light")
   if Knob("gruvbox")
