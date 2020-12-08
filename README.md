@@ -32,7 +32,7 @@ of working to streamline distraction free coding. This includes:
 : package manager
 
 **fish**
-: friendly interactive shell with oh-my-fish
+: friendly interactive shell
 
 **git**
 : source control
