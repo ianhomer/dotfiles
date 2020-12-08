@@ -1,6 +1,5 @@
 # todo
 
-- [ ] review whether I need omf anymore
 - [ ] try vim-test
 - [ ] try vim-themis
 
