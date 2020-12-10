@@ -31,14 +31,14 @@ of working to streamline distraction free coding. This includes:
 **brew**
 : package manager
 
-**fish**
-: friendly interactive shell
+**fish** and **zsh**
+: friendly interactive shells
 
 **git**
 : source control
 
-**kitty**
-: slick terminal
+**kitty** and **alacritty**
+: slick terminals
 
 **tmux**
 : terminal multiplexer with plugins - tmux-continuum ; tmux-resurrect ; vim-tmux-navigator
