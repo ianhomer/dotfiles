@@ -11,6 +11,8 @@ else
 
   . ~/.config/sh/aliases.sh
 
+  alias do="todo"
+
   # git
   alias branch="git branch"
   alias checkout="git checkout"

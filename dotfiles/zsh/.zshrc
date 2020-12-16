@@ -109,3 +109,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 . ~/.config/sh/aliases.sh
+
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
