@@ -2,6 +2,8 @@
 "
 
 let $FZF_DEFAULT_COMMAND = 'fd -H --type f'
+" Preview hidden by default
+let g:fzf_preview_window = ['right:50%:hidden', 'ctrl-/']
 
 " tiebreak on index for Maps so that the natural sort order of the source
 " (i.e. alphabetical on string from vim maps command takes precedence as

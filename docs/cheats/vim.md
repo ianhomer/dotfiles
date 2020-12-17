@@ -209,7 +209,8 @@
 
 ### fzf
 
-|          |                          |
-| --       | --                       |
-| `Ctrl+x` | Open in horizontal split |
-| `Ctrl+v` | Open in vertical split   |
+|          |                           |
+| --       | --                        |
+| `Ctrl+x` | Open in horizontal split  |
+| `Ctrl+v` | Open in vertical split    |
+| `Ctrl+/` | Toggle preview window off |
