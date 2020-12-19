@@ -363,9 +363,17 @@ if Knob("lsp")
   lua require'lspconfig'.bashls.setup{}
   lua require'lspconfig'.jsonls.setup{}
   lua require'lspconfig'.pyls.setup{}
-  lua require'lspconfig'.tsserver.setup{}
   lua require'lspconfig'.vimls.setup{}
   lua require'lspconfig'.yamlls.setup{}
+
+  autocmd BufEnter * lua require'completion'.on_attach()
+
+  " Use <Tab> and <S-Tab> to navigate through popup menu
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+  " Set completeopt to have a better completion experience
+  set completeopt=menuone,noinsert,noselect
 endif
 
 if !Knob("light")
@@ -532,7 +540,7 @@ augroup dotme
     " busy.
     autocmd TextChangedI,TextChangedP * ++nested silent!
       \ call my#DebouncedSave(3000)
-    autocmd InsertLeave,TextChanged * ++nested silent! call my#DebouncedSave(1000)
+    autocmd InsertLeave,TextChanged * ++nested silent! call my#DebouncedSave(500)
   endif
 
   if KnobAt(3)

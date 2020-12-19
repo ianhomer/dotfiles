@@ -3,7 +3,10 @@
     "browser": true,
     "es2020": true
   },
-  "extends": "plugin:react/recommended",
+  "extends": [
+    "plugin:react/recommended",
+    "prettier"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
