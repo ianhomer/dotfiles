@@ -532,7 +532,7 @@ augroup dotme
     " busy.
     autocmd TextChangedI,TextChangedP * ++nested silent!
       \ call my#DebouncedSave(3000)
-    autocmd TextChanged * ++nested silent! call my#DebouncedSave(1000)
+    autocmd InsertLeave,TextChanged * ++nested silent! call my#DebouncedSave(1000)
   endif
 
   if KnobAt(3)
