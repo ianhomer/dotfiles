@@ -25,7 +25,8 @@ set packages                  \
   edc/bass                    \
   fishgretel/fasd             \
   jorgebucaran/fish-nvm       \
-  oh-my-fish/theme-bobthefish
+  oh-my-fish/theme-bobthefish \
+  PatrickF1/fzf.fish
 
 for package in $packages
   fisher ls | grep "$package" || \
