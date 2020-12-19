@@ -1,4 +1,4 @@
-function foo(a) {
+export function foo(a) {
   if (true) {
     console.log("It's true");
   }

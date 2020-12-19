@@ -12,7 +12,7 @@ endfunction
 function! thingity#LintMarkdown()
   normal ma
   let currentLine=line("'a")
-  call PruneWhiteSpace()
+  call my#PruneWhiteSpace()
   normal gg
   " Do not format fenced blocks. I can't find a way to configure the default vim
   " formatting to not join lines in fenced blocks, so instead we'll only format

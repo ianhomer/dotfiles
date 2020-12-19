@@ -18,21 +18,25 @@ function! my#GitSynk(onlyPush)
 endfunction
 
 function my#LintMe()
-  echo "Linted ".&filetype
   if &filetype == "markdown"
+    let linter="thingity"
     call thingity#LintMarkdown()
   elseif knobs#("coc")
-    " Lint
+    let linter="coc"
     Format
   elseif knobs#("ale")
+    let linter="ale"
     ALEFix
   elseif &filetype == "json"
+    let linter="jq"
     execute "%!jq ."
   else
+    let linter="prune"
     normal ma
-    call PruneWhiteSpace()
+    call my#PruneWhiteSpace()
     normal `a
   endif
+  echo "Linted ".&filetype." with ".linter
 endfunction
 
 function my#ToggleQuickFix()
@@ -56,11 +60,11 @@ endfunction
 " Clear whitespace
 function my#PruneWhiteSpace()
   %s/\s\+$//ge
-  call ReduceBlankLines()
+  call my#ReduceBlankLines()
 endfunction
 
 function my#ReduceBlankLines()
-  call TrimEndLines()
+  call my#TrimEndLines()
   v/\S/,//-j
 endfunction
 
@@ -100,5 +104,3 @@ function my#nerdtreeBookmarks()
   let bookmarks = bookmarks[0:-2] " Slices an empty last line
   return map(bookmarks, "{'line': v:val, 'path': v:val}")
 endfunction
-
-
