@@ -2,13 +2,13 @@
 
 ## Plant UML
 
-``` plantuml
+```plantuml
 Bob -> Alice : hello
 ```
 
 ## JS Sequence Diagrams
 
-``` sequence-diagrams
+```sequence-diagrams
 Bob -> Alice : Says
 Note right of Alice: Bob thinks
 Alice --> Andrew: How are you?
@@ -17,7 +17,7 @@ Andrew ->> Alice: I'm OK
 
 ## Flowchart
 
-``` flowchart
+```flowchart
 st=>start: Start|past
 e=>end: End|future
 op1=>operation: My Operation|past
