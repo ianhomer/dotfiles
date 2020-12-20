@@ -152,7 +152,7 @@ command_packages() {
     elif is-android ; then
       dotme-pkg
     elif has-pacman ; then
-      has-pacman
+      dotme-pacman
     fi
   fi
 }
