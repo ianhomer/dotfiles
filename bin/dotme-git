@@ -20,4 +20,7 @@ git config user.email > /dev/null ||
 git config user.name > /dev/null ||
   git config --global user.name "ian"
 
+git config pull.rebase > /dev/null ||
+  git config --global pull.rebase false
+
 should-run -fu $0

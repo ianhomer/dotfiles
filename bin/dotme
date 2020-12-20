@@ -134,11 +134,15 @@ command_inner() {
 # Pull latest version of dotfiles
 #
 command_pull() {
-  printf "\e[36mpulling latest version of dotfiles\e[0m\n"
-  cd $REPOSITORY_DIR
-  printf "\e[35m"
-  [ $DRY -eq 0 ] && git pull
-  printf "\e[0m"
+  if git config pull.rebase > /dev/null ; then
+    printf "\e[36mpulling latest version of dotfiles\e[0m\n"
+    cd $REPOSITORY_DIR
+    printf "\e[35m"
+    [ $DRY -eq 0 ] && git pull
+    printf "\e[0m"
+  else
+    _ Skipping pull of latest dotfiles
+  fi
 }
 
 command_packages() {

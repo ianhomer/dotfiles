@@ -1,7 +1,7 @@
-# Testing with docker
+# Testing Arch with docker
 
-    docker build -t local/dotme -f Dockerfile .
-    docker run --rm -it local/dotme
+    docker build -t local/arch-me -f Dockerfile .
+    docker run --rm -it local/arch-me
 
 Then you can hook up the docker instance to commit changes
 
@@ -16,4 +16,4 @@ Copy public deploy key into deploy key for repository
     mv ~/.dotfiles ~/.dotfiles.bak
     git clone git@github.com:ianhomer/dotfiles.git ~/.dotfiles
     cd ~/.dotfiles
-    git checkout feature/jelly
+    git checkout feature/cardigans
