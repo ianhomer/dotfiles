@@ -122,9 +122,13 @@ command_inner() {
   [ $DRY -eq 0 ] && is-pc && dotme-tmux
   [ $DRY -eq 0 ] && is-pc && dotme-node
   [ $DRY -eq 0 ] && is-pc && dotme-jenv
-  [ $DRY -eq 0 ] && dotme-fish
-  [ $DRY -eq 0 ] && dotme-fisher
-  [ $DRY -eq 0 ] && dotme-zsh
+  if command -v fish &> /dev/null ; then
+    [ $DRY -eq 0 ] && dotme-fish
+    [ $DRY -eq 0 ] && dotme-fisher
+  fi
+  if command -v zsh &> /dev/null ; then
+    [ $DRY -eq 0 ] && dotme-zsh
+  fi
   [ $DRY -eq 0 ] && dotme-gitme
   [ $DRY -eq 0 ] && is-pc && dotme-nnn
   command_clean
