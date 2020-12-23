@@ -114,7 +114,6 @@ if [[ -z "$force" ]] && [[ -f "$shouldRunFile" ]] ; then
   if [[ ! -f $fullScriptName ]] ; then
     fullScriptName=`which ${scriptName}`
   fi
-  echo $fullScriptName
   [[ -z "$fullScriptName" ]] && \
     o_x "Cannot find $scriptName to check whether it should run"
   [[ -n "$verbose" ]] && echo "Full script name : $fullScriptName"

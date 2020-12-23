@@ -4,6 +4,11 @@
 # Install pacman - arch package manager - packages
 #
 
+should-run -m 7 dotme-pacman || exit
+
 echo "... updating brew"
 
-pacman -Syu --noconfirm - < ~/.dotfiles/config/pacman/pkglist.txt
+sudo pacman -Syu --noconfirm - < ~/.dotfiles/config/pacman/pkglist.txt
+
+should-run -fu dotme-pacman
+
