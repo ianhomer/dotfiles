@@ -1,12 +1,12 @@
 # Testing Arch with docker
 
-    docker build -t local/arch-me -f Dockerfile .
-    docker run --rm -it local/arch-me
+Spin up container
+
+    ./exec.sh
 
 Then you can hook up the docker instance to commit changes
 
-    cd ~/.dotfiles/bin
-    git checkout feature/jelly
+    git checkout feature/cardigans
     ./dotme set EMAIL dotfiles@purplepip.com
     ./create-deploy-key
 

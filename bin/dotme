@@ -110,6 +110,9 @@ command_install() {
 
 command_inner() {
   command_packages
+  if ! command -v stow &> /dev/null ; then
+    o_x "Stow is needed, but not found"
+  fi
   dotme-stow -d $DOTFILES_DIR
   [ $DRY -eq 0 ] && dotme-shim
   [ $DRY -eq 0 ] && dotme-git
