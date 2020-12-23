@@ -349,7 +349,7 @@ if knobs#("lsp")
 endif
 
 " CoC completion
-if Knob("coc")
+if knobs#could("coc")
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
 
@@ -370,7 +370,7 @@ if knobs#("lsp")
 endif
 
 if !Knob("light")
-  if Knob("gruvbox")
+  if knobs#("gruvbox")
     colorscheme gruvbox
   elseif Knob("gruvbox8")
     colorscheme gruvbox8
@@ -472,15 +472,15 @@ if exists('*which_key#register')
   call which_key#register("'", "g:which_key_map")
 endif
 
-if Knob("thingity")
+if knobs#("thingity")
   source ~/.config/vim/thingity.vim
 endif
 
-if Knob("tabcomplete")
+if knobs#("tabcomplete")
   source ~/.config/vim/tabcomplete.vim
 endif
 
-if Knob("coc")
+if knobs#("coc")
   source ~/.config/vim/coc.vim
 endif
 
@@ -494,7 +494,7 @@ let g:tmux_navigator_save_on_switch = 2
 " *** Scope : Writing ***
 
 " Goyo distraction free writing
-if Knob("goyo")
+if knobs#("goyo")
   nnoremap <leader>jg :Goyo<CR>
   let g:goyo_width = 85
 endif
@@ -521,7 +521,7 @@ augroup dotme
     autocmd InsertEnter,InsertLeave * set cul!
   endif
 
-  if Knob("autosave")
+  if knobs#("autosave")
     "
     " *** Scope : IO ***
     "
@@ -563,7 +563,7 @@ if KnobAt(1)
   vnoremap > >gv
 endif
 
-if Knob("spelling")
+if knobs#("spelling")
   source ~/.config/vim/spell.vim
 endif
 
@@ -586,7 +586,7 @@ endif
 " *** Scope : IO ***
 "
 if KnobAt(1)
-  if Knob("autosave")
+  if knobs#("autosave")
     " Auto reload underlying file if it changes, although
     " it only really reloads when external command run like :!ls
     set autoread
@@ -612,7 +612,7 @@ endif
 " *** Scope : Status Bar ***
 "
 
-if Knob("airline")
+if knobs#("airline")
   " Less accurate highlighting, but improved performance
   let g:airline_highlighting_cache = 1
   " Explicit airline extensions for quicker start up

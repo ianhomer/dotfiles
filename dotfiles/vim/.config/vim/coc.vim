@@ -20,6 +20,10 @@ let g:coc_global_extensions = [
 " 'coc-prettier',
 " 
 
+if !exists("*coc#config")
+  finish
+endif
+
 " dotfiles dictionaries for cSpell
 call coc#config('cSpell.dictionaryDefinitions', [
       \ { "name" : "dotfiles",
