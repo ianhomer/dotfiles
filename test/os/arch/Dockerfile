@@ -4,8 +4,9 @@ RUN pacman -Syu --noconfirm \
   openssh \
   sudo \
   vim
-RUN groupadd mygroup && \
-    useradd -m -g mygroup me
+RUN groupadd us && \
+    useradd -m -g us me
+RUN echo "me ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/me
 USER me
 RUN git clone                                  \
       -b feature/cardigans                     \

@@ -181,19 +181,19 @@ call plug#begin(g:vim_dir."/plugged")
 " Core essentials
 "
 " fzf - Fuzzy Finder
-if knobs#("fzf")
+if knobs#could("fzf")
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
   source ~/.config/vim/fzf.vim
 endif
 
 " fugitive - Git integration
-if knobs#("fugitive")
+if knobs#could("fugitive")
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
 endif
 
-if knobs#("conflict-marker")
+if knobs#could("conflict-marker")
   Plug 'rhysd/conflict-marker.vim'
   autocmd ColorScheme * highlight Info gui=bold guifg=#504945 guibg=#83a598
   let g:conflict_marker_highlight_group="Info"
@@ -202,151 +202,147 @@ endif
 "
 " Style
 "
-if knobs#("light")
+if knobs#could("light")
   Plug 'rakr/vim-one'
 endif
 
 IfKnob 'gruvbox'  Plug 'morhetz/gruvbox'
 IfKnob 'gruvbox8' Plug 'lifepillar/vim-gruvbox8'
 
-if Knob("nerdtree")
+if knobs#could("nerdtree")
   " NERDTree - file explore
   Plug 'preservim/nerdtree'
   source ~/.config/vim/nerdtree.vim
 endif
 
-if KnobAt(4)
-
-  if Knob("nnn")
-    "
-    " Window and file management
-    "
-    Plug 'mcchrish/nnn.vim'
-    let g:nnn#set_default_mappings = 0
-    let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6  } }
-    nnoremap <silent> <leader>m :NnnPicker<CR>
-  endif
-
-  IfKnob 'nerdtree' Plug 'ryanoasis/vim-devicons'
-  " Vinegar - better file expore than NERD
-  if KnobAt(9) | Plug 'tpope/vim-vinegar' | endif
-  " ack - Search files
-  if KnobAt(6) | Plug 'mileszs/ack.vim' | endif
-  if Knob("airline")
-    " Airline - status bar
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-  endif
-  " editorconfig - Support standard editorconfig files
-  if KnobAt(7) | Plug 'editorconfig/editorconfig-vim' | endif
-  " tmux - enable C-hjkl to move to across vim and tmux panes
-  Plug 'christoomey/vim-tmux-navigator'
-  " Improved path support
-  IfKnob 'apathy' Plug 'tpope/vim-apathy'
-  " UNIX-like shell commands
-  IfKnob 'eunuch' Plug 'tpope/vim-eunuch'
-
-  IfKnob 'startify' Plug 'mhinz/vim-startify'
-
-  if KnobAt(5)
-    Plug 'ludovicchabant/vim-gutentags'
-    let g:gutentags_cache_dir = expand('~/.cache/tags')
-  endif
-
+if knobs#could("nnn")
   "
-  " Help
+  " Window and file management
   "
-  " vim-which-key - guidance on what keys do
-  if knobs#("which-key")
-    Plug 'liuchengxu/vim-which-key',
-    \ { 'on': ['WhichKey', 'WhichKey!'] }
-  endif
-
-  "
-  " Coding
-  "
-
-  " tabular - Lining up columns
-  IfKnob 'tabular' Plug 'godlygeek/tabular'
-  " symlink - Follow symlink when opening file
-  Plug 'aymericbeaumet/vim-symlink'
-  " surround - Surround with brackets etc
-  IfKnob 'surround' Plug 'tpope/vim-surround'
-  " repeat - Repeat with mapped commands with . not just the native command
-  Plug 'tpope/vim-repeat'
-  " endwise - auto close structure
-  IfKnob 'endwise' Plug 'tpope/vim-endwise'
-  " Aysynchronous
-  if Knob("dispatch")
-    Plug 'tpope/vim-dispatch'
-    let g:dispatch_no_tmux_make = 1
-    let g:dispatch_quickfix_height = 4
-  endif
-
-  if Knob("syntastic")
-    Plug 'vim-syntastic/syntastic'
-    let g:vim_jsx_pretty_colorful_config = 1
-    Plug 'yuezk/vim-js'
-    Plug 'maxmellon/vim-jsx-pretty'
-    source ~/.config/vim/syntastic.vim
-  endif
-
-  if Knob("ale")
-    Plug 'dense-analysis/ale'
-    source ~/.config/vim/ale.vim
-  endif
-
-  " polyglot
-  if Knob("polyglot")
-    let g:polyglot_disabled = ['markdown']
-    Plug 'sheerun/vim-polyglot'
-  endif
-
-  " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
-  if KnobAt(5) | Plug 'preservim/nerdcommenter' | endif
-
-  if Knob("nerdtree")
-    " NERDTree - show git changes
-    if KnobAt(9) | Plug 'xuyuanp/nerdtree-git-plugin' | endif
-  endif
-
-  if Knob("gitgutter")
-    " gitgutter - Git change indicator to left of window
-    Plug 'airblade/vim-gitgutter'
-    let g:gitgutter_map_keys = 0
-    let g:gitgutter_highlight_linenrs = 1
-  endif
-
-  " HTML
-  if KnobAt(9) | Plug 'mattn/emmet-vim' | endif
-  " Handy mappings
-  if Knob("unimpaired")
-    Plug 'tpope/vim-unimpaired'
-  endif
-
-  "
-  " Writing
-  "
-  " goyo - Distraction free writing
-  if KnobAt(5) | Plug 'junegunn/goyo.vim' | endif
-
-  if KnobAt(5)
-    " markdown preview
-    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-    let g:mkdp_auto_close = 0
-    let g:mkdp_page_title = '${name}'
-  endif
-
-  " Vim testing
-  if KnobAt(6) | Plug 'junegunn/vader.vim' | endif
-
+  Plug 'mcchrish/nnn.vim'
+  let g:nnn#set_default_mappings = 0
+  let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6  } }
+  nnoremap <silent> <leader>m :NnnPicker<CR>
 endif
 
-if Knob("startuptime")
+IfKnob 'nerdtree' Plug 'ryanoasis/vim-devicons'
+" Vinegar - better file expore than NERD
+if KnobAt(9) | Plug 'tpope/vim-vinegar' | endif
+" ack - Search files
+if KnobAt(6) | Plug 'mileszs/ack.vim' | endif
+if knobs#could("airline")
+  " Airline - status bar
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+endif
+" editorconfig - Support standard editorconfig files
+if KnobAt(7) | Plug 'editorconfig/editorconfig-vim' | endif
+" tmux - enable C-hjkl to move to across vim and tmux panes
+Plug 'christoomey/vim-tmux-navigator'
+" Improved path support
+IfKnob 'apathy' Plug 'tpope/vim-apathy'
+" UNIX-like shell commands
+IfKnob 'eunuch' Plug 'tpope/vim-eunuch'
+
+IfKnob 'startify' Plug 'mhinz/vim-startify'
+
+if KnobAt(5)
+  Plug 'ludovicchabant/vim-gutentags'
+  let g:gutentags_cache_dir = expand('~/.cache/tags')
+endif
+
+"
+" Help
+"
+" vim-which-key - guidance on what keys do
+if knobs#could("which-key")
+  Plug 'liuchengxu/vim-which-key',
+  \ { 'on': ['WhichKey', 'WhichKey!'] }
+endif
+
+"
+" Coding
+"
+
+" tabular - Lining up columns
+IfKnob 'tabular' Plug 'godlygeek/tabular'
+" symlink - Follow symlink when opening file
+Plug 'aymericbeaumet/vim-symlink'
+" surround - Surround with brackets etc
+IfKnob 'surround' Plug 'tpope/vim-surround'
+" repeat - Repeat with mapped commands with . not just the native command
+Plug 'tpope/vim-repeat'
+" endwise - auto close structure
+IfKnob 'endwise' Plug 'tpope/vim-endwise'
+" Aysynchronous
+if knobs#could("dispatch")
+  Plug 'tpope/vim-dispatch'
+  let g:dispatch_no_tmux_make = 1
+  let g:dispatch_quickfix_height = 4
+endif
+
+if knobs#could("syntastic")
+  Plug 'vim-syntastic/syntastic'
+  let g:vim_jsx_pretty_colorful_config = 1
+  Plug 'yuezk/vim-js'
+  Plug 'maxmellon/vim-jsx-pretty'
+  source ~/.config/vim/syntastic.vim
+endif
+
+if knobs#could("ale")
+  Plug 'dense-analysis/ale'
+  source ~/.config/vim/ale.vim
+endif
+
+" polyglot
+if knobs#could("polyglot")
+  let g:polyglot_disabled = ['markdown']
+  Plug 'sheerun/vim-polyglot'
+endif
+
+" Commenter - loads maps prefixed with <leader>c <- don't use for local maps
+if KnobAt(5) | Plug 'preservim/nerdcommenter' | endif
+
+if knobs#could("nerdtree")
+  " NERDTree - show git changes
+  if KnobAt(9) | Plug 'xuyuanp/nerdtree-git-plugin' | endif
+endif
+
+if knobs#could("gitgutter")
+  " gitgutter - Git change indicator to left of window
+  Plug 'airblade/vim-gitgutter'
+  let g:gitgutter_map_keys = 0
+  let g:gitgutter_highlight_linenrs = 1
+endif
+
+" HTML
+if KnobAt(9) | Plug 'mattn/emmet-vim' | endif
+" Handy mappings
+if Knob("unimpaired")
+  Plug 'tpope/vim-unimpaired'
+endif
+
+"
+" Writing
+"
+" goyo - Distraction free writing
+if KnobAt(5) | Plug 'junegunn/goyo.vim' | endif
+
+if KnobAt(5)
+  " markdown preview
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
+  let g:mkdp_auto_close = 0
+  let g:mkdp_page_title = '${name}'
+endif
+
+" Vim testing
+if KnobAt(6) | Plug 'junegunn/vader.vim' | endif
+
+if knobs#could("startuptime")
   Plug 'tweekmonster/startuptime.vim'
 endif
 
-if knobs#has("lsp")
+if knobs#("lsp")
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
   Plug 'nvim-lua/diagnostic-nvim'
@@ -359,7 +355,7 @@ endif
 
 call plug#end()
 
-if knobs#has("lsp")
+if knobs#("lsp")
   lua require'lspconfig'.bashls.setup{}
   lua require'lspconfig'.jsonls.setup{}
   lua require'lspconfig'.pyls.setup{}
