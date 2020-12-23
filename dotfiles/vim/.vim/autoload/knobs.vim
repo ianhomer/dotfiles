@@ -62,8 +62,12 @@ function! knobs#(knob)
   if g:knobs_level == 11
     return 1
   endif
+  return knobs#has(a:knob)
+endfunction
+
+function! knobs#has(knob)
   return has_key(g:knobs, a:knob) ? g:knobs[a:knob] : 0
-endfunction f
+endfunction
 
 function! knobs#If(knob, ...)
   if knobs#(trim(a:knob,"'"))

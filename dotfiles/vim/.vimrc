@@ -359,7 +359,7 @@ endif
 
 call plug#end()
 
-if Knob("lsp")
+if knobs#has("lsp")
   lua require'lspconfig'.bashls.setup{}
   lua require'lspconfig'.jsonls.setup{}
   lua require'lspconfig'.pyls.setup{}
