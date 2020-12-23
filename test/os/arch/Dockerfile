@@ -2,6 +2,7 @@ FROM archlinux:latest
 RUN pacman -Syu --noconfirm \
   git \ 
   openssh \
+  sudo \
   vim
 RUN groupadd mygroup && \
     useradd -m -g mygroup me
