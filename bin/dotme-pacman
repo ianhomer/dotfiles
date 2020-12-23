@@ -4,7 +4,9 @@
 # Install pacman - arch package manager - packages
 #
 
-should-run -m 7 dotme-pacman || exit
+_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
+should-run -m 7 dotme-pacman $_DIR/../config/pacman || exit
 
 echo "... updating brew"
 
