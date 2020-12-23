@@ -372,7 +372,7 @@ endif
 if !Knob("light")
   if knobs#("gruvbox")
     colorscheme gruvbox
-  elseif Knob("gruvbox8")
+  elseif knobs#("gruvbox8")
     colorscheme gruvbox8
   endif
   set bg=dark
