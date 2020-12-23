@@ -111,4 +111,6 @@ source $ZSH/oh-my-zsh.sh
 . ~/.config/sh/aliases.sh
 
 export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+if command -v brew &> /dev/null ; then
+  source $(brew --prefix nvm)/nvm.sh
+fi
