@@ -5,10 +5,15 @@
 #
 
 _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+. ${_DIR}/functions/log.sh
 
 should-run -m 7 dotme-pacman $_DIR/../config/pacman || exit
 
-echo "... updating brew"
+if ! command -v stow &> /dev/null ; then
+  o_x "sudo is needed, but not found"
+fi
+
+o_o "updating brew"
 
 sudo pacman -Syu --noconfirm - < ~/.dotfiles/config/pacman/pkglist.txt
 
