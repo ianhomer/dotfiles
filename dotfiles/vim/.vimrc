@@ -346,7 +346,7 @@ if Knob("startuptime")
   Plug 'tweekmonster/startuptime.vim'
 endif
 
-if Knob("lsp")
+if knobs#has("lsp")
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
   Plug 'nvim-lua/diagnostic-nvim'
