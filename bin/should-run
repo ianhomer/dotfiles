@@ -97,7 +97,7 @@ fi
 [[ -n "$noop" ]] && exit
 
 if [[ -z "$scriptName" ]] ; then
-  _x Please pass script name "in" as argument to $(bold ${0##*/})
+  o_x Please pass script name "in" as argument to $(bold ${0##*/})
 fi
 
 [[ -n "$verbose" ]] && echo "Script : $scriptName"
@@ -110,10 +110,13 @@ shouldRun=0
 # Check whether script should run
 #
 if [[ -z "$force" ]] && [[ -f "$shouldRunFile" ]] ; then
-  fullScriptName=`which $scriptName`
+  fullScriptName="${_DIR}/${scriptName}"
+  if [[ ! -f $fullScriptName ]] ; then
+    fullScriptName=`which ${scriptName}`
+  fi
+  echo $fullScriptName
   [[ -z "$fullScriptName" ]] && \
-    echo "Cannot find scipt $scriptName to check whether it should run" && \
-    exit 1
+    o_x "Cannot find $scriptName to check whether it should run"
   [[ -n "$verbose" ]] && echo "Full script name : $fullScriptName"
 
   if [[ -z "$otheronly" ]] && [[ $fullScriptName -nt $shouldRunFile ]] ; then

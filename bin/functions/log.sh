@@ -61,7 +61,7 @@ function o_error() {
 
 # Error and exit
 function o_x() {
-  _error $@
+  o_error $@
   exit 1
 }
 
