@@ -4,6 +4,8 @@
 # Stow files
 #
 
+set -e
+
 DOTFILES_DOTFILES=~/.dotfiles/dotfiles
 while getopts "d:v" o; do case "$o" in
   d) DOTFILES_DOTFILES=$OPTARG ;;
@@ -16,10 +18,11 @@ shouldRunArgument=""
 
 should-run -z $0 $DOTFILES_DOTFILES $shouldRunArgument || exit 0
 
-shouldRunFile=`should-run -r`
+$(shim)
+. ${DOTFILES_BIN}/functions/log.sh
 
 cd $DOTFILES_DOTFILES
-printf "\e[36mstowing dotfiles\e[0m\n"
+o_o "stowing dotfiles"
 for DIR in `ls -d */` ; do
   if should-run -ozs $0 $DOTFILES_DOTFILES/$DIR ; then
     cd $DOTFILES_DOTFILES/$DIR

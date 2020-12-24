@@ -35,8 +35,8 @@ shift $((OPTIND-1))
 # Update local shim cache
 #
 if [[ "$UPDATE" = "y" ]] ; then
-  _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-. ${_DIR}/functions/log.sh
+  DOTFILES_BIN="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+  . ${DOTFILES_BIN}/functions/log.sh
   mkdir -p $DOTME_CONFIG
   LOCAL_SHIM=$HOME/.config/dotme/.shim
   if [[ -f "$LOCAL_SHIM" ]] ; then
@@ -52,44 +52,44 @@ EOF
   exit 0
 fi
 
-#
-# Imply the OS value from the underlying OSTYPE
-#
-if [[ -z "$OS" ]] ; then
-  case $OSTYPE in
-    linux-android)
-      SHIM_OS="termux"  ;;
-    darwin*)
-      SHIM_OS="macos"   ;;
-    *)
-      SHIM_OS="$OSTYPE" ;;
-  esac
-fi
+if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
+  #
+  # Imply the OS value from the underlying OSTYPE
+  #
+  if [[ -z "$OS" ]] ; then
+    case $OSTYPE in
+      linux-android)
+        SHIM_OS="termux"  ;;
+      darwin*)
+        SHIM_OS="macos"   ;;
+      *)
+        SHIM_OS="$OSTYPE" ;;
+    esac
+  fi
 
-if [[ "$SHIM_OS" = "termux" ]] ; then
-  THINGS_DIR=$HOME/storage/shared/projects/things
-else
-  THINGS_DIR=$HOME/projects/things
-fi
+  if [[ "$SHIM_OS" = "termux" ]] ; then
+    THINGS_DIR=$HOME/storage/shared/projects/things
+  else
+    THINGS_DIR=$HOME/projects/things
+  fi
 
-if [[ "$SHIM_OS" = "macos" ]] ; then
-  SHIM_SED="gsed"
-  SHIM_STAT="gstat"
-else
-  SHIM_SED="sed"
-  SHIM_STAT="stat"
-fi
+  if [[ "$SHIM_OS" = "macos" ]] ; then
+    SHIM_SED="gsed"
+    SHIM_STAT="gstat"
+  else
+    SHIM_SED="sed"
+    SHIM_STAT="stat"
+  fi
+ 
+  if command -v dotme &> /dev/null ; then
+    DOTFILES_BIN="$(cd "$(dirname `command -v dotme`)" >/dev/null 2>&1 && pwd)"
+  else
+    DOTFILES_BIN="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+  fi
 
-if command -v dotme &> /dev/null ; then
-  DOTFILES_BIN="$(cd "$(dirname `command -v dotme`)" >/dev/null 2>&1 && pwd)"
-else
-  _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+  DOTFILES_DIR="$(cd $DOTFILES_BIN/.. && pwd)"
 
-  DOTFILES_BIN="$HOME/.dotfiles/bin"
-fi
-DOTFILES_DIR="$(cd $DOTFILES_BIN/.. && pwd)"
-
-cat <<EOF
+  cat <<EOF
 export DOTFILES_BIN=$DOTFILES_BIN
 export DOTFILES_DIR=$DOTFILES_DIR
 export DOTME_CONFIG=$DOTME_CONFIG
@@ -98,3 +98,6 @@ export SHIM_SED=$SHIM_SED
 export SHIM_STAT=$SHIM_STAT
 export THINGS_DIR=$THINGS_DIR
 EOF
+else
+  cat $LOCAL_SHIM
+fi
