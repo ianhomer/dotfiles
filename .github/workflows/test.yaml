@@ -14,10 +14,9 @@ jobs:
           rm ~/.bash_profile
           ./bin/should-run -i "shim|stow"
           ./start
-          PATH=$PATH:$HOME/.dotfiles/bin
           . $HOME/.bash_profile
           . $HOME/.bashrc
-          dotme
+          ./bin/dotme
 
   vim:
     runs-on: ubuntu-latest
