@@ -101,7 +101,7 @@ command_help() {
 command_install() {
   _ Installing dotfiles
   [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
-  command_pull
+  [ $DRY -eq 0 ] && dotme-pull 
   # Call inner part of install as command onto a new execution of dotme so that
   # updates pulled in are taken into account
   arguments=""
@@ -137,25 +137,6 @@ command_inner() {
   [ $DRY -eq 0 ] && dotme-gitme
   #[ $DRY -eq 0 ] && is-pc && dotme-nnn
   command_clean
-}
-
-#
-# Pull latest version of dotfiles
-#
-command_pull() {
-  if git config pull.rebase > /dev/null ; then
-    cd $REPOSITORY_DIR
-    if [[ -d .git ]]; then
-      printf "\e[36mpulling latest version of dotfiles\e[0m\n"
-      printf "\e[35m"
-      [ $DRY -eq 0 ] && git pull
-      printf "\e[0m"
-    else
-      _ ".dotfiles is not a git directory, not updating"
-    fi
-  else
-    _ "Skipping pull of latest dotfiles"
-  fi
 }
 
 command_packages() {

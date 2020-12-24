@@ -14,8 +14,9 @@ jobs:
           rm ~/.bash_profile
           ./bin/should-run -i "shim|stow"
           ./start
-          ls -a
-          ./bin/dotme
+          . .bash_profile
+          . .bashrc
+          dotme
 
   vim:
     runs-on: ubuntu-latest
