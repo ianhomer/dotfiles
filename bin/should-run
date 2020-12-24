@@ -8,9 +8,8 @@
 set -e
 set -o noglob
 
-_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-$(${_DIR}/shim)
-. ${_DIR}/functions/log.sh
+$(shim)
+. ${DOTFILES_BIN}/functions/log.sh
 
 OPTIND=1
 while getopts "ace:fhi:lm:norsuvz" o; do case "$o" in

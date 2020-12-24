@@ -83,6 +83,8 @@ fi
 if command -v dotme &> /dev/null ; then
   DOTFILES_BIN="$(cd "$(dirname `command -v dotme`)" >/dev/null 2>&1 && pwd)"
 else
+  _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
   DOTFILES_BIN="$HOME/.dotfiles/bin"
 fi
 DOTFILES_DIR="$(cd $DOTFILES_BIN/.. && pwd)"

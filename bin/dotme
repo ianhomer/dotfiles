@@ -252,7 +252,7 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 # Initialize our own variables:
 VERBOSE=0
 
-while getopts "?df:Fhv" opt; do
+while getopts "?de:f:Fhi:v" opt; do
   case "$opt" in
   h|\?)
     command_help
@@ -260,7 +260,11 @@ while getopts "?df:Fhv" opt; do
     ;;
   d) DRY=1
     ;;
+  e) EXCLUDES=$OPTARG
+    ;;
   f) FORCE=$OPTARG
+    ;;
+  i) INCLUDES=$OPTARG
     ;;
   F) FORCE_ALL=1
     ;;
@@ -279,6 +283,15 @@ if [[ -n "$FORCE_ALL" ]] ; then
   done
 elif [[ -n "$FORCE" ]] ; then
   should-run -c "dotme-$FORCE"
+fi
+
+if [[ -n "$EXCLUDES" ]] || [[ -n "$INCLUDES" ]] ; then
+  if [[ -n "$EXCLUDES" ]] ; then
+    should-run -e "$EXCLUDES"
+  else
+    should-run -i "$INCLUDES"
+  fi
+  exit 0
 fi
 
 COMMAND=${1:-install}
