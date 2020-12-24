@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 #
 # Install brew packages
@@ -8,28 +8,29 @@ while getopts "a" o; do case "$o" in
   a) ADMIN=y ;;
 esac done
 
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-PATH=${SCRIPT_DIR}:${PATH}
-BREW_DIR=$SCRIPT_DIR/../config/brew
+$(shim)
+. ${DOTFILES_BIN}/functions/log.sh
+
+BREW_DIR=${DOTFILES_DIR}/config/brew
 
 if [[ "$ADMIN" != "y" ]] ; then
   should-run -m 7 $0 $BREW_DIR/Brewfile || exit 0
 fi
 
 if ! is-executable brew ; then
-  echo "... installing brew"
+  o_o "installing brew"
   curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install \
     | ruby
 fi
 
 adminFormula="adoptopenjdk8 adoptopenjdk11 java11 openjdk@11 powershell"
 
-echo "... updating brew"
+o_o "updating brew"
 
 # Pin formula that need password to upgrade if not in admin mode
 for formula in $adminFormula ; do
   if [[ "$ADMIN" == "y" ]] ; then
-    echo "unpinning $formula"
+    o_o "unpinning $formula"
     brew unpin $formula > /dev/null 2>&1
   else
     brew pin $formula > /dev/null 2>&1
@@ -46,7 +47,7 @@ cd $SCRIPT_DIR/../config/brew
 brew bundle
 
 if [[ "$ADMIN" == "y" ]] ; then
-  echo "... installing admin packages"
+  o_o "installing admin packages"
   cd $SCRIPT_DIR/../config/brew/admin
   brew bundle
 fi
@@ -55,6 +56,5 @@ fi
 # can be cleverer about restarting when updated ...
 osascript -e 'tell application "Alfred" to quit'
 /usr/bin/open -a "Alfred 4"
-
 
 should-run -fu $0
