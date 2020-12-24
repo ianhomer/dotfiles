@@ -16,27 +16,21 @@ let g:coc_global_extensions = [
       \ 'coc-xml'
       \ ]
 
-" Extensions to include
-" 'coc-prettier',
-" 
+if exists("*coc#config")
+  " dotfiles dictionaries for cSpell
+  call coc#config('cSpell.dictionaryDefinitions', [
+        \ { "name" : "dotfiles",
+        \   "path": expand("$HOME/.config/dictionaries/dotfiles.txt") },
+        \ { "name" : "tech",
+        \   "path": expand("$HOME/.config/dictionaries/tech.txt") },
+        \ { "name" : "inbox",
+        \   "path": expand("$HOME/.config/dictionaries/inbox.txt") },
+        \ { "name" : "enextra",
+        \   "path": expand("$HOME/.config/dictionaries/enextra.txt") }
+        \])
 
-if !exists("*coc#config")
-  finish
+  " set java home for coc-java
+  call coc#config('java.home',
+        \ expand("$HOME/.jenv/versions/11.0/"))
 endif
-
-" dotfiles dictionaries for cSpell
-call coc#config('cSpell.dictionaryDefinitions', [
-      \ { "name" : "dotfiles",
-      \   "path": expand("$HOME/.config/dictionaries/dotfiles.txt") },
-      \ { "name" : "tech",
-      \   "path": expand("$HOME/.config/dictionaries/tech.txt") },
-      \ { "name" : "inbox",
-      \   "path": expand("$HOME/.config/dictionaries/inbox.txt") },
-      \ { "name" : "enextra",
-      \   "path": expand("$HOME/.config/dictionaries/enextra.txt") }
-      \])
-
-" set java home for coc-java
-call coc#config('java.home',
-      \ expand("$HOME/.jenv/versions/11.0/"))
 

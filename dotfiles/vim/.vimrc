@@ -151,7 +151,7 @@ nnoremap <leader>.o :profile stop<CR>
 nnoremap <leader>.i :profile dump<CR>
 
 " save all files
-if !Knob("autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | endif
+if !knobs#("autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | endif
 
 " reset highlighting
 nnoremap <silent> <leader>z :noh<CR>
