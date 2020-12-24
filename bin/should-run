@@ -5,9 +5,11 @@
 # script have changed
 #
 
+set -e
 set -o noglob
 
 _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+$(${_DIR}/shim)
 . ${_DIR}/functions/log.sh
 
 OPTIND=1
@@ -66,16 +68,20 @@ EOF
 fi
 
 shift $((OPTIND-1))
+
 [ "${1:-}" = "--" ] && shift
-scriptName=${1##*/}
-shift
+if [[ -n $1 ]] ; then
+  scriptName=${1##*/}
+  shift
+fi
+
 otherFiles=$*
 shouldRunFile=${shouldRunDir}/last-run-${scriptName}
 
-propertiesFile=$HOME/.config/should-run/should-run.properties
+propertiesFile=$DOTME_CONFIG/should-run.properties
 
 if [[ -n "$include" ]] || [[ -n "$exclude" ]] || [[ -n "$all" ]] ; then
-  mkdir -p $HOME/.config/should-run
+  mkdir -p $DOTME_CONFIG
   if [[ -n "$include" ]] ; then
     o_o "Setting should-run global include to $include"
     echo "include=$include" > $propertiesFile
@@ -131,7 +137,7 @@ if [[ -n "$clean" ]] ; then
   fi
 fi
 
-[[ -n "$noop" ]] && exit
+[[ -n "$noop" ]] && exit 0
 
 if [[ -z "$scriptName" ]] ; then
   o_x Please pass script name "in" as argument to $(bold ${0##*/})

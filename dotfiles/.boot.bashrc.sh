@@ -4,7 +4,7 @@
 [[ $- != *i* ]] && return
 PS1='[\u@\h \W]\$ '
 echo "dotme boot bashrc"
-if [[ ! -d "$HOME/.config/dotme/" ]] ; then
+if [[ ! -f "$HOME/.config/dotme/.shim" ]] ; then
   echo "auto booting dotme"
   rm ~/.bashrc
   rm ~/.bash_profile
