@@ -16,6 +16,7 @@ jobs:
           ./start
           . $HOME/.bash_profile
           . $HOME/.bashrc
+          echo $PATH
           dotme
 
   vim:
