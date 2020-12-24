@@ -16,7 +16,7 @@ jobs:
           ./start
           . $HOME/.bash_profile
           . $HOME/.bashrc
-          ./bin/dotme
+          ./bin/dotme verify
 
   vim:
     runs-on: ubuntu-latest

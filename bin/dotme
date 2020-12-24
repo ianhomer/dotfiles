@@ -181,6 +181,11 @@ command_stow() {
   dotme-stow
 }
 
+# Verify
+command_verify() {
+  dotme-verify
+}
+
 # Unstow dotfiles.
 command_unstow() {
   echo "... unstowing files"

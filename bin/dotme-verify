@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+#
+# Verify dotme install AOK
+#
+
+$(shim)
+. ${DOTFILES_BIN}/functions/log.sh
+
+[[ ! -d ~/.config/dotme ]] && o_x "~/.config/dotme missing"
+[[ -z "$SHIM_OS" ]] && o_x "SHIM_OS env not set"
+o_o $(dim "OS = $SHIM_OS")
+
+o_status AOK dotme
