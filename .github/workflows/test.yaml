@@ -7,11 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - run: |
+      - name:
+        run: |
           sudo apt-get install stow
+          rm ~/.bashrc
+          rm ~/.bash_profile
           ./bin/should-run -i "shim|stow"
-          ./bin/dotme
+          ./start
           ls -a
+          ./bin/dotme
 
   vim:
     runs-on: ubuntu-latest
