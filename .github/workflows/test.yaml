@@ -14,8 +14,8 @@ jobs:
           rm ~/.bash_profile
           ./bin/should-run -i "shim|stow"
           ./start
-          . .bash_profile
-          . .bashrc
+          . $HOME/.bash_profile
+          . $HOME/.bashrc
           dotme
 
   vim:
