@@ -12,7 +12,7 @@ jobs:
           sudo apt-get install stow
           rm ~/.bashrc
           rm ~/.bash_profile
-          ./bin/should-run -i "shim|stow"
+          ./bin/dotme -i "shim|stow"
           ./start
           . $HOME/.bash_profile
           . $HOME/.bashrc
