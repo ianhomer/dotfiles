@@ -14,9 +14,9 @@ jobs:
           rm ~/.bash_profile
           ./bin/should-run -i "shim|stow"
           ./start
+          PATH=$PATH:$HOME/.dotfiles/bin
           . $HOME/.bash_profile
           . $HOME/.bashrc
-          echo $PATH
           dotme
 
   vim:
