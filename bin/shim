@@ -3,6 +3,8 @@
 # Output shell script that can be sourced as a shim for the environment
 #
 
+set -e
+
 LOCAL_SHIM=$HOME/.config/dotme/.shim
 
 if [[ $# -eq 0 ]] && [[ -f "$LOCAL_SHIM" ]] ; then
@@ -39,6 +41,7 @@ if [[ "$UPDATE" = "y" ]] ; then
     CURRENT_SHIM=$(cat $LOCAL_SHIM)
   fi
   NEW_SHIM=$(shim -f)
+  mkdir -p $HOME/.config/dotme
   if [[ "${CURRENT_SHIM}" != "${NEW_SHIM}" ]] ; then
     o_o "Updating local shim"
     cat <<EOF > $LOCAL_SHIM
@@ -81,9 +84,11 @@ if command -v dotme &> /dev/null ; then
 else
   DOTFILES_BIN="$HOME/.dotfiles/bin"
 fi
+DOTFILES_DIR="$(cd $DOTFILES_BIN/.. && pwd)"
 
 cat <<EOF
 export DOTFILES_BIN=$DOTFILES_BIN
+export DOTFILES_DIR=$DOTFILES_DIR
 export SHIM_OS=$SHIM_OS
 export SHIM_SED=$SHIM_SED
 export SHIM_STAT=$SHIM_STAT

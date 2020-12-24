@@ -12,6 +12,8 @@
 # is for macOS only.
 #
 
+set -e
+
 _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 . ${_DIR}/functions/log.sh
 REPOSITORY_DIR="$( cd "$_DIR" ; cd .. && pwd )"
@@ -133,7 +135,7 @@ command_inner() {
     [ $DRY -eq 0 ] && dotme-zsh
   fi
   [ $DRY -eq 0 ] && dotme-gitme
-  [ $DRY -eq 0 ] && is-pc && dotme-nnn
+  #[ $DRY -eq 0 ] && is-pc && dotme-nnn
   command_clean
 }
 
@@ -142,13 +144,17 @@ command_inner() {
 #
 command_pull() {
   if git config pull.rebase > /dev/null ; then
-    printf "\e[36mpulling latest version of dotfiles\e[0m\n"
     cd $REPOSITORY_DIR
-    printf "\e[35m"
-    [ $DRY -eq 0 ] && git pull
-    printf "\e[0m"
+    if [[ -d .git ]]; then
+      printf "\e[36mpulling latest version of dotfiles\e[0m\n"
+      printf "\e[35m"
+      [ $DRY -eq 0 ] && git pull
+      printf "\e[0m"
+    else
+      _ ".dotfiles is not a git directory, not updating"
+    fi
   else
-    _ Skipping pull of latest dotfiles
+    _ "Skipping pull of latest dotfiles"
   fi
 }
 

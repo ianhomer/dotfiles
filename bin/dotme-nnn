@@ -6,7 +6,7 @@
 # Based on https://github.com/jarun/nnn/blob/master/plugins/getplugs
 #
 
-should-run $0 || exit
+should-run $0 || exit 0
 
 printf "\e[36mConfiguring nnn\e[0m\n"
 
@@ -24,7 +24,7 @@ fi
 
 if [[ ! -d $SOURCE_DIR ]] ; then
   NNN_CHANGED=1
-  git clone git@github.com:ianhomer/nnn.git
+  git clone git@github.com:ianhomer/nnn.git ~/projects/opensource/nnn
 else
   cd $SOURCE_DIR
   if [[ `git status --porcelain` ]]; then
@@ -36,7 +36,7 @@ fi
 if [[ $NNN_CHANGED -eq 1 ]] ; then
   cd $SOURCE_DIR
   # Compile from source with nerd icons
-  make O_NERD=1
+  #  make O_NERD=1
   # Don't auto move into place until reliably tested
   # mv nnn ~/bin
 fi

@@ -4,7 +4,7 @@
 # Install jenv versions
 #
 
-should-run $0 || exit
+should-run $0 || exit 0
 
 _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 . ${_DIR}/functions/log.sh
