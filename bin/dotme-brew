@@ -13,7 +13,7 @@ PATH=${SCRIPT_DIR}:${PATH}
 BREW_DIR=$SCRIPT_DIR/../config/brew
 
 if [[ "$ADMIN" != "y" ]] ; then
-  should-run -m 7 $0 $BREW_DIR/Brewfile || exit
+  should-run -m 7 $0 $BREW_DIR/Brewfile || exit 0
 fi
 
 if ! is-executable brew ; then

@@ -3,6 +3,8 @@
 # Output shell script that can be sourced as a shim for the environment
 #
 
+set -e
+
 LOCAL_SHIM=$HOME/.config/dotme/.shim
 
 if [[ $# -eq 0 ]] && [[ -f "$LOCAL_SHIM" ]] ; then

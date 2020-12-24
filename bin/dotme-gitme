@@ -3,7 +3,7 @@
 # Refresh locally clone git repositories
 #
 
-should-run -m 7 $0 || exit
+should-run -m 7 $0 || exit 0
 
 # Clear directories from the fasd cache that have no value in fasd cache
 

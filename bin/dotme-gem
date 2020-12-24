@@ -4,7 +4,7 @@
 # Install ruby packages
 #
 
-should-run $0 || exit
+should-run $0 || exit 0
 
 printf "\e[36mInstalling gem packages\e[0m\n"
 

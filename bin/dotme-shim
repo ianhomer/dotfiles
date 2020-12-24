@@ -4,7 +4,7 @@
 # Configure environment shim
 #
 
-should-run -m 7 $0 ~/.dotfiles/bin/shim || exit
+should-run -m 7 $0 ~/.dotfiles/bin/shim || exit 0
 
 $(shim)
 . ${DOTFILES_BIN}/functions/log.sh

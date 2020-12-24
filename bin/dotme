@@ -12,6 +12,8 @@
 # is for macOS only.
 #
 
+set -e
+
 _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 . ${_DIR}/functions/log.sh
 REPOSITORY_DIR="$( cd "$_DIR" ; cd .. && pwd )"

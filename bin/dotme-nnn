@@ -6,7 +6,7 @@
 # Based on https://github.com/jarun/nnn/blob/master/plugins/getplugs
 #
 
-should-run $0 || exit
+should-run $0 || exit 0
 
 printf "\e[36mConfiguring nnn\e[0m\n"
 

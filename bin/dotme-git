@@ -4,7 +4,7 @@
 # Configure git
 #
 
-should-run $0 || exit
+should-run $0 || exit 0
 
 # Make sure ~/.gitconfig is in place before setting git config so that personal
 # settings end up in that config file

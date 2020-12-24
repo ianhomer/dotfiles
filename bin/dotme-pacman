@@ -7,7 +7,7 @@
 _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 . ${_DIR}/functions/log.sh
 
-should-run -m 7 dotme-pacman $_DIR/../config/pacman || exit
+should-run -m 7 dotme-pacman $_DIR/../config/pacman || exit 0
 
 if ! command -v sudo &> /dev/null ; then
   o_x "sudo is needed, but not found"
