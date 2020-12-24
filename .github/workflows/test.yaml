@@ -3,11 +3,12 @@ name: test
 on: [push, workflow_dispatch]
 
 jobs:
-  test:
+  dotme:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - run: |
+          sudo apt-get install stow
           ./bin/should-run -i "shim|stow"
           ./bin/dotme
           ls -a
