@@ -82,13 +82,13 @@ propertiesFile=$DOTME_CONFIG/should-run.properties
 if [[ -n "$include" ]] || [[ -n "$exclude" ]] || [[ -n "$all" ]] ; then
   mkdir -p $DOTME_CONFIG
   if [[ -n "$include" ]] ; then
-    o_o "Setting should-run global include to $include"
+    o_o "setting should-run global include to $include"
     echo "include=$include" > $propertiesFile
   elif [[ -n "$exclude" ]] ; then
-    o_o "Setting should-run global exclude to $exclude"
+    o_o "setting should-run global exclude to $exclude"
     echo "exclude=$exclude" > $propertiesFile
   else
-    o_o "Clearing should-run filters"
+    o_o "clearing should-run filters"
     rm $propertiesFile
   fi
   [[ -z "$scriptName" ]] && noop=1

@@ -5,10 +5,7 @@
 
 should-run -m 7 dotme-fish || exit 0
 
-$(shim)
-. ${DOTFILES_BIN}/functions/log.sh
-
-o_o "configuring fish shell"
+printf "\e[36mConfiguring fish shell\e[0m\n"
 
 #
 # Set up universal variables to improve shell start up times
