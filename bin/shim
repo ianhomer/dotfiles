@@ -5,7 +5,8 @@
 
 set -e
 
-LOCAL_SHIM=$HOME/.config/dotme/.shim
+DOTME_CONFIG=$HOME/.config/dotme
+LOCAL_SHIM=$DOTME_CONFIG/.shim
 
 if [[ $# -eq 0 ]] && [[ -f "$LOCAL_SHIM" ]] ; then
   cat $LOCAL_SHIM
@@ -36,12 +37,12 @@ shift $((OPTIND-1))
 if [[ "$UPDATE" = "y" ]] ; then
   _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 . ${_DIR}/functions/log.sh
+  mkdir -p $DOTME_CONFIG
   LOCAL_SHIM=$HOME/.config/dotme/.shim
   if [[ -f "$LOCAL_SHIM" ]] ; then
     CURRENT_SHIM=$(cat $LOCAL_SHIM)
   fi
   NEW_SHIM=$(shim -f)
-  mkdir -p $HOME/.config/dotme
   if [[ "${CURRENT_SHIM}" != "${NEW_SHIM}" ]] ; then
     o_o "updating local shim"
     cat <<EOF > $LOCAL_SHIM
@@ -89,6 +90,7 @@ DOTFILES_DIR="$(cd $DOTFILES_BIN/.. && pwd)"
 cat <<EOF
 export DOTFILES_BIN=$DOTFILES_BIN
 export DOTFILES_DIR=$DOTFILES_DIR
+export DOTME_CONFIG=$DOTME_CONFIG
 export SHIM_OS=$SHIM_OS
 export SHIM_SED=$SHIM_SED
 export SHIM_STAT=$SHIM_STAT

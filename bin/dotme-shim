@@ -10,8 +10,6 @@ should-run -m 7 $0 ~/.dotfiles/bin/shim || exit 0
 $(shim)
 . ${DOTFILES_BIN}/functions/log.sh
 
-o_o "configuring environment shim"
-
 shim -u
 
 should-run -fu $0

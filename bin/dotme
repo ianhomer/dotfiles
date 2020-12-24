@@ -101,7 +101,8 @@ command_help() {
 command_install() {
   o_o "installing dotfiles"
   [ $VERBOSE -eq 1 ] && o_o "... DOTFILES_DIR = ${DOTFILES_DIR}"
-  [ $DRY -eq 0 ] && dotme-pull 
+  [ $DRY -eq 0 ] && dotme-pull
+  [ $DRY -eq 0 ] && dotme-shim
   # Call inner part of install as command onto a new execution of dotme so that
   # updates pulled in are taken into account
   arguments=""
@@ -110,12 +111,18 @@ command_install() {
   o_o "dotfiles installed and $(bold AOK)"
 }
 
+command_initialise() {
+  [[ -z "$DOTME_CONFIG" ]] && o_x "shim should have set DOTME_CONFIG"
+  [[ ! -d "$DOTME_CONFIG" ]] && o_x "shim should have created $DOTME_CONFIG"
+  return 0
+}
+
 #
 # Inner part of install process, separated from wrapper so that 
 # the wrapper can update in situ.
 #
 command_inner() {
-  [ $DRY -eq 0 ] && dotme-shim
+  command_initialise
   command_packages
   if ! command -v stow &> /dev/null ; then
     o_x "stow is needed, but not found"
@@ -232,7 +239,6 @@ command_set() {
     return
   fi
   o_o "...setting dotme env - $name = $value"
-  mkdir -p ~/.config/dotme
   touch $envFile
   if grep -q "$name=" $envFile ; then
     sed -i.bak "s/$name=.*/$name=$value/g" $envFile
