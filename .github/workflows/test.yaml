@@ -5,6 +5,14 @@ on: [push, workflow_dispatch]
 jobs:
   test:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: |
+          ./bin/should-run -i "shim|stow"
+          dotme
+
+  vim:
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
