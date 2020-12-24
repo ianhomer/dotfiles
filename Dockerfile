@@ -15,5 +15,5 @@ RUN mkdir /home/me/.dotfiles/
 COPY . /home/me/.dotfiles
 COPY ./dotfiles/.boot.bashrc.sh /home/me/.bashrc
 USER me
-RUN /home/me/.dotfiles/bin/should-run -i "dotme-shim"
+RUN /home/me/.dotfiles/bin/should-run -i "shim|stow"
 WORKDIR /home/me
