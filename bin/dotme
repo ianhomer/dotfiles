@@ -144,13 +144,17 @@ command_inner() {
 #
 command_pull() {
   if git config pull.rebase > /dev/null ; then
-    printf "\e[36mpulling latest version of dotfiles\e[0m\n"
     cd $REPOSITORY_DIR
-    printf "\e[35m"
-    [ $DRY -eq 0 ] && git pull
-    printf "\e[0m"
+    if [[ -d .git ]]; then
+      printf "\e[36mpulling latest version of dotfiles\e[0m\n"
+      printf "\e[35m"
+      [ $DRY -eq 0 ] && git pull
+      printf "\e[0m"
+    else
+      _ ".dotfiles is not a git directory, not updating"
+    fi
   else
-    _ Skipping pull of latest dotfiles
+    _ "Skipping pull of latest dotfiles"
   fi
 }
 
