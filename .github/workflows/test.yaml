@@ -9,7 +9,8 @@ jobs:
       - uses: actions/checkout@v1
       - run: |
           ./bin/should-run -i "shim|stow"
-          dotme
+          ./bin/dotme
+          ls -a
 
   vim:
     runs-on: ubuntu-latest
