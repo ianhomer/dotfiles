@@ -4,9 +4,9 @@
 # Stow files
 #
 
-DOTFILES_DIR=~/.dotfiles/dotfiles
+DOTFILES_DOTFILES=~/.dotfiles/dotfiles
 while getopts "d:v" o; do case "$o" in
-  d) DOTFILES_DIR=$OPTARG ;;
+  d) DOTFILES_DOTFILES=$OPTARG ;;
   r) DRY="y" ;;
   v) VERBOSE="y" ;;
 esac done
@@ -14,15 +14,15 @@ esac done
 shouldRunArgument=""
 [[ -n $VERBOSE ]] && shouldRunArgument=" -v"
 
-should-run -z $0 $DOTFILES_DIR $shouldRunArgument || exit 0
+should-run -z $0 $DOTFILES_DOTFILES $shouldRunArgument || exit 0
 
 shouldRunFile=`should-run -r`
 
-cd $DOTFILES_DIR
+cd $DOTFILES_DOTFILES
 printf "\e[36mstowing dotfiles\e[0m\n"
 for DIR in `ls -d */` ; do
-  if should-run -ozs $0 $DOTFILES_DIR/$DIR ; then
-    cd $DOTFILES_DIR/$DIR
+  if should-run -ozs $0 $DOTFILES_DOTFILES/$DIR ; then
+    cd $DOTFILES_DOTFILES/$DIR
     for FILE in `find . -type f -print` ; do
       [[ -n $DRY ]] && backup $FILE
     done

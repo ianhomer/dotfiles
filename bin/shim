@@ -43,7 +43,7 @@ if [[ "$UPDATE" = "y" ]] ; then
   NEW_SHIM=$(shim -f)
   mkdir -p $HOME/.config/dotme
   if [[ "${CURRENT_SHIM}" != "${NEW_SHIM}" ]] ; then
-    o_o "Updating local shim"
+    o_o "updating local shim"
     cat <<EOF > $LOCAL_SHIM
 $NEW_SHIM
 EOF
