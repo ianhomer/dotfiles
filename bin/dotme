@@ -182,15 +182,17 @@ command_update() {
 
 # Housekeeping and keeping things clean.
 command_clean() {
+  o_o "cleaning"
   is-macos && clean-brew
+  return 0
 }
 
 # Unistall dotfiles. Note that this does not (at this time), unstill brew
 # packages.
 command_uninstall() {
-  echo "Uninstalling dotfiles ..."
+  o_o "Uninstalling dotfiles ..."
   command_unstow
-  echo "... uninstalled"
+  o_o "... uninstalled"
 }
 
 # Stow dotfiles.
