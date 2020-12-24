@@ -13,7 +13,7 @@ RUN groupadd us && \
 RUN echo "me ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/me
 RUN mkdir /home/me/.dotfiles/
 COPY . /home/me/.dotfiles
-COPY ./dotfiles/.boot.bashrc.sh /home/me/.bashrc
+COPY ./dotfiles/.boot.bashrc.sh /home/me/.boot.bashrc.sh
 USER me
 RUN /home/me/.dotfiles/bin/should-run -i "shim|stow"
 WORKDIR /home/me
