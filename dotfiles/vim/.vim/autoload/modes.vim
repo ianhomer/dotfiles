@@ -1,9 +1,14 @@
-function! DisabledEcho(command)
+if exists('g:modes_autoloaded')
+  finish
+endif
+let g:modes_autoloaded = 1
+
+function modes#DisabledEcho(command)
   echo a:command . " disabled - enable with space-1"
 endfunction
 
 " 1 = vanilla mode
-function! ResetMode()
+function modes#ResetMode()
   set nonu
   set nornu
   set backspace=indent,eol,start
@@ -26,21 +31,21 @@ function! ResetMode()
 endfunction
 
 " 2 = personal dev mode
-function! PersonalDevMode()
-  call ResetMode()
+function modes#PersonalDevMode()
+  call modes#ResetMode()
   set rnu
   set nu
 endfunction
 
 " 3 = mobbing mode
-function! MobbingMode()
-  call ResetMode()
+function modes#MobbingMode()
+  call modes#ResetMode()
   set nu
 endfunction
 
 " 4 = vi training mode
-function! TrainingMode()
-  call ResetMode()
+function modes#TrainingMode()
+  call modes#ResetMode()
   set rnu
   set backspace=0
 
@@ -59,11 +64,4 @@ function! TrainingMode()
   vnoremap <Left> :call DisabledEcho("visual mode left")<CR>
   vnoremap <Right> :call DisabledEcho("visual mode right")<CR>
 endfunction
-
-" Numbered modes of configuration
-nnoremap <silent> <leader>1 :call ResetMode()<CR>
-nnoremap <silent> <leader>2 :call PersonalDevMode()<CR>
-nnoremap <silent> <leader>3 :call MobbingMode()<CR>
-nnoremap <silent> <leader>4 :call TrainingMode()<CR>
-
 

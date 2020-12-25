@@ -10,7 +10,7 @@
 #
 
 NODE_GLOBAL=~/.dotfiles/config/node/global.txt
-should-run -m 14 $0 $NODE_GLOBAL || exit
+should-run -m 14 $0 $NODE_GLOBAL || exit 0
 
 #
 # Set up nvm

@@ -12,12 +12,15 @@
 # is for macOS only.
 #
 
-_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-. ${_DIR}/functions/log.sh
-REPOSITORY_DIR="$( cd "$_DIR" ; cd .. && pwd )"
-DOTFILES_DIR="${REPOSITORY_DIR}/dotfiles"
+set -e
 
+_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 PATH=${_DIR}:${PATH}
+
+$(shim)
+. ${DOTFILES_BIN}/functions/log.sh
+DOTFILES_DOTFILES="${DOTFILES_DIR}/dotfiles"
+
 VERBOSE=0
 DRY=0
 
@@ -31,9 +34,9 @@ backup() {
     [ $DRY -eq 0 ] && mv $HOME/$file{,.bak}
   elif [ $VERBOSE -eq 1 ] ; then
     if [ ! -f $HOME/$file ] ; then
-      echo "... not backing up $HOME/$file since it doesn't exist"
+      o_o "... not backing up $HOME/$file since it doesn't exist"
     else
-      echo "... not backing up $HOME/$file since it is already stowed, i.e. a link"
+      o_o  "... not backing up $HOME/$file since it is already stowed, i.e. a link"
     fi
   fi
 }
@@ -97,24 +100,38 @@ command_help() {
 # Main entry point for installing dotfiles, and more, for a system.
 #
 command_install() {
-  _ Installing dotfiles
-  [ $VERBOSE -eq 1 ] && echo "... DOTFILES_DIR = ${DOTFILES_DIR}"
-  command_pull
+  o_o "installing dotfiles"
+  [ $VERBOSE -eq 1 ] && o_o "... DOTFILES_DIR = ${DOTFILES_DIR}"
+  [ $DRY -eq 0 ] && dotme-pull
+  [ $DRY -eq 0 ] && dotme-shim
   # Call inner part of install as command onto a new execution of dotme so that
   # updates pulled in are taken into account
   arguments=""
   [ $DRY -eq 1 ] && arguments="$arguments -d"
   $_DIR/dotme $arguments inner
-  _ dotfiles installed and $(bold AOK)
+  o_o "dotfiles installed and $(bold AOK)"
 }
 
+command_initialise() {
+  [[ -z "$DOTME_CONFIG" ]] && o_x "shim should have set DOTME_CONFIG"
+  [[ ! -d "$DOTME_CONFIG" ]] && o_x "shim should have created $DOTME_CONFIG"
+  return 0
+}
+
+#
+# Inner part of install process, separated from wrapper so that
+# the wrapper can update in situ.
+#
 command_inner() {
+  command_initialise
   command_packages
-  dotme-stow -d $DOTFILES_DIR
+  if ! command -v stow &> /dev/null ; then
+    o_x "stow is needed, but not found"
+  fi
+  dotme-stow -d $DOTFILES_DOTFILES
   [ $DRY -eq 0 ] && dotme-git
   [ $DRY -eq 0 ] && is-macos && dotme-osx
   [ $DRY -eq 0 ] && is-android && dotme-termux
-  [ $DRY -eq 0 ] && dotme-omf
   [ $DRY -eq 0 ] && is-pc && dotme-pip
   [ $DRY -eq 0 ] && is-pc && dotme-gem
   [ $DRY -eq 0 ] && clean-vim
@@ -122,23 +139,16 @@ command_inner() {
   [ $DRY -eq 0 ] && is-pc && dotme-tmux
   [ $DRY -eq 0 ] && is-pc && dotme-node
   [ $DRY -eq 0 ] && is-pc && dotme-jenv
-  [ $DRY -eq 0 ] && dotme-fish
-  [ $DRY -eq 0 ] && dotme-fisher
-  [ $DRY -eq 0 ] && is-pc && dotme-zsh
+  if command -v fish &> /dev/null ; then
+    [ $DRY -eq 0 ] && dotme-fish
+    [ $DRY -eq 0 ] && dotme-fisher
+  fi
+  if command -v zsh &> /dev/null ; then
+    [ $DRY -eq 0 ] && dotme-zsh
+  fi
   [ $DRY -eq 0 ] && dotme-gitme
-  [ $DRY -eq 0 ] && is-pc && dotme-nnn
+  #[ $DRY -eq 0 ] && is-pc && dotme-nnn
   command_clean
-}
-
-#
-# Pull latest version of dotfiles
-#
-command_pull() {
-  printf "\e[36mpulling latest version of dotfiles\e[0m\n"
-  cd $REPOSITORY_DIR
-  printf "\e[35m"
-  [ $DRY -eq 0 ] && git pull
-  printf "\e[0m"
 }
 
 command_packages() {
@@ -148,7 +158,7 @@ command_packages() {
     elif is-android ; then
       dotme-pkg
     elif has-pacman ; then
-      has-pacman
+      dotme-pacman
     fi
   fi
 }
@@ -165,15 +175,17 @@ command_update() {
 
 # Housekeeping and keeping things clean.
 command_clean() {
+  o_o "cleaning"
   is-macos && clean-brew
+  return 0
 }
 
 # Unistall dotfiles. Note that this does not (at this time), unstill brew
 # packages.
 command_uninstall() {
-  echo "Uninstalling dotfiles ..."
+  o_o "uninstalling dotfiles ..."
   command_unstow
-  echo "... uninstalled"
+  o_o "... uninstalled"
 }
 
 # Stow dotfiles.
@@ -181,12 +193,17 @@ command_stow() {
   dotme-stow
 }
 
+# Verify
+command_verify() {
+  dotme-verify
+}
+
 # Unstow dotfiles.
 command_unstow() {
-  echo "... unstowing files"
-  cd $DOTFILES_DIR
+  o_o "... unstowing files"
+  cd $DOTFILES_DOTFILES
   for DIR in `ls -d */` ; do
-    cd $DOTFILES_DIR/$DIR
+    cd $DOTFILES_DOTFILES/$DIR
     [ $DRY -eq 0 ] && stow -v --delete -t $HOME .
     for FILE in `find . -type f -print` ; do
       restore $FILE
@@ -203,7 +220,7 @@ command_set() {
       echo $envFile
       cat $envFile
     else
-      echo "... $envFile not yet created"
+      o_o "... $envFile not yet created"
     fi
     return
   fi
@@ -215,15 +232,14 @@ command_set() {
         echo $envFile
         grep "$name=" $envFile
       else
-        echo "... $name not set"
+        o_o "... $name not set"
       fi
     else
-      echo "... $envFile not yet created"
+      o_o "... $envFile not yet created"
     fi
     return
   fi
-  echo "...setting dotme env - $name = $value"
-  mkdir -p ~/.config/dotme
+  o_o "...setting dotme env - $name = $value"
   touch $envFile
   if grep -q "$name=" $envFile ; then
     sed -i.bak "s/$name=.*/$name=$value/g" $envFile
@@ -237,7 +253,7 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 # Initialize our own variables:
 VERBOSE=0
 
-while getopts "?df:Fhv" opt; do
+while getopts "?de:f:Fhi:v" opt; do
   case "$opt" in
   h|\?)
     command_help
@@ -245,7 +261,11 @@ while getopts "?df:Fhv" opt; do
     ;;
   d) DRY=1
     ;;
+  e) EXCLUDES=$OPTARG
+    ;;
   f) FORCE=$OPTARG
+    ;;
+  i) INCLUDES=$OPTARG
     ;;
   F) FORCE_ALL=1
     ;;
@@ -264,6 +284,15 @@ if [[ -n "$FORCE_ALL" ]] ; then
   done
 elif [[ -n "$FORCE" ]] ; then
   should-run -c "dotme-$FORCE"
+fi
+
+if [[ -n "$EXCLUDES" ]] || [[ -n "$INCLUDES" ]] ; then
+  if [[ -n "$EXCLUDES" ]] ; then
+    should-run -e "$EXCLUDES"
+  else
+    should-run -i "$INCLUDES"
+  fi
+  exit 0
 fi
 
 COMMAND=${1:-install}

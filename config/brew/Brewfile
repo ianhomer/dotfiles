@@ -6,8 +6,8 @@ tap "homebrew/cask-fonts"
 # with the Nerd aggregation of icons - https://www.nerdfonts.com/
 #
 cask "font-firacode-nerd-font"
-cask "font-jetbrainsmono-nerd-font"
 cask "font-inconsolata-nerd-font"
+cask "font-jetbrainsmono-nerd-font"
 
 #
 # core tools
@@ -42,8 +42,8 @@ brew "ripgrep"
 brew "speedtest-cli"
 brew "stow"
 brew "switchaudio-osx"
-brew "thefuck"
 brew "the_silver_searcher"
+brew "thefuck"
 brew "tmux"
 brew "tree"
 brew "vim"
@@ -51,15 +51,15 @@ brew "watch"
 
 cask "alacritty"
 cask "iterm2"
-cask "kitty"
 cask "keybase"
+cask "kitty"
 
 #
 # linitng tools
 #
 
-brew "yamllint"
 brew "languagetool"
+brew "yamllint"
 
 #
 # supporting tools
@@ -88,6 +88,7 @@ cask "evernote"
 # * pandoc + basictex => doc conversion, e.g. markdown to PDF
 #
 brew "pandoc"
+
 # pandoc-citeproc,basictex disabled for now since password prompt appearing
 # after this in brew install, need to troubleshoot why.
 #brew "pandoc-citeproc"

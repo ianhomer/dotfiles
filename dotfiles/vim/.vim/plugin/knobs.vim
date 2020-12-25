@@ -7,15 +7,15 @@ let g:knobs_loaded = 1
 " Toggle features and layers. Layers are typically triggered by the environment
 " and can be used to toggle multiple features.
 "
-" Raise config level to disable configs
-" - 0 => core config
-" - 1 => core plugins
+" Raise config level to enable more configuration
+" - 0 => basic config
+" - 1 => core config - recommended default level
 " - 2 => useful config
 " - 3 => useful plugins
 " - 4 => power config
-" - 5 => power plugins
-" - 6 => trial config
-"   7 => trial plugins
+" - 5 => power plugins - recommended when opening vim explicitly
+" - 6 => extra config
+"   7 => extra plugins
 " - 8 => experimental config
 " - 9 => experimental plugins
 "
@@ -32,11 +32,13 @@ command! -nargs=1 -complete=customlist,knobs#core#ListKnobs
 nnoremap <silent> <leader>v :call knobs#core#ReloadConfig()<CR>
 
 nnoremap <silent> <leader>9a :call knobs#core#Toggle("ale")<CR>
+nnoremap <silent> <leader>9b :call knobs#core#Toggle("autosave")<CR>
 nnoremap <silent> <leader>9c :call knobs#core#Toggle("coc")<CR>
 nnoremap <silent> <leader>9j :call knobs#core#ToggleLayer("notes")<CR>
 nnoremap <silent> <leader>9l :call knobs#core#Toggle("light")<CR>
 nnoremap <silent> <leader>9m :call knobs#core#ToggleLayer("mobile")<CR>
 nnoremap <silent> <leader>9n :call knobs#core#Toggle("nerdtree")<CR>
+nnoremap <silent> <leader>9p :call knobs#core#Toggle("polyglot")<CR>
 nnoremap <silent> <leader>9g :call knobs#core#Toggle("gitgutter")<CR>
 nnoremap <silent> <leader>9s :call knobs#core#Toggle("syntastic")<CR>
 nnoremap <silent> <leader>9w :call knobs#core#Toggle("writegood")<CR>

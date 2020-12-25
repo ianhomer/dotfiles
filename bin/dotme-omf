@@ -4,7 +4,7 @@
 # Install / update omg packages from config/omf/bundle
 #
 
-should-run -m 7 dotme-omf || exit
+should-run -m 7 dotme-omf || exit 0
 
 if not test -d  ~/.local/share/omf
   curl -L https://get.oh-my.fish | fish

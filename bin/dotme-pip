@@ -6,7 +6,7 @@
 
 REQUIREMENTS=~/.dotfiles/config/python/requirements.txt
 
-should-run -m 30 $0 $REQUIREMENTS || exit
+should-run -m 30 $0 $REQUIREMENTS || exit 0
 
 printf "\e[36mInstalling pip requirements\e[0m\n"
 

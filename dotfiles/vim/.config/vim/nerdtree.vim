@@ -17,14 +17,21 @@ function! NERDTreeFindOrToggle()
     else
       " NERDTree doesn't like closing itself if it's the last window, so we'll
       " use the CloseMe function which will drop back to Startify
-      call CloseMe()
+      call window#cleaner#CloseMe()
     endif
   else
     NERDTreeFind
   endif
 endfunction
 
+function! NERDTreeSwitchAndFind()
+  call window#SwitchToFirstEditableFile()
+  NERDTreeFind
+  call window#SwitchToFirstEditableFile()
+endfunction
+
 nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
+nnoremap <silent> <leader>m :call NERDTreeSwitchAndFind()<CR>
 
 " https://github.com/preservim/nerdtree/wiki
 " If more than one window and previous buffer was NERDTree, go back to it.

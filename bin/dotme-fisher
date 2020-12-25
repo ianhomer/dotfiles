@@ -4,7 +4,7 @@
 # Install fisher, a package manager for fish
 #
 
-should-run -m 7 dotme-fisher || exit
+should-run -m 7 dotme-fisher || exit 0
 
 printf "\e[36mInstalling fisher packages\e[0m\n"
 
@@ -13,9 +13,25 @@ if not test -f ~/.config/fish/functions/fisher.fish
     ~/.config/fish/functions/fisher.fish
 end
 
-fisher self-update
+# Update fisher itself, once all environments on latest version
+# fisher update if sufficient.
+fisher update jorgebucaran/fisher
 
-fisher ls | grep fish-nvm || \
-  fisher add jorgebucaran/fish-nvm
+# Update all fisher plugins
+
+fisher update
+
+set packages                  \
+  edc/bass                    \
+  fishgretel/fasd             \
+  jorgebucaran/fish-nvm       \
+  oh-my-fish/theme-bobthefish \
+  PatrickF1/fzf.fish
+
+for package in $packages
+  fisher ls | grep "$package" || \
+     fisher install "$package"
+  echo $package
+end
 
 should-run -fu dotme-fisher
