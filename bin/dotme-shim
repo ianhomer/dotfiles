@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+#
+# Configure environment shim
+#
+
+set -e
+
+should-run -m 7 $0 ~/.dotfiles/bin/shim || exit 0
+
+shim -u
+
+should-run -fu $0

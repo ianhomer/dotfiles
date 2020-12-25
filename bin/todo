@@ -1,4 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+# Extract todos from markdown or add more todos to today's log.
+#
+# Quick prototype in bash, should covert to a better language to enhance. It's
+# hitting it's limit as bash.
+
+$(shim)
 
 help() {
   cat << EOF
@@ -37,7 +44,7 @@ if [[ -z "$todo" ]] ; then
   # List todos
   echo
   if [[ -n "$ALL" ]] ; then
-    pattern="\- \[[^ox]\]( [\.-~\^])?$CONTEXT"
+    pattern="\- \[[^ox]\]( [\.\-~\^])?$CONTEXT"
   elif [[ -n "$CANCELLED" ]] ; then
     pattern="\- \[x\] !$CONTEXT"
   elif [[ -n "$DONE" ]] ; then
@@ -47,15 +54,16 @@ if [[ -z "$todo" ]] ; then
   elif [[ -n "$GOAL" ]] ; then
     pattern="\- \[ \]( [-~\^])$CONTEXT"
   else
-    pattern="\- \[ \](?! [\.~\^])$CONTEXT"
+    pattern="\- \[ \](?! [\.\-~\^])$CONTEXT"
   fi
-  ag --nofilename --nocolor --nobreak "$pattern" ~/projects/things/ |
+  ag --nofilename --nocolor --nobreak "$pattern" $THINGS_DIR |
     cut -c 3- |
-    sort
+    sort | cut -c -$(tput cols)
   echo
 else
   # Create a todo
-  todayLog=~/projects/things/my-notes/stream/`date +%m%d`.md
+  relativeTodayLog=my-notes/stream/`date +%m%d`.md
+  todayLog=$THINGS_DIR/$relativeTodayLog
   if [[ ! -f "$todayLog" ]] ; then
     date=`date '+%a %d %b %Y' | tr [:lower:] [:upper:]`
     printf "# %s\n\n\n" "${date}" >> $todayLog
@@ -70,8 +78,13 @@ else
       fi
     fi
   fi
-  gsed -i "3i- [ ] ${todo}" $todayLog
-  ag --nofilename --nocolor --nobreak '\- \[ \](?! [\.~\^])' ~/projects/things/ | wc -l
+  echo $relativeTodayLog
+  if [[ "$SHIM_OS" = "termux" ]] ; then
+    # sed -i gives a permission error on termux, not sure why
+    # for now, just append to end which is good enough
+    echo "- [ ] ${todo}" >> $todayLog
+  else
+    $SHIM_SED -i "3i- [ ] ${todo}" $todayLog
+  fi
+  ag --nofilename --nocolor --nobreak '\- \[ \](?! [\.~\^])' $THINGS_DIR | wc -l
 fi
-
-

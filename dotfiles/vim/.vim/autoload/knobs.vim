@@ -57,12 +57,21 @@ function! s:DefineCommands()
   endif
 endfunction
 
+" Could this knob be needed, e.g. if knob level was higher
+function! knobs#could(knob)
+  " https://en.wikipedia.org/wiki/Up_to_eleven - everything on
+  if g:knobs_level == 11
+    return 1
+  endif
+  return knobs#(a:knob)
+endfunction
+
 function! knobs#(knob)
   return has_key(g:knobs, a:knob) ? g:knobs[a:knob] : 0
 endfunction
 
 function! knobs#If(knob, ...)
-  if knobs#(trim(a:knob,"'"))
+  if knobs#(trim(a:knob,"'")) || g:knobs_level == 11
     execute join(a:000)
   endif
 endfunction
@@ -78,5 +87,9 @@ function! knobs#At(level)
     return 0
   endif
 endfunction
+
+if !exists("g:knobs_default_level")
+  let g:knobs_default_level = 1
+endif
 
 call knobs#Init()

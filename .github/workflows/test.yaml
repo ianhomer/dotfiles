@@ -3,7 +3,22 @@ name: test
 on: [push, workflow_dispatch]
 
 jobs:
-  test:
+  dotme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name:
+        run: |
+          sudo apt-get install stow
+          rm ~/.bashrc
+          rm ~/.bash_profile
+          ./bin/dotme -i "shim|stow"
+          ./start
+          . $HOME/.bash_profile
+          . $HOME/.bashrc
+          ./bin/dotme verify
+
+  vim:
     runs-on: ubuntu-latest
 
     strategy:

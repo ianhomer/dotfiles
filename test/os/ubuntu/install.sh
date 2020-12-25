@@ -17,10 +17,8 @@ ln -s /home/runner/nvim/nvim-linux64/bin/nvim \
 
 git clone https://github.com/ianhomer/dotfiles.git \
   ~/.dotfiles
-cd ~/.dotfiles
 git clone https://github.com/junegunn/vader.vim.git \
   ~/.dotfiles/tmp/vim/plugins/vader.vim
-git checkout feature/arcadefire
 
 export VIM_COMMAND=/home/runner/nvim/bin/nvim
 cd ~/.dotfiles

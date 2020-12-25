@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-should-run $0 || exit
+should-run $0 || exit 0
 
 printf "\e[36mSetting up OSX defaults\e[0m\n"
 

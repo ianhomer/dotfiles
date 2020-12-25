@@ -1,7 +1,6 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.dotfiles/bin:$PATH
 
-# Path to your oh-my-zsh installation.
+# Path to oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
@@ -68,7 +67,18 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  docker
+  dotenv
+  fasd
+  fzf
+  npm
+  nvm
+  osx
+  git
+  terraform
+  vi-mode
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -97,3 +107,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+. ~/.config/sh/aliases.sh
+
+export NVM_DIR=~/.nvm
+if command -v brew &> /dev/null ; then
+  source $(brew --prefix nvm)/nvm.sh
+fi

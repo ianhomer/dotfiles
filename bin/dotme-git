@@ -4,7 +4,7 @@
 # Configure git
 #
 
-should-run $0 || exit
+should-run $0 || exit 0
 
 # Make sure ~/.gitconfig is in place before setting git config so that personal
 # settings end up in that config file
@@ -19,5 +19,8 @@ git config user.email > /dev/null ||
 
 git config user.name > /dev/null ||
   git config --global user.name "ian"
+
+git config pull.rebase > /dev/null ||
+  git config --global pull.rebase false
 
 should-run -fu $0

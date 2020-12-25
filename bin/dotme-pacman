@@ -4,4 +4,18 @@
 # Install pacman - arch package manager - packages
 #
 
-pacman -S - < ~/.dotfiles/config/package/pkglist.txt
+_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+. ${_DIR}/functions/log.sh
+
+should-run -m 7 dotme-pacman $_DIR/../config/pacman || exit 0
+
+if ! command -v sudo &> /dev/null ; then
+  o_x "sudo is needed, but not found"
+fi
+
+o_o "updating brew"
+
+sudo pacman -Syu --noconfirm - < ~/.dotfiles/config/pacman/pkglist.txt
+
+should-run -fu dotme-pacman
+

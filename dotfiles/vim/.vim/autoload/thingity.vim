@@ -1,3 +1,8 @@
+if exists('g:thingity_autoloaded')
+  finish
+endif
+let g:thingity_autoloaded = 1
+
 function thingity#GetThingityDateHeading()
   " Top level heading if first line
   let heading = line('.') == 1 ? "# " : "## "
@@ -7,7 +12,7 @@ endfunction
 function! thingity#LintMarkdown()
   normal ma
   let currentLine=line("'a")
-  call PruneWhiteSpace()
+  call my#PruneWhiteSpace()
   normal gg
   " Do not format fenced blocks. I can't find a way to configure the default vim
   " formatting to not join lines in fenced blocks, so instead we'll only format
@@ -135,7 +140,7 @@ function! thingity#NewThing(createNew,type)
     execute "normal! a".thingity#GetThingityDateHeading().headingExtra."\<ESC>2o\<ESC>"
     write
   endif
-  call NERDTreeFindIfRoom()
+  call window#NERDTreeFindIfRoom()
   wincmd l
 endfunction
 

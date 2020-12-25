@@ -8,7 +8,7 @@ coding and text editing a breeze.
 First time clone repository and install:
 
     git clone git@github.com:ianhomer/dotfiles.git ~/.dotfiles
-    ~/.dotfiles/bin/dotme
+    ~/.dotfiles/start
 
 Update at any time with:
 
@@ -31,14 +31,14 @@ of working to streamline distraction free coding. This includes:
 **brew**
 : package manager
 
-**fish**
-: friendly interactive shell with oh-my-fish
+**fish** and **zsh**
+: friendly interactive shells
 
 **git**
 : source control
 
-**kitty**
-: slick terminal
+**kitty** and **alacritty**
+: slick terminals
 
 **tmux**
 : terminal multiplexer with plugins - tmux-continuum ; tmux-resurrect ; vim-tmux-navigator

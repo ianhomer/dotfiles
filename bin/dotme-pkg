@@ -4,7 +4,7 @@
 # Install pkg packages
 #
 
-should-run -m 7 $0 || exit
+should-run -m 7 $0 || exit 0
 
 pkg install ctags
 pkg install fasd
@@ -17,5 +17,6 @@ pkg install openssh
 pkg install silversearcher-ag
 pkg install stow
 pkg install termux-api
+pkg install zsh
 
 should-run -fu $0

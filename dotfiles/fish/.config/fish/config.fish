@@ -31,7 +31,7 @@ if status --is-login
   set -gx RBENV_SHELL fish
 
   # Point OMF state to dotfiles
-  set -g OMF_CONFIG ~/.dotfiles/config/omf
+  #set -g OMF_CONFIG ~/.dotfiles/config/omf
 
   # Use fd for fzf by default
   set -gx FZF_DEFAULT_COMMAND 'fd --type f'
@@ -68,7 +68,7 @@ if status --is-interactive
   #   fish_default_key_bindings
   # Time between escape key press and subsequent character
   set -g fish_escape_delay_ms 200
-  
+
   #
   # Tweak colors for me - noise reduction, red/green color blind and
   # long-sighted.

@@ -5,23 +5,29 @@
 # script have changed
 #
 
-_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-. ${_DIR}/functions/log.sh
+set -e
+set -o noglob
+
+$(shim)
+. ${DOTFILES_BIN}/functions/log.sh
 
 OPTIND=1
-while getopts "cfhlm:norsuvz" o; do case "$o" in
-  c) clean="y" ;;      # Clean should run cache
-  f) force="y" ;;      # Force should run
-  h) help="y" ;; 
-  l) list="y" ;;       # List should run files
+while getopts "ace:fhi:lm:norsuvz" o; do case "$o" in
+  a) all="y" ;;         # Reset global filter
+  c) clean="y" ;;       # Clean should run cache
+  e) exclude=$OPTARG ;; # Set global should run filter
+  f) force="y" ;;       # Force should run
+  h) help="y" ;;
+  i) include=$OPTARG ;; # Set global should run filter
+  l) list="y" ;;        # List should run files
   m) modified=$OPTARG ;; # Expiry time of should run file
-  n) noop="y" ;;       # No operation
-  o) otheronly="y" ;;  # Only check other files for modified
-  r) outrunfile="y" ;; # Return the name of th should run file
-  s) silent="y" ;;     # Don't output message indicating what's done
-  u) update="y" ;;     # Update should run file
-  v) verbose="y" ;;    # Verbose output
-  z) changed="y" ;;    # Check whether other files status changed since last run
+  n) noop="y" ;;        # No operation
+  o) otheronly="y" ;;   # Only check other files for modified
+  r) outrunfile="y" ;;  # Return the name of th should run file
+  s) silent="y" ;;      # Don't output message indicating what's done
+  u) update="y" ;;      # Update should run file
+  v) verbose="y" ;;     # Verbose output
+  z) changed="y" ;;     # Check whether other files status changed since last run
 esac done
 
 shouldRunDir=~/.config/dotme/should-run
@@ -32,7 +38,7 @@ if [[ -n "$help" ]] ; then
   cat <<EOF
 Usage
 
-Check if script needs to run 
+Check if script needs to run
 
   should-run $0 || exit
 
@@ -41,7 +47,7 @@ Check if script needs to run, with expiry
   should-run -m 1 $0  || exit  # 1 day
   should-run -m 1h $0 || exit  # 1 hour
 
-Check whether other files have changed to trigger should run 
+Check whether other files have changed to trigger should run
 
   should-run $0 otherfile || exit
 
@@ -61,16 +67,52 @@ EOF
 fi
 
 shift $((OPTIND-1))
+
 [ "${1:-}" = "--" ] && shift
-scriptName=${1##*/}
-shift
+if [[ -n $1 ]] ; then
+  scriptName=${1##*/}
+  shift
+fi
+
 otherFiles=$*
 shouldRunFile=${shouldRunDir}/last-run-${scriptName}
 
-if [[ -n "$outrunfile" ]] ; then
-  echo $shouldRunFile
-  exit 0
+propertiesFile=$DOTME_CONFIG/should-run.properties
+
+if [[ -n "$include" ]] || [[ -n "$exclude" ]] || [[ -n "$all" ]] ; then
+  mkdir -p $DOTME_CONFIG
+  if [[ -n "$include" ]] ; then
+    o_o "setting should-run global include to $include"
+    echo "include=$include" > $propertiesFile
+  elif [[ -n "$exclude" ]] ; then
+    o_o "setting should-run global exclude to $exclude"
+    echo "exclude=$exclude" > $propertiesFile
+  else
+    o_o "clearing should-run filters"
+    rm $propertiesFile
+  fi
+  [[ -z "$scriptName" ]] && noop=1
 fi
+
+function prop {
+  [[ ! -f "${propertiesFile}" ]] && return
+  grep "${1}" ${propertiesFile}|cut -d'=' -f2
+}
+
+excluded=0
+shouldRunInclude=$(prop include)
+if [[ -n "$shouldRunInclude" ]] ; then
+  if ! [[ "$scriptName" =~ ${shouldRunInclude} ]] ; then
+    excluded=1
+  fi
+fi
+shouldRunExclude=$(prop exclude)
+if [[ -n "$shouldRunExclude" ]] ; then
+  if [[ "$scriptName" =~ ${shouldRunExclude} ]] ; then
+    excluded=1
+  fi
+fi
+
 
 [[ -n "$list" ]] && noop="y" && \
   ls -lt $shouldRunDir | awk '{$1=$2=$3=$4=$5=""; print $0}'
@@ -94,10 +136,10 @@ if [[ -n "$clean" ]] ; then
   fi
 fi
 
-[[ -n "$noop" ]] && exit
+[[ -n "$noop" ]] && exit 0
 
 if [[ -z "$scriptName" ]] ; then
-  _x Please pass script name "in" as argument to $(bold ${0##*/})
+  o_x Please pass script name "in" as argument to $(bold ${0##*/})
 fi
 
 [[ -n "$verbose" ]] && echo "Script : $scriptName"
@@ -109,11 +151,16 @@ shouldRun=0
 #
 # Check whether script should run
 #
-if [[ -z "$force" ]] && [[ -f "$shouldRunFile" ]] ; then
-  fullScriptName=`which $scriptName`
+if [[ "$excluded" -eq 1 ]] ; then
+  # should not run
+  shouldRun=0
+elif [[ -z "$force" ]] && [[ -f "$shouldRunFile" ]] ; then
+  fullScriptName="${_DIR}/${scriptName}"
+  if [[ ! -f $fullScriptName ]] ; then
+    fullScriptName=`which ${scriptName}`
+  fi
   [[ -z "$fullScriptName" ]] && \
-    echo "Cannot find scipt $scriptName to check whether it should run" && \
-    exit 1
+    o_x "Cannot find $scriptName to check whether it should run"
   [[ -n "$verbose" ]] && echo "Full script name : $fullScriptName"
 
   if [[ -z "$otheronly" ]] && [[ $fullScriptName -nt $shouldRunFile ]] ; then
@@ -163,18 +210,20 @@ if [[ "$update" == "y" ]] && [[ $shouldRun -eq 1 ]] ; then
 fi
 
 if [[ $shouldRun -eq 0 ]] ; then
-  if [[ -n "$modified" ]] ; then
-    notChangedMessage="ran in last"
+  if [[ $excluded -eq 1 ]] ; then
+    shouldNotRunMessage="excluded globally"
+  elif [[ -n "$modified" ]] ; then
+    shouldNotRunMessage="ran in last"
     if [[ "$modified" == "1" ]]; then
-      notChangedMessage="$notChangedMessage day"
+      shouldNotRunMessage="$notChangedMessage day"
     elif [[ "$modified" =~ ^[0-9]+$ ]] ; then
-      notChangedMessage="$notChangedMessage $modified days"
+      shouldNotRunMessage="$notChangedMessage $modified days"
     else
-      notChangedMessage="$notChangedMessage $modified"
+      shouldNotRunMessage="$notChangedMessage $modified"
     fi
   else
-    notChangedMessage="not changed since last run"
+    shouldNotRunMessage="not changed since last run"
   fi
-  [[ -z "$silent" ]] && o_o skip $scriptName $notChangedMessage 
+  [[ -z "$silent" ]] && o_o skip $scriptName $shouldNotRunMessage
   exit 1
 fi
