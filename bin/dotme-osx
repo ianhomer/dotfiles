@@ -2,7 +2,9 @@
 
 should-run $0 || exit 0
 
-printf "\e[36mSetting up OSX defaults\e[0m\n"
+$(shim) && . ${ME}/i.sh
+
+o_o "setting up OSX defaults"
 
 #
 # Based onhttps://github.com/paulirish which is a fork of https://mths.be/osx - thx
@@ -133,7 +135,7 @@ for app in "Dock" "Finder" \ ; do
   killall "${app}" &> /dev/null
 done
 
-echo "... ... DONE - OSX defaults have been configured"
+o_o "OK" "OSX defaults have been configured"
 
 should-run -fu $0
 
