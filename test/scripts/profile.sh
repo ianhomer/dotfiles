@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e
+
+echo $BASH
 
 # Experiment with function loading
 

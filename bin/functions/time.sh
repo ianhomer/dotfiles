@@ -1,24 +1,25 @@
 #!/bin/bash
 
+
 function time::start() {
-  export TIME_START=$(gdate +%s%N)
+  export TIME_START=$(gdate +%s%6N)
 }
 
 function time::mark() {
-  TIME_MARK=$(gdate +%s%N)
+  TIME_MARK=$(gdate +%s%6N)
 }
 
 function time::() {
-  time=$(gdate +%s%N)
+  time=$(gdate +%s%6N)
   printf "⨂ %-20s : %8sµs\n" \
-    "$1" $(( ( $time - $TIME_START ) / 1000 ))
+    "$1" $(( ( $time - $TIME_START ) ))
 }
 
 function time::block() {
-  time=$(gdate +%s%N)
+  time=$(gdate +%s%6N)
   count=${2:-1}
   printf "↳ %-20s :         %8sµs\n" \
-    "$1" $(( ( $time - $TIME_MARK ) / ( 1000 * $count) ))
+    "$1" $(( ( $time - $TIME_MARK ) / $count ))
 }
 
 function time::command() {
