@@ -4,12 +4,14 @@
 # Install brew packages
 #
 
+set -e
+
 while getopts "a" o; do case "$o" in
   a) ADMIN=y ;;
 esac done
 
-$(shim)
-. ${DOTFILES_BIN}/functions/log.sh
+$(shim) && . ${ME}/i.sh
+i:: log
 
 BREW_DIR=${DOTFILES_DIR}/config/brew
 
@@ -25,21 +27,21 @@ fi
 
 adminFormula="adoptopenjdk8 adoptopenjdk11 java11 openjdk@11 powershell"
 
-o_o "updating brew"
-
 # Pin formula that need password to upgrade if not in admin mode
 for formula in $adminFormula ; do
   if [[ "$ADMIN" == "y" ]] ; then
     o_o "unpinning $formula"
-    brew unpin $formula > /dev/null 2>&1
+    brew unpin $formula > /dev/null 2>&1 || o_o "not unpinned $formula"
   else
-    brew pin $formula > /dev/null 2>&1
+    brew pin $formula > /dev/null 2>&1 || o_o "not pinned $formula"
   fi
 done
 
+o_o "updating brew"
 # Use latest version of brew
 brew update
 
+o_o "upgrading brew"
 # Upgrade any already installed formulae
 brew upgrade
 

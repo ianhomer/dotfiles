@@ -17,8 +17,8 @@ set -e
 _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 PATH=${_DIR}:${PATH}
 
-$(shim)
-. ${DOTFILES_BIN}/functions/log.sh
+$(shim) && . ${ME}/i.sh
+i:: log
 DOTFILES_DOTFILES="${DOTFILES_DIR}/dotfiles"
 
 VERBOSE=0

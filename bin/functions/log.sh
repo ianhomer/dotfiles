@@ -56,6 +56,11 @@ function o_info() {
   printf "\e[36m$*\e[0m\n"
 }
 
+function o_trace() {
+  [[ "$TRACEME" == "y" ]] && printf "\e[38;5;238m$*\e[0m\n"
+  return 0
+}
+
 function o_error() {
   printf "\e[33m$*\e[0m\n"
 }
