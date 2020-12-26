@@ -36,9 +36,18 @@ function time::command() {
   label=${2:-$command}
   count=${3:-10}
   time::mark
-  for run in $(seq $count) ; do eval "$command"  ; done
+  for run in $(seq $count) ; do eval "$command" ; done
   time::block "$label" $count
 }
+
+function time::function() {
+  label=${2}
+  count=${3:-10}
+  time::mark
+  for run in $(seq $count) ; do "$1" ; done
+  time::block "$label" $count
+}
+
 
 
 

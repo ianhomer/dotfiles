@@ -2,6 +2,7 @@
 
 #
 # Run with native MacOS bash with
+#
 #   /bin/bash test/scripts/profile.sh
 #
 
@@ -26,15 +27,19 @@ time::command "gdate +%s%6N > /dev/null" "gdate +%s%6N" 100
 time::command "time::ms > /dev/null" "time::ms" 100
 
 time::mark
-for run in {1..10} ; do . ${DOTFILES_BIN}/functions/log.sh ; done
+for run in {1..1000} ; do . ${DOTFILES_BIN}/functions/log.sh ; done
 time::block ". log.sh" 1000
 
 time::command ". ${DOTFILES_BIN}/functions/log.sh" "command . log.sh" 1000
+
+fun() { . ${DOTFILES_BIN}/functions/log.sh ; }
+time::function fun "function . log.sh" 1000
 
 time::command "i::source log" "" 1000
 time::command "i:: log && i::reset" "" 1000
 time::command "i:: log" "" 10
 time::command "i:: log" "" 100
 time::command "i:: log" "" 1000
+time::command "i:: log" "" 10000
 
 time:: "end"
