@@ -8,8 +8,15 @@ $(shim) && . ${ME}/i.sh
 i:: time
 
 time::start
-echo ${SHIM_OS}
-time::me "start"
+time:: "start"
+
+time::mark
+for run in {1..10000} ; do : ; done
+time::block "control 10000" 10000
+time::command ":" "command 100" 100
+time::command ":" "command 1000" 1000
+time::command ":" "command 10000" 10000
+time::command "sleep 0.001" "" 50
 
 time::mark
 for run in {1..10} ; do . ${DOTFILES_BIN}/functions/log.sh ; done
@@ -33,4 +40,8 @@ time::mark
 for run in {1..10} ; do i:: log ; done
 time::block "log 3" 10
 
-time::me "end"
+time::command "i:: log" "" 100
+time::command "i:: log" "" 1000
+time::command "i::source log" "" 1000
+
+time:: "end"
