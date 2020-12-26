@@ -93,6 +93,7 @@ if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
 export DOTFILES_BIN=$DOTFILES_BIN
 export DOTFILES_DIR=$DOTFILES_DIR
 export DOTME_CONFIG=$DOTME_CONFIG
+export SHIM_LOADED=1
 export SHIM_OS=$SHIM_OS
 export SHIM_SED=$SHIM_SED
 export SHIM_STAT=$SHIM_STAT
