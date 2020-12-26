@@ -25,9 +25,9 @@ jobs:
       matrix:
         neovim: [false, true]
         version: [stable]
-        include:
-          - neovim: true
-            version: nightly
+        #include:
+        #  - neovim: true
+        #    version: nightly
 
       fail-fast: false
 
