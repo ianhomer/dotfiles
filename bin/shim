@@ -92,7 +92,7 @@ if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
   cat <<EOF
 export DOTFILES_BIN=$DOTFILES_BIN
 export DOTFILES_DIR=$DOTFILES_DIR
-export DOTME=$DOTFILES_DIR
+export ME=$DOTFILES_DIR
 export DOTME_CONFIG=$DOTME_CONFIG
 export SHIM_LOADED=1
 export SHIM_OS=$SHIM_OS

@@ -8,7 +8,7 @@ function i::reset() {
   unset loadmeLoaded
 }
 
-function i::mport() {
+function i::() {
   module=$1
   filename="${DOTFILES_BIN}/functions/${module}.sh"
   if ! [[ "${loadmeLoaded}" =~ ":$module:" ]]; then
