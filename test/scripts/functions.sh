@@ -11,21 +11,24 @@ $(shim)
 time::start
 echo ${SHIM_OS}
 time::me "start"
+
 time::mark
-for run in {1..10} ; do
-  . ${DOTFILES_BIN}/functions/log.sh
-done
+for run in {1..10} ; do . ${DOTFILES_BIN}/functions/log.sh ; done
 time::block "loading log function" 10
 
 . ${DOTFILES_BIN}/functions/loadme.sh
 time::me "loader loaded"
+
 time::mark
-loadme log
+for run in {1..10} ; do loadme log && loadme::reset ; done
 time::block "log 1"
+
 time::mark
-loadme log
-time::block "log 2"
+for run in {1..10} ; do loadme log ; done
+time::block "log 2" 10
+
 time::mark
-loadme log
-time::block "log 3"
+for run in {1..10} ; do loadme log ; done
+time::block "log 3" 10
+
 time::me "end"
