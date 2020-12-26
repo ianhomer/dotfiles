@@ -1,12 +1,14 @@
 #!/bin/bash
 
-$(shim)
+#
+# Module loader
+#
 
-loadme::reset() {
+function i::reset() {
   unset loadmeLoaded
 }
 
-loadme() {
+function i::mport() {
   module=$1
   filename="${DOTFILES_BIN}/functions/${module}.sh"
   if ! [[ "${loadmeLoaded}" =~ ":$module:" ]]; then
@@ -17,6 +19,12 @@ loadme() {
     #done
     export loadmeLoaded="${loadmeLoaded}:${module}:"
   fi
+}
+
+function i::source() {
+  module=$1
+  filename="${DOTFILES_BIN}/functions/${module}.sh"
+  . $filename
 }
 
 

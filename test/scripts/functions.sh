@@ -4,31 +4,33 @@ set -e
 
 # Experiment with function loading
 
-start=`gdate +%s%N`
+$(shim) && . ${DOTME}/i.sh
+i::mport time
 
-$(shim)
-. ${DOTFILES_BIN}/functions/time.sh
 time::start
 echo ${SHIM_OS}
 time::me "start"
 
 time::mark
 for run in {1..10} ; do . ${DOTFILES_BIN}/functions/log.sh ; done
-time::block "loading log function" 10
+time::block "source log.sh 1" 10
 
-. ${DOTFILES_BIN}/functions/loadme.sh
-time::me "loader loaded"
-
-time::mark
-for run in {1..10} ; do loadme log && loadme::reset ; done
-time::block "log 1"
+time::command ". ${DOTFILES_BIN}/functions/log.sh" "source log.sh 2"
 
 time::mark
-for run in {1..10} ; do loadme log ; done
+for run in {1..10} ; do i::source log ; done
+time::block "i::source log" 10
+
+time::mark
+for run in {1..10} ; do i::mport log && i::reset ; done
+time::block "log 1" 10
+
+time::mark
+for run in {1..10} ; do i::mport log ; done
 time::block "log 2" 10
 
 time::mark
-for run in {1..10} ; do loadme log ; done
+for run in {1..10} ; do i::mport log ; done
 time::block "log 3" 10
 
 time::me "end"
