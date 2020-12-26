@@ -4,11 +4,11 @@
 #
 
 read -p "Would you like to completely remove evernote and local caches? " -n 1 -r
-echo   
+echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
   osascript -e 'quit app "Evernote"'
-  if [[ $? -eq 0 ]] ; then 
+  if [[ $? -eq 0 ]] ; then
     brew cask uninstall evernote
 
     echo "Removing evernote caches"
@@ -19,5 +19,3 @@ then
     echo "*** Cannot quit Evernote, not uninstalling"
   fi
 fi
-
-

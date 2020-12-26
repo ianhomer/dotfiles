@@ -40,7 +40,7 @@
         }
       },
       "docker": {
-        "version": "2.2.0.5,43884",
+        "version": "2.2.0.3,42716",
         "options": {
           "full_name": "docker"
         }
@@ -52,7 +52,7 @@
         }
       },
       "visual-studio-code": {
-        "version": "1.42.1",
+        "version": "1.42.0",
         "options": {
           "full_name": "visual-studio-code"
         }
@@ -148,7 +148,7 @@
         }
       },
       "amethyst": {
-        "version": "0.15.4",
+        "version": "0.15.3",
         "options": {
           "full_name": "amethyst"
         }
@@ -365,29 +365,8 @@
         }
       },
       "neovim": {
-        "version": "0.4.4",
-        "bottle": {
-          "cellar": "/usr/local/Cellar",
-          "prefix": "/usr/local",
-          "files": {
-            "big_sur": {
-              "url": "https://homebrew.bintray.com/bottles/neovim-0.4.4.big_sur.bottle.1.tar.gz",
-              "sha256": "83957460b7c664b65f7339c6e37a6b468274ca747ba8f8746616c4cebf97caa9"
-            },
-            "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/neovim-0.4.4.catalina.bottle.1.tar.gz",
-              "sha256": "736260e14d50d9a42562fb0fe2215d5154a9cef3e3227469a961d030b45358fd"
-            },
-            "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/neovim-0.4.4.mojave.bottle.1.tar.gz",
-              "sha256": "9f8a7cb52a0060c524d4d4f96b2590d034257cc4f255a8f05dfbf464bef29cf1"
-            },
-            "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/neovim-0.4.4.high_sierra.bottle.1.tar.gz",
-              "sha256": "7286d497b92cf31f5839af325a1fc7760fb3006fa4a0dad7e547ab9c966cb491"
-            }
-          }
-        }
+        "version": "HEAD-4383c0f",
+        "bottle": false
       },
       "nmap": {
         "version": "7.91",
@@ -518,26 +497,26 @@
         }
       },
       "vim": {
-        "version": "8.2.2200",
+        "version": "8.2.2200_1",
         "bottle": {
           "cellar": "/usr/local/Cellar",
           "prefix": "/usr/local",
           "files": {
             "big_sur": {
-              "url": "https://homebrew.bintray.com/bottles/vim-8.2.2200.big_sur.bottle.tar.gz",
-              "sha256": "ca267655a477abb81187a3b9e24defa2b9c5d6d9aaeb2d3d5a3bdccf620a9f8b"
+              "url": "https://homebrew.bintray.com/bottles/vim-8.2.2200_1.big_sur.bottle.tar.gz",
+              "sha256": "dd91e058554e8de80a6b2472c02baac46df3f3dbf494af775e20dfb45d7ee07a"
             },
             "arm64_big_sur": {
-              "url": "https://homebrew.bintray.com/bottles/vim-8.2.2200.arm64_big_sur.bottle.tar.gz",
-              "sha256": "4199bfebbc5be38a01c9434f81c6cf4f223f2aa40e86e8196728fbcd31c3ad77"
+              "url": "https://homebrew.bintray.com/bottles/vim-8.2.2200_1.arm64_big_sur.bottle.tar.gz",
+              "sha256": "55da479b33bdbf1738f3a28a21226e793810305972b94a3e81883e240a148103"
             },
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/vim-8.2.2200.catalina.bottle.tar.gz",
-              "sha256": "fea9dccada1ef942e6303d001cc7bb7ea085a699200c6d2e904500eedbe7546a"
+              "url": "https://homebrew.bintray.com/bottles/vim-8.2.2200_1.catalina.bottle.tar.gz",
+              "sha256": "27ef7e801e5a79e92155f99230c0b15e49e484f1931a192ded1ff3ba0ab73d17"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/vim-8.2.2200.mojave.bottle.tar.gz",
-              "sha256": "d82e050514ec157f40f9fbfe12ddf1af859c0e2c1cb6f587111ec96ff030ef52"
+              "url": "https://homebrew.bintray.com/bottles/vim-8.2.2200_1.mojave.bottle.tar.gz",
+              "sha256": "14b43b89eb7dc5b8c63d77ef9a761ac801fc199c6b67319b9f47537d6ea46fde"
             }
           }
         }
@@ -1492,8 +1471,8 @@
       "big_sur": {
         "HOMEBREW_VERSION": "2.7.0",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "c1649915e236922cbfb104c391f34d6331a27bf7",
-        "CLT": "12.3.0.0.1.1607026830",
+        "Homebrew/homebrew-core": "e697f6b66e93f38f3eb9fe27399af604e202bd30",
+        "CLT": "",
         "Xcode": "12.3",
         "macOS": "11.1"
       }
