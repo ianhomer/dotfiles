@@ -18,6 +18,10 @@ function o_o() {
   esac
 }
 
+function log::() {
+  o_o $@
+}
+
 #
 # Sometimes _ looks cleaner, I'll try both for a bit to see witch I like
 #
