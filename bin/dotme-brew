@@ -31,9 +31,12 @@ adminFormula="adoptopenjdk8 adoptopenjdk11 java11 openjdk@11 powershell"
 for formula in $adminFormula ; do
   if [[ "$ADMIN" == "y" ]] ; then
     o_o "unpinning $formula"
-    brew unpin $formula > /dev/null 2>&1 || o_o "not unpinned $formula"
+    brew unpin $formula &>/dev/null || o_o "not unpinned $formula"
   else
-    brew pin $formula > /dev/null 2>&1 || o_o "not pinned $formula"
+    if brew list $formula &>/dev/null ; then
+      o_o "pinning $formula"
+      brew pin $formula
+    fi
   fi
 done
 
@@ -45,7 +48,7 @@ o_o "upgrading brew"
 # Upgrade any already installed formulae
 brew upgrade
 
-cd $SCRIPT_DIR/../config/brew
+cd $DOTFILES_DIR/config/brew
 brew bundle
 
 if [[ "$ADMIN" == "y" ]] ; then
