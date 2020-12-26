@@ -1,22 +1,31 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
+if [[ -n "$EPOCHREALTIME" ]] ; then
+  function time::ms() {
+    echo ${EPOCHREALTIME//.}
+  }
+else
+  function time::ms() {
+      gdate +%s%6N
+  }
+fi
 
 function time::start() {
-  export TIME_START=$(gdate +%s%6N)
+  export TIME_START=$(time::ms)
 }
 
 function time::mark() {
-  TIME_MARK=$(gdate +%s%6N)
+  TIME_MARK=$(time::ms)
 }
 
 function time::() {
-  time=$(gdate +%s%6N)
+  time=$(time::ms)
   printf "⨂ %-20s : %8sµs\n" \
     "$1" $(( ( $time - $TIME_START ) ))
 }
 
 function time::block() {
-  time=$(gdate +%s%6N)
+  time=$(time::ms)
   count=${2:-1}
   printf "↳ %-20s :         %8sµs\n" \
     "$1" $(( ( $time - $TIME_MARK ) / $count ))
