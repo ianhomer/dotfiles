@@ -7,41 +7,49 @@
 if [[ -z "${SHIM_LOADED}" ]] ; then
   echo "Please \$(shim) before sourcing i.sh"
 else
-  function i::reset() {
-    unset loadmeLoaded
-  }
-  
-  function o_trace() {
-    if [[ "$TRACEME" == "y" ]] ; then
-      printf "... \e[38;5;238m$*\e[0m\n"
-    fi
-    return 0
-  }
+  if [[ -z "${ISH_LOADED}" ]] ; then
 
-  function i::() {
-    modules=$*
-    for module in $modules ; do
-      filename="${DOTFILES_BIN}/functions/${module}.sh"
-      if ! [[ "${loadmeLoaded}" =~ ":$module:" ]]; then
-        o_trace "Sourcing $filename"
-        . $filename
-        functions=$(grep "^function" $filename | sed 's/function \([a-z_:]*\).*/\1/')
-        for function in $functions ; do
-          o_trace "Exporting $function"
-          export -f $function
-        done
-        export loadmeLoaded="${loadmeLoaded}:${module}:"
-      else
-        o_trace "Module $module already loaded"
+    function i::reset() {
+      unset loadmeLoaded
+    }
+    
+    function o_trace() {
+      if [[ "$TRACEME" == "y" ]] ; then
+        printf "... \e[38;5;238m$*\e[0m\n"
       fi
-    done
-  }
+      return 0
+    }
 
-  function i::source() {
-    module=$1
-    filename="${DOTFILES_BIN}/functions/${module}.sh"
-    . $filename
-  }
+    function i::() {
+      modules=$*
+      for module in $modules ; do
+        filename="${DOTFILES_BIN}/functions/${module}.sh"
+        if ! [[ "${loadmeLoaded}" =~ ":$module:" ]]; then
+          o_trace "Sourcing $filename"
+          . $filename
+          functions=$(grep "^function" $filename | sed 's/function \([a-z_:]*\).*/\1/')
+          for function in $functions ; do
+            o_trace "Exporting $function"
+            export -f $function
+          done
+          export loadmeLoaded="${loadmeLoaded}:${module}:"
+        else
+          o_trace "Module $module already loaded"
+        fi
+      done
+    }
+
+    function i::source() {
+      module=$1
+      filename="${DOTFILES_BIN}/functions/${module}.sh"
+      . $filename
+    }
+
+    export -f i::
+    export ISH_LOADED=y
+  else
+    o_trace "i.sh already loaded"
+  fi
 fi
 
 i:: log
