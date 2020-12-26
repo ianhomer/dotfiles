@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ -n "$EPOCHREALTIME" ]] ; then
+  # bash v5 approach
   function time::ms() {
     echo ${EPOCHREALTIME//.}
   }
@@ -47,7 +48,4 @@ function time::function() {
   for run in $(seq $count) ; do "$1" ; done
   time::block "$label" $count
 }
-
-
-
 
