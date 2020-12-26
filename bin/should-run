@@ -8,8 +8,7 @@
 set -e
 set -o noglob
 
-$(shim)
-. ${DOTFILES_BIN}/functions/log.sh
+$(shim) && . ${ME}/i.sh
 
 OPTIND=1
 while getopts "ace:fhi:lm:norsuvz" o; do case "$o" in

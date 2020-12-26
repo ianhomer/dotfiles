@@ -18,6 +18,10 @@ function o_o() {
   esac
 }
 
+function log::() {
+  o_o $@
+}
+
 #
 # Sometimes _ looks cleaner, I'll try both for a bit to see witch I like
 #
@@ -56,6 +60,11 @@ function o_info() {
   printf "\e[36m$*\e[0m\n"
 }
 
+function o_trace() {
+  [[ "$TRACEME" == "y" ]] && printf "\e[38;5;238m$*\e[0m\n"
+  return 0
+}
+
 function o_error() {
   printf "\e[33m$*\e[0m\n"
 }
@@ -63,6 +72,7 @@ function o_error() {
 # Error and exit
 function o_x() {
   o_error $@
+  caller
   exit 1
 }
 

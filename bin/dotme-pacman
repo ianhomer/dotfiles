@@ -4,10 +4,9 @@
 # Install pacman - arch package manager - packages
 #
 
-_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-. ${_DIR}/functions/log.sh
+$(shim) && . ${ME}/i.sh
 
-should-run -m 7 dotme-pacman $_DIR/../config/pacman || exit 0
+should-run -m 7 dotme-pacman ${ME}/config/pacman || exit 0
 
 if ! command -v sudo &> /dev/null ; then
   o_x "sudo is needed, but not found"

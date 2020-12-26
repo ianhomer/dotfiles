@@ -18,8 +18,7 @@ shouldRunArgument=""
 
 should-run -z $0 $DOTFILES_DOTFILES $shouldRunArgument || exit 0
 
-$(shim)
-. ${DOTFILES_BIN}/functions/log.sh
+$(shim) && . ${ME}/i.sh
 
 cd $DOTFILES_DOTFILES
 o_o "stowing dotfiles"
