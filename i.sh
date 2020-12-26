@@ -8,10 +8,6 @@ if [[ -z "${SHIM_LOADED}" ]] ; then
   echo "Please \$(shim) before sourcing i.sh"
 else
   if ! command -v i:: &>/dev/null ; then
-    function i::reset() {
-      unset loadmeLoaded
-    }
-
     function o_trace() {
       if [[ "$TRACEME" == "y" ]] ; then
         printf "... \e[38;5;238m$*\e[0m\n"
