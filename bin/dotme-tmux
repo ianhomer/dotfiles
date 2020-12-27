@@ -6,8 +6,7 @@
 
 should-run -m 7 $0 || exit 0
 
-$(shim)
-. ${DOTFILES_BIN}/functions/log.sh
+$(shim) && . ${ME}/i.sh
 
 if [ ! -d  ~/.tmux/plugins/tpm ] ; then
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -15,7 +14,7 @@ fi
 
 git -C ~/.tmux/plugins/tpm pull
 
-o_o "Updating tmux plugins"
+log:: "Updating tmux plugins"
 ~/.tmux/plugins/tpm/scripts/update_plugin_prompt_handler.sh all
 
 should-run -fu $0

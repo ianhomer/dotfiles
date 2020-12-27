@@ -49,7 +49,7 @@ for d in `git-get-directories` ; do
     root=${root/\/projects\//\/ℙ\/}
     printf '\033[0;35m%s ' $root
     if [[ `git remote | wc -l` -eq 0 ]] ; then
-      o_o "no remote"
+      log:: "no remote"
     else
       now=`date +%s`
       lastModified=`stat -f '%c' .git/FETCH_HEAD`
@@ -58,7 +58,7 @@ for d in `git-get-directories` ; do
         git remote update
         git pull
       else
-        o_o "∷ fetched $((now - lastModified))s ago"
+        log:: "∷ fetched $((now - lastModified))s ago"
       fi
     fi
   )

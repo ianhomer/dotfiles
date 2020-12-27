@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #
 # Given a posix shell, load dotme local env variables into your shell env
 # variables. Note that this must be sourced, i.e.
@@ -9,4 +10,6 @@ envFile=${1:-~/.config/dotme/.env}
 if [ -f $envFile ] ; then
   echo "... loading env from $envFile"
   export $(cat $envFile | xargs)
+else
+  echo "... cannot find a .env file"
 fi

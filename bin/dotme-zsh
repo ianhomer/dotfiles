@@ -5,10 +5,9 @@
 
 should-run -m 7 dotme-zsh || exit 0
 
-_DIR="$(cd "$(dirname "${ZSH_ARGZERO}")" >/dev/null 2>&1 && pwd)"
-. ${_DIR}/functions/log.sh
+$(shim) && . ${ME}/i.sh
 
-o_o "Configuring zsh shell"
+log:: "Configuring zsh shell"
 
 ZSH=~/.oh-my-zsh
 

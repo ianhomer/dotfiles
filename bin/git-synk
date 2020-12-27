@@ -33,8 +33,7 @@ while getopts "ahuw:" o; do case "$o" in
   h) help && exit 1 ;;
 esac done
 
-$(shim)
-. ${DOTFILES_BIN}/functions/log.sh
+$(shim) && . ${ME}/i.sh
 
 #
 # Execute git quietly ... keybase output messages in stderr
@@ -153,9 +152,9 @@ function gitSynk() {
     printf " ↓"
     if ! gitQuiet rebase ; then
       echo
-      o_o "START DIFF"
+      log:: "START DIFF"
       git diff --diff-filter=U
-      o_o "END   DIFF"
+      log:: "END   DIFF"
       git rebase --abort
       cat <<EOF
 Could not rebase, please rebase manually with:

@@ -28,6 +28,7 @@ while getopts "fho:u" o; do case "$o" in
   h) help && exit 0 ;;
   o) OS=$OPTARG ;;
   u) UPDATE=y ;;
+  *) exit 1 ;;
 esac done
 shift $((OPTIND-1))
 
@@ -44,7 +45,7 @@ if [[ "$UPDATE" = "y" ]] ; then
   fi
   NEW_SHIM=$(shim -f)
   if [[ "${CURRENT_SHIM}" != "${NEW_SHIM}" ]] ; then
-    o_o "updating local shim"
+    log:: "updating local shim"
     cat <<EOF > $LOCAL_SHIM
 $NEW_SHIM
 EOF
@@ -92,7 +93,9 @@ if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
   cat <<EOF
 export DOTFILES_BIN=$DOTFILES_BIN
 export DOTFILES_DIR=$DOTFILES_DIR
+export ME=$DOTFILES_DIR
 export DOTME_CONFIG=$DOTME_CONFIG
+export SHIM_LOADED=1
 export SHIM_OS=$SHIM_OS
 export SHIM_SED=$SHIM_SED
 export SHIM_STAT=$SHIM_STAT
