@@ -246,8 +246,8 @@ IfKnob 'eunuch' Plug 'tpope/vim-eunuch'
 
 IfKnob 'startify' Plug 'mhinz/vim-startify'
 
-if KnobAt(5)
-  Plug 'ludovicchabant/vim-gutentags'
+if knobs#could("gutentags")
+  Plug 'ludovicchabant/vim-gutentags' 
   let g:gutentags_cache_dir = expand('~/.cache/tags')
 endif
 
