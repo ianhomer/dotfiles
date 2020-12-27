@@ -1,5 +1,7 @@
 #!/usr/bin/env bats
 
+load ../setup
+
 @test "should-run in error if no script provided" {
   run should-run
   echo "output: $output"

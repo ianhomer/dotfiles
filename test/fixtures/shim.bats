@@ -1,5 +1,7 @@
 #!/usr/bin/env bats
 
+load ../setup
+
 @test "shim" {
   run shim
   echo "${lines}"
@@ -9,4 +11,3 @@
 @test "update shim" {
   shim -u
 }
-
