@@ -1,41 +1,26 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Pretty shell messages
 
-# 
-# o_o is a shell logger - it looks like a tape roll
-#
-function o_o() {
+function log::() {
   mode=$1
   case $mode in
-    box) shift && o_box ${@} ;;
-    error) shift && o_error ${@} ;;
-    skip) shift && o_action skip ${@} ;;
-    status) shift && o_status ${@} ;;
-    OK) shift && o_status OK "${@}" ;;
-    AOK) shift && o_status AOK ${@} ;;
-    NOK) shift && o_status NOK ${@} ;;
-    *) o_info ${@}
+    box) shift && log::box ${@} ;;
+    error) shift && log::error ${@} ;;
+    skip) shift && log::action skip ${@} ;;
+    status) shift && log::status ${@} ;;
+    OK) shift && log::status OK "${@}" ;;
+    AOK) shift && log::status AOK ${@} ;;
+    NOK) shift && log::status NOK ${@} ;;
+    *) log::info ${@}
   esac
 }
 
-function log::() {
-  o_o $@
-}
-
-#
-# Sometimes _ looks cleaner, I'll try both for a bit to see witch I like
-#
-
-function _() {
-  o_o $@
-}
-
-function trim() {
+function log::trim() {
   width=$1
   (( ${#2} > $width )) && printf "${2:0:$((width-3))}..." || printf $2
 }
 
-function o_box() {
+function log::box() {
   cols=`tput cols`
   left=$((cols / 2))
   right=$((cols - left))
@@ -47,7 +32,7 @@ function o_box() {
 #
 # Report the status of a thing
 #
-function o_status() {
+function log::status() {
   status=$1
   thing=$2
   message=$3
@@ -56,22 +41,22 @@ function o_status() {
     "$status" "$message"
 }
 
-function o_info() {
+function log::info() {
   printf "\e[36m$*\e[0m\n"
 }
 
-function o_trace() {
+function log::trace() {
   [[ "$TRACEME" == "y" ]] && printf "\e[38;5;238m$*\e[0m\n"
   return 0
 }
 
-function o_error() {
+function log::error() {
   printf "\e[33m$*\e[0m\n"
 }
 
 # Error and exit
-function o_x() {
-  o_error $@
+function log::x() {
+  log::error $@
   caller
   exit 1
 }
@@ -79,26 +64,26 @@ function o_x() {
 #
 # Report that an action has taken place on a thing
 #
-function o_action() {
+function log::action() {
   action=$1
   thing=$2
-  message=${*:3}
+  message=${*:-3}
   printf "\e[37m${action} \e[1m%-15s\e[0;37m %s\e[0m\n" "$thing" "$message"
 }
 
-function bold() {
+function log::bold() {
   printf "\e[1m$*\e[0m"
 }
 
-function dim() {
+function log::dim() {
   printf "\e[2m$*\e[0m"
 }
 
-function invert() {
+function log::invert() {
   printf "\e[7m$*\e[0m"
 }
 
-function o_palette() {
+function log::palette() {
   printf "\e[39m%10s\e[0m" default
   printf "\e[30m%10s\e[0m" black
   printf "\e[90m%10s\e[0m" "d grey"
