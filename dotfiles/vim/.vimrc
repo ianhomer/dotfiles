@@ -298,6 +298,7 @@ endif
 if knobs#could("polyglot")
   let g:polyglot_disabled = ['markdown']
   Plug 'sheerun/vim-polyglot'
+  Plug 'aliou/bats.vim'
 endif
 
 " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
