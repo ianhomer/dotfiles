@@ -7,7 +7,7 @@ should-run -m 7 dotme-zsh || exit 0
 
 $(shim) && . ${ME}/i.sh
 
-o_o "Configuring zsh shell"
+log:: "Configuring zsh shell"
 
 ZSH=~/.oh-my-zsh
 

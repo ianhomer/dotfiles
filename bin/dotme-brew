@@ -19,7 +19,7 @@ if [[ "$ADMIN" != "y" ]] ; then
 fi
 
 if ! is-executable brew ; then
-  o_o "installing brew"
+  log:: "installing brew"
   curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install \
     | ruby
 fi
@@ -29,21 +29,21 @@ adminFormula="adoptopenjdk8 adoptopenjdk11 java11 openjdk@11 powershell"
 # Pin formula that need password to upgrade if not in admin mode
 for formula in $adminFormula ; do
   if [[ "$ADMIN" == "y" ]] ; then
-    o_o "unpinning $formula"
-    brew unpin $formula &>/dev/null || o_o "not unpinned $formula"
+    log:: "unpinning $formula"
+    brew unpin $formula &>/dev/null || log:: "not unpinned $formula"
   else
     if brew list $formula &>/dev/null ; then
-      o_o "pinning $formula"
+      log:: "pinning $formula"
       brew pin $formula
     fi
   fi
 done
 
-o_o "updating brew"
+log:: "updating brew"
 # Use latest version of brew
 brew update
 
-o_o "upgrading brew"
+log:: "upgrading brew"
 # Upgrade any already installed formulae
 brew upgrade
 
@@ -51,7 +51,7 @@ cd $DOTFILES_DIR/config/brew
 brew bundle
 
 if [[ "$ADMIN" == "y" ]] ; then
-  o_o "installing admin packages"
+  log:: "installing admin packages"
   cd $SCRIPT_DIR/../config/brew/admin
   brew bundle
 fi

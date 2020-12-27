@@ -13,7 +13,7 @@ set -e
 $(shim) && . ${ME}/i.sh
 i:: time
 
-o_o "profile"
+log:: "profile"
 
 time::start
 time:: "start"

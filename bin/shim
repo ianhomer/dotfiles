@@ -44,7 +44,7 @@ if [[ "$UPDATE" = "y" ]] ; then
   fi
   NEW_SHIM=$(shim -f)
   if [[ "${CURRENT_SHIM}" != "${NEW_SHIM}" ]] ; then
-    o_o "updating local shim"
+    log:: "updating local shim"
     cat <<EOF > $LOCAL_SHIM
 $NEW_SHIM
 EOF

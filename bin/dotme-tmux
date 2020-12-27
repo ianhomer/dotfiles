@@ -14,7 +14,7 @@ fi
 
 git -C ~/.tmux/plugins/tpm pull
 
-o_o "Updating tmux plugins"
+log:: "Updating tmux plugins"
 ~/.tmux/plugins/tpm/scripts/update_plugin_prompt_handler.sh all
 
 should-run -fu $0
