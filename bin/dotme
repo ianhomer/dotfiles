@@ -33,9 +33,9 @@ backup() {
     [ $DRY -eq 0 ] && mv $HOME/$file{,.bak}
   elif [ $VERBOSE -eq 1 ] ; then
     if [ ! -f $HOME/$file ] ; then
-      o::o "... not backing up $HOME/$file since it doesn't exist"
+      log::o "... not backing up $HOME/$file since it doesn't exist"
     else
-      o::o  "... not backing up $HOME/$file since it is already stowed, i.e. a link"
+      log::o  "... not backing up $HOME/$file since it is already stowed, i.e. a link"
     fi
   fi
 }
@@ -108,12 +108,12 @@ command_install() {
   arguments=""
   [ $DRY -eq 1 ] && arguments="$arguments -d"
   $_DIR/dotme $arguments inner
-  o::o "dotfiles installed and $(bold AOK)"
+  log:: "dotfiles installed and $(log::bold AOK)"
 }
 
 command_initialise() {
-  [[ -z "$DOTME_CONFIG" ]] && o::error "shim should have set DOTME_CONFIG"
-  [[ ! -d "$DOTME_CONFIG" ]] && o::error "shim should have created $DOTME_CONFIG"
+  [[ -z "$DOTME_CONFIG" ]] && log::error "shim should have set DOTME_CONFIG"
+  [[ ! -d "$DOTME_CONFIG" ]] && log::error "shim should have created $DOTME_CONFIG"
   return 0
 }
 
@@ -125,7 +125,7 @@ command_inner() {
   command_initialise
   command_packages
   if ! command -v stow &> /dev/null ; then
-    o::x "stow is needed, but not found"
+    log::exit "stow is needed, but not found"
   fi
   dotme-stow -d $DOTFILES_DOTFILES
   [ $DRY -eq 0 ] && dotme-git
@@ -174,7 +174,7 @@ command_update() {
 
 # Housekeeping and keeping things clean.
 command_clean() {
-  o::o "cleaning"
+  log:: "cleaning"
   is-macos && clean-brew
   return 0
 }
@@ -182,9 +182,9 @@ command_clean() {
 # Unistall dotfiles. Note that this does not (at this time), unstill brew
 # packages.
 command_uninstall() {
-  o::o "uninstalling dotfiles ..."
+  log::o "uninstalling dotfiles ..."
   command_unstow
-  o::o "... uninstalled"
+  log::o "... uninstalled"
 }
 
 # Stow dotfiles.
