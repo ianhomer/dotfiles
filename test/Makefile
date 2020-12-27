@@ -1,2 +1,2 @@
 test:
-	bats --tap fixtures/
+	bats fixtures/
