@@ -28,6 +28,7 @@ while getopts "fho:u" o; do case "$o" in
   h) help && exit 0 ;;
   o) OS=$OPTARG ;;
   u) UPDATE=y ;;
+  *) exit 1 ;;
 esac done
 shift $((OPTIND-1))
 
