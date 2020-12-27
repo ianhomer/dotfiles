@@ -7,7 +7,7 @@ load test_helper
   assert_output 'Please $(shim) before sourcing i.sh'
 }
 
-@test "ish :" {
+@test "ish : should be able to load OK" {
   $(shim)
   . ../i.sh
   i:: log

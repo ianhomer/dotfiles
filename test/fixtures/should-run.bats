@@ -2,16 +2,16 @@
 
 load test_helper
 
-@test "should-run : in error if no script provided" {
+@test "should-run : should be in error if no script provided" {
   run should-run
   assert_equal $status 3
 }
 
-@test "should-run : if never called before" {
+@test "should-run : should run if not called before" {
   should-run mock-script-one-off
 }
 
-@test "should-run : not if called before" {
+@test "should-run : should not run if called before" {
   should-run -c mock-script
   run should-run mock-script
   assert_equal $status 0
