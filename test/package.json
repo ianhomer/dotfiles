@@ -28,7 +28,7 @@
     "prettier": "npx prettier --check .",
     "prettier:fix": "npx prettier --write .",
     "start:ts": "ts-node scratch.ts",
-    "test": "bats fixtures",
+    "test": "bats -T fixtures",
     "update": "npx npm-check-updates -u",
     "update:package-lock": "npm install --package-lock-only"
   },

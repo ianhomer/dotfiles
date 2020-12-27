@@ -2,11 +2,11 @@
 
 load test_helper
 
-@test "shim" {
+@test "shim : " {
   run shim
   assert_equal ${#lines[@]} 9
 }
 
-@test "update shim" {
+@test "shim : update" {
   shim -u
 }
