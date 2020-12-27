@@ -1,2 +1,2 @@
 test:
-	bats fixtures/
+	PATH="../bin:${PATH}" bats fixtures/
