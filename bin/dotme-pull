@@ -4,23 +4,24 @@
 # Pull latest dotfiles
 #
 
-should-run $0 || exit 0
+set -e
 
-$(shim)
-. ${DOTFILES_BIN}/functions/log.sh
+should-run -m 1h $0 || exit 0
+
+$(shim) && . ${ME}/i.sh
 
 if git config pull.rebase > /dev/null ; then
   cd ${DOTFILES_DIR}
   if [[ -d .git ]]; then
-    printf "\e[36mpulling latest version of dotfiles\e[0m\n"
+    log:: "pulling latest version of dotfiles"
     printf "\e[35m"
     git pull
     printf "\e[0m"
   else
-    _ ".dotfiles is not a git directory, not updating"
+    log:: ".dotfiles is not a git directory, not updating"
   fi
 else
-  _ "Skipping pull of latest dotfiles"
+  log:: "skipping pull of latest dotfiles"
 fi
 
 should-run -fu $0

@@ -17,8 +17,7 @@ set -e
 _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 PATH=${_DIR}:${PATH}
 
-$(shim)
-. ${DOTFILES_BIN}/functions/log.sh
+$(shim) && . ${ME}/i.sh
 DOTFILES_DOTFILES="${DOTFILES_DIR}/dotfiles"
 
 VERBOSE=0
@@ -34,9 +33,9 @@ backup() {
     [ $DRY -eq 0 ] && mv $HOME/$file{,.bak}
   elif [ $VERBOSE -eq 1 ] ; then
     if [ ! -f $HOME/$file ] ; then
-      o_o "... not backing up $HOME/$file since it doesn't exist"
+      log::o "... not backing up $HOME/$file since it doesn't exist"
     else
-      o_o  "... not backing up $HOME/$file since it is already stowed, i.e. a link"
+      log::o  "... not backing up $HOME/$file since it is already stowed, i.e. a link"
     fi
   fi
 }
@@ -100,8 +99,8 @@ command_help() {
 # Main entry point for installing dotfiles, and more, for a system.
 #
 command_install() {
-  o_o "installing dotfiles"
-  [ $VERBOSE -eq 1 ] && o_o "... DOTFILES_DIR = ${DOTFILES_DIR}"
+  log:: "installing dotfiles"
+  [ $VERBOSE -eq 1 ] && log:: "... DOTFILES_DIR = ${DOTFILES_DIR}"
   [ $DRY -eq 0 ] && dotme-pull
   [ $DRY -eq 0 ] && dotme-shim
   # Call inner part of install as command onto a new execution of dotme so that
@@ -109,12 +108,12 @@ command_install() {
   arguments=""
   [ $DRY -eq 1 ] && arguments="$arguments -d"
   $_DIR/dotme $arguments inner
-  o_o "dotfiles installed and $(bold AOK)"
+  log:: "dotfiles installed and $(log::bold AOK)"
 }
 
 command_initialise() {
-  [[ -z "$DOTME_CONFIG" ]] && o_x "shim should have set DOTME_CONFIG"
-  [[ ! -d "$DOTME_CONFIG" ]] && o_x "shim should have created $DOTME_CONFIG"
+  [[ -z "$DOTME_CONFIG" ]] && log::error "shim should have set DOTME_CONFIG"
+  [[ ! -d "$DOTME_CONFIG" ]] && log::error "shim should have created $DOTME_CONFIG"
   return 0
 }
 
@@ -126,7 +125,7 @@ command_inner() {
   command_initialise
   command_packages
   if ! command -v stow &> /dev/null ; then
-    o_x "stow is needed, but not found"
+    log::exit "stow is needed, but not found"
   fi
   dotme-stow -d $DOTFILES_DOTFILES
   [ $DRY -eq 0 ] && dotme-git
@@ -175,7 +174,7 @@ command_update() {
 
 # Housekeeping and keeping things clean.
 command_clean() {
-  o_o "cleaning"
+  log:: "cleaning"
   is-macos && clean-brew
   return 0
 }
@@ -183,9 +182,9 @@ command_clean() {
 # Unistall dotfiles. Note that this does not (at this time), unstill brew
 # packages.
 command_uninstall() {
-  o_o "uninstalling dotfiles ..."
+  log::o "uninstalling dotfiles ..."
   command_unstow
-  o_o "... uninstalled"
+  log::o "... uninstalled"
 }
 
 # Stow dotfiles.
@@ -198,9 +197,9 @@ command_verify() {
   dotme-verify
 }
 
-# Unstow dotfiles.
+# Unstow dotfiles
 command_unstow() {
-  o_o "... unstowing files"
+  log:: "... unstowing files"
   cd $DOTFILES_DOTFILES
   for DIR in `ls -d */` ; do
     cd $DOTFILES_DOTFILES/$DIR
@@ -220,7 +219,7 @@ command_set() {
       echo $envFile
       cat $envFile
     else
-      o_o "... $envFile not yet created"
+      log:: "... $envFile not yet created"
     fi
     return
   fi
@@ -232,14 +231,14 @@ command_set() {
         echo $envFile
         grep "$name=" $envFile
       else
-        o_o "... $name not set"
+        log:: "... $name not set"
       fi
     else
-      o_o "... $envFile not yet created"
+      log:: "... $envFile not yet created"
     fi
     return
   fi
-  o_o "...setting dotme env - $name = $value"
+  log:: "...setting dotme env - $name = $value"
   touch $envFile
   if grep -q "$name=" $envFile ; then
     sed -i.bak "s/$name=.*/$name=$value/g" $envFile

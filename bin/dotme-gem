@@ -6,10 +6,10 @@
 
 should-run $0 || exit 0
 
-$(shim)
-. ${DOTFILES_BIN}/functions/log.sh
+$(shim) && . ${ME}/i.sh
+i:: log
 
-o_o "installing gem packages"
+log:: "installing gem packages"
 
 gem install neovim
 

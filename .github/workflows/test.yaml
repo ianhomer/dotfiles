@@ -3,7 +3,17 @@ name: test
 on: [push, workflow_dispatch]
 
 jobs:
-  dotme:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name:
+        working-directory: ./test
+        run: |
+          npm install
+          npm test
+
+  test-dotme:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -18,16 +28,16 @@ jobs:
           . $HOME/.bashrc
           ./bin/dotme verify
 
-  vim:
+  test-vim:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         neovim: [false, true]
         version: [stable]
-        include:
-          - neovim: true
-            version: nightly
+        #include:
+        #  - neovim: true
+        #    version: nightly
 
       fail-fast: false
 
@@ -37,7 +47,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: junegunn/vader.vim
-          path: tmp/vim/plugins/vader.vim
+          path: ./test/vim/tmp/vim/plugins/vader.vim
       - uses: rhysd/action-setup-vim@v1
         id: vim
         with:
@@ -46,6 +56,7 @@ jobs:
       - name: test
         env:
           VIM_COMMAND: ${{ steps.vim.outputs.executable }}
+        working-directory: ./test/vim
         run: |
           echo $VIM_COMMAND
           make test
