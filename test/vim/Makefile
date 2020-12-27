@@ -7,6 +7,6 @@ $(vader):
 dependencies: $(vader)
 
 testdotfilesvim:
-	./test/vim/test-dotfiles-vim.sh
+	./test-dotfiles-vim.sh
 
 test: dependencies testdotfilesvim
