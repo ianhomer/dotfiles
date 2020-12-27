@@ -7,8 +7,6 @@
 }
 
 @test "update shim" {
-  run shim -u
-  echo "output : $output"
-  [ ${#lines[@]} -eq 0 ]
+  shim -u
 }
 
