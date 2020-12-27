@@ -24,8 +24,8 @@ function log::box() {
   cols=`tput cols`
   left=$((cols / 2))
   right=$((cols - left))
-  one=`trim $left "$1"`
-  two=`trim $right "$2"`
+  one=`log::trim $left "$1"`
+  two=`log::trim $right "$2"`
   printf "\e[0;35m%-${left}s\e[36m%${right}s\e[0m\n" "$one" "$two"
 }
 

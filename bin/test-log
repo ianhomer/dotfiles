@@ -4,20 +4,19 @@
 # Test log functions
 #
 
-_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-. ${_DIR}/functions/log.sh
+$(shim) && . ${ME}/i.sh
 
-_ message
+log:: message
 log:: "a log message"
 log:: another log message
-_ "info with multiple words"
-_ OK status
-_ error with $(bold message)
-_ skip this that
+log:: "info with multiple words"
+log:: OK status
+log:: error with $(log::bold message)
+log:: skip this that
 log:: box this that
 log:: box "a long message, a long message, a long message" that
 log::box this "a long message, a long message, a long message"
-trim 15 "a long message, a long message"
-trim 15 "short"
+log::trim 15 "a long message, a long message"
+log::trim 15 "short"
 
 # o_palette
