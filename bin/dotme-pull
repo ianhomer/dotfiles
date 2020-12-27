@@ -13,15 +13,15 @@ $(shim) && . ${ME}/i.sh
 if git config pull.rebase > /dev/null ; then
   cd ${DOTFILES_DIR}
   if [[ -d .git ]]; then
-    _ "pulling latest version of dotfiles"
+    log:: "pulling latest version of dotfiles"
     printf "\e[35m"
     git pull
     printf "\e[0m"
   else
-    _ ".dotfiles is not a git directory, not updating"
+    log:: ".dotfiles is not a git directory, not updating"
   fi
 else
-  _ "skipping pull of latest dotfiles"
+  log:: "skipping pull of latest dotfiles"
 fi
 
 should-run -fu $0

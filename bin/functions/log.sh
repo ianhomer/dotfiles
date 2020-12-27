@@ -55,7 +55,7 @@ function log::error() {
 }
 
 # Error and exit
-function log::x() {
+function log::exit() {
   log::error $@
   caller
   exit 1

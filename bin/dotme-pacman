@@ -9,7 +9,7 @@ $(shim) && . ${ME}/i.sh
 should-run -m 7 dotme-pacman ${ME}/config/pacman || exit 0
 
 if ! command -v sudo &> /dev/null ; then
-  o_x "sudo is needed, but not found"
+  log::exit "sudo is needed, but not found"
 fi
 
 log:: "updating brew"

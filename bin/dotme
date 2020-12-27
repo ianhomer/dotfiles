@@ -112,8 +112,8 @@ command_install() {
 }
 
 command_initialise() {
-  [[ -z "$DOTME_CONFIG" ]] && o_x "shim should have set DOTME_CONFIG"
-  [[ ! -d "$DOTME_CONFIG" ]] && o_x "shim should have created $DOTME_CONFIG"
+  [[ -z "$DOTME_CONFIG" ]] && o::error "shim should have set DOTME_CONFIG"
+  [[ ! -d "$DOTME_CONFIG" ]] && o::error "shim should have created $DOTME_CONFIG"
   return 0
 }
 
