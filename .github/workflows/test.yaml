@@ -18,6 +18,16 @@ jobs:
           . $HOME/.bashrc
           ./bin/dotme verify
 
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name:
+        working-directory: ./test
+        run: |
+          sudo apt-get install bats-core
+          make test
+
   vim:
     runs-on: ubuntu-latest
 
