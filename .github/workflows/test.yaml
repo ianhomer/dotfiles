@@ -14,7 +14,6 @@ jobs:
       - name:
         working-directory: ./test
         run: |
-          sudo apt-get install bats-core
           make test
 
   test-dotme:
