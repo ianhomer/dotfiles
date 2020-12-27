@@ -3,7 +3,17 @@ name: test
 on: [push, workflow_dispatch]
 
 jobs:
-  dotme:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name:
+        working-directory: ./test
+        run: |
+          sudo apt-get install bats-core
+          make test
+
+  test-dotme:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -18,17 +28,7 @@ jobs:
           . $HOME/.bashrc
           ./bin/dotme verify
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name:
-        working-directory: ./test
-        run: |
-          sudo apt-get install bats-core
-          make test
-
-  vim:
+  test-vim:
     runs-on: ubuntu-latest
 
     strategy:
