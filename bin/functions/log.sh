@@ -58,7 +58,7 @@ function log::error() {
 function log::exit() {
   log::error $@
   caller
-  exit 1
+  exit 3
 }
 
 #

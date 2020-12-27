@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-@test "first test" {
+@test "ish" {
   [ "1" = "1" ]
 }
 

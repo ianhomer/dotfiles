@@ -138,7 +138,7 @@ fi
 [[ -n "$noop" ]] && exit 0
 
 if [[ -z "$scriptName" ]] ; then
-  log::exit Please pass script name "in" as argument to $(bold ${0##*/})
+  log::exit Please pass script name "in" as argument to $(log::bold ${0##*/})
 fi
 
 [[ -n "$verbose" ]] && echo "Script : $scriptName"

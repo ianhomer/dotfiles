@@ -1,2 +1,2 @@
 test:
-	bats --tap suite.bats
+	bats --tap fixtures/
