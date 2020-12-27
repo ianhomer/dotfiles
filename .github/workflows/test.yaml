@@ -6,13 +6,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: setup bats
-        uses: mig4/setup-bats@v1
       - uses: actions/checkout@v1
       - name:
         working-directory: ./test
         run: |
-          make test
+          npm install
+          mpm test
 
   test-dotme:
     runs-on: ubuntu-latest

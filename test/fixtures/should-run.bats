@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-load ../setup
+load ../test_helper
 
 @test "should-run in error if no script provided" {
   run should-run
