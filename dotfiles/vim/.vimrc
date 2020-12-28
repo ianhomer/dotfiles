@@ -347,6 +347,7 @@ if knobs#("lsp")
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
   Plug 'nvim-lua/diagnostic-nvim'
+  Plug 'aca/completion-tabnine', { 'do': './install.sh' }
 endif
 
 " CoC completion
@@ -368,6 +369,15 @@ if knobs#("lsp")
 
   " Set completeopt to have a better completion experience
   set completeopt=menuone,noinsert,noselect
+
+  let g:completion_chain_complete_list = {
+    \ 'default': [
+    \    {'complete_items': ['lsp', 'snippet', 'tabnine' ]},
+    \    {'mode': '<c-p>'},
+    \    {'mode': '<c-n>'}
+    \]
+  \}
+  let g:completion_tabnine_priority = 0
 endif
 
 if !Knob("light")

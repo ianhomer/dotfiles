@@ -26,7 +26,7 @@ function! tabcomplete#auto_complete()
   let is_path = match(substr, '\(<\)\@<!\/') != -1
   if (!has_period && !is_path)
     return "\<C-X>\<C-P>"
-  elseif ( is_path )
+  elseif (!knobs#("lsp") && is_path)
     " Use CompletePath from dotfiles fzf.vim
     return fzf#CompletePath()
   else
