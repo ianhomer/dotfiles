@@ -28,3 +28,6 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
+
+set omnifunc=v:lua.vim.lsp.omnifunc
+
