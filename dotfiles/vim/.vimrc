@@ -348,7 +348,6 @@ if knobs#("lsp")
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-lua/completion-nvim'
   Plug 'nvim-lua/diagnostic-nvim'
-  Plug 'aca/completion-tabnine', { 'do': './install.sh' }
 endif
 
 " CoC completion
@@ -373,12 +372,11 @@ if knobs#("lsp")
 
   let g:completion_chain_complete_list = {
     \ 'default': [
-    \    {'complete_items': ['lsp']},
+    \    {'complete_items': ['lsp', 'snippet' ]},
     \    {'mode': '<c-p>'},
     \    {'mode': '<c-n>'}
     \]
   \}
-  "\    {'complete_items': ['lsp', 'snippet', 'tabnine' ]},
   let g:completion_tabnine_priority = 0
   imap <c-p> <Plug>(completion_trigger)
   set omnifunc=v:lua.vim.lsp.omnifunc
@@ -649,10 +647,6 @@ endif
 if KnobAt(1)
   set backspace=indent,eol,start
 endif
-
-" vnoremap <s-tab> <<
-" nnoremap <tab> >>
-" vnoremap <tab> >>
 
 " source ~/.config/vim/netrw.vim
 
