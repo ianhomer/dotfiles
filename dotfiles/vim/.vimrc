@@ -29,18 +29,18 @@ let g:knobs_levels = {
   \   "endwise":5,
   \   "eunuch":5,
   \   "fugitive":5,
-  \   "fzf":5,
+  \   "fzf":4,
   \   "gitgutter":5,
   \   "gruvbox":5,
   \   "gruvbox8":1,
   \   "goyo":5,
   \   "gutentags":6,
-  \   "nerdtree":5,
+  \   "nerdtree":4,
   \   "modes":1,
   \   "nnn":6,
   \   "polyglot":5,
   \   "spelling":5,
-  \   "startify":5,
+  \   "startify":4,
   \   "startuptime":5,
   \   "surround":5,
   \   "tabcomplete":5,
@@ -68,7 +68,7 @@ let g:knobs_layers_map = {
   \      "markdown.conceal.partial":1
   \    },
   \    "nvim-0.5":{
-  \      "lsp":0
+  \      "lsp":1
   \    }
   \  }
 
