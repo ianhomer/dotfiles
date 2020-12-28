@@ -23,7 +23,7 @@ let g:knobs_levels = {
   \   "ale":5,
   \   "apathy":5,
   \   "airline":5,
-  \   "autosave":4,
+  \   "autosave":5,
   \   "conflict-marker":7,
   \   "dispatch":5,
   \   "endwise":5,
@@ -373,13 +373,15 @@ if knobs#("lsp")
 
   let g:completion_chain_complete_list = {
     \ 'default': [
-    \    {'complete_items': ['lsp', 'snippet', 'tabnine' ]},
+    \    {'complete_items': ['lsp']},
     \    {'mode': '<c-p>'},
     \    {'mode': '<c-n>'}
     \]
   \}
+  "\    {'complete_items': ['lsp', 'snippet', 'tabnine' ]},
   let g:completion_tabnine_priority = 0
   imap <c-p> <Plug>(completion_trigger)
+  set omnifunc=v:lua.vim.lsp.omnifunc
 endif
 
 if !Knob("light")

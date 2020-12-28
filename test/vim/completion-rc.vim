@@ -8,6 +8,13 @@
 " check which scripts are loaded with :scriptnames
 "
 " verbose set omnifunc?
+"
+" Check active clients
+"
+" :lua print(vim.inspect(vim.lsp.buf_get_clients()))
+"
+" Is typescript required globally? <- not ideal if it is needed
+"    npm install -g typescript
 
 set runtimepath^=~/.vim-slim
 set runtimepath-=~/.config/nvim/after
@@ -19,9 +26,9 @@ call plug#begin('~/.config/nvim/plugged')
 call plug#end()
 
 lua require'lspconfig'.tsserver.setup{
-            \   cmd = { "typescript-language-server", "--stdio","--log-level","4" },
             \   on_attach=require'completion'.on_attach
             \ }
+            "\   cmd = { "typescript-language-server", "--stdio" },
 lua require'lspconfig'.vimls.setup{on_attach=require'completion'.on_attach}
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
@@ -42,5 +49,3 @@ nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
 set omnifunc=v:lua.vim.lsp.omnifunc
-
-
