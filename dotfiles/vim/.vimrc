@@ -68,7 +68,7 @@ let g:knobs_layers_map = {
   \      "markdown.conceal.partial":1
   \    },
   \    "nvim-0.5":{
-  \      "lsp":1
+  \      "lsp":0
   \    }
   \  }
 

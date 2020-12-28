@@ -12,7 +12,10 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'nvim-lua/completion-nvim'
 call plug#end()
 
-lua require'lspconfig'.tsserver.setup{on_attach=require'completion'.on_attach}
+lua require'lspconfig'.tsserver.setup{
+            \   cmd = { "typescript-language-server", "--stdio","--log-level","4" },
+            \   on_attach=require'completion'.on_attach
+            \ }
 lua require'lspconfig'.vimls.setup{on_attach=require'completion'.on_attach}
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
