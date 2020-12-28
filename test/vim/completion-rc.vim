@@ -3,9 +3,13 @@
 "
 " nvim -u test/vim/completion-rc.vim test/vim/completion-rc.vim
 " nvim -u test/vim/completion-rc.vim test/scratch.ts
+"
+" If completion not showing up with you type in insert mode then
+" check which scripts are loaded with :scriptnames
 
 set runtimepath^=~/.vim-slim
 set runtimepath-=~/.config/nvim/after
+set runtimepath-=~/.config/nvim
 let &packpath = &runtimepath
 call plug#begin('~/.config/nvim/plugged')
     Plug 'neovim/nvim-lspconfig'
