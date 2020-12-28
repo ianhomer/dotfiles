@@ -34,6 +34,7 @@ let g:knobs_levels = {
   \   "gruvbox":5,
   \   "gruvbox8":1,
   \   "goyo":5,
+  \   "gutentags":6,
   \   "nerdtree":5,
   \   "modes":1,
   \   "nnn":6,
@@ -361,11 +362,11 @@ if knobs#("lsp")
   lua require'lspconfig'.bashls.setup{}
   lua require'lspconfig'.jsonls.setup{}
   lua require'lspconfig'.pyls.setup{}
-  lua require'lspconfig'.tsserver.setup{}
-  lua require'lspconfig'.vimls.setup{}
+  lua require'lspconfig'.tsserver.setup{on_attach=require'completion'.on_attach}
+  lua require'lspconfig'.vimls.setup{on_attach=require'completion'.on_attach}
   lua require'lspconfig'.yamlls.setup{}
-
-  autocmd BufEnter * lua require'completion'.on_attach()
+  
+  "autocmd BufEnter * lua require'completion'.on_attach()
 
   " Set completeopt to have a better completion experience
   set completeopt=menuone,noinsert,noselect
@@ -378,6 +379,7 @@ if knobs#("lsp")
     \]
   \}
   let g:completion_tabnine_priority = 0
+  imap <c-p> <Plug>(completion_trigger)
 endif
 
 if !Knob("light")
