@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+#
+# Configure dotme test environment
+#
+
+set -e
+
+should-run -m 7 $0 || exit 0
+
+cd ${ME}/test
+npm install
+
+should-run -fu $0

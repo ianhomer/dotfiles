@@ -31,7 +31,7 @@ function! tabcomplete#auto_complete()
     return fzf#CompletePath()
   else
     " Otherwise we hand to default insert completion.
-    return "\<C-N>"
+    return "\<C-X>\<C-O>"
   endif
 endfunction
 
