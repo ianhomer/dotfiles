@@ -25,7 +25,7 @@ function! tabcomplete#auto_complete()
     " Use CompletePath from dotfiles fzf.vim
     return fzf#CompletePath()
   else
-    return "\<C-X>\<C-O>"
+    return "\<C-N>"
   endif
 endfunction
 
