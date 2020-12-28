@@ -9,7 +9,6 @@ set runtimepath-=~/.config/nvim/after
 let &packpath = &runtimepath
 call plug#begin('~/.config/nvim/plugged')
     Plug 'neovim/nvim-lspconfig'
-    Plug 'neovim/nvim-lsp'
     Plug 'nvim-lua/completion-nvim'
 call plug#end()
 
