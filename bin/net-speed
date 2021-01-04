@@ -12,7 +12,7 @@ while getopts "cdl" o; do case "$o" in
 esac done
 
 if [[ "y" == "$LOGOUT" ]] ; then
-  /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep " SSID" >> $logFile
+  /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep -e " SSID" -e " channel" >> $logFile
 
   /usr/local/bin/speedtest-cli --csv --csv-delimiter '|' >> $logFile
 elif [[ "y" == "$CRON" ]] ; then
