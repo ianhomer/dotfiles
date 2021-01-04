@@ -9,7 +9,7 @@ while getopts "cdly" o; do case "$o" in
   c) CRON=y ;;
   d) DELETE_CRON=y ;;
   l) LOG=y ;;
-  y) LOG=y ;;
+  y) SPEED=y ;;
 esac done
 
 if [[ "y" == "$LOG" ]] ; then
