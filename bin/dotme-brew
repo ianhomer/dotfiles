@@ -32,12 +32,10 @@ for formula in $adminFormula ; do
     log:: "unpinning $formula"
     brew unpin $formula &>/dev/null || log:: "not unpinned $formula"
   else
-    set +e
-    if ! brew list $formula &>/dev/null ; then
+    if brew list $formula &>/dev/null ; then
       log:: "pinning $formula"
       brew pin $formula
     fi
-    set -e
   fi
 done
 
