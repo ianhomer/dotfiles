@@ -24,6 +24,7 @@ let g:knobs_levels = {
   \   "apathy":5,
   \   "airline":5,
   \   "autosave":5,
+  \   "chadtree":5,
   \   "conflict-marker":7,
   \   "dispatch":5,
   \   "endwise":5,
@@ -48,7 +49,7 @@ let g:knobs_levels = {
   \   "thingity":5,
   \   "unimpaired":5,
   \   "update-spelling":5,
-  \   "which-key":7,
+  \   "which-key":5,
   \   "window-cleaner":5,
   \   "writegood":8
   \ }
@@ -209,6 +210,15 @@ endif
 
 IfKnob 'gruvbox'  Plug 'morhetz/gruvbox'
 IfKnob 'gruvbox8' Plug 'lifepillar/vim-gruvbox8'
+
+"
+" Trying chadtree, if better than nerdtree then
+" nerdtree will be removed
+"
+if knobs#could("chadtree")
+  Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+  source ~/.config/vim/chadtree.vim
+endif
 
 if knobs#could("nerdtree")
   " NERDTree - file explore

@@ -31,7 +31,7 @@ function! NERDTreeSwitchAndFind()
 endfunction
 
 nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
-nnoremap <silent> <leader>m :call NERDTreeSwitchAndFind()<CR>
+"nnoremap <silent> <leader>m :call NERDTreeSwitchAndFind()<CR>
 
 " https://github.com/preservim/nerdtree/wiki
 " If more than one window and previous buffer was NERDTree, go back to it.
