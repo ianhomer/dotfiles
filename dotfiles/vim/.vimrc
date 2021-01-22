@@ -49,7 +49,7 @@ let g:knobs_levels = {
   \   "thingity":5,
   \   "unimpaired":5,
   \   "update-spelling":5,
-  \   "which-key":5,
+  \   "which-key":7,
   \   "window-cleaner":5,
   \   "writegood":8
   \ }
