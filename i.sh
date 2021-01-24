@@ -1,8 +1,27 @@
 #!/bin/bash
 
 #
-# Module loader
+# A module loader used by these dotfiles to import shell functions to be used
+# by a script.
 #
+# The typical idiom for using this module loader is in scripts when run alongside
+# the shim script giving us:
+#
+#   $(shim) && . ${ME}/i.sh
+#
+# which shims in the necessary environment variables and loads the module
+# loader, along with the log module loaded by default.
+#
+# After this line is executed the log module is ready to use, e.g
+#
+#   log::trace "My trace message"
+#
+# and other modules can be loaded with, e.g loading the time module with
+#
+#   i:: time
+#
+# A module is simply a collection of shell functions which are prefixed with the
+# module name.
 
 if [[ -z "${SHIM_LOADED}" ]] ; then
   echo "Please \$(shim) before sourcing i.sh"
