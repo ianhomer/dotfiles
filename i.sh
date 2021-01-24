@@ -9,8 +9,8 @@
 #
 #   $(shim) && . ${ME}/i.sh
 #
-# which shims in the necessary environment variables and loads the module
-# loader, along with the log module loaded by default.
+# which shims in the necessary environment variables and sets up the module
+# loader, along with importing the log module by default.
 #
 # After this line is executed the log module is ready to use, e.g
 #
