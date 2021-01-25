@@ -26,8 +26,8 @@ npm list --global --depth=0
 # Install missing packages
 
 cat $NODE_GLOBAL | grep -v '#' | grep '@' |
-  grep -F -v "`npm list --global --depth=0 | grep "@" |
-  sed 's/.* \([^@]*\).*/\1/'`" |
+  grep -F -v "`npm list --global --depth=0 2>/dev/null | grep "@" |
+  sed 's/.* \(.*\)@[^@]*/\1/'`" |
   xargs npm install --global
 
 npm -g outdated
