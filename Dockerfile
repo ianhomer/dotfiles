@@ -15,5 +15,6 @@ RUN mkdir /home/me/.dotfiles/
 COPY . /home/me/.dotfiles
 COPY ./dotfiles/.boot.bashrc.sh /home/me/.boot.bashrc.sh
 USER me
+# Only include shim and stow dotfile modules when dotme runs
 RUN /home/me/.dotfiles/bin/dotme -i "shim|stow"
 WORKDIR /home/me
