@@ -76,10 +76,8 @@ if status --is-interactive
   # execute `set | grep fish_color` to see colors in use in shell
   #
   if [ "$BG_MODE" = "light" ]
-    echo "Light Mode"
     set fish_color_command 000000
   else
-    echo "Dark Mode"
     set theme_color_scheme dark
     # Command in white for clarity on dark background
     set fish_color_command ffffff

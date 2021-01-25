@@ -27,6 +27,8 @@ if not test -L $dockerCompletions
   ln -s /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion $dockerCompletions
 end
 
+set -U fish_greeting ""
+
 should-run -fu dotme-fish
 
 
