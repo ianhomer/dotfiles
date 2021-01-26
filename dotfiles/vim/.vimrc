@@ -240,7 +240,6 @@ endif
 IfKnob 'nerdtree' Plug 'ryanoasis/vim-devicons'
 IfKnob 'minimap' Plug 'wfxr/minimap.vim'
 let g:minimap_auto_start = 1
-let g:minimap_width = 6
 
 " Vinegar - better file expore than NERD
 if KnobAt(9) | Plug 'tpope/vim-vinegar' | endif
