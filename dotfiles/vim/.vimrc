@@ -37,6 +37,7 @@ let g:knobs_levels = {
   \   "goyo":5,
   \   "gutentags":6,
   \   "nerdtree":4,
+  \   "minimap": 5,
   \   "modes":1,
   \   "nnn":6,
   \   "polyglot":5,
@@ -237,6 +238,10 @@ if knobs#could("nnn")
 endif
 
 IfKnob 'nerdtree' Plug 'ryanoasis/vim-devicons'
+IfKnob 'minimap' Plug 'wfxr/minimap.vim'
+let g:minimap_auto_start = 1
+let g:minimap_width = 6
+
 " Vinegar - better file expore than NERD
 if KnobAt(9) | Plug 'tpope/vim-vinegar' | endif
 " ack - Search files
