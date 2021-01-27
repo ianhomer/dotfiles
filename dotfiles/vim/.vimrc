@@ -35,7 +35,7 @@ let g:knobs_levels = {
   \   "gruvbox":5,
   \   "gruvbox8":1,
   \   "goyo":5,
-  \   "gutentags":6,
+  \   "gutentags":5,
   \   "nerdtree":4,
   \   "minimap": 5,
   \   "modes":1,
