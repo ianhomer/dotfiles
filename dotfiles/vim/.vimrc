@@ -98,7 +98,7 @@ set wildmenu
 set cursorline
 " Ignore case of searches
 set ignorecase
-" Highelight dynamically as pattern is typed
+" Highlight dynamically as pattern is typed
 set incsearch
 " Default updatetime is 4000 and too slow
 set updatetime=300
@@ -680,6 +680,8 @@ if KnobAt(3)
   highlight ColorColumn ctermbg=magenta
   call matchadd('ColorColumn', '\%82v', 100)
 endif
+
+highlight ErrorMsg ctermbg=grey guibg=grey
 
 " Open new splits to the right and below
 set splitright
