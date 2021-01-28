@@ -373,6 +373,7 @@ call plug#end()
 
 if knobs#("lsp")
   lua require'lspconfig'.bashls.setup{}
+  lua require'lspconfig'.cssls.setup{}
   lua require'lspconfig'.jsonls.setup{}
   lua require'lspconfig'.pyls.setup{}
   lua require'lspconfig'.tsserver.setup{}
