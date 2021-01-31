@@ -33,11 +33,17 @@ for formula in $adminFormula ; do
     brew unpin $formula &>/dev/null || log:: "not unpinned $formula"
   else
     if brew list $formula &>/dev/null ; then
-      log:: "pinning $formula"
-      brew pin $formula
+      log::trace "$formula installed => should be pinned"
+      if [ $(brew list --pinned $formula | wc -l) == 0 ] ; then
+        log:: "pinning $formula"
+        brew pin $formula
+      fi
+    else
+      log::trace "$formula not installed => not pinning"
     fi
   fi
 done
+exit
 
 log:: "updating brew"
 # Use latest version of brew
