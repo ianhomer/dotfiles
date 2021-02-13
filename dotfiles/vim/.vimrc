@@ -37,6 +37,7 @@ let g:knobs_levels = {
   \   "goyo":5,
   \   "gutentags":5,
   \   "nerdtree":4,
+  \   "lens":8,
   \   "minimap": 5,
   \   "modes":1,
   \   "nnn":6,
@@ -261,6 +262,7 @@ IfKnob 'apathy' Plug 'tpope/vim-apathy'
 IfKnob 'eunuch' Plug 'tpope/vim-eunuch'
 
 IfKnob 'startify' Plug 'mhinz/vim-startify'
+IfKnob 'lens' Plug 'camspiers/lens.vim'
 
 if knobs#could("gutentags")
   Plug 'ludovicchabant/vim-gutentags' 
