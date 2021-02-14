@@ -66,6 +66,13 @@ endfunction
 " Close current window
 "
 function window#cleaner#CloseMe()
+
+  " Close fugitive if open
+  if window#cleaner#CloseFugitive()
+    call window#SwitchToFirstEditableFile()
+    return
+  endif
+
   if &filetype == "startify"
     " On startify window 
     "   => close vi
