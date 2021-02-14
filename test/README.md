@@ -12,6 +12,7 @@ Run image
 
     docker run -it ubuntu:18.04 bash
 
-Install and run with `test/arch/ubuntu/install.sh` than run tests
+Install and run with `test/os/ubuntu/install.sh` than run tests
 
-    make tst
+    cd test/vim
+    make test

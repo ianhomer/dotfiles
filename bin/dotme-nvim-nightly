@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+#
+# Install nightly version of neovim.
+#
+# This is interim until v0.5 released or brew HEAD reliably works. Following
+# guidance on https://github.com/neovim/neovim/releases/tag/nightly
+#
+
+set -e
+
+$(shim) && . ${ME}/i.sh
+
+nightlyInstallation=~/local/nvim/$(date +%Y%m%d)
+if [ ! -d ${nightlyInstallation} ] ; then
+  log:: "installing nightly nvim ${nightlyInstallation}"
+  curl -fLo ~/Downloads/nvim-macos.tar.gz \
+    https://github.com/neovim/neovim/releases/download/nightly/nvim-macos.tar.gz
+
+  mkdir -p ${nightlyInstallation}
+  cd ${nightlyInstallation}
+  tar xzf ~/Downloads/nvim-macos.tar.gz
+
+  [ -L ~/bin/nvim ] && rm ~/bin/nvim
+  ln -s ${nightlyInstallation}/nvim-osx64/bin/nvim ~/bin/nvim
+else
+  log:: "nightly nvim ${nightlyInstallation} already installed"
+fi

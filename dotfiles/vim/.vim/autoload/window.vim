@@ -6,14 +6,27 @@ let g:window_autoloaded = 1
 " Open NERDTree if there is space for it
 function window#NERDTreeFindIfRoom()
   if winwidth('%') > 112
+    let l:current = window#Mark()
     NERDTreeFind
     " Reset size of NERDTree
     normal 31<C-W>
-    " Switch back to last buffer, i.e. the one we want open
-    wincmd p
+    call window#SwitchToMark(l:current)
   endif
 endfunction
 
+function window#Mark()
+  normal mA:
+  return bufnr("%")
+endfunction
+
+function window#SwitchToMark(current)
+  " Switch back to last buffer, i.e. the one we want open
+  let l:window = bufwinnr(a:current)
+  if l:window > 0
+    execute l:window 'wincmd w'
+  endif
+  normal `A
+endfunction
 
 function window#SwitchToFirstEditableFile()
   let l:current = bufnr("%")

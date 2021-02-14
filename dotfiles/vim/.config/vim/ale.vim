@@ -11,6 +11,7 @@ if Knob("writegood")
 endif
 
 let g:ale_linters = {
+  \   'html': ['tidy'],
   \   'javascript': ['eslint'],
   \   'json': ['jsonlint'],
   \   'markdown': markdown_linters,
@@ -21,8 +22,10 @@ let g:ale_linters = {
 
 let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \   'css': ['prettier'],
   \   'javascript': ['eslint', 'prettier'],
   \   'json': ['jq'],
+  \   'scss': ['prettier'],
   \   'typescript': ['eslint', 'prettier']
   \}
 

@@ -19,13 +19,15 @@ printf "\e[36mConfiguring fish shell\e[0m\n"
 # - ~/.dotfiles/bin <- scripts from this dotfiles
 # - ~/bin           <- local overrides
 #
-add-to-universal-path ~/.dotfiles/bin ~/bin ~/.jenv/bin ~/.jenv/shims ~/.rbenv/shims
+add-to-universal-path /usr/local/sbin ~/.dotfiles/bin ~/bin ~/.jenv/bin ~/.jenv/shims ~/.rbenv/shims ~/Library/Python/3.9/bin
 
 # Link in docker completions
 set dockerCompletions ~/.config/fish/completions/docker.fish
 if not test -L $dockerCompletions
   ln -s /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion $dockerCompletions
 end
+
+set -U fish_greeting ""
 
 should-run -fu dotme-fish
 

@@ -1,7 +1,7 @@
 " Replace double spaces with a vertical grey dotted line
 syntax match leadingSpace /\v^\s\zs\s+/ containedIn=ALL contains=indent
 
-if Knob("light")
+if knobs#("light")
   syntax match indent /\v\s\zs\s/ conceal cchar=⋮ contained
   highlight Conceal gui=NONE cterm=NONE guifg=Grey90 ctermfg=249 guibg=NONE
 else

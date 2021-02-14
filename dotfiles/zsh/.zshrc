@@ -114,3 +114,6 @@ export NVM_DIR=~/.nvm
 if command -v brew &> /dev/null ; then
   source $(brew --prefix nvm)/nvm.sh
 fi
+
+fpath+=~/.config/zsh/functions
+autoload br
