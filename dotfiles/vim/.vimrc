@@ -23,23 +23,27 @@ let g:knobs_levels = {
   \   "ale":5,
   \   "apathy":5,
   \   "airline":5,
-  \   "autosave":4,
+  \   "autosave":5,
+  \   "chadtree":5,
   \   "conflict-marker":7,
   \   "dispatch":5,
   \   "endwise":5,
   \   "eunuch":5,
   \   "fugitive":5,
-  \   "fzf":5,
+  \   "fzf":4,
   \   "gitgutter":5,
   \   "gruvbox":5,
   \   "gruvbox8":1,
   \   "goyo":5,
-  \   "nerdtree":5,
+  \   "gutentags":5,
+  \   "nerdtree":4,
+  \   "lens":8,
+  \   "minimap": 5,
   \   "modes":1,
   \   "nnn":6,
   \   "polyglot":5,
   \   "spelling":5,
-  \   "startify":5,
+  \   "startify":4,
   \   "startuptime":5,
   \   "surround":5,
   \   "tabcomplete":5,
@@ -95,7 +99,7 @@ set wildmenu
 set cursorline
 " Ignore case of searches
 set ignorecase
-" Highelight dynamically as pattern is typed
+" Highlight dynamically as pattern is typed
 set incsearch
 " Default updatetime is 4000 and too slow
 set updatetime=300
@@ -209,6 +213,15 @@ endif
 IfKnob 'gruvbox'  Plug 'morhetz/gruvbox'
 IfKnob 'gruvbox8' Plug 'lifepillar/vim-gruvbox8'
 
+"
+" Trying chadtree, if better than nerdtree then
+" nerdtree will be removed
+"
+if knobs#could("chadtree")
+  Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+  source ~/.config/vim/chadtree.vim
+endif
+
 if knobs#could("nerdtree")
   " NERDTree - file explore
   Plug 'preservim/nerdtree'
@@ -226,6 +239,10 @@ if knobs#could("nnn")
 endif
 
 IfKnob 'nerdtree' Plug 'ryanoasis/vim-devicons'
+IfKnob 'minimap' Plug 'wfxr/minimap.vim'
+let g:minimap_auto_start = 1
+let g:minimap_close_filetypes = ['nerdtree','startify']
+
 " Vinegar - better file expore than NERD
 if KnobAt(9) | Plug 'tpope/vim-vinegar' | endif
 " ack - Search files
@@ -245,9 +262,10 @@ IfKnob 'apathy' Plug 'tpope/vim-apathy'
 IfKnob 'eunuch' Plug 'tpope/vim-eunuch'
 
 IfKnob 'startify' Plug 'mhinz/vim-startify'
+IfKnob 'lens' Plug 'camspiers/lens.vim'
 
-if KnobAt(5)
-  Plug 'ludovicchabant/vim-gutentags'
+if knobs#could("gutentags")
+  Plug 'ludovicchabant/vim-gutentags' 
   let g:gutentags_cache_dir = expand('~/.cache/tags')
 endif
 
@@ -358,16 +376,38 @@ call plug#end()
 
 if knobs#("lsp")
   lua require'lspconfig'.bashls.setup{}
+  lua require'lspconfig'.cssls.setup{}
   lua require'lspconfig'.jsonls.setup{}
   lua require'lspconfig'.pyls.setup{}
   lua require'lspconfig'.tsserver.setup{}
   lua require'lspconfig'.vimls.setup{}
   lua require'lspconfig'.yamlls.setup{}
-
+  
   autocmd BufEnter * lua require'completion'.on_attach()
 
   " Set completeopt to have a better completion experience
   set completeopt=menuone,noinsert,noselect
+
+  let g:completion_chain_complete_list = {
+    \ 'default': [
+    \    {'complete_items': ['lsp', 'snippet' ]},
+    \    {'mode': '<c-p>'},
+    \    {'mode': '<c-n>'}
+    \]
+  \}
+  let g:completion_tabnine_priority = 0
+  imap <c-p> <Plug>(completion_trigger)
+  set omnifunc=v:lua.vim.lsp.omnifunc
+
+  "nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+  nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+  nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+  nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+  nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+  nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+  nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+  nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+  nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 endif
 
 if !Knob("light")
@@ -636,10 +676,6 @@ if KnobAt(1)
   set backspace=indent,eol,start
 endif
 
-" vnoremap <s-tab> <<
-" nnoremap <tab> >>
-" vnoremap <tab> >>
-
 " source ~/.config/vim/netrw.vim
 
 if KnobAt(3)
@@ -648,6 +684,8 @@ if KnobAt(3)
   highlight ColorColumn ctermbg=magenta
   call matchadd('ColorColumn', '\%82v', 100)
 endif
+
+highlight ErrorMsg ctermbg=grey guibg=grey
 
 " Open new splits to the right and below
 set splitright

@@ -107,17 +107,7 @@ defaults write com.apple.dock wvous-br-modifier -int 0
 # just heavy weight and so wrong. Use vi instead for quick access.
 # To show current mapping for an extenion use `duti -x myext`
 
-duti -s org.vim.MacVim csv all
-duti -s org.vim.MacVim json all
-duti -s org.vim.MacVim md all
-duti -s com.apple.Preview pdf all
-duti -s org.vim.MacVim properties all
-duti -s com.brave.Browser png all
-duti -s org.vim.MacVim tf all
-duti -s org.vim.MacVim sql all
-duti -s com.brave.Browser svg all
-duti -s org.vim.MacVim txt all
-duti -s org.vim.MacVim yaml all
+duti ~/.dotfiles/config/osx/duti.config
 
 # Application Specific
 

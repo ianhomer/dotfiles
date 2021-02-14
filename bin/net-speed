@@ -5,18 +5,22 @@
 
 logFile=~/.net-speed.log
 
-while getopts "cdl" o; do case "$o" in
+while getopts "cdly" o; do case "$o" in
   c) CRON=y ;;
   d) DELETE_CRON=y ;;
-  l) LOGOUT=y ;;
+  l) LOG=y ;;
+  y) SPEED=y ;;
 esac done
 
-if [[ "y" == "$LOGOUT" ]] ; then
-  /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep " SSID" >> $logFile
-
-  /usr/local/bin/speedtest-cli --csv --csv-delimiter '|' >> $logFile
+if [[ "y" == "$LOG" ]] ; then
+  /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep -e " SSID" -e " channel" -e " maxRate" -e " lastTxRate" -e " agrCtlRSSI" -e " agrCtlNoise" | tr '\n' '|' | tr -s ' ' >> $logFile
+  echo >> $logFile
+  if [[ "y" == "$SPEED" ]] ; then
+    /usr/local/bin/speedtest-cli --csv --csv-delimiter '|' >> $logFile
+  fi
 elif [[ "y" == "$CRON" ]] ; then
-  (crontab -l 2>/dev/null | grep -v "net-speed"; echo "*/10 * * * * $HOME/.dotfiles/bin/net-speed -l") | crontab -
+  (crontab -l 2>/dev/null | grep -v "net-speed -l"; echo "*/10 * * * * $HOME/.dotfiles/bin/net-speed -l") | crontab -
+  (crontab -l 2>/dev/null | grep -v "net-speed -yl"; echo "*/60 * * * * $HOME/.dotfiles/bin/net-speed -yl") | crontab -
   echo "Added net-speed to cron"
   crontab -l
 elif [[ "y" == "$DELETE_CRON" ]] ; then

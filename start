@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
+#
+# This script can be used first time to start using dotfiles
+#
+
 set -e
 
-echo "starting dotme dotfiles"
+echo "initialising dotfiles"
 _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 ${_DIR}/bin/dotme

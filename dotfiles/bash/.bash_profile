@@ -5,7 +5,3 @@
 echo "... running .bash_profile from dotfiles"
 
 PATH=$PATH:$HOME/.dotfiles/bin
-
-if [[ "$OSTYPE" =~ ^darwin ]]; then
-  source /Users/ian/Library/Preferences/org.dystroy.broot/launcher/bash/br
-fi

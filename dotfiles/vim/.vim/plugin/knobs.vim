@@ -10,11 +10,11 @@ let g:knobs_loaded = 1
 " Raise config level to enable more configuration
 " - 0 => basic config
 " - 1 => core config - recommended default level
-" - 2 => useful config
-" - 3 => useful plugins
-" - 4 => power config
-" - 5 => power plugins - recommended when opening vim explicitly
-" - 6 => extra config
+" - 2 => useful config (stable)
+" - 3 => useful config
+" - 4 => power config (stable)
+" - 5 => power config - recommended when opening vim explicitly
+" - 6 => extra config (stable)
 "   7 => extra plugins
 " - 8 => experimental config
 " - 9 => experimental plugins
