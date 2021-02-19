@@ -1,5 +1,7 @@
 # Troubleshoot
 
+.
+
 ## Known issues
 
 My mac keyboard got it's ~ character mapped incorrectly I had to reset the
