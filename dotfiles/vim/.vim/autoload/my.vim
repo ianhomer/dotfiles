@@ -11,7 +11,7 @@ endfunction
 function! my#GitSynk(onlyPush)
   call window#cleaner#CloseFugitive()
   if a:onlyPush || !knobs#("dispatch")
-    Gpush
+    Git push
   else
     Dispatch! Git synk
   endif
