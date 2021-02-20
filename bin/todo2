@@ -1,8 +1,22 @@
 #!/usr/bin/env python3
 
-def foo(bar):
-    print(f"foo executed with {bar}")
+import argparse
 
 
-bar = "todo2"
-foo(bar)
+def run():
+    parser = argparse.ArgumentParser(description='todoer')
+    parser.add_argument('do', nargs='+', help='do')
+    args = parser.parse_args()
+    words = []
+
+    # Scan words
+    for word in args.do:
+        print(f"Word {word}")
+        words.append(word)
+
+    # do to add
+    do = " ".join(words)
+    print(f"Do {do}")
+
+
+run()
