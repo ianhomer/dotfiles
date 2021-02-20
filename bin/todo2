@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 
 import argparse
+from pathlib import Path
+home = str(Path.home())
+
+LOCAL_SHIM = str(Path.home()) + "/.config/dotme/.shim"
 
 
 def run():
+    print(f"SHIM {LOCAL_SHIM}")
     parser = argparse.ArgumentParser(description='todoer')
     parser.add_argument('do', nargs='+', help='do')
     args = parser.parse_args()
