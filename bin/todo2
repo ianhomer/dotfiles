@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 
 import argparse
+import configparser
 from pathlib import Path
 home = str(Path.home())
 
-LOCAL_SHIM = str(Path.home()) + "/.config/dotme/.shim"
+config = configparser.ConfigParser()
+config.read(str(Path.home()) + "/.config/dotme/shim.ini")
+THINGS_DIR = config['DEFAULT']['THINGS_DIR']
 
 
 def run():
-    print(f"SHIM {LOCAL_SHIM}")
+    print(f"THINGS_DIR {THINGS_DIR}")
     parser = argparse.ArgumentParser(description='todoer')
     parser.add_argument('do', nargs='+', help='do')
     args = parser.parse_args()
