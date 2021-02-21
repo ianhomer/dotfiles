@@ -24,6 +24,7 @@ class style:
 def run():
     parser = argparse.ArgumentParser(description='todoer')
     parser.add_argument('do', nargs='*', help='do')
+    parser.add_argument('--group', action='store_true', help='group')
     args = parser.parse_args()
 
     if args.do:
@@ -49,11 +50,18 @@ def run():
         do = line.replace("- [ ] ", "")
         match = re.search("^([A-Z]{0,3})\\s*(.*)$", do)
         if match:
-            if (context != match.group(1)):
-                context = match.group(1)
-                print(f"\n{style.BOLD}{style.PURPLE}{context}{style.END}")
+            doContext = match.group(1)
+            styledContext = f"{style.BOLD}{style.PURPLE}{doContext}{style.END}"
+            lengthOfHiddenStyle = len(styledContext) - len(doContext)
             subject = match.group(2)
-            print(subject[:columns])
+            if args.group:
+                if (context != doContext):
+                    context = doContext
+                    print("\n" + styledContext)
+                styledLine = subject
+            else:
+                styledLine = styledContext + " " + subject
+            print(styledLine[:columns + lengthOfHiddenStyle])
         else:
             # Invalid do
             print(f"BADDO : {do}")
