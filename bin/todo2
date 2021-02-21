@@ -5,6 +5,7 @@ import configparser
 import os
 import os.path
 import subprocess
+import re
 from datetime import datetime
 from pathlib import Path
 home = str(Path.home())
@@ -12,6 +13,12 @@ home = str(Path.home())
 config = configparser.ConfigParser()
 config.read(str(Path.home()) + "/.config/dotme/shim.ini")
 THINGS_DIR = config['DEFAULT']['THINGS_DIR']
+
+
+class style:
+    PURPLE = '\033[95m'
+    BOLD = '\033[1m'
+    END = '\033[0m'
 
 
 def run():
@@ -37,13 +44,19 @@ def run():
     lines = result.stdout.splitlines()
     lines.sort()
     columns = os.get_terminal_size().columns
+    context = ""
     for line in lines:
-        print(line.replace("- [ ] ", "")[:columns])
-#    os.system("ag --nofilename --nocolor --nobreak " +
-#              f"\"{pattern}\" {THINGS_DIR} " +
-#              "| cut -c 3- " +
-#              "| sort " +
-#              "| cut -c -$(tput cols)")
+        do = line.replace("- [ ] ", "")
+        match = re.search("^([A-Z]{0,3})\\s*(.*)$", do)
+        if match:
+            if (context != match.group(1)):
+                context = match.group(1)
+                print(f"\n{style.BOLD}{style.PURPLE}{context}{style.END}")
+            subject = match.group(2)
+            print(subject[:columns])
+        else:
+            # Invalid do
+            print(f"BADDO : {do}")
 
 
 # Add a do
