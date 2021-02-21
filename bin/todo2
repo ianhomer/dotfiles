@@ -91,6 +91,7 @@ def run():
         match = re.search("^([^:]*):(.*)$", output)
         if match:
             print(match.group(1))
+            subprocess.call(['nvim', match.group(1)])
         else:
             print(output)
 
