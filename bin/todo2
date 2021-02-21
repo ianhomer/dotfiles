@@ -34,6 +34,13 @@ def run():
         add(do)
         return
 
+    # Repeat search until we exit (Ctrl-C)
+    more = True
+    while more:
+        more = search()
+
+
+def search():
     pattern = "\\- \\[ \\](?! [\\.\\-~\\^])"
     ag = ["ag", "--noheading", "--nonumbers", "--nocolor", "--nobreak",
           pattern, THINGS_DIR]
@@ -68,11 +75,11 @@ def run():
     match = re.search("^([^\t]*)\t([^\t]*)\t(.*)$", output)
     if match:
         file = match.group(3)
-        print(file)
         subprocess.call(['nvim', file])
+        return True
     else:
         print(output)
-
+    return False
 
 # Add a do
 def add(do):
