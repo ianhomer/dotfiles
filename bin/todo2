@@ -55,6 +55,7 @@ def search():
                            stdout=subprocess.PIPE,
                            stderr=None)
     fzfIn = fzf.stdin
+    fzfIn.write(f"\t(today)\t{getTodayLog()}\n".encode(encoding))
     for line in lines:
         do = line.replace("- [ ] ", "")
         match = re.search("^([^:]*):([A-Z]{0,3})\\s*(.*)$", do)
@@ -64,10 +65,10 @@ def search():
             subject = match.group(3)
             fzfIn.write(f"{PURPLE}{doContext}{END}\t{subject}\t{doFile}\n"
                         .encode(encoding))
-            fzfIn.flush()
         else:
             # Invalid do
             print(f"BADDO : {do}")
+    fzfIn.flush()
     fzfIn.close()
     fzf.wait()
     stdout = fzf.stdout
@@ -81,11 +82,17 @@ def search():
         print(output)
     return False
 
+
+def getTodayLog(now=datetime.now()):
+    now = datetime.now()
+    today = now.strftime("%m%d")
+    return f"{THINGS_DIR}/my-notes/stream/{today}.md"
+
+
 # Add a do
 def add(do):
     now = datetime.now()
-    today = now.strftime("%m%d")
-    todayLog = f"{THINGS_DIR}/my-notes/stream/{today}.md"
+    todayLog = getTodayLog(now)
     if not os.path.isfile(todayLog):
         Path(todayLog).touch()
     with open(todayLog, 'r+') as file:
@@ -101,7 +108,7 @@ def add(do):
             # file
             lines.append("\n")
 
-        lines.append(f"- [ ] {do}\n")
+        lines.insert(2, f"- [ ] {do}\n")
         file.seek(0)
         file.writelines(lines)
 
