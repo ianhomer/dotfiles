@@ -79,7 +79,8 @@ def run():
             if args.stdout:
                 print(styledLine[:columns + lengthOfHiddenStyle])
             else:
-                fzfIn.write(f"{doFile}:{doContext}:{subject}\n".encode(encoding))
+                fzfIn.write(f"{doFile}:{doContext}:{subject}\n"
+                            .encode(encoding))
                 fzfIn.flush()
         else:
             # Invalid do
