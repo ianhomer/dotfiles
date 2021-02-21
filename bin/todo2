@@ -2,6 +2,7 @@
 
 import argparse
 import configparser
+import os
 import os.path
 import subprocess
 from datetime import datetime
@@ -32,7 +33,12 @@ def run():
     result = subprocess.run(["ag", "--nofilename", "--nocolor", "--nobreak",
                              pattern, THINGS_DIR], text=True,
                             stdout=subprocess.PIPE)
-    print(result.stdout)
+
+    lines = result.stdout.splitlines()
+    lines.sort()
+    columns = os.get_terminal_size().columns
+    for line in lines:
+        print(line.replace("- [ ] ", "")[:columns])
 #    os.system("ag --nofilename --nocolor --nobreak " +
 #              f"\"{pattern}\" {THINGS_DIR} " +
 #              "| cut -c 3- " +
