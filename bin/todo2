@@ -13,7 +13,6 @@ THINGS_DIR = config['DEFAULT']['THINGS_DIR']
 
 
 def run():
-    print(f"THINGS_DIR {THINGS_DIR}")
     parser = argparse.ArgumentParser(description='todoer')
     parser.add_argument('do', nargs='+', help='do')
     args = parser.parse_args()
@@ -21,16 +20,18 @@ def run():
 
     # Scan words
     for word in args.do:
-        print(f"Word {word}")
         words.append(word)
-
     # do to add
     do = " ".join(words)
     print(f"Do {do}")
+    add(do)
+
+
+# Add a do
+def add(do):
     now = datetime.now()
     today = now.strftime("%m%d")
     todayLog = f"{THINGS_DIR}/my-notes/stream/{today}.md"
-    print(f"today {todayLog}")
     if not os.path.isfile(todayLog):
         Path(todayLog).touch()
     with open(todayLog, 'r+') as file:
@@ -38,14 +39,19 @@ def run():
         lines = file.readlines()
         length = len(lines)
         if length == 0:
+            # Add date heading
             todayLong = now.strftime("%a %m %b %Y").upper()
             lines.append(f"# {todayLong}\n\n")
         elif length == 1:
+            # Guard to make sure todos don't crash heading of manually created
+            # file
             lines.append("\n")
 
         lines.append(f"[ ] {do}\n")
         file.seek(0)
         file.writelines(lines)
+
+
 
 
 run()
