@@ -40,7 +40,9 @@ def run():
 
     lines = result.stdout.splitlines()
     encoding = sys.getdefaultencoding()
-    fzf = subprocess.Popen(["fzf", "--ansi", "-d", "\t", "--with-nth", "2.."],
+    fzf = subprocess.Popen(["fzf", "--ansi", "+m", "-d", "\t", "--with-nth",
+                            "1,2",
+                            "--tabstop", "4", "--tiebreak", "begin"],
                            stdin=subprocess.PIPE,
                            stdout=subprocess.PIPE,
                            stderr=None)
@@ -52,7 +54,7 @@ def run():
             doFile = match.group(1)
             doContext = match.group(2)
             subject = match.group(3)
-            fzfIn.write(f"{doFile}\t{PURPLE}{doContext}{END}\t{subject}\n"
+            fzfIn.write(f"{PURPLE}{doContext}{END}\t{subject}\t{doFile}\n"
                         .encode(encoding))
             fzfIn.flush()
         else:
