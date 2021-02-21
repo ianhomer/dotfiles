@@ -32,6 +32,7 @@ def run():
         # do to add
         do = " ".join(words)
         add(do)
+        return
 
     pattern = "\\- \\[ \\](?! [\\.\\-~\\^])"
     ag = ["ag", "--noheading", "--nonumbers", "--nocolor", "--nobreak",
@@ -64,10 +65,11 @@ def run():
     fzf.wait()
     stdout = fzf.stdout
     output = stdout.read().decode(encoding)
-    match = re.search("^([^\t]*)\t(.*)$", output)
+    match = re.search("^([^\t]*)\t([^\t]*)\t(.*)$", output)
     if match:
-        print(match.group(1))
-        subprocess.call(['nvim', match.group(1)])
+        file = match.group(3)
+        print(file)
+        subprocess.call(['nvim', file])
     else:
         print(output)
 
