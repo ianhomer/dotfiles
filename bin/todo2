@@ -6,6 +6,7 @@ import os
 import os.path
 import subprocess
 import re
+import sys
 from datetime import datetime
 from pathlib import Path
 home = str(Path.home())
@@ -14,17 +15,16 @@ config = configparser.ConfigParser()
 config.read(str(Path.home()) + "/.config/dotme/shim.ini")
 THINGS_DIR = config['DEFAULT']['THINGS_DIR']
 
-
-class style:
-    PURPLE = '\033[95m'
-    BOLD = '\033[1m'
-    END = '\033[0m'
-
+PURPLE = '\033[95m'
+BOLD = '\033[1m'
+END = '\033[0m'
 
 def run():
     parser = argparse.ArgumentParser(description='todoer')
     parser.add_argument('do', nargs='*', help='do')
-    parser.add_argument('--group', action='store_true', help='group')
+    parser.add_argument('--group', action='store_true', help='group contexts')
+    parser.add_argument('--stdout', action='store_true',
+                        help='send to stdout not fzf')
     args = parser.parse_args()
 
     if args.do:
@@ -39,32 +39,48 @@ def run():
 
     pattern = "\\- \\[ \\](?! [\\.\\-~\\^])"
     result = subprocess.run(["ag", "--nofilename", "--nocolor", "--nobreak",
-                             pattern, THINGS_DIR], text=True,
-                            stdout=subprocess.PIPE)
+                             pattern, THINGS_DIR],
+                            stdout=subprocess.PIPE, text=True)
 
     lines = result.stdout.splitlines()
     lines.sort()
     columns = os.get_terminal_size().columns
     context = ""
+    encoding = sys.getdefaultencoding()
+    if not args.stdout:
+        fzf = subprocess.Popen("fzf",
+                               stdin=subprocess.PIPE,
+                               stdout=subprocess.PIPE,
+                               stderr=None)
+        fzfIn = fzf.stdin
     for line in lines:
         do = line.replace("- [ ] ", "")
         match = re.search("^([A-Z]{0,3})\\s*(.*)$", do)
         if match:
             doContext = match.group(1)
-            styledContext = f"{style.BOLD}{style.PURPLE}{doContext}{style.END}"
-            lengthOfHiddenStyle = len(styledContext) - len(doContext)
+            if args.stdout:
+                styledContext = f"{BOLD}{PURPLE}{doContext}{END}"
+                lengthOfHiddenStyle = len(styledContext) - len(doContext)
             subject = match.group(2)
             if args.group:
                 if (context != doContext):
                     context = doContext
                     print("\n" + styledContext)
-                styledLine = subject
+                if args.stdout:
+                    styledLine = subject
             else:
-                styledLine = styledContext + " " + subject
-            print(styledLine[:columns + lengthOfHiddenStyle])
+                if args.stdout:
+                    styledLine = styledContext + " " + subject
+            if args.stdout:
+                print(styledLine[:columns + lengthOfHiddenStyle])
+            else:
+                fzfIn.write(f"{doContext} {subject}\n".encode(encoding))
+                fzfIn.flush()
         else:
             # Invalid do
             print(f"BADDO : {do}")
+    if not args.stdout:
+        fzf.wait()
 
 
 # Add a do
