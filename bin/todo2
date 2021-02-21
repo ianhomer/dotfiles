@@ -15,16 +15,10 @@ config = configparser.ConfigParser()
 config.read(str(Path.home()) + "/.config/dotme/shim.ini")
 THINGS_DIR = config['DEFAULT']['THINGS_DIR']
 
-PURPLE = '\033[95m'
-BOLD = '\033[1m'
-END = '\033[0m'
 
 def run():
     parser = argparse.ArgumentParser(description='todoer')
     parser.add_argument('do', nargs='*', help='do')
-    parser.add_argument('--group', action='store_true', help='group contexts')
-    parser.add_argument('--stdout', action='store_true',
-                        help='send to stdout not fzf')
     args = parser.parse_args()
 
     if args.do:
@@ -38,63 +32,39 @@ def run():
         add(do)
 
     pattern = "\\- \\[ \\](?! [\\.\\-~\\^])"
-    ag = ["ag"]
-    if args.stdout:
-        ag.append("--nofilename")
-    else:
-        ag.extend(["--noheading", "--nonumbers"])
-    ag.extend(["--nocolor", "--nobreak", pattern, THINGS_DIR])
+    ag = ["ag", "--noheading", "--nonumbers", "--nocolor", "--nobreak",
+          pattern, THINGS_DIR]
     result = subprocess.run(ag, stdout=subprocess.PIPE, text=True)
 
     lines = result.stdout.splitlines()
-    lines.sort()
-    columns = os.get_terminal_size().columns
-    context = ""
     encoding = sys.getdefaultencoding()
-    if not args.stdout:
-        fzf = subprocess.Popen(["fzf", "-d", ":", "--with-nth", "2.."],
-                               stdin=subprocess.PIPE,
-                               stdout=subprocess.PIPE,
-                               stderr=None)
-        fzfIn = fzf.stdin
+    fzf = subprocess.Popen(["fzf", "-d", ":", "--with-nth", "2.."],
+                           stdin=subprocess.PIPE,
+                           stdout=subprocess.PIPE,
+                           stderr=None)
+    fzfIn = fzf.stdin
     for line in lines:
         do = line.replace("- [ ] ", "")
         match = re.search("^([^:]*):([A-Z]{0,3})\\s*(.*)$", do)
         if match:
             doFile = match.group(1)
             doContext = match.group(2)
-            if args.stdout:
-                styledContext = f"{BOLD}{PURPLE}{doContext}{END}"
-                lengthOfHiddenStyle = len(styledContext) - len(doContext)
             subject = match.group(3)
-            if args.group:
-                if (context != doContext):
-                    context = doContext
-                    print("\n" + styledContext)
-                if args.stdout:
-                    styledLine = subject
-            else:
-                if args.stdout:
-                    styledLine = styledContext + " " + subject
-            if args.stdout:
-                print(styledLine[:columns + lengthOfHiddenStyle])
-            else:
-                fzfIn.write(f"{doFile}:{doContext}:{subject}\n"
-                            .encode(encoding))
-                fzfIn.flush()
+            fzfIn.write(f"{doFile}:{doContext}:{subject}\n"
+                        .encode(encoding))
+            fzfIn.flush()
         else:
             # Invalid do
             print(f"BADDO : {do}")
-    if not args.stdout:
-        fzf.wait()
-        stdout = fzf.stdout
-        output = stdout.read().decode(encoding)
-        match = re.search("^([^:]*):(.*)$", output)
-        if match:
-            print(match.group(1))
-            subprocess.call(['nvim', match.group(1)])
-        else:
-            print(output)
+    fzf.wait()
+    stdout = fzf.stdout
+    output = stdout.read().decode(encoding)
+    match = re.search("^([^:]*):(.*)$", output)
+    if match:
+        print(match.group(1))
+        subprocess.call(['nvim', match.group(1)])
+    else:
+        print(output)
 
 
 # Add a do
