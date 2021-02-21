@@ -38,9 +38,13 @@ def run():
         add(do)
 
     pattern = "\\- \\[ \\](?! [\\.\\-~\\^])"
-    result = subprocess.run(["ag", "--nofilename", "--nocolor", "--nobreak",
-                             pattern, THINGS_DIR],
-                            stdout=subprocess.PIPE, text=True)
+    ag = ["ag"]
+    if args.stdout:
+        ag.append("--nofilename")
+    else:
+        ag.extend(["--noheading", "--nonumbers"])
+    ag.extend(["--nocolor", "--nobreak", pattern, THINGS_DIR])
+    result = subprocess.run(ag, stdout=subprocess.PIPE, text=True)
 
     lines = result.stdout.splitlines()
     lines.sort()
@@ -48,20 +52,21 @@ def run():
     context = ""
     encoding = sys.getdefaultencoding()
     if not args.stdout:
-        fzf = subprocess.Popen("fzf",
+        fzf = subprocess.Popen(["fzf", "-d", ":", "--with-nth", "2.."],
                                stdin=subprocess.PIPE,
                                stdout=subprocess.PIPE,
                                stderr=None)
         fzfIn = fzf.stdin
     for line in lines:
         do = line.replace("- [ ] ", "")
-        match = re.search("^([A-Z]{0,3})\\s*(.*)$", do)
+        match = re.search("^([^:]*):([A-Z]{0,3})\\s*(.*)$", do)
         if match:
-            doContext = match.group(1)
+            doFile = match.group(1)
+            doContext = match.group(2)
             if args.stdout:
                 styledContext = f"{BOLD}{PURPLE}{doContext}{END}"
                 lengthOfHiddenStyle = len(styledContext) - len(doContext)
-            subject = match.group(2)
+            subject = match.group(3)
             if args.group:
                 if (context != doContext):
                     context = doContext
@@ -74,13 +79,20 @@ def run():
             if args.stdout:
                 print(styledLine[:columns + lengthOfHiddenStyle])
             else:
-                fzfIn.write(f"{doContext} {subject}\n".encode(encoding))
+                fzfIn.write(f"{doFile}:{doContext}:{subject}\n".encode(encoding))
                 fzfIn.flush()
         else:
             # Invalid do
             print(f"BADDO : {do}")
     if not args.stdout:
         fzf.wait()
+        stdout = fzf.stdout
+        output = stdout.read().decode(encoding)
+        match = re.search("^([^:]*):(.*)$", output)
+        if match:
+            print(match.group(1))
+        else:
+            print(output)
 
 
 # Add a do
