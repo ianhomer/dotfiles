@@ -14,17 +14,25 @@ THINGS_DIR = config['DEFAULT']['THINGS_DIR']
 
 def run():
     parser = argparse.ArgumentParser(description='todoer')
-    parser.add_argument('do', nargs='+', help='do')
+    parser.add_argument('do', nargs='*', help='do')
     args = parser.parse_args()
-    words = []
 
-    # Scan words
-    for word in args.do:
-        words.append(word)
-    # do to add
-    do = " ".join(words)
-    print(f"Do {do}")
-    add(do)
+    if args.do:
+        words = []
+
+        # Scan words
+        for word in args.do:
+            words.append(word)
+        # do to add
+        do = " ".join(words)
+        add(do)
+
+    pattern = "\\- \\[ \\](?! [\\.\\-~\\^])$CONTEXT"
+    os.system("ag --nofilename --nocolor --nobreak " +
+              f"\"{pattern}\" {THINGS_DIR} " +
+              "| cut -c 3- " +
+              "| sort " +
+              "| cut -c -$(tput cols)")
 
 
 # Add a do
@@ -47,11 +55,9 @@ def add(do):
             # file
             lines.append("\n")
 
-        lines.append(f"[ ] {do}\n")
+        lines.append(f"- [ ] {do}\n")
         file.seek(0)
         file.writelines(lines)
-
-
 
 
 run()
