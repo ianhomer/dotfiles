@@ -2,6 +2,7 @@
 
 import argparse
 import configparser
+import os.path
 from datetime import datetime
 from pathlib import Path
 home = str(Path.home())
@@ -26,8 +27,25 @@ def run():
     # do to add
     do = " ".join(words)
     print(f"Do {do}")
-    today = datetime.now().strftime("%m%d")
-    print(f"today {today}")
+    now = datetime.now()
+    today = now.strftime("%m%d")
+    todayLog = f"{THINGS_DIR}/my-notes/stream/{today}.md"
+    print(f"today {todayLog}")
+    if not os.path.isfile(todayLog):
+        Path(todayLog).touch()
+    with open(todayLog, 'r+') as file:
+        file.seek(0)
+        lines = file.readlines()
+        length = len(lines)
+        if length == 0:
+            todayLong = now.strftime("%a %m %b %Y").upper()
+            lines.append(f"# {todayLong}\n\n")
+        elif length == 1:
+            lines.append("\n")
+
+        lines.append(f"[ ] {do}\n")
+        file.seek(0)
+        file.writelines(lines)
 
 
 run()
