@@ -56,6 +56,7 @@ def search():
                            stderr=None)
     fzfIn = fzf.stdin
     fzfIn.write(f"\t(today)\t{getTodayLog()}\n".encode(encoding))
+    dos = []
     for line in lines:
         do = line.replace("- [ ] ", "")
         match = re.search("^([^:]*):([A-Z]{0,3})\\s*(.*)$", do)
@@ -63,11 +64,14 @@ def search():
             doFile = match.group(1)
             doContext = match.group(2)
             subject = match.group(3)
-            fzfIn.write(f"{PURPLE}{doContext}{END}\t{subject}\t{doFile}\n"
-                        .encode(encoding))
+            dos.append(f"{PURPLE}{doContext}{END}\t{subject}\t{doFile}\n")
         else:
             # Invalid do
             print(f"BADDO : {do}")
+    dos.sort()
+    for do in dos:
+        fzfIn.write(do.encode(encoding))
+
     fzfIn.flush()
     fzfIn.close()
     fzf.wait()
