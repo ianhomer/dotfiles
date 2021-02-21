@@ -14,6 +14,8 @@ home = str(Path.home())
 config = configparser.ConfigParser()
 config.read(str(Path.home()) + "/.config/dotme/shim.ini")
 THINGS_DIR = config['DEFAULT']['THINGS_DIR']
+PURPLE = '\033[95m'
+END = '\033[0m'
 
 
 def run():
@@ -38,7 +40,7 @@ def run():
 
     lines = result.stdout.splitlines()
     encoding = sys.getdefaultencoding()
-    fzf = subprocess.Popen(["fzf", "-d", ":", "--with-nth", "2.."],
+    fzf = subprocess.Popen(["fzf", "--ansi", "-d", "\t", "--with-nth", "2.."],
                            stdin=subprocess.PIPE,
                            stdout=subprocess.PIPE,
                            stderr=None)
@@ -50,7 +52,7 @@ def run():
             doFile = match.group(1)
             doContext = match.group(2)
             subject = match.group(3)
-            fzfIn.write(f"{doFile}:{doContext}:{subject}\n"
+            fzfIn.write(f"{doFile}\t{PURPLE}{doContext}{END}\t{subject}\n"
                         .encode(encoding))
             fzfIn.flush()
         else:
@@ -60,7 +62,7 @@ def run():
     fzf.wait()
     stdout = fzf.stdout
     output = stdout.read().decode(encoding)
-    match = re.search("^([^:]*):(.*)$", output)
+    match = re.search("^([^\t]*)\t(.*)$", output)
     if match:
         print(match.group(1))
         subprocess.call(['nvim', match.group(1)])
