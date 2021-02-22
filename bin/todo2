@@ -48,18 +48,10 @@ def search():
 
     lines = result.stdout.splitlines()
     encoding = sys.getdefaultencoding()
-    fzf = subprocess.Popen(["fzf", "--ansi", "+m", "-d", "\t", "--with-nth",
-                            "1,2",
-                            "--tabstop", "4", "--tiebreak", "begin"],
-                           stdin=subprocess.PIPE,
-                           stdout=subprocess.PIPE,
-                           stderr=None)
-    fzfIn = fzf.stdin
-    fzfIn.write(f"\t(today)\t{getTodayLog()}\n".encode(encoding))
     dos = []
     for line in lines:
         do = line.replace("- [ ] ", "")
-        match = re.search("^([^:]*):([A-Z]{0,3})\\s+(.*)$", do)
+        match = re.search("^([^:]*):((?:[A-Z]{0,3}(?=\\s))?)\\s*(.*)$", do)
         if match:
             doFile = match.group(1)
             doContext = match.group(2)
@@ -69,6 +61,14 @@ def search():
             # Invalid do
             print(f"BADDO : {do}")
     dos.sort()
+    fzf = subprocess.Popen(["fzf", "--ansi", "+m", "-d", "\t", "--with-nth",
+                            "1,2",
+                            "--tabstop", "4", "--tiebreak", "begin"],
+                           stdin=subprocess.PIPE,
+                           stdout=subprocess.PIPE,
+                           stderr=None)
+    fzfIn = fzf.stdin
+    fzfIn.write(f"\t(today)\t{getTodayLog()}\n".encode(encoding))
     for do in dos:
         fzfIn.write(do.encode(encoding))
 
