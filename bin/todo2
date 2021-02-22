@@ -59,7 +59,7 @@ def search():
     dos = []
     for line in lines:
         do = line.replace("- [ ] ", "")
-        match = re.search("^([^:]*):([A-Z]{0,3})\\s*(.*)$", do)
+        match = re.search("^([^:]*):([A-Z]{0,3})\\s+(.*)$", do)
         if match:
             doFile = match.group(1)
             doContext = match.group(2)
