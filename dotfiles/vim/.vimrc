@@ -177,7 +177,6 @@ call plug#begin(g:vim_dir."/plugged")
 if knobs#could("fzf")
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
-  source ~/.config/vim/fzf.vim
 endif
 
 " fugitive - Git integration

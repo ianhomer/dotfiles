@@ -1,3 +1,7 @@
+if !knobs#("fzf")
+  finish
+endif
+
 " Custimise fzf behaviour.
 "
 
