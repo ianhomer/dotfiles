@@ -298,7 +298,6 @@ endif
 
 if knobs#could("ale")
   Plug 'dense-analysis/ale'
-  source ~/.config/vim/ale.vim
 endif
 
 " polyglot
@@ -502,20 +501,8 @@ if exists('*which_key#register')
   call which_key#register("'", "g:which_key_map")
 endif
 
-if knobs#("thingity")
-  source ~/.config/vim/thingity.vim
-endif
-
 if knobs#("tabcomplete")
   source ~/.config/vim/tabcomplete.vim
-endif
-
-if knobs#("coc")
-  source ~/.config/vim/coc.vim
-endif
-
-if KnobAt(3)
-  nnoremap <leader>L ma:call my#PruneWhiteSpace()<CR>`a
 endif
 
 " Write all buffers before navigating from Vim to tmux pane
@@ -690,10 +677,3 @@ source ~/.config/vim/terminal.vim
 " Don't conceal any syntax
 set conceallevel=0
 
-if KnobAt(4)
-  " Markdown syntax
-  " Enable folding
-  let g:markdown_folding = 1
-  " Default large fold level start, folding everything up by default feels odd.
-  set foldlevelstart=20
-endif
