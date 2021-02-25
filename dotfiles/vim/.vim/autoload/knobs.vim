@@ -26,8 +26,10 @@ function! knobs#Init()
   " Set default state of feature toggles
   let g:knobs = get(g:, "knobs", g:knobs_defaults)
 
-  for key in keys(g:knobs)
-    let {"g:knob_" . key} = 1
+  for [key,value] in items(g:knobs)
+    if value > 0
+      let {"g:knob_" . key} = value
+    endif
   endfor
 
   call s:DefineCommands()
