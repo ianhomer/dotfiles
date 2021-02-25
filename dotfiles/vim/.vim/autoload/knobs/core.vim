@@ -31,11 +31,12 @@ endfunction
 
 function! knobs#core#SetKnob(knob, value)
   let g:knobs[a:knob] = a:value
+  " And set a global file since cheaper to check at run time
   let knob_name = "g:knob_" . a:knob
   if a:value > 0
     let {knob_name} = a:value
-  "elseif exists(name)
-  "  unlet {name}
+  elseif exists(knob_name)
+    unlet {knob_name}
   endif
 endfunction
 
@@ -69,7 +70,12 @@ endfunction
 function! knobs#core#ReloadConfig()
   silent! wall
   let config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
+  let plugin_directory = "~/.vim/plugin"
   exec "source ".config_file
+  " Source local plugin files too, since not explicitly referenced in init file
+  for plugin_file in split(globpath(plugin_directory, '*'), '\n')
+    exec "source ".plugin_file
+  endfor
   call knobs#core#RestartConfig()
   let config_message = has('nvim') ? "neo init.vm" : ".vimrc"
   let extra_message = exists("*CocRestart") ? " with CoC" : ""

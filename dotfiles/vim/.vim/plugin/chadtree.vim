@@ -1,14 +1,3 @@
-if has_key({}, "chadtree")
-endif
-
-finish
-
-if knobs#("chadtree")
-endif
-
-
-finish
-
 if !has('nvim') || !knobs#("chadtree")
   finish
 endif
