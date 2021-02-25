@@ -24,7 +24,7 @@ let g:knobs_levels = {
   \   "apathy":5,
   \   "airline":5,
   \   "autosave":5,
-  \   "chadtree":5,
+  \   "chadtree":7,
   \   "conflict-marker":7,
   \   "dispatch":5,
   \   "endwise":5,
@@ -206,7 +206,7 @@ IfKnob 'gruvbox8' Plug 'lifepillar/vim-gruvbox8'
 " Trying chadtree, if better than nerdtree then
 " nerdtree will be removed
 "
-if knobs#could("chadtree")
+if knobs#could("chadtree") && has('nvim')
   Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
   source ~/.config/vim/chadtree.vim
 endif
