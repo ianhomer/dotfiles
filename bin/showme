@@ -14,7 +14,7 @@ def usage():
 
 
 def heading(heading, separator="-"):
-    if (separator == "-"):
+    if separator == "-":
         print()
     print(heading)
     print(separator * 40)
@@ -48,11 +48,13 @@ def reportAll():
 
 
 parser = argparse.ArgumentParser(description="System Report")
-parser.add_argument("--brew", dest="reports", const="brew",
-                    help="Brew report", action='append_const')
-parser.add_argument("--fish", dest="reports", const="fish",
-                    help="fish report", action='append_const')
-#parser.add_argument("--help", dest="help", help="Help", action="store_true")
+parser.add_argument(
+    "--brew", dest="reports", const="brew", help="Brew report", action="append_const"
+)
+parser.add_argument(
+    "--fish", dest="reports", const="fish", help="fish report", action="append_const"
+)
+# parser.add_argument("--help", dest="help", help="Help", action="store_true")
 
 
 def main(argv):
@@ -63,9 +65,9 @@ def main(argv):
     else:
         if args.help:
             usage()
-        if 'brew' in args.reports:
+        if "brew" in args.reports:
             reportBrew()
-        if 'fish' in args.reports:
+        if "fish" in args.reports:
             reportFish()
 
 

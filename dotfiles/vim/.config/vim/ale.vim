@@ -25,6 +25,7 @@ let g:ale_fixers = {
   \   'css': ['prettier'],
   \   'javascript': ['eslint', 'prettier'],
   \   'json': ['jq'],
+  \   'python': ['black'],
   \   'scss': ['prettier'],
   \   'typescript': ['eslint', 'prettier']
   \}
