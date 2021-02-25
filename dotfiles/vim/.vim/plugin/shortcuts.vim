@@ -29,7 +29,7 @@ if KnobAt(1)
     "nnoremap <silent> q :echo "q disabled"<CR>
 
     if KnobAt(4)
-      if knobs#("which-key")
+      if knobs#("which_key")
         nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
         nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
       endif

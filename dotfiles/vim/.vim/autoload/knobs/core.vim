@@ -31,6 +31,12 @@ endfunction
 
 function! knobs#core#SetKnob(knob, value)
   let g:knobs[a:knob] = a:value
+  let knob_name = "g:knob_" . a:knob
+  if a:value > 0
+    let {knob_name} = a:value
+  "elseif exists(name)
+  "  unlet {name}
+  endif
 endfunction
 
 function! knobs#core#ApplyLayer(layer, enabled)

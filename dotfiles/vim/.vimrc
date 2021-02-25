@@ -8,11 +8,11 @@ endif
 " Default values for knobs
 let g:knobs_defaults = {
   \   "compactcmd":0,
-  \   "markdown.flow":0,
-  \   "markdown.conceal.full":0,
-  \   "markdown.conceal.partial":0,
-  \   "markdown.syntax.list":0,
-  \   "markdown.syntax.table":1,
+  \   "markdown_flow":0,
+  \   "markdown_conceal_full":0,
+  \   "markdown_conceal_partial":0,
+  \   "markdown_syntax_list":0,
+  \   "markdown_syntax_table":1,
   \   "polyglot":0,
   \   "syntastic":0,
   \   "startuptime":0
@@ -50,9 +50,9 @@ let g:knobs_levels = {
   \   "tabular":5,
   \   "thingity":5,
   \   "unimpaired":5,
-  \   "update-spelling":5,
-  \   "which-key":7,
-  \   "window-cleaner":5,
+  \   "update_spelling":5,
+  \   "which_key":7,
+  \   "window_cleaner":5,
   \   "writegood":8
   \ }
 
@@ -61,14 +61,14 @@ let g:knobs_layers_map = {
   \    "mobile":{
   \      "compactcmd":1,
   \      "light":1,
-  \      "markdown.flow":1,
-  \      "markdown.conceal.full":1,
-  \      "markdown.syntax.list":1
+  \      "markdown_flow":1,
+  \      "markdown_conceal_full":1,
+  \      "markdown_syntax_list":1
   \    },
   \    "notes":{
   \      "compactcmd":1,
   \      "light":1,
-  \      "markdown.conceal.partial":1
+  \      "markdown_conceal_partial":1
   \    },
   \    "nvim-0.5":{
   \      "lsp":1
@@ -259,7 +259,7 @@ endif
 " Help
 "
 " vim-which-key - guidance on what keys do
-if knobs#could("which-key")
+if knobs#could("which_key")
   Plug 'liuchengxu/vim-which-key',
   \ { 'on': ['WhichKey', 'WhichKey!'] }
 endif
@@ -512,7 +512,7 @@ if KnobAt(3)
   let g:surround_{char2nr('b')} = "**\r**"
   let g:surround_{char2nr('<')} = "<\r>"
   " Short cuts for surround word
-  if knobs#("which-key")
+  if knobs#("which_key")
     nnoremap <silent> ' :WhichKey "'"<CR>
   endif
   nmap '" ysiW"

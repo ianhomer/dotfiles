@@ -26,6 +26,10 @@ function! knobs#Init()
   " Set default state of feature toggles
   let g:knobs = get(g:, "knobs", g:knobs_defaults)
 
+  for key in keys(g:knobs)
+    let {"g:knob_" . key} = 1
+  endfor
+
   call s:DefineCommands()
 
   " Do full initialisation if config level greater than zero
@@ -67,7 +71,7 @@ function! knobs#could(knob)
 endfunction
 
 function! knobs#(knob)
-  return has_key(g:knobs, a:knob) ? g:knobs[a:knob] : 0
+  return exists("g:knob_" . a:knob)
 endfunction
 
 function! knobs#If(knob, ...)

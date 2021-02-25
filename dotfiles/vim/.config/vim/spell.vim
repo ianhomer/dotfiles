@@ -9,7 +9,7 @@ set spelllang=en,local
 set spellfile=~/.config/vim/spell/en.utf-8.add
 set complete+=kspell
 
-if Knob("update-spelling") 
+if Knob("update_spelling") 
   call spelling#Update()
 endif
 
