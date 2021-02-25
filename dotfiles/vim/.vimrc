@@ -697,7 +697,3 @@ if KnobAt(4)
   " Default large fold level start, folding everything up by default feels odd.
   set foldlevelstart=20
 endif
-
-if KnobAt(9)
-  source ~/.config/vim/experimental.vim
-endif
