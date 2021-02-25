@@ -1,3 +1,7 @@
+if !knobs#("tabcomplete")
+  finish
+endif
+
 " Map tab to auto complete
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
