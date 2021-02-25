@@ -1,3 +1,13 @@
+" Goyo distraction free writing
+if knobs#("goyo")
+  nnoremap <leader>jg :Goyo<CR>
+  let g:goyo_width = 85
+endif
+
+if knobs#("spelling")
+  source ~/.config/vim/spell.vim
+endif
+
 if !knobs#("thingity")
   finish
 endif

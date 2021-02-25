@@ -254,7 +254,7 @@ IfKnob 'startify' Plug 'mhinz/vim-startify'
 IfKnob 'lens' Plug 'camspiers/lens.vim'
 
 if knobs#could("gutentags")
-  Plug 'ludovicchabant/vim-gutentags' 
+  Plug 'ludovicchabant/vim-gutentags'
   let g:gutentags_cache_dir = expand('~/.cache/tags')
 endif
 
@@ -370,7 +370,7 @@ if knobs#("lsp")
   lua require'lspconfig'.tsserver.setup{}
   lua require'lspconfig'.vimls.setup{}
   lua require'lspconfig'.yamlls.setup{}
-  
+
   autocmd BufEnter * lua require'completion'.on_attach()
 
   " Set completeopt to have a better completion experience
@@ -508,14 +508,6 @@ endif
 " Write all buffers before navigating from Vim to tmux pane
 let g:tmux_navigator_save_on_switch = 2
 
-" *** Scope : Writing ***
-
-" Goyo distraction free writing
-if knobs#("goyo")
-  nnoremap <leader>jg :Goyo<CR>
-  let g:goyo_width = 85
-endif
-
 "
 " *** Scope : Windows ***
 "
@@ -578,10 +570,6 @@ if KnobAt(1)
   " Return to visual mode after indenting
   vnoremap < <gv
   vnoremap > >gv
-endif
-
-if knobs#("spelling")
-  source ~/.config/vim/spell.vim
 endif
 
 " Surround customisation
@@ -666,8 +654,6 @@ highlight ErrorMsg ctermbg=grey guibg=grey
 " Open new splits to the right and below
 set splitright
 set splitbelow
-
-source ~/.config/vim/terminal.vim
 
 " Surround Customisations
 " This doesn't work for me -
