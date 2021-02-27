@@ -19,18 +19,12 @@ if knobs#could("fugitive")
   Plug 'tpope/vim-rhubarb'
 endif
 
-if knobs#could("conflict-marker")
-  Plug 'rhysd/conflict-marker.vim'
-  autocmd ColorScheme * highlight Info gui=bold guifg=#504945 guibg=#83a598
-  let g:conflict_marker_highlight_group="Info"
-endif
+IfKnob 'conflict-marker' Plug 'rhysd/conflict-marker.vim'
 
 "
 " Style
 "
-if knobs#could("light")
-  Plug 'rakr/vim-one'
-endif
+IfKnob 'light' Plug 'rakr/vim-one'
 
 IfKnob 'gruvbox'  Plug 'morhetz/gruvbox'
 IfKnob 'gruvbox8' Plug 'lifepillar/vim-gruvbox8'
@@ -43,16 +37,8 @@ if knobs#could("chadtree") && has('nvim')
   Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 endif
 
-if knobs#could("nerdtree")
-  " NERDTree - file explore
-  Plug 'preservim/nerdtree'
-endif
-
-if knobs#could("nnn")
-  " Window and file management
-  Plug 'mcchrish/nnn.vim'
-endif
-
+IfKnob 'nerdtree' Plug 'preservim/nerdtree'
+IfKnob 'nnn' Plug 'mcchrish/nnn.vim'
 IfKnob 'nerdtree' Plug 'ryanoasis/vim-devicons'
 IfKnob 'minimap' Plug 'wfxr/minimap.vim'
 
@@ -77,9 +63,7 @@ IfKnob 'eunuch' Plug 'tpope/vim-eunuch'
 IfKnob 'startify' Plug 'mhinz/vim-startify'
 IfKnob 'lens' Plug 'camspiers/lens.vim'
 
-if knobs#could("gutentags")
-  Plug 'ludovicchabant/vim-gutentags'
-endif
+IfKnob 'gutentags' Plug 'ludovicchabant/vim-gutentags'
 
 "
 " Help
@@ -105,9 +89,7 @@ Plug 'tpope/vim-repeat'
 " endwise - auto close structure
 IfKnob 'endwise' Plug 'tpope/vim-endwise'
 " Aysynchronous
-if knobs#could("dispatch")
-  Plug 'tpope/vim-dispatch'
-endif
+IfKnob 'dispatch' Plug 'tpope/vim-dispatch'
 
 if knobs#could("syntastic")
   Plug 'vim-syntastic/syntastic'
@@ -115,9 +97,7 @@ if knobs#could("syntastic")
   Plug 'maxmellon/vim-jsx-pretty'
 endif
 
-if knobs#could("ale")
-  Plug 'dense-analysis/ale'
-endif
+IfKnob 'ale' Plug 'dense-analysis/ale'
 
 " polyglot
 if knobs#could("polyglot")
@@ -134,17 +114,13 @@ if knobs#could("nerdtree")
   if KnobAt(9) | Plug 'xuyuanp/nerdtree-git-plugin' | endif
 endif
 
-if knobs#could("gitgutter")
-  " gitgutter - Git change indicator to left of window
-  Plug 'airblade/vim-gitgutter'
-endif
+" gitgutter - Git change indicator to left of window
+IfKnob 'gitgutter' Plug 'airblade/vim-gitgutter'
 
 " HTML
 if KnobAt(9) | Plug 'mattn/emmet-vim' | endif
 " Handy mappings
-if Knob("unimpaired")
-  Plug 'tpope/vim-unimpaired'
-endif
+IfKnob 'unimpaired' Plug 'tpope/vim-unimpaired'
 
 "
 " Writing
@@ -160,9 +136,7 @@ endif
 " Vim testing
 if KnobAt(6) | Plug 'junegunn/vader.vim' | endif
 
-if knobs#could("startuptime")
-  Plug 'tweekmonster/startuptime.vim'
-endif
+IfKnob 'startuptime' Plug 'tweekmonster/startuptime.vim'
 
 if knobs#("lsp")
   Plug 'neovim/nvim-lspconfig'
