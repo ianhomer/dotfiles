@@ -1,10 +1,3 @@
-if has('nvim')
-  " Store nvim plugins in isolated location
-  let g:vim_dir = "~/.config/nvim"
-else
-  let g:vim_dir = "~/.vim"
-endif
-
 " Default values for knobs
 let g:knobs_defaults = {
   \   "compactcmd":0,
@@ -169,7 +162,7 @@ if knobs#("modes")
 endif
 
 " Load plugins
-call plug#begin(g:vim_dir."/plugged")
+call plug#begin(knobs#GetPluggedDir())
 "
 " Core essentials
 "

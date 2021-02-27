@@ -69,11 +69,9 @@ endfunction
 " Reload vimrc, neo vimrc and CoC
 function! knobs#core#ReloadConfig()
   silent! wall
-  let config_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
-  let plugin_directory = "~/.vim/plugin"
-  exec "source ".config_file
+  exec "source ".g:vim_init_file
   " Source local plugin files too, since not explicitly referenced in init file
-  for plugin_file in split(globpath(plugin_directory, '*'), '\n')
+  for plugin_file in split(globpath(g:vim_local_plugin_dir, '*'), '\n')
     exec "source ".plugin_file
   endfor
   call knobs#core#RestartConfig()

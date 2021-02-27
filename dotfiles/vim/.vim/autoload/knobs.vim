@@ -8,6 +8,24 @@ if exists('g:knobs_autoloaded')
 endif
 let g:knobs_autoloaded = 1
 
+if has('nvim')
+  " Store nvim plugins in isolated location
+  let g:vim_config_dir = "~/.config/nvim"
+else
+  let g:vim_config_dir = "~/.vim"
+endif
+let g:vim_init_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
+let g:vim_local_plugin_dir = "~/.vim/plugin"
+let g:vim_plugged_dir = g:vim_config_dir."/plugged"
+
+function! knobs#GetPluggedDir()
+  return g:vim_plugged_dir
+endfunction
+
+function! knobs#GetConfigDir()
+  return g:vim_config_dir
+endfunction
+
 function! knobs#Level()
   return g:knobs_level
 endfunction
