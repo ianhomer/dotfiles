@@ -8,6 +8,84 @@ if exists('g:knobs_autoloaded')
 endif
 let g:knobs_autoloaded = 1
 
+" Default values for knobs
+let g:knobs_defaults = {
+  \   "compactcmd":0,
+  \   "markdown_flow":0,
+  \   "markdown_conceal_full":0,
+  \   "markdown_conceal_partial":0,
+  \   "markdown_syntax_list":0,
+  \   "markdown_syntax_table":1,
+  \   "polyglot":0,
+  \   "syntastic":0,
+  \   "startuptime":0
+  \ }
+
+" Levels at which knobs are enabled
+let g:knobs_levels = {
+  \   "ale":5,
+  \   "apathy":5,
+  \   "airline":5,
+  \   "autosave":5,
+  \   "chadtree":7,
+  \   "conflict-marker":7,
+  \   "dispatch":5,
+  \   "endwise":5,
+  \   "eunuch":5,
+  \   "fugitive":5,
+  \   "fzf":4,
+  \   "gitgutter":5,
+  \   "gruvbox":5,
+  \   "gruvbox8":1,
+  \   "goyo":5,
+  \   "gutentags":5,
+  \   "nerdtree":4,
+  \   "lens":8,
+  \   "minimap": 5,
+  \   "modes":1,
+  \   "nnn":6,
+  \   "polyglot":5,
+  \   "spelling":5,
+  \   "startify":4,
+  \   "startuptime":5,
+  \   "surround":5,
+  \   "tabcomplete":5,
+  \   "tabular":5,
+  \   "thingity":5,
+  \   "unimpaired":5,
+  \   "update_spelling":5,
+  \   "which_key":7,
+  \   "window_cleaner":5,
+  \   "writegood":8
+  \ }
+
+" Feature toggles triggered by each layer
+let g:knobs_layers_map = {
+  \    "mobile":{
+  \      "compactcmd":1,
+  \      "light":1,
+  \      "markdown_flow":1,
+  \      "markdown_conceal_full":1,
+  \      "markdown_syntax_list":1
+  \    },
+  \    "notes":{
+  \      "compactcmd":1,
+  \      "light":1,
+  \      "markdown_conceal_partial":1
+  \    },
+  \    "nvim-0.5":{
+  \      "lsp":1
+  \    }
+  \  }
+
+" Default state of layers
+" iTerm used for notes layer
+let g:knobs_layers = get(g:, "layers",{
+  \   "mobile": $ANDROID_DATA == '/data' ? 1 : 0,
+  \   "notes": $ITERM_PROFILE == 'oh-my' ? 1 : 0,
+  \   "nvim-0.5": has('nvim-0.5') ? 1 : 0
+  \ })
+
 if has('nvim')
   " Store nvim plugins in isolated location
   let g:vim_config_dir = "~/.config/nvim"

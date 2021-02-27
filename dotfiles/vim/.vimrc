@@ -1,164 +1,5 @@
-" Default values for knobs
-let g:knobs_defaults = {
-  \   "compactcmd":0,
-  \   "markdown_flow":0,
-  \   "markdown_conceal_full":0,
-  \   "markdown_conceal_partial":0,
-  \   "markdown_syntax_list":0,
-  \   "markdown_syntax_table":1,
-  \   "polyglot":0,
-  \   "syntastic":0,
-  \   "startuptime":0
-  \ }
-
-" Levels at which knobs are enabled
-let g:knobs_levels = {
-  \   "ale":5,
-  \   "apathy":5,
-  \   "airline":5,
-  \   "autosave":5,
-  \   "chadtree":7,
-  \   "conflict-marker":7,
-  \   "dispatch":5,
-  \   "endwise":5,
-  \   "eunuch":5,
-  \   "fugitive":5,
-  \   "fzf":4,
-  \   "gitgutter":5,
-  \   "gruvbox":5,
-  \   "gruvbox8":1,
-  \   "goyo":5,
-  \   "gutentags":5,
-  \   "nerdtree":4,
-  \   "lens":8,
-  \   "minimap": 5,
-  \   "modes":1,
-  \   "nnn":6,
-  \   "polyglot":5,
-  \   "spelling":5,
-  \   "startify":4,
-  \   "startuptime":5,
-  \   "surround":5,
-  \   "tabcomplete":5,
-  \   "tabular":5,
-  \   "thingity":5,
-  \   "unimpaired":5,
-  \   "update_spelling":5,
-  \   "which_key":7,
-  \   "window_cleaner":5,
-  \   "writegood":8
-  \ }
-
-" Feature toggles triggered by each layer
-let g:knobs_layers_map = {
-  \    "mobile":{
-  \      "compactcmd":1,
-  \      "light":1,
-  \      "markdown_flow":1,
-  \      "markdown_conceal_full":1,
-  \      "markdown_syntax_list":1
-  \    },
-  \    "notes":{
-  \      "compactcmd":1,
-  \      "light":1,
-  \      "markdown_conceal_partial":1
-  \    },
-  \    "nvim-0.5":{
-  \      "lsp":1
-  \    }
-  \  }
-
-" Default state of layers
-" iTerm used for notes layer
-let g:knobs_layers = get(g:, "layers",{
-  \   "mobile": $ANDROID_DATA == '/data' ? 1 : 0,
-  \   "notes": $ITERM_PROFILE == 'oh-my' ? 1 : 0,
-  \   "nvim-0.5": has('nvim-0.5') ? 1 : 0
-  \ })
-
-"
-" CORE Configuration - START
-"
-let mapleader = "\<Space>"
-let maplocalleader = "\\"
-
-" Enable mouse support
-set mouse=a
-" Disable error bells
-set noerrorbells
-" Enhance command-line completion
-set wildmenu
-" Highlight current line
-set cursorline
-" Ignore case of searches
-set ignorecase
-" Highlight dynamically as pattern is typed
-set incsearch
-" Default updatetime is 4000 and too slow
-set updatetime=300
-" Quicker timeout between key presses
-set timeoutlen=500
-" Always show sign column to stop flip-flopping
-set signcolumn=yes
-if has("nvim")
-  " Support true color in nvim only, this feature causes colours to not render
-  " in vim in tmux
-  set termguicolors
-endif
-" Keep messages short and don't give ins-completion-messages (c)
-set shortmess=catI
-" Tab support with 2 spaces
-set tabstop=2
-set shiftwidth=2
-set expandtab
-" 80 characters default width
-set textwidth=80
-" Softbreak on space between words
-set linebreak
-" Use the OS clipboard by default (on versions compiled with `+clipboard`)
-set clipboard=unnamed
-
-" I don't use modelines
-set nomodeline
-
-"
-" CORE Configuration - END
-"
-
 if !knobs#At(1)
   finish
-endif
-if !knobs#("nerdtree")
-  nnoremap <silent> <leader>f :call knobs#core#SetLevel(5)<CR>
-  nnoremap <silent> <leader>n :call knobs#core#SetLevel(5)<CR>
-  nnoremap <silent> <leader>s :call knobs#core#SetLevel(5)<CR>
-endif
-
-" Provide more space for command output (e.g. fugitive) - with it this you may
-" need to press ENTER after fugitive commands
-if knobs#("compactcmd")
-  set cmdheight=1
-else
-  set cmdheight=2
-endif
-
-" Start / stop profiling
-nnoremap <leader>.p :profile start ~/vim-performance.log<CR>:profile func*<CR>:profile file *<CR>
-nnoremap <leader>.o :profile stop<CR>
-nnoremap <leader>.i :profile dump<CR>
-
-" save all files
-if !knobs#("autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | endif
-
-" reset highlighting
-nnoremap <silent> <leader>z :noh<CR>
-
-if knobs#("modes")
-  " Numbered modes of configuration
-  nnoremap <silent> <leader>1 :call modes#ResetMode()<CR>
-  nnoremap <silent> <leader>2 :call modes#PersonalDevMode()<CR>
-  nnoremap <silent> <leader>3 :call modes#MobbingMode()<CR>
-  nnoremap <silent> <leader>4 :call modes#TrainingMode()<CR>
 endif
 
 " Load plugins
@@ -208,19 +49,12 @@ if knobs#could("nerdtree")
 endif
 
 if knobs#could("nnn")
-  "
   " Window and file management
-  "
   Plug 'mcchrish/nnn.vim'
-  let g:nnn#set_default_mappings = 0
-  let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6  } }
-  nnoremap <silent> <leader>m :NnnPicker<CR>
 endif
 
 IfKnob 'nerdtree' Plug 'ryanoasis/vim-devicons'
 IfKnob 'minimap' Plug 'wfxr/minimap.vim'
-let g:minimap_auto_start = 1
-let g:minimap_close_filetypes = ['nerdtree','startify']
 
 " Vinegar - better file expore than NERD
 if KnobAt(9) | Plug 'tpope/vim-vinegar' | endif
@@ -245,7 +79,6 @@ IfKnob 'lens' Plug 'camspiers/lens.vim'
 
 if knobs#could("gutentags")
   Plug 'ludovicchabant/vim-gutentags'
-  let g:gutentags_cache_dir = expand('~/.cache/tags')
 endif
 
 "
@@ -274,16 +107,12 @@ IfKnob 'endwise' Plug 'tpope/vim-endwise'
 " Aysynchronous
 if knobs#could("dispatch")
   Plug 'tpope/vim-dispatch'
-  let g:dispatch_no_tmux_make = 1
-  let g:dispatch_quickfix_height = 4
 endif
 
 if knobs#could("syntastic")
   Plug 'vim-syntastic/syntastic'
-  let g:vim_jsx_pretty_colorful_config = 1
   Plug 'yuezk/vim-js'
   Plug 'maxmellon/vim-jsx-pretty'
-  source ~/.config/vim/syntastic.vim
 endif
 
 if knobs#could("ale")
@@ -308,8 +137,6 @@ endif
 if knobs#could("gitgutter")
   " gitgutter - Git change indicator to left of window
   Plug 'airblade/vim-gitgutter'
-  let g:gitgutter_map_keys = 0
-  let g:gitgutter_highlight_linenrs = 1
 endif
 
 " HTML
@@ -328,8 +155,6 @@ if KnobAt(5) | Plug 'junegunn/goyo.vim' | endif
 if KnobAt(5)
   " markdown preview
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-  let g:mkdp_auto_close = 0
-  let g:mkdp_page_title = '${name}'
 endif
 
 " Vim testing
@@ -387,207 +212,4 @@ if knobs#("lsp")
   nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
   nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 endif
-
-if !Knob("light")
-  if knobs#("gruvbox")
-    colorscheme gruvbox
-  elseif knobs#("gruvbox8")
-    colorscheme gruvbox8
-  endif
-  set bg=dark
-else
-  " Light scheme primarily used for writing content
-  colorscheme one
-  set bg=light
-  let $BG_MODE="light"
-  let g:one_allow_italics = 1
-  call one#highlight('Normal', '000000', 'ffffff', 'none')
-  for i in [1,2,3,4,5,6]
-    call one#highlight('markdownH'.i, '000000', 'ffffff', 'bold')
-  endfor
-  call one#highlight('markdownH2', '000000', 'ffffff', 'bold')
-  call one#highlight('Directory', '222222', '', 'bold')
-  highlight Cursor guibg=grey
-  highlight iCursor guibg=black
-  set guicursor=n-v-c:block-Cursor
-  set guicursor+=i:ver100-iCursor
-endif
-
-if !KnobAt(3)
-  finish
-endif
-
-if Knob("startify")
-  let g:startify_custom_header = ""
-  let g:startify_session_autoload = 0
-  let g:startify_change_to_dir = 0
-  let g:startify_lists = [
-        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-        \ { 'type': 'sessions',  'header': ['   Sessions']       },
-        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-        \ { 'type': function('my#gitModified'),  'header': ['   git modified']},
-        \ { 'type': function('my#gitUntracked'), 'header': ['   git untracked']},
-        \ { 'type': 'commands',  'header': ['   Commands']       },
-        \ { 'type': function('my#nerdtreeBookmarks'),
-        \ 'header': ['   NERDTree Bookmarks']}
-        \ ]
-endif
-
-" Write all buffers before navigating from Vim to tmux pane
-let g:tmux_navigator_save_on_switch = 2
-
-"
-" *** Scope : Windows ***
-"
-"
-" Group all autocmds together to improve reloadability (reloads of vimrc
-" replace, not add to, existing commands) and source tacking (we know that
-" the autocmds came from here).
-"
-augroup dotme
-  autocmd!
-
-  autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
-  autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
-
-  if KnobAt(3)
-    "
-    " *** Scope : Editing ***
-    "
-    " Do not highlight current line when in insert mode
-    autocmd InsertEnter,InsertLeave * set cul!
-  endif
-
-  if knobs#("autosave")
-    "
-    " *** Scope : IO ***
-    "
-    " Auto reload when focus gained or buffer entered
-    autocmd FocusGained,WinEnter,BufEnter * :checktime
-
-    " Auto write when text changes using debouncing to wait for pause in text
-    " entry. If we save too often then tools that watch for change will get too
-    " busy.
-    autocmd TextChangedI,TextChangedP * ++nested silent!
-      \ call my#DebouncedSave(3000)
-    autocmd InsertLeave,TextChanged * ++nested silent! call my#DebouncedSave(500)
-  endif
-
-  if KnobAt(3)
-    "
-    " *** Scope : Python ***
-    "
-
-    " Override shiftwidth for python
-    autocmd Filetype python set shiftwidth=2
-  endif
-augroup end
-
-"
-" *** Scope : Editing ***
-"
-
-" Show white space
-if KnobAt(1)
-  exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
-  set list
-
-  " Add operator af for all file
-  onoremap af :<C-u>normal! ggVG<CR>
-
-  " Return to visual mode after indenting
-  vnoremap < <gv
-  vnoremap > >gv
-endif
-
-" Surround customisation
-if KnobAt(3)
-  let g:surround_{char2nr('b')} = "**\r**"
-  let g:surround_{char2nr('<')} = "<\r>"
-  " Short cuts for surround word
-  if knobs#("which_key")
-    nnoremap <silent> ' :WhichKey "'"<CR>
-  endif
-  nmap '" ysiW"
-  nmap "" ysiW"
-  nmap '' ysiW'
-  nmap '` ysiW`
-  nmap '< ysiW<
-  nmap 'b ysiWb
-endif
-
-" *** Scope : IO ***
-"
-if KnobAt(1)
-  if knobs#("autosave")
-    " Auto reload underlying file if it changes, although
-    " it only really reloads when external command run like :!ls
-    set autoread
-    set autowrite
-  endif
-  " Allow hidden buffers without saving
-  set hidden
-  " No backups or backups during write
-  set nobackup
-  set nowritebackup
-  " Keep swap and backups centrally
-  set backupdir=~/.vim/backups
-  set directory=~/.vim/swaps
-
-  " Scroll 3 lines before border
-  set scrolloff=3
-endif
-
-" Optimise for faster terminal connections
-" set ttyfast
-
-"
-" *** Scope : Status Bar ***
-"
-
-if knobs#("airline")
-  " Less accurate highlighting, but improved performance
-  let g:airline_highlighting_cache = 1
-  " Explicit airline extensions for quicker start up
-  let g:airline_extensions = [
-         \ "ale",
-         \ "branch",
-         \ "tabline",
-         \ "whitespace",
-         \ "wordcount"
-         \ ]
-  " Enable powerfonts giving angled tab
-  let g:airline_powerline_fonts = 1
-  let g:airline_skip_empty_sections = 1
-  let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-  let g:airline_detect_spell = 0
-endif
-
-" Backspace support
-if KnobAt(1)
-  set backspace=indent,eol,start
-endif
-
-" source ~/.config/vim/netrw.vim
-
-if KnobAt(3)
-  " Thanks to Damian Conway                                                         test long line
-  set colorcolumn=""
-  highlight ColorColumn ctermbg=magenta
-  call matchadd('ColorColumn', '\%82v', 100)
-endif
-
-highlight ErrorMsg ctermbg=grey guibg=grey
-
-" Open new splits to the right and below
-set splitright
-set splitbelow
-
-" Surround Customisations
-" This doesn't work for me -
-" https://stackoverflow.com/questions/32769488/double-vim-surround-with
-" autocmd Filetype markdown let b:surround_43 = "**\r**"
-
-" Don't conceal any syntax
-set conceallevel=0
 
