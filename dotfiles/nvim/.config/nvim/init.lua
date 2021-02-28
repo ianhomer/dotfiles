@@ -30,6 +30,4 @@ paq 'nvim-lua/completion-nvim'
 paq 'nvim-lua/diagnostic-nvim'
 paq 'tweekmonster/startuptime.vim'
 
-if knobs.has('ale') then
-  paq 'dense-analysis/ale'
-end
+knobs.paq('ale', 'dense-analysis/ale')
