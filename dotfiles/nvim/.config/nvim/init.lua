@@ -1,9 +1,23 @@
-vim.cmd 'packadd paq-nvim'               -- load the package manager
+local cmd = vim.cmd
+
+cmd 'packadd paq-nvim'               -- load the package manager
 local paq = require('paq-nvim').paq  -- a convenient alias
+local o = vim.o
+
+o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
+
+local knobs = require("knobs")
+
+cmd 'call knobs#Init()'
+
 paq {'savq/paq-nvim', opt = true}
 
-paq 'morhetz/gruvbox'
-paq 'lifepillar/vim-gruvbox8'
+if knobs.has('gruvbox') then
+  paq 'morhetz/gruvbox'
+elseif knobs.has('gruvbox8') then
+  paq 'lifepillar/vim-gruvbox8'
+end
+
 paq 'junegunn/fzf'
 paq 'junegunn/fzf.vim'
 paq 'tpope/vim-fugitive'
@@ -16,9 +30,6 @@ paq 'nvim-lua/completion-nvim'
 paq 'nvim-lua/diagnostic-nvim'
 paq 'tweekmonster/startuptime.vim'
 
-local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
-
-scopes["o"]["runtimepath"] = scopes["o"]["runtimepath"] .. ",~/.vim"
-
-
-
+if knobs.has('ale') then
+  paq 'dense-analysis/ale'
+end
