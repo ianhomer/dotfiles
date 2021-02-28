@@ -1,4 +1,4 @@
-if !Knob("spelling")
+if !knobs#("spelling")
   finish
 endif
 

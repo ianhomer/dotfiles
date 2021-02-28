@@ -4,10 +4,6 @@ if knobs#("goyo")
   let g:goyo_width = 85
 endif
 
-if knobs#("spelling")
-  source ~/.config/vim/spell.vim
-endif
-
 if !knobs#("thingity")
   finish
 endif

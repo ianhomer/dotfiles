@@ -12,23 +12,27 @@ cmd 'call knobs#Init()'
 
 paq {'savq/paq-nvim', opt = true}
 
-if knobs.has('gruvbox') then
-  paq 'morhetz/gruvbox'
-elseif knobs.has('gruvbox8') then
-  paq 'lifepillar/vim-gruvbox8'
-end
+knobs.paq('gruvbox', 'morhetz/gruvbox')
+knobs.paq('gruvbox8', 'lifepillar/vim-gruvbox8')
 
-paq 'junegunn/fzf'
-paq 'junegunn/fzf.vim'
-paq 'tpope/vim-fugitive'
-paq 'tpope/vim-rhubarb'
-paq 'preservim/nerdtree'
-paq 'mhinz/vim-startify'
+knobs.paq('fzf', 'junegunn/fzf')
+knobs.paq('fzf', 'junegunn/fzf.vim')
+knobs.paq('fugitive', 'tpope/vim-fugitive')
+knobs.paq('fugitive', 'tpope/vim-rhubarb')
+knobs.paq('gitgutter', 'airblade/vim-gitgutter')
+knobs.paq('dispatch', 'tpope/vim-dispatch')
+knobs.paq('nerdtree', 'preservim/nerdtree')
+knobs.paq('startify', 'mhinz/vim-startify')
+
+knobs.paq('airline', 'vim-airline/vim-airline')
+knobs.paq('airline', 'vim-airline/vim-airline-themes')
+knobs.paq('gutentags', 'ludovicchabant/vim-gutentags')
+knobs.paq('tabular', 'godlygeek/tabular')
 
 paq 'neovim/nvim-lspconfig'
 paq 'nvim-lua/completion-nvim'
 paq 'nvim-lua/diagnostic-nvim'
-paq 'tweekmonster/startuptime.vim'
+knobs.paq('startuptime', 'tweekmonster/startuptime.vim')
 
 knobs.paq('nerdtree', 'ryanoasis/vim-devicons')
 knobs.paq('minimap', 'wfxr/minimap.vim')
@@ -42,7 +46,7 @@ local on_attach = function(client, bufnr)
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
+  -- Mappings
   local opts = { noremap=true, silent=true }
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -70,7 +74,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
--- Use a loop to conveniently both setup defined servers 
+-- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches
 local servers = { "bashls", "cssls", "jsonls", "pyls", "tsserver", "vimls",  }
 for _, lsp in ipairs(servers) do
