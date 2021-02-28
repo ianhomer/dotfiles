@@ -2,6 +2,8 @@ if !knobs#At(1)
   finish
 endif
 
+let g:init_vim = 1
+
 " Load plugins
 call plug#begin(knobs#GetPluggedDir())
 "

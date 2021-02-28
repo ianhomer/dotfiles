@@ -69,7 +69,9 @@ endfunction
 " Reload vimrc, neo vimrc and CoC
 function! knobs#core#ReloadConfig()
   silent! wall
-  exec "source ".g:vim_init_file
+  if exists("g:init_vim")
+    exec "source ".g:vim_init_file
+  endif
   " Source local plugin files too, since not explicitly referenced in init file
   for plugin_file in split(globpath(g:vim_local_plugin_dir, '*'), '\n')
     exec "source ".plugin_file
