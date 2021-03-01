@@ -12,6 +12,7 @@ cmd 'call knobs#Init()'
 
 paq {'savq/paq-nvim', opt = true}
 
+knobs.paq('light', 'rakr/vim-one')
 knobs.paq('gruvbox', 'morhetz/gruvbox')
 knobs.paq('gruvbox8', 'lifepillar/vim-gruvbox8')
 
