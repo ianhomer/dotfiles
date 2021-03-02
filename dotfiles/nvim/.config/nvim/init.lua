@@ -33,6 +33,9 @@ knobs.paq('tabular', 'godlygeek/tabular')
 paq 'neovim/nvim-lspconfig'
 paq 'nvim-lua/completion-nvim'
 paq 'nvim-lua/diagnostic-nvim'
+
+paq{'iamcco/markdown-preview.nvim', run='cd app && yarn install'}
+
 knobs.paq('startuptime', 'tweekmonster/startuptime.vim')
 
 knobs.paq('nerdtree', 'ryanoasis/vim-devicons')
