@@ -41,6 +41,7 @@ let g:knobs_levels = {
   \   "gutentags":5,
   \   "nerdtree":4,
   \   "lens":8,
+  \   "lightbulb":5,
   \   "minimap": 5,
   \   "modes":1,
   \   "nnn":6,
