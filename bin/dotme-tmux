@@ -15,7 +15,12 @@ fi
 git -C ~/.tmux/plugins/tpm pull
 
 log:: "Updating tmux plugins"
-~/.tmux/plugins/tpm/scripts/update_plugin_prompt_handler.sh all
+SCRIPTS=~/.tmux/plugins/tpm/scripts
+
+. "$SCRIPTS/helpers/tmux_echo_functions.sh"
+. "$SCRIPTS/helpers/tmux_utils.sh"
+$SCRIPTS/update_plugin.sh --tmux-echo all
+reload_tmux_environment
 
 should-run -fu $0
 

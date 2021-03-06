@@ -17,15 +17,17 @@ help() {
   cat << EOF
   -f force dynamic shim (not from cache)
   -h this help
+  -i variables as ini file
   -o (termux|macos)
   -u update local shim cache
 EOF
 }
 
 OPTIND=1
-while getopts "fho:u" o; do case "$o" in
+while getopts "fhio:u" o; do case "$o" in
   f) FORCE=y ;;
   h) help && exit 0 ;;
+  i) INI=y ;;
   o) OS=$OPTARG ;;
   u) UPDATE=y ;;
   *) exit 1 ;;
@@ -39,6 +41,8 @@ if [[ "$UPDATE" = "y" ]] ; then
   DOTFILES_BIN="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
   . ${DOTFILES_BIN}/functions/log.sh
   mkdir -p $DOTME_CONFIG
+
+  # Update .shim
   LOCAL_SHIM=$HOME/.config/dotme/.shim
   if [[ -f "$LOCAL_SHIM" ]] ; then
     CURRENT_SHIM=$(cat $LOCAL_SHIM)
@@ -46,6 +50,18 @@ if [[ "$UPDATE" = "y" ]] ; then
   NEW_SHIM=$(shim -f)
   if [[ "${CURRENT_SHIM}" != "${NEW_SHIM}" ]] ; then
     log:: "updating local shim"
+    cat <<EOF > $LOCAL_SHIM
+$NEW_SHIM
+EOF
+  fi
+  # Update shim.ini
+  LOCAL_SHIM=$HOME/.config/dotme/shim.ini
+  if [[ -f "$LOCAL_SHIM" ]] ; then
+    CURRENT_SHIM=$(cat $LOCAL_SHIM)
+  fi
+  NEW_SHIM=$(shim -fi)
+  if [[ "${CURRENT_SHIM}" != "${NEW_SHIM}" ]] ; then
+    log:: "updating local shim ini"
     cat <<EOF > $LOCAL_SHIM
 $NEW_SHIM
 EOF
@@ -90,7 +106,21 @@ if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
 
   DOTFILES_DIR="$(cd $DOTFILES_BIN/.. && pwd)"
 
-  cat <<EOF
+  if [[ "$INI" = "y" ]] ; then
+    cat <<EOF
+[DEFAULT]
+DOTFILES_BIN = $DOTFILES_BIN
+DOTFILES_DIR = $DOTFILES_DIR
+ME = $DOTFILES_DIR
+DOTME_CONFIG = $DOTME_CONFIG
+SHIM_LOADED = 1
+SHIM_OS = $SHIM_OS
+SHIM_SED = $SHIM_SED
+SHIM_STAT = $SHIM_STAT
+THINGS_DIR = $THINGS_DIR
+EOF
+  else
+    cat <<EOF
 export DOTFILES_BIN=$DOTFILES_BIN
 export DOTFILES_DIR=$DOTFILES_DIR
 export ME=$DOTFILES_DIR
@@ -101,6 +131,7 @@ export SHIM_SED=$SHIM_SED
 export SHIM_STAT=$SHIM_STAT
 export THINGS_DIR=$THINGS_DIR
 EOF
+  fi
 else
   cat $LOCAL_SHIM
 fi

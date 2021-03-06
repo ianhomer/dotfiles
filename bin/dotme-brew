@@ -26,13 +26,15 @@ fi
 
 adminFormula="adoptopenjdk8 adoptopenjdk11 java11 openjdk@11 powershell"
 
+installed=`brew list -1 --formula`
+
 # Pin formula that need password to upgrade if not in admin mode
 for formula in $adminFormula ; do
   if [[ "$ADMIN" == "y" ]] ; then
     log:: "unpinning $formula"
     brew unpin $formula &>/dev/null || log:: "not unpinned $formula"
   else
-    if brew list $formula &>/dev/null ; then
+    if [[ "$installed" == *${formula}* ]] ; then
       log::trace "$formula installed => should be pinned"
       if [ $(brew list --pinned $formula | wc -l) == 0 ] ; then
         log:: "pinning $formula"
@@ -50,7 +52,8 @@ brew update
 
 log:: "upgrading brew"
 # Upgrade any already installed formulae
-brew upgrade
+brew upgrade --ignore-pinned
+log:: "upgraded brew"
 
 cd $DOTFILES_DIR/config/brew
 brew bundle

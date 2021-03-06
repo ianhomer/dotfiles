@@ -31,15 +31,15 @@ endfunction
 function window#SwitchToFirstEditableFile()
   let l:current = bufnr("%")
 
-  if <SID>IsEditableFile(current) || winnr('$') == 1 
+  if window#IsEditableFile(current)
     " Current buffer is good for one to stay open
     return l:current
   endif
 
   " Find a more appropriate buffer to switch to
   for l:buffer in filter(range(1, bufnr('$')), 'buflisted(v:val)')
-    " Is buffer in active window and editable?
-    if bufwinnr(l:buffer) > -1 && <SID>IsEditableFile(l:buffer)
+    " Is buffer editable?
+    if window#IsEditableFile(l:buffer)
       let l:window = bufwinnr(l:buffer)
       if l:window > 0
         execute l:window 'wincmd w'
@@ -50,14 +50,11 @@ function window#SwitchToFirstEditableFile()
     endif
   endfor
 
-  " Open up last file editted
-  execute "normal! `0"
-
   " Can't find a suitable buffer to switch to, so carry on with current as best
   " option.
 endfunction
 
-function s:IsEditableFile(buffer)
+function window#IsEditableFile(buffer)
   " Nonexistant buffer
   if bufexists(a:buffer) == 0 | return 0 | endif
   " Unmodifiable buffer

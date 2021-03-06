@@ -5,7 +5,8 @@
 #
 
 def foo(bar):
-  print(f"foo executed with {bar}")
+    print(f"foo executed with {bar}")
 
-bar = "hello";
+
+bar = "hello"
 foo(bar)

@@ -1,3 +1,21 @@
+" Goyo distraction free writing
+if knobs#("goyo")
+  nnoremap <leader>jg :Goyo<CR>
+  let g:goyo_width = 85
+endif
+
+if !knobs#("thingity")
+  finish
+endif
+
+if KnobAt(4)
+  " Markdown syntax
+  " Enable folding
+  let g:markdown_folding = 1
+  " Default large fold level start, folding everything up by default feels odd.
+  set foldlevelstart=20
+endif
+
 nnoremap <silent> <leader>jd :call thingity#DateHeading()<CR>
 nnoremap <silent> <leader>jn :call thingity#NewThing(1,"")<CR>
 nnoremap <silent> <leader>jj :call thingity#NewThing(0,"")<CR>

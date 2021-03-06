@@ -1,0 +1,120 @@
+#!/usr/bin/env python3
+
+import argparse
+import configparser
+import os
+import os.path
+import subprocess
+import re
+import sys
+from datetime import datetime
+from pathlib import Path
+home = str(Path.home())
+
+config = configparser.ConfigParser()
+config.read(str(Path.home()) + "/.config/dotme/shim.ini")
+THINGS_DIR = config['DEFAULT']['THINGS_DIR']
+PURPLE = '\033[95m'
+END = '\033[0m'
+
+
+def run():
+    parser = argparse.ArgumentParser(description='todoer')
+    parser.add_argument('do', nargs='*', help='do')
+    args = parser.parse_args()
+
+    if args.do:
+        words = []
+
+        # Scan words
+        for word in args.do:
+            words.append(word)
+        # do to add
+        do = " ".join(words)
+        add(do)
+        return
+
+    # Repeat search until we exit (Ctrl-C)
+    more = True
+    while more:
+        more = search()
+
+
+def search():
+    pattern = "\\- \\[ \\](?! [\\.\\-~\\^])"
+    ag = ["ag", "--noheading", "--nonumbers", "--nocolor", "--nobreak",
+          pattern, THINGS_DIR]
+    result = subprocess.run(ag, stdout=subprocess.PIPE, text=True)
+
+    lines = result.stdout.splitlines()
+    encoding = sys.getdefaultencoding()
+    dos = []
+    for line in lines:
+        do = line.replace("- [ ] ", "")
+        match = re.search("^([^:]*):((?:[A-Z]{0,3}(?=\\s))?)\\s*(.*)$", do)
+        if match:
+            doFile = match.group(1)
+            doContext = match.group(2)
+            subject = match.group(3)
+            dos.append(f"{PURPLE}{doContext}{END}\t{subject}\t{doFile}\n")
+        else:
+            # Invalid do
+            print(f"BADDO : {do}")
+    dos.sort()
+    fzf = subprocess.Popen(["fzf", "--ansi", "+m", "-d", "\t", "--with-nth",
+                            "1,2",
+                            "--tabstop", "4", "--tiebreak", "begin"],
+                           stdin=subprocess.PIPE,
+                           stdout=subprocess.PIPE,
+                           stderr=None)
+    fzfIn = fzf.stdin
+    fzfIn.write(f"\t(today)\t{getTodayLog()}\n".encode(encoding))
+    for do in dos:
+        fzfIn.write(do.encode(encoding))
+
+    fzfIn.flush()
+    fzfIn.close()
+    fzf.wait()
+    stdout = fzf.stdout
+    output = stdout.read().decode(encoding)
+    match = re.search("^([^\t]*)\t([^\t]*)\t(.*)$", output)
+    if match:
+        file = match.group(3)
+        subprocess.call(['nvim', file])
+        return True
+    else:
+        print(output)
+    return False
+
+
+def getTodayLog(now=datetime.now()):
+    now = datetime.now()
+    today = now.strftime("%m%d")
+    return f"{THINGS_DIR}/my-notes/stream/{today}.md"
+
+
+# Add a do
+def add(do):
+    now = datetime.now()
+    todayLog = getTodayLog(now)
+    if not os.path.isfile(todayLog):
+        Path(todayLog).touch()
+    with open(todayLog, 'r+') as file:
+        file.seek(0)
+        lines = file.readlines()
+        length = len(lines)
+        if length == 0:
+            # Add date heading
+            todayLong = now.strftime("%a %m %b %Y").upper()
+            lines.append(f"# {todayLong}\n\n")
+        elif length == 1:
+            # Guard to make sure todos don't crash heading of manually created
+            # file
+            lines.append("\n")
+
+        lines.insert(2, f"- [ ] {do}\n")
+        file.seek(0)
+        file.writelines(lines)
+
+
+run()

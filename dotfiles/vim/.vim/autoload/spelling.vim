@@ -2,7 +2,7 @@
 " Refresh spelling files
 "
 function! spelling#Update()
-  let l:spelldir = substitute(g:vim_dir, '\~', $HOME, '') . '/spell' 
+  let l:spelldir = substitute(knobs#GetConfigDir(), '\~', $HOME, '') . '/spell' 
   if !isdirectory(l:spelldir)
     echo 'Creating local spell directory ' . l:spelldir
     call mkdir(l:spelldir)
