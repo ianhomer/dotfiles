@@ -38,3 +38,7 @@ To change Alfred to use local preferences, not synced one :
     :profile stop
 
 Look at the bottom of the log file for a sorted summary
+
+Also generate a start up time report with:
+
+    :StartupTime

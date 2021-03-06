@@ -1,3 +1,11 @@
+if KnobAt(3)
+  nnoremap <leader>L ma:call my#PruneWhiteSpace()<CR>`a
+endif
+
+if !knobs#("ale")
+  finish
+endif
+
 let markdown_linters = ['markdownlint']
 
 " Enable markdown linters that help with good writing
@@ -25,6 +33,7 @@ let g:ale_fixers = {
   \   'css': ['prettier'],
   \   'javascript': ['eslint', 'prettier'],
   \   'json': ['jq'],
+  \   'python': ['black'],
   \   'scss': ['prettier'],
   \   'typescript': ['eslint', 'prettier']
   \}

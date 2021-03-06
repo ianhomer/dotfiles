@@ -1,3 +1,7 @@
+if !KnobAt(9)
+  finish
+endif
+
 " *** Scope : Experimental ***
 "
 
