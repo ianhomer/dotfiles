@@ -53,7 +53,7 @@ let g:knobs_levels = {
   \   "tabular":5,
   \   "thingity":5,
   \   "unimpaired":5,
-  \   "update_spelling":5,
+  \   "update_spelling":6,
   \   "which_key":7,
   \   "window_cleaner":5,
   \   "writegood":8
