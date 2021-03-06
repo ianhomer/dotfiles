@@ -2,7 +2,6 @@ local cmd = vim.cmd
 
 cmd 'packadd paq-nvim'               -- load the package manager
 local paq = require('paq-nvim').paq  -- a convenient alias
-require('lsp')
 local o = vim.o
 
 o['runtimepath'] = o['runtimepath'] .. ',~/.vim'
@@ -45,3 +44,6 @@ knobs.paq('nerdtree', 'ryanoasis/vim-devicons')
 knobs.paq('minimap', 'wfxr/minimap.vim')
 
 knobs.paq('ale', 'dense-analysis/ale')
+
+require('lsp')
+
