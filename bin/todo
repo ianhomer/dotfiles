@@ -46,7 +46,8 @@ def search(args):
     if args.all:
         pattern = "\\- \\[ \\]"
     else:
-        pattern = "\\- \\[ \\](?! [\\.\\-~\\^])"
+        # By default ignore todos
+        pattern = "\\- \\[ \\](?! ([A-Z]{0,3} )?[\\.\\-~\\^])"
     ag = ["ag", "--noheading", "--nonumbers", "--nocolor", "--nobreak",
           pattern, THINGS_DIR]
     result = subprocess.run(ag, stdout=subprocess.PIPE, text=True)
