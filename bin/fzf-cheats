@@ -5,7 +5,6 @@
 #
 
 import os, re, sys, fileinput, getopt
-from pathlib import Path
 
 
 def usage():
@@ -75,9 +74,9 @@ def parse(line):
         lastWasCommand = 0
         return
     # Command and definition
-    match = re.search("^[-|] `([^`]*)`\s*[:|] ([^|]*)", line)
+    match = re.search("^[-|] `([^`]*)`\\s*[:|] ([^|]*)", line)
     if not match:
-        match = re.search("^[-|] \*\*([^\*]*)\*\*\s*[:|] ([^|]*)", line)
+        match = re.search("^[-|] \\*\\*([^\\*]*)\\*\\*\\s*[:|] ([^|]*)", line)
     if match:
         printLine(
             {
@@ -87,7 +86,7 @@ def parse(line):
             }
         )
     # Command
-    match = re.search("^\*\*([^\*]*)\*\*", line)
+    match = re.search("^\\*\\*([^\\*]*)\\*\\*", line)
     if not match:
         match = re.search("^`([^`]*)`", line)
     if match:
@@ -96,7 +95,7 @@ def parse(line):
         return
     definition = line
     # Definition
-    match = re.search("^: ([^;:\.]+).*$", line)
+    match = re.search("^: ([^;:\\.]+).*$", line)
     if lastWasCommand and match:
         printLine(
             {
