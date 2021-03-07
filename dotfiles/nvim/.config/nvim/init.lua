@@ -27,6 +27,7 @@ knobs.paq('gitgutter', 'airblade/vim-gitgutter')
 knobs.paq('dispatch', 'tpope/vim-dispatch')
 knobs.paq('nerdtree', 'preservim/nerdtree')
 knobs.paq('startify', 'mhinz/vim-startify')
+knobs.paq('which_key', 'liuchengxu/vim-which-key')
 
 knobs.paq('airline', 'vim-airline/vim-airline')
 knobs.paq('airline', 'vim-airline/vim-airline-themes')

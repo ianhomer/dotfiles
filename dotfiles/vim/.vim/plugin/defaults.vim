@@ -64,6 +64,10 @@ if !knobs#("nerdtree")
   nnoremap <silent> <leader>s :call knobs#core#SetLevel(5)<CR>
 endif
 
+if knobs#("minimap")
+  nnoremap <silent> <leader>m :MinimapToggle<CR>
+endif
+
 " Start / stop profiling
 nnoremap <leader>.p :profile start ~/vim-performance.log<CR>:profile func*<CR>:profile file *<CR>
 nnoremap <leader>.o :profile stop<CR>
@@ -89,7 +93,7 @@ if knobs#could("nnn")
   nnoremap <silent> <leader>m :NnnPicker<CR>
 endif
 
-let g:minimap_auto_start = 1
+let g:minimap_auto_start = 0
 let g:minimap_close_filetypes = ['nerdtree','startify']
 
 if knobs#could("gutentags")
