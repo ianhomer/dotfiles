@@ -19,6 +19,14 @@ PURPLE = '\033[95m'
 END = '\033[0m'
 
 
+# - [ ] Todo
+# - [x] Done
+# - [ ] ABC . Backlog
+# - [ ] ABC - Near aligment
+# - [ ] ABC ~ Far alignment
+# - [ ] ABC ^ Goal
+# - [x] x Cancelled
+
 def run():
     parser = argparse.ArgumentParser(description='todoer')
     parser.add_argument('do', nargs='*', help='do')
