@@ -39,6 +39,8 @@ paq 'nvim-lua/diagnostic-nvim'
 
 paq{'iamcco/markdown-preview.nvim', run='cd app && yarn install'}
 
+paq 'christoomey/vim-tmux-navigator'
+
 knobs.paq('startuptime', 'tweekmonster/startuptime.vim')
 
 knobs.paq('nerdtree', 'ryanoasis/vim-devicons')

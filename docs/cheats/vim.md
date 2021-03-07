@@ -90,6 +90,7 @@
 | `[[`        | next header                                     |
 | `]]`        | previous header                                 |
 | `:nn`       | line nn                                         |
+| `gd`        | go to definition                                |
 | `gg`        | beginning of file                               |
 | `GG`        | end of file                                     |
 | `percent %` | next / previous bracket                         |
@@ -101,7 +102,7 @@
 | `zz`        | Scroll window center current line               |
 | `zt`        | Scroll down with current line at top            |
 | `zb`        | Scroll up with current line at bottom           |
-| `Ctrl+]`    | Go to definition                                |
+| `Ctrl+]`    | Go to tag definition                            |
 | `Ctrl+t`    | Go back up call stack                           |
 
 ### windows
