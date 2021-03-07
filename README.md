@@ -85,6 +85,13 @@ get a list of each part. `man dotme` will give you more guidance on usage.
 I configure a few things on my system [./docs/manual-configuration.md](manually)
 for minor tweaks and enhancements.
 
+To customise local dotme configuration, `vi ~/.config/dotme/.env` and edit a
+properties to look like:
+
+```properties
+MY_NOTES=my-notes
+```
+
 ## Thanks
 
 A large number of dotfiles projects out there that have given me inspiration to

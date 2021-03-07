@@ -13,8 +13,8 @@
 " for starting me down this route.  Originally I was using the `%bd | e#`
 " technique, but this
 " was performing badly for me - I had to move to the right window first, there'd
-" be an annoying (but small delay) 
-" since it'd open and close the buffer and I'd loose my cursor position. 
+" be an annoying (but small delay)
+" since it'd open and close the buffer and I'd loose my cursor position.
 " Some non-modifiable windows weren't closed either e.g. help windows.
 "
 
@@ -74,10 +74,10 @@ function window#cleaner#CloseMe()
   endif
 
   if &filetype == "startify"
-    " On startify window 
+    " On startify window
     "   => close vi
     quit
-  elseif len(getbufinfo({'buflisted':1})) > 1 
+  elseif len(getbufinfo({'buflisted':1})) > 1
         \ || (&filetype == "nerdtree" && len(getbufinfo({'buflisted':1})) == 1)
     " More than one buffer open or on nerdtree and one buffer open
     "   => close buffer and switch to next
@@ -91,7 +91,7 @@ function window#cleaner#CloseMe()
     endif
     NERDTreeClose
   elseif exists("g:NERDTree") && g:NERDTree.IsOpen()
-    " NERDTree open 
+    " NERDTree open
     "   => close buffer and leave NERDTree open
     execute ":q"
   elseif exists(':Startify')
@@ -103,7 +103,3 @@ function window#cleaner#CloseMe()
     execute ":bd"
   endif
 endfunction
-
-
-
-

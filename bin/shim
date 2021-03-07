@@ -71,6 +71,13 @@ fi
 
 if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
   #
+  # Load dotme .env
+  #
+  MY_NOTES="my-notes"
+  export ENV=~/.config/dotme/.env
+  [[ -f $ENV ]] && export $(cat $ENV| xargs)
+
+  #
   # Imply the OS value from the underlying OSTYPE
   #
   if [[ -z "$OS" ]] ; then
@@ -111,8 +118,9 @@ if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
 [DEFAULT]
 DOTFILES_BIN = $DOTFILES_BIN
 DOTFILES_DIR = $DOTFILES_DIR
-ME = $DOTFILES_DIR
 DOTME_CONFIG = $DOTME_CONFIG
+ME = $DOTFILES_DIR
+MY_NOTES = $MY_NOTES
 SHIM_LOADED = 1
 SHIM_OS = $SHIM_OS
 SHIM_SED = $SHIM_SED
@@ -123,8 +131,9 @@ EOF
     cat <<EOF
 export DOTFILES_BIN=$DOTFILES_BIN
 export DOTFILES_DIR=$DOTFILES_DIR
-export ME=$DOTFILES_DIR
 export DOTME_CONFIG=$DOTME_CONFIG
+export ME=$DOTFILES_DIR
+export MY_NOTES=$MY_NOTES
 export SHIM_LOADED=1
 export SHIM_OS=$SHIM_OS
 export SHIM_SED=$SHIM_SED
