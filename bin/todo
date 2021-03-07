@@ -1,90 +1,126 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
 
-# Extract todos from markdown or add more todos to today's log.
-#
-# Quick prototype in bash, should covert to a better language to enhance. It's
-# hitting it's limit as bash.
+import argparse
+import configparser
+import os
+import os.path
+import subprocess
+import re
+import sys
+from datetime import datetime
+from pathlib import Path
+home = str(Path.home())
 
-$(shim)
+config = configparser.ConfigParser()
+config.read(str(Path.home()) + "/.config/dotme/shim.ini")
+THINGS_DIR = config['DEFAULT']['THINGS_DIR']
+MY_NOTES = config['DEFAULT']['MY_NOTES']
+PURPLE = '\033[95m'
+END = '\033[0m'
 
-help() {
-  cat << EOF
-- [ ] Todo
-- [x] Done
-- [ ] . Backlog
-- [ ] - Near aligment
-- [ ] ~ Far alignment
-- [ ] ^ Goal
-- [ ] ^ ABC Goal for ABC context
-- [ ] ! Cancelled
-EOF
-}
 
-OPTIND=1
-while getopts "abc:hgox" o; do case "$o" in
-  a) ALL=y ;;
-  b) BACKLOG=y ;;
-  c) CONTEXT=" $OPTARG" ;;
-  g) GOAL=y ;;
-  h) help && exit 0 ;;
-  o) CANCELLED=y ;;
-  x) DONE=y ;;
-esac done
-shift $((OPTIND-1))
+def run():
+    parser = argparse.ArgumentParser(description='todoer')
+    parser.add_argument('do', nargs='*', help='do')
+    args = parser.parse_args()
 
-todo="$@"
+    if args.do:
+        words = []
 
-# If todo is just three characters then it's a context to list
-if [[ ${#todo} == 3 ]] ; then
-  CONTEXT=" $todo"
-  todo=""
-fi
+        # Scan words
+        for word in args.do:
+            words.append(word)
+        # do to add
+        do = " ".join(words)
+        add(do)
+        return
 
-if [[ -z "$todo" ]] ; then
-  # List todos
-  echo
-  if [[ -n "$ALL" ]] ; then
-    pattern="\- \[[^ox]\]( [\.\-~\^])?$CONTEXT"
-  elif [[ -n "$CANCELLED" ]] ; then
-    pattern="\- \[x\] !$CONTEXT"
-  elif [[ -n "$DONE" ]] ; then
-    pattern="\- \[x\]$CONTEXT"
-  elif [[ -n "$BACKLOG" ]] ; then
-    pattern="\- \[ \]( \.)$CONTEXT"
-  elif [[ -n "$GOAL" ]] ; then
-    pattern="\- \[ \]( [-~\^])$CONTEXT"
-  else
-    pattern="\- \[ \](?! [\.\-~\^])$CONTEXT"
-  fi
-  ag --nofilename --nocolor --nobreak "$pattern" $THINGS_DIR |
-    cut -c 3- |
-    sort | cut -c -$(tput cols)
-  echo
-else
-  # Create a todo
-  relativeTodayLog=my-notes/stream/`date +%m%d`.md
-  todayLog=$THINGS_DIR/$relativeTodayLog
-  if [[ ! -f "$todayLog" ]] ; then
-    date=`date '+%a %d %b %Y' | tr [:lower:] [:upper:]`
-    printf "# %s\n\n\n" "${date}" >> $todayLog
-  fi
-  
-  if [[ `wc -l < $todayLog` -lt 3 ]] ; then
-    echo >> $todayLog
-    if [[ `wc -l < $todayLog` -lt 3 ]] ; then
-      echo >> $todayLog
-      if [[ `wc -l < $todayLog` -lt 3 ]] ; then
-        echo >> $todayLog
-      fi
-    fi
-  fi
-  echo $relativeTodayLog
-  if [[ "$SHIM_OS" = "termux" ]] ; then
-    # sed -i gives a permission error on termux, not sure why
-    # for now, just append to end which is good enough
-    echo "- [ ] ${todo}" >> $todayLog
-  else
-    $SHIM_SED -i "3i- [ ] ${todo}" $todayLog
-  fi
-  ag --nofilename --nocolor --nobreak '\- \[ \](?! [\.~\^])' $THINGS_DIR | wc -l
-fi
+    # Repeat search until we exit (Ctrl-C)
+    more = True
+    while more:
+        more = search()
+
+
+def search():
+    pattern = "\\- \\[ \\](?! [\\.\\-~\\^])"
+    ag = ["ag", "--noheading", "--nonumbers", "--nocolor", "--nobreak",
+          pattern, THINGS_DIR]
+    result = subprocess.run(ag, stdout=subprocess.PIPE, text=True)
+
+    lines = result.stdout.splitlines()
+    encoding = sys.getdefaultencoding()
+    dos = []
+    for line in lines:
+        do = line.replace("- [ ] ", "")
+        match = re.search("^([^:]*):((?:[A-Z]{0,3}(?=\\s))?)\\s*(.*)$", do)
+        if match:
+            doFile = match.group(1)
+            doContext = match.group(2)
+            subject = match.group(3)
+            dos.append(f"{PURPLE}{doContext}{END}\t{subject}\t{doFile}\n")
+        else:
+            # Invalid do
+            print(f"BADDO : {do}")
+    dos.sort()
+    fzf = subprocess.Popen(["fzf", "--ansi", "+m", "-d", "\t", "--with-nth",
+                            "1,2",
+                            "--tabstop", "4", "--tiebreak", "begin"],
+                           stdin=subprocess.PIPE,
+                           stdout=subprocess.PIPE,
+                           stderr=None)
+    fzfIn = fzf.stdin
+    fzfIn.write(f"\t(today)\t{getTodayLog()}\n".encode(encoding))
+    for do in dos:
+        fzfIn.write(do.encode(encoding))
+
+    fzfIn.flush()
+    fzfIn.close()
+    fzf.wait()
+    stdout = fzf.stdout
+    output = stdout.read().decode(encoding)
+    match = re.search("^([^\t]*)\t([^\t]*)\t(.*)$", output)
+    if match:
+        file = match.group(3)
+        subprocess.call(['nvim', file])
+        return True
+    else:
+        print(output)
+    return False
+
+
+def getTodayLog(now=datetime.now()):
+    now = datetime.now()
+    today = now.strftime("%m%d")
+    return f"{THINGS_DIR}/{MY_NOTES}/stream/{today}.md"
+
+
+# Add a do
+def add(do):
+    match = re.search("^((?:[A-Z]{0,3}(?=\\s))?)\\s*(.*)$", do)
+    # MEM (Memento https://www.imdb.com/title/tt0209144/)
+    doContext = match.group(1) or "MEM"
+    subject = match.group(2)
+
+    now = datetime.now()
+    todayLog = getTodayLog(now)
+    if not os.path.isfile(todayLog):
+        Path(todayLog).touch()
+    with open(todayLog, 'r+') as file:
+        file.seek(0)
+        lines = file.readlines()
+        length = len(lines)
+        if length == 0:
+            # Add date heading
+            todayLong = now.strftime("%a %d %b %Y").upper()
+            lines.append(f"# {todayLong}\n\n")
+        elif length == 1:
+            # Guard to make sure todos don't crash heading of manually created
+            # file
+            lines.append("\n")
+
+        lines.insert(2, f"- [ ] {doContext} {subject}\n")
+        file.seek(0)
+        file.writelines(lines)
+
+
+run()
