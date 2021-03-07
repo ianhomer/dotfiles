@@ -2,6 +2,16 @@
 
 ## vim
 
+### memento
+
+Things I'm trying to remember.
+
+|          |                                                       |
+| --       | --                                                    |
+| `gd`     | Go to definition                                      |
+| `ctrl-]` | Go to tag                                             |
+| `ctrl-o` | Jump back to previous location (after `gd` or `ctr-]` |
+
 ### misc
 
 |            |                       |
