@@ -34,8 +34,7 @@ knobs.paq('gutentags', 'ludovicchabant/vim-gutentags')
 knobs.paq('tabular', 'godlygeek/tabular')
 
 paq 'neovim/nvim-lspconfig'
-paq 'nvim-lua/completion-nvim'
-paq 'nvim-lua/diagnostic-nvim'
+-- paq 'nvim-lua/completion-nvim'
 
 paq{'iamcco/markdown-preview.nvim', run='cd app && yarn install'}
 

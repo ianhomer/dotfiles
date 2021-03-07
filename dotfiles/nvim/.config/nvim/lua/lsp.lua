@@ -41,6 +41,7 @@ local servers = { "bashls", "cssls", "jsonls", "pyls", "tsserver", "vimls",  }
 for _, lsp in ipairs(servers) do
   local lspserver = lspconfig[lsp]
   if lspserver then
+    -- lspconfig[lsp].setup { on_attach = require'completion'.on_attach }
     lspconfig[lsp].setup { on_attach = on_attach }
   else
     print("Can't set up LSP for"..lsp)
