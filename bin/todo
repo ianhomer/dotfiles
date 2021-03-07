@@ -22,6 +22,7 @@ END = '\033[0m'
 def run():
     parser = argparse.ArgumentParser(description='todoer')
     parser.add_argument('do', nargs='*', help='do')
+    parser.add_argument('-a', '--all', help='all dos', action='store_true')
     args = parser.parse_args()
 
     if args.do:
@@ -38,11 +39,14 @@ def run():
     # Repeat search until we exit (Ctrl-C)
     more = True
     while more:
-        more = search()
+        more = search(args)
 
 
-def search():
-    pattern = "\\- \\[ \\](?! [\\.\\-~\\^])"
+def search(args):
+    if args.all:
+        pattern = "\\- \\[ \\]"
+    else:
+        pattern = "\\- \\[ \\](?! [\\.\\-~\\^])"
     ag = ["ag", "--noheading", "--nonumbers", "--nocolor", "--nobreak",
           pattern, THINGS_DIR]
     result = subprocess.run(ag, stdout=subprocess.PIPE, text=True)
