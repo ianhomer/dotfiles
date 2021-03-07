@@ -81,7 +81,7 @@ def search():
     match = re.search("^([^\t]*)\t([^\t]*)\t(.*)$", output)
     if match:
         file = match.group(3)
-        subprocess.call(['nvim', file])
+        subprocess.call(['nvim', file], env={**os.environ, "VIM_KNOB": "5"})
         return True
     else:
         print(output)
