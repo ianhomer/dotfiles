@@ -108,9 +108,9 @@ def getTodayLog(now=datetime.now()):
 
 # Add a do
 def add(do):
-    match = re.search("^((?:[A-Z]{0,3}(?=\\s))?)\\s*(.*)$", do)
+    match = re.search("^((?:[A-Za-z]{0,3}(?=\\s))?)\\s*(.*)$", do)
     # MEM (Memento https://www.imdb.com/title/tt0209144/)
-    doContext = match.group(1) or "MEM"
+    doContext = match.group(1).upper() or "MEM"
     subject = match.group(2)
 
     now = datetime.now()
