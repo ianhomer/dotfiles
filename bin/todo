@@ -64,8 +64,6 @@ def context():
     ag = subprocess.Popen(
         [
             "ag",
-            "--noheading",
-            "--nonumbers",
             "--nocolor",
             "--nobreak",
             "--nofilename",
@@ -93,7 +91,7 @@ def search(args):
         pattern = "\\- \\[ \\]"
     else:
         # By default ignore todos
-        pattern = "\\- \\[ \\](?! ([A-Z]{0,3} )?[\\.\\-~\\^])"
+        pattern = "\\- \\[ \\](?! ([A-Z]{3} )?[\\.\\-~\\^])"
 
     ag = [
         "ag",
@@ -111,7 +109,7 @@ def search(args):
     dos = []
     for line in lines:
         do = line.replace("- [ ] ", "")
-        match = re.search("^([^:]*):((?:[A-Z]{0,3}(?=\\s))?)\\s*(.*)$", do)
+        match = re.search("^([^:]*):((?:[A-Z]{3}(?=\\s))?)\\s*(.*)$", do)
         if match:
             doFile = match.group(1)
             doContext = match.group(2)
