@@ -92,7 +92,6 @@ def search(args):
         # By default ignore todos
         pattern = "\\- \\[ \\](?! ([A-Z]{3} )?[\\.\\-~])"
 
-
     ag = [
         "ag",
         "--noheading",
