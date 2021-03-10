@@ -9,14 +9,15 @@ import re
 import sys
 from datetime import datetime
 from pathlib import Path
+
 home = str(Path.home())
 
 config = configparser.ConfigParser()
 config.read(str(Path.home()) + "/.config/dotme/shim.ini")
-THINGS_DIR = config['DEFAULT']['THINGS_DIR']
-MY_NOTES = config['DEFAULT']['MY_NOTES']
-PURPLE = '\033[95m'
-END = '\033[0m'
+THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
+MY_NOTES = config["DEFAULT"]["MY_NOTES"]
+PURPLE = "\033[95m"
+END = "\033[0m"
 
 
 # - [ ] Todo
@@ -26,10 +27,12 @@ END = '\033[0m'
 # - [ ] ABC ~ Alignment
 # - [x] x Cancelled
 
+
 def run():
-    parser = argparse.ArgumentParser(description='todoer')
-    parser.add_argument('do', nargs='*', help='do')
-    parser.add_argument('-a', '--all', help='all dos', action='store_true')
+    parser = argparse.ArgumentParser(description="todoer")
+    parser.add_argument("do", nargs="*", help="do")
+    parser.add_argument("-a", "--all", help="all dos", action="store_true")
+    parser.add_argument("-c", "--context", help="all contexts", action="store_true")
     args = parser.parse_args()
 
     if args.do:
@@ -55,8 +58,46 @@ def search(args):
     else:
         # By default ignore todos
         pattern = "\\- \\[ \\](?! ([A-Z]{0,3} )?[\\.\\-~\\^])"
-    ag = ["ag", "--noheading", "--nonumbers", "--nocolor", "--nobreak",
-          pattern, THINGS_DIR]
+
+    if args.context:
+        # test with:
+        # cd ~/projects/things
+        # ag --nofilename '\- \[ \] [A-Z]{3}' . | sed 's/- \[ \] \([A-Z]\{3\}\) .*/\1/g' | sort -u
+        ag = subprocess.Popen(
+            [
+                "ag",
+                "--noheading",
+                "--nonumbers",
+                "--nocolor",
+                "--nobreak",
+                "--nofilename",
+                "\\- \\[ \\] [A-Z]{3}",
+                THINGS_DIR,
+            ],
+            stdout=subprocess.PIPE,
+        )
+        sed = subprocess.Popen(
+            ["sed", "s/- \\[ \\] \\([A-Z]\\{3\\}\\) .*/\\1/g"],
+            stdin=ag.stdout,
+            stdout=subprocess.PIPE,
+        )
+        result = subprocess.run(
+            ["sort", "-u"], stdin=sed.stdout, stdout=subprocess.PIPE, text=True
+        )
+        lines = result.stdout.splitlines()
+        for line in lines:
+            print(line)
+        return
+
+    ag = [
+        "ag",
+        "--noheading",
+        "--nonumbers",
+        "--nocolor",
+        "--nobreak",
+        pattern,
+        THINGS_DIR,
+    ]
     result = subprocess.run(ag, stdout=subprocess.PIPE, text=True)
 
     lines = result.stdout.splitlines()
@@ -74,12 +115,24 @@ def search(args):
             # Invalid do
             print(f"BADDO : {do}")
     dos.sort()
-    fzf = subprocess.Popen(["fzf", "--ansi", "+m", "-d", "\t", "--with-nth",
-                            "1,2",
-                            "--tabstop", "4", "--tiebreak", "begin"],
-                           stdin=subprocess.PIPE,
-                           stdout=subprocess.PIPE,
-                           stderr=None)
+    fzf = subprocess.Popen(
+        [
+            "fzf",
+            "--ansi",
+            "+m",
+            "-d",
+            "\t",
+            "--with-nth",
+            "1,2",
+            "--tabstop",
+            "4",
+            "--tiebreak",
+            "begin",
+        ],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=None,
+    )
     fzfIn = fzf.stdin
     fzfIn.write(f"\t(today)\t{getTodayLog()}\n".encode(encoding))
     for do in dos:
@@ -93,7 +146,7 @@ def search(args):
     match = re.search("^([^\t]*)\t([^\t]*)\t(.*)$", output)
     if match:
         file = match.group(3)
-        subprocess.call(['nvim', file], env={**os.environ, "VIM_KNOB": "5"})
+        subprocess.call(["nvim", file], env={**os.environ, "VIM_KNOB": "5"})
         return True
     else:
         print(output)
@@ -117,7 +170,7 @@ def add(do):
     todayLog = getTodayLog(now)
     if not os.path.isfile(todayLog):
         Path(todayLog).touch()
-    with open(todayLog, 'r+') as file:
+    with open(todayLog, "r+") as file:
         file.seek(0)
         lines = file.readlines()
         length = len(lines)
