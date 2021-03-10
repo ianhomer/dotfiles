@@ -46,10 +46,46 @@ def run():
         add(do)
         return
 
+    if args.context:
+        context()
+        return
+
     # Repeat search until we exit (Ctrl-C)
     more = True
     while more:
         more = search(args)
+
+
+def context():
+    # test with:
+    # cd ~/projects/things
+    # ag --nofilename '\- \[ \] [A-Z]{3}' . |
+    # sed 's/- \[ \] \([A-Z]\{3\}\) .*/\1/g' | sort -u
+    ag = subprocess.Popen(
+        [
+            "ag",
+            "--noheading",
+            "--nonumbers",
+            "--nocolor",
+            "--nobreak",
+            "--nofilename",
+            "\\- \\[ \\] [A-Z]{3}",
+            THINGS_DIR,
+        ],
+        stdout=subprocess.PIPE,
+    )
+    sed = subprocess.Popen(
+        ["sed", "s/- \\[ \\] \\([A-Z]\\{3\\}\\) .*/\\1/g"],
+        stdin=ag.stdout,
+        stdout=subprocess.PIPE,
+    )
+    result = subprocess.run(
+        ["sort", "-u"], stdin=sed.stdout, stdout=subprocess.PIPE, text=True
+    )
+    lines = result.stdout.splitlines()
+    for line in lines:
+        print(line)
+    return
 
 
 def search(args):
@@ -58,36 +94,6 @@ def search(args):
     else:
         # By default ignore todos
         pattern = "\\- \\[ \\](?! ([A-Z]{0,3} )?[\\.\\-~\\^])"
-
-    if args.context:
-        # test with:
-        # cd ~/projects/things
-        # ag --nofilename '\- \[ \] [A-Z]{3}' . | sed 's/- \[ \] \([A-Z]\{3\}\) .*/\1/g' | sort -u
-        ag = subprocess.Popen(
-            [
-                "ag",
-                "--noheading",
-                "--nonumbers",
-                "--nocolor",
-                "--nobreak",
-                "--nofilename",
-                "\\- \\[ \\] [A-Z]{3}",
-                THINGS_DIR,
-            ],
-            stdout=subprocess.PIPE,
-        )
-        sed = subprocess.Popen(
-            ["sed", "s/- \\[ \\] \\([A-Z]\\{3\\}\\) .*/\\1/g"],
-            stdin=ag.stdout,
-            stdout=subprocess.PIPE,
-        )
-        result = subprocess.run(
-            ["sort", "-u"], stdin=sed.stdout, stdout=subprocess.PIPE, text=True
-        )
-        lines = result.stdout.splitlines()
-        for line in lines:
-            print(line)
-        return
 
     ag = [
         "ag",
