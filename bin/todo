@@ -9,6 +9,7 @@ import re
 import sys
 from datetime import datetime
 from pathlib import Path
+from subprocess import PIPE
 
 home = str(Path.home())
 
@@ -35,7 +36,7 @@ def run():
     parser.add_argument("-c", "--context", help="all contexts", action="store_true")
     args = parser.parse_args()
 
-    if args.do:
+    if args.do and len(args.do) > 1:
         words = []
 
         # Scan words
@@ -57,10 +58,6 @@ def run():
 
 
 def context():
-    # test with:
-    # cd ~/projects/things
-    # ag --nofilename '\- \[ \] [A-Z]{3}' . |
-    # sed 's/- \[ \] \([A-Z]\{3\}\) .*/\1/g' | sort -u
     ag = subprocess.Popen(
         [
             "ag",
@@ -70,28 +67,31 @@ def context():
             "\\- \\[ \\] [A-Z]{3}",
             THINGS_DIR,
         ],
-        stdout=subprocess.PIPE,
+        stdout=PIPE,
     )
     sed = subprocess.Popen(
         ["sed", "s/- \\[ \\] \\([A-Z]\\{3\\}\\) .*/\\1/g"],
         stdin=ag.stdout,
-        stdout=subprocess.PIPE,
+        stdout=PIPE,
     )
-    result = subprocess.run(
-        ["sort", "-u"], stdin=sed.stdout, stdout=subprocess.PIPE, text=True
-    )
-    lines = result.stdout.splitlines()
-    for line in lines:
+    result = subprocess.run(["sort", "-u"], stdin=sed.stdout, stdout=PIPE, text=True)
+    for line in result.stdout.splitlines():
         print(line)
     return
 
 
 def search(args):
     if args.all:
-        pattern = "\\- \\[ \\]"
+        if args.do:
+            pattern = f"\\- \\[ \\] {args.do[0]}"
+        else:
+            pattern = "\\- \\[ \\]"
+    elif args.do:
+        pattern = f"\\- \\[ \\] {args.do[0]} [^\\.\\-~]"
     else:
         # By default ignore todos
-        pattern = "\\- \\[ \\](?! ([A-Z]{3} )?[\\.\\-~\\^])"
+        pattern = "\\- \\[ \\](?! ([A-Z]{3} )?[\\.\\-~])"
+
 
     ag = [
         "ag",
@@ -102,7 +102,7 @@ def search(args):
         pattern,
         THINGS_DIR,
     ]
-    result = subprocess.run(ag, stdout=subprocess.PIPE, text=True)
+    result = subprocess.run(ag, stdout=PIPE, text=True)
 
     lines = result.stdout.splitlines()
     encoding = sys.getdefaultencoding()
@@ -133,8 +133,8 @@ def search(args):
             "--tiebreak",
             "begin",
         ],
-        stdin=subprocess.PIPE,
-        stdout=subprocess.PIPE,
+        stdin=PIPE,
+        stdout=PIPE,
         stderr=None,
     )
     fzfIn = fzf.stdin
