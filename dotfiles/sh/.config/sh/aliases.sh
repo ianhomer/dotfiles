@@ -3,6 +3,7 @@ alias vi="VIM_KNOB=5 nvim"
 alias v="VIM_KNOB=5 nvim"
 
 alias d="docker"
+alias q="exit"
 alias push="git push"
 alias gs="git status"
 alias gd="git diff HEAD"
