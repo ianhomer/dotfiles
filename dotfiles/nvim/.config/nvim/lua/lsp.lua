@@ -38,11 +38,12 @@ end
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches
 local servers = { "bashls", "cssls", "jsonls", "pyls", "tsserver", "vimls",  }
+local lspsettings = { pyls = { pyls = { configurationSources = { "flake8" } } } }
 for _, lsp in ipairs(servers) do
   local lspserver = lspconfig[lsp]
   if lspserver then
     -- lspconfig[lsp].setup { on_attach = require'completion'.on_attach }
-    lspconfig[lsp].setup { on_attach = on_attach }
+    lspconfig[lsp].setup { on_attach = on_attach, settings = lspsettings[lsp] }
   else
     print("Can't set up LSP for"..lsp)
   end
