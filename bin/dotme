@@ -252,7 +252,7 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 # Initialize our own variables:
 VERBOSE=0
 
-while getopts "?de:f:Fhi:v" opt; do
+while getopts "?de:f:Fhi:ov" opt; do
   case "$opt" in
   h|\?)
     command_help
@@ -266,12 +266,37 @@ while getopts "?de:f:Fhi:v" opt; do
     ;;
   i) INCLUDES=$OPTARG
     ;;
+  o) LIST_OPTIONS=1
+    ;;
   F) FORCE_ALL=1
     ;;
   v) VERBOSE=1
     ;;
   esac
 done
+
+# Options for fish completion
+if [[ -n "$LIST_OPTIONS" ]] ; then
+  cat << EOF
+brew
+jenv
+fish
+fisher
+gem
+git
+gitme
+node
+osx
+pip
+pull
+shim
+test
+tmux
+vim
+zsh
+EOF
+  exit 0
+fi
 
 shift $((OPTIND-1))
 
