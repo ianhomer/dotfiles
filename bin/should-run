@@ -189,7 +189,7 @@ elif [[ -z "$force" ]] && [[ -f "$shouldRunFile" ]] ; then
       log::trace "Checking modified $modified"
       if [[ $(find "$shouldRunFile" -mtime ${modified} -print) ]]; then
         shouldRun=1
-        [[ -n "$verbose" ]] && echo "Should run expired, older than ${modified}"
+        log::trace "Should run expired, older than ${modified}"
       fi
     fi
   fi
