@@ -146,7 +146,7 @@ command_inner() {
     [ $DRY -eq 0 ] && dotme-zsh
   fi
   [ $DRY -eq 0 ] && dotme-gitme
-  [ $DRY -eq 0 ] && dotme-test
+  [ $DRY -eq 0 ] && is-pc && dotme-test
   #[ $DRY -eq 0 ] && is-pc && dotme-nnn
   command_clean
 }
