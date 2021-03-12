@@ -6,11 +6,14 @@
 
 Things I'm trying to remember.
 
-|          |                                                       |
-| --       | --                                                    |
-| `gd`     | Go to definition                                      |
-| `ctrl-]` | Go to tag                                             |
-| `ctrl-o` | Jump back to previous location (after `gd` or `ctr-]` |
+|           |                                                       |
+| --        | --                                                    |
+| `gd`      | Go to definition                                      |
+| `ctrl-]`  | Go to tag                                             |
+| `ctrl-o`  | Jump back to previous location (after `gd` or `ctr-]` |
+| `space-d` | Show LSP diagnostics on current line                  |
+| `[-d`     | Previous LSP diagnostic                               |
+| `]-d`     | Next LSP diagnostic                                   |
 
 ### misc
 
