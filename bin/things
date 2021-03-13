@@ -25,6 +25,18 @@ def run():
 
 
 def search(args):
+    fzf = [
+        "fzf",
+        "--ansi",
+        "-d",
+        ":",
+        "--with-nth",
+        "2",
+        "--preview",
+        "bat --style=header --color=always (echo {} | cut -d: -f1)",
+        "--color",
+        "dark"
+    ]
     if args.thing and len(args.thing) > 0:
         words = []
 
@@ -36,21 +48,8 @@ def search(args):
         fzfDefaultCommand = f"rg -i --glob '**/*.md' '{pattern}'"
     else:
         fzfDefaultCommand = "true"
+        fzf.extend(["--bind", "change:reload:rg -i --glob '**/*.md' {q} || true"])
 
-    fzf = [
-        "fzf",
-        "--ansi",
-        "-d",
-        ":",
-        "--with-nth",
-        "2",
-        "--preview",
-        "bat --style=header --color=always (echo {} | cut -d: -f1)",
-        "--color",
-        "dark",
-        "--bind",
-        "change:reload:rg -i --glob '**/*.md' {q} || true",
-    ]
     process = subprocess.run(
         fzf,
         stdout=PIPE,
