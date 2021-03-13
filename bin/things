@@ -45,7 +45,7 @@ def search(args):
             words.append(word)
         # thing to search
         pattern = " ".join(words)
-        fzfDefaultCommand = f"rg -i --glob '**/*.md' '{pattern}'"
+        fzfDefaultCommand = f"rg -i --glob '**/*.md' '{pattern}' || true"
     else:
         fzfDefaultCommand = "true"
         fzf.extend(["--bind", "change:reload:rg -i --glob '**/*.md' {q} || true"])
