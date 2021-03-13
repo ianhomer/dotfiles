@@ -5,6 +5,7 @@ import os
 import subprocess
 import configparser
 import re
+import time
 from pathlib import Path
 from subprocess import PIPE
 
@@ -17,11 +18,28 @@ THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
 def run():
     parser = argparse.ArgumentParser(description="things")
     parser.add_argument("thing", nargs="*", help="thing")
+    parser.add_argument("-s", "--synk", help="synk things", action="store_true")
+    parser.add_argument("--foreground", help="run in foreground", action="store_true")
+
     args = parser.parse_args()
+
+    if args.synk:
+        sync(args)
+        return
 
     more = True
     while more:
         more = search(args)
+
+
+def sync(args):
+    if args.foreground:
+        subprocess.run(["git", "synk"], cwd=THINGS_DIR)
+        time.sleep(3)
+    else:
+        subprocess.run(
+            ["tmux", "split-window", "-l", "5", "-v", "things -s --foreground"]
+        )
 
 
 def search(args):
