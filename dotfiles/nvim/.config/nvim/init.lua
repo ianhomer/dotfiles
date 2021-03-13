@@ -33,6 +33,9 @@ knobs.paq('airline', 'vim-airline/vim-airline-themes')
 knobs.paq('gutentags', 'ludovicchabant/vim-gutentags')
 knobs.paq('tabular', 'godlygeek/tabular')
 
+knobs.paq('goyo', 'junegunn/goyo.vim')
+knobs.paq('surround', 'tpope/vim-surround')
+
 paq 'neovim/nvim-lspconfig'
 -- paq 'nvim-lua/completion-nvim'
 
