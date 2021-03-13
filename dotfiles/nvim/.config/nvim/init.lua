@@ -30,6 +30,9 @@ knobs.paq('which_key', 'liuchengxu/vim-which-key')
 
 knobs.paq('airline', 'vim-airline/vim-airline')
 knobs.paq('airline', 'vim-airline/vim-airline-themes')
+
+cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
+
 knobs.paq('gutentags', 'ludovicchabant/vim-gutentags')
 knobs.paq('tabular', 'godlygeek/tabular')
 
@@ -46,6 +49,7 @@ knobs.paq('nerdtree', 'ryanoasis/vim-devicons')
 knobs.paq('minimap', 'wfxr/minimap.vim')
 
 knobs.paq('ale', 'dense-analysis/ale')
+cmd 'set tags'
 
 require('lsp')
 
