@@ -17,6 +17,11 @@ THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
 def run():
     parser = argparse.ArgumentParser(description="things")
     args = parser.parse_args()
+    parser.add_argument("-s", "--sync", help="sync things", action="store_true")
+
+    if args.sync:
+        print("Syncing")
+        return
 
     more = True
     while more:
