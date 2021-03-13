@@ -49,7 +49,6 @@ knobs.paq('nerdtree', 'ryanoasis/vim-devicons')
 knobs.paq('minimap', 'wfxr/minimap.vim')
 
 knobs.paq('ale', 'dense-analysis/ale')
-cmd 'set tags'
 
 require('lsp')
 
