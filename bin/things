@@ -49,7 +49,7 @@ def search(args):
         fzfDefaultCommand = f"{rgPrefix} '{pattern}' || true"
     else:
         fzfDefaultCommand = "true"
-        fzf.extend(["--bind", "change:reload:" + rgPrefix + " {q} || true"])
+        fzf.extend(["--phony", "--bind", "change:reload:" + rgPrefix + " {q} || true"])
 
     process = subprocess.run(
         fzf,
