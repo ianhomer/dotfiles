@@ -46,6 +46,7 @@ endfunction
 function! s:NextLine()
   let l:previousLineNumber = line(".") - 1
   let l:previous = getline(l:previousLineNumber)
+  echo l:previous
   " Continuation of bullet list
   if l:previous =~ '\v^\s*-\s'
     " Continuation of todo list
@@ -63,6 +64,12 @@ function! s:NextLine()
       else
         return "- "
       endif
+    endif
+  elseif l:previous =~ '\v^\>\s'
+    if l:previous =~ '\v^\>\s*$'
+      normal k"_ddj
+    else
+      return "> "
     endif
   elseif l:previous =~ '\v^[0-9]+\.'
     " Numbered list

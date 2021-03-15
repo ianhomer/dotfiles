@@ -6,6 +6,7 @@ import subprocess
 import configparser
 import re
 import time
+import datetime
 from pathlib import Path
 from subprocess import PIPE
 
@@ -13,6 +14,7 @@ from subprocess import PIPE
 config = configparser.ConfigParser()
 config.read(str(Path.home()) + "/.config/dotme/shim.ini")
 THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
+shouldSynkFile = str(Path.home()) + "/.config/dotme/should-run/last-run-git-synk-things"
 
 
 def run():
@@ -27,29 +29,51 @@ def run():
         sync(args)
         return
 
+    sync(args)
     more = True
     while more:
         more = search(args)
 
 
+def shouldRun(file):
+    if not os.path.isfile(file):
+        return False
+    lastRunTime = round(os.stat(file).st_mtime)
+    shouldRunTime = round(
+        time.mktime(
+            (datetime.datetime.today() - datetime.timedelta(minutes=10)).timetuple()
+        )
+    )
+    return lastRunTime < shouldRunTime
+
+
+def hasRun(file):
+    Path(shouldSynkFile).touch()
+
+
 def sync(args):
+    if not args.synk and not shouldRun(shouldSynkFile):
+        return
     if args.foreground:
         subprocess.run(["git", "synk"], cwd=THINGS_DIR)
-        time.sleep(3)
+        hasRun(shouldSynkFile)
+        time.sleep(1)
     else:
         subprocess.run(
-            ["tmux", "split-window", "-l", "5", "-v", "things -s --foreground"]
+            ["tmux", "split-window", "-d", "-l", "5", "-v", "things -s --foreground"]
         )
 
 
 def search(args):
     fzf = [
         "fzf",
+        "--height",
+        "100%",
         "--ansi",
         "-d",
         ":",
         "--with-nth",
-        "2",
+        "2..",
         "--preview",
         "bat --style=header --color=always (echo {} | cut -d: -f1)",
         "--color",
@@ -75,6 +99,7 @@ def search(args):
         text=True,
         stderr=None,
         env={**os.environ, "FZF_DEFAULT_COMMAND": fzfDefaultCommand},
+        cwd=THINGS_DIR,
     )
 
     lines = process.stdout.splitlines()
@@ -86,7 +111,9 @@ def search(args):
 
     if len(selected) > 0:
         print(f"opening {selected[0]}")
-        subprocess.call(["nvim", selected[0]], env={**os.environ, "VIM_KNOB": "5"})
+        subprocess.call(
+            ["nvim", selected[0]], env={**os.environ, "VIM_KNOB": "5"}, cwd=THINGS_DIR
+        )
         return True
     return False
 
