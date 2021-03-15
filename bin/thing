@@ -3,15 +3,9 @@
 import argparse
 import os
 import subprocess
-import configparser
 from datetime import datetime
 from pathlib import Path
-
-
-config = configparser.ConfigParser()
-config.read(str(Path.home()) + "/.config/dotme/shim.ini")
-THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
-MY_NOTES = config["DEFAULT"]["MY_NOTES"]
+from lib import thingity
 
 
 def run():
@@ -23,14 +17,9 @@ def run():
     edit(args)
 
 
-def getTodayLog(now=datetime.now()):
-    today = now.strftime("%m%d")
-    return f"{THINGS_DIR}/{MY_NOTES}/stream/{today}.md"
-
-
 def edit(args):
     now = datetime.now()
-    todayLog = getTodayLog(now)
+    todayLog = thingity.getTodayLog(now)
     if not os.path.isfile(todayLog):
         Path(todayLog).touch()
         with open(todayLog, "w") as file:
@@ -38,7 +27,7 @@ def edit(args):
             file.write(f"# {todayLong}\n\n")
 
     subprocess.call(
-        ["nvim", todayLog], env={**os.environ, "VIM_KNOB": "5"}, cwd=THINGS_DIR
+        ["nvim", todayLog], env={**os.environ, "VIM_KNOB": "5"}, cwd=thingity.THINGS_DIR
     )
 
 
