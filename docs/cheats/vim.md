@@ -26,11 +26,13 @@ Things I'm trying to remember.
 
 ### maps
 
-|           |                              |
-| --        | --                           |
-| `space+m` | Keyboard map for normal mode |
-| `:Maps!`  | Open maps in full screen     |
-| `space+l` | Keyboard map for insert mode |
+|            |                              |
+| --         | --                           |
+| `space+m`  | Keyboard map for normal mode |
+| `:Maps!`   | Open maps in full screen     |
+| `space+l`  | Keyboard map for insert mode |
+| `:dig`     | List di-graphs               |
+| `ctrl-k Co | Insert di-graph e.g. ©       |
 
 ### files
 

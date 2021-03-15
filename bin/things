@@ -6,10 +6,9 @@ import subprocess
 import configparser
 import re
 import time
-import datetime
+from lib import runner
 from pathlib import Path
 from subprocess import PIPE
-
 
 config = configparser.ConfigParser()
 config.read(str(Path.home()) + "/.config/dotme/shim.ini")
@@ -35,28 +34,12 @@ def run():
         more = search(args)
 
 
-def shouldRun(file):
-    if not os.path.isfile(file):
-        return False
-    lastRunTime = round(os.stat(file).st_mtime)
-    shouldRunTime = round(
-        time.mktime(
-            (datetime.datetime.today() - datetime.timedelta(minutes=10)).timetuple()
-        )
-    )
-    return lastRunTime < shouldRunTime
-
-
-def hasRun(file):
-    Path(shouldSynkFile).touch()
-
-
 def sync(args):
-    if not args.synk and not shouldRun(shouldSynkFile):
+    if not args.synk and not runner.should(shouldSynkFile):
         return
     if args.foreground:
         subprocess.run(["git", "synk"], cwd=THINGS_DIR)
-        hasRun(shouldSynkFile)
+        runner.has(shouldSynkFile)
         time.sleep(1)
     else:
         subprocess.run(
