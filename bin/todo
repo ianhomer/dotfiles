@@ -108,7 +108,7 @@ def search(args):
 
     lines = result.stdout.splitlines()
     encoding = sys.getdefaultencoding()
-    days = args.days or 7
+    days = args.days or (365 if args.all else 7)
     dos = []
     for line in lines:
         do = line.replace("- [ ] ", "")
