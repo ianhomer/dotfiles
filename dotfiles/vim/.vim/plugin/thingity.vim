@@ -1,6 +1,6 @@
 " Goyo distraction free writing
 if knobs#("goyo")
-  nnoremap <leader>jg :Goyo<CR>
+  nnoremap <leader>i :Goyo<CR>
   let g:goyo_width = 85
 endif
 

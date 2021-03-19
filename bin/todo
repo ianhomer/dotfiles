@@ -18,6 +18,7 @@ config.read(str(Path.home()) + "/.config/dotme/shim.ini")
 THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
 MY_NOTES = config["DEFAULT"]["MY_NOTES"]
 PURPLE = "\033[95m"
+ORANGE = "\033[33m"
 END = "\033[0m"
 
 
@@ -108,12 +109,19 @@ def search(args):
     dos = []
     for line in lines:
         do = line.replace("- [ ] ", "")
-        match = re.search("^([^:]*):((?:[A-Z]{3}(?=\\s))?)\\s*(.*)$", do)
+        match = re.search(
+            "^([^:]*):((?:[A-Z]{3}(?=\\s))?)\\s*((?:[0-9]+(?=\\s)\\s)?)\\s*(.*)$",
+            do,
+        )
         if match:
             doFile = match.group(1)
             doContext = match.group(2)
-            subject = match.group(3)
-            dos.append(f"{PURPLE}{doContext}{END}\t{subject}\t{doFile}\n")
+            date = match.group(3)
+            subject = match.group(4)
+            dos.append(
+                f"{PURPLE}{doContext}{END}\t"
+                + f"{ORANGE}{date}{END}{subject}\t{doFile}\n"
+            )
         else:
             # Invalid do
             print(f"BADDO : {do}")
