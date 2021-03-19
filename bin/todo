@@ -36,6 +36,7 @@ def run():
     parser.add_argument("do", nargs="*", help="do")
     parser.add_argument("-a", "--all", help="all dos", action="store_true")
     parser.add_argument("-c", "--context", help="all contexts", action="store_true")
+    parser.add_argument("--days", type=int, help="days")
     args = parser.parse_args()
 
     if args.do and len(args.do) > 1:
@@ -107,7 +108,7 @@ def search(args):
 
     lines = result.stdout.splitlines()
     encoding = sys.getdefaultencoding()
-    days = 31
+    days = args.days or 7
     dos = []
     for line in lines:
         do = line.replace("- [ ] ", "")
@@ -120,12 +121,15 @@ def search(args):
             doFile = match.group(1)
             doContext = match.group(2)
             doDate = match.group(3)
+            # Filter on date
             if doDate != "":
-                doDateMatch = re.search("([0-9]{4})([0-9]{2})", doDate)
+                doDateMatch = re.search("([0-9]{4})([0-9]{2})([0-9]*)", doDate)
                 if doDateMatch:
-                    d0 = date(int(doDateMatch.group(1)), int(doDateMatch.group(2)), 1)
+                    d0 = date(int(doDateMatch.group(1)),
+                              int(doDateMatch.group(2)),
+                              int(doDateMatch.group(3) or 1))
                     d1 = date.today()
-                    include = (d0 - d1).days < days
+                    include = (d0 - d1).days <= days
                     print(include)
             subject = match.group(4)
             if include:
