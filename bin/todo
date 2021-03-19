@@ -8,6 +8,7 @@ import subprocess
 import re
 import sys
 from datetime import datetime
+from datetime import date
 from pathlib import Path
 from subprocess import PIPE
 
@@ -106,6 +107,7 @@ def search(args):
 
     lines = result.stdout.splitlines()
     encoding = sys.getdefaultencoding()
+    days = 31
     dos = []
     for line in lines:
         do = line.replace("- [ ] ", "")
@@ -114,14 +116,23 @@ def search(args):
             do,
         )
         if match:
+            include = True
             doFile = match.group(1)
             doContext = match.group(2)
-            date = match.group(3)
+            doDate = match.group(3)
+            if doDate != "":
+                doDateMatch = re.search("([0-9]{4})([0-9]{2})", doDate)
+                if doDateMatch:
+                    d0 = date(int(doDateMatch.group(1)), int(doDateMatch.group(2)), 1)
+                    d1 = date.today()
+                    include = (d0 - d1).days < days
+                    print(include)
             subject = match.group(4)
-            dos.append(
-                f"{PURPLE}{doContext}{END}\t"
-                + f"{ORANGE}{date}{END}{subject}\t{doFile}\n"
-            )
+            if include:
+                dos.append(
+                    f"{PURPLE}{doContext}{END}\t"
+                    + f"{ORANGE}{doDate}{END}{subject}\t{doFile}\n"
+                )
         else:
             # Invalid do
             print(f"BADDO : {do}")
