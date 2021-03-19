@@ -17,7 +17,6 @@ if KnobAt(1)
     nnoremap <silent> <leader>k :call my#ToggleQuickFix()<CR>
     nnoremap <silent> <leader>K :call my#ToggleLocationList()<CR>
     nnoremap <silent> <leader>g :call window#ToggleFugitive()<CR>
-    nnoremap <silent> <leader>gd :Gvdiff!<CR>
     nnoremap gdh :diffget //2<CR>
     nnoremap gdl :diffget //3<CR>
     nnoremap <silent> <leader>b :call my#GitSynk(1)<CR>
