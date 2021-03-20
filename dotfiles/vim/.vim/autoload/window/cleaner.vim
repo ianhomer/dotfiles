@@ -67,6 +67,12 @@ endfunction
 "
 function window#cleaner#CloseMe()
 
+  " If goyo enabled then force close goyo otherwise hanging windows
+  " can remain
+  if knobs#("goyo")
+    execute ":Goyo!"
+  endif
+
   " Close fugitive if open
   if window#cleaner#CloseFugitive()
     call window#SwitchToFirstEditableFile()
