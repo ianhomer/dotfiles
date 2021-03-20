@@ -15,11 +15,15 @@ from subprocess import PIPE
 home = str(Path.home())
 
 config = configparser.ConfigParser()
-config.read(str(Path.home()) + "/.config/dotme/shim.ini")
+home = str(Path.home())
+config.read(home + "/.config/dotme/shim.ini")
 THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
 MY_NOTES = config["DEFAULT"]["MY_NOTES"]
 PURPLE = "\033[95m"
 ORANGE = "\033[33m"
+CYAN = "\033[36m"
+GREEN = "\033[32m"
+GREY = "\033[90m"
 END = "\033[0m"
 
 
@@ -44,7 +48,10 @@ def run():
 
         # Scan words
         for word in args.do:
-            words.append(word)
+            if home == word:
+                words.append("~")
+            else:
+                words.append(word)
         # do to add
         do = " ".join(words)
         add(do)
@@ -90,10 +97,10 @@ def search(args):
         else:
             pattern = "\\- \\[ \\]"
     elif args.do:
-        pattern = f"\\- \\[ \\] {args.do[0]} [^\\.\\-~]"
+        pattern = f"\\- \\[ \\] {args.do[0]} [^\\.\\-]"
     else:
         # By default ignore todos
-        pattern = "\\- \\[ \\](?! ([A-Z]{3} )?[\\.\\-~])"
+        pattern = "\\- \\[ \\](?! ([A-Z]{3} )?[\\.\\-])"
 
     ag = [
         "ag",
@@ -132,10 +139,18 @@ def search(args):
                     include = (d0 - d1).days <= days
                     print(include)
             subject = match.group(4)
+            first = subject[:1]
+            if first == '~':
+                color = GREEN
+            elif first == '.':
+                color = GREY
+            else:
+                color = ""
             if include:
                 dos.append(
                     f"{PURPLE}{doContext}{END}\t"
-                    + f"{ORANGE}{doDate}{END}{subject}\t{doFile}\n"
+                    + f"{ORANGE}{doDate}{END}"
+                    + f"{color}{subject}{END}\t{doFile}\n"
                 )
         else:
             # Invalid do
