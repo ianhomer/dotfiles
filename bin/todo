@@ -137,7 +137,6 @@ def search(args):
                               int(doDateMatch.group(3) or 1))
                     d1 = date.today()
                     include = (d0 - d1).days <= days
-                    print(include)
             subject = match.group(4)
             first = subject[:1]
             if first == '~':
