@@ -20,11 +20,11 @@ def getPath(name):
 
 
 # Given date as numbers, e.g. 20210531, output a nice human date from a todo
-# point of view.
+# point of view. Display date is None if date is "days" days into the future.
 def getDateDisplay(dateAsNumbers, days):
     include = True
     if dateAsNumbers == "":
-        return {"display": "", "include": include}
+        return ""
     else:
         d1 = date.today()
         doDateMatch = re.search("^([0-9]{4})([0-9]{2}) $", dateAsNumbers)
@@ -50,4 +50,7 @@ def getDateDisplay(dateAsNumbers, days):
                 d0 = d1
                 dateDisplay = dateAsNumbers
                 include = (d0 - d1).days <= days
-    return {"display": dateDisplay, "include": include}
+    if include:
+        return dateDisplay
+    else:
+        return None

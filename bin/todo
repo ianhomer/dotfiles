@@ -137,11 +137,10 @@ def search(args):
                 color = GREY
             else:
                 color = ""
-            print(dateDisplay)
-            if dateDisplay["include"]:
+            if dateDisplay is not None:
                 dos.append(
                     f"{PURPLE}{doContext}{END}\t"
-                    + f"{ORANGE}{dateDisplay['display']}{END}"
+                    + f"{ORANGE}{dateDisplay}{END}"
                     + f"{color}{subject}{END}\t{doFile}\n"
                 )
         else:

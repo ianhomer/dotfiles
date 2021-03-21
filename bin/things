@@ -41,9 +41,7 @@ def sync(args):
         runner.has(shouldSynkFile)
         time.sleep(1)
     else:
-        subprocess.run(
-            ["tmux", "split-window", "-d", "-l", "5", "-v", "things -s"]
-        )
+        subprocess.run(["tmux", "split-window", "-d", "-l", "5", "-v", "things -s"])
 
 
 def search(args):
@@ -94,7 +92,9 @@ def search(args):
     if len(selected) > 0:
         print(f"opening {selected[0]}")
         subprocess.call(
-            ["nvim", selected[0]], env={**os.environ, "VIM_KNOB": "5"}, cwd=THINGS_DIR
+            ["nvim", selected[0], "+:Goyo", "+:$"],
+            env={**os.environ, "VIM_KNOB": "4"},
+            cwd=THINGS_DIR,
         )
         return True
     return False
