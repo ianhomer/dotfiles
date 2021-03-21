@@ -1,4 +1,5 @@
 local M = {}
+local KNOB_RE = '^[%w-]+/([%w]+)'
 local REPO_RE = '^[%w-]+/([%w-_.]+)$'
 local cmd = vim.api.nvim_command
 
@@ -9,10 +10,18 @@ function M.has(knob)
   return (g["knob_".. knob] or 0) > 0
 end
 
+function knobFromPackage(package)
+  return package:match(KNOB_RE)
+end
+
 function M.paq(args)
   local package = args[1] or args.package
-  local knob = args[2] or args.knob
+  local knob = args[2] or args.knob or knobFromPackage(package)
   local opt = args[3] or args.opt or true
+
+  print(package)
+  print(knob)
+  print("--")
 
   if M.has(knob) then
     paq({package, opt=opt})

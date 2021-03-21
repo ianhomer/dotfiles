@@ -19,8 +19,8 @@ knobs.paq1('gruvbox8', 'lifepillar/vim-gruvbox8')
 
 knobs.paq1('lightbulb', 'kosayoda/nvim-lightbulb')
 
-knobs.paq {'junegunn/fzf', 'fzf'}
-knobs.paq1('fzf', 'junegunn/fzf.vim')
+knobs.paq {'junegunn/fzf'}
+knobs.paq {'junegunn/fzf.vim'}
 knobs.paq1('fugitive', 'tpope/vim-fugitive')
 knobs.paq1('fugitive', 'tpope/vim-rhubarb')
 knobs.paq1('gitgutter', 'airblade/vim-gitgutter')
