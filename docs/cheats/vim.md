@@ -14,6 +14,7 @@ Things I'm trying to remember.
 | `space-d` | Show LSP diagnostics on current line                  |
 | `[-d`     | Previous LSP diagnostic                               |
 | `]-d`     | Next LSP diagnostic                                   |
+| `ctrl-X`  | In FZF open in horizontal split                       |
 
 ### misc
 
