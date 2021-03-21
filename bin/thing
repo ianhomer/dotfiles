@@ -3,6 +3,7 @@
 import argparse
 import os
 import subprocess
+import re
 from datetime import datetime
 from pathlib import Path
 from lib import thingity
@@ -19,15 +20,28 @@ def run():
 
 def edit(args):
     now = datetime.now()
-    todayLog = thingity.getTodayLog(now)
-    if not os.path.isfile(todayLog):
-        Path(todayLog).touch()
-        with open(todayLog, "w") as file:
-            todayLong = now.strftime("%a %d %b %Y").upper()
-            file.write(f"# {todayLong}\n\n")
+    words = []
+    if args.thing and len(args.thing) > 0:
+
+        # Scan words
+        for word in args.thing:
+            words.append(word)
+
+        kebab = re.sub("[^a-zA-Z0-9]", "-", "-".join(words).lower())
+        filename = thingity.getPath(kebab)
+    else:
+        filename = thingity.getTodayLog(now)
+    if not os.path.isfile(filename):
+        Path(filename).touch()
+        with open(filename, "w") as file:
+            if len(words) == 0:
+                title = now.strftime("%a %d %b %Y").upper()
+            else:
+                title = " ".join(words)
+            file.write(f"# {title}\n\n")
 
     subprocess.call(
-        ["nvim", todayLog, "+:Goyo"],
+        ["nvim", filename, "+:Goyo"],
         env={**os.environ, "VIM_KNOB": "4"},
         cwd=thingity.THINGS_DIR,
     )

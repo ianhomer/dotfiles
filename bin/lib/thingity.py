@@ -11,3 +11,7 @@ MY_NOTES = config["DEFAULT"]["MY_NOTES"]
 def getTodayLog(now=datetime.now()):
     today = now.strftime("%m%d")
     return f"{THINGS_DIR}/{MY_NOTES}/stream/{today}.md"
+
+
+def getPath(name):
+    return f"{THINGS_DIR}/{MY_NOTES}/stream/{name}.md"

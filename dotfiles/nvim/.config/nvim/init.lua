@@ -17,11 +17,11 @@ knobs.paq {'morhetz/gruvbox'}
 
 knobs.paq {'lifepillar/gruvbox8'}
 
-knobs.paq {'kosayoda/nvim-lightbulb'}
+paq {'kosayoda/nvim-lightbulb'}
 
 knobs.paq {'junegunn/fzf'}
 knobs.paq {'junegunn/fzf.vim'}
-knobs.paq {'tpope/vim-fugitive'}
+paq {'tpope/vim-fugitive'}
 
 knobs.paq1('fugitive', 'tpope/vim-rhubarb')
 knobs.paq1('gitgutter', 'airblade/vim-gitgutter')
@@ -50,7 +50,7 @@ paq 'christoomey/vim-tmux-navigator'
 
 knobs.paq1('startuptime', 'tweekmonster/startuptime.vim')
 
-knobs.paq1('nerdtree', 'ryanoasis/vim-devicons')
+paq {'ryanoasis/vim-devicons'}
 knobs.paq1('minimap', 'wfxr/minimap.vim')
 
 knobs.paq1('ale', 'dense-analysis/ale')

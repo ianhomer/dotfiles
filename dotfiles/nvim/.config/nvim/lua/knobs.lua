@@ -21,8 +21,12 @@ function M.paq(args)
 
   if M.has(knob) then
     paq({package, opt=opt})
-    name = package:match(REPO_RE)
-    xpcall(cmd, function(err) print(err) end, 'packadd ' .. name)
+    if opt then
+      name = package:match(REPO_RE)
+      xpcall(cmd, function(err) 
+        print(err)
+      end, 'packadd ' .. name)
+    end
   end
 end
 
