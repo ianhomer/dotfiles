@@ -15,10 +15,20 @@ function knobFromPackage(package)
   return package:match(KNOB_VIM_RE) or package:match(KNOB_RE)
 end
 
+function isOpt(args)
+  if args[3] == nil then
+    if args.opt == nil then
+      return true
+    end
+    return args.opt
+  end
+  return args[3]
+end
+
 function M.paq(args)
   local package = args[1] or args.package
   local knob = args[2] or args.knob or knobFromPackage(package)
-  local opt = args[3] or args.opt or true
+  local opt = isOpt(args)
 
   -- print(package .. ":" .. knob .. ":" .. tostring(opt))
   if M.has(knob) then

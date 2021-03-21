@@ -43,19 +43,9 @@ set clipboard=unnamed
 set nomodeline
 
 " work around for https://github.com/vim/vim/issues/4738
-if has('macunix')
-  function! OpenURLUnderCursor()
-    let s:uri = expand('<cWORD>')
-    let s:uri = matchstr(s:uri, '[a-z]*:\/\/[^ >,;()]*')
-    let s:uri = substitute(s:uri, '?', '\\?', '')
-    let s:uri = shellescape(s:uri, 1)
-    if s:uri != ''
-      silent exec "!open '".s:uri."'"
-      :redraw!
-    endif
-  endfunction
-  nnoremap gx :call OpenURLUnderCursor()<CR>
-endif
+"if has('macunix')
+"  nnoremap gx :call thingity#OpenURLUnderCursor()<CR>
+"endif
 
 if !knobs#At(1)
   finish
@@ -142,15 +132,17 @@ endif
 
 if !Knob("light")
   if knobs#("gruvbox")
-    try
+    "try
       colorscheme gruvbox
-    catch /^Vim\%((\a\+)\)\=:E185/
-      echo "gruvbox color scheme not loaded, does it need to be installed?"
-    endtry
+    "catch /^Vim\%((\a\+)\)\=:E185/
+    "  echo "gruvbox color scheme not loaded, does it need to be installed?"
+    "endtry
   elseif knobs#("gruvbox8")
     colorscheme gruvbox8
   endif
   set bg=dark
+  "finish
+
 else
   " Light scheme primarily used for writing content
   colorscheme one

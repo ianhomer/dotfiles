@@ -172,4 +172,15 @@ function! s:ThingityArchive()
   endfor
 endfunction
 
+function! thingity#OpenURLUnderCursor()
+  let s:uri = expand('<cWORD>')
+  let s:uri = matchstr(s:uri, '[a-z]*:\/\/[^ >,;()]*')
+  let s:uri = substitute(s:uri, '?', '\\?', '')
+  let s:uri = shellescape(s:uri, 1)
+  if s:uri != ''
+    silent exec "!open '".s:uri."'"
+    :redraw!
+  endif
+endfunction
+
 
