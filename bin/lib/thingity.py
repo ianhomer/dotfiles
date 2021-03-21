@@ -1,13 +1,29 @@
 import configparser
+import subprocess
+import re
+import time
 from pathlib import Path
 from datetime import datetime
 from datetime import date
-import re
+from . import runner
 
 config = configparser.ConfigParser()
 config.read(str(Path.home()) + "/.config/dotme/shim.ini")
 THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
 MY_NOTES = config["DEFAULT"]["MY_NOTES"]
+shouldSynkFile = str(Path.home()) + "/.config/dotme/should-run/last-run-git-synk-things"
+
+
+def synk(force):
+    if not force and not runner.should(shouldSynkFile):
+        return
+    if force:
+        subprocess.run(["git", "synk"], cwd=THINGS_DIR)
+        runner.has(shouldSynkFile)
+        time.sleep(1)
+    else:
+        subprocess.run(["tmux", "split-window", "-d", "-l", "5", "-v", "things -s"])
+    return force
 
 
 def getTodayLog(now=datetime.now()):

@@ -5,15 +5,14 @@ import os
 import subprocess
 import configparser
 import re
-import time
-from lib import runner
 from pathlib import Path
 from subprocess import PIPE
+from lib import thingity
+
 
 config = configparser.ConfigParser()
 config.read(str(Path.home()) + "/.config/dotme/shim.ini")
 THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
-shouldSynkFile = str(Path.home()) + "/.config/dotme/should-run/last-run-git-synk-things"
 
 
 def run():
@@ -23,25 +22,12 @@ def run():
 
     args = parser.parse_args()
 
-    if args.synk:
-        sync(args)
+    if thingity.synk(args.synk):
         return
 
-    sync(args)
     more = True
     while more:
         more = search(args)
-
-
-def sync(args):
-    if not args.synk and not runner.should(shouldSynkFile):
-        return
-    if args.synk:
-        subprocess.run(["git", "synk"], cwd=THINGS_DIR)
-        runner.has(shouldSynkFile)
-        time.sleep(1)
-    else:
-        subprocess.run(["tmux", "split-window", "-d", "-l", "5", "-v", "things -s"])
 
 
 def search(args):

@@ -41,8 +41,12 @@ def run():
     parser.add_argument("do", nargs="*", help="do")
     parser.add_argument("-a", "--all", help="all dos", action="store_true")
     parser.add_argument("-c", "--context", help="all contexts", action="store_true")
+    parser.add_argument("-s", "--synk", help="synk things", action="store_true")
     parser.add_argument("--days", type=int, help="days")
     args = parser.parse_args()
+
+    if thingity.synk(args.synk):
+        return
 
     if args.do and len(args.do) > 1:
         words = []
