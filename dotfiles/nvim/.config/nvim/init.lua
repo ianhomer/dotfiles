@@ -12,16 +12,17 @@ cmd 'call knobs#Init()'
 
 paq {'savq/paq-nvim', opt = true}
 
-knobs.paq1('light', 'rakr/vim-one')
-knobs.paq1('gruvbox', 'morhetz/gruvbox')
+knobs.paq {'rakr/vim-one', 'light'}
+knobs.paq {'morhetz/gruvbox'}
 
-knobs.paq1('gruvbox8', 'lifepillar/vim-gruvbox8')
+knobs.paq {'lifepillar/gruvbox8'}
 
-knobs.paq1('lightbulb', 'kosayoda/nvim-lightbulb')
+knobs.paq {'kosayoda/nvim-lightbulb'}
 
 knobs.paq {'junegunn/fzf'}
 knobs.paq {'junegunn/fzf.vim'}
-knobs.paq1('fugitive', 'tpope/vim-fugitive')
+knobs.paq {'tpope/vim-fugitive'}
+
 knobs.paq1('fugitive', 'tpope/vim-rhubarb')
 knobs.paq1('gitgutter', 'airblade/vim-gitgutter')
 knobs.paq1('dispatch', 'tpope/vim-dispatch')

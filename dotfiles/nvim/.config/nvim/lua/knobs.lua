@@ -19,14 +19,10 @@ function M.paq(args)
   local knob = args[2] or args.knob or knobFromPackage(package)
   local opt = args[3] or args.opt or true
 
-  print(package)
-  print(knob)
-  print("--")
-
   if M.has(knob) then
     paq({package, opt=opt})
     name = package:match(REPO_RE)
-    cmd('packadd ' .. name)
+    xpcall(cmd, function(err) print(err) end, 'packadd ' .. name)
   end
 end
 
