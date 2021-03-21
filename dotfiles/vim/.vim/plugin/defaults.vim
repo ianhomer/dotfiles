@@ -42,6 +42,21 @@ set clipboard=unnamed
 " I don't use modelines
 set nomodeline
 
+" work around for https://github.com/vim/vim/issues/4738
+if has('macunix')
+  function! OpenURLUnderCursor()
+    let s:uri = expand('<cWORD>')
+    let s:uri = matchstr(s:uri, '[a-z]*:\/\/[^ >,;()]*')
+    let s:uri = substitute(s:uri, '?', '\\?', '')
+    let s:uri = shellescape(s:uri, 1)
+    if s:uri != ''
+      silent exec "!open '".s:uri."'"
+      :redraw!
+    endif
+  endfunction
+  nnoremap gx :call OpenURLUnderCursor()<CR>
+endif
+
 if !knobs#At(1)
   finish
 endif
