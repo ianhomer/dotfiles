@@ -28,7 +28,7 @@ def edit(args):
 
     subprocess.call(
         ["nvim", todayLog, "+:Goyo"],
-        env={**os.environ, "VIM_KNOB": "5"},
+        env={**os.environ, "VIM_KNOB": "4"},
         cwd=thingity.THINGS_DIR,
     )
 

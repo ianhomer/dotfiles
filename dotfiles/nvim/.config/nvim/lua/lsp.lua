@@ -66,16 +66,18 @@ end
 --  nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 --  nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 
-require'nvim-lightbulb'.update_lightbulb {
-    sign = {
-        enabled = true,
-        -- Priority of the gutter sign
-        priority = 10,
-    },
-    float = {
-        enabled = true,
-        -- Text to show in the popup float
-        text = "💡",
-    }
-}
+if package.loaded['nvim-lightbulb'] then
+  require'nvim-lightbulb'.update_lightbulb {
+      sign = {
+          enabled = true,
+          -- Priority of the gutter sign
+          priority = 10,
+      },
+      float = {
+          enabled = true,
+          -- Text to show in the popup float
+          text = "💡",
+      }
+  }
+end
 

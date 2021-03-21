@@ -127,7 +127,11 @@ endif
 
 if !Knob("light")
   if knobs#("gruvbox")
-    colorscheme gruvbox
+    try
+      colorscheme gruvbox
+    catch /^Vim\%((\a\+)\)\=:E185/
+      echo "gruvbox color scheme not loaded, does it need to be installed?"
+    endtry
   elseif knobs#("gruvbox8")
     colorscheme gruvbox8
   endif

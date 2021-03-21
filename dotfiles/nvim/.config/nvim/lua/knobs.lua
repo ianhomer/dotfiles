@@ -9,7 +9,7 @@ end
 
 function M.paq(knob, package)
   if M.has(knob) then
-    paq(package)
+    paq({package, opt=false})
   end
 end
 

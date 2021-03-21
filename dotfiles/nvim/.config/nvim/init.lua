@@ -56,4 +56,3 @@ knobs.paq('ale', 'dense-analysis/ale')
 knobs.paq('which_key', 'liuchengxu/vim-which-key')
 
 require('lsp')
-

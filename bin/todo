@@ -132,16 +132,18 @@ def search(args):
             if doDate != "":
                 doDateMatch = re.search("([0-9]{4})([0-9]{2})([0-9]*)", doDate)
                 if doDateMatch:
-                    d0 = date(int(doDateMatch.group(1)),
-                              int(doDateMatch.group(2)),
-                              int(doDateMatch.group(3) or 1))
+                    d0 = date(
+                        int(doDateMatch.group(1)),
+                        int(doDateMatch.group(2)),
+                        int(doDateMatch.group(3) or 1),
+                    )
                     d1 = date.today()
                     include = (d0 - d1).days <= days
             subject = match.group(4)
             first = subject[:1]
-            if first == '~':
+            if first == "~":
                 color = GREEN
-            elif first == '.':
+            elif first == ".":
                 color = GREY
             else:
                 color = ""
@@ -186,7 +188,7 @@ def search(args):
     match = re.search("^([^\t]*)\t([^\t]*)\t(.*)$", output)
     if match:
         file = match.group(3)
-        subprocess.call(["nvim", file], env={**os.environ, "VIM_KNOB": "5"})
+        subprocess.call(["nvim", file, "+:Goyo"], env={**os.environ, "VIM_KNOB": "4"})
         return True
     else:
         print(output)
