@@ -12,33 +12,33 @@ cmd 'call knobs#Init()'
 
 paq {'savq/paq-nvim', opt = true}
 
-knobs.paq('light', 'rakr/vim-one')
-knobs.paq('gruvbox', 'morhetz/gruvbox')
+knobs.paq1('light', 'rakr/vim-one')
+knobs.paq1('gruvbox', 'morhetz/gruvbox')
 
-knobs.paq('gruvbox8', 'lifepillar/vim-gruvbox8')
+knobs.paq1('gruvbox8', 'lifepillar/vim-gruvbox8')
 
-knobs.paq('lightbulb', 'kosayoda/nvim-lightbulb')
+knobs.paq1('lightbulb', 'kosayoda/nvim-lightbulb')
 
-knobs.paq('fzf', 'junegunn/fzf')
-knobs.paq('fzf', 'junegunn/fzf.vim')
-knobs.paq('fugitive', 'tpope/vim-fugitive')
-knobs.paq('fugitive', 'tpope/vim-rhubarb')
-knobs.paq('gitgutter', 'airblade/vim-gitgutter')
-knobs.paq('dispatch', 'tpope/vim-dispatch')
-knobs.paq('nerdtree', 'preservim/nerdtree')
-knobs.paq('startify', 'mhinz/vim-startify')
-knobs.paq('which_key', 'liuchengxu/vim-which-key')
+knobs.paq {'junegunn/fzf', 'fzf'}
+knobs.paq1('fzf', 'junegunn/fzf.vim')
+knobs.paq1('fugitive', 'tpope/vim-fugitive')
+knobs.paq1('fugitive', 'tpope/vim-rhubarb')
+knobs.paq1('gitgutter', 'airblade/vim-gitgutter')
+knobs.paq1('dispatch', 'tpope/vim-dispatch')
+knobs.paq1('nerdtree', 'preservim/nerdtree')
+knobs.paq1('startify', 'mhinz/vim-startify')
+knobs.paq1('which_key', 'liuchengxu/vim-which-key')
 
-knobs.paq('airline', 'vim-airline/vim-airline')
-knobs.paq('airline', 'vim-airline/vim-airline-themes')
+knobs.paq1('airline', 'vim-airline/vim-airline')
+knobs.paq1('airline', 'vim-airline/vim-airline-themes')
 
 cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
 
-knobs.paq('gutentags', 'ludovicchabant/vim-gutentags')
-knobs.paq('tabular', 'godlygeek/tabular')
+knobs.paq1('gutentags', 'ludovicchabant/vim-gutentags')
+knobs.paq1('tabular', 'godlygeek/tabular')
 
-knobs.paq('goyo', 'junegunn/goyo.vim')
-knobs.paq('surround', 'tpope/vim-surround')
+knobs.paq1('goyo', 'junegunn/goyo.vim')
+knobs.paq1('surround', 'tpope/vim-surround')
 
 paq 'neovim/nvim-lspconfig'
 -- paq 'nvim-lua/completion-nvim'
@@ -47,13 +47,13 @@ paq{'iamcco/markdown-preview.nvim', run='cd app && yarn install'}
 
 paq 'christoomey/vim-tmux-navigator'
 
-knobs.paq('startuptime', 'tweekmonster/startuptime.vim')
+knobs.paq1('startuptime', 'tweekmonster/startuptime.vim')
 
-knobs.paq('nerdtree', 'ryanoasis/vim-devicons')
-knobs.paq('minimap', 'wfxr/minimap.vim')
+knobs.paq1('nerdtree', 'ryanoasis/vim-devicons')
+knobs.paq1('minimap', 'wfxr/minimap.vim')
 
-knobs.paq('ale', 'dense-analysis/ale')
+knobs.paq1('ale', 'dense-analysis/ale')
 
-knobs.paq('which_key', 'liuchengxu/vim-which-key')
+knobs.paq1('which_key', 'liuchengxu/vim-which-key')
 
 require('lsp')
