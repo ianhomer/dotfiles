@@ -43,9 +43,9 @@ set clipboard=unnamed
 set nomodeline
 
 " work around for https://github.com/vim/vim/issues/4738
-"if has('macunix')
-"  nnoremap gx :call thingity#OpenURLUnderCursor()<CR>
-"endif
+if has('macunix')
+  nnoremap gx :call thingity#OpenURLUnderCursor()<CR>
+endif
 
 if !knobs#At(1)
   finish
@@ -132,11 +132,11 @@ endif
 
 if !Knob("light")
   if knobs#("gruvbox")
-    "try
+    try
       colorscheme gruvbox
-    "catch /^Vim\%((\a\+)\)\=:E185/
-    "  echo "gruvbox color scheme not loaded, does it need to be installed?"
-    "endtry
+    catch /^Vim\%((\a\+)\)\=:E185/
+      echo "gruvbox color scheme not loaded, does it need to be installed?"
+    endtry
   elseif knobs#("gruvbox8")
     colorscheme gruvbox8
   endif
