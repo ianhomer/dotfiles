@@ -103,9 +103,7 @@ function window#cleaner#CloseMe()
   elseif exists(':Startify')
     execute ":bd"
     execute ":Startify"
-  elseif bufname("%") == ""
-    execute ":q"
   else
-    execute ":bd"
+    quit
   endif
 endfunction

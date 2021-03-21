@@ -23,15 +23,18 @@ def edit(args):
     words = []
     if args.thing and len(args.thing) > 0:
 
-        # Scan words
+        # Thing is a named thing.
         for word in args.thing:
             words.append(word)
 
         kebab = re.sub("[^a-zA-Z0-9]", "-", "-".join(words).lower())
         filename = thingity.getPath(kebab)
     else:
+        # Thing is a today log.
         filename = thingity.getTodayLog(now)
+
     if not os.path.isfile(filename):
+        # Create a new thing.
         Path(filename).touch()
         with open(filename, "w") as file:
             if len(words) == 0:
@@ -40,8 +43,9 @@ def edit(args):
                 title = " ".join(words)
             file.write(f"# {title}\n\n")
 
+    # Edit a thing.
     subprocess.call(
-        ["nvim", filename, "+:Goyo"],
+        ["nvim", filename, "+:Goyo", "+:$"],
         env={**os.environ, "VIM_KNOB": "4"},
         cwd=thingity.THINGS_DIR,
     )
