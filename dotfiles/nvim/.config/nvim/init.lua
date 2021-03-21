@@ -1,8 +1,8 @@
 local cmd = vim.cmd
+local o = vim.o
 
 cmd 'packadd paq-nvim'               -- load the package manager
 local paq = require('paq-nvim').paq  -- a convenient alias
-local o = vim.o
 
 o['runtimepath'] = o['runtimepath'] .. ',~/.vim'
 
@@ -14,6 +14,7 @@ paq {'savq/paq-nvim', opt = true}
 
 knobs.paq('light', 'rakr/vim-one')
 knobs.paq('gruvbox', 'morhetz/gruvbox')
+
 knobs.paq('gruvbox8', 'lifepillar/vim-gruvbox8')
 
 knobs.paq('lightbulb', 'kosayoda/nvim-lightbulb')
