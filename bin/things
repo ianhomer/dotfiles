@@ -19,10 +19,12 @@ def run():
     parser = argparse.ArgumentParser(description="things")
     parser.add_argument("thing", nargs="*", help="thing")
     parser.add_argument("-s", "--synk", help="synk things", action="store_true")
+    # Just sync my notes
+    parser.add_argument("-m", "--my", help="synk my things", action="store_true")
 
     args = parser.parse_args()
 
-    if thingity.synk(args.synk):
+    if thingity.synk(args.synk, args.my):
         return
 
     more = True

@@ -11,18 +11,20 @@ config = configparser.ConfigParser()
 config.read(str(Path.home()) + "/.config/dotme/shim.ini")
 THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
 MY_NOTES = config["DEFAULT"]["MY_NOTES"]
+MY_NOTES_DIR = THINGS_DIR + "/" + MY_NOTES
 shouldSynkFile = str(Path.home()) + "/.config/dotme/should-run/last-run-git-synk-things"
 
 
-def synk(force):
+def synk(force, justMyNotes=False):
     if not force and not runner.should(shouldSynkFile):
         return
     if force:
-        subprocess.run(["git", "synk"], cwd=THINGS_DIR)
+        dir = MY_NOTES_DIR if justMyNotes else THINGS_DIR
+        subprocess.run(["git", "synk"], cwd=dir)
         runner.has(shouldSynkFile)
         time.sleep(1)
     else:
-        subprocess.run(["tmux", "split-window", "-d", "-l", "5", "-v", "things -s"])
+        subprocess.run(["tmux", "split-window", "-d", "-l", "1", "-v", "things -ms"])
     return force
 
 
