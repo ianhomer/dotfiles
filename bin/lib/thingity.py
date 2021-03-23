@@ -24,7 +24,7 @@ def synk(force, justMyNotes=False):
         runner.has(shouldSynkFile)
         time.sleep(1)
     else:
-        subprocess.run(["tmux", "split-window", "-d", "-l", "1", "-v", "things -ms"])
+        subprocess.run(["tmux", "split-window", "-d", "-l", "5", "-v", "things -ms"])
     return force
 
 
@@ -42,13 +42,16 @@ def getPath(name):
 def getDateDisplay(dateAsNumbers, days):
     include = True
     if dateAsNumbers == "":
-        return ""
+        return ("", None)
+    if dateAsNumbers == "0 ":
+        return ("*** ", 0)
     else:
         d1 = date.today()
         doDateMatch = re.search("^([0-9]{4})([0-9]{2}) $", dateAsNumbers)
         if doDateMatch:
             d0 = date(int(doDateMatch.group(1)), int(doDateMatch.group(2)), 1)
-            include = (d0 - d1).days <= days
+            daysToDate = (d0 - d1).days
+            include = daysToDate <= days
             dateDisplay = d0.strftime("%b ").upper()
         else:
             doDateMatch = re.search("([0-9]{4})([0-9]{2})([0-9]{2})", dateAsNumbers)
@@ -58,17 +61,19 @@ def getDateDisplay(dateAsNumbers, days):
                     int(doDateMatch.group(2)),
                     int(doDateMatch.group(3) or 1),
                 )
-                if (d0 - d1).days < 0:
+                daysToDate = (d0 - d1).days
+                if daysToDate < 0:
                     dateDisplay = "*** "
-                elif (d0 - d1).days <= 7:
+                elif daysToDate <= 7:
                     dateDisplay = d0.strftime("%a ").upper()
                 else:
                     dateDisplay = d0.strftime("%d %b ").upper()
             else:
                 d0 = d1
                 dateDisplay = dateAsNumbers
+                daysToDate = (d0 - d1).days
                 include = (d0 - d1).days <= days
     if include:
-        return dateDisplay
+        return (dateDisplay, daysToDate)
     else:
-        return None
+        return (None, None)

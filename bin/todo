@@ -140,10 +140,14 @@ def search(args):
                 color = GREY
             else:
                 color = ""
-            if dateDisplay is not None:
+            if dateDisplay[0] is not None:
+                if dateDisplay[1] is not None:
+                    rank = 2000 + dateDisplay[1]
+                else:
+                    rank = 3000
                 dos.append(
-                    f"{PURPLE}{doContext}{END}\t"
-                    + f"{ORANGE}{dateDisplay}{END}"
+                    f"{rank}\t{PURPLE}{doContext}{END}\t"
+                    + f"{ORANGE}{dateDisplay[0]}{END}"
                     + f"{color}{subject}{END}\t{doFile}\n"
                 )
         else:
@@ -158,7 +162,7 @@ def search(args):
             "-d",
             "\t",
             "--with-nth",
-            "1,2",
+            "2,3",
             "--tabstop",
             "4",
             "--tiebreak",
