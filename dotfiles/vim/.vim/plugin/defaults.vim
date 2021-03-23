@@ -133,7 +133,12 @@ endif
 if !Knob("light")
   if knobs#("gruvbox")
     try
-      colorscheme gruvbox
+      let g:syntax_cmd = "skip"
+      unlet g:syntax_on
+      let g:colors_name='gruvbox'
+      " Above faster startup (saves 20ms) than using colorscheme
+      " since using colorscheme triggers multiple loads of plugin
+      "colorscheme gruvbox
     catch /^Vim\%((\a\+)\)\=:E185/
       echo "gruvbox color scheme not loaded, does it need to be installed?"
     endtry
@@ -142,7 +147,6 @@ if !Knob("light")
   endif
   set bg=dark
   "finish
-
 else
   " Light scheme primarily used for writing content
   colorscheme one
