@@ -24,8 +24,6 @@ colorscheme gruvbox
 EOF
 )
 
-exit
-
 echo
 echo "vim : colorscheme gruvbox"
 echo
@@ -50,8 +48,6 @@ rm vim-startup.log
 nvim --noplugin \
   --startuptime vim-startup.log \
   +q -Nu <(cat << EOF
-let g:syntax_cmd = "skip"
-unlet g:syntax_on
 let g:colors_name='gruvbox'
 EOF
 )
