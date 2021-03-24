@@ -28,7 +28,7 @@ echo
 echo "vim : colorscheme gruvbox"
 echo
 
-cat vim-startup.log | grep 'colors\|syn\|editing'
+cat vim-startup.log | grep 'color\|editing'
 
 rm vim-startup.log
 nvim --noplugin \
@@ -42,7 +42,7 @@ echo
 echo "neovim : colorscheme gruvbox"
 echo
 
-cat vim-startup.log | grep 'colors\|syn\|editing'
+cat vim-startup.log | grep 'color\|editing'
 
 rm vim-startup.log
 nvim --noplugin \
@@ -55,14 +55,13 @@ EOF
 echo
 echo "neovim : g:colors_name gruvbox"
 echo
-cat vim-startup.log | grep 'gruvbox\|syn\|editing'
+cat vim-startup.log | grep 'color\|editing'
 
 rm vim-startup.log
 nvim --noplugin \
   --startuptime vim-startup.log \
   +q -Nu <(cat << EOF
 colorscheme default
-let g:syntax_cmd = "skip"
 EOF
 )
 
@@ -70,6 +69,6 @@ echo
 echo "neovim : colorscheme default"
 echo
 
-cat vim-startup.log | grep 'colors\|syn\|editing'
+cat vim-startup.log | grep 'color\|editing'
 
 
