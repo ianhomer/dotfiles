@@ -4,7 +4,7 @@
 # Install fisher, a package manager for fish
 #
 
-should-run -m 7 dotme-fisher || exit 0
+should-run -m 7 $0 || exit 0
 
 printf "\e[36mInstalling fisher packages\e[0m\n"
 
