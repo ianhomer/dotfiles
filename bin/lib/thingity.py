@@ -24,7 +24,7 @@ def synk(force, justMyNotes=False):
         runner.has(shouldSynkFile)
         time.sleep(1)
     else:
-        subprocess.run(["tmux", "split-window", "-d", "-l", "5", "-v", "things -ms"])
+        subprocess.run(["tmux", "split-window", "-d", "-l", "1", "-v", "things -ms"])
     return force
 
 

@@ -4,7 +4,7 @@ load test_helper
 
 @test "shim : should output correct number of variables" {
   run shim
-  assert_equal ${#lines[@]} 10
+  assert_equal ${#lines[@]} 11
 }
 
 @test "shim : should update without error" {

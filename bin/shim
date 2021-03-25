@@ -74,6 +74,7 @@ if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
   # Load dotme .env
   #
   MY_NOTES="my-notes"
+  MY_DO="-WOR"
   export ENV=~/.config/dotme/.env
   [[ -f $ENV ]] && export $(cat $ENV| xargs)
 
@@ -121,6 +122,7 @@ DOTFILES_DIR = $DOTFILES_DIR
 DOTME_CONFIG = $DOTME_CONFIG
 ME = $DOTFILES_DIR
 MY_NOTES = $MY_NOTES
+MY_DO = $MY_DO
 SHIM_LOADED = 1
 SHIM_OS = $SHIM_OS
 SHIM_SED = $SHIM_SED
@@ -134,6 +136,7 @@ export DOTFILES_DIR=$DOTFILES_DIR
 export DOTME_CONFIG=$DOTME_CONFIG
 export ME=$DOTFILES_DIR
 export MY_NOTES=$MY_NOTES
+export MY_DO=$MY_DO
 export SHIM_LOADED=1
 export SHIM_OS=$SHIM_OS
 export SHIM_SED=$SHIM_SED
