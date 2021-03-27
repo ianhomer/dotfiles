@@ -12,33 +12,33 @@ return require('packer').startup(function(use)
   knobs.setUse(use)
   use 'wbthomason/packer.nvim'
 
-  knobs.use {'rakr/vim-one', 'light'}
-  knobs.use {'morhetz/gruvbox', opt = false}
+  use {'rakr/vim-one'}
+  use {'morhetz/gruvbox', opt = false}
 
-  knobs.use {'lifepillar/gruvbox8', opt = false}
+  use {'lifepillar/gruvbox8', opt = false}
 
   use {'kosayoda/nvim-lightbulb'}
 
-  knobs.use {'junegunn/fzf'}
-  knobs.use {'junegunn/fzf.vim'}
+  use {'junegunn/fzf'}
+  use {'junegunn/fzf.vim'}
   use {'tpope/vim-fugitive'}
 
-  knobs.use {'tpope/vim-rhubarb', 'fugitive'}
-  knobs.use {'airblade/vim-gitgutter'}
-  knobs.use {'tpope/vim-dispatch'}
-  knobs.use {'preservim/nerdtree'}
-  knobs.use {'mhinz/vim-startify'}
+  use {'tpope/vim-rhubarb'}
+  use {'airblade/vim-gitgutter'}
+  use {'tpope/vim-dispatch'}
+  use {'preservim/nerdtree'}
+  use {'mhinz/vim-startify'}
 
   -- knobs.use {'vim-airline/vim-airline'}
   -- knobs.use {'vim-airline/vim-airline-themes', 'airline'}
 
   cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
 
-  knobs.use {'ludovicchabant/vim-gutentags'}
-  knobs.use {'godlygeek/tabular'}
+  use {'ludovicchabant/vim-gutentags'}
+  use {'godlygeek/tabular'}
 
-  knobs.use {'junegunn/goyo.vim'}
-  knobs.use {'tpope/vim-surround'}
+  use {'junegunn/goyo.vim'}
+  use {'tpope/vim-surround'}
 
   use 'neovim/nvim-lspconfig'
   -- paq 'nvim-lua/completion-nvim'
@@ -47,14 +47,13 @@ return require('packer').startup(function(use)
 
   use 'christoomey/vim-tmux-navigator'
 
-  knobs.use {'tweekmonster/startuptime.vim'}
+  use {'tweekmonster/startuptime.vim'}
 
   use {'ryanoasis/vim-devicons'}
-  knobs.use {'wfxr/minimap.vim'}
+  use {'wfxr/minimap.vim'}
 
-  knobs.use {'dense-analysis/ale'}
-
-  knobs.use {'liuchengxu/vim-which-key', 'which_key'}
+  use {'dense-analysis/ale'}
+  use {'liuchengxu/vim-which-key'}
 
   require('lsp')
 end)
