@@ -92,12 +92,6 @@ if knobs#("modes")
   nnoremap <silent> <leader>4 :call modes#TrainingMode()<CR>
 endif
 
-if knobs#could("nnn")
-  let g:nnn#set_default_mappings = 0
-  let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6  } }
-  nnoremap <silent> <leader>m :NnnPicker<CR>
-endif
-
 let g:minimap_auto_start = 0
 let g:minimap_close_filetypes = ['nerdtree','startify']
 
@@ -108,10 +102,6 @@ endif
 if knobs#could("dispatch")
   let g:dispatch_no_tmux_make = 1
   let g:dispatch_quickfix_height = 4
-endif
-
-if knobs#could("syntastic")
-  let g:vim_jsx_pretty_colorful_config = 1
 endif
 
 if knobs#could("gitgutter")
@@ -202,13 +192,14 @@ augroup dotme
   autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 
-  if KnobAt(3)
-    "
-    " *** Scope : Editing ***
-    "
-    " Do not highlight current line when in insert mode
-    autocmd InsertEnter,InsertLeave * set cul!
-  endif
+  "
+  " *** Scope : Editing ***
+  "
+  " Do not highlight current line when in insert mode
+  autocmd InsertEnter,InsertLeave * set cul!
+
+  " Override shiftwidth for python
+  autocmd Filetype python set shiftwidth=2
 
   if knobs#("autosave")
     "
@@ -224,15 +215,6 @@ augroup dotme
       \ call my#DebouncedSave(3000)
     autocmd InsertLeave,TextChanged * ++nested silent! call my#DebouncedSave(500)
   endif
-
-  if KnobAt(3)
-    "
-    " *** Scope : Python ***
-    "
-
-    " Override shiftwidth for python
-    autocmd Filetype python set shiftwidth=2
-  endif
 augroup end
 
 "
@@ -240,55 +222,52 @@ augroup end
 "
 
 " Show white space
-if KnobAt(1)
-  exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
-  set list
+exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
+set list
 
-  " Add operator af for all file
-  onoremap af :<C-u>normal! ggVG<CR>
+" Add operator af for all file
+onoremap af :<C-u>normal! ggVG<CR>
 
-  " Return to visual mode after indenting
-  vnoremap < <gv
-  vnoremap > >gv
-endif
+" Return to visual mode after indenting
+vnoremap < <gv
+vnoremap > >gv
 
 " Surround customisation
-if KnobAt(3)
-  let g:surround_{char2nr('b')} = "**\r**"
-  let g:surround_{char2nr('<')} = "<\r>"
-  " Short cuts for surround word
-  if knobs#("which_key")
-    nnoremap <silent> ' :WhichKey "'"<CR>
-  endif
-  nmap '" ysiW"
-  nmap "" ysiW"
-  nmap '' ysiW'
-  nmap '` ysiW`
-  nmap '< ysiW<
-  nmap 'b ysiWb
+let g:surround_{char2nr('b')} = "**\r**"
+let g:surround_{char2nr('<')} = "<\r>"
+" Short cuts for surround word
+if knobs#("which_key")
+  nnoremap <silent> ' :WhichKey "'"<CR>
 endif
+nmap '" ysiW"
+nmap "" ysiW"
+nmap '' ysiW'
+nmap '` ysiW`
+nmap '< ysiW<
+nmap 'b ysiWb
 
 " *** Scope : IO ***
 "
-if KnobAt(1)
-  if knobs#("autosave")
-    " Auto reload underlying file if it changes, although
-    " it only really reloads when external command run like :!ls
-    set autoread
-    set autowrite
-  endif
-  " Allow hidden buffers without saving
-  set hidden
-  " No backups or backups during write
-  set nobackup
-  set nowritebackup
-  " Keep swap and backups centrally
-  set backupdir=~/.vim/backups
-  set directory=~/.vim/swaps
-
-  " Scroll 3 lines before border
-  set scrolloff=3
+if knobs#("autosave")
+  " Auto reload underlying file if it changes, although
+  " it only really reloads when external command run like :!ls
+  set autoread
+  set autowrite
 endif
+" Allow hidden buffers without saving
+set hidden
+" No backups or backups during write
+set nobackup
+set nowritebackup
+" Keep swap and backups centrally
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
+
+" Scroll 3 lines before border
+set scrolloff=3
+
+" Backspace support
+set backspace=indent,eol,start
 
 " Optimise for faster terminal connections
 " set ttyfast
@@ -315,19 +294,10 @@ if knobs#("airline")
   let g:airline_detect_spell = 0
 endif
 
-" Backspace support
-if KnobAt(1)
-  set backspace=indent,eol,start
-endif
-
-" source ~/.config/vim/netrw.vim
-
-if KnobAt(3)
-  " Thanks to Damian Conway                                                         test long line
-  set colorcolumn=""
-  highlight ColorColumn ctermbg=magenta
-  call matchadd('ColorColumn', '\%82v', 100)
-endif
+" Thanks to Damian Conway                                                         test long line
+set colorcolumn=""
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%82v', 100)
 
 highlight ErrorMsg ctermbg=grey guibg=grey
 
