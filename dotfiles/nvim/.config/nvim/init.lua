@@ -9,7 +9,6 @@ return require('packer').startup(function(use)
   local knobs = require('knobs')
   cmd 'call knobs#Init()'
 
-  knobs.setUse(use)
   use 'wbthomason/packer.nvim'
 
   use {'rakr/vim-one'}
@@ -53,9 +52,9 @@ return require('packer').startup(function(use)
   use {'tweekmonster/startuptime.vim'}
 
   use {'ryanoasis/vim-devicons'}
-  use {'wfxr/minimap.vim'}
+  use {'wfxr/minimap.vim', cmd={"Minimap"}}
 
-  use {'dense-analysis/ale'}
+  use {'dense-analysis/ale', cmd={"ALEFix"}}
   use {'liuchengxu/vim-which-key'}
 
   require('lsp')
