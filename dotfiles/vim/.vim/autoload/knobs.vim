@@ -28,7 +28,7 @@ let g:knobs_levels = {
   \   "airline":5,
   \   "autosave":4,
   \   "chadtree":7,
-  \   "conflict-marker":7,
+  \   "conflict_marker":7,
   \   "dispatch":4,
   \   "endwise":5,
   \   "eunuch":5,
