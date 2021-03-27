@@ -15,9 +15,9 @@ let NERDTreeDirArrowCollapsible=""
 let NERDTreeMinimalMenu = 0
 
 function! NERDTreeFindOrToggle()
-  if g:NERDTree.IsOpen() || @% == ""
+  if (exists("g:NERDTree") && g:NERDTree.IsOpen()) || @% == ""
     if winnr('$') > 0 || &filetype == "startify" 
-      NERDTreeToggle
+       NERDTreeToggle
     else
       " NERDTree doesn't like closing itself if it's the last window, so we'll
       " use the CloseMe function which will drop back to Startify

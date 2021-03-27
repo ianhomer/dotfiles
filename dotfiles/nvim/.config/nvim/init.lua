@@ -21,12 +21,12 @@ return require('packer').startup(function(use)
 
   use {'junegunn/fzf'}
   use {'junegunn/fzf.vim'}
-  use {'tpope/vim-fugitive'}
+  use {'tpope/vim-fugitive', cmd = {'Gstatus', 'Gblame', 'Gpush', 'Gpull'}}
 
   use {'tpope/vim-rhubarb'}
   use {'airblade/vim-gitgutter'}
   use {'tpope/vim-dispatch'}
-  use {'preservim/nerdtree', cmd={'NERDTreeFind'}}
+  use {'preservim/nerdtree', cmd={'NERDTreeFind', 'NERDTreeToggle'}}
   use {'mhinz/vim-startify'}
 
   use {
@@ -40,7 +40,7 @@ return require('packer').startup(function(use)
   cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
 
   use {'ludovicchabant/vim-gutentags'}
-  use {'godlygeek/tabular'}
+  use {'godlygeek/tabular', cmd={'Tabularize'}}
 
   use {'junegunn/goyo.vim'}
   use {'tpope/vim-surround'}
