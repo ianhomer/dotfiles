@@ -169,7 +169,7 @@ if !KnobAt(3)
   finish
 endif
 
-if Knob("startify")
+if knobs#("startify")
   let g:startify_custom_header = ""
   let g:startify_session_autoload = 0
   let g:startify_change_to_dir = 0
