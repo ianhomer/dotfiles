@@ -29,8 +29,8 @@ return require('packer').startup(function(use)
   knobs.use {'preservim/nerdtree'}
   knobs.use {'mhinz/vim-startify'}
 
-  knobs.use {'vim-airline/vim-airline'}
-  knobs.use {'vim-airline/vim-airline-themes', 'airline'}
+  -- knobs.use {'vim-airline/vim-airline'}
+  -- knobs.use {'vim-airline/vim-airline-themes', 'airline'}
 
   cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
 
