@@ -1,60 +1,60 @@
 local cmd = vim.cmd
 local o = vim.o
 
-cmd 'packadd paq-nvim'               -- load the package manager
-local paq = require('paq-nvim').paq  -- a convenient alias
+cmd 'packadd packer.nvim'            -- load the package manager
 
-o['runtimepath'] = o['runtimepath'] .. ',~/.vim'
+return require('packer').startup(function(use)
+  o['runtimepath'] = o['runtimepath'] .. ',~/.vim'
 
-local knobs = require('knobs')
+  local knobs = require('knobs')
+  cmd 'call knobs#Init()'
 
-cmd 'call knobs#Init()'
+  knobs.setUse(use)
+  use 'wbthomason/packer.nvim'
 
-paq {'savq/paq-nvim', opt = true}
+  knobs.use {'rakr/vim-one', 'light'}
+  knobs.use {'morhetz/gruvbox', opt = false}
 
-knobs.paq {'rakr/vim-one', 'light'}
-knobs.paq {'morhetz/gruvbox', opt = false}
+  knobs.use {'lifepillar/gruvbox8', opt = false}
 
-knobs.paq {'lifepillar/gruvbox8', opt = false}
+  use {'kosayoda/nvim-lightbulb'}
 
-paq {'kosayoda/nvim-lightbulb'}
+  knobs.use {'junegunn/fzf'}
+  knobs.use {'junegunn/fzf.vim'}
+  use {'tpope/vim-fugitive'}
 
-knobs.paq {'junegunn/fzf'}
-knobs.paq {'junegunn/fzf.vim'}
-paq {'tpope/vim-fugitive'}
+  knobs.use {'tpope/vim-rhubarb', 'fugitive'}
+  knobs.use {'airblade/vim-gitgutter'}
+  knobs.use {'tpope/vim-dispatch'}
+  knobs.use {'preservim/nerdtree'}
+  knobs.use {'mhinz/vim-startify'}
 
-knobs.paq {'tpope/vim-rhubarb', 'fugitive'}
-knobs.paq {'airblade/vim-gitgutter'}
-knobs.paq {'tpope/vim-dispatch'}
-knobs.paq {'preservim/nerdtree'}
-knobs.paq {'mhinz/vim-startify'}
-knobs.paq {'liuchengxu/vim-which-key', 'which_key'}
+  knobs.use {'vim-airline/vim-airline'}
+  knobs.use {'vim-airline/vim-airline-themes', 'airline'}
 
-knobs.paq {'vim-airline/vim-airline', opt = false}
-knobs.paq {'vim-airline/vim-airline-themes', 'airline', opt = false}
+  cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
 
-cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
+  knobs.use {'ludovicchabant/vim-gutentags'}
+  knobs.use {'godlygeek/tabular'}
 
-knobs.paq {'ludovicchabant/vim-gutentags'}
-knobs.paq {'godlygeek/tabular'}
+  knobs.use {'junegunn/goyo.vim'}
+  knobs.use {'tpope/vim-surround'}
 
-knobs.paq {'junegunn/goyo.vim'}
-knobs.paq {'tpope/vim-surround'}
+  use 'neovim/nvim-lspconfig'
+  -- paq 'nvim-lua/completion-nvim'
 
-paq 'neovim/nvim-lspconfig'
--- paq 'nvim-lua/completion-nvim'
+  use {'iamcco/markdown-preview.nvim', run='cd app && yarn install'}
 
-paq {'iamcco/markdown-preview.nvim', run='cd app && yarn install'}
+  use 'christoomey/vim-tmux-navigator'
 
-paq 'christoomey/vim-tmux-navigator'
+  knobs.use {'tweekmonster/startuptime.vim'}
 
-knobs.paq {'tweekmonster/startuptime.vim'}
+  use {'ryanoasis/vim-devicons'}
+  knobs.use {'wfxr/minimap.vim'}
 
-paq {'ryanoasis/vim-devicons'}
-knobs.paq {'wfxr/minimap.vim'}
+  knobs.use {'dense-analysis/ale'}
 
-knobs.paq {'dense-analysis/ale'}
+  knobs.use {'liuchengxu/vim-which-key', 'which_key'}
 
-knobs.paq {'liuchengxu/vim-which-key', 'which_key'}
-
-require('lsp')
+  require('lsp')
+end)
