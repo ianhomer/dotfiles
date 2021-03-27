@@ -1,9 +1,9 @@
 import configparser
+import datetime
 import subprocess
 import re
 import time
 from pathlib import Path
-from datetime import datetime
 from datetime import date
 from . import runner
 
@@ -28,7 +28,7 @@ def synk(force, justMyNotes=False):
     return force
 
 
-def getTodayLog(now=datetime.now()):
+def getTodayLog(now=datetime.datetime.now()):
     today = now.strftime("%m%d")
     return f"{THINGS_DIR}/{MY_NOTES}/stream/{today}.md"
 
@@ -44,8 +44,17 @@ def getDateDisplay(dateAsNumbers, days):
     if dateAsNumbers == "":
         return ("", None)
     d1 = date.today()
-    if re.search("^([0-9]) $", dateAsNumbers):
-        return ("*** ", 0)
+    if match := re.search("^([0-9]) $", dateAsNumbers):
+        day = int(match.group(1))
+        if day > 1:
+            # 2 is mañana
+            return ((d1 + datetime.timedelta(days=1)).strftime("%a ").upper(), 0)
+        elif day > 0:
+            # 1 is today
+            return (d1.strftime("%a ").upper(), 0)
+        else:
+            # 0 is now
+            return ("*** ", 0)
     elif match := re.search("^([0-9]{4})([0-9]{2}) $", dateAsNumbers):
         d0 = date(int(match.group(1)), int(match.group(2)), 1)
         daysToDate = (d0 - d1).days
