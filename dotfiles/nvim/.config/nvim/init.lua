@@ -34,9 +34,6 @@ return require('packer').startup(function(use)
     requires = {'kyazdani42/nvim-web-devicons', opt = true}
   }
 
-  -- use {'vim-airline/vim-airline'}
-  -- use {'vim-airline/vim-airline-themes'}
-
   cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
 
   use {'ludovicchabant/vim-gutentags'}
