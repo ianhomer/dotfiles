@@ -172,6 +172,7 @@ def search(args):
             "4",
             "--tiebreak",
             "begin",
+            "--bind=q:abort"
         ],
         stdin=PIPE,
         stdout=PIPE,
