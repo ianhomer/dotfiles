@@ -51,7 +51,7 @@ function M.use(args)
   local knob = args[2] or args.knob or knobFromPackage(package)
   local opt = isOpt(args)
 
-  print(package .. ":" .. knob .. ":" .. tostring(M.has(knob)) .. ":" .. tostring(opt))
+  -- print(package .. ":" .. knob .. ":" .. tostring(M.has(knob)) .. ":" .. tostring(opt))
   if M.has(knob) then
     use {package, opt=opt}
     if opt then
