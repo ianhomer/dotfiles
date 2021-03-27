@@ -53,7 +53,7 @@ function M.use(args)
 
   -- print(package .. ":" .. knob .. ":" .. tostring(M.has(knob)) .. ":" .. tostring(opt))
   if M.has(knob) then
-    use {package, opt=opt}
+    use {package, opt=opt, cmd=args.cmd}
     if opt then
       name = package:match(REPO_RE)
       xpcall(cmd, function(err) 
