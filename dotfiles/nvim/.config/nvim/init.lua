@@ -26,7 +26,7 @@ return require('packer').startup(function(use)
   knobs.use {'tpope/vim-rhubarb', 'fugitive'}
   knobs.use {'airblade/vim-gitgutter'}
   knobs.use {'tpope/vim-dispatch'}
-  knobs.use {'preservim/nerdtree'}
+  knobs.use {'preservim/nerdtree', cmd = { 'NERDTreeFindOrToggle'} }
   knobs.use {'mhinz/vim-startify'}
 
   -- knobs.use {'vim-airline/vim-airline'}
