@@ -90,7 +90,7 @@ function window#cleaner#CloseMe()
     execute ":bd"
     call window#SwitchToFirstEditableFile()
   elseif &filetype == "nerdtree"
-    if exists(':Startify') && winnr('$') == 1
+    if knobs#("startify") && exists(':Startify') && winnr('$') == 1
       " Last window and Startify available
       "   => Open startify before closing NERDTree
       execute ":Startify"
@@ -100,7 +100,7 @@ function window#cleaner#CloseMe()
     " NERDTree open
     "   => close buffer and leave NERDTree open
     execute ":q"
-  elseif exists(':Startify')
+  elseif knobs#("startify") && exists(':Startify')
     execute ":bd"
     execute ":Startify"
   else
