@@ -134,7 +134,7 @@ if !Knob("light")
   if knobs#("gruvbox")
     try
       let g:syntax_cmd = "skip"
-      unlet g:syntax_on
+      "unlet g:syntax_on
       let g:colors_name='gruvbox'
       " Above faster startup (saves 20ms) than using colorscheme
       " since using colorscheme triggers multiple loads of plugin

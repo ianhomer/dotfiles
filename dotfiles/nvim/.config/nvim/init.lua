@@ -9,36 +9,37 @@ return require('packer').startup(function(use)
   local knobs = require('knobs')
   cmd 'call knobs#Init()'
 
-  knobs.setUse(use)
   use 'wbthomason/packer.nvim'
 
-  knobs.use {'rakr/vim-one', 'light'}
-  knobs.use {'morhetz/gruvbox', opt = false}
+  use {'rakr/vim-one'}
+  use {'morhetz/gruvbox', opt = false}
 
-  knobs.use {'lifepillar/gruvbox8', opt = false}
+  use {'lifepillar/gruvbox8', opt = false}
 
   use {'kosayoda/nvim-lightbulb'}
 
-  knobs.use {'junegunn/fzf'}
-  knobs.use {'junegunn/fzf.vim'}
-  use {'tpope/vim-fugitive'}
+  use {'junegunn/fzf'}
+  use {'junegunn/fzf.vim'}
+  use {'tpope/vim-fugitive', cmd = {'Gstatus', 'Gblame', 'Gpush', 'Gpull'}}
 
-  knobs.use {'tpope/vim-rhubarb', 'fugitive'}
-  knobs.use {'airblade/vim-gitgutter'}
-  knobs.use {'tpope/vim-dispatch'}
-  knobs.use {'preservim/nerdtree', cmd = { 'NERDTreeFindOrToggle'} }
-  knobs.use {'mhinz/vim-startify'}
+  use {'tpope/vim-rhubarb'}
+  use {'airblade/vim-gitgutter'}
+  use {'tpope/vim-dispatch'}
+  use {'preservim/nerdtree', cmd={'NERDTreeFind', 'NERDTreeToggle'}}
+  use {'mhinz/vim-startify'}
 
-  -- knobs.use {'vim-airline/vim-airline'}
-  -- knobs.use {'vim-airline/vim-airline-themes', 'airline'}
+  use {
+    'hoob3rt/lualine.nvim',
+    requires = {'kyazdani42/nvim-web-devicons', opt = true}
+  }
 
   cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
 
-  knobs.use {'ludovicchabant/vim-gutentags'}
-  knobs.use {'godlygeek/tabular'}
+  use {'ludovicchabant/vim-gutentags'}
+  use {'godlygeek/tabular', cmd={'Tabularize'}}
 
-  knobs.use {'junegunn/goyo.vim'}
-  knobs.use {'tpope/vim-surround'}
+  use {'junegunn/goyo.vim'}
+  use {'tpope/vim-surround'}
 
   use 'neovim/nvim-lspconfig'
   -- paq 'nvim-lua/completion-nvim'
@@ -47,14 +48,15 @@ return require('packer').startup(function(use)
 
   use 'christoomey/vim-tmux-navigator'
 
-  knobs.use {'tweekmonster/startuptime.vim'}
+  -- use {'dstein64/vim-startuptime'}
+  use {'tweekmonster/startuptime.vim'}
 
   use {'ryanoasis/vim-devicons'}
-  knobs.use {'wfxr/minimap.vim'}
+  use {'wfxr/minimap.vim', cmd={"Minimap"}}
 
-  knobs.use {'dense-analysis/ale'}
-
-  knobs.use {'liuchengxu/vim-which-key', 'which_key'}
+  use {'dense-analysis/ale', cmd={"ALEFix"}}
+  use {'liuchengxu/vim-which-key'}
 
   require('lsp')
+  require('lualine').setup{{theme = 'gruvbox'}}
 end)
