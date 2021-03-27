@@ -51,9 +51,15 @@ function M.use(args)
   local knob = args[2] or args.knob or knobFromPackage(package)
   local opt = isOpt(args)
 
-  -- print(package .. ":" .. knob .. ":" .. tostring(opt))
+  print(package .. ":" .. knob .. ":" .. tostring(M.has(knob)) .. ":" .. tostring(opt))
   if M.has(knob) then
-    use {package, opt_default=opt}
+    use {package, opt=opt}
+    if opt then
+      name = package:match(REPO_RE)
+      xpcall(cmd, function(err) 
+        print(err)
+      end, 'packadd ' .. name)
+    end
   end
 end
 

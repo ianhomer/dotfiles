@@ -25,7 +25,7 @@ let g:knobs_defaults = {
 let g:knobs_levels = {
   \   "ale":4,
   \   "apathy":5,
-  \   "airline":4,
+  \   "airline":5,
   \   "autosave":4,
   \   "chadtree":7,
   \   "conflict-marker":7,
