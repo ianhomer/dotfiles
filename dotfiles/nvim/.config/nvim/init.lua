@@ -26,11 +26,16 @@ return require('packer').startup(function(use)
   use {'tpope/vim-rhubarb'}
   use {'airblade/vim-gitgutter'}
   use {'tpope/vim-dispatch'}
-  use {'preservim/nerdtree'}
+  use {'preservim/nerdtree', cmd={'NERDTreeFind'}}
   use {'mhinz/vim-startify'}
 
-  use {'vim-airline/vim-airline'}
-  use {'vim-airline/vim-airline-themes'}
+  use {
+    'hoob3rt/lualine.nvim',
+    requires = {'kyazdani42/nvim-web-devicons', opt = true}
+  }
+
+  -- use {'vim-airline/vim-airline'}
+  -- use {'vim-airline/vim-airline-themes'}
 
   cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
 
@@ -47,6 +52,7 @@ return require('packer').startup(function(use)
 
   use 'christoomey/vim-tmux-navigator'
 
+  -- use {'dstein64/vim-startuptime'}
   use {'tweekmonster/startuptime.vim'}
 
   use {'ryanoasis/vim-devicons'}
@@ -56,4 +62,5 @@ return require('packer').startup(function(use)
   use {'liuchengxu/vim-which-key'}
 
   require('lsp')
+  require('lualine').setup{{theme = 'gruvbox'}}
 end)
