@@ -2,6 +2,11 @@ if !KnobAt(9)
   finish
 endif
 
+if knobs#could("conflict_marker")
+  autocmd ColorScheme * highlight Info gui=bold guifg=#504945 guibg=#83a598
+  let g:conflict_marker_highlight_group="Info"
+endif
+
 if knobs#could("syntastic")
   let g:vim_jsx_pretty_colorful_config = 1
 endif

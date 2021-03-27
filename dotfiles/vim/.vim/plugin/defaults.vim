@@ -109,11 +109,6 @@ if knobs#could("gitgutter")
   let g:gitgutter_highlight_linenrs = 1
 endif
 
-if knobs#could("conflict_marker")
-  autocmd ColorScheme * highlight Info gui=bold guifg=#504945 guibg=#83a598
-  let g:conflict_marker_highlight_group="Info"
-endif
-
 if KnobAt(5)
   " markdown preview
   let g:mkdp_auto_close = 0
