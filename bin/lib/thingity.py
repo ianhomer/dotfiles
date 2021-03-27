@@ -43,36 +43,32 @@ def getDateDisplay(dateAsNumbers, days):
     include = True
     if dateAsNumbers == "":
         return ("", None)
-    if dateAsNumbers == "0 ":
+    d1 = date.today()
+    if re.search("^([0-9]) $", dateAsNumbers):
         return ("*** ", 0)
-    else:
-        d1 = date.today()
-        doDateMatch = re.search("^([0-9]{4})([0-9]{2}) $", dateAsNumbers)
-        if doDateMatch:
-            d0 = date(int(doDateMatch.group(1)), int(doDateMatch.group(2)), 1)
-            daysToDate = (d0 - d1).days
-            include = daysToDate <= days
-            dateDisplay = d0.strftime("%b ").upper()
+    elif match := re.search("^([0-9]{4})([0-9]{2}) $", dateAsNumbers):
+        d0 = date(int(match.group(1)), int(match.group(2)), 1)
+        daysToDate = (d0 - d1).days
+        include = daysToDate <= days
+        dateDisplay = d0.strftime("%b ").upper()
+    elif match := re.search("([0-9]{4})([0-9]{2})([0-9]{2})", dateAsNumbers):
+        d0 = date(
+            int(match.group(1)),
+            int(match.group(2)),
+            int(match.group(3) or 1),
+        )
+        daysToDate = (d0 - d1).days
+        if daysToDate < 0:
+            dateDisplay = "*** "
+        elif daysToDate <= 7:
+            dateDisplay = d0.strftime("%a ").upper()
         else:
-            doDateMatch = re.search("([0-9]{4})([0-9]{2})([0-9]{2})", dateAsNumbers)
-            if doDateMatch:
-                d0 = date(
-                    int(doDateMatch.group(1)),
-                    int(doDateMatch.group(2)),
-                    int(doDateMatch.group(3) or 1),
-                )
-                daysToDate = (d0 - d1).days
-                if daysToDate < 0:
-                    dateDisplay = "*** "
-                elif daysToDate <= 7:
-                    dateDisplay = d0.strftime("%a ").upper()
-                else:
-                    dateDisplay = d0.strftime("%d %b ").upper()
-            else:
-                d0 = d1
-                dateDisplay = dateAsNumbers
-                daysToDate = (d0 - d1).days
-                include = (d0 - d1).days <= days
+            dateDisplay = d0.strftime("%d %b ").upper()
+    else:
+        d0 = d1
+        dateDisplay = dateAsNumbers
+        daysToDate = (d0 - d1).days
+        include = (d0 - d1).days <= days
     if include:
         return (dateDisplay, daysToDate)
     else:
