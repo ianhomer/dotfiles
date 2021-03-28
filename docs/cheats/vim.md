@@ -15,6 +15,8 @@ Things I'm trying to remember.
 | `[-d`     | Previous LSP diagnostic                               |
 | `]-d`     | Next LSP diagnostic                                   |
 | `ctrl-X`  | In FZF open in horizontal split                       |
+| `%norm`   | Do operation on each line in file                     |
+| `csw"`    | Quote word                                            |
 
 ### misc
 
