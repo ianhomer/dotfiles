@@ -25,7 +25,6 @@ function M.setup()
       vsnip = true;
     };
   }
-
 end
 
 return M
