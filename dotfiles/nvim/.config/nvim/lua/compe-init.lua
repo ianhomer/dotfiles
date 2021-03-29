@@ -1,7 +1,6 @@
 local M = {}
 
 function M.setup()
-  print("XX")
   require'compe'.setup {
     enabled = true;
     autocomplete = true;
