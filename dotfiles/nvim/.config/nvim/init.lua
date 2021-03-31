@@ -17,16 +17,17 @@ return require('packer').startup(function(use)
   use {'lifepillar/gruvbox8', opt = false}
 
   use {'kosayoda/nvim-lightbulb'}
+  use {'onsails/lspkind-nvim'}
 
   use {'junegunn/fzf'}
   use {'junegunn/fzf.vim'}
-  use {'tpope/vim-fugitive', cmd = {'Gstatus', 'Gblame', 'Gpush', 'Gpull'}}
+  use {'tpope/vim-fugitive', cmd = {'Git', 'Gstatus', 'Gblame', 'Gpush', 'Gpull'}}
 
   use {'tpope/vim-rhubarb'}
   use {'airblade/vim-gitgutter'}
   use {'tpope/vim-dispatch'}
   use {'preservim/nerdtree', cmd={'NERDTreeFind', 'NERDTreeToggle'}}
-  use {'mhinz/vim-startify'}
+  use {'mhinz/vim-startify', cond=function() return knobs.has('startify') end}
 
   use {
     'hoob3rt/lualine.nvim',
@@ -61,5 +62,6 @@ return require('packer').startup(function(use)
   use {'liuchengxu/vim-which-key'}
 
   require('lsp')
+  require('lspkind').init()
   require('lualine').setup{{theme = 'gruvbox'}}
 end)
