@@ -1,5 +1,5 @@
 local M = {}
-local KNOB_VIM_RE = '^[%w-]+/n+vim%-([%w]+)'
+local KNOB_VIM_RE = '^[%w-]+/n?vim%-([%w]+)'
 local KNOB_RE = '^[%w-]+/([%w]+)'
 local REPO_RE = '^[%w-]+/([%w-_.]+)$'
 local cmd = vim.api.nvim_command
