@@ -6,7 +6,7 @@ cmd 'packadd packer.nvim'            -- load the package manager
 return require('packer').startup(function(use)
   o['runtimepath'] = o['runtimepath'] .. ',~/.vim'
 
-  local knobs = require('knobs')
+  local useif = require('knobs').useif(use)
   cmd 'call knobs#Init()'
 
   use 'wbthomason/packer.nvim'
@@ -27,7 +27,7 @@ return require('packer').startup(function(use)
   use {'airblade/vim-gitgutter'}
   use {'tpope/vim-dispatch'}
   use {'preservim/nerdtree', cmd={'NERDTreeFind', 'NERDTreeToggle'}}
-  use {'mhinz/vim-startify', cond=function() return knobs.has('startify') end}
+  useif {'mhinz/vim-startify'}
 
   use {
     'hoob3rt/lualine.nvim',
