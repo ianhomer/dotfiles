@@ -43,8 +43,7 @@ return require('packer').startup(function(use)
   use {'tpope/vim-surround'}
 
   use 'neovim/nvim-lspconfig'
-  -- paq 'nvim-lua/completion-nvim'
-  use {'hrsh7th/nvim-compe',
+  useif {'hrsh7th/nvim-compe',
     config = function() require('compe-init').setup() end
   }
 

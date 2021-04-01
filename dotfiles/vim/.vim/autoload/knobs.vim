@@ -29,6 +29,7 @@ let g:knobs_levels = {
   \   "autosave":4,
   \   "chadtree":7,
   \   "conflict_marker":7,
+  \   "compe":5,
   \   "dispatch":4,
   \   "endwise":5,
   \   "eunuch":5,
