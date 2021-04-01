@@ -24,8 +24,8 @@ return require('packer').startup(function(use)
   use {'tpope/vim-fugitive', cmd = {'Git', 'Gstatus', 'Gblame', 'Gpush', 'Gpull'}}
 
   use {'tpope/vim-rhubarb'}
-  use {'airblade/vim-gitgutter'}
-  use {'tpope/vim-dispatch'}
+  useif {'airblade/vim-gitgutter'}
+  useif {'tpope/vim-dispatch'}
   use {'preservim/nerdtree', cmd={'NERDTreeFind', 'NERDTreeToggle'}}
   useif {'mhinz/vim-startify'}
 
@@ -54,7 +54,7 @@ return require('packer').startup(function(use)
   -- use {'dstein64/vim-startuptime'}
   use {'tweekmonster/startuptime.vim'}
 
-  use {'ryanoasis/vim-devicons'}
+  useif {'ryanoasis/vim-devicons'}
   use {'wfxr/minimap.vim', cmd={"Minimap"}}
 
   use {'dense-analysis/ale', cmd={"ALEFix"}}
