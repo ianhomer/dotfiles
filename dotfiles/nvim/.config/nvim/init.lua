@@ -6,15 +6,20 @@ cmd 'packadd packer.nvim'            -- load the package manager
 return require('packer').startup(function(use)
   o['runtimepath'] = o['runtimepath'] .. ',~/.vim'
 
-  local useif = require('knobs').useif(use)
+  local knobs = require('knobs')
+  local useif = knobs.useif(use)
+
   cmd 'call knobs#Init()'
 
   use 'wbthomason/packer.nvim'
 
   use {'rakr/vim-one'}
-  use {'morhetz/gruvbox', opt = false}
-
-  use {'lifepillar/gruvbox8', opt = false}
+  useif {'morhetz/gruvbox', opt = false}
+  useif {'lifepillar/gruvbox8', opt = false}
+  useif {'tjdevries/colorbuddy.vim'}
+  useif {'tjdevries/gruvbuddy.nvim',
+    config = function() require('colorbuddy').colorscheme('gruvbuddy') end
+  }
 
   use {'kosayoda/nvim-lightbulb'}
   use {'onsails/lspkind-nvim'}
@@ -63,4 +68,5 @@ return require('packer').startup(function(use)
   require('lsp')
   require('lspkind').init()
   require('lualine').setup{{theme = 'gruvbox'}}
+
 end)

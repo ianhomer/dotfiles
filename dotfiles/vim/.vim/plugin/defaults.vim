@@ -116,7 +116,10 @@ if KnobAt(5)
 endif
 
 if !Knob("light")
-  if knobs#("gruvbox")
+  set bg=dark
+  if knobs#("gruvbuddy")
+    " no-op - done in init.lua
+  elseif knobs#("gruvbox")
     try
       let g:syntax_cmd = "skip"
       "unlet g:syntax_on
@@ -130,7 +133,6 @@ if !Knob("light")
   elseif knobs#("gruvbox8")
     colorscheme gruvbox8
   endif
-  set bg=dark
   "finish
 else
   " Light scheme primarily used for writing content
