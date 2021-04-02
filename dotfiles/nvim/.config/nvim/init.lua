@@ -14,8 +14,9 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {'rakr/vim-one'}
-  useif {'morhetz/gruvbox', opt = false}
-  useif {'lifepillar/gruvbox8', opt = false}
+  useif {'morhetz/gruvbox'}
+  useif {'lifepillar/gruvbox8'}
+  useif {'glepnir/zephyr-nvim'}
   use {'tjdevries/colorbuddy.vim', opt = true}
   useif {'tjdevries/gruvbuddy.nvim',
     requires = {'tjdevries/colorbuddy.vim'}

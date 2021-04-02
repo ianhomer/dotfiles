@@ -61,7 +61,8 @@ let g:knobs_levels = {
   \   "update_spelling":6,
   \   "which_key":5,
   \   "window_cleaner":4,
-  \   "writegood":8
+  \   "writegood":8,
+  \   "zephyr":9
   \ }
 
 " Feature toggles triggered by each layer

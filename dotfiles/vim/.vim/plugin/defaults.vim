@@ -118,6 +118,8 @@ endif
 if !Knob("light")
   if knobs#("gruvbuddy")
     " no-op - done in init.lua
+  elseif knobs#("zephyr")
+    colorscheme zephyr
   elseif knobs#("gruvbox")
     try
       let g:syntax_cmd = "skip"
