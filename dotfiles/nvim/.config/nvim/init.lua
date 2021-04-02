@@ -17,7 +17,6 @@ return require('packer').startup(function(use)
   useif {'morhetz/gruvbox'}
   useif {'lifepillar/gruvbox8'}
   useif {'glepnir/zephyr-nvim'}
-  use {'tjdevries/colorbuddy.vim', opt = true}
   useif {'tjdevries/gruvbuddy.nvim',
     requires = {'tjdevries/colorbuddy.vim'}
     -- config = function() require('colorbuddy').colorscheme('gruvbuddy') end

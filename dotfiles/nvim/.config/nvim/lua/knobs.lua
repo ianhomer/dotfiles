@@ -16,15 +16,11 @@ function M.useif(use)
   return function(args)
     local package = args[1]
     knob = knobFromPackage(package)
-    has = function(knob)
-      return (vim.g["knob_".. knob] or 0) > 0
-    end
+    -- has = function(knob)
+      -- return (vim.g["knob_".. knob] or 0) > 0
+    -- end
     -- print(package .. ":" .. knob .. ":" .. tostring(has(knob)))
-
-    args.cond = function(args)
-      -- print(knob .. ":" .. tostring(has(knob)))
-      return has(knob)
-    end
+    args.cond = '(vim.g["knob_' .. knob .. '"] or 0) > 0'
     use(args)
   end
 end

@@ -1,3 +1,7 @@
+"
+" See init.lua for more recent configuration
+"
+
 if !knobs#At(1)
   finish
 endif
