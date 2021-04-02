@@ -35,7 +35,9 @@ else
       echo "gruvbox color scheme not loaded, does it need to be installed?"
     endtry
   elseif knobs#("gruvbox8")
-    colorscheme gruvbox8
+    let g:syntax_cmd = "skip"
+    let g:colors_name='gruvbox8'
+    " colorscheme gruvbox8
   endif
   set bg=dark
   "finish
