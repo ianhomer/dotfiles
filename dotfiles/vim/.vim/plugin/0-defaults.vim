@@ -109,13 +109,13 @@ if knobs#could("gitgutter")
   let g:gitgutter_highlight_linenrs = 1
 endif
 
-if KnobAt(5)
+if knobs#At(5)
   " markdown preview
   let g:mkdp_auto_close = 0
   let g:mkdp_page_title = '${name}'
 endif
 
-if !KnobAt(3)
+if !knobs#At(3)
   finish
 endif
 

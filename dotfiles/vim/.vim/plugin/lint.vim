@@ -1,4 +1,4 @@
-if KnobAt(3)
+if knobs#At(3)
   nnoremap <leader>L ma:call my#PruneWhiteSpace()<CR>`a
 endif
 
@@ -9,7 +9,7 @@ endif
 let markdown_linters = ['markdownlint']
 
 " Enable markdown linters that help with good writing
-if Knob("writegood")
+if knobs#("writegood")
   let markdown_linters += [
         \ 'alex',
         \ 'languagetool',
