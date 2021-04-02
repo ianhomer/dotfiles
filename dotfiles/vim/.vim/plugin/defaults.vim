@@ -116,7 +116,6 @@ if KnobAt(5)
 endif
 
 if !Knob("light")
-  set bg=dark
   if knobs#("gruvbuddy")
     " no-op - done in init.lua
   elseif knobs#("gruvbox")
@@ -133,6 +132,7 @@ if !Knob("light")
   elseif knobs#("gruvbox8")
     colorscheme gruvbox8
   endif
+  set bg=dark
   "finish
 else
   " Light scheme primarily used for writing content

@@ -28,7 +28,7 @@ let g:knobs_levels = {
   \   "airline":5,
   \   "autosave":4,
   \   "chadtree":7,
-  \   "colorbuddy":4,
+  \   "colorbuddy":6,
   \   "conflict_marker":7,
   \   "compe":5,
   \   "devicons":5,

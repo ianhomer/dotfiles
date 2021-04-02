@@ -16,9 +16,10 @@ return require('packer').startup(function(use)
   use {'rakr/vim-one'}
   useif {'morhetz/gruvbox', opt = false}
   useif {'lifepillar/gruvbox8', opt = false}
-  useif {'tjdevries/colorbuddy.vim'}
+  use {'tjdevries/colorbuddy.vim', opt = true}
   useif {'tjdevries/gruvbuddy.nvim',
-    config = function() require('colorbuddy').colorscheme('gruvbuddy') end
+    requires = {'tjdevries/colorbuddy.vim'}
+    -- config = function() require('colorbuddy').colorscheme('gruvbuddy') end
   }
 
   use {'kosayoda/nvim-lightbulb'}
