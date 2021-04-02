@@ -20,7 +20,7 @@ function M.useif(use)
       -- return (vim.g["knob_".. knob] or 0) > 0
     -- end
     -- print(package .. ":" .. knob .. ":" .. tostring(has(knob)))
-    args.cond = '(vim.g["knob_' .. knob .. '"] or 0) > 0'
+    args.cond = 'vim.g["knob_' .. knob .. '"]'
     use(args)
   end
 end
