@@ -10,15 +10,7 @@ let g:knobs_autoloaded = 1
 
 " Default values for knobs
 let g:knobs_defaults = {
-  \   "compactcmd":0,
-  \   "markdown_flow":0,
-  \   "markdown_conceal_full":0,
-  \   "markdown_conceal_partial":0,
-  \   "markdown_syntax_list":0,
-  \   "markdown_syntax_table":1,
-  \   "polyglot":0,
-  \   "syntastic":0,
-  \   "startuptime":0
+  \   "markdown_syntax_table":1
   \ }
 
 " Levels at which knobs are enabled
