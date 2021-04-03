@@ -151,6 +151,17 @@ return require("packer").startup(
 
         require("lsp")
         require("lspkind").init()
-        require("lualine").setup {{theme = "gruvbox"}}
+        require("lualine").setup {
+            options = {
+                sources = {"ale"},
+                theme = "gruvbox"
+            },
+            sections = {
+                lualine_c = {
+                    {"filename"},
+                    {"diagnostics", sources = {"ale"}, color_error = "#ffffff"}
+                }
+            }
+        }
     end
 )
