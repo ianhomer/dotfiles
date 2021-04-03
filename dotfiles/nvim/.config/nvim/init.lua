@@ -146,7 +146,11 @@ return require("packer").startup(
         useif {"ryanoasis/vim-devicons"}
         use {"wfxr/minimap.vim", cmd = {"Minimap"}}
 
-        use {"dense-analysis/ale", cmd = {"ALEFix"}}
+        use {
+            "dense-analysis/ale",
+            ft = {"sh", "javascript", "markdown", "lua", "python", "typescript", "vim"},
+            cmd = {"ALEFix"}
+        }
         use {"liuchengxu/vim-which-key"}
 
         require("lsp")
