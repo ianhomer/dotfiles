@@ -104,11 +104,7 @@ function! knobs#Level()
 endfunction
 
 function! knobs#At(level)
-  if exists("g:knobs_level")
-    return g:knobs_level >= a:level
-  else
-    return 0
-  endif
+  return g:knobs_level >= a:level
 endfunction
 
 if !exists("g:knobs_default_level")
