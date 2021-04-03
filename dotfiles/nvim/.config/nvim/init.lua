@@ -136,7 +136,10 @@ return require("packer").startup(
             end
         }
 
-        use {"iamcco/markdown-preview.nvim", run = "cd app && yarn install"}
+        use {"iamcco/markdown-preview.nvim",
+          -- cmd = {"MarkdownPreview"},
+          run = "cd app && yarn install"
+        }
 
         use "christoomey/vim-tmux-navigator"
 

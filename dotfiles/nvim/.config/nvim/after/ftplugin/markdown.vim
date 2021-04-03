@@ -1,4 +1,4 @@
-if !KnobAt(3)
+if !knobs#At(3)
   finish
 endif
 
@@ -108,13 +108,13 @@ inoremap <buffer> <silent> <Bar> <Bar><Esc>:call <SID>LintTable()<CR>$a
 " Auto continuation on carriage return
 inoremap <buffer> <silent> <CR> <CR><C-R>=<SID>NextLine()<C-M>
 
-if Knob("markdown_flow")
+if knobs#("markdown_flow")
   nnoremap <buffer> <silent> <CR> :call <SID>CarriageReturn()<CR>
   inoremap <buffer> <silent> [ [<C-O>:call <SID>LintTodo()<CR><C-O>$
 endif
 
 " The rest of this filetype plugin is not relevant if we're using CoC
-if Knob("coc")
+if knobs#("coc")
   finish
 end
 
