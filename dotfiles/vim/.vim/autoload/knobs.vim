@@ -8,12 +8,16 @@ if exists('g:knobs_autoloaded')
 endif
 let g:knobs_autoloaded = 1
 
+if !exists('g:knobs_defaults')
+  let g:knobs_defaults={}
+endif
+
 " Default state of layers
 " iTerm used for notes layer
 let g:knobs_layers = get(g:, "layers",{
   \   "mobile": $ANDROID_DATA == '/data' ? 1 : 0,
   \   "notes": $ITERM_PROFILE == 'oh-my' ? 1 : 0,
-  \   "nvim-0.5": has('nvim-0.5') ? 1 : 0
+  \   "nvim_0_5": has('nvim-0.5') ? 1 : 0
   \ })
 
 if has('nvim')
