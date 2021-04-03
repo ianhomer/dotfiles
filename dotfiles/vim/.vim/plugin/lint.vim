@@ -22,6 +22,7 @@ let g:ale_linters = {
   \   'html': ['tidy'],
   \   'javascript': ['eslint'],
   \   'json': ['jsonlint'],
+  \   'lua': ['luac'],
   \   'markdown': markdown_linters,
   \   'python': ['flake8'],
   \   'typescript': ['eslint'],
@@ -33,6 +34,7 @@ let g:ale_fixers = {
   \   'css': ['prettier'],
   \   'javascript': ['eslint', 'prettier'],
   \   'json': ['jq'],
+  \   'lua': ['luafmt'],
   \   'python': ['black'],
   \   'scss': ['prettier'],
   \   'typescript': ['eslint', 'prettier']

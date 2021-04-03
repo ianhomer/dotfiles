@@ -60,7 +60,7 @@ brew bundle
 
 if [[ "$ADMIN" == "y" ]] ; then
   log:: "installing admin packages"
-  cd $SCRIPT_DIR/../config/brew/admin
+  cd $DOTFILES_DIR/config/brew/admin
   brew bundle
 fi
 
