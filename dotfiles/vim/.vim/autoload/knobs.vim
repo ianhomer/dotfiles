@@ -12,6 +12,10 @@ if !exists('g:knobs_defaults')
   let g:knobs_defaults={}
 endif
 
+if !exists("g:knobs_default_level")
+  let g:knobs_default_level = 1
+endif
+
 " Default state of layers
 " iTerm used for notes layer
 let g:knobs_layers = get(g:, "layers",{
@@ -106,9 +110,5 @@ endfunction
 function! knobs#At(level)
   return g:knobs_level >= a:level
 endfunction
-
-if !exists("g:knobs_default_level")
-  let g:knobs_default_level = 1
-endif
 
 call knobs#Init()
