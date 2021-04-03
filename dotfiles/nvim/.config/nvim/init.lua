@@ -2,14 +2,6 @@ local cmd = vim.cmd
 local o = vim.o
 local nvim_set_var = vim.api.nvim_set_var
 
--- Default values for knobs
-nvim_set_var(
-    "knobs_defaults",
-    {
-        markdown_syntax_table = 1
-    }
-)
-
 -- Levels at which knobs are enabled
 nvim_set_var(
     "knobs_levels",
@@ -37,6 +29,8 @@ nvim_set_var(
         nerdtree = 5,
         lens = 8,
         lightbulb = 5,
+        lsp = 1,
+        markdown_syntax_table = 1,
         minimap = 5,
         modes = 1,
         nnn = 6,
@@ -72,9 +66,6 @@ nvim_set_var(
             compactcmd = 1,
             light = 1,
             markdown_conceal_partial = 1
-        },
-        nvim_0_5 = {
-            lsp = 1
         }
     }
 )
@@ -106,7 +97,7 @@ return require("packer").startup(
         use {"onsails/lspkind-nvim"}
 
         use {"junegunn/fzf.vim",
-          cmd = { "Ag", "Files" },
+          cmd = { "Ag", "Buffers", "Files" },
           requires = {"junegunn/fzf"}
         }
         use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Gpush", "Gpull"}}
