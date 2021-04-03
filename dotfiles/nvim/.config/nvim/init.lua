@@ -136,9 +136,10 @@ return require("packer").startup(
             end
         }
 
-        use {"iamcco/markdown-preview.nvim",
-          -- cmd = {"MarkdownPreview"},
-          run = "cd app && yarn install"
+        use {
+            "iamcco/markdown-preview.nvim",
+            -- cmd = {"MarkdownPreview"},
+            run = "cd app && yarn install"
         }
 
         use "christoomey/vim-tmux-navigator"
@@ -166,7 +167,7 @@ return require("packer").startup(
             sections = {
                 lualine_c = {
                     {"filename"},
-                    {"diagnostics", sources = {"ale"}, color_error = "#ffffff"}
+                    {"diagnostics", sources = {"ale", "nvim_lsp"}, color_error = "#ffffff"}
                 }
             }
         }
