@@ -64,9 +64,9 @@ else
 endif
 
 if !knobs#("nerdtree")
-  nnoremap <silent> <leader>f :call knobs#core#SetLevel(5)<CR>
-  nnoremap <silent> <leader>n :call knobs#core#SetLevel(5)<CR>
-  nnoremap <silent> <leader>s :call knobs#core#SetLevel(5)<CR>
+  nnoremap <silent> <leader>f :call knobs#runtime#SetLevel(5)<CR>
+  nnoremap <silent> <leader>n :call knobs#runtime#SetLevel(5)<CR>
+  nnoremap <silent> <leader>s :call knobs#runtime#SetLevel(5)<CR>
 endif
 
 if knobs#("minimap")
@@ -95,16 +95,16 @@ endif
 let g:minimap_auto_start = 0
 let g:minimap_close_filetypes = ['nerdtree','startify']
 
-if knobs#could("gutentags")
+if knobs#("gutentags")
   let g:gutentags_cache_dir = expand('~/.cache/tags')
 endif
 
-if knobs#could("dispatch")
+if knobs#("dispatch")
   let g:dispatch_no_tmux_make = 1
   let g:dispatch_quickfix_height = 4
 endif
 
-if knobs#could("gitgutter")
+if knobs#("gitgutter")
   let g:gitgutter_map_keys = 0
   let g:gitgutter_highlight_linenrs = 1
 endif

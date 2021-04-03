@@ -62,5 +62,5 @@ function knobs#runtime#SetLevel(level)
   let g:knobs_level_session=a:level
   let g:knobs_level=a:level
   call knobs#core#ApplyLevels()
-  call knobs#core#ReloadConfig()
+  call knobs#runtime#ReloadConfig()
 endfunction

@@ -16,6 +16,10 @@ if !exists("g:knobs_default_level")
   let g:knobs_default_level = 1
 endif
 
+if !exists('g:knobs_levels')
+  let g:knobs_levels={}
+endif
+
 " Default state of layers
 " iTerm used for notes layer
 let g:knobs_layers = get(g:, "layers",{
@@ -80,27 +84,12 @@ endfunction
 "
 function! s:DefineCommands()
   if !exists("*IfKnob")
-    command! -nargs=+ -bar IfKnob call knobs#If(<f-args>)
+    command! -nargs=+ -bar IfKnob call knobs#plug#If(<f-args>)
   endif
-endfunction
-
-" Could this knob be needed, e.g. if knob level was higher
-function! knobs#could(knob)
-  " https://en.wikipedia.org/wiki/Up_to_eleven - everything on
-  if g:knobs_level == 11
-    return 1
-  endif
-  return knobs#(a:knob)
 endfunction
 
 function! knobs#(knob)
   return exists("g:knob_" . a:knob)
-endfunction
-
-function! knobs#If(knob, ...)
-  if knobs#(trim(a:knob,"'")) || g:knobs_level == 11
-    execute join(a:000)
-  endif
 endfunction
 
 function! knobs#Level()
