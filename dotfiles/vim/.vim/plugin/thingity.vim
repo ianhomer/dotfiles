@@ -8,7 +8,7 @@ if !knobs#("thingity")
   finish
 endif
 
-if KnobAt(4)
+if knobs#At(4)
   " Markdown syntax
   " Enable folding
   let g:markdown_folding = 1

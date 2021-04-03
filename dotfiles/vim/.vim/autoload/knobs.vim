@@ -74,19 +74,6 @@ function! s:DefineCommands()
   if !exists("*IfKnob")
     command! -nargs=+ -bar IfKnob call knobs#If(<f-args>)
   endif
-
-  " Shortcuts to functions
-  if !exists("*Knob")
-    function! Knob(feature)
-      return knobs#(a:feature)
-    endfunction
-  endif
-
-  if !exists("*KnobAt")
-    function! KnobAt(level)
-      return knobs#At(a:level)
-    endfunction
-  endif
 endfunction
 
 " Could this knob be needed, e.g. if knob level was higher

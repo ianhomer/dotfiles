@@ -10,15 +10,7 @@ let g:init_vim = 1
 
 " Default values for knobs
 let g:knobs_defaults = {
-  \   "compactcmd":0,
-  \   "markdown_flow":0,
-  \   "markdown_conceal_full":0,
-  \   "markdown_conceal_partial":0,
-  \   "markdown_syntax_list":0,
-  \   "markdown_syntax_table":1,
-  \   "polyglot":0,
-  \   "syntastic":0,
-  \   "startuptime":0
+  \   "markdown_syntax_table":1
   \ }
 
 " Levels at which knobs are enabled
@@ -84,6 +76,70 @@ let g:knobs_layers_map = {
   \    }
   \  }
 
+
+
+" Levels at which knobs are enabled
+let g:knobs_levels = {
+  \   "ale":4,
+  \   "apathy":5,
+  \   "airline":5,
+  \   "autosave":4,
+  \   "chadtree":7,
+  \   "colorbuddy":6,
+  \   "conflict_marker":7,
+  \   "compe":5,
+  \   "devicons":5,
+  \   "dispatch":5,
+  \   "endwise":5,
+  \   "eunuch":5,
+  \   "fugitive":4,
+  \   "fzf":4,
+  \   "gitgutter":5,
+  \   "gruvbox":5,
+  \   "gruvbox8":4,
+  \   "gruvbuddy":6,
+  \   "goyo":4,
+  \   "gutentags":5,
+  \   "nerdtree":5,
+  \   "lens":8,
+  \   "lightbulb":5,
+  \   "minimap": 5,
+  \   "modes":1,
+  \   "nnn":6,
+  \   "polyglot":5,
+  \   "spelling":4,
+  \   "startify":5,
+  \   "startuptime":5,
+  \   "surround":4,
+  \   "tabcomplete":4,
+  \   "tabular":4,
+  \   "thingity":4,
+  \   "unimpaired":4,
+  \   "update_spelling":6,
+  \   "which_key":5,
+  \   "window_cleaner":4,
+  \   "writegood":8,
+  \   "zephyr":9
+  \ }
+
+" Feature toggles triggered by each layer
+let g:knobs_layers_map = {
+  \    "mobile":{
+  \      "compactcmd":1,
+  \      "light":1,
+  \      "markdown_flow":1,
+  \      "markdown_conceal_full":1,
+  \      "markdown_syntax_list":1
+  \    },
+  \    "notes":{
+  \      "compactcmd":1,
+  \      "light":1,
+  \      "markdown_conceal_partial":1
+  \    },
+  \    "nvim-0.5":{
+  \      "lsp":1
+  \    }
+  \  }
 
 " Load plugins
 call plug#begin(knobs#GetPluggedDir())

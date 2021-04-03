@@ -1,5 +1,5 @@
 " My shortcuts
-if KnobAt(1)
+if knobs#At(1)
   nnoremap <silent> <leader><space> :Buffers<CR>
   nnoremap <silent> <leader>f :call my#SearchFiles()<CR>
   nnoremap <silent> <leader>F :Files!<CR>
@@ -7,7 +7,7 @@ if KnobAt(1)
   " Hide all windows except the current one
   nnoremap <silent> <leader>O :only<CR>
 
-  if KnobAt(3)
+  if knobs#At(3)
     nnoremap <silent> <leader>y :BCommits<CR>
     nnoremap <silent> <leader>Y :BCommits!<CR>
     nnoremap <silent> <leader>t :Commits<CR>
@@ -27,7 +27,7 @@ if KnobAt(1)
 
     "nnoremap <silent> q :echo "q disabled"<CR>
 
-    if KnobAt(4)
+    if knobs#At(4)
       if knobs#("which_key")
         nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
         nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
