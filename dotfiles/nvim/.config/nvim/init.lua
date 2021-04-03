@@ -96,9 +96,10 @@ return require("packer").startup(
         use {"kosayoda/nvim-lightbulb"}
         use {"onsails/lspkind-nvim"}
 
-        use {"junegunn/fzf.vim",
-          cmd = { "Ag", "Buffers", "Files" },
-          requires = {"junegunn/fzf"}
+        use {
+            "junegunn/fzf.vim",
+            cmd = {"Ag", "Buffers", "Files"},
+            requires = {"junegunn/fzf"}
         }
         use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Gpush", "Gpull"}}
 
