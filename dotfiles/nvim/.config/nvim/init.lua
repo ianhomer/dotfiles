@@ -96,39 +96,38 @@ return require("packer").startup(
         useif {"morhetz/gruvbox"}
         useif {"lifepillar/gruvbox8"}
         useif {"glepnir/zephyr-nvim"}
-        useif {
-            "tjdevries/gruvbuddy.nvim",
-            requires = {"tjdevries/colorbuddy.vim"}
-            -- config = function() require('colorbuddy').colorscheme('gruvbuddy') end
-        }
 
-        use {"kosayoda/nvim-lightbulb"}
-        use {"onsails/lspkind-nvim"}
-
-        use {"junegunn/fzf.vim",
-          cmd = { "Ag", "Files" },
-          requires = {"junegunn/fzf"}
-        }
-        use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Gpush", "Gpull"}}
-
-        use {"tpope/vim-rhubarb"}
-        useif {"airblade/vim-gitgutter"}
-        useif {"tpope/vim-dispatch"}
-        use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
         useif {"mhinz/vim-startify"}
+        use {
+            "junegunn/fzf.vim",
+            cmd = {"Ag", "Files"},
+            requires = {"junegunn/fzf"}
+        }
+        use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
+        useif {"ryanoasis/vim-devicons"}
+        use {"wfxr/minimap.vim", cmd = {"Minimap"}}
+        use {"liuchengxu/vim-which-key"}
+        use "christoomey/vim-tmux-navigator"
 
         use {
             "hoob3rt/lualine.nvim",
             requires = {"kyazdani42/nvim-web-devicons", opt = true}
         }
 
-        cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
+        use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Gpush", "Gpull"}}
+        use {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
+        useif {"airblade/vim-gitgutter"}
+        useif {"tpope/vim-dispatch"}
 
-        use {"ludovicchabant/vim-gutentags"}
+        use {"tpope/vim-surround"}
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
 
         use {"junegunn/goyo.vim"}
-        use {"tpope/vim-surround"}
+        use {
+            "iamcco/markdown-preview.nvim",
+            -- cmd = {"MarkdownPreview"},
+            run = "cd app && yarn install"
+        }
 
         use "neovim/nvim-lspconfig"
         useif {
@@ -137,27 +136,20 @@ return require("packer").startup(
                 require("compe-init").setup()
             end
         }
+        use {"kosayoda/nvim-lightbulb"}
+        use {"onsails/lspkind-nvim"}
 
-        use {
-            "iamcco/markdown-preview.nvim",
-            -- cmd = {"MarkdownPreview"},
-            run = "cd app && yarn install"
-        }
-
-        use "christoomey/vim-tmux-navigator"
-
-        -- use {'dstein64/vim-startuptime'}
-        use {"tweekmonster/startuptime.vim"}
-
-        useif {"ryanoasis/vim-devicons"}
-        use {"wfxr/minimap.vim", cmd = {"Minimap"}}
+        cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
+        use {"ludovicchabant/vim-gutentags"}
 
         use {
             "dense-analysis/ale",
             ft = {"sh", "javascript", "markdown", "lua", "python", "typescript", "vim"},
             cmd = {"ALEFix"}
         }
-        use {"liuchengxu/vim-which-key"}
+
+        -- use {'dstein64/vim-startuptime'}
+        use {"tweekmonster/startuptime.vim"}
 
         require("lsp")
         require("lspkind").init()
@@ -169,7 +161,11 @@ return require("packer").startup(
             sections = {
                 lualine_c = {
                     {"filename"},
-                    {"diagnostics", sources = {"ale", "nvim_lsp"}, color_error = "#ffffff"}
+                    {
+                        "diagnostics",
+                        sources = {"ale", "nvim_lsp"},
+                        color_error = "#ffffff"
+                    }
                 }
             }
         }
