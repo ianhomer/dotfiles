@@ -92,6 +92,7 @@ return require("packer").startup(
         use {
             "junegunn/fzf.vim",
             cmd = {"Ag", "Buffers", "Files"},
+            fn = {"fzf#vim#ag"},
             requires = {"junegunn/fzf"}
         }
         use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
