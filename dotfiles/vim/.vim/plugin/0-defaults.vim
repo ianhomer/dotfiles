@@ -85,11 +85,16 @@ if !knobs#("autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | endif
 nnoremap <silent> <leader>z :noh<CR>
 
 if knobs#("modes")
+  command! -nargs=0 ResetMode :call modes#ResetMode()
+  command! -nargs=0 PersonalDevMode :call modes#PersonalDevMode()
+  command! -nargs=0 MobbingMode :call modes#MobbingMode()
+  command! -nargs=0 TrainingMode :call modes#TrainingMode()
+
   " Numbered modes of configuration
-  nnoremap <silent> <leader>1 :call modes#ResetMode()<CR>
-  nnoremap <silent> <leader>2 :call modes#PersonalDevMode()<CR>
-  nnoremap <silent> <leader>3 :call modes#MobbingMode()<CR>
-  nnoremap <silent> <leader>4 :call modes#TrainingMode()<CR>
+  nnoremap <silent> <leader>1 :ResetMode<CR>
+  nnoremap <silent> <leader>2 :PersonalDevMode<CR>
+  nnoremap <silent> <leader>3 :MobbingMode<CR>
+  nnoremap <silent> <leader>4 :TrainingMode<CR>
 endif
 
 let g:minimap_auto_start = 0

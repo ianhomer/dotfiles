@@ -8,15 +8,19 @@ if knobs#At(1)
   nnoremap <silent> <leader>O :only<CR>
 
   if knobs#At(3)
+    command! -nargs=0 ToggleQuickFix :call my#ToggleQuickFix()
+    command! -nargs=0 ToggleLocationList :call my#ToggleLocationList()
+    command! -nargs=0 ToggleFugitive :call window#ToggleFugitive()
+ 
     nnoremap <silent> <leader>y :BCommits<CR>
     nnoremap <silent> <leader>Y :BCommits!<CR>
     nnoremap <silent> <leader>t :Commits<CR>
     nnoremap <silent> <leader>T :Commits!<CR>
     nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
-    nnoremap <silent> <leader>k :call my#ToggleQuickFix()<CR>
-    nnoremap <silent> <leader>K :call my#ToggleLocationList()<CR>
-    nnoremap <silent> <leader>g :call window#ToggleFugitive()<CR>
+    nnoremap <silent> <leader>k :ToggleQuickFix<CR>
+    nnoremap <silent> <leader>K :ToggleLocationList<CR>
+    nnoremap <silent> <leader>g :ToggleFugitive<CR>
     nnoremap gdh :diffget //2<CR>
     nnoremap gdl :diffget //3<CR>
     nnoremap <silent> <leader>b :call my#GitSynk(1)<CR>

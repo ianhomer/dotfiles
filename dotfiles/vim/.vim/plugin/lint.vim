@@ -1,5 +1,6 @@
 if knobs#At(3)
-  nnoremap <leader>L ma:call my#PruneWhiteSpace()<CR>`a
+  command! -nargs=0 LintSpace :call my#LintSpace()
+  nnoremap <leader>L :LintSpace<CR>
 endif
 
 if !knobs#("ale")

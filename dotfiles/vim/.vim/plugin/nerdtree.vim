@@ -38,7 +38,9 @@ function! NERDTreeSwitchAndFind()
   call window#SwitchToFirstEditableFile()
 endfunction
 
-nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
+command! -nargs=0 NERDTreeFindOrToggle :call NERDTreeFindOrToggle()
+
+nnoremap <silent> <leader>n :NERDTreeFindOrToggle<CR>
 "nnoremap <silent> <leader>m :call NERDTreeSwitchAndFind()<CR>
 
 " https://github.com/preservim/nerdtree/wiki

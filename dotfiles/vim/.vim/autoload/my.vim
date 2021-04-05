@@ -63,6 +63,12 @@ function my#PruneWhiteSpace()
   call my#ReduceBlankLines()
 endfunction
 
+function my#LintSpace()
+  normal ma
+  call my#PruneWhiteSpace()
+  normal `a
+endfunction
+
 function my#ReduceBlankLines()
   call my#TrimEndLines()
   v/\S/,//-j

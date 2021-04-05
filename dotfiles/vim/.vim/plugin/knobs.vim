@@ -26,10 +26,11 @@ let g:knobs_loaded = 1
 
 command! -nargs=0 Knobs :call knobs#runtime#Knobs()
 command! -nargs=0 KnobLevel :echo knobs#Level()
+command! -nargs=0 ReloadConfig :call knobs#runtime#ReloadConfig()
 command! -nargs=1 -complete=customlist,knobs#runtime#ListKnobs
   \ KnobToggle :call knobs#runtime#Toggle(<q-args>)
 
-nnoremap <silent> <leader>v :call knobs#runtime#ReloadConfig()<CR>
+nnoremap <silent> <leader>v :ReloadConfig<CR>
 
 nnoremap <silent> <leader>9a :call knobs#runtime#Toggle("ale")<CR>
 nnoremap <silent> <leader>9b :call knobs#runtime#Toggle("autosave")<CR>
