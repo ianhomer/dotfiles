@@ -127,7 +127,12 @@ return require("packer").startup(
                 require("compe-init").setup()
             end
         }
-        use {"kosayoda/nvim-lightbulb"}
+        use {
+            "kosayoda/nvim-lightbulb",
+            config = function()
+                require("lightbulb")
+            end
+        }
         use {"onsails/lspkind-nvim"}
 
         cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"

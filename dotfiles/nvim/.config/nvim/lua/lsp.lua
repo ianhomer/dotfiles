@@ -29,7 +29,6 @@ local on_attach = function(client, bufnr)
         autocmd! * <buffer>
         autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
         autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-        autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
       augroup END
     ]], false)
   end
@@ -48,36 +47,3 @@ for _, lsp in ipairs(servers) do
     print("Can't set up LSP for"..lsp)
   end
 end
-
---  let g:completion_chain_complete_list = {
---    \ 'default': [
---    \    {'complete_items': ['lsp', 'snippet' ]},
---    \    {'mode': '<c-p>'},
---    \    {'mode': '<c-n>'}
---    \]
---  \}
---  imap <c-p> <Plug>(completion_trigger)
---
---  nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
---  nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
---  nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
---  nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
---  nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
---  nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
---  nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-
-if package.loaded['nvim-lightbulb'] then
-  require'nvim-lightbulb'.update_lightbulb {
-      sign = {
-          enabled = true,
-          -- Priority of the gutter sign
-          priority = 10,
-      },
-      float = {
-          enabled = true,
-          -- Text to show in the popup float
-          text = "💡",
-      }
-  }
-end
-
