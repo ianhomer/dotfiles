@@ -121,14 +121,14 @@ return require("packer").startup(
             run = "cd app && yarn install"
         }
 
-        use "neovim/nvim-lspconfig"
+        use {"neovim/nvim-lspconfig", config = [[require'config.lspconfig']]}
         useif {
             "hrsh7th/nvim-compe",
-            config = [[require('config.compe')]]
+            config = [[require'config.compe']]
         }
         use {
             "kosayoda/nvim-lightbulb",
-            config = [[require('config.lightbulb')]]
+            config = [[require'config.lightbulb']]
         }
         use {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
 
@@ -143,7 +143,5 @@ return require("packer").startup(
 
         -- use {'dstein64/vim-startuptime'}
         use {"tweekmonster/startuptime.vim"}
-
-        require("config.lsp")
     end
 )
