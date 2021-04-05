@@ -122,7 +122,10 @@ return require("packer").startup(
             run = "cd app && yarn install"
         }
 
-        use {"neovim/nvim-lspconfig", config = [[require'config.lspconfig']]}
+        use {
+            "neovim/nvim-lspconfig",
+            config = [[require'config.lspconfig']]
+        }
         useif {
             "hrsh7th/nvim-compe",
             config = [[require'config.compe']]
