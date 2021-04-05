@@ -38,6 +38,7 @@ if knobs#At(1)
       if knobs#("which_key")
         nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
         nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+        nnoremap <silent> ' :WhichKey "'"<CR>
       endif
       nnoremap <silent> <leader>p :MarkdownPreview<CR>
       nnoremap <silent> <leader>.m :!mind-map %:p<CR>

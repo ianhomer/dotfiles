@@ -138,6 +138,8 @@ if knobs#("startify")
         \ ]
 endif
 
+let g:which_key_hspace = 2
+
 " Write all buffers before navigating from Vim to tmux pane
 let g:tmux_navigator_save_on_switch = 2
 
@@ -199,9 +201,6 @@ vnoremap > >gv
 let g:surround_{char2nr('b')} = "**\r**"
 let g:surround_{char2nr('<')} = "<\r>"
 " Short cuts for surround word
-if knobs#("which_key")
-  nnoremap <silent> ' :WhichKey "'"<CR>
-endif
 nmap '" ysiW"
 nmap "" ysiW"
 nmap '' ysiW'
