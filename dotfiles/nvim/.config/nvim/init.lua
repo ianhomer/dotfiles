@@ -46,7 +46,7 @@ nvim_set_var(
         update_spelling = 6,
         which_key = 5,
         window_cleaner = 4,
-        writegood = 8,
+        writegood = 5,
         zephyr = 9
     }
 )

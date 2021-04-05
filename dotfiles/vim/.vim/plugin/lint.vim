@@ -11,9 +11,9 @@ let markdown_linters = ['markdownlint']
 
 " Enable markdown linters that help with good writing
 if knobs#("writegood")
+  " Excluded 'languagetool'
   let markdown_linters += [
         \ 'alex',
-        \ 'languagetool',
         \ 'proselint',
         \ 'writegood'
         \]
