@@ -1,7 +1,8 @@
 " My shortcuts
 if knobs#At(1)
   nnoremap <silent> <leader><space> :Buffers<CR>
-  nnoremap <silent> <leader>f :call my#SearchFiles()<CR>
+  command! -nargs=0 SearchFiles :call my#SearchFiles()
+  nnoremap <silent> <leader>f :SearchFiles<CR>
   nnoremap <silent> <leader>F :Files!<CR>
 
   " Hide all windows except the current one
@@ -41,7 +42,8 @@ if knobs#At(1)
     endif
   endif
 
-  nnoremap <silent> <leader>l :call my#LintMe()<CR>
+  command! -nargs=0 LintMe :call my#LintMe()
+  nnoremap <silent> <leader>l :LintMe<CR>
   nnoremap <leader>.e <C-W><C-=>
 endif
 
