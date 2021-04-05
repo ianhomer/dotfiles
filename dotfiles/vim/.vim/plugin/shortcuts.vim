@@ -12,7 +12,9 @@ if knobs#At(1)
     command! -nargs=0 ToggleQuickFix :call my#ToggleQuickFix()
     command! -nargs=0 ToggleLocationList :call my#ToggleLocationList()
     command! -nargs=0 ToggleFugitive :call window#ToggleFugitive()
- 
+    command! -nargs=0 GitPush :call my#GitSynk(1)
+    command! -nargs=0 GitSynk :call my#GitSynk(0)
+    
     nnoremap <silent> <leader>y :BCommits<CR>
     nnoremap <silent> <leader>Y :BCommits!<CR>
     nnoremap <silent> <leader>t :Commits<CR>
@@ -24,8 +26,8 @@ if knobs#At(1)
     nnoremap <silent> <leader>g :ToggleFugitive<CR>
     nnoremap gdh :diffget //2<CR>
     nnoremap gdl :diffget //3<CR>
-    nnoremap <silent> <leader>b :call my#GitSynk(1)<CR>
-    nnoremap <silent> <leader>e :call my#GitSynk(0)<CR>
+    nnoremap <silent> <leader>b :GitPush<CR>
+    nnoremap <silent> <leader>e :GitSynk<CR>
 
     " ... and let this q mapping apply for NERDTree
     let NERDTreeMapQuit='qq'
