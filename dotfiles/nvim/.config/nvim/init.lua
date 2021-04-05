@@ -123,15 +123,11 @@ return require("packer").startup(
         use "neovim/nvim-lspconfig"
         useif {
             "hrsh7th/nvim-compe",
-            config = function()
-                require("compe-init").setup()
-            end
+            config = [[require('config.compe')]]
         }
         use {
             "kosayoda/nvim-lightbulb",
-            config = function()
-                require("lightbulb")
-            end
+            config = [[require('config.lightbulb')]]
         }
         use {"onsails/lspkind-nvim"}
 
@@ -147,7 +143,7 @@ return require("packer").startup(
         -- use {'dstein64/vim-startuptime'}
         use {"tweekmonster/startuptime.vim"}
 
-        require("lsp")
+        require("config.lsp")
         require("lspkind").init()
         require("lualine").setup {
             options = {
