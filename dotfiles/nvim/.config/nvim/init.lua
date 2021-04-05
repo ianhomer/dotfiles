@@ -102,7 +102,8 @@ return require("packer").startup(
 
         use {
             "hoob3rt/lualine.nvim",
-            requires = {"kyazdani42/nvim-web-devicons", opt = true}
+            requires = {"kyazdani42/nvim-web-devicons", opt = true},
+            config = [[require'config.lualine']]
         }
 
         use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Gpush", "Gpull"}}
@@ -129,7 +130,7 @@ return require("packer").startup(
             "kosayoda/nvim-lightbulb",
             config = [[require('config.lightbulb')]]
         }
-        use {"onsails/lspkind-nvim"}
+        use {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
 
         cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
         use {"ludovicchabant/vim-gutentags"}
@@ -144,22 +145,5 @@ return require("packer").startup(
         use {"tweekmonster/startuptime.vim"}
 
         require("config.lsp")
-        require("lspkind").init()
-        require("lualine").setup {
-            options = {
-                sources = {"ale"},
-                theme = "gruvbox"
-            },
-            sections = {
-                lualine_c = {
-                    {"filename"},
-                    {
-                        "diagnostics",
-                        sources = {"ale", "nvim_lsp"},
-                        color_error = "#ffffff"
-                    }
-                }
-            }
-        }
     end
 )
