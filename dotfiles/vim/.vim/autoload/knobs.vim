@@ -8,10 +8,6 @@ if exists('g:knobs_autoloaded')
 endif
 let g:knobs_autoloaded = 1
 
-if !exists('g:knobs_defaults')
-  let g:knobs_defaults={}
-endif
-
 if !exists("g:knobs_default_level")
   let g:knobs_default_level = 1
 endif
@@ -62,13 +58,18 @@ function! knobs#Init()
     \ exists('g:knobs_default_level') ? g:knobs_default_level : 0
 
   " Set default state of feature toggles
-  let g:knobs = get(g:, "knobs", g:knobs_defaults)
 
-  for [key,value] in items(g:knobs)
-    if value > 0
-      let {"g:knob_" . key} = value
-    endif
-  endfor
+  if exists('g:knobs_defaults')
+    let g:knobs = get(g:, "knobs", g:knobs_defaults)
+
+    for [key,value] in items(g:knobs)
+      if value > 0
+        let {"g:knob_" . key} = value
+      endif
+    endfor
+  else
+    let g:knobs = {}
+  endif
 
   call s:DefineCommands()
 

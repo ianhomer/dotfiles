@@ -10,13 +10,24 @@ function! knobs#core#Init()
   let g:knobs_core_initialised = 1
 
   " Apply all levels
-  call knobs#core#ApplyLevels()
+  call knobs#core#InitLevels()
 
   " Apply all layers
   call knobs#core#ApplyLayers()
 endfunction
 
-" Apply feature toggles for all layers
+" Init feature toggles based on knobs levels (called first time)
+function! knobs#core#InitLevels()
+  for [knob,level] in items(g:knobs_levels)
+    if g:knobs_level >= level
+      let g:knobs[knob] = 1
+      let knob_name = "g:knob_" . knob 
+      let {knob_name} = 1
+    endif
+  endfor
+endfunction
+
+" Apply feature toggles based on knobs levels (called when reloading)
 function! knobs#core#ApplyLevels()
   for [knob,level] in items(g:knobs_levels)
     call knobs#core#SetKnob(knob, knobs#At(level))
