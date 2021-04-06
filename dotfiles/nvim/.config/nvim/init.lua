@@ -136,6 +136,8 @@ return require("packer").startup(
         }
         use {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
 
+        use {"junegunn/vim-peekaboo"}
+
         cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
         use {"ludovicchabant/vim-gutentags"}
 
