@@ -83,8 +83,8 @@ return require("packer").startup(
 
         use "wbthomason/packer.nvim"
 
-        use {"rakr/vim-one"}
-        useif {"morhetz/gruvbox"}
+        use "rakr/vim-one"
+        use "morhetz/gruvbox"
         useif {"lifepillar/gruvbox8"}
         useif {"glepnir/zephyr-nvim"}
 
@@ -98,7 +98,7 @@ return require("packer").startup(
         use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
         useif {"ryanoasis/vim-devicons"}
         use {"wfxr/minimap.vim", cmd = {"Minimap"}}
-        use {"liuchengxu/vim-which-key"}
+        use "liuchengxu/vim-which-key"
         use "christoomey/vim-tmux-navigator"
 
         use {
@@ -112,10 +112,10 @@ return require("packer").startup(
         useif {"airblade/vim-gitgutter"}
         useif {"tpope/vim-dispatch"}
 
-        use {"tpope/vim-surround"}
+        use "tpope/vim-surround"
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
 
-        use {"junegunn/goyo.vim"}
+        use "junegunn/goyo.vim"
         use {
             "iamcco/markdown-preview.nvim",
             -- cmd = {"MarkdownPreview"},
@@ -136,7 +136,7 @@ return require("packer").startup(
         }
         use {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
 
-        use {"junegunn/vim-peekaboo"}
+        use "junegunn/vim-peekaboo"
 
         cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
         use {"ludovicchabant/vim-gutentags"}
@@ -148,6 +148,6 @@ return require("packer").startup(
         }
 
         -- use {'dstein64/vim-startuptime'}
-        use {"tweekmonster/startuptime.vim"}
+        use "tweekmonster/startuptime.vim"
     end
 )
