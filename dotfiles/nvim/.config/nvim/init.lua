@@ -76,10 +76,9 @@ return require("packer").startup(
     function(use)
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
+        cmd "call knobs#Init()"
         local knobs = require("knobs")
         local useif = knobs.useif(use)
-
-        cmd "call knobs#Init()"
 
         use "wbthomason/packer.nvim"
 
@@ -109,15 +108,15 @@ return require("packer").startup(
 
         use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Gpush", "Gpull"}}
         use {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
-        -- useif {"airblade/vim-gitgutter"}
+        useif {"airblade/vim-gitgutter"}
         useif {"tpope/vim-dispatch"}
-        use {
-          'lewis6991/gitsigns.nvim',
-          config = [[require'config.gitsigns']],
-          requires = {
-            'nvim-lua/plenary.nvim'
-          }
-        }
+        -- use {
+          -- 'lewis6991/gitsigns.nvim',
+          -- config = [[require'config.gitsigns']],
+          -- requires = {
+            -- 'nvim-lua/plenary.nvim'
+          -- }
+        -- }
 
         use "tpope/vim-surround"
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
