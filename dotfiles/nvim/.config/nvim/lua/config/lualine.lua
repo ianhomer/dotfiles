@@ -6,6 +6,7 @@ require("lualine").setup {
     sections = {
         lualine_c = {
             {"filename"},
+            {"diff"},
             {
                 "diagnostics",
                 sources = {"ale", "nvim_lsp"},
