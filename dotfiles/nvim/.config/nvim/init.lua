@@ -97,7 +97,7 @@ return require("packer").startup(
             fn = {"fzf#vim#ag"},
             requires = {"junegunn/fzf"}
         }
-        useif {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
+        use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
         useif {"ryanoasis/vim-devicons"}
         useif {"wfxr/minimap.vim", cmd = {"Minimap"}}
         useif "liuchengxu/vim-which-key"
