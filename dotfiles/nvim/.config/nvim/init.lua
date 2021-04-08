@@ -85,7 +85,7 @@ return require("packer").startup(
 
         use "wbthomason/packer.nvim"
 
-        use "rakr/vim-one"
+        use { "rakr/vim-one", disable = true }
         useif "morhetz/gruvbox"
         useif {"lifepillar/gruvbox8"}
         useif {"glepnir/zephyr-nvim"}
