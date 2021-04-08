@@ -35,7 +35,9 @@ nvim_set_var(
         minimap = 5,
         modes = 1,
         nnn = 6,
+        peekaboo = 5,
         polyglot = 5,
+        rhubarb = 5,
         spelling = 4,
         startify = 5,
         startuptime = 5,
@@ -84,7 +86,7 @@ return require("packer").startup(
         use "wbthomason/packer.nvim"
 
         use "rakr/vim-one"
-        use "morhetz/gruvbox"
+        useif "morhetz/gruvbox"
         useif {"lifepillar/gruvbox8"}
         useif {"glepnir/zephyr-nvim"}
 
@@ -95,10 +97,10 @@ return require("packer").startup(
             fn = {"fzf#vim#ag"},
             requires = {"junegunn/fzf"}
         }
-        use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
+        useif {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
         useif {"ryanoasis/vim-devicons"}
-        use {"wfxr/minimap.vim", cmd = {"Minimap"}}
-        use "liuchengxu/vim-which-key"
+        useif {"wfxr/minimap.vim", cmd = {"Minimap"}}
+        useif "liuchengxu/vim-which-key"
         use "christoomey/vim-tmux-navigator"
 
         useif {
@@ -108,7 +110,7 @@ return require("packer").startup(
         }
 
         use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Gpush", "Gpull"}}
-        use {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
+        useif {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
         useif {"airblade/vim-gitgutter"}
         useif {"tpope/vim-dispatch"}
         -- use {
@@ -119,10 +121,10 @@ return require("packer").startup(
           -- }
         -- }
 
-        use "tpope/vim-surround"
-        use {"godlygeek/tabular", cmd = {"Tabularize"}}
+        useif "tpope/vim-surround"
+        useif {"godlygeek/tabular", cmd = {"Tabularize"}}
 
-        use "junegunn/goyo.vim"
+        useif "junegunn/goyo.vim"
         use {
             "iamcco/markdown-preview.nvim",
             -- cmd = {"MarkdownPreview"},
@@ -143,12 +145,14 @@ return require("packer").startup(
         }
         useif {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
 
-        use "junegunn/vim-peekaboo"
+        useif {"junegunn/vim-peekaboo"}
 
-        cmd "let g:gutentags_cache_dir = expand('~/.cache/tags')"
-        use {"ludovicchabant/vim-gutentags"}
+        useif {
+          "ludovicchabant/vim-gutentags",
+          -- setup = [[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
+        }
 
-        use {
+        useif {
             "dense-analysis/ale",
             ft = {"sh", "javascript", "markdown", "lua", "python", "typescript", "vim"},
             cmd = {"ALEFix"}

@@ -14,6 +14,9 @@ end
 
 function M.useif(use)
     return function(args)
+        if type(args) == 'string' then
+          args = { args }
+        end
         local package = args[1]
         knob = knobFromPackage(package)
         -- has = function(knob)

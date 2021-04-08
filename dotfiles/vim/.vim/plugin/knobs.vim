@@ -9,12 +9,12 @@ let g:knobs_loaded = 1
 "
 " Raise config level to enable more configuration
 " - 0 => vanilla config - close to empty
-" - 1 => basic config - light touch
-" - 2 => basic+ config
-" - 3 => lightweight config - key config, but fast startup
+" - 1 => default config - light touch
+" - 2 => default+ config
+" - 3 => lightweight config - key config, but fast startup for embedded commands
 " - 4 => lightweight+ config - config being considered for lightweight
-" - 5 => default config - recommended when opening vim explicitly
-" - 6 => default+ config - config is occasionally needed
+" - 5 => daily config - recommended when opening vim explicitly
+" - 6 => daily config - config is occasionally needed
 "   7 => incubation config - new ideas
 " - 8 => playground config - wild ideas
 " - 9 => legacy config
