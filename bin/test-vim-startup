@@ -8,26 +8,27 @@ from timeit import Timer
 
 def run():
     parser = argparse.ArgumentParser(description="test vim startup")
-    parser.add_argument(
-        "--iterations",  type=int, help="iterations", default=5
-    )
+    parser.add_argument("--iterations", type=int, help="iterations", default=5)
     args = parser.parse_args()
 
     timeAll(args)
 
 
 def timeAll(args):
+    timeOne(["nvim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero")
+    timeOne(["nvim", "--noplugin", "+q"], 0, args, "noplugin")
     for knob in range(6):
-        timeOne(["nvim", "+q"], knob, args)
+        timeOne(["nvim", "+q"], knob, args, "")
 
 
-def timeOne(command, knob, args):
+def timeOne(command, knob, args, label):
     def process():
         subprocess.call(command, env={**os.environ, "VIM_KNOB": f"{knob}"})
 
     t = Timer(process)
     time = int(t.timeit(args.iterations) * 1000 / args.iterations)
-    print(f"{knob} : {time}")
+    print(f"{command[0]} : {knob} : {time} : {label}")
+    return time
 
 
 run()
