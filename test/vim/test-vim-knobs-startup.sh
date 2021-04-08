@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-#set fish_trace on
 set -x
 time VIM_KNOB=0 nvim --noplugin -u NONE +q
 time VIM_KNOB=0 nvim --noplugin +q
 time VIM_KNOB=0 nvim +q
 set +x
-#set -e fish_trace
 
 echo "KNOB 1"
 time VIM_KNOB=1 nvim +q

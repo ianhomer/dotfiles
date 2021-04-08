@@ -6,7 +6,7 @@ local nvim_set_var = vim.api.nvim_set_var
 nvim_set_var(
     "knobs_levels",
     {
-        ale = 9,
+        ale = 5,
         apathy = 5,
         airline = 5,
         autosave = 4,
@@ -152,7 +152,7 @@ return require("packer").startup(
           "ludovicchabant/vim-gutentags"
         }
 
-        useif {
+        use {
             "dense-analysis/ale",
             ft = {"sh", "javascript", "markdown", "lua", "python", "typescript", "vim"},
             cmd = {"ALEFix"}

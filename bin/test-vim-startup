@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+
+import os
+import subprocess
+import time
+
+
+def run():
+    timeAll()
+
+
+def timeAll():
+    for knob in range(6):
+        timeOne(["nvim", "+q"], knob)
+
+
+def timeOne(command, knob):
+    timeStarted = time.time()
+    subprocess.call(command, env={**os.environ, "VIM_KNOB": f"{knob}"})
+    timeDelta = int(1000 * (time.time() - timeStarted))
+    print(f"{knob} : {timeDelta}")
+
+
+run()
