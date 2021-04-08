@@ -30,7 +30,7 @@ nvim_set_var(
         lsp = 1,
         lspconfig = 5,
         lspkind = 5,
-        lualine = 3,
+        lualine = 4,
         markdown_syntax_table = 1,
         minimap = 5,
         modes = 1,
