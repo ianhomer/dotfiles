@@ -8,16 +8,16 @@ let g:knobs_loaded = 1
 " and can be used to toggle multiple features.
 "
 " Raise config level to enable more configuration
-" - 0 => basic config
-" - 1 => runtime config - recommended default level
-" - 2 => useful config (stable)
-" - 3 => useful config
-" - 4 => power config (stable)
-" - 5 => power config - recommended when opening vim explicitly
-" - 6 => extra config (stable)
-"   7 => extra plugins
-" - 8 => experimental config
-" - 9 => experimental plugins
+" - 0 => vanilla config - close to empty
+" - 1 => basic config - light touch
+" - 2 => basic+ config
+" - 3 => lightweight config - key config, but fast startup
+" - 4 => lightweight+ config - config being considered for lightweight
+" - 5 => default config - recommended when opening vim explicitly
+" - 6 => default+ config - config is occasionally needed
+"   7 => incubation config - new ideas
+" - 8 => playground config - wild ideas
+" - 9 => legacy config
 "
 " Config level can be used to reduce start up times, troubleshoot interactions
 " between configurations and plugins. It can also be used to introduce new

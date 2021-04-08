@@ -75,7 +75,7 @@ function! knobs#Init()
 
   " Do full initialisation if config level greater than zero
   if knobs#At(1)
-    silent call knobs#core#Init()
+    call knobs#core#Init()
   endif
 endfunction
 
