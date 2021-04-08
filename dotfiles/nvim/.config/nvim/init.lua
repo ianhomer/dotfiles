@@ -28,6 +28,9 @@ nvim_set_var(
         lens = 8,
         lightbulb = 5,
         lsp = 1,
+        lspconfig = 5,
+        lspkind = 5,
+        lualine = 3,
         markdown_syntax_table = 1,
         minimap = 5,
         modes = 1,
@@ -98,7 +101,7 @@ return require("packer").startup(
         use "liuchengxu/vim-which-key"
         use "christoomey/vim-tmux-navigator"
 
-        use {
+        useif {
             "hoob3rt/lualine.nvim",
             requires = {"kyazdani42/nvim-web-devicons", opt = true},
             config = [[require'config.lualine']]
@@ -126,7 +129,7 @@ return require("packer").startup(
             run = "cd app && yarn install"
         }
 
-        use {
+        useif {
             "neovim/nvim-lspconfig",
             config = [[require'config.lspconfig']]
         }
@@ -134,11 +137,11 @@ return require("packer").startup(
             "hrsh7th/nvim-compe",
             config = [[require'config.compe']]
         }
-        use {
+        useif {
             "kosayoda/nvim-lightbulb",
             config = [[require'config.lightbulb']]
         }
-        use {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
+        useif {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
 
         use "junegunn/vim-peekaboo"
 

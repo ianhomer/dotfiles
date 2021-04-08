@@ -44,7 +44,6 @@ function! knobs#core#ApplyLayers()
 endfunction
 
 function! knobs#core#ApplyLayer(layer, enabled)
-  echo g:knobs_layers_map
   if has_key(g:knobs_layers_map, a:layer)
     for [feature,value] in items(g:knobs_layers_map[a:layer])
       call knobs#core#SetKnob(feature, a:enabled ? value : 1 - value)
