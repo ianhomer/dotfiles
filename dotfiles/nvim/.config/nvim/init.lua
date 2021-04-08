@@ -99,7 +99,7 @@ return require("packer").startup(
         }
         use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
         useif {"ryanoasis/vim-devicons"}
-        useif {"wfxr/minimap.vim", cmd = {"Minimap"}}
+        use {"wfxr/minimap.vim", cmd = {"Minimap"}}
         useif "liuchengxu/vim-which-key"
         use "christoomey/vim-tmux-navigator"
 
@@ -147,9 +147,9 @@ return require("packer").startup(
 
         useif {"junegunn/vim-peekaboo"}
 
+        cmd[[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
         useif {
-          "ludovicchabant/vim-gutentags",
-          -- setup = [[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
+          "ludovicchabant/vim-gutentags"
         }
 
         useif {
