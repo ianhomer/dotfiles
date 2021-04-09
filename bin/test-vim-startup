@@ -3,6 +3,7 @@
 import argparse
 import os
 import subprocess
+import time
 from timeit import Timer
 
 
@@ -15,6 +16,7 @@ def run():
 
 
 def timeAll(args):
+    start = time.time()
     timeOne(["vim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero")
     timeOne(["vim", "--noplugin", "+q"], 0, args, "noplugin")
     timeOne(["vim", "--noplugin", "+q"], 1, args, "noplugin")
@@ -22,6 +24,7 @@ def timeAll(args):
     timeOne(["nvim", "--noplugin", "+q"], 0, args, "noplugin")
     for knob in range(6):
         timeOne(["nvim", "+q"], knob, args, "")
+    print(f"Tests run in :{int((time.time() - start)*1000)}ms")
 
 
 def timeOne(command, knob, args, label):
