@@ -4,10 +4,12 @@
 # Verify dotme install AOK
 #
 
+set -e
+
 $(shim) && . ${ME}/i.sh
 
 [[ ! -d ~/.config/dotme ]] && log::exit "~/.config/dotme missing"
 [[ -z "$SHIM_OS" ]] && log::exit "SHIM_OS env not set"
-log:: $(dim "OS = $SHIM_OS")
+log:: $(log::dim "OS = $SHIM_OS")
 
 log:: AOK dotme
