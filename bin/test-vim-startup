@@ -17,6 +17,7 @@ def run():
 def timeAll(args):
     timeOne(["vim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero")
     timeOne(["vim", "--noplugin", "+q"], 0, args, "noplugin")
+    timeOne(["vim", "--noplugin", "+q"], 1, args, "noplugin")
     timeOne(["nvim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero")
     timeOne(["nvim", "--noplugin", "+q"], 0, args, "noplugin")
     for knob in range(6):

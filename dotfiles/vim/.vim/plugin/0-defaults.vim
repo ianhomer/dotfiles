@@ -118,10 +118,6 @@ endif
 let g:mkdp_auto_close = 0
 let g:mkdp_page_title = '${name}'
 
-if !knobs#At(3)
-  finish
-endif
-
 if knobs#("startify")
   let g:startify_custom_header = ""
   let g:startify_session_autoload = 0
@@ -136,6 +132,10 @@ if knobs#("startify")
         \ { 'type': function('my#nerdtreeBookmarks'),
         \ 'header': ['   NERDTree Bookmarks']}
         \ ]
+endif
+
+if !knobs#At(3)
+  finish
 endif
 
 let g:which_key_hspace = 2
