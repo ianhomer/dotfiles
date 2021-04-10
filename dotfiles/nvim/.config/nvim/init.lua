@@ -43,7 +43,7 @@ nvim_set_var(
         polyglot = 9,
         rhubarb = 7,
         spelling = 4,
-        startify = 6,
+        startify = 5,
         startuptime = 1,
         surround = 3,
         tabcomplete = 3,
