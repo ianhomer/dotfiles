@@ -9,19 +9,19 @@ import subprocess
 import time
 from timeit import Timer
 
+# Generate with test-vim-startup --iterations=50 --nocompare
 snapshotOutput = """
-       scenario - k :  ms :   %
- vim   zero (*) - 0 :  22 : 100
- vim   noplugin - 0 :  25 : 113
- vim   noplugin - 1 :  38 : 172
-nvim   zero (*) - 0 :  39 : 177
-nvim   noplugin - 0 :  60 : 153
-nvim            - 0 :  71 : 182
-nvim            - 1 :  87 : 223
-nvim            - 2 :  75 : 192
-nvim            - 3 :  78 : 200
-nvim            - 4 :  96 : 246
-nvim            - 5 : 155 : 397
+ vim   zero (*) - 0 :  24 : 100
+ vim   noplugin - 0 :  24 : 100
+ vim   noplugin - 1 :  40 : 166
+nvim   zero (*) - 0 :  39 : 162
+nvim   noplugin - 0 :  58 : 148
+nvim            - 0 :  69 : 176
+nvim            - 1 :  73 : 187
+nvim            - 2 :  74 : 189
+nvim            - 3 :  79 : 202
+nvim            - 4 :  93 : 238
+nvim            - 5 : 154 : 394
 """
 
 
@@ -30,17 +30,20 @@ def keyFromLabel(label):
     return key
 
 
-snapshotData = {}
+snapshotTimeMs = {}
+snapshotFactor = {}
 for line in snapshotOutput.split("\n"):
     if line and line.find("vim") > -1:
         label, timeMs, factor = line.split(":")[0:3]
         key = keyFromLabel(label)
-        snapshotData[key] = factor
+        snapshotTimeMs[key] = int(timeMs)
+        snapshotFactor[key] = int(factor)
 
 
 def run():
     parser = argparse.ArgumentParser(description="test vim startup")
     parser.add_argument("--iterations", type=int, help="iterations", default=3)
+    parser.add_argument("--nocompare", action="store_true")
     args = parser.parse_args()
 
     timeAll(args)
@@ -78,12 +81,19 @@ def timeOne(command, knob, args, label, baseline=0):
         factor = int(100 * timeMs / baseline)
     else:
         factor = 100
-    key = keyFromLabel(f"{command[0]} {label} {knob}")
-    snapshot = snapshotData[key]
-    print(
-        f"{command[0]:>4} {label:>10} - {knob} : {timeMs:>3} : {factor:>3} : "
-        + f"{snapshot:>3}"
-    )
+
+    if args.nocompare:
+        compare = ""
+    else:
+        key = keyFromLabel(f"{command[0]} {label} {knob}")
+        sTimeMs = snapshotTimeMs[key]
+        sFactor = snapshotFactor[key] 
+        compare = (
+            f" : {sTimeMs:>3} : {sFactor:>3}"
+            + f" : {sTimeMs - timeMs:>3} : {sFactor - factor:>3}"
+        )
+
+    print(f"{command[0]:>4} {label:>10} - {knob} : {timeMs:>3} : {factor:>3}" + compare)
     return timeMs
 
 
