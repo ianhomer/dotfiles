@@ -94,7 +94,7 @@ return require("packer").startup(
         useif {"mhinz/vim-startify"}
         use {
             "junegunn/fzf.vim",
-            cmd = {"Ag", "Buffers", "Files"},
+            cmd = {"Ag", "Buffers", "Files", "History"},
             fn = {"fzf#vim#ag"},
             requires = {"junegunn/fzf"}
         }
