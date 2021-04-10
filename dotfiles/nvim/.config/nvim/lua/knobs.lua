@@ -1,6 +1,6 @@
 local M = {}
-local KNOB_VIM_RE = "^[%w-]+/n?vim%-([%w]+)"
-local KNOB_RE = "^[%w-]+/([%w]+)"
+local KNOB_VIM_RE = "^[%w-]+/n?vim%-([%w-]+)"
+local KNOB_RE = "^[%w-]+/([%w-]+)"
 local REPO_RE = "^[%w-]+/([%w-_.]+)$"
 local cmd = vim.api.nvim_command
 
@@ -9,7 +9,7 @@ function M.has(knob)
 end
 
 function knobFromPackage(package)
-    return package:match(KNOB_VIM_RE) or package:match(KNOB_RE) or "nil"
+    return (package:match(KNOB_VIM_RE) or package:match(KNOB_RE)):gsub("-","_")
 end
 
 function M.useif(use)
@@ -20,7 +20,7 @@ function M.useif(use)
         local package = args[1]
         knob = knobFromPackage(package)
         -- has = function(knob)
-        -- return (vim.g["knob_".. knob] or 0) > 0
+        --  return (vim.g["knob_".. knob] or 0) > 0
         -- end
         -- print(package .. ":" .. knob .. ":" .. tostring(has(knob)))
         args.cond = 'vim.g["knob_' .. knob .. '"]'

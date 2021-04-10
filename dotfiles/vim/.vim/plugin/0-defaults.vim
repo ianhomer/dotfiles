@@ -64,9 +64,7 @@ else
 endif
 
 if !knobs#("nerdtree")
-  nnoremap <silent> <leader>f :call knobs#runtime#SetLevel(5)<CR>
   nnoremap <silent> <leader>n :call knobs#runtime#SetLevel(5)<CR>
-  nnoremap <silent> <leader>s :call knobs#runtime#SetLevel(5)<CR>
 endif
 
 if knobs#("minimap")

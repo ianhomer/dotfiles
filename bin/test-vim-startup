@@ -87,10 +87,10 @@ def timeOne(command, knob, args, label, baseline=0):
     else:
         key = keyFromLabel(f"{command[0]} {label} {knob}")
         sTimeMs = snapshotTimeMs[key]
-        sFactor = snapshotFactor[key] 
+        sFactor = snapshotFactor[key]
         compare = (
             f" : {sTimeMs:>3} : {sFactor:>3}"
-            + f" : {sTimeMs - timeMs:>3} : {sFactor - factor:>3}"
+            + f" : {timeMs - sTimeMs:>3} : {factor - sFactor:>3}"
         )
 
     print(f"{command[0]:>4} {label:>10} - {knob} : {timeMs:>3} : {factor:>3}" + compare)

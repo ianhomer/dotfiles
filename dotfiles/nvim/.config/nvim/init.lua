@@ -19,7 +19,7 @@ nvim_set_var(
         endwise = 5,
         eunuch = 5,
         fugitive = 3,
-        fzf = 3,
+        fzf = 1,
         gitgutter = 5,
         gruvbox = 5,
         gruvbuddy = 6,
@@ -34,6 +34,7 @@ nvim_set_var(
         lspkind = 5,
         lualine = 4,
         markdown_syntax_table = 3,
+        markdown_preview = 3,
         material = 9,
         minimap = 5,
         modes = 3,
@@ -43,7 +44,7 @@ nvim_set_var(
         rhubarb = 5,
         spelling = 4,
         startify = 5,
-        startuptime = 2,
+        startuptime = 1,
         surround = 3,
         tabcomplete = 3,
         tabular = 3,
@@ -54,6 +55,7 @@ nvim_set_var(
         which_key = 5,
         window_cleaner = 3,
         writegood = 5,
+        tmux_navigator = 2,
         zephyr = 9
     }
 )
@@ -92,24 +94,24 @@ return require("packer").startup(
         use {"rakr/vim-one", disable = true}
         useif {"tjdevries/colorbuddy.nvim", config = [[require'config.colorbuddy']]}
         useif "tjdevries/gruvbuddy.nvim"
-        useif "marko-cerovac/material.nvim"
+        use {"marko-cerovac/material.nvim", disable = true}
 
         useif "morhetz/gruvbox"
         useif {"lifepillar/gruvbox8"}
-        useif {"glepnir/zephyr-nvim"}
+        use {"glepnir/zephyr-nvim", disable = true}
 
         useif {"mhinz/vim-startify"}
         use {
             "junegunn/fzf.vim",
             cmd = {"Ag", "Buffers", "Files", "History"},
             fn = {"fzf#vim#ag"},
-            requires = {"junegunn/fzf"}
+            requires = {{"junegunn/fzf", opt = true, fn = {"fzf#shellescape"}}}
         }
         use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
         useif {"ryanoasis/vim-devicons"}
         use {"wfxr/minimap.vim", cmd = {"Minimap"}}
         useif "liuchengxu/vim-which-key"
-        use "christoomey/vim-tmux-navigator"
+        useif "christoomey/vim-tmux-navigator"
 
         useif {
             "hoob3rt/lualine.nvim",
@@ -133,7 +135,7 @@ return require("packer").startup(
         useif {"godlygeek/tabular", cmd = {"Tabularize"}}
 
         useif "junegunn/goyo.vim"
-        use {
+        useif {
             "iamcco/markdown-preview.nvim",
             -- cmd = {"MarkdownPreview"},
             run = "cd app && yarn install"

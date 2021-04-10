@@ -4,6 +4,7 @@ if knobs#At(1)
   command! -nargs=0 SearchFiles :call my#SearchFiles()
   nnoremap <silent> <leader>f :SearchFiles<CR>
   nnoremap <silent> <leader>F :Files!<CR>
+  nnoremap <silent> <leader>h :History<CR>
 
   " Hide all windows except the current one
   nnoremap <silent> <leader>O :only<CR>
@@ -19,7 +20,6 @@ if knobs#At(1)
     nnoremap <silent> <leader>Y :BCommits!<CR>
     nnoremap <silent> <leader>t :Commits<CR>
     nnoremap <silent> <leader>T :Commits!<CR>
-    nnoremap <silent> <leader>h :History<CR>
     nnoremap <silent> <leader>r :reg<CR>
     nnoremap <silent> <leader>k :ToggleQuickFix<CR>
     nnoremap <silent> <leader>K :ToggleLocationList<CR>
