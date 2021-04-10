@@ -2,25 +2,40 @@
 
 # Output startup performance for vim, for example:
 
-#  vim : 0 :  19 : 100% : zero (baseline)
-#  vim : 0 :  22 : 115% : noplugin
-#  vim : 1 :  36 : 189% : noplugin
-# nvim : 0 :  34 : 178% : zero (baseline)
-# nvim : 0 :  45 : 132% : noplugin
-# nvim : 0 :  57 : 167% :
-# nvim : 1 :  60 : 176% :
-# nvim : 2 :  60 : 176% :
-# nvim : 3 :  67 : 197% :
-# nvim : 4 :  79 : 232% :
-# nvim : 5 : 134 : 394% :
-# Run in   :1861 ms
-
-
 import argparse
 import os
+import re
 import subprocess
 import time
 from timeit import Timer
+
+snapshotOutput = """
+       scenario - k :  ms :   %
+ vim   zero (*) - 0 :  22 : 100
+ vim   noplugin - 0 :  25 : 113
+ vim   noplugin - 1 :  38 : 172
+nvim   zero (*) - 0 :  39 : 177
+nvim   noplugin - 0 :  60 : 153
+nvim            - 0 :  71 : 182
+nvim            - 1 :  87 : 223
+nvim            - 2 :  75 : 192
+nvim            - 3 :  78 : 200
+nvim            - 4 :  96 : 246
+nvim            - 5 : 155 : 397
+"""
+
+
+def keyFromLabel(label):
+    key = re.sub(r"[^a-z0-9]+", "-", label).strip("-")
+    return key
+
+
+snapshotData = {}
+for line in snapshotOutput.split("\n"):
+    if line and line.find("vim") > -1:
+        label, timeMs, factor = line.split(":")[0:3]
+        key = keyFromLabel(label)
+        snapshotData[key] = factor
 
 
 def run():
@@ -32,14 +47,20 @@ def run():
 
 
 def timeAll(args):
+    command = "scenario"
+    knob = "k"
+    timeMs = "ms"
+    factor = "%"
+    print(f"{command:>15} - {knob} : {timeMs:>3} : {factor:>3}")
+
     start = time.time()
     baseline = timeOne(
-        ["vim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero (baseline)", 0
+        ["vim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero (*)", 0
     )
     timeOne(["vim", "--noplugin", "+q"], 0, args, "noplugin", baseline)
     timeOne(["vim", "--noplugin", "+q"], 1, args, "noplugin", baseline)
     baseline = timeOne(
-        ["nvim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero (baseline)", baseline
+        ["nvim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero (*)", baseline
     )
     timeOne(["nvim", "--noplugin", "+q"], 0, args, "noplugin", baseline)
     for knob in range(6):
@@ -52,13 +73,18 @@ def timeOne(command, knob, args, label, baseline=0):
         subprocess.call(command, env={**os.environ, "VIM_KNOB": f"{knob}"})
 
     t = Timer(process)
-    time = int(t.timeit(args.iterations) * 1000 / args.iterations)
+    timeMs = int(t.timeit(args.iterations) * 1000 / args.iterations)
     if baseline > 0:
-        factor = int(100 * time / baseline)
+        factor = int(100 * timeMs / baseline)
     else:
         factor = 100
-    print(f"{command[0]:>4} : {knob} : {time:>3} : {factor:>3}% : {label}")
-    return time
+    key = keyFromLabel(f"{command[0]} {label} {knob}")
+    snapshot = snapshotData[key]
+    print(
+        f"{command[0]:>4} {label:>10} - {knob} : {timeMs:>3} : {factor:>3} : "
+        + f"{snapshot:>3}"
+    )
+    return timeMs
 
 
 run()

@@ -11,6 +11,7 @@ nvim_set_var(
         airline = 5,
         autosave = 4,
         chadtree = 7,
+        colorbuddy = 6,
         conflict_marker = 7,
         compe = 5,
         devicons = 5,
@@ -89,9 +90,9 @@ return require("packer").startup(
         use "wbthomason/packer.nvim"
 
         use {"rakr/vim-one", disable = true}
-        use {"tjdevries/colorbuddy.nvim", config = [[require'config.colorbuddy']]}
-        use "tjdevries/gruvbuddy.nvim"
-        use "marko-cerovac/material.nvim"
+        useif {"tjdevries/colorbuddy.nvim", config = [[require'config.colorbuddy']]}
+        useif "tjdevries/gruvbuddy.nvim"
+        useif "marko-cerovac/material.nvim"
 
         useif "morhetz/gruvbox"
         useif {"lifepillar/gruvbox8"}
