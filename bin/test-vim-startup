@@ -1,5 +1,20 @@
 #!/usr/bin/env python3
 
+# Output startup performance for vim, for example:
+
+#  vim : 0 :  19 : 100% : zero
+#  vim : 0 :  22 : 115% : noplugin
+#  vim : 1 :  36 : 189% : noplugin
+# nvim : 0 :  34 : 178% : zero
+# nvim : 0 :  45 : 132% : noplugin
+# nvim : 0 :  57 : 167% :
+# nvim : 1 :  60 : 176% :
+# nvim : 2 :  60 : 176% :
+# nvim : 3 :  67 : 197% :
+# nvim : 4 :  79 : 232% :
+# nvim : 5 : 134 : 394% :
+# Run in   :1861 ms
+
 import argparse
 import os
 import subprocess
@@ -17,23 +32,29 @@ def run():
 
 def timeAll(args):
     start = time.time()
-    timeOne(["vim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero")
-    timeOne(["vim", "--noplugin", "+q"], 0, args, "noplugin")
-    timeOne(["vim", "--noplugin", "+q"], 1, args, "noplugin")
-    timeOne(["nvim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero")
-    timeOne(["nvim", "--noplugin", "+q"], 0, args, "noplugin")
+    baseline = timeOne(["vim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero", 0)
+    timeOne(["vim", "--noplugin", "+q"], 0, args, "noplugin", baseline)
+    timeOne(["vim", "--noplugin", "+q"], 1, args, "noplugin", baseline)
+    baseline = timeOne(
+        ["nvim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero", baseline
+    )
+    timeOne(["nvim", "--noplugin", "+q"], 0, args, "noplugin", baseline)
     for knob in range(6):
-        timeOne(["nvim", "+q"], knob, args, "")
+        timeOne(["nvim", "+q"], knob, args, "", baseline)
     print(f"Run in   :{int((time.time() - start)*1000)} ms")
 
 
-def timeOne(command, knob, args, label):
+def timeOne(command, knob, args, label, baseline=0):
     def process():
         subprocess.call(command, env={**os.environ, "VIM_KNOB": f"{knob}"})
 
     t = Timer(process)
     time = int(t.timeit(args.iterations) * 1000 / args.iterations)
-    print(f"{command[0]:>4} : {knob} : {time:>3} : {label}")
+    if baseline > 0:
+        factor = int(100 * time / baseline)
+    else:
+        factor = 100
+    print(f"{command[0]:>4} : {knob} : {time:>3} : {factor:>3}% : {label}")
     return time
 
 

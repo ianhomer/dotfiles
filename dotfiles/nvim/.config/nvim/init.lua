@@ -27,20 +27,20 @@ nvim_set_var(
         nerdtree = 5,
         lens = 8,
         lightbulb = 5,
-        lsp = 1,
+        lsp = 2,
         lspconfig = 5,
         lspkind = 5,
         lualine = 4,
-        markdown_syntax_table = 1,
+        markdown_syntax_table = 3,
         minimap = 5,
-        modes = 1,
+        modes = 3,
         nnn = 6,
         peekaboo = 5,
         polyglot = 5,
         rhubarb = 5,
         spelling = 4,
         startify = 5,
-        startuptime = 5,
+        startuptime = 2,
         surround = 3,
         tabcomplete = 3,
         tabular = 3,
@@ -164,6 +164,6 @@ return require("packer").startup(
         }
 
         -- use {'dstein64/vim-startuptime'}
-        use "tweekmonster/startuptime.vim"
+        useif "tweekmonster/startuptime.vim"
     end
 )
