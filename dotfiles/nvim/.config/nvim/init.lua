@@ -45,6 +45,7 @@ nvim_set_var(
         tabcomplete = 3,
         tabular = 3,
         thingity = 3,
+        treesitter = 5,
         unimpaired = 4,
         update_spelling = 6,
         which_key = 5,
@@ -131,6 +132,10 @@ return require("packer").startup(
             run = "cd app && yarn install"
         }
 
+        useif {
+            "nvim-treesitter/nvim-treesitter",
+            config = [[require'config.treesitter']]
+        }
         useif {
             "neovim/nvim-lspconfig",
             config = [[require'config.lspconfig']]
