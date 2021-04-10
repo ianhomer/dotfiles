@@ -2,10 +2,10 @@
 
 # Output startup performance for vim, for example:
 
-#  vim : 0 :  19 : 100% : zero
+#  vim : 0 :  19 : 100% : zero (baseline)
 #  vim : 0 :  22 : 115% : noplugin
 #  vim : 1 :  36 : 189% : noplugin
-# nvim : 0 :  34 : 178% : zero
+# nvim : 0 :  34 : 178% : zero (baseline)
 # nvim : 0 :  45 : 132% : noplugin
 # nvim : 0 :  57 : 167% :
 # nvim : 1 :  60 : 176% :
@@ -14,6 +14,7 @@
 # nvim : 4 :  79 : 232% :
 # nvim : 5 : 134 : 394% :
 # Run in   :1861 ms
+
 
 import argparse
 import os
@@ -32,11 +33,13 @@ def run():
 
 def timeAll(args):
     start = time.time()
-    baseline = timeOne(["vim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero", 0)
+    baseline = timeOne(
+        ["vim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero (baseline)", 0
+    )
     timeOne(["vim", "--noplugin", "+q"], 0, args, "noplugin", baseline)
     timeOne(["vim", "--noplugin", "+q"], 1, args, "noplugin", baseline)
     baseline = timeOne(
-        ["nvim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero", baseline
+        ["nvim", "--noplugin", "-u", "NONE", "+q"], 0, args, "zero (baseline)", baseline
     )
     timeOne(["nvim", "--noplugin", "+q"], 0, args, "noplugin", baseline)
     for knob in range(6):
