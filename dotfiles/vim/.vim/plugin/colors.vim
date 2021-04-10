@@ -19,13 +19,13 @@ if knobs#("light")
   set guicursor=n-v-c:block-Cursor
   set guicursor+=i:ver100-iCursor
 else
-  if knobs#("gruvbuddy")
+  let g:syntax_cmd = "skip"
+  if knobs#("gruvbuddy") || knobs#("material")
     " no-op - done in init.lua
   elseif knobs#("zephyr")
     colorscheme zephyr
   elseif knobs#("gruvbox")
     try
-      let g:syntax_cmd = "skip"
       "unlet g:syntax_on
       let g:colors_name='gruvbox'
       " Above faster startup (saves 20ms) than using colorscheme
@@ -35,7 +35,6 @@ else
       echo "gruvbox color scheme not loaded, does it need to be installed?"
     endtry
   elseif knobs#("gruvbox8")
-    let g:syntax_cmd = "skip"
     let g:colors_name='gruvbox8'
     " colorscheme gruvbox8
   endif

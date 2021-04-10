@@ -21,6 +21,7 @@ nvim_set_var(
         fzf = 3,
         gitgutter = 5,
         gruvbox = 5,
+        gruvbuddy = 6,
         gruvbox8 = 1,
         goyo = 3,
         gutentags = 5,
@@ -32,6 +33,7 @@ nvim_set_var(
         lspkind = 5,
         lualine = 4,
         markdown_syntax_table = 3,
+        material = 9,
         minimap = 5,
         modes = 3,
         nnn = 6,
@@ -86,7 +88,11 @@ return require("packer").startup(
 
         use "wbthomason/packer.nvim"
 
-        use { "rakr/vim-one", disable = true }
+        use {"rakr/vim-one", disable = true}
+        use {"tjdevries/colorbuddy.nvim", config = [[require'config.colorbuddy']]}
+        use "tjdevries/gruvbuddy.nvim"
+        use "marko-cerovac/material.nvim"
+
         useif "morhetz/gruvbox"
         useif {"lifepillar/gruvbox8"}
         useif {"glepnir/zephyr-nvim"}
@@ -115,11 +121,11 @@ return require("packer").startup(
         useif {"airblade/vim-gitgutter"}
         useif {"tpope/vim-dispatch"}
         -- use {
-          -- 'lewis6991/gitsigns.nvim',
-          -- config = [[require'config.gitsigns']],
-          -- requires = {
-            -- 'nvim-lua/plenary.nvim'
-          -- }
+        -- 'lewis6991/gitsigns.nvim',
+        -- config = [[require'config.gitsigns']],
+        -- requires = {
+        -- 'nvim-lua/plenary.nvim'
+        -- }
         -- }
 
         useif "tpope/vim-surround"
@@ -152,9 +158,9 @@ return require("packer").startup(
 
         useif {"junegunn/vim-peekaboo"}
 
-        cmd[[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
+        cmd [[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
         useif {
-          "ludovicchabant/vim-gutentags"
+            "ludovicchabant/vim-gutentags"
         }
 
         use {
