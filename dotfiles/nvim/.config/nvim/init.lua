@@ -32,7 +32,7 @@ nvim_set_var(
         nerdtree = 5,
         lens = 8,
         lightbulb = 5,
-        lsp = 2,
+        lsp = 3,
         lspconfig = 5,
         lspkind = 4,
         lualine = 4,
@@ -51,7 +51,7 @@ nvim_set_var(
         surround = 3,
         tabcomplete = 9,
         tabular = 3,
-        telescope = 3,
+        telescope = 5,
         thingity = 3,
         treesitter = 5,
         unimpaired = 4,
@@ -59,7 +59,7 @@ nvim_set_var(
         which_key = 4,
         window_cleaner = 3,
         writegood = 3,
-        tmux_navigator = 2,
+        tmux_navigator = 3,
         vsnip = 5,
         zephyr = 9
     }
@@ -134,17 +134,20 @@ return require("packer").startup(
             fn = {"fzf#vim#ag"},
             requires = {{"junegunn/fzf", opt = true, fn = {"fzf#shellescape"}}}
         }
-        use {
+        useif {
             "nvim-telescope/telescope.nvim",
-            requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}},
+            requires = {
+                {"nvim-lua/popup.nvim", cond = "vim.g['knob_telescope']"},
+                {"nvim-lua/plenary.nvim", cond = "vim.g['knob_telescope']"}
+            },
             config = [[require'config.telescope']]
         }
         use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
         useif {"ryanoasis/vim-devicons"}
         use {"wfxr/minimap.vim", cmd = {"Minimap"}}
         useif {
-          "liuchengxu/vim-which-key",
-          config = [[require'config.which_key']]
+            "liuchengxu/vim-which-key",
+            config = [[require'config.which_key']]
         }
         useif "christoomey/vim-tmux-navigator"
 
