@@ -9,9 +9,10 @@ nvim_set_var(
         ale = 5,
         apathy = 6,
         airline = 9,
+        auto_pairs = 6,
         autosave = 4,
         chadtree = 7,
-        colorbuddy = 6,
+        colorbuddy = 7,
         conflict_marker = 7,
         compe = 5,
         devicons = 5,
@@ -19,10 +20,11 @@ nvim_set_var(
         endwise = 7,
         eunuch = 7,
         fugitive = 3,
+        friendly_snippets = 6,
         fzf = 1,
         gitgutter = 6,
         gruvbox = 5,
-        gruvbuddy = 6,
+        gruvbuddy = 7,
         gruvbox8 = 1,
         goyo = 3,
         gutentags = 5,
@@ -56,6 +58,7 @@ nvim_set_var(
         window_cleaner = 3,
         writegood = 3,
         tmux_navigator = 2,
+        vsnip = 6,
         zephyr = 9
     }
 )
@@ -91,14 +94,38 @@ return require("packer").startup(
 
         use "wbthomason/packer.nvim"
 
-        use {"rakr/vim-one", disable = true}
-        useif {"tjdevries/colorbuddy.nvim", config = [[require'config.colorbuddy']]}
-        useif "tjdevries/gruvbuddy.nvim"
-        use {"marko-cerovac/material.nvim", disable = true}
+        -- LSP, autocomplete and code guidance
+        useif {
+            "neovim/nvim-lspconfig",
+            config = [[require'config.lspconfig']]
+        }
+        useif "windwp/nvim-autopairs"
+        useif {
+            "hrsh7th/nvim-compe",
+            config = [[require'config.compe']]
+        }
+        useif {
+            "kosayoda/nvim-lightbulb",
+            config = [[require'config.lightbulb']]
+        }
+        useif {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
+        cmd [[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
+        useif {
+            "ludovicchabant/vim-gutentags"
+        }
+        use {
+            "dense-analysis/ale",
+            ft = {"sh", "javascript", "markdown", "lua", "python", "typescript", "vim"},
+            cmd = {"ALEFix"}
+        }
+        useif {
+            "nvim-treesitter/nvim-treesitter",
+            config = [[require'config.treesitter']]
+        }
+        useif "rafamadriz/friendly-snippets"
+        useif "hrsh7th/vim-vsnip"
 
-        useif "morhetz/gruvbox"
-        useif {"lifepillar/gruvbox8"}
-        use {"glepnir/zephyr-nvim", disable = true}
+        -- Navigation
 
         useif {"mhinz/vim-startify"}
         use {
@@ -119,18 +146,23 @@ return require("packer").startup(
             config = [[require'config.lualine']]
         }
 
+        -- Style
+        use {"rakr/vim-one", disable = true}
+        useif {"tjdevries/colorbuddy.nvim", config = [[require'config.colorbuddy']]}
+        useif "tjdevries/gruvbuddy.nvim"
+        use {"marko-cerovac/material.nvim", disable = true}
+
+        useif "morhetz/gruvbox"
+        useif {"lifepillar/gruvbox8"}
+        use {"glepnir/zephyr-nvim", disable = true}
+
+        -- Git
         use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Gpush", "Gpull"}}
         useif {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
         useif {"airblade/vim-gitgutter"}
         useif {"tpope/vim-dispatch"}
-        -- use {
-        -- 'lewis6991/gitsigns.nvim',
-        -- config = [[require'config.gitsigns']],
-        -- requires = {
-        -- 'nvim-lua/plenary.nvim'
-        -- }
-        -- }
 
+        -- Editing
         useif "tpope/vim-surround"
         useif {"godlygeek/tabular", cmd = {"Tabularize"}}
 
@@ -141,37 +173,10 @@ return require("packer").startup(
             run = "cd app && yarn install"
         }
 
-        useif {
-            "nvim-treesitter/nvim-treesitter",
-            config = [[require'config.treesitter']]
-        }
-        useif {
-            "neovim/nvim-lspconfig",
-            config = [[require'config.lspconfig']]
-        }
-        useif {
-            "hrsh7th/nvim-compe",
-            config = [[require'config.compe']]
-        }
-        useif {
-            "kosayoda/nvim-lightbulb",
-            config = [[require'config.lightbulb']]
-        }
-        useif {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
-
         useif {"junegunn/vim-peekaboo"}
 
-        cmd [[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
-        useif {
-            "ludovicchabant/vim-gutentags"
-        }
-
-        use {
-            "dense-analysis/ale",
-            ft = {"sh", "javascript", "markdown", "lua", "python", "typescript", "vim"},
-            cmd = {"ALEFix"}
-        }
-
+        -- Diagnostics
+        --
         -- use {'dstein64/vim-startuptime'}
         useif "tweekmonster/startuptime.vim"
     end

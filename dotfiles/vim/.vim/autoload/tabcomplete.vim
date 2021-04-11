@@ -29,6 +29,9 @@ function! tabcomplete#auto_complete()
   elseif (!knobs#("lsp") && is_path)
     " Use CompletePath from dotfiles fzf.vim
     return fzf#CompletePath()
+  elseif (knobs#("compe"))
+    echo "compe complete"
+    return compe#complete()
   else
     " Otherwise we hand to default insert completion.
     return "\<C-X>\<C-O>"
