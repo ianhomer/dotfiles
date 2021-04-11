@@ -2,7 +2,9 @@
 if knobs#At(1)
   nnoremap <silent> <leader><space> :Buffers<CR>
   command! -nargs=0 SearchFiles :call my#SearchFiles()
-  nnoremap <silent> <leader>f :SearchFiles<CR>
+  if !knobs#("telescope")
+    nnoremap <silent> <leader>f :SearchFiles<CR>
+  endif
   nnoremap <silent> <leader>F :Files!<CR>
   nnoremap <silent> <leader>h :History<CR>
 
@@ -15,7 +17,7 @@ if knobs#At(1)
     command! -nargs=0 ToggleFugitive :call window#ToggleFugitive()
     command! -nargs=0 GitPush :call my#GitSynk(1)
     command! -nargs=0 GitSynk :call my#GitSynk(0)
-    
+
     nnoremap <silent> <leader>r :reg<CR>
     nnoremap <silent> <leader>k :ToggleQuickFix<CR>
     nnoremap <silent> <leader>K :ToggleLocationList<CR>
