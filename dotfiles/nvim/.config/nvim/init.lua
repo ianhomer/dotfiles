@@ -20,7 +20,7 @@ nvim_set_var(
         endwise = 7,
         eunuch = 7,
         fugitive = 3,
-        friendly_snippets = 6,
+        friendly_snippets = 5,
         fzf = 1,
         gitgutter = 6,
         gruvbox = 5,
@@ -58,7 +58,7 @@ nvim_set_var(
         window_cleaner = 3,
         writegood = 3,
         tmux_navigator = 2,
-        vsnip = 6,
+        vsnip = 5,
         zephyr = 9
     }
 )
