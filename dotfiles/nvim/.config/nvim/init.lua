@@ -142,7 +142,10 @@ return require("packer").startup(
         use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
         useif {"ryanoasis/vim-devicons"}
         use {"wfxr/minimap.vim", cmd = {"Minimap"}}
-        useif "liuchengxu/vim-which-key"
+        useif {
+          "liuchengxu/vim-which-key",
+          config = [[require'config.which_key']]
+        }
         useif "christoomey/vim-tmux-navigator"
 
         useif {

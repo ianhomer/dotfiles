@@ -47,17 +47,3 @@ if knobs#At(1)
   nnoremap <silent> <leader>l :LintMe<CR>
   nnoremap <leader>.e <C-W><C-=>
 endif
-
-if exists('*which_key#register')
-  " Note that this currently when config reloaded after which keys as been used
-  " since which keys is lazily loaded
-  let g:which_key_map =  {}
-  let g:which_key_map.c = { 'name' : '...Commenter' }
-  let g:which_key_map.j = { 'name' : '...Thingity' }
-  let g:which_key_map['k'] = { 'name' : '...Bookmarks' }
-  let g:which_key_map['9'] = { 'name' : '...Toggle' }
-  let g:which_key_map[','] = { 'name' : '...Misc' }
-  let g:which_key_map['.'] = { 'name' : '...Experimental' }
-  call which_key#register('<Space>', "g:which_key_map")
-  call which_key#register("'", "g:which_key_map")
-endif
