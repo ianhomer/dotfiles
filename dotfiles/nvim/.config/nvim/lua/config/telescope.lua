@@ -1,4 +1,3 @@
-print("telescope")
 require("telescope").setup {
     defaults = {
         vimgrep_arguments = {
@@ -13,3 +12,6 @@ require("telescope").setup {
         }
     }
 }
+
+local opt = {noremap = true, silent = true}
+vim.api.nvim_set_keymap("n", " t", [[<Cmd>Telescope<CR>]], opt)

@@ -16,10 +16,6 @@ if knobs#At(1)
     command! -nargs=0 GitPush :call my#GitSynk(1)
     command! -nargs=0 GitSynk :call my#GitSynk(0)
     
-    nnoremap <silent> <leader>y :BCommits<CR>
-    nnoremap <silent> <leader>Y :BCommits!<CR>
-    nnoremap <silent> <leader>t :Commits<CR>
-    nnoremap <silent> <leader>T :Commits!<CR>
     nnoremap <silent> <leader>r :reg<CR>
     nnoremap <silent> <leader>k :ToggleQuickFix<CR>
     nnoremap <silent> <leader>K :ToggleLocationList<CR>

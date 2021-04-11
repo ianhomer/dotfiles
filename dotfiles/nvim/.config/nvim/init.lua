@@ -129,7 +129,7 @@ return require("packer").startup(
         useif {"mhinz/vim-startify"}
         use {
             "junegunn/fzf.vim",
-            cmd = {"Ag", "Buffers", "Files", "History"},
+            cmd = {"Ag", "Buffers", "Commits", "Files", "History"},
             fn = {"fzf#vim#ag"},
             requires = {{"junegunn/fzf", opt = true, fn = {"fzf#shellescape"}}}
         }
