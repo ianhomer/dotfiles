@@ -13,6 +13,7 @@ nvim_set_var(
         autosave = 4,
         chadtree = 7,
         colorbuddy = 7,
+        colorizer = 5,
         conflict_marker = 7,
         compe = 5,
         devicons = 5,
@@ -153,6 +154,7 @@ return require("packer").startup(
         useif "morhetz/gruvbox"
         useif {"lifepillar/gruvbox8"}
         use {"glepnir/zephyr-nvim", disable = true}
+        useif {"norcalli/nvim-colorizer.lua", config = [[require'config.colorizer']]}
 
         -- Git
         use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Gpush", "Gpull"}}
