@@ -48,7 +48,7 @@ nvim_set_var(
         startify = 5,
         startuptime = 1,
         surround = 3,
-        tabcomplete = 3,
+        tabcomplete = 9,
         tabular = 3,
         thingity = 3,
         treesitter = 5,
