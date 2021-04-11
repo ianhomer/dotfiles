@@ -176,7 +176,7 @@ return require("packer").startup(
 
         -- Editing
         useif "tpope/vim-surround"
-        useif {"godlygeek/tabular", cmd = {"Tabularize"}}
+        use {"godlygeek/tabular", cmd = {"Tabularize"}}
 
         useif "junegunn/goyo.vim"
         useif {
