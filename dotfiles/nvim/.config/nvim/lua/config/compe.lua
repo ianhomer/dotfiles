@@ -72,8 +72,6 @@ function _G.complete()
         end
     end
     return t "<CR>"
-    --local npairs = require("nvim-autopairs")
-    -- return npairs.check_break_line_char()
 end
 
 vim.api.nvim_set_keymap("i", "<CR>", "v:lua.complete()", {expr = true})

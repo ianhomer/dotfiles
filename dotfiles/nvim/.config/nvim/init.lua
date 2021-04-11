@@ -88,7 +88,6 @@ return require("packer").startup(
     function(use)
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
-        cmd "call knobs#Init()"
         local knobs = require("knobs")
         local useif = knobs.useif(use)
 
@@ -99,7 +98,6 @@ return require("packer").startup(
             "neovim/nvim-lspconfig",
             config = [[require'config.lspconfig']]
         }
-        useif "windwp/nvim-autopairs"
         useif {
             "hrsh7th/nvim-compe",
             config = [[require'config.compe']]
