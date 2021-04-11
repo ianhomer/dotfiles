@@ -133,6 +133,11 @@ return require("packer").startup(
             fn = {"fzf#vim#ag"},
             requires = {{"junegunn/fzf", opt = true, fn = {"fzf#shellescape"}}}
         }
+        use {
+            "nvim-telescope/telescope.nvim",
+            requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}},
+            config = [[require'config.telescope']]
+        }
         use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
         useif {"ryanoasis/vim-devicons"}
         use {"wfxr/minimap.vim", cmd = {"Minimap"}}
@@ -147,8 +152,8 @@ return require("packer").startup(
 
         -- Style
         use {"rakr/vim-one", disable = true}
-        useif "tjdevries/gruvbuddy.nvim"
-        useif {"tjdevries/colorbuddy.nvim", config = [[require'config.colorbuddy']]}
+        use {"tjdevries/gruvbuddy.nvim", disable = true}
+        useif {"tjdevries/colorbuddy.nvim", config = [[require'config.colorbuddy']], disable = true}
         use {"marko-cerovac/material.nvim", disable = true}
 
         useif "morhetz/gruvbox"
