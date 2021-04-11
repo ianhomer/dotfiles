@@ -147,8 +147,8 @@ return require("packer").startup(
 
         -- Style
         use {"rakr/vim-one", disable = true}
-        useif {"tjdevries/colorbuddy.nvim", config = [[require'config.colorbuddy']]}
         useif "tjdevries/gruvbuddy.nvim"
+        useif {"tjdevries/colorbuddy.nvim", config = [[require'config.colorbuddy']]}
         use {"marko-cerovac/material.nvim", disable = true}
 
         useif "morhetz/gruvbox"
