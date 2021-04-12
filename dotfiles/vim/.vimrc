@@ -15,7 +15,6 @@ let g:knobs_levels = {
   \   "apathy":5,
   \   "airline":5,
   \   "autosave":4,
-  \   "chadtree":7,
   \   "colorbuddy":6,
   \   "conflict_marker":7,
   \   "compe":5,
@@ -102,14 +101,6 @@ IfKnob 'light' Plug 'rakr/vim-one'
 
 IfKnob 'gruvbox'  Plug 'morhetz/gruvbox'
 IfKnob 'gruvbox8' Plug 'lifepillar/vim-gruvbox8'
-
-"
-" Trying chadtree, if better than nerdtree then
-" nerdtree will be removed
-"
-if knobs#plug#could("chadtree") && has('nvim')
-  Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
-endif
 
 IfKnob 'nerdtree' Plug 'preservim/nerdtree'
 IfKnob 'nnn' Plug 'mcchrish/nnn.vim'
