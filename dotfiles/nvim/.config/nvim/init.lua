@@ -11,7 +11,6 @@ nvim_set_var(
         airline = 9,
         auto_pairs = 6,
         autosave = 4,
-        chadtree = 7,
         colorbuddy = 7,
         colorizer = 5,
         conflict_marker = 7,

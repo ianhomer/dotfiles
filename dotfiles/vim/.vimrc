@@ -15,9 +15,7 @@ let g:knobs_levels = {
   \   "apathy":5,
   \   "airline":5,
   \   "autosave":4,
-  \   "colorbuddy":6,
   \   "conflict_marker":7,
-  \   "compe":5,
   \   "devicons":5,
   \   "dispatch":5,
   \   "endwise":5,
@@ -27,15 +25,12 @@ let g:knobs_levels = {
   \   "gitgutter":5,
   \   "gruvbox":5,
   \   "gruvbox8":1,
-  \   "gruvbuddy":6,
   \   "goyo":4,
   \   "gutentags":5,
   \   "lens":8,
-  \   "lightbulb":5,
   \   "minimap": 5,
   \   "modes":1,
   \   "nerdtree":1,
-  \   "nnn":6,
   \   "polyglot":5,
   \   "spelling":4,
   \   "startify":1,
@@ -48,8 +43,7 @@ let g:knobs_levels = {
   \   "update_spelling":6,
   \   "which_key":5,
   \   "window_cleaner":4,
-  \   "writegood":8,
-  \   "zephyr":9
+  \   "writegood":8
   \ }
 
 " Feature toggles triggered by each layer
@@ -103,7 +97,6 @@ IfKnob 'gruvbox'  Plug 'morhetz/gruvbox'
 IfKnob 'gruvbox8' Plug 'lifepillar/vim-gruvbox8'
 
 IfKnob 'nerdtree' Plug 'preservim/nerdtree'
-IfKnob 'nnn' Plug 'mcchrish/nnn.vim'
 IfKnob 'nerdtree' Plug 'ryanoasis/vim-devicons'
 IfKnob 'minimap' Plug 'wfxr/minimap.vim'
 
@@ -155,12 +148,6 @@ Plug 'tpope/vim-repeat'
 IfKnob 'endwise' Plug 'tpope/vim-endwise'
 " Aysynchronous
 IfKnob 'dispatch' Plug 'tpope/vim-dispatch'
-
-if knobs#plug#could("syntastic")
-  Plug 'vim-syntastic/syntastic'
-  Plug 'yuezk/vim-js'
-  Plug 'maxmellon/vim-jsx-pretty'
-endif
 
 IfKnob 'ale' Plug 'dense-analysis/ale'
 
