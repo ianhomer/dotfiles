@@ -86,17 +86,6 @@ Things I'm trying to remember.
 | `cd`      | Change current directory to current note   |
 | `CD`      | Change root directory to current directory |
 
-### netrw
-
-|             |                                |
-| --          | --                             |
-| `-`         | up a directory                 |
-| `i`         | change list view               |
-| `I`         | show header                    |
-| `gn`        | make current node root of tree |
-| `gh`        | hide/un-hide dot files         |
-| `percent %` | create new file                |
-
 ### motion
 
 |             |                                                 |
