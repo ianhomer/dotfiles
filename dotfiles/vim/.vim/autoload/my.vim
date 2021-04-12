@@ -21,9 +21,6 @@ function my#LintMe()
   if &filetype == "markdown"
     let linter="thingity"
     call thingity#LintMarkdown()
-  elseif knobs#("coc")
-    let linter="coc"
-    Format
   elseif knobs#("ale")
     let linter="ale"
     ALEFix

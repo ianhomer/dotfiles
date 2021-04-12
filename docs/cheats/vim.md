@@ -147,7 +147,6 @@ Things I'm trying to remember.
 | `:%!jq .`        | reformat JSON                          |
 | `count+space+cc` | comment out the next count lines       |
 | `:Format`        | Format current buffer                  |
-| `space+d`        | Open CoC diagnostics                   |
 | `:nu`            | Show line numbers                      |
 | `:set rnu`       | Show relative line numbers             |
 | `space+w`        | Clear white space at end of lines      |

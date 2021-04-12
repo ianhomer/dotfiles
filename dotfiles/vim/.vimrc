@@ -212,9 +212,4 @@ if knobs#At(6) | Plug 'junegunn/vader.vim' | endif
 
 IfKnob 'startuptime' Plug 'tweekmonster/startuptime.vim'
 
-" CoC completion
-if knobs#plug#could("coc")
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-endif
-
 call plug#end()

@@ -113,11 +113,6 @@ if knobs#("markdown_flow")
   inoremap <buffer> <silent> [ [<C-O>:call <SID>LintTodo()<CR><C-O>$
 endif
 
-" The rest of this filetype plugin is not relevant if we're using CoC
-if knobs#("coc")
-  finish
-end
-
 " Support definition list as a list when formating
 set formatlistpat+=\\\|^:\\s
 " Support table row as list when formating
