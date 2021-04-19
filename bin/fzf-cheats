@@ -5,17 +5,18 @@
 #
 
 import os, re, sys, fileinput, getopt
-from pathlib import Path
+
 
 def usage():
-  scriptName = os.path.basename(__file__)
-  print(f"{scriptName}")
+    scriptName = os.path.basename(__file__)
+    print(f"{scriptName}")
 
-COMMAND_CHAR="⌘"
-SHIFT_CHAR="⇧"
-CONTROL_CHAR="⌃"
-OPTION_CHAR="⌥"
-SPACE_CHAR="␣"
+
+COMMAND_CHAR = "⌘"
+SHIFT_CHAR = "⇧"
+CONTROL_CHAR = "⌃"
+OPTION_CHAR = "⌥"
+SPACE_CHAR = "␣"
 
 lineFormat = "\u001b[0m {command:12s} \u001b[33m{context:15s} \u001b[36m {definition:s}"
 
@@ -28,79 +29,91 @@ command = "n/a"
 definition = "definition"
 lastWasCommand = 0
 
-DEBUG=0
+DEBUG = 0
 
 commands = []
 
+
 def printLine(meta):
-  meta["command"] = transformCommand(meta["command"])
-  print(lineFormat.format(**meta))
+    meta["command"] = transformCommand(meta["command"])
+    print(lineFormat.format(**meta))
+
 
 def debug(message):
-  if DEBUG: print("DEBUG : " + message)
+    if DEBUG:
+        print("DEBUG : " + message)
+
 
 def hidden(s):
-  return "\u001b[30m" + s + "\u001b[0m"
+    return "\u001b[30m" + s + "\u001b[0m"
+
 
 def transformCommand(command):
-  return command \
-    .replace("Cmd+",COMMAND_CHAR) \
-    .replace("Shift+",SHIFT_CHAR) \
-    .replace("Ctrl+",CONTROL_CHAR) \
-    .replace("Opt+",OPTION_CHAR) \
-    .replace("Alt+",OPTION_CHAR) \
-    .replace("space+",SPACE_CHAR)
+    return (
+        command.replace("Cmd+", COMMAND_CHAR)
+        .replace("Shift+", SHIFT_CHAR)
+        .replace("Ctrl+", CONTROL_CHAR)
+        .replace("Opt+", OPTION_CHAR)
+        .replace("Alt+", OPTION_CHAR)
+        .replace("space+", SPACE_CHAR)
+    )
+
 
 def parse(line):
-  global application, context, command, definition, mark, lastWasCommand
-  debug("line - " + line)
-  # Heading 
-  match = re.search('^(#+) (.*)$', line)
-  if match:
-    debug("heading : " + match.group(1) + ":" + match.group(2))
-    headingDepth=len(match.group(1))
-    if headingDepth == 2:
-      application = match.group(2)
-    else:
-      context = match.group(2)
+    global application, context, command, definition, mark, lastWasCommand
+    debug("line - " + line)
+    # Heading
+    match = re.search("^(#+) (.*)$", line)
+    if match:
+        debug("heading : " + match.group(1) + ":" + match.group(2))
+        headingDepth = len(match.group(1))
+        if headingDepth == 2:
+            application = match.group(2)
+        else:
+            context = match.group(2)
+        lastWasCommand = 0
+        return
+    # Command and definition
+    match = re.search("^[-|] `([^`]*)`\\s*[:|] ([^|]*)", line)
+    if not match:
+        match = re.search("^[-|] \\*\\*([^\\*]*)\\*\\*\\s*[:|] ([^|]*)", line)
+    if match:
+        printLine(
+            {
+                "context": application + " " + context,
+                "command": match.group(1),
+                "definition": match.group(2),
+            }
+        )
+    # Command
+    match = re.search("^\\*\\*([^\\*]*)\\*\\*", line)
+    if not match:
+        match = re.search("^`([^`]*)`", line)
+    if match:
+        command = match.group(1)
+        lastWasCommand = 1
+        return
+    definition = line
+    # Definition
+    match = re.search("^: ([^;:\\.]+).*$", line)
+    if lastWasCommand and match:
+        printLine(
+            {
+                "context": application + " " + context,
+                "command": command,
+                "definition": match.group(1),
+            }
+        )
     lastWasCommand = 0
-    return
-  # Command and definition
-  match = re.search('^[-|] `([^`]*)`\s*[:|] ([^|]*)', line)
-  if not match:
-    match = re.search('^[-|] \*\*([^\*]*)\*\*\s*[:|] ([^|]*)', line)
-  if match:
-    printLine({
-      "context": application + ' ' + context,
-      "command": match.group(1),
-      "definition": match.group(2)
-    })
-  # Command
-  match = re.search('^\*\*([^\*]*)\*\*', line)
-  if not match:
-    match = re.search('^`([^`]*)`', line)
-  if match:
-    command = match.group(1)
-    lastWasCommand = 1
-    return
-  definition=line
-  # Definition
-  match = re.search('^: ([^;:\.]+).*$', line)
-  if lastWasCommand and match:
-    printLine({
-      "context": application + ' ' + context,
-      "command": command,
-      "definition": match.group(1)
-    })
-  lastWasCommand = 0
+
 
 def main(argv):
-  for line in fileinput.input():
-    parse(line.rstrip())
+    for line in fileinput.input():
+        parse(line.rstrip())
 
-  for meta in metas:
-    printLine(meta)
+    for meta in metas:
+        printLine(meta)
+
 
 if __name__ == "__main__":
-  main(sys.argv[1:])
-
+    main(sys.argv[1:])

@@ -2,10 +2,15 @@
 alias vi="VIM_KNOB=5 nvim"
 alias v="VIM_KNOB=5 nvim"
 
-alias d="docker"
+alias q="exit"
 alias push="git push"
 alias gs="git status"
 alias gd="git diff HEAD"
+
+# Things
+alias d="do"
+alias t="thing"
+alias ts="things"
 
 # Attach to tmux session if exists, otherwise new
 alias tm="tmux attach || tmux new"

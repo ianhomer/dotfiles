@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-should-run $0 || exit 0
+should-run $0 ~/.dotfiles/config/osx/duti.config || exit 0
 
 $(shim) && . ${ME}/i.sh
 

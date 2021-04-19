@@ -4,11 +4,6 @@ function! s:check_back_space() abort
 endfunction
 
 function! tabcomplete#auto_complete()
-  if knobs#("coc")
-    " Hand control to CoC
-    return <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-  endif
   " If at start of line or whitespace before character then we'll return a tab
   " character.
   let line = getline('.')
@@ -29,6 +24,9 @@ function! tabcomplete#auto_complete()
   elseif (!knobs#("lsp") && is_path)
     " Use CompletePath from dotfiles fzf.vim
     return fzf#CompletePath()
+  elseif (knobs#("compe"))
+    echo "compe complete"
+    return compe#complete()
   else
     " Otherwise we hand to default insert completion.
     return "\<C-X>\<C-O>"

@@ -5,7 +5,11 @@
 #
 brew "openjdk@11"
 
-cask "adoptopenjdk8"
+# Disable adoptopenjdk8 until resolution to ..
+# https://github.com/AdoptOpenJDK/homebrew-openjdk/issues/106
+# Error: Cask adoptopenjdk8 exists in multiple taps:
+#cask "adoptopenjdk8"
+
 cask "adoptopenjdk11"
 cask "java11"
 cask "powershell"

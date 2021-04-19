@@ -1,5 +1,6 @@
-if KnobAt(3)
-  nnoremap <leader>L ma:call my#PruneWhiteSpace()<CR>`a
+if knobs#At(3)
+  command! -nargs=0 LintSpace :call my#LintSpace()
+  nnoremap <leader>L :LintSpace<CR>
 endif
 
 if !knobs#("ale")
@@ -9,10 +10,10 @@ endif
 let markdown_linters = ['markdownlint']
 
 " Enable markdown linters that help with good writing
-if Knob("writegood")
+if knobs#("writegood")
+  " Excluded 'languagetool'
   let markdown_linters += [
         \ 'alex',
-        \ 'languagetool',
         \ 'proselint',
         \ 'writegood'
         \]
@@ -22,6 +23,7 @@ let g:ale_linters = {
   \   'html': ['tidy'],
   \   'javascript': ['eslint'],
   \   'json': ['jsonlint'],
+  \   'lua': ['luac'],
   \   'markdown': markdown_linters,
   \   'python': ['flake8'],
   \   'typescript': ['eslint'],
@@ -31,8 +33,10 @@ let g:ale_linters = {
 let g:ale_fixers = {
   \   '*': ['remove_trailing_lines', 'trim_whitespace'],
   \   'css': ['prettier'],
+  \   'html': ['prettier'],
   \   'javascript': ['eslint', 'prettier'],
   \   'json': ['jq'],
+  \   'lua': ['luafmt'],
   \   'python': ['black'],
   \   'scss': ['prettier'],
   \   'typescript': ['eslint', 'prettier']

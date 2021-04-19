@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -e
+
+$(shim)
+
+FETCH_WINDOW=600
+while getopts "w:" o; do case "$o" in
+  w) FETCH_WINDOW=$OPTARG ;;
+esac done
+
+cd $THINGS_DIR
+git synk -w $FETCH_WINDOW

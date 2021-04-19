@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+
+import argparse
+import os
+import subprocess
+import re
+from datetime import datetime
+from pathlib import Path
+from lib import thingity
+
+
+def run():
+    parser = argparse.ArgumentParser(description="thing")
+    parser.add_argument("thing", nargs="*", help="thing")
+
+    args = parser.parse_args()
+
+    edit(args)
+
+
+def edit(args):
+    now = datetime.now()
+    words = []
+    if args.thing and len(args.thing) > 0:
+
+        # Thing is a named thing.
+        for word in args.thing:
+            words.append(word)
+
+        kebab = re.sub("[^a-zA-Z0-9]", "-", "-".join(words).lower())
+        filename = thingity.getPath(kebab)
+    else:
+        # Thing is a today log.
+        filename = thingity.getTodayLog(now)
+
+    if not os.path.isfile(filename):
+        # Create a new thing.
+        Path(filename).touch()
+        with open(filename, "w") as file:
+            if len(words) == 0:
+                title = now.strftime("%a %d %b %Y").upper()
+            else:
+                title = " ".join(words)
+            file.write(f"# {title}\n\n")
+
+    # Edit a thing.
+    subprocess.call(
+        ["nvim", filename, "+:Goyo", "+:$"],
+        env={**os.environ, "VIM_KNOB": "5"},
+        cwd=thingity.THINGS_DIR,
+    )
+
+
+run()

@@ -21,9 +21,6 @@ function my#LintMe()
   if &filetype == "markdown"
     let linter="thingity"
     call thingity#LintMarkdown()
-  elseif knobs#("coc")
-    let linter="coc"
-    Format
   elseif knobs#("ale")
     let linter="ale"
     ALEFix
@@ -61,6 +58,12 @@ endfunction
 function my#PruneWhiteSpace()
   %s/\s\+$//ge
   call my#ReduceBlankLines()
+endfunction
+
+function my#LintSpace()
+  normal ma
+  call my#PruneWhiteSpace()
+  normal `a
 endfunction
 
 function my#ReduceBlankLines()

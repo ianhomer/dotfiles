@@ -42,6 +42,11 @@ set clipboard=unnamed
 " I don't use modelines
 set nomodeline
 
+" work around for https://github.com/vim/vim/issues/4738
+if has('macunix')
+  nnoremap gx :call thingity#OpenURLUnderCursor()<CR>
+endif
+
 if !knobs#At(1)
   finish
 endif
@@ -59,9 +64,11 @@ else
 endif
 
 if !knobs#("nerdtree")
-  nnoremap <silent> <leader>f :call knobs#core#SetLevel(5)<CR>
-  nnoremap <silent> <leader>n :call knobs#core#SetLevel(5)<CR>
-  nnoremap <silent> <leader>s :call knobs#core#SetLevel(5)<CR>
+  nnoremap <silent> <leader>n :call knobs#runtime#SetLevel(5)<CR>
+endif
+
+if knobs#("minimap")
+  nnoremap <silent> <leader>m :MinimapToggle<CR>
 endif
 
 " Start / stop profiling
@@ -76,81 +83,40 @@ if !knobs#("autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | endif
 nnoremap <silent> <leader>z :noh<CR>
 
 if knobs#("modes")
+  command! -nargs=0 ResetMode :call modes#ResetMode()
+  command! -nargs=0 PersonalDevMode :call modes#PersonalDevMode()
+  command! -nargs=0 MobbingMode :call modes#MobbingMode()
+  command! -nargs=0 TrainingMode :call modes#TrainingMode()
+
   " Numbered modes of configuration
-  nnoremap <silent> <leader>1 :call modes#ResetMode()<CR>
-  nnoremap <silent> <leader>2 :call modes#PersonalDevMode()<CR>
-  nnoremap <silent> <leader>3 :call modes#MobbingMode()<CR>
-  nnoremap <silent> <leader>4 :call modes#TrainingMode()<CR>
+  nnoremap <silent> <leader>1 :ResetMode<CR>
+  nnoremap <silent> <leader>2 :PersonalDevMode<CR>
+  nnoremap <silent> <leader>3 :MobbingMode<CR>
+  nnoremap <silent> <leader>4 :TrainingMode<CR>
 endif
 
-if knobs#could("nnn")
-  let g:nnn#set_default_mappings = 0
-  let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6  } }
-  nnoremap <silent> <leader>m :NnnPicker<CR>
-endif
-
-let g:minimap_auto_start = 1
+let g:minimap_auto_start = 0
 let g:minimap_close_filetypes = ['nerdtree','startify']
 
-if knobs#could("gutentags")
+if knobs#("gutentags")
   let g:gutentags_cache_dir = expand('~/.cache/tags')
 endif
 
-if knobs#could("dispatch")
+if knobs#("dispatch")
   let g:dispatch_no_tmux_make = 1
   let g:dispatch_quickfix_height = 4
 endif
 
-if knobs#could("syntastic")
-  let g:vim_jsx_pretty_colorful_config = 1
-endif
-
-if knobs#could("gitgutter")
+if knobs#("gitgutter")
   let g:gitgutter_map_keys = 0
   let g:gitgutter_highlight_linenrs = 1
 endif
 
-if knobs#could("conflict-marker")
-  autocmd ColorScheme * highlight Info gui=bold guifg=#504945 guibg=#83a598
-  let g:conflict_marker_highlight_group="Info"
-endif
+" markdown preview
+let g:mkdp_auto_close = 0
+let g:mkdp_page_title = '${name}'
 
-if KnobAt(5)
-  " markdown preview
-  let g:mkdp_auto_close = 0
-  let g:mkdp_page_title = '${name}'
-endif
-
-if !Knob("light")
-  if knobs#("gruvbox")
-    colorscheme gruvbox
-  elseif knobs#("gruvbox8")
-    colorscheme gruvbox8
-  endif
-  set bg=dark
-else
-  " Light scheme primarily used for writing content
-  colorscheme one
-  set bg=light
-  let $BG_MODE="light"
-  let g:one_allow_italics = 1
-  call one#highlight('Normal', '000000', 'ffffff', 'none')
-  for i in [1,2,3,4,5,6]
-    call one#highlight('markdownH'.i, '000000', 'ffffff', 'bold')
-  endfor
-  call one#highlight('markdownH2', '000000', 'ffffff', 'bold')
-  call one#highlight('Directory', '222222', '', 'bold')
-  highlight Cursor guibg=grey
-  highlight iCursor guibg=black
-  set guicursor=n-v-c:block-Cursor
-  set guicursor+=i:ver100-iCursor
-endif
-
-if !KnobAt(3)
-  finish
-endif
-
-if Knob("startify")
+if knobs#("startify")
   let g:startify_custom_header = ""
   let g:startify_session_autoload = 0
   let g:startify_change_to_dir = 0
@@ -165,6 +131,12 @@ if Knob("startify")
         \ 'header': ['   NERDTree Bookmarks']}
         \ ]
 endif
+
+if !knobs#At(3)
+  finish
+endif
+
+let g:which_key_hspace = 2
 
 " Write all buffers before navigating from Vim to tmux pane
 let g:tmux_navigator_save_on_switch = 2
@@ -183,13 +155,14 @@ augroup dotme
   autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
 
-  if KnobAt(3)
-    "
-    " *** Scope : Editing ***
-    "
-    " Do not highlight current line when in insert mode
-    autocmd InsertEnter,InsertLeave * set cul!
-  endif
+  "
+  " *** Scope : Editing ***
+  "
+  " Do not highlight current line when in insert mode
+  autocmd InsertEnter,InsertLeave * set cul!
+
+  " Override shiftwidth for python
+  autocmd Filetype python set shiftwidth=2
 
   if knobs#("autosave")
     "
@@ -205,15 +178,6 @@ augroup dotme
       \ call my#DebouncedSave(3000)
     autocmd InsertLeave,TextChanged * ++nested silent! call my#DebouncedSave(500)
   endif
-
-  if KnobAt(3)
-    "
-    " *** Scope : Python ***
-    "
-
-    " Override shiftwidth for python
-    autocmd Filetype python set shiftwidth=2
-  endif
 augroup end
 
 "
@@ -221,55 +185,49 @@ augroup end
 "
 
 " Show white space
-if KnobAt(1)
-  exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
-  set list
+exec "set listchars=tab:>~,nbsp:~,trail:\uB7"
+set list
 
-  " Add operator af for all file
-  onoremap af :<C-u>normal! ggVG<CR>
+" Add operator af for all file
+onoremap af :<C-u>normal! ggVG<CR>
 
-  " Return to visual mode after indenting
-  vnoremap < <gv
-  vnoremap > >gv
-endif
+" Return to visual mode after indenting
+vnoremap < <gv
+vnoremap > >gv
 
 " Surround customisation
-if KnobAt(3)
-  let g:surround_{char2nr('b')} = "**\r**"
-  let g:surround_{char2nr('<')} = "<\r>"
-  " Short cuts for surround word
-  if knobs#("which_key")
-    nnoremap <silent> ' :WhichKey "'"<CR>
-  endif
-  nmap '" ysiW"
-  nmap "" ysiW"
-  nmap '' ysiW'
-  nmap '` ysiW`
-  nmap '< ysiW<
-  nmap 'b ysiWb
-endif
+let g:surround_{char2nr('b')} = "**\r**"
+let g:surround_{char2nr('<')} = "<\r>"
+" Short cuts for surround word
+nmap '" ysiW"
+nmap "" ysiW"
+nmap '' ysiW'
+nmap '` ysiW`
+nmap '< ysiW<
+nmap 'b ysiWb
 
 " *** Scope : IO ***
 "
-if KnobAt(1)
-  if knobs#("autosave")
-    " Auto reload underlying file if it changes, although
-    " it only really reloads when external command run like :!ls
-    set autoread
-    set autowrite
-  endif
-  " Allow hidden buffers without saving
-  set hidden
-  " No backups or backups during write
-  set nobackup
-  set nowritebackup
-  " Keep swap and backups centrally
-  set backupdir=~/.vim/backups
-  set directory=~/.vim/swaps
-
-  " Scroll 3 lines before border
-  set scrolloff=3
+if knobs#("autosave")
+  " Auto reload underlying file if it changes, although
+  " it only really reloads when external command run like :!ls
+  set autoread
+  set autowrite
 endif
+" Allow hidden buffers without saving
+set hidden
+" No backups or backups during write
+set nobackup
+set nowritebackup
+" Keep swap and backups centrally
+set backupdir=~/.vim/backups
+set directory=~/.vim/swaps
+
+" Scroll 3 lines before border
+set scrolloff=3
+
+" Backspace support
+set backspace=indent,eol,start
 
 " Optimise for faster terminal connections
 " set ttyfast
@@ -296,19 +254,10 @@ if knobs#("airline")
   let g:airline_detect_spell = 0
 endif
 
-" Backspace support
-if KnobAt(1)
-  set backspace=indent,eol,start
-endif
-
-" source ~/.config/vim/netrw.vim
-
-if KnobAt(3)
-  " Thanks to Damian Conway                                                         test long line
-  set colorcolumn=""
-  highlight ColorColumn ctermbg=magenta
-  call matchadd('ColorColumn', '\%82v', 100)
-endif
+" Thanks to Damian Conway                                                         test long line
+set colorcolumn=""
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%82v', 100)
 
 highlight ErrorMsg ctermbg=grey guibg=grey
 

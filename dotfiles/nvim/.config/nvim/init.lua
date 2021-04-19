@@ -1,110 +1,194 @@
 local cmd = vim.cmd
-
-cmd 'packadd paq-nvim'               -- load the package manager
-local paq = require('paq-nvim').paq  -- a convenient alias
 local o = vim.o
+local nvim_set_var = vim.api.nvim_set_var
 
-o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
+-- Levels at which knobs are enabled
+nvim_set_var(
+    "knobs_levels",
+    {
+        ale = 5,
+        apathy = 6,
+        airline = 9,
+        auto_pairs = 6,
+        autosave = 4,
+        colorbuddy = 7,
+        colorizer = 5,
+        conflict_marker = 7,
+        compe = 5,
+        devicons = 5,
+        dispatch = 5,
+        endwise = 7,
+        eunuch = 7,
+        fugitive = 3,
+        friendly_snippets = 5,
+        fzf = 1,
+        gitgutter = 6,
+        gruvbox = 5,
+        gruvbuddy = 7,
+        gruvbox8 = 1,
+        goyo = 3,
+        gutentags = 5,
+        nerdtree = 5,
+        lens = 8,
+        lightbulb = 5,
+        lsp = 3,
+        lspconfig = 5,
+        lspkind = 4,
+        lualine = 4,
+        markdown_syntax_table = 3,
+        markdown_preview = 3,
+        material = 9,
+        minimap = 4,
+        modes = 3,
+        nnn = 7,
+        peekaboo = 3,
+        polyglot = 9,
+        rhubarb = 7,
+        spelling = 4,
+        startify = 5,
+        startuptime = 1,
+        surround = 3,
+        tabcomplete = 9,
+        tabular = 3,
+        telescope = 5,
+        thingity = 3,
+        treesitter = 5,
+        unimpaired = 4,
+        update_spelling = 7,
+        which_key = 4,
+        window_cleaner = 3,
+        writegood = 3,
+        tmux_navigator = 3,
+        vsnip = 5,
+        zephyr = 9
+    }
+)
 
-local knobs = require("knobs")
+-- Feature toggles triggered by each layer
+nvim_set_var(
+    "knobs_layers_map",
+    {
+        mobile = {
+            compactcmd = 1,
+            light = 1,
+            markdown_flow = 1,
+            markdown_conceal_full = 1,
+            markdown_syntax_list = 1
+        },
+        notes = {
+            compactcmd = 1,
+            light = 1,
+            markdown_conceal_partial = 1
+        }
+    }
+)
 
-cmd 'call knobs#Init()'
+cmd "packadd packer.nvim" -- load the package manager
 
-paq {'savq/paq-nvim', opt = true}
+return require("packer").startup(
+    function(use)
+        o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
-knobs.paq('light', 'rakr/vim-one')
-knobs.paq('gruvbox', 'morhetz/gruvbox')
-knobs.paq('gruvbox8', 'lifepillar/vim-gruvbox8')
+        local knobs = require("knobs")
+        local useif = knobs.useif(use)
 
-knobs.paq('fzf', 'junegunn/fzf')
-knobs.paq('fzf', 'junegunn/fzf.vim')
-knobs.paq('fugitive', 'tpope/vim-fugitive')
-knobs.paq('fugitive', 'tpope/vim-rhubarb')
-knobs.paq('gitgutter', 'airblade/vim-gitgutter')
-knobs.paq('dispatch', 'tpope/vim-dispatch')
-knobs.paq('nerdtree', 'preservim/nerdtree')
-knobs.paq('startify', 'mhinz/vim-startify')
+        use "wbthomason/packer.nvim"
 
-knobs.paq('airline', 'vim-airline/vim-airline')
-knobs.paq('airline', 'vim-airline/vim-airline-themes')
-knobs.paq('gutentags', 'ludovicchabant/vim-gutentags')
-knobs.paq('tabular', 'godlygeek/tabular')
+        -- LSP, autocomplete and code guidance
+        useif {
+            "neovim/nvim-lspconfig",
+            config = [[require'config.lspconfig']]
+        }
+        useif {
+            "hrsh7th/nvim-compe",
+            config = [[require'config.compe']]
+        }
+        useif {
+            "kosayoda/nvim-lightbulb",
+            config = [[require'config.lightbulb']]
+        }
+        useif {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
+        cmd [[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
+        useif {
+            "ludovicchabant/vim-gutentags"
+        }
+        use {
+            "dense-analysis/ale",
+            ft = {"sh", "javascript", "markdown", "lua", "python", "typescript", "vim"},
+            cmd = {"ALEFix"}
+        }
+        useif {
+            "nvim-treesitter/nvim-treesitter",
+            config = [[require'config.treesitter']]
+        }
+        useif "rafamadriz/friendly-snippets"
+        useif "hrsh7th/vim-vsnip"
 
-paq 'neovim/nvim-lspconfig'
-paq 'nvim-lua/completion-nvim'
-paq 'nvim-lua/diagnostic-nvim'
+        -- Navigation
 
-paq{'iamcco/markdown-preview.nvim', run='cd app && yarn install'}
+        useif {"mhinz/vim-startify"}
+        use {
+            "junegunn/fzf.vim",
+            cmd = {"Ag", "Buffers", "Commits", "Files", "History"},
+            fn = {"fzf#vim#ag"},
+            requires = {{"junegunn/fzf", opt = true, fn = {"fzf#shellescape"}}}
+        }
+        useif {
+            "nvim-telescope/telescope.nvim",
+            requires = {
+                {"nvim-lua/popup.nvim", cond = "vim.g['knob_telescope']"},
+                {"nvim-lua/plenary.nvim", cond = "vim.g['knob_telescope']"}
+            },
+            config = [[require'config.telescope']]
+        }
+        use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
+        useif {"ryanoasis/vim-devicons"}
+        use {"wfxr/minimap.vim", cmd = {"Minimap"}}
+        useif {
+            "liuchengxu/vim-which-key",
+            config = [[require'config.which_key']]
+        }
+        useif "christoomey/vim-tmux-navigator"
 
-knobs.paq('startuptime', 'tweekmonster/startuptime.vim')
+        useif {
+            "hoob3rt/lualine.nvim",
+            requires = {"kyazdani42/nvim-web-devicons", opt = true},
+            config = [[require'config.lualine']]
+        }
 
-knobs.paq('nerdtree', 'ryanoasis/vim-devicons')
-knobs.paq('minimap', 'wfxr/minimap.vim')
+        -- Style
+        use {"rakr/vim-one", disable = true}
+        use {"tjdevries/gruvbuddy.nvim", disable = true}
+        useif {"tjdevries/colorbuddy.nvim", config = [[require'config.colorbuddy']], disable = true}
+        use {"marko-cerovac/material.nvim", disable = true}
 
-knobs.paq('ale', 'dense-analysis/ale')
+        useif "morhetz/gruvbox"
+        useif {"lifepillar/gruvbox8"}
+        use {"glepnir/zephyr-nvim", disable = true}
+        useif {"norcalli/nvim-colorizer.lua", config = [[require'config.colorizer']]}
 
-local lspconfig = require('lspconfig')
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+        -- Git
+        use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Gpush", "Gpull"}}
+        useif {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
+        useif {"airblade/vim-gitgutter"}
+        useif {"tpope/vim-dispatch"}
 
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+        -- Editing
+        useif "tpope/vim-surround"
+        use {"godlygeek/tabular", cmd = {"Tabularize"}}
 
-  -- Mappings
-  local opts = { noremap=true, silent=true }
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+        useif "junegunn/goyo.vim"
+        useif {
+            "iamcco/markdown-preview.nvim",
+            -- cmd = {"MarkdownPreview"},
+            run = "cd app && yarn install"
+        }
 
-  -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec([[
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=DarkSlateGray
-      hi LspReferenceText cterm=bold ctermbg=red guibg=DarkSlateGray
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=DarkSlateGray
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]], false)
-  end
-end
+        useif {"junegunn/vim-peekaboo"}
 
--- Use a loop to conveniently both setup defined servers
--- and map buffer local keybindings when the language server attaches
-local servers = { "bashls", "cssls", "jsonls", "pyls", "tsserver", "vimls",  }
-for _, lsp in ipairs(servers) do
-  local lspserver = lspconfig[lsp]
-  if lspserver then
-    lspconfig[lsp].setup { on_attach = on_attach }
-  else
-    print("Can't set up LSP for"..lsp)
-  end
-end
-
---  let g:completion_chain_complete_list = {
---    \ 'default': [
---    \    {'complete_items': ['lsp', 'snippet' ]},
---    \    {'mode': '<c-p>'},
---    \    {'mode': '<c-n>'}
---    \]
---  \}
---  imap <c-p> <Plug>(completion_trigger)
---
---  nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
---  nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
---  nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
---  nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
---  nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
---  nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
---  nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-
-
+        -- Diagnostics
+        --
+        -- use {'dstein64/vim-startuptime'}
+        useif "tweekmonster/startuptime.vim"
+    end
+)

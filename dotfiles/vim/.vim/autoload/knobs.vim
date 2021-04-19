@@ -8,82 +8,20 @@ if exists('g:knobs_autoloaded')
 endif
 let g:knobs_autoloaded = 1
 
-" Default values for knobs
-let g:knobs_defaults = {
-  \   "compactcmd":0,
-  \   "markdown_flow":0,
-  \   "markdown_conceal_full":0,
-  \   "markdown_conceal_partial":0,
-  \   "markdown_syntax_list":0,
-  \   "markdown_syntax_table":1,
-  \   "polyglot":0,
-  \   "syntastic":0,
-  \   "startuptime":0
-  \ }
+if !exists("g:knobs_default_level")
+  let g:knobs_default_level = 1
+endif
 
-" Levels at which knobs are enabled
-let g:knobs_levels = {
-  \   "ale":5,
-  \   "apathy":5,
-  \   "airline":5,
-  \   "autosave":5,
-  \   "chadtree":7,
-  \   "conflict-marker":7,
-  \   "dispatch":5,
-  \   "endwise":5,
-  \   "eunuch":5,
-  \   "fugitive":5,
-  \   "fzf":4,
-  \   "gitgutter":5,
-  \   "gruvbox":5,
-  \   "gruvbox8":1,
-  \   "goyo":5,
-  \   "gutentags":5,
-  \   "nerdtree":4,
-  \   "lens":8,
-  \   "minimap": 5,
-  \   "modes":1,
-  \   "nnn":6,
-  \   "polyglot":5,
-  \   "spelling":5,
-  \   "startify":4,
-  \   "startuptime":5,
-  \   "surround":5,
-  \   "tabcomplete":5,
-  \   "tabular":5,
-  \   "thingity":5,
-  \   "unimpaired":5,
-  \   "update_spelling":5,
-  \   "which_key":7,
-  \   "window_cleaner":5,
-  \   "writegood":8
-  \ }
-
-" Feature toggles triggered by each layer
-let g:knobs_layers_map = {
-  \    "mobile":{
-  \      "compactcmd":1,
-  \      "light":1,
-  \      "markdown_flow":1,
-  \      "markdown_conceal_full":1,
-  \      "markdown_syntax_list":1
-  \    },
-  \    "notes":{
-  \      "compactcmd":1,
-  \      "light":1,
-  \      "markdown_conceal_partial":1
-  \    },
-  \    "nvim-0.5":{
-  \      "lsp":1
-  \    }
-  \  }
+if !exists('g:knobs_levels')
+  let g:knobs_levels={}
+endif
 
 " Default state of layers
 " iTerm used for notes layer
 let g:knobs_layers = get(g:, "layers",{
   \   "mobile": $ANDROID_DATA == '/data' ? 1 : 0,
   \   "notes": $ITERM_PROFILE == 'oh-my' ? 1 : 0,
-  \   "nvim-0.5": has('nvim-0.5') ? 1 : 0
+  \   "nvim_0_5": has('nvim-0.5') ? 1 : 0
   \ })
 
 if has('nvim')
@@ -120,19 +58,24 @@ function! knobs#Init()
     \ exists('g:knobs_default_level') ? g:knobs_default_level : 0
 
   " Set default state of feature toggles
-  let g:knobs = get(g:, "knobs", g:knobs_defaults)
 
-  for [key,value] in items(g:knobs)
-    if value > 0
-      let {"g:knob_" . key} = value
-    endif
-  endfor
+  if exists('g:knobs_defaults')
+    let g:knobs = get(g:, "knobs", g:knobs_defaults)
+
+    for [key,value] in items(g:knobs)
+      if value > 0
+        let {"g:knob_" . key} = value
+      endif
+    endfor
+  else
+    let g:knobs = {}
+  endif
 
   call s:DefineCommands()
 
   " Do full initialisation if config level greater than zero
   if knobs#At(1)
-    silent call knobs#core#Init()
+    call knobs#core#Init()
   endif
 endfunction
 
@@ -142,40 +85,12 @@ endfunction
 "
 function! s:DefineCommands()
   if !exists("*IfKnob")
-    command! -nargs=+ -bar IfKnob call knobs#If(<f-args>)
+    command! -nargs=+ -bar IfKnob call knobs#plug#If(<f-args>)
   endif
-
-  " Shortcuts to functions
-  if !exists("*Knob")
-    function! Knob(feature)
-      return knobs#(a:feature)
-    endfunction
-  endif
-
-  if !exists("*KnobAt")
-    function! KnobAt(level)
-      return knobs#At(a:level)
-    endfunction
-  endif
-endfunction
-
-" Could this knob be needed, e.g. if knob level was higher
-function! knobs#could(knob)
-  " https://en.wikipedia.org/wiki/Up_to_eleven - everything on
-  if g:knobs_level == 11
-    return 1
-  endif
-  return knobs#(a:knob)
 endfunction
 
 function! knobs#(knob)
   return exists("g:knob_" . a:knob)
-endfunction
-
-function! knobs#If(knob, ...)
-  if knobs#(trim(a:knob,"'")) || g:knobs_level == 11
-    execute join(a:000)
-  endif
 endfunction
 
 function! knobs#Level()
@@ -183,15 +98,7 @@ function! knobs#Level()
 endfunction
 
 function! knobs#At(level)
-  if exists("g:knobs_level")
-    return g:knobs_level >= a:level
-  else
-    return 0
-  endif
+  return g:knobs_level >= a:level
 endfunction
-
-if !exists("g:knobs_default_level")
-  let g:knobs_default_level = 1
-endif
 
 call knobs#Init()

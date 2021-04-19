@@ -16,8 +16,8 @@ Update at any time with:
 
 This gets local machine up to date, including pulling latest version of this
 repository, sets OSX defaults, updates brew including packages. Run this at any
-time to update to latest. It only updates what's changed or out of date, so
-it's quick, painless and pretty.
+time to update to latest. It updates what's changed or out of date, so it's
+quick, painless and pretty.
 
 I remind myself of commands and shortcuts I use with:
 
@@ -41,7 +41,8 @@ of working to streamline distraction free coding. This includes:
 : slick terminals
 
 **tmux**
-: terminal multiplexer with plugins - tmux-continuum ; tmux-resurrect ; vim-tmux-navigator
+: terminal multiplexer with plugins - tmux-continuum ; tmux-resurrect ;
+  vim-tmux-navigator
 
 **neovim**
 : file editing with plugins - airline ; ale ; dispatch ; endwise ; fugitive ;
@@ -74,16 +75,23 @@ Other tools woven into these dotfiles include **ag**, **fzf**, **pandoc**,
 ## How
 
 dotfiles are all located in sub-folders in the dotfiles/ folder for the
-associated tools. On installation, these are stowed in to your home directory,
-i.e. original backed up and dotfiles linked into place. Further installation and
-configuration takes place with scripts in the bin/ directory.  Look at bin/dotme
-to see what actually happens.
+associated tools. Installation stows these in your home directory, i.e. original
+backed up and dotfiles linked into place. Further installation and configuration
+takes place with scripts in the bin directory. Look at bin/dotme to see what
+actually happens.
 
 You can also update parts of the initialisation separately, see `dotme -h` to
 get a list of each part. `man dotme` will give you more guidance on usage.
 
-I configure a few things on my system [./docs/manual-configuration.md](manually)
+I configure something on my system [./docs/manual-configuration.md](manually)
 for minor tweaks and enhancements.
+
+To customise local dotme configuration, `vi ~/.config/dotme/.env` and edit a
+properties to look like:
+
+```properties
+MY_NOTES=my-notes
+```
 
 ## Thanks
 

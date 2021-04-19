@@ -11,7 +11,8 @@ else
 
   . ~/.config/sh/aliases.sh
 
-  alias do="todo2"
+  alias do="todo"
+  alias ls="exa"
 
   # git
   alias branch="git branch"

@@ -1,4 +1,4 @@
-if !KnobAt(3)
+if !knobs#At(3)
   finish
 endif
 
@@ -46,6 +46,7 @@ endfunction
 function! s:NextLine()
   let l:previousLineNumber = line(".") - 1
   let l:previous = getline(l:previousLineNumber)
+  echo l:previous
   " Continuation of bullet list
   if l:previous =~ '\v^\s*-\s'
     " Continuation of todo list
@@ -63,6 +64,12 @@ function! s:NextLine()
       else
         return "- "
       endif
+    endif
+  elseif l:previous =~ '\v^\>\s'
+    if l:previous =~ '\v^\>\s*$'
+      normal k"_ddj
+    else
+      return "> "
     endif
   elseif l:previous =~ '\v^[0-9]+\.'
     " Numbered list
@@ -101,15 +108,10 @@ inoremap <buffer> <silent> <Bar> <Bar><Esc>:call <SID>LintTable()<CR>$a
 " Auto continuation on carriage return
 inoremap <buffer> <silent> <CR> <CR><C-R>=<SID>NextLine()<C-M>
 
-if Knob("markdown_flow")
+if knobs#("markdown_flow")
   nnoremap <buffer> <silent> <CR> :call <SID>CarriageReturn()<CR>
   inoremap <buffer> <silent> [ [<C-O>:call <SID>LintTodo()<CR><C-O>$
 endif
-
-" The rest of this filetype plugin is not relevant if we're using CoC
-if Knob("coc")
-  finish
-end
 
 " Support definition list as a list when formating
 set formatlistpat+=\\\|^:\\s

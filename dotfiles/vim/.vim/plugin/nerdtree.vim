@@ -15,8 +15,12 @@ let NERDTreeDirArrowCollapsible=""
 let NERDTreeMinimalMenu = 0
 
 function! NERDTreeFindOrToggle()
-  if g:NERDTree.IsOpen() || @% == ""
-    if winnr('$') > 0 || &filetype == "startify" 
+  if (exists("g:NERDTree") && g:NERDTree.IsOpen()) || @% == ""
+    if &filetype == "startify"
+      let current = bufnr("%")
+      NERDTreeToggle
+      execute current."bd"
+    elseif winnr('$') > 0
       NERDTreeToggle
     else
       " NERDTree doesn't like closing itself if it's the last window, so we'll
@@ -34,7 +38,9 @@ function! NERDTreeSwitchAndFind()
   call window#SwitchToFirstEditableFile()
 endfunction
 
-nnoremap <silent> <leader>n :call NERDTreeFindOrToggle()<CR>
+command! -nargs=0 NERDTreeFindOrToggle :call NERDTreeFindOrToggle()
+
+nnoremap <silent> <leader>n :NERDTreeFindOrToggle<CR>
 "nnoremap <silent> <leader>m :call NERDTreeSwitchAndFind()<CR>
 
 " https://github.com/preservim/nerdtree/wiki
