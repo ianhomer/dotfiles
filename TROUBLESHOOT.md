@@ -20,7 +20,7 @@ Install keycastr to see key presses on screen
 
     brew cask install keycastr
 
-To debug key presses into kitty
+To debug key presses into kitty terminal
 
     kitty --debug-keyboard
 
