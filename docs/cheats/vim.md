@@ -2,6 +2,22 @@
 
 ## vim
 
+### memento
+
+Things I'm trying to remember.
+
+|           |                                                       |
+| --        | --                                                    |
+| `gd`      | Go to definition                                      |
+| `ctrl-]`  | Go to tag                                             |
+| `ctrl-o`  | Jump back to previous location (after `gd` or `ctr-]` |
+| `space-d` | Show LSP diagnostics on current line                  |
+| `[-d`     | Previous LSP diagnostic                               |
+| `]-d`     | Next LSP diagnostic                                   |
+| `ctrl-X`  | In FZF open in horizontal split                       |
+| `%norm`   | Do operation on each line in file                     |
+| `csw"`    | Quote word                                            |
+
 ### misc
 
 |            |                       |
@@ -13,11 +29,13 @@
 
 ### maps
 
-|           |                              |
-| --        | --                           |
-| `space+m` | Keyboard map for normal mode |
-| `:Maps!`  | Open maps in full screen     |
-| `space+l` | Keyboard map for insert mode |
+|            |                              |
+| --         | --                           |
+| `space+m`  | Keyboard map for normal mode |
+| `:Maps!`   | Open maps in full screen     |
+| `space+l`  | Keyboard map for insert mode |
+| `:dig`     | List di-graphs               |
+| `ctrl-k Co | Insert di-graph e.g. ©       |
 
 ### files
 
@@ -68,17 +86,6 @@
 | `cd`      | Change current directory to current note   |
 | `CD`      | Change root directory to current directory |
 
-### netrw
-
-|             |                                |
-| --          | --                             |
-| `-`         | up a directory                 |
-| `i`         | change list view               |
-| `I`         | show header                    |
-| `gn`        | make current node root of tree |
-| `gh`        | hide/un-hide dot files         |
-| `percent %` | create new file                |
-
 ### motion
 
 |             |                                                 |
@@ -90,6 +97,7 @@
 | `[[`        | next header                                     |
 | `]]`        | previous header                                 |
 | `:nn`       | line nn                                         |
+| `gd`        | go to definition                                |
 | `gg`        | beginning of file                               |
 | `GG`        | end of file                                     |
 | `percent %` | next / previous bracket                         |
@@ -101,7 +109,7 @@
 | `zz`        | Scroll window center current line               |
 | `zt`        | Scroll down with current line at top            |
 | `zb`        | Scroll up with current line at bottom           |
-| `Ctrl+]`    | Go to definition                                |
+| `Ctrl+]`    | Go to tag definition                            |
 | `Ctrl+t`    | Go back up call stack                           |
 
 ### windows
@@ -128,7 +136,6 @@
 | `:%!jq .`        | reformat JSON                          |
 | `count+space+cc` | comment out the next count lines       |
 | `:Format`        | Format current buffer                  |
-| `space+d`        | Open CoC diagnostics                   |
 | `:nu`            | Show line numbers                      |
 | `:set rnu`       | Show relative line numbers             |
 | `space+w`        | Clear white space at end of lines      |

@@ -1,8 +1,8 @@
-" 
+"
 " Refresh spelling files
 "
 function! spelling#Update()
-  let l:spelldir = substitute(knobs#GetConfigDir(), '\~', $HOME, '') . '/spell' 
+  let l:spelldir = substitute(knobs#GetConfigDir(), '\~', $HOME, '') . '/spell'
   if !isdirectory(l:spelldir)
     echo 'Creating local spell directory ' . l:spelldir
     call mkdir(l:spelldir)
@@ -24,7 +24,7 @@ function! spelling#Update()
     endif
   endfor
   "
-  " Create single spell file with all local words 
+  " Create single spell file with all local words
   "
   if l:updated == 1
     let l:localSpell = 'local.utf-8.spl'
@@ -34,5 +34,3 @@ function! spelling#Update()
     exec 'mkspell! ' . l:spelldir . '/' . l:localSpell . ' ' . l:allDictionaries
   endif
 endfunction
-
-

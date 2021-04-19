@@ -1,6 +1,6 @@
 " Goyo distraction free writing
 if knobs#("goyo")
-  nnoremap <leader>jg :Goyo<CR>
+  nnoremap <leader>i :Goyo<CR>
   let g:goyo_width = 85
 endif
 
@@ -8,7 +8,7 @@ if !knobs#("thingity")
   finish
 endif
 
-if KnobAt(4)
+if knobs#At(4)
   " Markdown syntax
   " Enable folding
   let g:markdown_folding = 1

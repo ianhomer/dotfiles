@@ -7,9 +7,9 @@ set spelllang=en,local
 " will try also to locate a local spelling file in a .vim directory in a parent
 " directory.
 set spellfile=~/.config/vim/spell/en.utf-8.add
+
 set complete+=kspell
 
-if Knob("update_spelling") 
+if knobs#("update_spelling")
   call spelling#Update()
 endif
-

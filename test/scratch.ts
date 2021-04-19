@@ -3,6 +3,8 @@ interface Thing {
   content: string;
 }
 
+const myGlobal = [];
+
 function add(x: number, y: number): number {
   return x + y;
 }
@@ -15,5 +17,6 @@ export function foo(a: string): string {
 
 const thing: Thing = { title: "My Title", content: "My Content" };
 
+console.log(myGlobal);
 console.log(thing.title);
 console.log(add(1, 2));

@@ -13,8 +13,8 @@
 " for starting me down this route.  Originally I was using the `%bd | e#`
 " technique, but this
 " was performing badly for me - I had to move to the right window first, there'd
-" be an annoying (but small delay) 
-" since it'd open and close the buffer and I'd loose my cursor position. 
+" be an annoying (but small delay)
+" since it'd open and close the buffer and I'd loose my cursor position.
 " Some non-modifiable windows weren't closed either e.g. help windows.
 "
 
@@ -67,6 +67,12 @@ endfunction
 "
 function window#cleaner#CloseMe()
 
+  " If goyo enabled then force close goyo otherwise hanging windows
+  " can remain
+  if knobs#("goyo")
+    execute ":Goyo!"
+  endif
+
   " Close fugitive if open
   if window#cleaner#CloseFugitive()
     call window#SwitchToFirstEditableFile()
@@ -74,36 +80,30 @@ function window#cleaner#CloseMe()
   endif
 
   if &filetype == "startify"
-    " On startify window 
+    " On startify window
     "   => close vi
     quit
-  elseif len(getbufinfo({'buflisted':1})) > 1 
+  elseif len(getbufinfo({'buflisted':1})) > 1
         \ || (&filetype == "nerdtree" && len(getbufinfo({'buflisted':1})) == 1)
     " More than one buffer open or on nerdtree and one buffer open
     "   => close buffer and switch to next
     execute ":bd"
     call window#SwitchToFirstEditableFile()
   elseif &filetype == "nerdtree"
-    if exists(':Startify') && winnr('$') == 1
+    if knobs#("startify") && exists(':Startify') && winnr('$') == 1
       " Last window and Startify available
       "   => Open startify before closing NERDTree
       execute ":Startify"
     endif
     NERDTreeClose
   elseif exists("g:NERDTree") && g:NERDTree.IsOpen()
-    " NERDTree open 
+    " NERDTree open
     "   => close buffer and leave NERDTree open
     execute ":q"
-  elseif exists(':Startify')
+  elseif knobs#("startify") && exists(':Startify')
     execute ":bd"
     execute ":Startify"
-  elseif bufname("%") == ""
-    execute ":q"
   else
-    execute ":bd"
+    quit
   endif
 endfunction
-
-
-
-

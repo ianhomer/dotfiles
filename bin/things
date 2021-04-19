@@ -1,13 +1,100 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
 
-set -e
+import argparse
+import os
+import subprocess
+import configparser
+import re
+from pathlib import Path
+from subprocess import PIPE
+from lib import thingity
 
-$(shim)
 
-FETCH_WINDOW=600
-while getopts "w:" o; do case "$o" in
-  w) FETCH_WINDOW=$OPTARG ;;
-esac done
+config = configparser.ConfigParser()
+config.read(str(Path.home()) + "/.config/dotme/shim.ini")
+THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
 
-cd $THINGS_DIR
-git synk -w $FETCH_WINDOW
+
+def run():
+    parser = argparse.ArgumentParser(description="things")
+    parser.add_argument("thing", nargs="*", help="thing")
+    parser.add_argument("-s", "--synk", help="synk things", action="store_true")
+    # Just sync my notes
+    parser.add_argument("-m", "--my", help="synk my things", action="store_true")
+    parser.add_argument("-o", "--open", help="open my things", action="store_true")
+
+    args = parser.parse_args()
+
+    if thingity.synk(args.synk, args.my):
+        return
+
+    if args.open:
+        return open()
+
+    more = True
+    while more:
+        more = search(args)
+
+
+def open():
+    subprocess.run(["nvim"], env={**os.environ, "VIM_KNOB": "5"}, cwd=THINGS_DIR)
+
+
+def search(args):
+    fzf = [
+        "fzf",
+        "--height",
+        "100%",
+        "--ansi",
+        "-d",
+        ":",
+        "--with-nth",
+        "2..",
+        "--preview",
+        "bat --style=header --color=always (echo {} | cut -d: -f1)",
+        "--color",
+        "dark",
+        "--bind=q:abort",
+    ]
+    rgPrefix = "rg -i --glob '**/*.md'"
+    if args.thing and len(args.thing) > 0:
+        words = []
+
+        # Scan words
+        for word in args.thing:
+            words.append(word)
+        # thing to search
+        pattern = " ".join(words)
+        fzfDefaultCommand = f"{rgPrefix} '{pattern}' || true"
+    else:
+        fzfDefaultCommand = "true"
+        fzf.extend(["--phony", "--bind", "change:reload:" + rgPrefix + " {q} || true"])
+
+    process = subprocess.run(
+        fzf,
+        stdout=PIPE,
+        text=True,
+        stderr=None,
+        env={**os.environ, "FZF_DEFAULT_COMMAND": fzfDefaultCommand},
+        cwd=THINGS_DIR,
+    )
+
+    lines = process.stdout.splitlines()
+    selected = []
+    for line in lines:
+        match = re.search("^([^:]*):.*$", line)
+        if match:
+            selected.append(match.group(1))
+
+    if len(selected) > 0:
+        print(f"opening {selected[0]}")
+        subprocess.call(
+            ["nvim", selected[0], "+:Goyo", "+:$"],
+            env={**os.environ, "VIM_KNOB": "5"},
+            cwd=THINGS_DIR,
+        )
+        return True
+    return False
+
+
+run()
