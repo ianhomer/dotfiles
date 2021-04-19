@@ -34,7 +34,6 @@ nnoremap <silent> <leader>v :ReloadConfig<CR>
 
 nnoremap <silent> <leader>9a :call knobs#runtime#Toggle("ale")<CR>
 nnoremap <silent> <leader>9b :call knobs#runtime#Toggle("autosave")<CR>
-nnoremap <silent> <leader>9c :call knobs#runtime#Toggle("coc")<CR>
 nnoremap <silent> <leader>9j :call knobs#runtime#ToggleLayer("notes")<CR>
 nnoremap <silent> <leader>9l :call knobs#runtime#Toggle("light")<CR>
 nnoremap <silent> <leader>9m :call knobs#runtime#ToggleLayer("mobile")<CR>
