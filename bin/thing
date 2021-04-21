@@ -12,8 +12,13 @@ from lib import thingity
 def run():
     parser = argparse.ArgumentParser(description="thing")
     parser.add_argument("thing", nargs="*", help="thing")
+    parser.add_argument("-m", "--my", help="synk my things", action="store_true")
+    parser.add_argument("-s", "--synk", help="synk things", action="store_true")
 
     args = parser.parse_args()
+
+    if thingity.synk(args.synk, args.my):
+        return
 
     edit(args)
 
@@ -41,11 +46,11 @@ def edit(args):
                 title = now.strftime("%a %d %b %Y").upper()
             else:
                 title = " ".join(words)
-            file.write(f"# {title}\n\n")
+            file.write(f"# {title}\n\n\n")
 
     # Edit a thing.
     subprocess.call(
-        ["nvim", filename, "+:Goyo", "+:$"],
+        ["nvim", filename, "+:$"],
         env={**os.environ, "VIM_KNOB": "5"},
         cwd=thingity.THINGS_DIR,
     )

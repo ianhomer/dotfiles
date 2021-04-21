@@ -89,7 +89,7 @@ def search(args):
     if len(selected) > 0:
         print(f"opening {selected[0]}")
         subprocess.call(
-            ["nvim", selected[0], "+:Goyo", "+:$"],
+            ["nvim", selected[0], "+:$"],
             env={**os.environ, "VIM_KNOB": "5"},
             cwd=THINGS_DIR,
         )
