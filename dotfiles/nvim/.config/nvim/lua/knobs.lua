@@ -14,7 +14,8 @@ function knobFromPackage(package)
     return (package:match(KNOB_VIM_RE) or package:match(KNOB_RE)):gsub("-", "_")
 end
 
-function M.useif(use)
+function M.useif(use, disableIf)
+    local disableIf = disableIf ~= nil
     return function(args)
         if type(args) == "string" then
             args = {args}
@@ -22,7 +23,11 @@ function M.useif(use)
         local package = args[1]
         knob = knobFromPackage(package)
         -- print(package .. ":" .. knob .. ":" .. tostring(vim.g["knob_" .. knob]))
-        args.cond = 'vim.g["knob_' .. knob .. '"]'
+        if disableIf then
+            args.disable = (vim.g["knob_" .. knob] or 0) == 0
+        else
+            args.cond = 'vim.g["knob_' .. knob .. '"]'
+        end
         use(args)
     end
 end

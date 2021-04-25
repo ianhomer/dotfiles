@@ -90,7 +90,7 @@ return require("packer").startup{
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
         local knobs = require("knobs")
-        local useif = knobs.useif(use)
+        local useif = knobs.useif(use, true)
 
         use "wbthomason/packer.nvim"
 
@@ -159,7 +159,7 @@ return require("packer").startup{
 
         -- Style
         use {"rakr/vim-one", disable = true}
-        use {"tjdevries/gruvbuddy.nvim", disable = true}
+        useif {"tjdevries/gruvbuddy.nvim", disable = true}
         useif {"tjdevries/colorbuddy.nvim", config = [[require'config.colorbuddy']], disable = true}
         use {"marko-cerovac/material.nvim", disable = true}
 
