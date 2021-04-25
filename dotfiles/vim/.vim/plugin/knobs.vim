@@ -32,16 +32,8 @@ command! -nargs=1 -complete=customlist,knobs#runtime#ListKnobs
 
 nnoremap <silent> <leader>v :ReloadConfig<CR>
 
-nnoremap <silent> <leader>9a :call knobs#runtime#Toggle("ale")<CR>
-nnoremap <silent> <leader>9b :call knobs#runtime#Toggle("autosave")<CR>
-nnoremap <silent> <leader>9j :call knobs#runtime#ToggleLayer("notes")<CR>
+nnoremap <silent> <leader>9a :call knobs#runtime#Toggle("autosave")<CR>
 nnoremap <silent> <leader>9l :call knobs#runtime#Toggle("light")<CR>
-nnoremap <silent> <leader>9m :call knobs#runtime#ToggleLayer("mobile")<CR>
-nnoremap <silent> <leader>9n :call knobs#runtime#Toggle("nerdtree")<CR>
-nnoremap <silent> <leader>9p :call knobs#runtime#Toggle("polyglot")<CR>
-nnoremap <silent> <leader>9g :call knobs#runtime#Toggle("gitgutter")<CR>
-nnoremap <silent> <leader>9s :call knobs#runtime#Toggle("syntastic")<CR>
-nnoremap <silent> <leader>9w :call knobs#runtime#Toggle("writegood")<CR>
 
 nnoremap <silent> <leader>90 :call knobs#runtime#SetLevel(0)<CR>
 nnoremap <silent> <leader>91 :call knobs#runtime#SetLevel(1)<CR>
