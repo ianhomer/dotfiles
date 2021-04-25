@@ -1,6 +1,6 @@
 # Aliases that work in all shells. fish, zsh, bash etc
 alias vi="VIM_KNOB=5 nvim"
-alias v="VIM_KNOB=5 nvim"
+alias v="VIM_KNOB=5 vim"
 
 alias q="exit"
 alias push="git push"
