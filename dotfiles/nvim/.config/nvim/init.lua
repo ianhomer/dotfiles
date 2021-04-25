@@ -90,7 +90,7 @@ return require("packer").startup{
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
         local knobs = require("knobs")
-        local useif = knobs.useif(use, true)
+        local useif = knobs.useif(use)
 
         use "wbthomason/packer.nvim"
 
