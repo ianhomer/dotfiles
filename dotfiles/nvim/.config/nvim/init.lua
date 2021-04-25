@@ -85,7 +85,7 @@ nvim_set_var(
 
 cmd "packadd packer.nvim" -- load the package manager
 
-return require("packer").startup(
+return require("packer").startup{
     function(use)
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
@@ -133,7 +133,7 @@ return require("packer").startup(
             fn = {"fzf#vim#ag"},
             requires = {{"junegunn/fzf", opt = true, fn = {"fzf#shellescape"}}}
         }
-        use { "nvim-lua/plenary.nvim" }
+        use {"nvim-lua/plenary.nvim"}
         useif {
             "nvim-telescope/telescope.nvim",
             requires = {
@@ -191,5 +191,10 @@ return require("packer").startup(
         --
         -- use {'dstein64/vim-startuptime'}
         useif "tweekmonster/startuptime.vim"
-    end
-)
+    end,
+    config = {
+      profile = {
+        enable = true
+      }
+    }
+}

@@ -30,7 +30,7 @@ if has('nvim')
 else
   let g:vim_config_dir = "~/.vim"
 endif
-let g:vim_init_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
+let g:vim_init_file = has('nvim') ? "~/.config/nvim/init.lua" : "~/.vimrc"
 let g:vim_local_plugin_dir = "~/.vim/plugin"
 let g:vim_plugged_dir = g:vim_config_dir."/plugged"
 
