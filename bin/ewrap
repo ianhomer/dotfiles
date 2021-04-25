@@ -3,9 +3,9 @@
 #
 # Edit file in a new window
 #
-if ! { [ "$TERM" = "screen-256color" ] && [ -n "$TMUX" ]; } then
-  kitty "nvim \"$*\""
+if ! { [ "$TERM" = "xterm-kitty" ] && [ -n "$TMUX" ]; } then
+  vi $*
 else
   # tmux session running
-  tmux split-window -v "nvim \"$*\""
+  tmux split-window -v "vi \"$*\""
 fi
