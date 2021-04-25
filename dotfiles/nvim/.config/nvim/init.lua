@@ -133,6 +133,7 @@ return require("packer").startup(
             fn = {"fzf#vim#ag"},
             requires = {{"junegunn/fzf", opt = true, fn = {"fzf#shellescape"}}}
         }
+        use { "nvim-lua/plenary.nvim" }
         useif {
             "nvim-telescope/telescope.nvim",
             requires = {
