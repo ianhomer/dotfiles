@@ -6,7 +6,7 @@ local nvim_set_var = vim.api.nvim_set_var
 nvim_set_var(
     "knobs_levels",
     {
-        ale = 1,
+        ale = 3,
         apathy = 6,
         airline = 9,
         auto_pairs = 6,
