@@ -20,7 +20,7 @@ function! NERDTreeFindOrToggle()
       let current = bufnr("%")
       NERDTreeToggle
       execute current."bd"
-    elseif winnr('$') > 0
+    elseif winnr('$') > 1
       NERDTreeToggle
     else
       " NERDTree doesn't like closing itself if it's the last window, so we'll
