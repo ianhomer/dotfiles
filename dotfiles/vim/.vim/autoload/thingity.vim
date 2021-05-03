@@ -183,4 +183,16 @@ function! thingity#OpenURLUnderCursor()
   endif
 endfunction
 
-
+function thingity#UpdateMeta()
+  if line("$") > 10
+    let l = 10
+  else
+    let l = line("$")
+  endif
+  exe "1," . l . "g/id:/s/id:$/id: ".system('uuidgen')
+  exe "1," . l . "g/created:/s/created:$/created: ".strftime("%Y%m%d%H%M%S")
+  try
+    exe "undojoin | 1," . l . "g/modified: /s/modified: .*/modified: ".strftime("%Y%m%d%H%M%S")
+  catch /^Vim\%((\a\+)\)\=:E790/
+  endtry
+endfunction

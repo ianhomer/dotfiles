@@ -1,4 +1,6 @@
 ---
+created: 20210503172954
+id: F0B15C71-F3AF-4B03-A5D7-81A905FA1C96
 label: foo
 tag: bar
 ---

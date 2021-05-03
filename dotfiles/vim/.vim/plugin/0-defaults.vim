@@ -154,6 +154,9 @@ augroup dotme
 
   autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+  autocmd BufNewFile *.sh 0r ~/.vim/skeletons/skeleton.sh
+  autocmd BufNewFile *.md 0r ~/.vim/skeletons/skeleton.md
+
 
   "
   " *** Scope : Editing ***
