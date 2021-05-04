@@ -164,7 +164,7 @@ function! s:ThingityArchive()
       let l:datePart = l:datePartMatch[1]
       let fullDate = l:datePart
       if len(l:datePart) == 4
-        let fullDate = strftime(%Y%).l:datePart
+        let fullDate = strftime("%Y").l:datePart
       endif
       echo log
       echo "Date parts ".l:datePart
