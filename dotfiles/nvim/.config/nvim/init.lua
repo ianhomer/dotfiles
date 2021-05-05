@@ -14,6 +14,7 @@ nvim_set_var(
         colorbuddy = 7,
         colorizer = 5,
         conflict_marker = 7,
+        commentary = 5,
         compe = 5,
         devicons = 5,
         dispatch = 5,
@@ -176,6 +177,7 @@ return require("packer").startup{
 
         -- Editing
         useif "tpope/vim-surround"
+        useif "tpope/vim-commentary"
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
 
         useif "junegunn/goyo.vim"
