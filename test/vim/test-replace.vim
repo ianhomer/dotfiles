@@ -1,3 +1,6 @@
+" Experimenting with behaviour after undo
+" Seems to always jump to first position in the file for the undo block
+" 
 function ReplaceA()
   let win = winsaveview()
   let l = search('^modified:','b')
@@ -30,6 +33,8 @@ function ReplaceAB()
 endfunction
 
 function ReplaceABA()
+  execute "normal! i "
+  execute "normal! a\<BS>"
   let win = winsaveview()
   let l = search('^modified:','b')
   call winrestview(win)
@@ -38,7 +43,27 @@ function ReplaceABA()
       undojoin
       normal iX
       undojoin
-      call setline(l, "modified: test")
+      keepj call setline(l, "modified: test")
+      call winrestview(win)
+      undojoin
+      normal iX
+    catch /^Vim\%((\a\+)\)\=:E790/
+    endtry
+  endif
+endfunction
+
+function ReplaceABB()
+  execute "normal! i "
+  execute "normal! a\<BS>"
+  let win = winsaveview()
+  let l = search('^modified:','b')
+  call winrestview(win)
+  if l > -1
+    try 
+      undojoin
+      normal iX
+      undojoin
+      keepj call setline(l, substitute(getline(l), 'modified:.*', 'modified: "'.strftime("%a %d %b %Y %H:%M:%S").'"', 'g'))
       call winrestview(win)
       undojoin
       normal iX

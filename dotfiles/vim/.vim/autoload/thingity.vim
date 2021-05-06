@@ -189,11 +189,13 @@ function thingity#UpdateMeta()
   else
     let l = line("$")
   endif
-  try 
-    exe "1," . l . "g/id:/s/id:$/id: ".system('uuidgen')
-    exe "1," . l . "g/created:/s/created:$/created: \"".strftime("%a %d %b %Y %H:%M:%S")."\""
+  let win = winsaveview()
+  exe "1," . l . "g/^id:$/s/^id:$/id: ".system('uuidgen')
+  exe "1," . l . "g/^created:$/s/^created:$/created: \"".strftime("%a %d %b %Y %H:%M:%S")."\""
+  try
     undojoin
-    exe "keepj keepp 1," . l . "g/modified:/s/modified:.*/modified: \"".strftime("%a %d %b %Y %H:%M:%S")."\""
+    keepj keepp exe "1," . l . "g/^modified:/s/^modified:.*/modified: \"".strftime("%a %d %b %Y %H:%M:%S")."\""
   catch /^Vim\%((\a\+)\)\=:E790/
   endtry
+  call winrestview(win)
 endfunction
