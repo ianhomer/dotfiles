@@ -69,6 +69,9 @@ nvim_set_var(
 nvim_set_var(
     "knobs_layers_map",
     {
+        debug = {
+          debug = 1
+        },
         mobile = {
             compactcmd = 1,
             light = 1,

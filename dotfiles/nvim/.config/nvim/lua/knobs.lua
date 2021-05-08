@@ -15,7 +15,7 @@ function knobFromPackage(package)
     return (package:match(KNOB_VIM_RE) or package:match(KNOB_VIM_AFTER_RE) or package:match(KNOB_RE)):gsub("-", "_")
 end
 
-function M.useif(use, disableIf)
+function M.use(use, disableIf)
     local disableIf = disableIf ~= nil
     return function(args)
         if type(args) == "string" then
@@ -25,14 +25,18 @@ function M.useif(use, disableIf)
         knob = knobFromPackage(package)
         local knobVariable = "knob_" .. knob
         if vim.g["knobs_levels"][knob] ~= nil then
-            -- print(package .. ":" .. knob .. ":" .. tostring(vim.g[knobVariable]))
+            if M.has("debug") then
+                print(package .. ":" .. knob .. ":" .. tostring(vim.g[knobVariable]))
+            end
             if disableIf then
                 args.disable = (vim.g[knobVariable] or 0) == 0
             else
                 args.cond = 'vim.g["' .. knobVariable .. '"]'
             end
         else
-            -- print(package .. ":" .. knob .. " does not exist")
+            if M.has("debug") then
+                print(package .. ":" .. knob .. " does not exist")
+            end
         end
         use(args)
     end
