@@ -22,11 +22,16 @@ function M.useif(use, disableIf)
         end
         local package = args[1]
         knob = knobFromPackage(package)
-        -- print(package .. ":" .. knob .. ":" .. tostring(vim.g["knob_" .. knob]))
-        if disableIf then
-            args.disable = (vim.g["knob_" .. knob] or 0) == 0
+        local knobVariable = "knob_" .. knob
+        if vim.g["knobs_levels"][knob] ~= nil then
+            print(package .. ":" .. knob .. ":" .. tostring(vim.g[knobVariable]))
+            if disableIf then
+                args.disable = (vim.g[knobVariable] or 0) == 0
+            else
+                args.cond = "vim.g[knobVariable]"
+            end
         else
-            args.cond = 'vim.g["knob_' .. knob .. '"]'
+            print(package .. ":" .. knob .. " does not exist")
         end
         use(args)
     end
