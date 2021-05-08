@@ -27,9 +27,9 @@ function M.useif(use, disableIf)
         if vim.g["knobs_levels"][knob] ~= nil then
             -- print(package .. ":" .. knob .. ":" .. tostring(vim.g[knobVariable]))
             if disableIf then
-               args.disable = (vim.g[knobVariable] or 0) == 0
+                args.disable = (vim.g[knobVariable] or 0) == 0
             else
-               args.cond = 'vim.g["' .. knobVariable .. '"]'
+                args.cond = 'vim.g["' .. knobVariable .. '"]'
             end
         else
             -- print(package .. ":" .. knob .. " does not exist")
