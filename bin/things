@@ -18,8 +18,9 @@ THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
 def run():
     parser = argparse.ArgumentParser(description="things")
     parser.add_argument("thing", nargs="*", help="thing")
+    parser.add_argument("-s", "--search", help="find things", action="store_true")
     parser.add_argument("-r", "--recent", help="recent things", action="store_true")
-    parser.add_argument("-s", "--synk", help="synk things", action="store_true")
+    parser.add_argument("--synk", help="synk things", action="store_true")
     # Just sync my notes
     parser.add_argument("-m", "--my", help="synk my things", action="store_true")
     parser.add_argument("-o", "--open", help="open my things", action="store_true")
@@ -32,12 +33,12 @@ def run():
     if args.open:
         return open()
 
-    if args.recent:
-        return recent(args)
+    if args.search:
+        return search(args)
 
     more = True
     while more:
-        more = search(args)
+        more = recent(args)
 
 
 def open():
@@ -84,7 +85,8 @@ def recent(args):
             env={**os.environ, "VIM_KNOB": "5"},
             cwd=THINGS_DIR,
         )
-    return True
+        return True
+    return False
 
 
 def search(args):
