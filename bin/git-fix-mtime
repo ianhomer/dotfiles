@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+
+import argparse
+import shlex
+import subprocess
+
+
+def normalise(path):
+    return path
+
+
+class Git:
+    def __init__(self):
+        self.cmd = ["git"]
+
+    def ls(self):
+        return (normalise(_) for _ in self._run("ls-files --full-name"))
+
+    def _run(self, command):
+        commandList = self.cmd + shlex.split(command)
+        print(f"Executing: {' '.join(commandList)}")
+        proc = subprocess.Popen(
+            commandList, stdout=subprocess.PIPE, universal_newlines=True
+        )
+        return (_.strip() for _ in proc.stdout)
+
+
+def run():
+    parser = argparse.ArgumentParser(description="git meta")
+    updateLastModified()
+
+
+def updateLastModified():
+    git = Git()
+    for path in git.ls():
+        print(f"{path}")
+
+
+run()
