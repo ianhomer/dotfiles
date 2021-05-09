@@ -18,6 +18,7 @@ THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
 def run():
     parser = argparse.ArgumentParser(description="things")
     parser.add_argument("thing", nargs="*", help="thing")
+    parser.add_argument("-r", "--recent", help="recent things", action="store_true")
     parser.add_argument("-s", "--synk", help="synk things", action="store_true")
     # Just sync my notes
     parser.add_argument("-m", "--my", help="synk my things", action="store_true")
@@ -31,6 +32,9 @@ def run():
     if args.open:
         return open()
 
+    if args.recent:
+        return recent(args)
+
     more = True
     while more:
         more = search(args)
@@ -38,6 +42,36 @@ def run():
 
 def open():
     subprocess.run(["nvim"], env={**os.environ, "VIM_KNOB": "5"}, cwd=THINGS_DIR)
+
+
+def recent(args):
+    fzf = [
+        "fzf",
+        "--height",
+        "100%",
+        "--ansi",
+        "--preview",
+        "bat --style=header --color=always (echo {})",
+        "--color",
+        "dark",
+    ]
+    period = args.thing[0] if args.thing else "2weeks"
+    commandPrefix = f"fd --changed-within {period} md"
+    fzfDefaultCommand = commandPrefix
+    process = subprocess.run(
+        fzf,
+        stdout=PIPE,
+        text=True,
+        stderr=None,
+        env={**os.environ, "FZF_DEFAULT_COMMAND": fzfDefaultCommand},
+        cwd=THINGS_DIR,
+    )
+    lines = process.stdout.splitlines()
+    subprocess.call(
+        ["nvim", lines[0], "+:$"],
+        env={**os.environ, "VIM_KNOB": "5"},
+        cwd=THINGS_DIR,
+    )
 
 
 def search(args):
@@ -53,7 +87,7 @@ def search(args):
         "--preview",
         "bat --style=header --color=always (echo {} | cut -d: -f1)",
         "--color",
-        "dark"
+        "dark",
     ]
     rgPrefix = "rg -i --glob '**/*.md'"
     if args.thing and len(args.thing) > 0:
