@@ -42,7 +42,7 @@ def run():
 
 
 def open():
-    subprocess.run(["nvim"], env={**os.environ, "VIM_KNOB": "5"}, cwd=THINGS_DIR)
+    subprocess.run(["nvim"], env={**os.environ, "VIM_KNOB": "4"}, cwd=THINGS_DIR)
 
 
 def recent(args):
@@ -82,7 +82,7 @@ def recent(args):
     if len(selected) > 0:
         subprocess.call(
             ["nvim", selected[0], "+:$"],
-            env={**os.environ, "VIM_KNOB": "5"},
+            env={**os.environ, "VIM_KNOB": "4"},
             cwd=THINGS_DIR,
         )
         return True
@@ -138,7 +138,7 @@ def search(args):
         print(f"opening {selected[0]}")
         subprocess.call(
             ["nvim", selected[0], "+:$"],
-            env={**os.environ, "VIM_KNOB": "5"},
+            env={**os.environ, "VIM_KNOB": "4"},
             cwd=THINGS_DIR,
         )
         return True
