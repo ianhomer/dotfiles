@@ -50,13 +50,18 @@ def recent(args):
         "--height",
         "100%",
         "--ansi",
+        "--with-nth",
+        "2..",
         "--preview",
-        "bat --style=header --color=always (echo {})",
+        "bat --style=header --color=always (echo {} | cut -d ' ' -f2)",
         "--color",
         "dark",
     ]
-    period = args.thing[0] if args.thing else "2weeks"
-    commandPrefix = f"fd --changed-within {period} md"
+    period = args.thing[0] if args.thing else "1week"
+    commandPrefix = (
+        f"fd --changed-within {period} md " +
+        "--exec stat -f '%m %N' {} | sort -r"
+    )
     fzfDefaultCommand = commandPrefix
     process = subprocess.run(
         fzf,
@@ -67,11 +72,19 @@ def recent(args):
         cwd=THINGS_DIR,
     )
     lines = process.stdout.splitlines()
-    subprocess.call(
-        ["nvim", lines[0], "+:$"],
-        env={**os.environ, "VIM_KNOB": "5"},
-        cwd=THINGS_DIR,
-    )
+    selected = []
+    for line in lines:
+        match = re.search("^[^ ]* (.*)$", line)
+        if match:
+            selected.append(match.group(1))
+
+    if len(selected) > 0:
+        subprocess.call(
+            ["nvim", selected[0], "+:$"],
+            env={**os.environ, "VIM_KNOB": "5"},
+            cwd=THINGS_DIR,
+        )
+    return True
 
 
 def search(args):
