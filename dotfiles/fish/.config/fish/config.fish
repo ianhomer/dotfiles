@@ -106,6 +106,11 @@ if [ {$DOT_LOG_LEVEL} -gt 0 ]
   status --is-interactive; and set_color normal
 end
 
+# Things bind
+
+bind \ct things
+bind --mode insert \ct things
+
 time-me "END config.fish"
 
 

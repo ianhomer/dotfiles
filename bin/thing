@@ -13,7 +13,7 @@ def run():
     parser = argparse.ArgumentParser(description="thing")
     parser.add_argument("thing", nargs="*", help="thing")
     parser.add_argument("-m", "--my", help="synk my things", action="store_true")
-    parser.add_argument("-s", "--synk", help="synk things", action="store_true")
+    parser.add_argument("--synk", help="synk things", action="store_true")
 
     args = parser.parse_args()
 
