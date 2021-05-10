@@ -60,6 +60,7 @@ nvim_set_var(
         window_cleaner = 3,
         writegood = 3,
         tmux_navigator = 3,
+        unicode = 4,
         vsnip = 5,
         zephyr = 9
     }
@@ -183,6 +184,7 @@ return require("packer").startup{
         useif "tpope/vim-commentary"
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
 
+        useif "chrisbra/unicode.vim"
         useif "junegunn/goyo.vim"
         useif {
             "iamcco/markdown-preview.nvim",
