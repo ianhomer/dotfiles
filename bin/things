@@ -52,10 +52,14 @@ class Fzf:
         self.parts = []
         self.defaultCommand = "true"
         self.filenameMatcher = ""
+        self.binds = []
 
     def run(self):
+        cmd = self.cmd + self.parts
+        if len(self.binds) > 0:
+            cmd += ["--bind", ",".join(self.binds)]
         process = subprocess.run(
-            self.cmd + self.parts,
+            cmd,
             stdout=PIPE,
             text=True,
             stderr=None,
@@ -116,7 +120,8 @@ def search(args):
         pattern = " ".join(words)
         fzf.defaultCommand = f"{rgPrefix} '{pattern}' || true"
     else:
-        fzf.parts += ["--phony", "--bind", "change:reload:" + rgPrefix + " {q} || true"]
+        fzf.parts += ["--phony"]
+        fzf.binds = ["change:reload:" + rgPrefix + " {q} || true"]
 
     fzf.filenameMatcher = "^([^:]*):.*$"
     return fzf.run()
