@@ -29,7 +29,7 @@ nvim_set_var(
         gruvbox8 = 1,
         goyo = 3,
         gutentags = 5,
-        nerdtree = 5,
+        nerdtree = 2,
         lens = 8,
         lightbulb = 5,
         lsp = 3,
@@ -174,7 +174,7 @@ return require("packer").startup{
         useif {"norcalli/nvim-colorizer.lua", config = [[require'config.colorizer']]}
 
         -- Git
-        use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Gpush", "Gpull"}}
+        use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Ggrep", "Gpush", "Gpull" }}
         useif {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
         useif {"airblade/vim-gitgutter"}
         useif {"tpope/vim-dispatch"}

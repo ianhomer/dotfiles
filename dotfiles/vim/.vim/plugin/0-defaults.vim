@@ -63,10 +63,6 @@ else
   set cmdheight=2
 endif
 
-if !knobs#("nerdtree")
-  nnoremap <silent> <leader>n :call knobs#runtime#SetLevel(5)<CR>
-endif
-
 if knobs#("minimap")
   nnoremap <silent> <leader>m :MinimapToggle<CR>
 endif
