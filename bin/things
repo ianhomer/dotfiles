@@ -48,11 +48,15 @@ def open():
 class Fzf:
     # Command Fzf command
     def __init__(self):
-        self.cmd = ["fzf", "--height", "100%", "--ansi", "--color", "dark"]
+        self.cmd = ["fzf", "--height", "100%", "--ansi", "-d", ":", "--color", "dark"]
         self.parts = []
         self.defaultCommand = "true"
         self.filenameMatcher = ""
-        self.binds = []
+        self.binds = [
+            "ctrl-f:reload(fd --changed-within 2weeks md "
+            + "--exec stat -f '%m %N' {} | sort -r)",
+            "ctrl-s:reload(rg -i --glob '**/*.md' {q} || true)",
+        ]
 
     def run(self):
         cmd = self.cmd + self.parts
@@ -89,11 +93,11 @@ def recent(args):
         "--with-nth",
         "2..",
         "--preview",
-        "bat --style=header --color=always (echo {} | cut -d ' ' -f2)",
+        "bat --style=header --color=always (echo {} | cut -d: -f2)",
     ]
     period = args.thing[0] if args.thing else "1week"
     fzf.defaultCommand = (
-        f"fd --changed-within {period} md " + "--exec stat -f '%m %N' {} | sort -r"
+        f"fd --changed-within {period} md " + "--exec stat -f '%m:%N' {} | sort -r"
     )
     fzf.filenameMatcher = "^[^ ]* (.*)$"
     return fzf.run()
@@ -102,8 +106,6 @@ def recent(args):
 def search(args):
     fzf = Fzf()
     fzf.parts = [
-        "-d",
-        ":",
         "--with-nth",
         "2..",
         "--preview",
