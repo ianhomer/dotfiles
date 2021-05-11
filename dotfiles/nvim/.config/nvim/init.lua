@@ -154,7 +154,7 @@ return require("packer").startup{
             "liuchengxu/vim-which-key",
             config = [[require'config.which_key']]
         }
-        useif "christoomey/vim-tmux-navigator"
+        use "christoomey/vim-tmux-navigator"
 
         useif {
             "hoob3rt/lualine.nvim",
