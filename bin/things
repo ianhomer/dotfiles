@@ -47,6 +47,10 @@ def open():
 
 class Fzf:
     # Command Fzf command
+    # Stream into fzf has three ":" separated parts
+    # 1) sort key
+    # 2) filename
+    # 3) display string
     def __init__(self):
         self.cmd = ["fzf", "--height", "100%", "--ansi", "-d", ":", "--color", "dark"]
         self.parts = []
@@ -55,7 +59,8 @@ class Fzf:
         self.binds = [
             "ctrl-f:reload(fd --changed-within 2weeks md "
             + "--exec stat -f '%m:%N' {} | sort -r)",
-            "ctrl-s:reload(rg -i --glob '**/*.md' {q} || true)",
+            "ctrl-s:reload(rg -i --glob '**/*.md' --no-heading -N {q} " +
+              "| sed 's/^/:/' || true)",
         ]
 
     def run(self):
@@ -91,15 +96,15 @@ def recent(args):
     fzf = Fzf()
     fzf.parts = [
         "--with-nth",
-        "2..",
+        "3",
         "--preview",
         "bat --style=header --color=always (echo {} | cut -d: -f2)",
     ]
     period = args.thing[0] if args.thing else "1week"
     fzf.defaultCommand = (
-        f"fd --changed-within {period} md " + "--exec stat -f '%m:%N' {} | sort -r"
+        f"fd --changed-within {period} md " + "--exec stat -f '%m:%N:%N' {} | sort -r"
     )
-    fzf.filenameMatcher = "^[^ ]*:(.*)$"
+    fzf.filenameMatcher = "^[^:]*:([^:]*)"
     return fzf.run()
 
 
