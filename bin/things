@@ -99,7 +99,7 @@ def recent(args):
     fzf.defaultCommand = (
         f"fd --changed-within {period} md " + "--exec stat -f '%m:%N' {} | sort -r"
     )
-    fzf.filenameMatcher = "^[^ ]* (.*)$"
+    fzf.filenameMatcher = "^[^ ]*:(.*)$"
     return fzf.run()
 
 
