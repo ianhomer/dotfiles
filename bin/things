@@ -33,12 +33,12 @@ def run():
     if args.open:
         return open()
 
-    if args.search:
-        return search(args)
-
     more = True
     while more:
-        more = recent(args)
+        if args.search:
+            more = search(args)
+        else:
+            more = recent(args)
 
 
 def open():
@@ -52,15 +52,28 @@ class Fzf:
     # 2) filename
     # 3) display string
     def __init__(self):
-        self.cmd = ["fzf", "--height", "100%", "--ansi", "-d", ":", "--color", "dark"]
+        self.cmd = [
+            "fzf",
+            "--height",
+            "100%",
+            "--ansi",
+            "-d",
+            ":",
+            "--with-nth",
+            "3",
+            "--preview",
+            "bat --style=header --color=always (echo {} | cut -d: -f2)",
+            "--color",
+            "dark"
+        ]
         self.parts = []
         self.defaultCommand = "true"
-        self.filenameMatcher = ""
+        self.filenameMatcher = "^[^:]*:([^:]*)"
         self.binds = [
             "ctrl-f:reload(fd --changed-within 2weeks md "
-            + "--exec stat -f '%m:%N' {} | sort -r)",
-            "ctrl-s:reload(rg -i --glob '**/*.md' --no-heading -N {q} " +
-              "| sed 's/^/:/' || true)",
+            + "--exec stat -f '%m:%N:%N' {} | sort -r)",
+            "ctrl-s:reload(rg -i --glob '**/*.md' --no-heading -N {q} "
+            + "| sed 's/^/:/' || true)",
         ]
 
     def run(self):
@@ -94,29 +107,16 @@ class Fzf:
 
 def recent(args):
     fzf = Fzf()
-    fzf.parts = [
-        "--with-nth",
-        "3",
-        "--preview",
-        "bat --style=header --color=always (echo {} | cut -d: -f2)",
-    ]
     period = args.thing[0] if args.thing else "1week"
     fzf.defaultCommand = (
         f"fd --changed-within {period} md " + "--exec stat -f '%m:%N:%N' {} | sort -r"
     )
-    fzf.filenameMatcher = "^[^:]*:([^:]*)"
     return fzf.run()
 
 
 def search(args):
     fzf = Fzf()
-    fzf.parts = [
-        "--with-nth",
-        "2..",
-        "--preview",
-        "bat --style=header --color=always (echo {} | cut -d: -f1)",
-    ]
-    rgPrefix = "rg -i --glob '**/*.md'"
+    rgPrefix = "rg -i --glob '**/*.md' --no-heading -N"
     if args.thing and len(args.thing) > 0:
         words = []
 
@@ -125,12 +125,11 @@ def search(args):
             words.append(word)
         # thing to search
         pattern = " ".join(words)
-        fzf.defaultCommand = f"{rgPrefix} '{pattern}' || true"
+        fzf.defaultCommand = f"{rgPrefix} '{pattern}' | sed 's/^/:/' || true"
     else:
         fzf.parts += ["--phony"]
-        fzf.binds = ["change:reload:" + rgPrefix + " {q} || true"]
+        fzf.binds = ["change:reload:" + rgPrefix + " {q} | sed 's/^/:/' || true"]
 
-    fzf.filenameMatcher = "^([^:]*):.*$"
     return fzf.run()
 
 
