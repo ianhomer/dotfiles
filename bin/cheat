@@ -8,8 +8,15 @@
 # things
 #
 
-cat ~/.dotfiles/docs/cheats/*.md |
+cheat=$(cat ~/.dotfiles/docs/cheats/*.md |
   fzf-cheats |
   sort |
-  fzf --ansi --height 100% --tiebreak=index --no-hscroll --bind \
-  "ctrl-s:abort,ctrl-w:abort"
+  fzf --ansi --height 100% -d : --with-nth 2.. \
+  --tiebreak=index --no-hscroll --bind "ctrl-s:abort,ctrl-w:abort" |
+  sed 's/\(.*\):.*/\1/')
+
+file=$(cd ~/.dotfiles/docs/cheats ; \
+  rg -i --glob '*.md' --no-heading -N -l "# $cheat" |
+  head -n 1)
+
+vi ~/.dotfiles/docs/cheats/$file

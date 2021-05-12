@@ -4,7 +4,10 @@
 # Generate cheats for streaming into fzf
 #
 
-import os, re, sys, fileinput, getopt
+import os
+import re
+import sys
+import fileinput
 
 
 def usage():
@@ -18,10 +21,13 @@ CONTROL_CHAR = "⌃"
 OPTION_CHAR = "⌥"
 SPACE_CHAR = "␣"
 
-lineFormat = "\u001b[0m {command:12s} \u001b[33m{context:15s} \u001b[36m {definition:s}"
+lineFormat = (
+    "{group}:\u001b[0m {command:12s} \u001b[33m{context:15s} \u001b[36m {definition:s}"
+)
 
 metas = []
 
+group = "unknown"
 application = "default"
 context = "main"
 mark = ""
@@ -60,14 +66,18 @@ def transformCommand(command):
 
 
 def parse(line):
-    global application, context, command, definition, mark, lastWasCommand
+    global group
+    global application, context
+    global command, definition, mark, lastWasCommand
     debug("line - " + line)
     # Heading
     match = re.search("^(#+) (.*)$", line)
     if match:
         debug("heading : " + match.group(1) + ":" + match.group(2))
         headingDepth = len(match.group(1))
-        if headingDepth == 2:
+        if headingDepth == 1:
+            group = match.group(2)
+        elif headingDepth == 2:
             application = match.group(2)
         else:
             context = match.group(2)
@@ -80,6 +90,7 @@ def parse(line):
     if match:
         printLine(
             {
+                "group": group,
                 "context": application + " " + context,
                 "command": match.group(1),
                 "definition": match.group(2),
@@ -99,6 +110,7 @@ def parse(line):
     if lastWasCommand and match:
         printLine(
             {
+                "group": group,
                 "context": application + " " + context,
                 "command": command,
                 "definition": match.group(1),
