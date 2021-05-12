@@ -3,7 +3,12 @@
 # Cheats
 #
 
+#
+# Note ctrl-s aborts, such that a subsequent ctrl-s in fish shell then opens
+# things
+#
+
 cat ~/.dotfiles/docs/cheats/*.md |
   fzf-cheats |
   sort |
-  fzf --ansi --tiebreak=index --no-hscroll
+  fzf --ansi --height 100% --tiebreak=index --no-hscroll --bind "ctrl-s:abort"

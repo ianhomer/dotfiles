@@ -109,6 +109,7 @@ end
 # Things bind
 
 bind --mode insert \cw do
+bind --mode insert \cx cheat
 bind --mode insert \cs things
 
 time-me "END config.fish"
