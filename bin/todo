@@ -163,6 +163,8 @@ def search(args):
         [
             "fzf",
             "--ansi",
+            "--height",
+            "100%",
             "+m",
             "-d",
             "\t",
@@ -172,7 +174,7 @@ def search(args):
             "4",
             "--tiebreak",
             "begin",
-            "--bind=q:abort"
+            "--bind=q:abort,ctrl-s:abort,ctrl-x:abort"
         ],
         stdin=PIPE,
         stdout=PIPE,

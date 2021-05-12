@@ -11,4 +11,5 @@
 cat ~/.dotfiles/docs/cheats/*.md |
   fzf-cheats |
   sort |
-  fzf --ansi --height 100% --tiebreak=index --no-hscroll --bind "ctrl-s:abort"
+  fzf --ansi --height 100% --tiebreak=index --no-hscroll --bind \
+  "ctrl-s:abort,ctrl-w:abort"

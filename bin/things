@@ -78,7 +78,8 @@ class Fzf:
             + "| sed 's/^/:/' || true)",
             # Note that ctrl-x aborts so that a subsequence ctrl-x in fish shell
             # opens cheats
-            "ctrl-x:abort"
+            "ctrl-x:abort",
+            "ctrl-w:abort"
         ]
 
     def run(self):
