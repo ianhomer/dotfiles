@@ -108,8 +108,8 @@ end
 
 # Things bind
 
-bind \ct things
-bind --mode insert \ct things
+bind --mode insert \cw do
+bind --mode insert \cs things
 
 time-me "END config.fish"
 
