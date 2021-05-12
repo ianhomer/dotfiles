@@ -41,7 +41,7 @@ def getPath(name):
 
 # Given date as numbers, e.g. 20210531, output a nice human date from a todo
 # point of view. Display date is None if date is "days" days into the future.
-def getDateDisplay(dateAsNumbers, days):
+def getDateDisplay(dateAsNumbers, days=0):
     include = True
     if dateAsNumbers == "":
         return ("", None)

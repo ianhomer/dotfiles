@@ -150,11 +150,18 @@ def search(args):
                     rank = 2000 + dateDisplay[1]
                 else:
                     rank = 3000
-                dos.append(
+                display = (
                     f"{rank}\t{PURPLE}{doContext}{END}\t"
-                    + f"{ORANGE}{dateDisplay[0]}{END}"
-                    + f"{color}{subject}{END}\t{doFile}\n"
+                    + f"{ORANGE}{dateDisplay[0]}{END}{color}"
                 )
+                match = re.search("to ([0-9]{8}) (.*)", subject)
+                if match:
+                    toDate = thingity.getDateDisplay(match.group(1))[0]
+                    display += f"to {ORANGE}{toDate}{END}{match.group(2)}"
+                else:
+                    display += f"{subject}"
+
+                dos.append(display + f"{END}\t{doFile}\n")
         else:
             # Invalid do
             print(f"BADDO : {do}")
@@ -174,7 +181,7 @@ def search(args):
             "4",
             "--tiebreak",
             "begin",
-            "--bind=q:abort,ctrl-s:abort,ctrl-x:abort"
+            "--bind=q:abort,ctrl-s:abort,ctrl-x:abort",
         ],
         stdin=PIPE,
         stdout=PIPE,

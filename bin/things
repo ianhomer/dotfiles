@@ -62,10 +62,11 @@ class Fzf:
             ":",
             "--with-nth",
             "3..",
-            "--preview",
-            "bat --style=header --color=always (echo {} | cut -d: -f2)",
             "--color",
             "dark",
+            "--preview",
+            "bat --style=header --color=always (echo {} | cut -d: -f2)"
+            # "ls -l (echo {} | cut -d: -f2)"
         ]
         self.parts = []
         self.defaultCommand = "true"
@@ -84,6 +85,11 @@ class Fzf:
             + "rg -i --glob '**/*.md' "
             + "--no-heading -N --sort modified --color always"
             + " '^\\[[0-9]+\\]:.*{q}' "
+            + "| sed 's/^/:/' || true)",
+            "ctrl-v:reload("
+            + "rg -i --glob '**/*.md' "
+            + "--no-heading -N --sortr modified --color always"
+            + " '^#+ .*'"
             + "| sed 's/^/:/' || true)",
             # Note that ctrl-x aborts so that a subsequence ctrl-x in fish shell
             # opens cheats. Similarly for ctrl-w opening todos.
@@ -131,7 +137,7 @@ def recent(args):
 
 def search(args):
     fzf = Fzf()
-    rgPrefix = "rg -i --glob '**/*.md' --no-heading -N"
+    rgPrefix = "rg -i --glob '**/*.md' --no-heading -N --sortr modified"
     if args.thing and len(args.thing) > 0:
         words = []
 
