@@ -182,6 +182,8 @@ return require("packer").startup{
         -- Editing
         useif "tpope/vim-surround"
         useif "tpope/vim-commentary"
+        useif "tpope/vim-unimpaired"
+        use "tpope/vim-repeat"
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
 
         useif "chrisbra/unicode.vim"

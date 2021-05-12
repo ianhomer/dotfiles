@@ -11,7 +11,7 @@ Login Items
 - Todoist - Hide
 - iTerm - Hide
 
-## Initialise a few desktop apps
+## Initialise desktop apps
 
 ### Magnet
 
@@ -111,4 +111,4 @@ for vim like keys in browser. Type ? in browser for help.
 
 ### Gmail
 
-Gmail -> Settings -> Keyboard Shortcuts -> Keyboard shortcuts on
+Settings -> Keyboard Shortcuts -> Keyboard shortcuts on
