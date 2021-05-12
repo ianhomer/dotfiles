@@ -18,7 +18,9 @@ THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
 def run():
     parser = argparse.ArgumentParser(description="things")
     parser.add_argument("thing", nargs="*", help="thing")
-    parser.add_argument("-s", "--synk", help="synk things", action="store_true")
+    parser.add_argument("-s", "--search", help="find things", action="store_true")
+    parser.add_argument("-r", "--recent", help="recent things", action="store_true")
+    parser.add_argument("--synk", help="synk things", action="store_true")
     # Just sync my notes
     parser.add_argument("-m", "--my", help="synk my things", action="store_true")
     parser.add_argument("-o", "--open", help="open my things", action="store_true")
@@ -33,30 +35,90 @@ def run():
 
     more = True
     while more:
-        more = search(args)
+        if args.search:
+            more = search(args)
+        else:
+            more = recent(args)
 
 
 def open():
-    subprocess.run(["nvim"], env={**os.environ, "VIM_KNOB": "5"}, cwd=THINGS_DIR)
+    subprocess.run(["nvim"], env={**os.environ, "VIM_KNOB": "4"}, cwd=THINGS_DIR)
+
+
+class Fzf:
+    # Command Fzf command
+    # Stream into fzf has three ":" separated parts
+    # 1) sort key
+    # 2) filename
+    # 3) display string
+    def __init__(self):
+        self.cmd = [
+            "fzf",
+            "--height",
+            "100%",
+            "--ansi",
+            "--no-sort",
+            "-d",
+            ":",
+            "--with-nth",
+            "3",
+            "--preview",
+            "bat --style=header --color=always (echo {} | cut -d: -f2)",
+            "--color",
+            "dark"
+        ]
+        self.parts = []
+        self.defaultCommand = "true"
+        self.filenameMatcher = "^[^:]*:([^:]*)"
+        self.binds = [
+            "ctrl-f:reload(fd --changed-within 2weeks md "
+            + "--exec stat -f '%m:%N:%N' {} | sort -r)",
+            "ctrl-s:reload(rg -i --glob '**/*.md' "
+            + "--no-heading -N --sortr modified {q} "
+            + "| sed 's/^/:/' || true)",
+        ]
+
+    def run(self):
+        cmd = self.cmd + self.parts
+        if len(self.binds) > 0:
+            cmd += ["--bind", ",".join(self.binds)]
+        process = subprocess.run(
+            cmd,
+            stdout=PIPE,
+            text=True,
+            stderr=None,
+            env={**os.environ, "FZF_DEFAULT_COMMAND": self.defaultCommand},
+            cwd=THINGS_DIR,
+        )
+        lines = process.stdout.splitlines()
+        selected = []
+        for line in lines:
+            match = re.search(self.filenameMatcher, line)
+            if match:
+                selected.append(match.group(1))
+
+        if len(selected) > 0:
+            subprocess.call(
+                ["nvim", selected[0], "+:$"],
+                env={**os.environ, "VIM_KNOB": "5"},
+                cwd=THINGS_DIR,
+            )
+            return True
+        return False
+
+
+def recent(args):
+    fzf = Fzf()
+    period = args.thing[0] if args.thing else "1week"
+    fzf.defaultCommand = (
+        f"fd --changed-within {period} md " + "--exec stat -f '%m:%N:%N' {} | sort -r"
+    )
+    return fzf.run()
 
 
 def search(args):
-    fzf = [
-        "fzf",
-        "--height",
-        "100%",
-        "--ansi",
-        "-d",
-        ":",
-        "--with-nth",
-        "2..",
-        "--preview",
-        "bat --style=header --color=always (echo {} | cut -d: -f1)",
-        "--color",
-        "dark",
-        "--bind=q:abort",
-    ]
-    rgPrefix = "rg -i --glob '**/*.md'"
+    fzf = Fzf()
+    rgPrefix = "rg -i --glob '**/*.md' --no-heading -N"
     if args.thing and len(args.thing) > 0:
         words = []
 
@@ -65,36 +127,12 @@ def search(args):
             words.append(word)
         # thing to search
         pattern = " ".join(words)
-        fzfDefaultCommand = f"{rgPrefix} '{pattern}' || true"
+        fzf.defaultCommand = f"{rgPrefix} '{pattern}' | sed 's/^/:/' || true"
     else:
-        fzfDefaultCommand = "true"
-        fzf.extend(["--phony", "--bind", "change:reload:" + rgPrefix + " {q} || true"])
+        fzf.parts += ["--phony"]
+        fzf.binds = ["change:reload:" + rgPrefix + " {q} | sed 's/^/:/' || true"]
 
-    process = subprocess.run(
-        fzf,
-        stdout=PIPE,
-        text=True,
-        stderr=None,
-        env={**os.environ, "FZF_DEFAULT_COMMAND": fzfDefaultCommand},
-        cwd=THINGS_DIR,
-    )
-
-    lines = process.stdout.splitlines()
-    selected = []
-    for line in lines:
-        match = re.search("^([^:]*):.*$", line)
-        if match:
-            selected.append(match.group(1))
-
-    if len(selected) > 0:
-        print(f"opening {selected[0]}")
-        subprocess.call(
-            ["nvim", selected[0], "+:Goyo", "+:$"],
-            env={**os.environ, "VIM_KNOB": "5"},
-            cwd=THINGS_DIR,
-        )
-        return True
-    return False
+    return fzf.run()
 
 
 run()

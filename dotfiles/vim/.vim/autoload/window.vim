@@ -69,7 +69,7 @@ endfunction
 
 function window#ToggleFugitive()
   if !window#cleaner#CloseFugitive()
-    Gstatus
+    Git
   endif
 endfunction
 

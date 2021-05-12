@@ -6,7 +6,7 @@ local nvim_set_var = vim.api.nvim_set_var
 nvim_set_var(
     "knobs_levels",
     {
-        ale = 5,
+        ale = 3,
         apathy = 6,
         airline = 9,
         auto_pairs = 6,
@@ -14,6 +14,7 @@ nvim_set_var(
         colorbuddy = 7,
         colorizer = 5,
         conflict_marker = 7,
+        commentary = 5,
         compe = 5,
         devicons = 5,
         dispatch = 5,
@@ -28,7 +29,7 @@ nvim_set_var(
         gruvbox8 = 1,
         goyo = 3,
         gutentags = 5,
-        nerdtree = 5,
+        nerdtree = 2,
         lens = 8,
         lightbulb = 5,
         lsp = 3,
@@ -59,6 +60,7 @@ nvim_set_var(
         window_cleaner = 3,
         writegood = 3,
         tmux_navigator = 3,
+        unicode = 4,
         vsnip = 5,
         zephyr = 9
     }
@@ -68,6 +70,9 @@ nvim_set_var(
 nvim_set_var(
     "knobs_layers_map",
     {
+        debug = {
+          debug = 1
+        },
         mobile = {
             compactcmd = 1,
             light = 1,
@@ -85,12 +90,12 @@ nvim_set_var(
 
 cmd "packadd packer.nvim" -- load the package manager
 
-return require("packer").startup(
+return require("packer").startup{
     function(use)
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
         local knobs = require("knobs")
-        local useif = knobs.useif(use)
+        local useif = knobs.use(use)
 
         use "wbthomason/packer.nvim"
 
@@ -133,6 +138,7 @@ return require("packer").startup(
             fn = {"fzf#vim#ag"},
             requires = {{"junegunn/fzf", opt = true, fn = {"fzf#shellescape"}}}
         }
+        use {"nvim-lua/plenary.nvim"}
         useif {
             "nvim-telescope/telescope.nvim",
             requires = {
@@ -148,7 +154,7 @@ return require("packer").startup(
             "liuchengxu/vim-which-key",
             config = [[require'config.which_key']]
         }
-        useif "christoomey/vim-tmux-navigator"
+        use "christoomey/vim-tmux-navigator"
 
         useif {
             "hoob3rt/lualine.nvim",
@@ -158,7 +164,7 @@ return require("packer").startup(
 
         -- Style
         use {"rakr/vim-one", disable = true}
-        use {"tjdevries/gruvbuddy.nvim", disable = true}
+        useif {"tjdevries/gruvbuddy.nvim", disable = true}
         useif {"tjdevries/colorbuddy.nvim", config = [[require'config.colorbuddy']], disable = true}
         use {"marko-cerovac/material.nvim", disable = true}
 
@@ -168,15 +174,17 @@ return require("packer").startup(
         useif {"norcalli/nvim-colorizer.lua", config = [[require'config.colorizer']]}
 
         -- Git
-        use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Gpush", "Gpull"}}
+        use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Ggrep", "Gpush", "Gpull" }}
         useif {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
         useif {"airblade/vim-gitgutter"}
         useif {"tpope/vim-dispatch"}
 
         -- Editing
         useif "tpope/vim-surround"
+        useif "tpope/vim-commentary"
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
 
+        useif "chrisbra/unicode.vim"
         useif "junegunn/goyo.vim"
         useif {
             "iamcco/markdown-preview.nvim",
@@ -190,5 +198,10 @@ return require("packer").startup(
         --
         -- use {'dstein64/vim-startuptime'}
         useif "tweekmonster/startuptime.vim"
-    end
-)
+    end,
+    config = {
+      profile = {
+        enable = true
+      }
+    }
+}

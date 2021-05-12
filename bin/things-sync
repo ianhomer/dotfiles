@@ -11,3 +11,8 @@ esac done
 
 cd $THINGS_DIR
 git synk -w $FETCH_WINDOW
+
+# Fix modified time for things
+for child in */ ; do
+  (cd $child ; git fix-mtime)
+done

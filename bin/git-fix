@@ -91,12 +91,24 @@ function fixMain() {
   fi
 }
 
+function fixUpstream() {
+  upstream=$(git rev-parse --abbrev-ref @{upstream})
+  current=$(git rev-parse --abbrev-ref HEAD)
+  if [[ "$upstream" != "origin/$current" ]] ; then
+    git set-upstream
+  else
+    log:: AOK upstream $current
+  fi
+}
+
+
 [[ -n "${verbose}" ]] && echo "deleting identites from SSH agent"
 ssh-add -q -D
 [[ -n "${verbose}" ]] && ssh-add -l
 
 setMyGitUrl
 fixMain
+fixUpstream
 
 # Clear authentication agent
 

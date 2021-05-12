@@ -21,6 +21,7 @@ endif
 let g:knobs_layers = get(g:, "layers",{
   \   "mobile": $ANDROID_DATA == '/data' ? 1 : 0,
   \   "notes": $ITERM_PROFILE == 'oh-my' ? 1 : 0,
+  \   "debug": $VIM_KNOB_DEBUG == "1" ? 1 : 0,
   \   "nvim_0_5": has('nvim-0.5') ? 1 : 0
   \ })
 
@@ -30,7 +31,7 @@ if has('nvim')
 else
   let g:vim_config_dir = "~/.vim"
 endif
-let g:vim_init_file = has('nvim') ? "~/.config/nvim/init.vim" : "~/.vimrc"
+let g:vim_init_file = has('nvim') ? "~/.config/nvim/init.lua" : "~/.vimrc"
 let g:vim_local_plugin_dir = "~/.vim/plugin"
 let g:vim_plugged_dir = g:vim_config_dir."/plugged"
 

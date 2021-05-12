@@ -164,7 +164,7 @@ function! s:ThingityArchive()
       let l:datePart = l:datePartMatch[1]
       let fullDate = l:datePart
       if len(l:datePart) == 4
-        let fullDate = strftime(%Y%).l:datePart
+        let fullDate = strftime("%Y").l:datePart
       endif
       echo log
       echo "Date parts ".l:datePart
@@ -183,4 +183,19 @@ function! thingity#OpenURLUnderCursor()
   endif
 endfunction
 
-
+function thingity#UpdateMeta()
+  if line("$") > 10
+    let l = 10
+  else
+    let l = line("$")
+  endif
+  let win = winsaveview()
+  exe "1," . l . "g/^id:$/s/^id:$/id: ".system('uuidgen')
+  exe "1," . l . "g/^created:$/s/^created:$/created: \"".strftime("%a %d %b %Y %H:%M:%S")."\""
+  try
+    undojoin
+    keepj keepp exe "1," . l . "g/^modified:/s/^modified:.*/modified: \"".strftime("%a %d %b %Y %H:%M:%S")."\""
+  catch /^Vim\%((\a\+)\)\=:E790/
+  endtry
+  call winrestview(win)
+endfunction

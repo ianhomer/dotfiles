@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+
+#
+# Git sets modified time for file to the time the file was downloaded locally,
+# this script sets the modified time to the time of the commit
+#
+
+import os
+import shlex
+import subprocess
+
+
+def normal(path):
+    return path
+
+
+class Git:
+    # Git class for running git commands
+    def __init__(self):
+        self.cmd = ["git"]
+        # Getting the root early has the side effect of throwing an error if
+        # we're not in a git repository.
+        self.workDirectory, self.gitDirectory = self.root()
+
+    def ls(self):
+        return (normal(_) for _ in self._run("ls-files --full-name"))
+
+    def root(self):
+        return self._run("rev-parse --show-toplevel --absolute-git-dir")
+
+    def _run(self, command):
+        parts = self.cmd + shlex.split(command)
+        stdout = subprocess.check_output(parts, text=True)
+        return stdout.splitlines()
+
+
+def run():
+    fixModifiedTime()
+
+
+def fixModifiedTime():
+    git = Git()
+    # get all files in git repository
+    files = set()
+    for path in git.ls():
+        files.add(path)
+
+    modifiedTime = 0
+    # whatchanged returns, for each commit,
+    # modified time followed by files changed
+    whatchanged = subprocess.Popen(
+        shlex.split("git whatchanged --pretty=%at"), text=True, stdout=subprocess.PIPE
+    )
+    for line in whatchanged.stdout:
+        line = line.strip()
+        if not line:
+            continue
+
+        if line[0] == ":":
+            # The filename is after the first tab
+            file = line.split("\t")[-1]
+            if file in files:
+                files.remove(file)
+                stinfo = os.stat(file)
+                if modifiedTime != stinfo.st_mtime:
+                    print(f"set mtime {modifiedTime} -> {file}")
+                    os.utime(file, (modifiedTime, modifiedTime))
+        else:
+            modifiedTime = int(line)
+
+        if not files:
+            break
+
+
+run()
