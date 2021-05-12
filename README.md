@@ -17,7 +17,7 @@ Update at any time with:
 This gets local machine up to date, including pulling latest version of this
 repository, sets OSX defaults, updates brew including packages. Run this at any
 time to update to latest. It updates what's changed or out of date, so it's
-quick, painless and pretty.
+quick and painless.
 
 I remind myself of commands and shortcuts I use with:
 
@@ -45,9 +45,9 @@ of working to streamline distraction free coding. This includes:
   vim-tmux-navigator
 
 **neovim**
-: file editing with plugins - airline ; ale ; dispatch ; endwise ; fugitive ;
-  fzf.vim ; markdown-preview ; nerdtree ; polyglot ; repeat ; startify ;
-  surround ; tabular ; which-key ; surround ; syntastic
+: file editing with plugins - airline ; ale ; dispatch ; fugitive ;
+  fzf.vim ; lsp ; markdown-preview ; nerdtree ; repeat ; startify ;
+  surround ; tabular ; which-key ; surround
 
 **nnn** and **broot**
 : file explorers

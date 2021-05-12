@@ -4,7 +4,7 @@
 
 ### memento
 
-Things I'm trying to remember.
+Shortcuts I'm trying to remember.
 
 |           |                                                       |
 | --        | --                                                    |

@@ -30,9 +30,6 @@ if status --is-login
   # dotfiled
   set -gx RBENV_SHELL fish
 
-  # Point OMF state to dotfiles
-  #set -g OMF_CONFIG ~/.dotfiles/config/omf
-
   # Use fd for fzf by default
   set -gx FZF_DEFAULT_COMMAND 'fd --type f'
 
@@ -108,6 +105,11 @@ if [ {$DOT_LOG_LEVEL} -gt 0 ]
   echo "◎ up in "(math $DATE - $SHELL_START_DATE)"ms"
   status --is-interactive; and set_color normal
 end
+
+# Things bind
+
+bind --mode insert \cw do
+bind --mode insert \cs things
 
 time-me "END config.fish"
 

@@ -1,4 +1,6 @@
 ---
+created: "Mon 03 May 2021 17:37:15"
+id: 62DA6AF1-E7C8-48A2-8E15-6DB239D3E4A2
 label: foo
 tag: bar
 ---
@@ -83,11 +85,11 @@ Term 1
   quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
   consequat.
 
-Term with multiple definitions
+Term with definitions
 : Definition 1
 : Definition 2
 
-Term with multiple definitions and long lines
+Term with definitions and long lines
 : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
   quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

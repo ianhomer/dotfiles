@@ -63,10 +63,6 @@ else
   set cmdheight=2
 endif
 
-if !knobs#("nerdtree")
-  nnoremap <silent> <leader>n :call knobs#runtime#SetLevel(5)<CR>
-endif
-
 if knobs#("minimap")
   nnoremap <silent> <leader>m :MinimapToggle<CR>
 endif
@@ -154,6 +150,9 @@ augroup dotme
 
   autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+  autocmd BufNewFile *.sh 0r ~/.vim/skeletons/skeleton.sh
+  autocmd BufNewFile *.md 0r ~/.vim/skeletons/skeleton.md
+
 
   "
   " *** Scope : Editing ***

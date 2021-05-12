@@ -2,12 +2,21 @@
 
 ## fish
 
+### memento
+
+Shortcuts I'm trying to remember.
+
+|              |                 |
+| --           | --              |
+| `Ctrl+s`     | Find things     |
+| `Ctrl+f`     | Find file       |
+| `Ctrl+Alt+s` | Git status      |
+| `Ctrl+Alt+l` | Git log         |
+| `Ctrl+v`     | Shell variables |
+
 ### line
 
-|                 |                         |
-| --              | --                      |
-| `Ctrl+a Ctrl+a` | go to beginning of line |
-| `Ctrl+e`        | go to end of line       |
-| `Ctrl+b`        | go back a word          |
-| `Ctrl+f`        | go forward a word       |
-| `bind`          | see key binding         |
+|        |                      |
+| --     | --                   |
+| `Esc`  | Go into vi edit mode |
+| `bind` | see key binding      |

@@ -65,8 +65,8 @@ function gitQuiet() {
   else
     if ! git $1 --quiet ; then
       if [[ "$1" == "fetch" ]] ; then
-        # Sometimes git fetch will fail if we have the 
-        # wrong SSH key cached, just clearing the 
+        # Sometimes git fetch will fail if we have the
+        # wrong SSH key cached, just clearing the
         # ssh cache seems to fix it.
         printf "!"
         ssh-add -q -D
@@ -186,15 +186,14 @@ else
   first=1
   error=0
   for child in */ ; do
-   cd ${root}
-   if [ -d "${child}.git" ] ; then
-     # Each subsequence synk on a new line
-     [[ first -eq 0 ]] && printf "\n"
-     cd $child
-     gitSynk || error=1
-     first=0
-   fi
+    cd ${root}
+    if [ -d "${child}.git" ] ; then
+      # Each subsequence synk on a new line
+      [[ first -eq 0 ]] && printf "\n"
+      cd $child
+      gitSynk || error=1
+      first=0
+    fi
   done
   [[ $error -eq 0 ]] || exit $error
 fi
-

@@ -40,9 +40,9 @@ if [ ! -d ~/.cache/tags ] ; then
 fi
 
 # Update plugins at 11
-export VIM_KNOB=11
+export VIM_KNOB=5
 
 # update neovim
-#nvim +PackerUpdate +qa
+nvim +TSUpdate +qa
 
 should-run -fu $0
