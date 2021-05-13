@@ -75,22 +75,9 @@ class Fzf:
             "ctrl-f:reload("
             + "fd --changed-within 3months md --exec stat -f '%m:%N:%N' {q} "
             + "| sort -r)",
-            "ctrl-s:reload("
-            + "rg -i --glob '**/*.md' "
-            + "--no-heading -N --sort modified --color always"
-            + " {q} "
-            + "| sed 's/^/:/' || true)",
-            # Bookmarks
-            "ctrl-g:reload("
-            + "rg -i --glob '**/*.md' "
-            + "--no-heading -N --sort modified --color always"
-            + " '^\\[[0-9]+\\]:.*{q}' "
-            + "| sed 's/^/:/' || true)",
-            "ctrl-v:reload("
-            + "rg -i --glob '**/*.md' "
-            + "--no-heading -N --sortr modified --color always"
-            + " '^#+ .*'"
-            + "| sed 's/^/:/' || true)",
+            "ctrl-s:reload(things-search {q} || true)",
+            "ctrl-g:reload(things-search -n bookmarks {q} || true)",
+            "ctrl-v:reload(things-search -n headings {q} || true)",
             # Note that ctrl-x aborts so that a subsequence ctrl-x in fish shell
             # opens cheats. Similarly for ctrl-w opening todos.
             "ctrl-x:abort",
@@ -137,11 +124,7 @@ def recent(args):
 
 def search(args):
     fzf = Fzf()
-    prependLastModified = (
-        'awk \'BEGIN { FS = ":" } ; {"stat -f \'%m\' " $1'
-        + ' | getline ts ; print ts ":" $1 ":" $2}\''
-    )
-    rgPrefix = "rg -i --glob '**/*.md' --no-heading -N"
+    searchPrefix = "things-search"
     if args.thing and len(args.thing) > 0:
         words = []
 
@@ -151,11 +134,11 @@ def search(args):
         # thing to search
         pattern = " ".join(words)
         fzf.defaultCommand = (
-            f"{rgPrefix} '{pattern}' | " + prependLastModified + " | sort -r || true"
+            f"{searchPrefix} '{pattern}' || true"
         )
     else:
         fzf.parts += ["--phony"]
-        fzf.binds = ["change:reload:" + rgPrefix + " {q} | sed 's/^/:/' || true"]
+        fzf.binds = ["change:reload:" + searchPrefix + " {q} || true"]
 
     return fzf.run()
 
