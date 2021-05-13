@@ -5,4 +5,4 @@
 #
 
 BEGIN { FS = ":" ; OFS = ":" }
-{ cmd="stat -f '%m' "$1 ; cmd|getline ts ; print ts,$1,$2 ; close(cmd) }
+{ cmd="stat -f '%m' "$1 ; cmd|getline ts ; print ts,$0 ; close(cmd) }
