@@ -35,7 +35,7 @@ def run():
 # Make a part safe for executing as shell command. This allows the output from a
 # dry run report to be cut and pasted into a shell window
 def commandPartShellSafe(part):
-    if part.startswith("s/") or part.startswith("*"):
+    if part.startswith("s/") or part.startswith("*") or part.startswith("^"):
         return f"'{part}'"
     return part
 
@@ -140,10 +140,12 @@ def search(args):
 
     if args.name == "default":
         search = Rg(match)
+        search.maxPerFile = 1
     elif args.name == "sort-modified":
         search = Rg(match)
         search.withModifiedKey = True
         search.sort = True
+        search.maxPerFile = 1
     elif args.name == "bookmarks":
         search = Rg(match)
         search.matchPrefix = "^\\[[0-9]+\\]:.*"
@@ -153,6 +155,7 @@ def search(args):
         search.postFilter = "s/\\#* //"
         search.withModifiedKey = True
         search.sort = True
+        search.maxPerFile = 1
     else:
         raise Exception(f"Search {args.name} not recognised")
 

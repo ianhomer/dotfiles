@@ -75,7 +75,7 @@ class Fzf:
             "ctrl-f:reload("
             + "fd --changed-within 3months md --exec stat -f '%m:%N:%N' {q} "
             + "| sort -r)",
-            "ctrl-s:reload(things-search {q} || true)",
+            "ctrl-s:reload(things-search -n sort-modified {q} || true)",
             "ctrl-g:reload(things-search -n bookmarks {q} || true)",
             "ctrl-v:reload(things-search -n headings {q} || true)",
             # Note that ctrl-x aborts so that a subsequence ctrl-x in fish shell
