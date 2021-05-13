@@ -137,7 +137,11 @@ def recent(args):
 
 def search(args):
     fzf = Fzf()
-    rgPrefix = "rg -i --glob '**/*.md' --no-heading -N --sortr modified"
+    prependLastModified = (
+        'awk \'BEGIN { FS = ":" } ; {"stat -f \'%m\' " $1'
+        + ' | getline ts ; print ts ":" $1 ":" $2}\''
+    )
+    rgPrefix = "rg -i --glob '**/*.md' --no-heading -N"
     if args.thing and len(args.thing) > 0:
         words = []
 
@@ -146,7 +150,9 @@ def search(args):
             words.append(word)
         # thing to search
         pattern = " ".join(words)
-        fzf.defaultCommand = f"{rgPrefix} '{pattern}' | sed 's/^/:/' || true"
+        fzf.defaultCommand = (
+            f"{rgPrefix} '{pattern}' | " + prependLastModified + " | sort -r || true"
+        )
     else:
         fzf.parts += ["--phony"]
         fzf.binds = ["change:reload:" + rgPrefix + " {q} | sed 's/^/:/' || true"]
