@@ -152,7 +152,9 @@ def search(args):
     elif args.name == "headings":
         search = Rg(match)
         search.matchPrefix = "^#+.*"
-        search.postFilter = "s/\\#* //"
+        # search.postFilter = "s/\([^/]*\).md:#* \(.*\)/\1.md:\2 (\1)/"
+        search.postFilter = "s/\\([^/]*\\).md:#* \\(.*\\)/\\1.md:\\2 \033[95m(\\1)\033[0m/"
+        # search.postFilter = "s/\\#* //"
         search.withModifiedKey = True
         search.sort = True
         search.maxPerFile = 1
