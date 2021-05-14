@@ -54,6 +54,7 @@ class Fzf:
     def __init__(self):
         self.cmd = [
             "fzf",
+            "--multi",
             "--height",
             "100%",
             "--ansi",
@@ -105,7 +106,7 @@ class Fzf:
 
         if len(selected) > 0:
             subprocess.call(
-                ["nvim", selected[0], "+:$"],
+                ["nvim"] + selected,
                 env={**os.environ, "VIM_KNOB": "5"},
                 cwd=THINGS_DIR,
             )
@@ -124,15 +125,9 @@ def recent(args):
 
 def search(args):
     fzf = Fzf()
-    searchPrefix = "things-search"
+    searchPrefix = "things-search -n sort-modified"
     if args.thing and len(args.thing) > 0:
-        words = []
-
-        # Scan words
-        for word in args.thing:
-            words.append(word)
-        # thing to search
-        pattern = " ".join(words)
+        pattern = " ".join(args.thing)
         fzf.defaultCommand = (
             f"{searchPrefix} '{pattern}' || true"
         )
