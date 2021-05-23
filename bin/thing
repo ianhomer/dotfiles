@@ -51,7 +51,7 @@ def edit(args):
     # Edit a thing.
     subprocess.call(
         ["nvim", filename, "+:$"],
-        env={**os.environ, "VIM_KNOB": "5"},
+        env={**os.environ, "VIM_KNOB": "4"},
         cwd=thingity.THINGS_DIR,
     )
 

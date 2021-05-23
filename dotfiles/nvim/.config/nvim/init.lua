@@ -16,7 +16,7 @@ nvim_set_var(
         colorizer = 5,
         conflict_marker = 7,
         commentary = 5,
-        compe = 5,
+        compe = 4,
         devicons = 5,
         dispatch = 5,
         endwise = 7,
@@ -30,13 +30,13 @@ nvim_set_var(
         gruvbox8 = 1,
         goyo = 3,
         gutentags = 5,
-        indent_blankline = 5,
-        indentline = 5,
+        indent_blankline = 4,
+        indentline = 4,
         nerdtree = 2,
         lens = 8,
         lightbulb = 5,
         lsp = 3,
-        lspconfig = 5,
+        lspconfig = 4,
         lspkind = 4,
         lualine = 4,
         markdown_syntax_table = 3,
@@ -56,7 +56,7 @@ nvim_set_var(
         tabular = 3,
         telescope = 5,
         thingity = 3,
-        treesitter = 5,
+        treesitter = 4,
         unimpaired = 4,
         update_spelling = 7,
         which_key = 4,
@@ -64,7 +64,8 @@ nvim_set_var(
         writegood = 3,
         tmux_navigator = 3,
         unicode = 4,
-        vsnip = 5,
+        vsnip = 4,
+        zen_mode = 4,
         zephyr = 9
     }
 )
@@ -74,7 +75,7 @@ nvim_set_var(
     "knobs_layers_map",
     {
         debug = {
-          debug = 1
+            debug = 1
         },
         mobile = {
             compactcmd = 1,
@@ -102,7 +103,7 @@ g.indent_blankline_show_first_indent_level = false
 
 cmd "packadd packer.nvim" -- load the package manager
 
-return require("packer").startup{
+return require("packer").startup {
     function(use)
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
@@ -186,7 +187,7 @@ return require("packer").startup{
         useif {"norcalli/nvim-colorizer.lua", config = [[require'config.colorizer']]}
 
         -- Git
-        use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Ggrep", "Gpush", "Gpull" }}
+        use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Ggrep", "Gpush", "Gpull"}}
         useif {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
         useif {"airblade/vim-gitgutter"}
         useif {"tpope/vim-dispatch"}
@@ -199,6 +200,12 @@ return require("packer").startup{
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
 
         useif "chrisbra/unicode.vim"
+        use {
+            "folke/zen-mode.nvim",
+            cmd = {"ZenMode"},
+            config = [[require'config.zen_mode']]
+        }
+
         useif "junegunn/goyo.vim"
         useif {
             "iamcco/markdown-preview.nvim",
@@ -215,8 +222,8 @@ return require("packer").startup{
         useif "tweekmonster/startuptime.vim"
     end,
     config = {
-      profile = {
-        enable = true
-      }
+        profile = {
+            enable = true
+        }
     }
 }

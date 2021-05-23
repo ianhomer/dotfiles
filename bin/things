@@ -107,7 +107,7 @@ class Fzf:
         if len(selected) > 0:
             subprocess.call(
                 ["nvim"] + selected,
-                env={**os.environ, "VIM_KNOB": "5"},
+                env={**os.environ, "VIM_KNOB": "4"},
                 cwd=THINGS_DIR,
             )
             return True
