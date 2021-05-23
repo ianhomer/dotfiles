@@ -25,6 +25,7 @@ nvim_set_var(
         friendly_snippets = 5,
         fzf = 1,
         gitgutter = 6,
+        gitsigns = 5,
         gruvbox = 5,
         gruvbuddy = 7,
         gruvbox8 = 1,
@@ -191,6 +192,7 @@ return require("packer").startup {
         useif {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
         useif {"airblade/vim-gitgutter"}
         useif {"tpope/vim-dispatch"}
+        useif {"lewis6991/gitsigns.nvim", config = [[require'config.gitsigns']]}
 
         -- Editing
         useif "tpope/vim-surround"
