@@ -19,6 +19,7 @@ nvim_set_var(
         compe = 4,
         devicons = 5,
         dispatch = 5,
+        editorconfig = 5,
         endwise = 7,
         eunuch = 7,
         fugitive = 3,
@@ -201,6 +202,7 @@ return require("packer").startup {
         use "tpope/vim-repeat"
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
 
+        useif 'editorconfig/editorconfig-vim'
         useif "chrisbra/unicode.vim"
         use {
             "folke/zen-mode.nvim",
