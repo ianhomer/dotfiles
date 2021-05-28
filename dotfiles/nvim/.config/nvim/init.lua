@@ -66,7 +66,7 @@ nvim_set_var(
         writegood = 3,
         tmux_navigator = 3,
         unicode = 4,
-        vsnip = 4,
+        vsnip = 8,
         zen_mode = 4,
         zephyr = 9
     }
