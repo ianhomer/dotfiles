@@ -15,9 +15,17 @@ jobs:
 
   test-py:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.8]
+
     steps:
       - uses: actions/checkout@v1
       - name: python tests
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
         run: |
           pytest
 
