@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from subprocess import PIPE
-from lib import thingity
+from dot import thingity
 
 
 home = str(Path.home())
@@ -110,6 +110,7 @@ def search(args):
         for category in MY_DO.split(","):
             if category.startswith("-"):
                 excludes.append(category[1:])
+
 
     ag = [
         "ag",

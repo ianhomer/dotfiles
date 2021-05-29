@@ -7,11 +7,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - name:
+      - name: node tests
         working-directory: ./test
         run: |
           npm install
           npm test
+
+  test-py:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: python tests
+        run: |
+          pytest
 
   test-dotme:
     runs-on: ubuntu-latest
@@ -43,7 +51,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - name: Checkout vader.vim
+      - name: checkout vader.vim
         uses: actions/checkout@v2
         with:
           repository: junegunn/vader.vim
