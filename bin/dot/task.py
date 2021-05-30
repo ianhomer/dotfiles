@@ -1,3 +1,6 @@
+#
+# Parse a task line. See test cases for examples
+#
 import re
 
 
@@ -12,6 +15,11 @@ class Task:
             self.line,
         )
         if match:
+            self.file = match.group(1)
             self.context = match.group(2)
+            self.date = match.group(3) or None
+            self.subject = match.group(4)
         else:
+            self.file = None
             self.context = None
+            self.date = None
