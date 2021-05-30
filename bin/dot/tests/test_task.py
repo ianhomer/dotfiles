@@ -1,4 +1,4 @@
-from pytest_bdd import scenario, given, when, then
+from pytest_bdd import scenario, given, when, then, parsers
 from unittest import TestCase
 
 from dot.task import Task
@@ -18,16 +18,11 @@ def test_task():
     pass
 
 
-@given("tasks", target_fixture="tasks")
-def tasks():
-    return dict()
+@given(parsers.parse("I have task {task}"), target_fixture="tasks")
+def tasks(task):
+    return dict(task=Task(":" + task))
 
 
-@when("I have task")
-def have_task(tasks):
-    tasks["task"] = Task(":ABC something")
-
-
-@then("context OK")
-def should_have_context(tasks):
-    assert tasks["task"].context == "ABC"
+@then(parsers.parse("context for task is {context}"))
+def task_should_have_context(tasks, context):
+    assert tasks["task"].context == context

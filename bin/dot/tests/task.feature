@@ -2,7 +2,6 @@ Feature: Task
     Parse a task
 
     Scenario: Simple task
-        Given tasks
-        When I have task
-        Then context OK
+        Given I have task ABC something
+        Then context for task is ABC
 
