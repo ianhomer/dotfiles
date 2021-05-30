@@ -1,9 +1,13 @@
 from unittest import TestCase
 
-from dot.doFilter import DoFilter
+from dot.contextFilter import ContextFilter
 
 
 class TestDoFilter(TestCase):
-    def test_doFilter(self):
-        doFilter = DoFilter("-A,-B")
-        self.assertEqual(["A", "B"], doFilter.excludes())
+    def test_excludes(self):
+        contextFilter = ContextFilter("-A,-B")
+        self.assertEqual(["A", "B"], contextFilter.excludes())
+
+    def test_children(self):
+        contextFilter = ContextFilter(":A>B,C")
+        self.assertEqual(["B", "C"], contextFilter.children("A"))
