@@ -161,7 +161,7 @@ augroup dotme
   autocmd InsertEnter,InsertLeave * set cul!
 
   " Override shiftwidth for python
-  autocmd Filetype python set shiftwidth=2
+  autocmd Filetype python set shiftwidth=4
 
   if knobs#("autosave")
     "

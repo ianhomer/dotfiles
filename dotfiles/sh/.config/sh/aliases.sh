@@ -16,10 +16,10 @@ alias ts="things"
 alias tm="tmux attach || tmux new"
 
 # search for file in directory and open in vi
-alias o="fzf | xargs nvim -c ':cd %:h'"
-alias oh="fd -H | fzf | xargs nvim -c ':cd %:h'"
-alias oi="fd -I | fzf | xargs nvim -c ':cd %:h'"
-alias ohi="fd -HI | fzf | xargs nvim -c ':cd %:h'"
+alias o="fzf --height "100%" | xargs nvim -c ':cd %:h'"
+alias oh="fd -H | fzf --height "100%" | xargs nvim -c ':cd %:h'"
+alias oi="fd -I | fzf --height "100%" | xargs nvim -c ':cd %:h'"
+alias ohi="fd -HI | fzf --height "100%" | xargs nvim -c ':cd %:h'"
 
 
 

@@ -5,9 +5,10 @@ import os
 import subprocess
 import configparser
 import re
+import shutil
 from pathlib import Path
 from subprocess import PIPE
-from lib import thingity
+from dot import thingity
 
 
 config = configparser.ConfigParser()
@@ -52,6 +53,7 @@ class Fzf:
     # 2) filename
     # 3) display string
     def __init__(self):
+        terminal = shutil.get_terminal_size((80, 24))
         self.cmd = [
             "fzf",
             "--multi",
@@ -65,10 +67,25 @@ class Fzf:
             "3..",
             "--color",
             "dark",
-            "--preview",
-            "bat --style=header --color=always (echo {} | cut -d: -f2)"
             # "ls -l (echo {} | cut -d: -f2)"
         ]
+        if terminal.columns > 60 or terminal.lines > 10:
+            self.cmd += [
+                "--preview",
+                "bat --style=header --color=always (echo {} | cut -d: -f2)",
+            ]
+            if terminal.columns > 80:
+                width = "90" if terminal.columns > 110 else "70%"
+                self.cmd += [
+                    "--preview-window",
+                    f"right,{width}",
+                ]
+            else:
+                height = "5" if terminal.lines < 20 else "50%"
+                self.cmd += [
+                    "--preview-window",
+                    f"bottom,{height}",
+                ]
         self.parts = []
         self.defaultCommand = "true"
         self.filenameMatcher = "^[^:]*:([^:]*)"
@@ -107,7 +124,7 @@ class Fzf:
         if len(selected) > 0:
             subprocess.call(
                 ["nvim"] + selected,
-                env={**os.environ, "VIM_KNOB": "5"},
+                env={**os.environ, "VIM_KNOB": "4"},
                 cwd=THINGS_DIR,
             )
             return True
@@ -128,9 +145,7 @@ def search(args):
     searchPrefix = "things-search -n sort-modified"
     if args.thing and len(args.thing) > 0:
         pattern = " ".join(args.thing)
-        fzf.defaultCommand = (
-            f"{searchPrefix} '{pattern}' || true"
-        )
+        fzf.defaultCommand = f"{searchPrefix} '{pattern}' || true"
     else:
         fzf.parts += ["--phony"]
         fzf.binds = ["change:reload:" + searchPrefix + " {q} || true"]

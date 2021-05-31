@@ -10,8 +10,8 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from subprocess import PIPE
-from lib import thingity
-
+from dot import thingity
+from dot.contextFilter import ContextFilter
 
 home = str(Path.home())
 
@@ -107,9 +107,7 @@ def search(args):
     else:
         # By default ignore todos
         pattern = "\\- \\[ \\](?! ([A-Z]{3} )?[\\.\\-])"
-        for category in MY_DO.split(","):
-            if category.startswith("-"):
-                excludes.append(category[1:])
+        excludes = ContextFilter(MY_DO).excludes()
 
     ag = [
         "ag",
