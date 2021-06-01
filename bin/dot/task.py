@@ -14,12 +14,20 @@ class Task:
             "^([^:]*):((?:[A-Z]{3}(?=\\s))?)\\s*((?:[0-9]+(?=\\s)\\s)?)\\s*(.*)$",
             self.line,
         )
+        self.roadmap = False
+        self.backlog = False
         if match:
             self.file = match.group(1)
             self.context = match.group(2)
             self.date = match.group(3) or None
             self.subject = match.group(4)
+            first = self.subject[:1]
+            if first == "~":
+                self.roadmap = True
+            elif first == ".":
+                self.backlog = True
         else:
             self.file = None
             self.context = None
             self.date = None
+            self.subect = None
