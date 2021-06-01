@@ -1,4 +1,4 @@
-from pytest_bdd import scenario, given, when, then, parsers
+from pytest_bdd import scenarios, given, then, parsers
 from unittest import TestCase
 
 from dot.task import Task
@@ -13,9 +13,7 @@ class TestTask(TestCase):
         self.assertIsNone(task.date)
 
 
-@scenario("task.feature", "Simple task")
-def test_task():
-    pass
+scenarios("features")
 
 
 @given(parsers.parse("I have task {task}"), target_fixture="tasks")
