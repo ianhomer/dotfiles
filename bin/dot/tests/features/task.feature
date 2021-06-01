@@ -10,4 +10,5 @@ Feature: Task
     Scenario: Task in file
         Given I have file my.md with task ABC something
         Then the file is my.md
+        And the subject is something
 
