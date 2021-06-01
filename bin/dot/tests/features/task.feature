@@ -3,5 +3,6 @@ Feature: Task
 
     Scenario: Simple task
         Given I have task ABC something
-        Then context for task is ABC
+        Then the context is ABC
+        And the subject is something
 
