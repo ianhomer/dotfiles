@@ -20,12 +20,16 @@ class Task:
             self.file = match.group(1)
             self.context = match.group(2)
             self.date = match.group(3) or None
-            self.subject = match.group(4)
-            first = self.subject[:1]
+            subject = match.group(4)
+            first = subject[:1]
             if first == "~":
                 self.roadmap = True
+                self.subject = subject[1:].strip()
             elif first == ".":
                 self.backlog = True
+                self.subject = subject[1:].strip()
+            else:
+                self.subject = subject
         else:
             self.file = None
             self.context = None
