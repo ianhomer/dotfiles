@@ -6,3 +6,7 @@ Feature: Task
         Then the context is ABC
         And the subject is something
 
+    Scenario: Task in file
+        Given I have file my.md with task ABC something
+        Then the file is my.md
+
