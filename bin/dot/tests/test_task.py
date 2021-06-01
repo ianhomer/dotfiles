@@ -5,12 +5,12 @@ from dot.task import Task
 scenarios("features")
 
 
-@given(parsers.parse("I have task {task}"), target_fixture="tasks")
+@given(parsers.parse("I have a task {task}"), target_fixture="tasks")
 def tasks(task):
     return dict(task=Task(":" + task))
 
 
-@given(parsers.parse("I have file {file} with task {task}"), target_fixture="tasks")
+@given(parsers.parse("I have a file {file} with task {task}"), target_fixture="tasks")
 def file_with_task(file, task):
     return dict(task=Task(file + ":" + task))
 
