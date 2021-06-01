@@ -3,12 +3,12 @@ Feature: Task
 
     Scenario: Simple task
         Given I have task ABC something
-        Then the context is ABC
-        And the subject is something
-        And the date is not set
+        Then the task context is ABC
+        And the task subject is something
+        And the task date is not set
 
     Scenario: Task in file
         Given I have file my.md with task ABC something
-        Then the file is my.md
-        And the subject is something
+        Then the task file is my.md
+        And the task subject is something
 

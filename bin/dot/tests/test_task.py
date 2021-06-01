@@ -11,15 +11,15 @@ def tasks(task):
 
 
 @given(parsers.parse("I have file {file} with task {task}"), target_fixture="tasks")
-def file_with_tasks(file, task):
+def file_with_task(file, task):
     return dict(task=Task(file + ":" + task))
 
 
-@then(parsers.parse("the {field} is {value}"))
-def task_should_have_field_value(tasks, field, value):
-    assert getattr(tasks["task"], field) == value
+@then(parsers.parse("the {thing} {field} is {value}"))
+def thing_should_have_field_value(tasks, thing, field, value):
+    assert getattr(tasks[thing], field) == value
 
 
-@then(parsers.parse("the {field} is not set"))
-def task_should_not_have_field_set(tasks, field):
-    assert getattr(tasks["task"], field) is None
+@then(parsers.parse("the {thing} {field} is not set"))
+def thing_should_not_have_field_set(tasks, thing, field):
+    assert getattr(tasks[thing], field) is None
