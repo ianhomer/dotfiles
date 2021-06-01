@@ -1,17 +1,6 @@
 from pytest_bdd import scenarios, given, then, parsers
-from unittest import TestCase
 
 from dot.task import Task
-
-
-class TestTask(TestCase):
-    def test_task(self):
-        task = Task("my.md:ABC do this")
-        self.assertEqual(task.context, "ABC")
-        self.assertEqual(task.file, "my.md")
-        self.assertEqual(task.subject, "do this")
-        self.assertIsNone(task.date)
-
 
 scenarios("features")
 
@@ -34,6 +23,11 @@ def task_should_have_context(tasks, context):
 @then(parsers.parse("the subject is {subject}"))
 def task_should_have_subject(tasks, subject):
     assert tasks["task"].subject == subject
+
+
+@then(parsers.parse("the date is not set"))
+def task_should_not_have_date(tasks):
+    assert tasks["task"].date is None
 
 
 @then(parsers.parse("the file is {file}"))
