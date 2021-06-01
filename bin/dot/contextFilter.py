@@ -31,4 +31,4 @@ class ContextFilter:
         matcher = parent + ">"
         for part in self.parts:
             if part.startswith(matcher):
-                return part[len(matcher) :].split(",")
+                return part[len(matcher):].split(",")
