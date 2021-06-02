@@ -12,7 +12,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  -- C-k conflicts with tmux split navigation 
+  -- C-k conflicts with tmux split navigation
   -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
@@ -49,8 +49,8 @@ end
 
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches
-local servers = { "bashls", "cssls", "jsonls", "pyls", "tsserver", "vimls" }
-local lspsettings = { pyls = { pyls = { configurationSources = { "flake8" } } } }
+local servers = { "bashls", "cssls", "jsonls", "pyright", "tsserver", "vimls" }
+local lspsettings = {}
 for _, lsp in ipairs(servers) do
   local module = lspconfig[lsp]
   if module then
