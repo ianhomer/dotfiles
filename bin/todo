@@ -11,6 +11,7 @@ from datetime import datetime
 from pathlib import Path
 from subprocess import PIPE
 from dot import thingity
+from dot.date import Date
 from dot.contextFilter import ContextFilter
 
 home = str(Path.home())
@@ -134,7 +135,7 @@ def search(args):
             doFile = match.group(1)
             doContext = match.group(2)
             doDate = match.group(3)
-            dateDisplay = thingity.getDateDisplay(doDate, days)
+            date = Date(doDate, days)
             subject = match.group(4)
             first = subject[:1]
             if first == "~":
@@ -143,18 +144,18 @@ def search(args):
                 color = GREY
             else:
                 color = ""
-            if dateDisplay[0] is not None and doContext not in excludes:
-                if dateDisplay[1] is not None:
-                    rank = 2000 + dateDisplay[1]
+            if date.display is not None and doContext not in excludes:
+                if date.include:
+                    rank = "2000" + doDate
                 else:
-                    rank = 3000
-                display = (
-                    f"{rank}\t{PURPLE}{doContext}{END}\t"
-                    + f"{ORANGE}{dateDisplay[0]}{END}{color}"
-                )
+                    rank = "3000"
+                display = f"{rank}\t{PURPLE}{doContext}{END}\t"
+                if date.include:
+                    display += f"{ORANGE}{date.display} {END}"
+                display += f"{color}"
                 match = re.search("to ([0-9]{8}) (.*)", subject)
                 if match:
-                    toDate = thingity.getDateDisplay(match.group(1))[0]
+                    toDate = Date(match.group(1))[0]
                     display += f"to {ORANGE}{toDate}{END}{match.group(2)}"
                 else:
                     display += f"{subject}"

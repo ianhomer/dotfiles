@@ -25,3 +25,13 @@ Feature: Task
         Then the task garage is False
         Then the task mission is True
         And the task subject is something in mission
+
+    Scenario: Task for now
+        Given I have the task 0 something
+        Then the task subject is something
+        And the task date is ***
+
+    Scenario: Task for the future
+        Given I have the task 20500101 something
+        Then the task subject is something
+        And the task date is 01 JAN 2050

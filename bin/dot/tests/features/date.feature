@@ -5,18 +5,21 @@ Feature: Human Date
         Given today
         When I have the date 0
         Then the date display is ***
+        And the date include is True
 
     Scenario: Future
         Given today
-        When I have the date 25000101
-        Then the date display is 25000101
+        When I have the date 20500101
+        Then the date display is 01 JAN 2050
 
     Scenario: Next Month
         Given today is 20210601
         When I have the date 20210701
         Then the date display is 01 JUL
+        And the date include is True
 
     Scenario: Tomorrow
         Given today is 20210601
         When I have the date 2
         Then the date display is WED
+        And the date include is True

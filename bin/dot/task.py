@@ -2,6 +2,7 @@
 # Parse a task line. See test cases for examples
 #
 import re
+from .date import Date
 
 
 class Task:
@@ -19,7 +20,8 @@ class Task:
         if match:
             self.file = match.group(1)
             self.context = match.group(2)
-            self.date = match.group(3) or None
+            self.dateAsNumbers = match.group(3) or None
+            self.date = Date(self.dateAsNumbers).display
             subject = match.group(4)
             first = subject[:1]
             if first == "~":
@@ -34,4 +36,4 @@ class Task:
             self.file = None
             self.context = None
             self.date = None
-            self.subect = None
+            self.subect = self.line
