@@ -7,7 +7,7 @@ import re
 from datetime import date
 
 
-class HumanDate:
+class Date:
     def __init__(self, numbers, today=date.today):
         self.numbers = numbers
         self.today = today

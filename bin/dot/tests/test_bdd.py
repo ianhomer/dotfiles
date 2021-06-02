@@ -1,24 +1,32 @@
+import pytest
 from pytest_bdd import scenarios, given, then, parsers
 
 from dot.task import Task
-from dot.humanDate import HumanDate
+from dot.date import Date
 
 scenarios("features")
 
 
-@given(parsers.parse("I have the task {task}"), target_fixture="tasks")
+@pytest.fixture
+def context():
+    return dict()
+
+
+@given(parsers.parse("I have the task {task}"), target_fixture="context")
 def tasks(task):
     return dict(task=Task(":" + task))
 
 
-@given(parsers.parse("I have the file {file} with task {task}"), target_fixture="tasks")
+@given(
+    parsers.parse("I have the file {file} with task {task}"), target_fixture="context"
+)
 def file_with_task(file, task):
     return dict(task=Task(file + ":" + task))
 
 
 @then(parsers.parse("the {thing} {field} is {value}"))
-def thing_should_have_field_value(tasks, thing, field, value):
-    actual = getattr(tasks[thing], field)
+def thing_should_have_field_value(context, thing, field, value):
+    actual = getattr(context[thing], field)
     if value == "False":
         expected = False
     elif value == "True":
@@ -29,10 +37,10 @@ def thing_should_have_field_value(tasks, thing, field, value):
 
 
 @then(parsers.parse("the {thing} {field} is not set"))
-def thing_should_not_have_field_set(tasks, thing, field):
-    assert getattr(tasks[thing], field) is None
+def thing_should_not_have_field_set(context, thing, field):
+    assert getattr(context[thing], field) is None
 
 
-@given(parsers.parse("I have the date {numbers}"), target_fixture="tasks")
+@given(parsers.parse("I have the date {numbers}"), target_fixture="context")
 def date(numbers):
-    return dict(date=HumanDate(numbers))
+    return dict(date=Date(numbers))
