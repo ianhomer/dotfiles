@@ -1,8 +1,10 @@
 import pytest
-from pytest_bdd import scenarios, given, then, parsers
+from pytest_bdd import scenarios, given, when, then, parsers
 
 from dot.task import Task
 from dot.date import Date
+
+from datetime import date
 
 scenarios("features")
 
@@ -41,6 +43,16 @@ def thing_should_not_have_field_set(context, thing, field):
     assert getattr(context[thing], field) is None
 
 
-@given(parsers.parse("I have the date {numbers}"), target_fixture="context")
-def date(numbers):
-    return dict(date=Date(numbers))
+@when(parsers.parse("I have the date {numbers}"))
+def I_have_date(context, numbers):
+    context["date"] = Date(numbers, 0, context["today"])
+
+
+@given(parsers.parse("today"), target_fixture="context")
+def today():
+    return dict(today=date.today())
+
+
+@given(parsers.parse("today is {numbers}"), target_fixture="context")
+def todayMock(numbers):
+    return dict(today=date(int(numbers[0:4]), int(numbers[4:6]), int(numbers[7:8])))

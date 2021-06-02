@@ -23,7 +23,7 @@ class Date:
             thisDate = date(int(match.group(1)), int(match.group(2)), 1)
             self.daysAhead = (thisDate - self.today).days
             self.include = self.daysAhead <= self.days
-            self.display = thisDate.strftime("%b ").upper()
+            self.display = thisDate.strftime("%b").upper()
         elif match := re.search("([0-9]{4})([0-9]{2})([0-9]{2})", self.numbers):
             thisDate = date(
                 int(match.group(1)),
@@ -34,9 +34,9 @@ class Date:
             if self.daysAhead < 0:
                 self.display = "***"
             elif self.daysAhead <= 7:
-                self.display = thisDate.strftime("%a ").upper()
+                self.display = thisDate.strftime("%a").upper()
             elif self.daysAhead < 300:
-                self.display = thisDate.strftime("%d %b ").upper()
+                self.display = thisDate.strftime("%d %b").upper()
             else:
                 self.display = self.numbers
         else:
@@ -48,7 +48,7 @@ class Date:
         if day > 1:
             # 2 is mañana
             self.display = (
-                (self.today + datetime.timedelta(days=1)).strftime("%a ").upper()
+                (self.today + datetime.timedelta(days=1)).strftime("%a").upper()
             )
             self.daysAhead = 2
         elif day > 0:
