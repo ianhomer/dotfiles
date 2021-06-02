@@ -14,8 +14,8 @@ class Task:
             "^([^:]*):((?:[A-Z]{3}(?=\\s))?)\\s*((?:[0-9]+(?=\\s)\\s)?)\\s*(.*)$",
             self.line,
         )
-        self.roadmap = False
-        self.backlog = False
+        self.mission = False
+        self.garage = False
         if match:
             self.file = match.group(1)
             self.context = match.group(2)
@@ -23,10 +23,10 @@ class Task:
             subject = match.group(4)
             first = subject[:1]
             if first == "~":
-                self.roadmap = True
+                self.mission = True
                 self.subject = subject[1:].strip()
             elif first == ".":
-                self.backlog = True
+                self.garage = True
                 self.subject = subject[1:].strip()
             else:
                 self.subject = subject
