@@ -1,4 +1,4 @@
-from pytest_bdd import scenarios, given, when, then, parsers
+from pytest_bdd import scenarios, given, then, parsers
 
 from dot.task import Task
 from dot.humanDate import HumanDate
