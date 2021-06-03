@@ -155,7 +155,7 @@ def search(args):
                 display += f"{color}"
                 match = re.search("to ([0-9]{8}) (.*)", subject)
                 if match:
-                    toDate = Date(match.group(1))[0]
+                    toDate = Date(match.group(1)).display
                     display += f"to {ORANGE}{toDate}{END}{match.group(2)}"
                 else:
                     display += f"{subject}"

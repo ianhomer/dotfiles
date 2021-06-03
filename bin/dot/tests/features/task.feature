@@ -39,3 +39,9 @@ Feature: Task
         Given I have the task 20500101 something
         Then the task subject is something
         And the task date is 01 JAN 2050
+
+    Scenario: Task with to date
+        Given I have the task 20500101 to 20500120 something
+        Then the task subject is something
+        And the task date is 01 JAN 2050
+        And the task end is 20 JAN 2050

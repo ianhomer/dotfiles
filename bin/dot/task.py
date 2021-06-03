@@ -21,6 +21,7 @@ class Task:
         )
         self.mission = False
         self.garage = False
+        self.toDate = None
         if match:
             self.file = match.group(1)
             self.context = match.group(2)
@@ -36,6 +37,11 @@ class Task:
                 self.subject = subject[1:].strip()
             else:
                 self.subject = subject
+            # Extra toDate part
+            match = re.search("to ([0-9]{8}) (.*)", subject)
+            if match:
+                self.end = Date(match.group(1)).display
+                self.subject = match.group(2)
         else:
             self.file = None
             self.context = None
