@@ -126,17 +126,9 @@ def search(args):
     for line in lines:
         do = Task(line, days)
         if do.subject:
-            if do.mission:
-                color = GREEN
-            elif do.garage:
-                color = GREY
-            else:
-                color = ""
+            color = GREEN if do.mission else GREY if do.garage else ""
             if do.context not in excludes:
-                if do.dateInclude:
-                    rank = "2000" + (do.dateAsNumbers or "0")
-                else:
-                    rank = "3000"
+                rank = "2000" + (do.dateAsNumbers or "0") if do.dateInclude else "3000"
                 display = f"{rank}\t{PURPLE}{do.context}{END}\t"
                 if do.dateInclude:
                     display += f"{ORANGE}{do.date} {END}"
