@@ -54,11 +54,11 @@
 : find recently opened folder (using fasd)
 
 **z**
-: list recently opened folder we
+: list recently opened folder
 
 ## git
 
-**git-remote-fix**
+**git-fix**
 : Fix git remote, e.g. use personal context, use SSH, reset SSH keys
 
 ## Document conversions
