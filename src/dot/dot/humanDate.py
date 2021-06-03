@@ -9,7 +9,7 @@ from datetime import date
 
 # Given date as numbers, e.g. 20210531, output a nice human date from a todo
 # point of view. Display is None if date is "days" days into the future.
-class Date:
+class HumanDate:
     def __init__(self, numbers, days=7, today: date = date.today()):
         self.days = days
         self.today = today

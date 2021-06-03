@@ -2,7 +2,7 @@ import pytest
 from pytest_bdd import scenarios, given, when, then, parsers
 
 from .. import Task
-from .. import Date
+from .. import HumanDate
 
 from datetime import date
 
@@ -45,7 +45,7 @@ def thing_should_not_have_field_set(context, thing, field):
 
 @when(parsers.parse("I have the date {numbers}"))
 def I_have_date(context, numbers):
-    context["date"] = Date(numbers, 0, context["today"])
+    context["date"] = HumanDate(numbers, 0, context["today"])
 
 
 @given(parsers.parse("today"), target_fixture="context")

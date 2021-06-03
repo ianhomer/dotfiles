@@ -10,8 +10,9 @@ Feature: Task
         And the task subject is something
 
     Scenario: Task in file
-        Given I have the file my.md with task ABC something
+        Given I have the file my.md with task - [ ] ABC something
         Then the task file is my.md
+        And the task context is ABC
         And the task subject is something
 
     Scenario: Garage task
