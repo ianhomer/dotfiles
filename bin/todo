@@ -10,9 +10,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from subprocess import PIPE
-from dot import thingity
-from dot.date import Date
-from dot.contextFilter import ContextFilter
+from dot import ContextFilter, Date, thingity
 
 home = str(Path.home())
 
@@ -126,6 +124,7 @@ def search(args):
     days = args.days or (365 if args.all else 7)
     dos = []
     for line in lines:
+
         do = line.replace("- [ ] ", "")
         match = re.search(
             "^([^:]*):((?:[A-Z]{3}(?=\\s))?)\\s*((?:[0-9]+(?=\\s)\\s)?)\\s*(.*)$",

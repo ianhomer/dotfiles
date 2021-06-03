@@ -2,7 +2,7 @@
 # Parse a task line. See test cases for examples
 #
 import re
-from .date import Date
+from . import Date
 
 
 class Task:

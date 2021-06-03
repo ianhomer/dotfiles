@@ -1,8 +1,8 @@
 import pytest
 from pytest_bdd import scenarios, given, when, then, parsers
 
-from ..task import Task
-from ..date import Date
+from .. import Task
+from .. import Date
 
 from datetime import date
 

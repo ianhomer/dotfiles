@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from dot.contextFilter import ContextFilter
+from .. import ContextFilter
 
 
 class TestDoFilter(TestCase):
