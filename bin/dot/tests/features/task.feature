@@ -26,6 +26,10 @@ Feature: Task
         Then the task mission is True
         And the task subject is something in mission
 
+    Scenario: Markdown task
+        Given I have the task - [ ] something
+        Then the task subject is something
+
     Scenario: Task for now
         Given I have the task 0 something
         Then the task subject is something

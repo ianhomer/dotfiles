@@ -12,7 +12,11 @@ class Task:
 
     def _parse(self):
         match = re.search(
-            "^([^:]*):((?:[A-Z]{3}(?=\\s))?)\\s*((?:[0-9]+(?=\\s)\\s)?)\\s*(.*)$",
+            "^([^:]*):" +                        # File part
+            "(?:- \\[ \\])?" +                   # Optional markdown part
+            "((?:[A-Z]{3}(?=\\s))?)\\s*" +       # Context part
+            "((?:[0-9]+(?=\\s)\\s)?)\\s*" +      # Date part
+            "(.*)$",                             # Subject part
             self.line,
         )
         self.mission = False
