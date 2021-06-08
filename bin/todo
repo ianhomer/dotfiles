@@ -132,6 +132,8 @@ def search(args):
                 display = f"{rank}\t{PURPLE}{do.context}{END}\t"
                 if do.dateInclude:
                     display += f"{ORANGE}{do.date} {END}"
+                if do.timeInclude:
+                    display += f"{CYAN}{do.time} {END}"
                 display += f"{color}"
                 if do.end is not None:
                     display += f"to {ORANGE}{do.end}{END}{do.subject}"

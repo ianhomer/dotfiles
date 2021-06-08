@@ -2,13 +2,14 @@
 # Parse a task line. See test cases for examples
 #
 import re
-from . import HumanDate
+from . import HumanDate, HumanTime
 
 
 class Task:
     def __init__(self, line, days=7):
         self.line = line
         self.dateInclude = False
+        self.timeInclude = True
         self.end = None
         self.days = days
         self._parse()
@@ -16,9 +17,10 @@ class Task:
     def _parse(self):
         match = re.search(
             "^([^:]*):" +                        # File part
-            "(?:- \\[ \\] )?" +                   # Optional markdown part
+            "(?:- \\[ \\] )?" +                  # Optional markdown part
             "((?:[A-Z]{3}(?=\\s))?)\\s*" +       # Context part
             "((?:[0-9]+(?=\\s)\\s)?)\\s*" +      # Date part
+            "((?:[0-9]{4}(?=\\s)\\s)?)\\s*" + # Time part
             "(.*)$",                             # Subject part
             self.line,
         )
@@ -32,7 +34,11 @@ class Task:
             date = HumanDate(self.dateAsNumbers, self.days)
             self.date = date.display
             self.dateInclude = date.include
-            subject = match.group(4)
+            self.timeAsNumbers = match.group(4) or None
+            time = HumanTime(self.timeAsNumbers)
+            self.time = time.display
+            self.timeInclude = time.include
+            subject = match.group(5)
             first = subject[:1]
             if first == "~":
                 self.mission = True

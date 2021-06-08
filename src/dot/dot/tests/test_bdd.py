@@ -1,8 +1,7 @@
 import pytest
 from pytest_bdd import scenarios, given, when, then, parsers
 
-from .. import Task
-from .. import HumanDate
+from .. import HumanDate, HumanTime, Task
 
 from datetime import date
 
@@ -56,3 +55,8 @@ def today():
 @given(parsers.parse("today is {numbers}"), target_fixture="context")
 def todayMock(numbers):
     return dict(today=date(int(numbers[0:4]), int(numbers[4:6]), int(numbers[7:8])))
+
+
+@when(parsers.parse("I have the time {numbers}"))
+def I_have_time(context, numbers):
+    context["time"] = HumanTime(numbers, 0)

@@ -46,3 +46,9 @@ Feature: Task
         Then the task subject is something
         And the task date is 01 JAN 2050
         And the task end is 20 JAN 2050
+
+    Scenario: Task with date and time
+        Given I have the task 20500101 1415 something
+        Then the task subject is something
+        And the task date is 01 JAN 2050
+        And the task time is 14:15
