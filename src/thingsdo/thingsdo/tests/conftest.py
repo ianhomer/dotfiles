@@ -1,4 +1,4 @@
-from pytest_bdd import scenarios, given, when, then, parsers
+from pytest_bdd import then, parsers
 
 
 @then(parsers.parse("the {thing} {field} is {value}"))
