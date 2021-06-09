@@ -4,7 +4,6 @@ import subprocess
 import re
 import time
 from pathlib import Path
-from datetime import date
 from . import runner
 
 config = configparser.ConfigParser()

@@ -1,4 +1,4 @@
-# Dot file Python support library
+# Notes and todo library
 
 ## tl;dr
 

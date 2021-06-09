@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from subprocess import PIPE
-from dot import ContextFilter, Task, thingity
+from thingsdo import ContextFilter, Task, thingity
 
 home = str(Path.home())
 

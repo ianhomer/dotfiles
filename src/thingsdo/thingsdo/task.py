@@ -20,7 +20,7 @@ class Task:
             "(?:- \\[ \\] )?" +                  # Optional markdown part
             "((?:[A-Z]{3}(?=\\s))?)\\s*" +       # Context part
             "((?:[0-9]+(?=\\s)\\s)?)\\s*" +      # Date part
-            "((?:[0-9]{4}(?=\\s)\\s)?)\\s*" + # Time part
+            "((?:[0-9]{4}(?=\\s)\\s)?)\\s*" +    # Time part
             "(.*)$",                             # Subject part
             self.line,
         )
