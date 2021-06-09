@@ -28,3 +28,7 @@ def filter_should_have_children(context, child, value):
 @then(parsers.parse("the filter for {child} has family {value}"))
 def filter_should_have_family(context, child, value):
     assert context["filter"].family(child) == value.split(",")
+
+@then(parsers.parse("the filter for {child} has pattern {value}"))
+def filter_should_have_pattern(context, child, value):
+    assert context["filter"].pattern(child) == value

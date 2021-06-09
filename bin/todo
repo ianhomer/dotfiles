@@ -96,17 +96,19 @@ def context():
 
 def search(args):
     excludes = []
+    contextFilter = ContextFilter(MY_DO)
     if args.all:
         if args.do:
             pattern = f"\\- \\[ \\] {args.do[0]}"
         else:
             pattern = "\\- \\[ \\]"
     elif args.do:
-        pattern = f"\\- \\[ \\] {args.do[0]} [^\\.\\-]"
+        # pattern = f"\\- \\[ \\] (GEE|DOT) [^\\.\\-]"
+        pattern = f"\\- \\[ \\] {contextFilter.pattern(args.do[0])} [^\\.\\-]"
     else:
         # By default ignore todos
         pattern = "\\- \\[ \\](?! ([A-Z]{3} )?[\\.\\-])"
-        excludes = ContextFilter(MY_DO).excludes()
+        excludes = contextFilter.excludes()
 
     ag = [
         "ag",

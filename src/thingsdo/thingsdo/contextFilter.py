@@ -36,3 +36,6 @@ class ContextFilter:
 
     def family(self, parent):
         return [parent] + self.children(parent)
+
+    def pattern(self, pattern):
+        return "(" + "|".join(self.family(pattern)) + ")"
