@@ -8,3 +8,4 @@ Feature: Context Filter
     Scenario: Children
         When I have the filter :A>B,C
         Then the filter for A has children B,C
+        And the filter for A has family A,B,C
