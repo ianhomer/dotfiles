@@ -151,7 +151,7 @@ def search(args):
         )
     elif args.name == "bookmarks":
         search = Rg(match)
-        search.matchPrefix = "^\\[[0-9]+\\]:.*"
+        search.matchPrefix = "^\\[[0-9A-Za-z\s]+\\]:.*"
     elif args.name == "headings":
         search = Rg(match)
         search.matchPrefix = "^#+.*"
