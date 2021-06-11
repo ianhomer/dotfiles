@@ -50,7 +50,7 @@ class HumanDate:
             else:
                 self.display = thisDate.strftime("%d %b %Y").upper()
         else:
-            self.display = self.numbers
+            self.display = self.input
 
     def _parseRelativeDay(self, day):
         if day > 1:

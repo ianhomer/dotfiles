@@ -12,6 +12,11 @@ Feature: Human Date
         When I have the date 20500101
         Then the date display is 01 JAN 2050
 
+    Scenario: Pass through of invalid date
+        Given today
+        When I have the date 12345
+        Then the date display is 12345
+
     Scenario: Next Month
         Given today is 20210601
         When I have the date 20210701
