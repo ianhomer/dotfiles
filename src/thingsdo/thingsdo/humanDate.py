@@ -68,6 +68,7 @@ class HumanDate:
             self.display = "***"
             self.daysAhead = 0
 
+    # Parse a day of the week like MON or TUE to a date based on what today is
     def _parseDay(self, day):
         for i in range(0, 7):
             candidate = self.today + timedelta(days=i)
@@ -75,7 +76,7 @@ class HumanDate:
                 self.date = candidate
                 self.display = candidate.strftime("%a").upper()
                 return candidate
-        raise(Exception(f"Cannot find day {day}"))
+        raise (Exception(f"Cannot find day {day}"))
 
     def asNumbers(self):
         return self.date.strftime("%Y%m%d")
