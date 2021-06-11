@@ -47,6 +47,12 @@ Feature: Task
         And the task date is 01 JAN 2050
         And the task end is 20 JAN 2050
 
+    # Scenario: Task with relative date
+    #     Given today is 20210610
+    #     And I have the task FRI something
+    #     Then the task subject is something
+    #     And the task date is 11 JUN 2021
+
     Scenario: Task with date and time
         Given I have the task 20500101 1415 something
         Then the task subject is something

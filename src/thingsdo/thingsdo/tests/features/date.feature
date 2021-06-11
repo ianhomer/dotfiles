@@ -23,3 +23,8 @@ Feature: Human Date
         When I have the date 2
         Then the date display is WED
         And the date include is True
+
+    Scenario: Day of week
+        Given today is 20210610
+        When I have the date FRI
+        Then the date as numbers are 20210611

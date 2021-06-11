@@ -16,12 +16,18 @@ class Task:
 
     def _parse(self):
         match = re.search(
-            "^([^:]*):" +                        # File part
-            "(?:- \\[ \\] )?" +                  # Optional markdown part
-            "((?:[A-Z]{3}(?=\\s))?)\\s*" +       # Context part
-            "((?:[0-9]+(?=\\s)\\s)?)\\s*" +      # Date part
-            "((?:[0-9]{4}(?=\\s)\\s)?)\\s*" +    # Time part
-            "(.*)$",                             # Subject part
+            # File part
+            "^([^:]*):" +
+            # Optional markdown part
+            "(?:- \\[ \\] )?" +
+            # Context part
+            "((?:[A-Z]{3}(?=\\s))?)\\s*" +
+            # Date part
+            "((?:(?:[0-9]+|[A-Z]{3})(?=\\s)\\s)?)\\s*" +
+            # Time part
+            "((?:[0-9]{4}(?=\\s)\\s)?)\\s*" +
+            # Subject part
+            "(.*)$",
             self.line,
         )
         self.mission = False
@@ -30,8 +36,8 @@ class Task:
         if match:
             self.file = match.group(1)
             self.context = match.group(2)
-            self.dateAsNumbers = match.group(3) or None
-            date = HumanDate(self.dateAsNumbers, self.days)
+            self.dateIn = match.group(3) or None
+            date = HumanDate(self.dateIn, self.days)
             self.date = date.display
             self.dateInclude = date.include
             self.timeAsNumbers = match.group(4) or None
