@@ -48,11 +48,12 @@ Feature: Task
         And the task date is 01 JAN 2050
         And the task end is 20 JAN 2050
 
-    # Scenario: Task with relative date
-    #     Given today is 20210610
-    #     And I have the task FRI something
-    #     Then the task subject is something
-    #     And the task date is 11 JUN 2021
+    Scenario: Task with relative date
+         Given today is 20210609
+         And I have the task ABC FRI something
+         Then the task subject is something
+         And the task context is ABC
+         And the task date is FRI
 
     Scenario: Task with date and time
         Given I have the task 20500101 1415 something
@@ -60,3 +61,15 @@ Feature: Task
         And the task date is 01 JAN 2050
         And the task time is 14:15
         And the task rank is 200020500101
+
+    Scenario: Task with no context
+        Given I have the task something
+        Then the task subject is something
+        And the task context is not set
+
+    Scenario: Task with no context and default context
+        Given default context is XYZ
+        And I have the task something
+        Then the task subject is something
+        And the task context is XYZ
+

@@ -10,13 +10,18 @@ def context():
     return dict()
 
 
-@given(parsers.parse("I have the task {task}"), target_fixture="context")
-def tasks(task):
-    return dict(task=Task(":" + task))
+@given(parsers.parse("default context is {defaultContext}"))
+def defaultContext(context, defaultContext):
+    context["defaultContext"] = defaultContext
 
 
-@given(
-    parsers.parse("I have the file {file} with task {task}"), target_fixture="context"
-)
-def file_with_task(file, task):
-    return dict(task=Task(file + ":" + task))
+@given(parsers.parse("I have the task {task}"))
+def tasks(context, task):
+    context["task"] = Task(
+        ":" + task, defaultContext=context.get("defaultContext")
+    )
+
+
+@given(parsers.parse("I have the file {file} with task {task}"))
+def file_with_task(context, file, task):
+    context["task"] = Task(file + ":" + task)

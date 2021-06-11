@@ -6,12 +6,13 @@ from . import HumanDate, HumanTime
 
 
 class Task:
-    def __init__(self, line, days=7):
+    def __init__(self, line, days=7, defaultContext=None):
         self.line = line
         self.dateInclude = False
         self.timeInclude = True
         self.end = None
         self.days = days
+        self.defaultContext = defaultContext
         self._parse()
 
     def _parse(self):
@@ -35,7 +36,7 @@ class Task:
         self.toDate = None
         if match:
             self.file = match.group(1)
-            self.context = match.group(2)
+            self.context = match.group(2) or self.defaultContext
             self.dateIn = match.group(3) or None
             if self.dateIn is None:
                 self.date = None
