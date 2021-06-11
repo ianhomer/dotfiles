@@ -8,6 +8,7 @@ Feature: Task
         And the task date is not set
         And the task mission is False
         And the task subject is something
+        And the task rank is 3000
 
     Scenario: Task in file
         Given I have the file my.md with task - [ ] ABC something

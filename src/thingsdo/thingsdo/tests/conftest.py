@@ -3,15 +3,9 @@ from pytest_bdd import given, then, parsers
 from datetime import date
 
 
-@then(parsers.parse("the {thing} {field} is {value}"))
-def thing_should_have_field_value(context, thing, field, value):
-    actual = getattr(context[thing], field)
-    if value == "False":
-        expected = False
-    elif value == "True":
-        expected = True
-    else:
-        expected = value
+@then(parsers.parse("the {thing} {field} is {expected}"))
+def thing_should_have_field_value(context, thing, field, expected):
+    actual = str(getattr(context[thing], field))
     assert actual == expected
 
 

@@ -132,12 +132,12 @@ def search(args):
             if do.context not in excludes:
                 display = f"{do.rank}\t{PURPLE}{do.context}{END}\t"
                 if do.dateInclude:
-                    display += f"{ORANGE}{do.date} {END}"
+                    display += f"{ORANGE}{do.date.display} {END}"
                 if do.timeInclude:
                     display += f"{CYAN}{do.time} {END}"
                 display += f"{color}"
                 if do.end is not None:
-                    display += f"to {ORANGE}{do.end}{END}{do.subject}"
+                    display += f"to {ORANGE}{do.end.display}{END}{do.subject}"
                 else:
                     display += f"{do.subject}"
 

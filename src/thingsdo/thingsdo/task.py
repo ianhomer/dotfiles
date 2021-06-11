@@ -37,9 +37,10 @@ class Task:
             self.file = match.group(1)
             self.context = match.group(2)
             self.dateIn = match.group(3) or None
-            date = HumanDate(self.dateIn, self.days)
-            self.date = date.display
-            self.dateInclude = date.include
+            if self.dateIn is None:
+                self.date = None
+            else:
+                self.date = HumanDate(self.dateIn, self.days)
             self.timeAsNumbers = match.group(4) or None
             time = HumanTime(self.timeAsNumbers)
             self.time = time.display
@@ -57,7 +58,7 @@ class Task:
             # Extra toDate part
             match = re.search("to ([0-9]{8}) (.*)", subject)
             if match:
-                self.end = HumanDate(match.group(1), self.days).display
+                self.end = HumanDate(match.group(1), self.days)
                 self.subject = match.group(2)
         else:
             self.file = None
@@ -67,4 +68,8 @@ class Task:
 
     @property
     def rank(self):
-        return "2000" + (self.dateIn.strip() or "0") if self.dateInclude else "3000"
+        return (
+            "2000" + (self.dateIn.strip() or "0")
+            if self.date is not None and self.date.include
+            else "3000"
+        )

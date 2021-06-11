@@ -62,3 +62,6 @@ class HumanDate:
 
     def asNumbers(self):
         return self.date.strftime("%Y%m%d")
+
+    def __str__(self):
+        return self.display
