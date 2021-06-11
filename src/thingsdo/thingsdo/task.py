@@ -64,3 +64,7 @@ class Task:
             self.context = None
             self.date = None
             self.subject = None
+
+    @property
+    def rank(self):
+        return "2000" + (self.dateIn.strip() or "0") if self.dateInclude else "3000"

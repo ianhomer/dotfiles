@@ -130,8 +130,7 @@ def search(args):
         if do.subject:
             color = GREEN if do.mission else GREY if do.garage else ""
             if do.context not in excludes:
-                rank = "2000" + (do.dateAsNumbers or "0") if do.dateInclude else "3000"
-                display = f"{rank}\t{PURPLE}{do.context}{END}\t"
+                display = f"{do.rank}\t{PURPLE}{do.context}{END}\t"
                 if do.dateInclude:
                     display += f"{ORANGE}{do.date} {END}"
                 if do.timeInclude:

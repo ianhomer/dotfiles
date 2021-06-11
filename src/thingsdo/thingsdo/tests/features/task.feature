@@ -58,3 +58,4 @@ Feature: Task
         Then the task subject is something
         And the task date is 01 JAN 2050
         And the task time is 14:15
+        And the task rank is 200020500101
