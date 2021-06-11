@@ -50,8 +50,7 @@ class HumanDate:
             self.display = self.date.strftime("%d %b %Y").upper()
 
     def _parseRelativeDay(self, day):
-        return self.today + datetime.timedelta(days=day -1)
-
+        return self.today + datetime.timedelta(days=day-1)
 
     # Parse a day of the week like MON or TUE to a date based on what today is
     def _parseDay(self, day):
