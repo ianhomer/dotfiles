@@ -23,58 +23,41 @@ class HumanDate:
 
     def _parse(self):
         if match := re.search("^([0-9])$", self.input):
-            self._parseRelativeDay(int(match.group(1)))
-            self.include = True
+            self.date = self._parseRelativeDay(int(match.group(1)))
         elif match := re.search("^([A-Z]{3})$", self.input):
-            self._parseDay(match.group(1))
-            self.include = True
+            self.date = self._parseDay(match.group(1))
         elif match := re.search("^([0-9]{4})([0-9]{2}) $", self.input):
-            thisDate = date(int(match.group(1)), int(match.group(2)), 1)
-            self.daysAhead = (thisDate - self.today).days
-            self.include = self.daysAhead <= self.days
-            self.display = thisDate.strftime("%b").upper()
+            self.date = date(int(match.group(1)), int(match.group(2)), 1)
         elif match := re.search("([0-9]{4})([0-9]{2})([0-9]{2})", self.input):
-            thisDate = date(
+            self.date = date(
                 int(match.group(1)),
                 int(match.group(2)),
                 int(match.group(3) or 1),
             )
-            self.daysAhead = (thisDate - self.today).days
-            self.include = True
-            if self.daysAhead < 0:
-                self.display = "***"
-            elif self.daysAhead <= 7:
-                self.display = thisDate.strftime("%a").upper()
-            elif self.daysAhead < 300:
-                self.display = thisDate.strftime("%d %b").upper()
-            else:
-                self.display = thisDate.strftime("%d %b %Y").upper()
         else:
-            self.display = self.input
+            self.date = self.today
+
+        self.daysAhead = (self.date - self.today).days
+        self.include = self.daysAhead <= self.days
+        self.include = True
+        if self.daysAhead < 0:
+            self.display = "***"
+        elif self.daysAhead <= 7:
+            self.display = self.date.strftime("%a").upper()
+        elif self.daysAhead < 300:
+            self.display = self.date.strftime("%d %b").upper()
+        else:
+            self.display = self.date.strftime("%d %b %Y").upper()
 
     def _parseRelativeDay(self, day):
-        if day > 1:
-            # 2 is mañana
-            self.display = (
-                (self.today + datetime.timedelta(days=1)).strftime("%a").upper()
-            )
-            self.daysAhead = 2
-        elif day > 0:
-            # 1 is today
-            self.display = self.today.strftime("%a ").upper()
-            self.daysAhead = 1
-        else:
-            # 0 is now
-            self.display = "***"
-            self.daysAhead = 0
+        return self.today + datetime.timedelta(days=day -1)
+
 
     # Parse a day of the week like MON or TUE to a date based on what today is
     def _parseDay(self, day):
         for i in range(0, 7):
             candidate = self.today + timedelta(days=i)
             if (candidate).strftime("%a").upper() == day:
-                self.date = candidate
-                self.display = candidate.strftime("%a").upper()
                 return candidate
         raise (Exception(f"Cannot find day {day}"))
 

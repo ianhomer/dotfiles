@@ -13,9 +13,9 @@ Feature: Human Date
         Then the date display is 01 JAN 2050
 
     Scenario: Pass through of invalid date
-        Given today
+        Given today is 20210610
         When I have the date 12345
-        Then the date display is 12345
+        Then the date display is THU
 
     Scenario: Next Month
         Given today is 20210601
