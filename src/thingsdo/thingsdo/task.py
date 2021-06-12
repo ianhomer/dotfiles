@@ -3,16 +3,18 @@
 #
 import re
 from . import HumanDate, HumanTime
+from datetime import date
 
 
 class Task:
-    def __init__(self, line, days=7, defaultContext=None):
+    def __init__(self, line, days=7, defaultContext=None, today: date = date.today()):
         self.line = line
         self.dateInclude = False
         self.timeInclude = True
         self.end = None
         self.days = days
         self.defaultContext = defaultContext
+        self.today = today
         self._parse()
 
     def _parse(self):
@@ -41,11 +43,14 @@ class Task:
             if self.dateIn is None:
                 self.date = None
             else:
-                self.date = HumanDate(self.dateIn, self.days)
+                self.date = HumanDate(self.dateIn, self.days, today=self.today)
             self.timeAsNumbers = match.group(4) or None
-            time = HumanTime(self.timeAsNumbers)
-            self.time = time.display
-            self.timeInclude = time.include
+            if self.timeAsNumbers is None:
+                self.time = None
+                self.timeInclude = False
+            else:
+                self.time = HumanTime(self.timeAsNumbers)
+                self.timeInclude = self.time.include
             subject = match.group(5)
             first = subject[:1]
             if first == "~":
@@ -59,13 +64,26 @@ class Task:
             # Extra toDate part
             match = re.search("to ([0-9]{8}) (.*)", subject)
             if match:
-                self.end = HumanDate(match.group(1), self.days)
+                self.end = HumanDate(match.group(1), self.days, today=self.today)
                 self.subject = match.group(2)
         else:
             self.file = None
             self.context = None
             self.date = None
             self.subject = None
+
+    def __str__(self):
+        parts = []
+        if self.context:
+            parts += [self.context]
+        if self.date:
+            parts += [self.date.code]
+        if self.time and self.timeInclude:
+            parts += [self.time.code]
+        if self.end:
+            parts += ["to", self.end.code]
+        parts += [self.subject]
+        return " ".join(parts)
 
     @property
     def rank(self):

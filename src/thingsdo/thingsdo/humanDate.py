@@ -60,7 +60,8 @@ class HumanDate:
                 return candidate
         raise (Exception(f"Cannot find day {day}"))
 
-    def asNumbers(self):
+    @property
+    def code(self):
         return self.date.strftime("%Y%m%d")
 
     def __str__(self):

@@ -99,7 +99,7 @@ def search(args):
     contextFilter = ContextFilter(MY_DO)
     if args.all:
         if args.do:
-            pattern = f"\\- \\[ \\] {args.do[0]}"
+            pattern = f"\\- \\[ \\] {contextFilter.pattern(args.do[0])}"
         else:
             pattern = "\\- \\[ \\]"
     elif args.do:
@@ -195,10 +195,8 @@ def getTodayLog(now=datetime.now()):
 
 # Add a do
 def add(do):
-    task = Task(f":{do}", defaultContext="MEM")
     # MEM (Memento https://www.imdb.com/title/tt0209144/)
-    doContext = task.context or "MEM"
-    subject = match.group(2)
+    task = Task(f":{do}", defaultContext="MEM")
 
     now = datetime.now()
     todayLog = getTodayLog(now)
@@ -217,7 +215,7 @@ def add(do):
             # file
             lines.append("\n")
 
-        lines.insert(2, f"- [ ] {doContext} {subject}\n")
+        lines.insert(2, f"- [ ] {task}\n")
         file.seek(0)
         file.writelines(lines)
 

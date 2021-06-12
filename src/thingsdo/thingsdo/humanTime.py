@@ -24,3 +24,11 @@ class HumanTime:
             self.display = f"{match.group(1)}:{match.group(2)}"
         else:
             self.display = self.numbers
+
+    @property
+    def code(self):
+        return self.numbers
+
+    def __str__(self):
+        return self.display
+

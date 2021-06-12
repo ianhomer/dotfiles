@@ -17,4 +17,4 @@ def I_have_date(context, numbers):
 
 @then(parsers.parse("the date as numbers are {value}"))
 def filter_should_have_pattern(context, value):
-    assert context["date"].asNumbers() == value
+    assert context["date"].code == value

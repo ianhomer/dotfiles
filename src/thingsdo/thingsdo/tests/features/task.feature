@@ -44,7 +44,8 @@ Feature: Task
 
     Scenario: Task with to date
         Given I have the task 20500101 to 20500120 something
-        Then the task subject is something
+        Then the task is as given
+        And the task subject is something
         And the task date is 01 JAN 2050
         And the task end is 20 JAN 2050
 
@@ -54,6 +55,7 @@ Feature: Task
         Then the task subject is something
         And the task context is ABC
         And the task date is FRI
+        And the task is ABC 20210611 something
 
     Scenario: Task with date and time
         Given I have the task 20500101 1415 something
