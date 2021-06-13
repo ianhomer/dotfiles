@@ -122,17 +122,11 @@ def search(args):
     result = subprocess.run(ag, stdout=PIPE, text=True)
 
     lines = result.stdout.splitlines()
-    encoding = sys.getdefaultencoding()
     days = args.days or (365 if args.all else 7)
     dos = []
     renderer = TaskRenderer(theme="do")
     for line in lines:
-        do = Task(line, days=days)
-        if do.subject:
-            dos.append(renderer.render(do) + "\n")
-        else:
-            # Invalid do
-            print(f"BADDO : {do}")
+        dos.append(renderer.render(Task(line, days=days)) + "\n")
     dos.sort()
     fzf = subprocess.Popen(
         [
@@ -156,6 +150,7 @@ def search(args):
         stderr=None,
     )
     fzfIn = fzf.stdin
+    encoding = sys.getdefaultencoding()
     fzfIn.write(f"\t(today)\t{getTodayLog()}\n".encode(encoding))
     for do in dos:
         fzfIn.write(do.encode(encoding))
