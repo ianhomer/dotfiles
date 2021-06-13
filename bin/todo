@@ -126,7 +126,9 @@ def search(args):
     dos = []
     renderer = TaskRenderer(theme="do")
     for line in lines:
-        dos.append(renderer.render(Task(line, days=days)) + "\n")
+        task = Task(line, days=days)
+        if task.context not in excludes:
+            dos.append(renderer.render(task) + "\n")
     dos.sort()
     fzf = subprocess.Popen(
         [
