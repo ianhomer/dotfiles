@@ -101,9 +101,9 @@ class Task:
         if self.timeInclude:
             parts += [f"{self.palette.color('time')}{self.time.display} {clear}"]
         if self.mission:
-            parts += [self.palette("mission")]
+            parts += [self.palette.color("mission")]
         elif self.garage:
-            parts += [self.palette("garage")]
+            parts += [self.palette.color("garage")]
         if self.end:
             parts += [f"to {self.palette.color('end')}{self.end.display}{clear}"]
         parts += [self.subject]

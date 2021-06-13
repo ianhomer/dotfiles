@@ -126,22 +126,9 @@ def search(args):
     days = args.days or (365 if args.all else 7)
     dos = []
     for line in lines:
-        do = Task(line, days)
+        do = Task(line, days, theme="do")
         if do.subject:
-            color = GREEN if do.mission else GREY if do.garage else ""
-            if do.context not in excludes:
-                display = f"{do.rank}\t{PURPLE}{do.context}{END}\t"
-                if do.dateInclude:
-                    display += f"{ORANGE}{do.date.display} {END}"
-                if do.timeInclude:
-                    display += f"{CYAN}{do.time} {END}"
-                display += f"{color}"
-                if do.end is not None:
-                    display += f"to {ORANGE}{do.end.display}{END}{do.subject}"
-                else:
-                    display += f"{do.subject}"
-
-                dos.append(display + f"{END}\t{do.file}\n")
+            dos.append(do.row + "\n")
         else:
             # Invalid do
             print(f"BADDO : {do}")
