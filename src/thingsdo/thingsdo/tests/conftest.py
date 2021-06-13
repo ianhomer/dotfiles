@@ -1,18 +1,28 @@
-from pytest_bdd import then, parsers
+from pytest_bdd import given, then, parsers
+
+from datetime import date
 
 
-@then(parsers.parse("the {thing} {field} is {value}"))
-def thing_should_have_field_value(context, thing, field, value):
-    actual = getattr(context[thing], field)
-    if value == "False":
-        expected = False
-    elif value == "True":
-        expected = True
-    else:
-        expected = value
-    assert actual == expected
+@then(parsers.parse("the {thing:l} {field:l} is {expected}"))
+def thing_should_have_field_value(context, thing, field, expected):
+    assert str(getattr(context[thing], field)) == expected
 
 
-@then(parsers.parse("the {thing} {field} is not set"))
+@then(parsers.parse("the {thing:l} is {expected}"))
+def thing_should_be(context, thing, expected):
+    assert str(context[thing]) == expected
+
+
+@then(parsers.parse("the {thing:l} {field:l} is not set"))
 def thing_should_not_have_field_set(context, thing, field):
     assert getattr(context[thing], field) is None
+
+
+@given(parsers.parse("today"))
+def today(context):
+    context["today"] = date.today()
+
+
+@given(parsers.parse("today is {numbers}"))
+def todayMock(context, numbers):
+    context["today"] = date(int(numbers[0:4]), int(numbers[4:6]), int(numbers[6:8]))

@@ -130,15 +130,14 @@ def search(args):
         if do.subject:
             color = GREEN if do.mission else GREY if do.garage else ""
             if do.context not in excludes:
-                rank = "2000" + (do.dateAsNumbers or "0") if do.dateInclude else "3000"
-                display = f"{rank}\t{PURPLE}{do.context}{END}\t"
+                display = f"{do.rank}\t{PURPLE}{do.context}{END}\t"
                 if do.dateInclude:
-                    display += f"{ORANGE}{do.date} {END}"
+                    display += f"{ORANGE}{do.date.display} {END}"
                 if do.timeInclude:
                     display += f"{CYAN}{do.time} {END}"
                 display += f"{color}"
                 if do.end is not None:
-                    display += f"to {ORANGE}{do.end}{END}{do.subject}"
+                    display += f"to {ORANGE}{do.end.display}{END}{do.subject}"
                 else:
                     display += f"{do.subject}"
 
@@ -196,10 +195,8 @@ def getTodayLog(now=datetime.now()):
 
 # Add a do
 def add(do):
-    match = re.search("^((?:[A-Za-z]{0,3}(?=\\s))?)\\s*(.*)$", do)
     # MEM (Memento https://www.imdb.com/title/tt0209144/)
-    doContext = match.group(1).upper() or "MEM"
-    subject = match.group(2)
+    task = Task(f":{do}", defaultContext="MEM")
 
     now = datetime.now()
     todayLog = getTodayLog(now)
@@ -218,7 +215,7 @@ def add(do):
             # file
             lines.append("\n")
 
-        lines.insert(2, f"- [ ] {doContext} {subject}\n")
+        lines.insert(2, f"- [ ] {task}\n")
         file.seek(0)
         file.writelines(lines)
 

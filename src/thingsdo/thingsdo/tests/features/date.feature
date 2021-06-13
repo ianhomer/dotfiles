@@ -12,6 +12,11 @@ Feature: Human Date
         When I have the date 20500101
         Then the date display is 01 JAN 2050
 
+    Scenario: Pass through of invalid date
+        Given today is 20210610
+        When I have the date 12345
+        Then the date display is THU
+
     Scenario: Next Month
         Given today is 20210601
         When I have the date 20210701
@@ -23,3 +28,8 @@ Feature: Human Date
         When I have the date 2
         Then the date display is WED
         And the date include is True
+
+    Scenario: Day of week
+        Given today is 20210610
+        When I have the date FRI
+        Then the date as numbers are 20210611
