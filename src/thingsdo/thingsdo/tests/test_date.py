@@ -12,9 +12,8 @@ def context():
 
 @when(parsers.parse("I have the date {numbers}"))
 def I_have_date(context, numbers):
-    context["date"] = HumanDate(numbers, 0, context["today"])
+    kwargs = {}
+    if "today" in context:
+        kwargs["today"] = context["today"]
 
-
-@then(parsers.parse("the date as numbers are {value}"))
-def filter_should_have_pattern(context, value):
-    assert context["date"].code == value
+    context["date"] = HumanDate(numbers, 0, **kwargs)

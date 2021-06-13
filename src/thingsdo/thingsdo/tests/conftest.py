@@ -18,11 +18,6 @@ def thing_should_not_have_field_set(context, thing, field):
     assert getattr(context[thing], field) is None
 
 
-@given(parsers.parse("today"))
-def today(context):
-    context["today"] = date.today()
-
-
 @given(parsers.parse("today is {numbers}"))
 def todayMock(context, numbers):
     context["today"] = date(int(numbers[0:4]), int(numbers[4:6]), int(numbers[6:8]))
