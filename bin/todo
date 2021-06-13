@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from subprocess import PIPE
-from thingsdo import ContextFilter, Task, thingity
+from thingsdo import ContextFilter, Task, thingity, TaskRenderer
 
 home = str(Path.home())
 
@@ -125,10 +125,11 @@ def search(args):
     encoding = sys.getdefaultencoding()
     days = args.days or (365 if args.all else 7)
     dos = []
+    renderer = TaskRenderer(theme="do")
     for line in lines:
-        do = Task(line, days, theme="do")
+        do = Task(line, days=days)
         if do.subject:
-            dos.append(do.row + "\n")
+            dos.append(renderer.render(do) + "\n")
         else:
             # Invalid do
             print(f"BADDO : {do}")
