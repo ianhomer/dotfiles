@@ -3,7 +3,7 @@ if knobs#At(1)
   nnoremap <silent> <leader><space> :Buffers<CR>
   command! -nargs=0 SearchFiles :call my#SearchFiles()
   if !knobs#("telescope")
-    nnoremap <silent> <leader>f :SearchFiles<CR>
+      e
   endif
   nnoremap <silent> <leader>F :Files!<CR>
   nnoremap <silent> <leader>h :History<CR>
