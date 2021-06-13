@@ -76,7 +76,7 @@ Feature: Task
         And the task context is XYZ
 
     Scenario: Task with date in past
-        Given I have the task MEM 20210617 1930 Something
-        Then the task display is Something
-
+        Given I have the file my.md with task MEM 20210617 1930 Something
+        Then the task display is THU 19:30 Something
+        Then the task row is 200020210617 MEM THU 19:30 Something my.md
 

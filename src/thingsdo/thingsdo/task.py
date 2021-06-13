@@ -2,12 +2,13 @@
 # Parse a task line. See test cases for examples
 #
 import re
-from . import HumanDate, HumanTime
+from . import HumanDate, HumanTime, Palette
 from datetime import date
 
 
 class Task:
-    def __init__(self, line, days=7, defaultContext=None, today: date = date.today()):
+    def __init__(self, line, days=7, defaultContext=None, today: date =
+            date.today(), theme=None):
         self.line = line
         self.dateInclude = False
         self.timeInclude = True
@@ -15,6 +16,7 @@ class Task:
         self.days = days
         self.defaultContext = defaultContext
         self.today = today
+        self.palette = Palette(theme=theme)
         self._parse()
 
     def _parse(self):
@@ -92,7 +94,35 @@ class Task:
 
     @property
     def display(self):
-        return self.subject
+        clear = self.palette.color("clear")
+        parts = []
+        if self.dateInclude:
+            parts += [f"{self.palette.color('date')}{self.date.display} {clear}"]
+        if self.timeInclude:
+            parts += [f"{self.palette.color('time')}{self.time.display} {clear}"]
+        if self.mission:
+            parts += [self.palette("mission")]
+        elif self.garage:
+            parts += [self.palette("garage")]
+        if self.end:
+            parts += [f"to {self.palette.color('end')}{self.end.display}{clear}"]
+        parts += [self.subject]
+
+        return "".join(parts)
+
+    @property
+    def row(self):
+        clear = self.palette.color("clear")
+        separator = self.palette.color("separator")
+        parts = []
+        parts += [
+            f"{self.rank}{separator}",
+            f"{self.palette.color('context')}{self.context}{clear}{separator}",
+            self.display,
+            f"{separator}{self.file}"
+        ]
+        return "".join(parts)
+
 
     @property
     def rank(self):

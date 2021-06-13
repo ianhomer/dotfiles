@@ -11,21 +11,16 @@ class Palette:
         self.theme = theme
         if self.theme:
             self.colors = {
-                    "context": PURPLE,
-                    "clear": CLEAR,
-                    "end": ORANGE,
-                    "garage": GREY,
-                    "date": ORANGE,
-                    "time": CYAN
-                }
+                "separator": "\t",
+                "context": PURPLE,
+                "clear": CLEAR,
+                "end": ORANGE,
+                "garage": GREY,
+                "date": ORANGE,
+                "time": CYAN,
+            }
+        else:
+            self.colors = {"separator": " "}
 
     def color(self, name):
-        if self.theme:
-            return self.colors.get(name, "")
-        else:
-            return ""
-
-
-
-
-
+        return self.colors.get(name, "")
