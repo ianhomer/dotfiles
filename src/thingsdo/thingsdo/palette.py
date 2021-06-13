@@ -3,7 +3,7 @@ ORANGE = "\033[33m"
 CYAN = "\033[36m"
 GREEN = "\033[32m"
 GREY = "\033[90m"
-END = "\033[0m"
+CLEAR = "\033[0m"
 
 
 class Palette:
@@ -11,7 +11,12 @@ class Palette:
         self.theme = theme
         if self.theme:
             self.colors = {
-                    "x": PURPLE
+                    "context": PURPLE,
+                    "clear": CLEAR,
+                    "end": ORANGE,
+                    "garage": GREY,
+                    "date": ORANGE,
+                    "time": CYAN
                 }
 
     def color(self, name):
