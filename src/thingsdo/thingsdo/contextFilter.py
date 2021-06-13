@@ -15,9 +15,9 @@
 # defaults for the "do" command.
 #
 class ContextFilter:
-    def __init__(self, value):
+    def __init__(self, value: str):
         self.value = value
-        self.parts = value.split(":")
+        self.parts = self.value.split(":")
         self.localPart = self.parts[0]
 
     def excludes(self):
@@ -27,15 +27,15 @@ class ContextFilter:
                 excludes.append(category[1:])
         return excludes
 
-    def children(self, parent):
-        matcher = parent + ">"
+    def children(self, parent: str):
+        matcher = parent.upper() + ">"
         for part in self.parts:
             if part.startswith(matcher):
                 return part[len(matcher) :].split(",")
         return []
 
-    def family(self, parent):
-        return [parent] + self.children(parent)
+    def family(self, parent: str):
+        return [parent.upper()] + self.children(parent)
 
-    def pattern(self, pattern):
+    def pattern(self, pattern: str):
         return "(" + "|".join(self.family(pattern)) + ")"
