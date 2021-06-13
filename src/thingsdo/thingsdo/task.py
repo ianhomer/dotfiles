@@ -44,6 +44,7 @@ class Task:
                 self.date = None
             else:
                 self.date = HumanDate(self.dateIn, self.days, today=self.today)
+                self.dateInclude = True
             self.timeAsNumbers = match.group(4) or None
             if self.timeAsNumbers is None:
                 self.time = None
@@ -73,6 +74,10 @@ class Task:
             self.subject = None
 
     def __str__(self):
+        return self.code
+
+    @property
+    def code(self):
         parts = []
         if self.context:
             parts += [self.context]
@@ -84,6 +89,10 @@ class Task:
             parts += ["to", self.end.code]
         parts += [self.subject]
         return " ".join(parts)
+
+    @property
+    def display(self):
+        return self.subject
 
     @property
     def rank(self):

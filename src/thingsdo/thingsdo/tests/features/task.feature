@@ -75,3 +75,8 @@ Feature: Task
         Then the task subject is something
         And the task context is XYZ
 
+    Scenario: Task with date in past
+        Given I have the task MEM 20210617 1930 Something
+        Then the task display is Something
+
+
