@@ -24,6 +24,8 @@ class HumanDate:
     def _parse(self):
         if match := re.search("^([0-9])$", self.input):
             self.date = self._parseRelativeDay(int(match.group(1)))
+        elif match := re.search("^([A-Z]{3}\\s[0-9]+)$", self.input):
+            self.date = self._parseDate(match.group(1))
         elif match := re.search("^([A-Z]{3})$", self.input):
             self.date = self._parseDay(match.group(1))
         elif match := re.search("^([0-9]{4})([0-9]{2}) $", self.input):
@@ -56,9 +58,20 @@ class HumanDate:
     def _parseDay(self, day):
         for i in range(0, 7):
             candidate = self.today + timedelta(days=i)
-            if (candidate).strftime("%a").upper() == day:
+            if candidate.strftime("%a").upper() == day:
                 return candidate
         raise (Exception(f"Cannot find day {day}"))
+
+    # Parse a date like JUN 8 by scanning forward for a year
+    def _parseDate(self, date: str):
+        needle = date.upper()
+        for i in range(0, 365):
+            candidate = self.today + timedelta(days=i)
+            if candidate.strftime("%b %-d").upper() == needle:
+                return candidate
+            if candidate.strftime("%b %d").upper() == needle:
+                return candidate
+        raise (Exception(f"Cannot find date {date}"))
 
     @property
     def code(self):

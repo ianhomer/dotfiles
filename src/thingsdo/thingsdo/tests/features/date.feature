@@ -31,3 +31,18 @@ Feature: Human Date
         Given today is 20210610
         When I have the date FRI
         Then the date code is 20210611
+
+    Scenario: Day of month
+        Given today is 20210610
+        When I have the date JUL 8
+        Then the date code is 20210708
+
+    Scenario: Zero padded day of month
+        Given today is 20210610
+        When I have the date JUL 08
+        Then the date code is 20210708
+
+    Scenario: Day of month when today
+        Given today is 20210708
+        When I have the date JUL 08
+        Then the date code is 20210708
