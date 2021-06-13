@@ -28,12 +28,12 @@ GREY = "\033[90m"
 END = "\033[0m"
 
 
-# - [ ] Todo
-# - [x] Done
+# - [ ] ABC Todo
+# - [x] ABC Done
 # - [ ] ABC . Backlog
 # - [ ] ABC - Horizon
 # - [ ] ABC ~ Alignment
-# - [x] x Cancelled
+# - [x] ABC x Cancelled
 
 
 def run():
@@ -99,7 +99,7 @@ def search(args):
     contextFilter = ContextFilter(MY_DO)
     if args.all:
         if args.do:
-            pattern = f"\\- \\[ \\] {args.do[0]}"
+            pattern = f"\\- \\[ \\] {contextFilter.pattern(args.do[0])}"
         else:
             pattern = "\\- \\[ \\]"
     elif args.do:
