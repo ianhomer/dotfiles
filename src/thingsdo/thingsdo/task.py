@@ -6,10 +6,6 @@ from thingsdo.taskRenderer import TaskRenderer
 from . import HumanDate, HumanTime
 from datetime import date
 
-#
-# When natural is true then line interpretted as entered by human.
-#
-
 NON_CATEGORIES = [
     "JAN",
     "FEB",
@@ -31,6 +27,10 @@ NON_CATEGORIES = [
     "SAT",
     "SUN",
 ]
+
+#
+# When natural is true then line interpretted as entered by human.
+#
 
 
 class Task:
