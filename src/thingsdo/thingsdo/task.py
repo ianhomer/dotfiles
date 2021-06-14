@@ -39,9 +39,14 @@ class Task:
             # Context part
             "((?:[A-Z]{3}(?=\\s))?)\\s*" +
             # Date part
-            "((?:(?:[0-9]+" +
-            ("|[A-Z]{3}(?:\\s[0-9]+)?" if self.natural else "") +
-            ")(?=\\s)\\s)?)\\s*" +
+            "((?:(?:[0-9]+"
+            + (
+                "|(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC|MON|TUE|WED|THU|FRI|SAT|SUN)(?:\\s[0-9]{1,2})?"
+                if self.natural
+                else ""
+            )
+            + ")(?=\\s)\\s)?)\\s*"
+            +
             # Time part
             "((?:[0-9]{4}(?=\\s)\\s)?)\\s*" +
             # Subject part
