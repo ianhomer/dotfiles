@@ -11,20 +11,28 @@ def context():
 
 
 @given(parsers.parse("default context is {defaultContext}"))
-def defaultContext(context, defaultContext):
+def default_context(context, defaultContext):
     context["defaultContext"] = defaultContext
+
+
+@given("natural mode")
+def natural_mode(context):
+    context["natural"] = True
 
 
 @given(parsers.parse("I have the task {task}"))
 def tasks(context, task):
     context["givenTask"] = task
     defaultContext = context.get("defaultContext")
+    natural = context.get("natural")
     today = context.get("today")
     kwargs = {}
     if today:
         kwargs["today"] = today
     if defaultContext:
         kwargs["defaultContext"] = defaultContext
+    if natural:
+        kwargs["natural"] = natural
     context["task"] = Task(":" + task, **kwargs)
 
 

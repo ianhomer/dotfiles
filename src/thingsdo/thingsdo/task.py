@@ -6,15 +6,27 @@ from thingsdo.taskRenderer import TaskRenderer
 from . import HumanDate, HumanTime
 from datetime import date
 
+#
+# When natural is true then line interpretted as entered by human.
+#
+
 
 class Task:
-    def __init__(self, line, days=7, defaultContext=None, today: date = date.today()):
-        self.line = line
+    def __init__(
+        self,
+        line,
+        natural=False,
+        days=7,
+        defaultContext=None,
+        today: date = date.today(),
+    ):
         self.dateInclude = False
-        self.timeInclude = True
-        self.end = None
         self.days = days
         self.defaultContext = defaultContext
+        self.end = None
+        self.line = line
+        self.natural = natural
+        self.timeInclude = True
         self.today = today
         self._parse()
 
@@ -27,7 +39,9 @@ class Task:
             # Context part
             "((?:[A-Z]{3}(?=\\s))?)\\s*" +
             # Date part
-            "((?:(?:[0-9]+|[A-Z]{3}(?:\\s[0-9]+)?)(?=\\s)\\s)?)\\s*" +
+            "((?:(?:[0-9]+" +
+            ("|[A-Z]{3}(?:\\s[0-9]+)?" if self.natural else "") +
+            ")(?=\\s)\\s)?)\\s*" +
             # Time part
             "((?:[0-9]{4}(?=\\s)\\s)?)\\s*" +
             # Subject part
