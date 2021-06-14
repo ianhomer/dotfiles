@@ -64,11 +64,11 @@ Feature: Task
         And I have the task ABC JUL 8 something
         Then the task is ABC 20210708 something
 
-    # Scenario: Task with relative day without context
-    #     Given today is 20210609
-    #     And natural mode
-    #     And I have the task SUN something
-    #     Then the task is 20210613 something
+    Scenario: Task with relative day without context
+        Given today is 20210609
+        And natural mode
+        And I have the task SUN something
+        Then the task is MEM 20210613 something
 
     Scenario: Task with date and time
         Given I have the task 20500101 1415 something

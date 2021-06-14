@@ -33,7 +33,7 @@ def tasks(context, task):
         kwargs["defaultContext"] = defaultContext
     if natural:
         kwargs["natural"] = natural
-    context["task"] = Task(":" + task, **kwargs)
+    context["task"] = Task(("" if natural else ":") + task, **kwargs)
 
 
 @given(parsers.parse("I have the file {file} with task {task}"))

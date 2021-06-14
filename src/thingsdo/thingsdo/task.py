@@ -10,6 +10,28 @@ from datetime import date
 # When natural is true then line interpretted as entered by human.
 #
 
+NON_CATEGORIES = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC",
+    "MON",
+    "TUE",
+    "WED",
+    "THU",
+    "FRI",
+    "SAT",
+    "SUN",
+]
+
 
 class Task:
     def __init__(
@@ -33,7 +55,7 @@ class Task:
     def _parse(self):
         match = re.search(
             # File part
-            "^([^:]*):" +
+            ("()" if self.natural else "^([^:]*):") +
             # Optional markdown part
             "(?:- \\[ \\] )?" +
             # Context part
@@ -51,7 +73,10 @@ class Task:
             "((?:[0-9]{4}(?=\\s)\\s)?)\\s*" +
             # Subject part
             "(.*)$",
-            self.line,
+            # Pre-pepend MEM category if natural and starts with a non-category,
+            # e.g. day of week
+            ("MEM " if self.natural and self.line[0:3] in NON_CATEGORIES else "")
+            + self.line,
         )
         self.mission = False
         self.garage = False
@@ -91,7 +116,8 @@ class Task:
             self.file = None
             self.context = None
             self.date = None
-            self.subject = None
+            self.time = None
+            self.subject = self.line
 
     def __str__(self):
         return self.code

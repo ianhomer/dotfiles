@@ -181,7 +181,7 @@ def getTodayLog(now=datetime.now()):
 # Add a do
 def add(do):
     # MEM (Memento https://www.imdb.com/title/tt0209144/)
-    task = Task(f":{do}", defaultContext="MEM")
+    task = Task(f"{do}", defaultContext="MEM", natural=True)
 
     now = datetime.now()
     todayLog = getTodayLog(now)
