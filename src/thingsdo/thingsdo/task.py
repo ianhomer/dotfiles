@@ -70,7 +70,7 @@ class Task:
             + ")(?=\\s)\\s)?)\\s*"
             +
             # Time part
-            "((?:[0-9]{4}(?=\\s)\\s)?)\\s*" +
+            "((?:[0-9]{2}:?[0-9]{2}(?=\\s)\\s)?)\\s*" +
             # Subject part
             "(.*)$",
             # Pre-pepend MEM category if natural and starts with a non-category,
