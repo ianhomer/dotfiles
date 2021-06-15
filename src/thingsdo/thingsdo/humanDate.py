@@ -13,6 +13,7 @@ class HumanDate:
     def __init__(self, input, today: date = date.today()):
         self.today = today
         self.daysAhead = 0
+        self.withDays = True
         if input is None:
             self.display = None
             self.daysAhead = 0
@@ -27,8 +28,9 @@ class HumanDate:
             self.date = self._parseDate(match.group(1))
         elif match := re.search("^([A-Z]{3})$", self.input):
             self.date = self._parseDay(match.group(1))
-        elif match := re.search("^([0-9]{4})([0-9]{2}) $", self.input):
+        elif match := re.search("^([0-9]{4})([0-9]{2})$", self.input):
             self.date = date(int(match.group(1)), int(match.group(2)), 1)
+            self.withDays = False
         elif match := re.search("([0-9]{4})([0-9]{2})([0-9]{2})", self.input):
             self.date = date(
                 int(match.group(1)),
@@ -46,7 +48,10 @@ class HumanDate:
                 "+" if self.daysAhead == 7 else ""
             )
         elif self.daysAhead < 300:
-            self.display = self.date.strftime("%d %b").upper()
+            if self.withDays:
+                self.display = self.date.strftime("%d %b").upper()
+            else:
+                self.display = self.date.strftime("%b").upper()
         else:
             self.display = self.date.strftime("%d %b %Y").upper()
 
@@ -74,7 +79,7 @@ class HumanDate:
 
     @property
     def code(self):
-        return self.date.strftime("%Y%m%d")
+        return self.date.strftime("%Y%m%d" if self.withDays else "%Y%m")
 
     def __str__(self):
         return self.display
