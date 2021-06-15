@@ -1,26 +1,38 @@
-PURPLE = "\033[95m"
-ORANGE = "\033[33m"
-CYAN = "\033[36m"
-GREEN = "\033[32m"
-GREY = "\033[90m"
-CLEAR = "\033[0m"
+PURPLE = "95m"
+ORANGE = "33m"
+CYAN = "36m"
+GREEN = "32m"
+GREY = "90m"
+NORMAL = "97m"
+CLEAR = "0m"
 
 
 class Palette:
     def __init__(self, theme=None):
         self.theme = theme
         if self.theme:
+            self.pre = "\033["
             self.colors = {
-                "separator": "\t",
-                "context": PURPLE,
                 "clear": CLEAR,
+                "context": PURPLE,
+                "date": ORANGE,
                 "end": ORANGE,
                 "garage": GREY,
-                "date": ORANGE,
+                "normal": NORMAL,
+                "separator": "\t",
                 "time": CYAN,
             }
+            self.modifiers = {
+                "normal": "",
+                "bold": "1;",
+                "faint": "2;",
+                "italics": "3;",
+                "underline": "4;",
+            }
         else:
+            self.pre = ""
             self.colors = {"separator": " "}
+            self.modifiers = {"faint": ""}
 
-    def color(self, name):
-        return self.colors.get(name, "")
+    def color(self, name, modifier="normal"):
+        return self.pre + self.modifiers.get(modifier, "") + self.colors.get(name, "")

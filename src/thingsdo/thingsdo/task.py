@@ -146,13 +146,21 @@ class Task:
         return TaskRenderer().render(self)
 
     @property
-    def rank(self):
+    def rankGroup(self):
         return (
             (
-                "2000" + (self.date.code)
+                2000
                 if self.date.daysAhead < self.near
-                else "4000" + (self.date.code)
+                else 4000
             )
             if self.date is not None
-            else "3000"
+            else 3000
+        )
+
+    @property
+    def rank(self):
+        return (
+            str(self.rankGroup) + self.date.code
+            if self.date is not None
+            else str(self.rankGroup)
         )
