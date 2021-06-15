@@ -15,6 +15,7 @@ class HumanDate:
         self.daysAhead = 0
         if input is None:
             self.display = None
+            self.daysAhead = 0
         else:
             self.input = input.strip()
             self._parse()

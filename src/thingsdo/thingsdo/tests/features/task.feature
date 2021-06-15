@@ -71,17 +71,18 @@ Feature: Task
         Then the task is MEM 20210613 something
 
     Scenario: Task with relative day with time without context
-        Given today is 20210609
+        Given today is 20210612
         And natural mode
         And I have the task SUN 10:15 something
         Then the task is MEM 20210613 1015 something
+        And the task rank is 200020210613
 
     Scenario: Task with date and time
         Given I have the task 20500101 1415 something
         Then the task subject is something
         And the task date is 01 JAN 2050
         And the task time is 14:15
-        And the task rank is 200020500101
+        And the task rank is 400020500101
 
     Scenario: Task with no context
         Given I have the task something

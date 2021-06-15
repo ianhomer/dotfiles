@@ -122,7 +122,7 @@ def search(args):
     result = subprocess.run(ag, stdout=PIPE, text=True)
 
     lines = result.stdout.splitlines()
-    days = args.days or (365 if args.all else 7)
+    days = args.days or (365 if args.all else 3)
     dos = []
     renderer = TaskRenderer(theme="do")
     for line in lines:

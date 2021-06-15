@@ -148,7 +148,11 @@ class Task:
     @property
     def rank(self):
         return (
-            "2000" + (self.dateIn.strip() or "0")
+            (
+                "2000" + (self.date.code)
+                if self.date.daysAhead < self.near
+                else "4000" + (self.date.code)
+            )
             if self.date is not None
             else "3000"
         )
