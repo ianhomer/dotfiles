@@ -77,6 +77,13 @@ Feature: Task
         Then the task is MEM 20210613 1015 something
         And the task rank is 200020210613
 
+    Scenario: Task with relative day of todays day
+        Given today is 20210613
+        And natural mode
+        And I have the task SUN something
+        Then the task is MEM 20210620 something
+        And the task display is SUN+ something
+
     Scenario: Task with date and time
         Given I have the task 20500101 1415 something
         Then the task subject is something

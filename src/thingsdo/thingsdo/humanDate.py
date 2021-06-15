@@ -42,7 +42,9 @@ class HumanDate:
         if self.daysAhead < 0:
             self.display = "***"
         elif self.daysAhead <= 7:
-            self.display = self.date.strftime("%a").upper()
+            self.display = self.date.strftime("%a").upper() + (
+                "+" if self.daysAhead == 7 else ""
+            )
         elif self.daysAhead < 300:
             self.display = self.date.strftime("%d %b").upper()
         else:
@@ -53,7 +55,7 @@ class HumanDate:
 
     # Parse a day of the week like MON or TUE to a date based on what today is
     def _parseDay(self, day):
-        for i in range(0, 7):
+        for i in range(1, 8):
             candidate = self.today + timedelta(days=i)
             if candidate.strftime("%a").upper() == day:
                 return candidate
