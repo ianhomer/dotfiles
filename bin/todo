@@ -41,6 +41,7 @@ def run():
     parser.add_argument("do", nargs="*", help="do")
     parser.add_argument("-a", "--all", help="all dos", action="store_true")
     parser.add_argument("-c", "--context", help="all contexts", action="store_true")
+    parser.add_argument("-t", "--today", help="add today item", action="store_true")
     parser.add_argument("--days", type=int, help="days")
     args = parser.parse_args()
 
@@ -153,7 +154,8 @@ def search(args):
     )
     fzfIn = fzf.stdin
     encoding = sys.getdefaultencoding()
-    fzfIn.write(f"\t(today)\t{getTodayLog()}\n".encode(encoding))
+    if args.today:
+        fzfIn.write(f"\t(today)\t{getTodayLog()}\n".encode(encoding))
     for do in dos:
         fzfIn.write(do.encode(encoding))
 
