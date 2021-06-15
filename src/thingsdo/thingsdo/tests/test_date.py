@@ -16,4 +16,4 @@ def I_have_date(context, numbers):
     if "today" in context:
         kwargs["today"] = context["today"]
 
-    context["date"] = HumanDate(numbers, 0, **kwargs)
+    context["date"] = HumanDate(numbers, **kwargs)

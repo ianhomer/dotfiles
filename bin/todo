@@ -126,7 +126,7 @@ def search(args):
     dos = []
     renderer = TaskRenderer(theme="do")
     for line in lines:
-        task = Task(line, days=days)
+        task = Task(line, near=days)
         if task.context not in excludes:
             dos.append(renderer.render(task) + "\n")
     dos.sort()

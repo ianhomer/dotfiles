@@ -38,12 +38,13 @@ class Task:
         self,
         line,
         natural=False,
-        days=7,
+        # How many days are considered near
+        near=3,
         defaultContext=None,
         today: date = date.today(),
     ):
         self.dateInclude = False
-        self.days = days
+        self.near = near
         self.defaultContext = defaultContext
         self.end = None
         self.line = line
@@ -88,7 +89,7 @@ class Task:
             if self.dateIn is None:
                 self.date = None
             else:
-                self.date = HumanDate(self.dateIn, self.days, today=self.today)
+                self.date = HumanDate(self.dateIn, today=self.today)
                 self.dateInclude = True
             self.timeAsNumbers = match.group(4) or None
             if self.timeAsNumbers is None:
@@ -110,7 +111,7 @@ class Task:
             # Extra toDate part
             match = re.search("to ([0-9]{8}) (.*)", subject)
             if match:
-                self.end = HumanDate(match.group(1), self.days, today=self.today)
+                self.end = HumanDate(match.group(1), today=self.today)
                 self.subject = match.group(2)
         else:
             self.file = None
@@ -148,6 +149,6 @@ class Task:
     def rank(self):
         return (
             "2000" + (self.dateIn.strip() or "0")
-            if self.date is not None and self.date.include
+            if self.date is not None
             else "3000"
         )

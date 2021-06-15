@@ -10,11 +10,9 @@ from datetime import date, timedelta
 # Given date as numbers, e.g. 20210531, output a nice human date from a todo
 # point of view. Display is None if date is "days" days into the future.
 class HumanDate:
-    def __init__(self, input, days=7, today: date = date.today()):
-        self.days = days
+    def __init__(self, input, today: date = date.today()):
         self.today = today
         self.daysAhead = 0
-        self.include = False
         if input is None:
             self.display = None
         else:
@@ -40,8 +38,6 @@ class HumanDate:
             self.date = self.today
 
         self.daysAhead = (self.date - self.today).days
-        self.include = self.daysAhead <= self.days
-        self.include = True
         if self.daysAhead < 0:
             self.display = "***"
         elif self.daysAhead <= 7:
@@ -52,7 +48,7 @@ class HumanDate:
             self.display = self.date.strftime("%d %b %Y").upper()
 
     def _parseRelativeDay(self, day):
-        return self.today + datetime.timedelta(days=day-1)
+        return self.today + datetime.timedelta(days=day - 1)
 
     # Parse a day of the week like MON or TUE to a date based on what today is
     def _parseDay(self, day):
