@@ -10,12 +10,12 @@ from datetime import date, timedelta
 # Given date as numbers, e.g. 20210531, output a nice human date from a todo
 # point of view. Display is None if date is "days" days into the future.
 class HumanDate:
-    def __init__(self, input, today: date = date.today()):
+    def __init__(self, input=None, today: date = date.today()):
         self.today = today
         self.daysAhead = 0
         self.withDays = True
         if input is None:
-            self.display = None
+            self.date = today
             self.daysAhead = 0
         else:
             self.input = input.strip()

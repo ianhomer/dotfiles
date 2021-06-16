@@ -76,7 +76,17 @@ class Task:
             "(.*)$",
             # Pre-pepend MEM category if natural and starts with a non-category,
             # e.g. day of week
-            ("MEM " if self.natural and self.line[0:3] in NON_CATEGORIES else "")
+            (
+                "MEM "
+                if (
+                    self.natural
+                    and (
+                        (self.line[0:3] in NON_CATEGORIES)
+                        or re.search("^[0-9]{2}:?[0-9]{2}", self.line[0:5])
+                    )
+                )
+                else ""
+            )
             + self.line,
         )
         self.mission = False
@@ -98,6 +108,9 @@ class Task:
             else:
                 self.time = HumanTime(self.timeAsNumbers)
                 self.timeInclude = self.time.include
+                if self.date is None:
+                    self.date = HumanDate(today = self.today)
+                    self.dateInclude = True
             subject = match.group(5)
             first = subject[:1]
             if first == "~":
@@ -148,11 +161,7 @@ class Task:
     @property
     def rankGroup(self):
         return (
-            (
-                2000
-                if self.date.daysAhead < self.near
-                else 4000
-            )
+            (2000 if self.date.daysAhead < self.near else 4000)
             if self.date is not None
             else 3000
         )

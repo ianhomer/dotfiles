@@ -70,6 +70,12 @@ Feature: Task
         And I have the task SUN something
         Then the task is MEM 20210613 something
 
+    Scenario: Task with time without context
+        Given today is 20210609
+        And natural mode
+        And I have the task 17:15 something
+        Then the task is MEM 20210609 1715 something
+
     Scenario: Task with relative day with time without context
         Given today is 20210612
         And natural mode
