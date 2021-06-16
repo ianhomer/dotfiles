@@ -90,6 +90,18 @@ Feature: Task
         Then the task is MEM 20210620 something
         And the task display is SUN+ something
 
+    Scenario: Task for today
+        Given today is 20210613
+        And natural mode
+        And I have the task TOD today thing
+        Then the task is MEM 20210613 today thing
+
+    Scenario: Task for tomorrow
+        Given today is 20210613
+        And natural mode
+        And I have the task TOM tomorrow thing
+        Then the task is MEM 20210614 tomorrow thing
+
     Scenario: Task with date and time
         Given I have the task 20500101 1415 something
         Then the task subject is something

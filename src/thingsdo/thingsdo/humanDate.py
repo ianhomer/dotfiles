@@ -22,7 +22,11 @@ class HumanDate:
             self._parse()
 
     def _parse(self):
-        if match := re.search("^([0-9])$", self.input):
+        if self.input == "TOD":
+            self.date = self.today
+        elif self.input == "TOM":
+            self.date = self.today + timedelta(days=1)
+        elif match := re.search("^([0-9])$", self.input):
             self.date = self._parseRelativeDay(int(match.group(1)))
         elif match := re.search("^([A-Z]{3}\\s[0-9]+)$", self.input):
             self.date = self._parseDate(match.group(1))

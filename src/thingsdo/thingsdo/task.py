@@ -26,6 +26,8 @@ NON_CATEGORIES = [
     "FRI",
     "SAT",
     "SUN",
+    "TOD",
+    "TOM"
 ]
 
 #
@@ -64,7 +66,7 @@ class Task:
             # Date part
             "((?:(?:[0-9]+"
             + (
-                "|(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC|MON|TUE|WED|THU|FRI|SAT|SUN)(?:\\s[0-9]{1,2})?"
+                "|(?:JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC|MON|TUE|WED|THU|FRI|SAT|SUN|TOD|TOM)(?:\\s[0-9]{1,2})?"
                 if self.natural
                 else ""
             )
