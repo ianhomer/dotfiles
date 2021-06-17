@@ -11,13 +11,8 @@ from datetime import date
 class HumanTime:
     def __init__(self, input, today: date = date.today()):
         self.today = today
-        if input is None:
-            self.display = None
-            self.include = False
-            self.codified = None
-        else:
-            self.include = True
-            self._parse(input.strip())
+        self.include = True
+        self._parse(input.strip())
 
     def _parse(self, input: str):
         if match := re.search("^([0-9]{2}):?([0-9]{2})$", input):

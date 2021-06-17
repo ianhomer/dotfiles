@@ -81,7 +81,7 @@ Feature: Task
         And natural mode
         And I have the task SUN 10:15 something
         Then the task is MEM 20210613 1015 something
-        And the task rank is 200020210613
+        And the task rank is 2000202106131015
 
     Scenario: Task with relative day of todays day
         Given today is 20210613
@@ -107,7 +107,7 @@ Feature: Task
         Then the task subject is something
         And the task date is 01 JAN 2050
         And the task time is 14:15
-        And the task rank is 400020500101
+        And the task rank is 4000205001011415
 
     Scenario: Task with month
         Given today is 20210613
@@ -129,5 +129,5 @@ Feature: Task
     Scenario: Task with date in past
         Given I have the file my.md with task MEM 20210617 1930 Something
         Then the task display is THU 19:30 Something
-        Then the task row is 200020210617 MEM THU 19:30 Something my.md
+        Then the task row is 2000202106171930 MEM THU 19:30 Something my.md
 

@@ -171,7 +171,12 @@ class Task:
     @property
     def rank(self):
         return (
-            str(self.rankGroup) + self.date.code
+            str(self.rankGroup) + self.date.code +
+            (
+                 self.time.code
+                 if self.time is not None
+                 else "0000"
+             )
             if self.date is not None
             else str(self.rankGroup)
         )
