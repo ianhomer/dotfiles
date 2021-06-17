@@ -128,4 +128,16 @@ another-fenced-block
 second-line
 ```
 
+JSON
+
+```json
+{ "field": "value"}
+```
+
+Typescript
+
+```typescript
+const myGlobal = [];
+```
+
 Test change ..
