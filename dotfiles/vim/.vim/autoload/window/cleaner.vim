@@ -104,6 +104,6 @@ function window#cleaner#CloseMe()
     execute ":bd"
     execute ":Startify"
   else
-    quit
+    execute ":wq!"
   endif
 endfunction
