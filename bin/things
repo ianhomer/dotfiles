@@ -150,6 +150,8 @@ def search(args):
     if args.thing and len(args.thing) > 0:
         pattern = " ".join(args.thing)
         fzf.defaultCommand = f"{searchPrefix} '{pattern}' || true"
+    elif args.name:
+        fzf.defaultCommand = f"{searchPrefix} || true"
     else:
         fzf.parts += ["--phony"]
         fzf.binds = ["change:reload:" + searchPrefix + " {q} || true"]
