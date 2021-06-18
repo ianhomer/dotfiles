@@ -56,7 +56,7 @@ nvim_set_var(
         surround = 3,
         tabcomplete = 9,
         tabular = 3,
-        telescope = 5,
+        telescope = 8,
         thingity = 3,
         treesitter = 4,
         unimpaired = 4,
