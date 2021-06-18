@@ -148,6 +148,7 @@ let g:tmux_navigator_save_on_switch = 2
 augroup dotme
   autocmd!
 
+  autocmd BufNewFile,BufRead *.fish set filetype=fish
   autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
   autocmd BufNewFile *.sh 0r ~/.vim/skeletons/skeleton.sh
