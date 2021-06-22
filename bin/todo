@@ -146,7 +146,7 @@ def search(args):
             "4",
             "--tiebreak",
             "begin",
-            "--bind=q:abort,ctrl-s:abort,ctrl-x:abort",
+            "--bind=ctrl-s:abort,ctrl-x:abort",
         ],
         stdin=PIPE,
         stdout=PIPE,
