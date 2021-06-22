@@ -26,7 +26,7 @@ nvim_set_var(
         friendly_snippets = 5,
         fzf = 1,
         gitgutter = 6,
-        gitsigns = 5,
+        gitsigns = 6,
         gruvbox = 5,
         gruvbuddy = 7,
         gruvbox8 = 1,
