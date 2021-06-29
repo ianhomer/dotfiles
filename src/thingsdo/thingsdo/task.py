@@ -165,7 +165,7 @@ class Task:
         return (
             (2000 if self.date.daysAhead < self.near else 4000)
             if self.date is not None
-            else 3000
+            else (5000 if self.mission else 4000 if self.garage else 3000)
         )
 
     @property

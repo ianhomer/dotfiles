@@ -22,13 +22,15 @@ class TaskRenderer:
             parts += [
                 f"{self.palette.color('time', modifier)}{task.time.display} {self.clear}"
             ]
+        if task.end:
+            parts += [f"to {self.palette.color('end')}{task.end.display}{self.clear}"]
         if task.mission:
             parts += [self.palette.color("mission", modifier)]
         elif task.garage:
             parts += [self.palette.color("garage", modifier)]
-        if task.end:
-            parts += [f"to {self.palette.color('end')}{task.end.display}{self.clear}"]
-        parts += [self.palette.color("normal", modifier), task.subject, self.clear]
+        else:
+            parts += [self.palette.color("normal", modifier)]
+        parts += [task.subject, self.clear]
         return "".join(parts)
 
     def modifier(self, task):

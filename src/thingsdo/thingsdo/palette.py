@@ -18,6 +18,7 @@ class Palette:
                 "date": ORANGE,
                 "end": ORANGE,
                 "garage": GREY,
+                "mission": GREEN,
                 "normal": NORMAL,
                 "separator": "\t",
                 "time": CYAN,
