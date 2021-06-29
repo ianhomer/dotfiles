@@ -11,7 +11,8 @@ Feature: Task
         And the task rank is 3000
 
     Scenario: Task in file
-        Given I have the file my.md with task - [ ] ABC something
+        Given I am in the file my.md
+        And I have the task - [ ] ABC something
         Then the task file is my.md
         And the task context is ABC
         And the task subject is something
@@ -127,7 +128,9 @@ Feature: Task
         And the task context is XYZ
 
     Scenario: Task with date in past
-        Given I have the file my.md with task MEM 20210617 1930 Something
+        Given today is 20210615
+        And I am in the file my.md
+        And I have the task MEM 20210617 1930 Something
         Then the task display is THU 19:30 Something
         Then the task row is 2000202106171930 MEM THU 19:30 Something my.md
 

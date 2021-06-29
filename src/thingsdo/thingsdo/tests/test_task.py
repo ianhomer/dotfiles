@@ -26,6 +26,7 @@ def tasks(context, task):
     defaultContext = context.get("defaultContext")
     natural = context.get("natural")
     today = context.get("today")
+    file = context.get("file")
     kwargs = {}
     if today:
         kwargs["today"] = today
@@ -33,12 +34,13 @@ def tasks(context, task):
         kwargs["defaultContext"] = defaultContext
     if natural:
         kwargs["natural"] = natural
-    context["task"] = Task(("" if natural else ":") + task, **kwargs)
+    filePrefix = (file if file else "") + ":"
+    context["task"] = Task(("" if natural else filePrefix) + task, **kwargs)
 
 
-@given(parsers.parse("I have the file {file} with task {task}"))
-def file_with_task(context, file, task):
-    context["task"] = Task(file + ":" + task)
+@given(parsers.parse("I am in the file {file}"))
+def file(context, file):
+    context["file"] = file
 
 
 @then(parsers.parse("the task is as given"))

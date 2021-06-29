@@ -121,6 +121,9 @@ class Task:
             elif first == ".":
                 self.garage = True
                 self.subject = subject[1:].strip()
+            elif first == "-":
+                self.garage = True
+                self.subject = subject[1:].strip()
             else:
                 self.subject = subject
             # Extra toDate part
