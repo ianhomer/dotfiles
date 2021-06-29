@@ -27,7 +27,7 @@ NON_CATEGORIES = [
     "SAT",
     "SUN",
     "TOD",
-    "TOM"
+    "TOM",
 ]
 
 #
@@ -93,6 +93,7 @@ class Task:
         )
         self.mission = False
         self.garage = False
+        self.backlog = False
         self.toDate = None
         if match:
             self.file = match.group(1)
@@ -111,7 +112,7 @@ class Task:
                 self.time = HumanTime(self.timeAsNumbers)
                 self.timeInclude = self.time.include
                 if self.date is None:
-                    self.date = HumanDate(today = self.today)
+                    self.date = HumanDate(today=self.today)
                     self.dateInclude = True
             subject = match.group(5)
             first = subject[:1]
@@ -119,7 +120,7 @@ class Task:
                 self.mission = True
                 self.subject = subject[1:].strip()
             elif first == ".":
-                self.garage = True
+                self.backlog = True
                 self.subject = subject[1:].strip()
             elif first == "-":
                 self.garage = True
@@ -168,18 +169,23 @@ class Task:
         return (
             (2000 if self.date.daysAhead < self.near else 4000)
             if self.date is not None
-            else (5000 if self.mission else 4000 if self.garage else 3000)
+            else (
+                6000
+                if self.mission
+                else 5000
+                if self.garage
+                else 4000
+                if self.backlog
+                else 3000
+            )
         )
 
     @property
     def rank(self):
         return (
-            str(self.rankGroup) + self.date.code +
-            (
-                 self.time.code
-                 if self.time is not None
-                 else "0000"
-             )
+            str(self.rankGroup)
+            + self.date.code
+            + (self.time.code if self.time is not None else "0000")
             if self.date is not None
             else str(self.rankGroup)
         )

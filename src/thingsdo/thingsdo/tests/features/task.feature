@@ -18,7 +18,7 @@ Feature: Task
         And the task subject is something
 
     Scenario: Garage task
-        Given I have the task . something in garage
+        Given I have the task - something in garage
         Then the task garage is True
         Then the task mission is False
         And the task subject is something in garage
@@ -27,6 +27,11 @@ Feature: Task
         Given I have the task ~ something in mission
         Then the task garage is False
         Then the task mission is True
+        And the task subject is something in mission
+
+    Scenario: Backlog task
+        Given I have the task . something in mission
+        Then the task backlog is True
         And the task subject is something in mission
 
     Scenario: Markdown task

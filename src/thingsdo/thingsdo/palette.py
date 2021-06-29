@@ -3,6 +3,7 @@ ORANGE = "33m"
 CYAN = "36m"
 GREEN = "32m"
 GREY = "90m"
+LIGHT_BLUE = "94m"
 NORMAL = "97m"
 CLEAR = "0m"
 
@@ -18,6 +19,7 @@ class Palette:
                 "date": ORANGE,
                 "end": ORANGE,
                 "garage": GREY,
+                "backlog": LIGHT_BLUE,
                 "mission": GREEN,
                 "normal": NORMAL,
                 "separator": "\t",

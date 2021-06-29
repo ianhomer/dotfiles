@@ -26,6 +26,8 @@ class TaskRenderer:
             parts += [f"to {self.palette.color('end')}{task.end.display}{self.clear}"]
         if task.mission:
             parts += [self.palette.color("mission", modifier)]
+        elif task.backlog:
+            parts += [self.palette.color("backlog", modifier)]
         elif task.garage:
             parts += [self.palette.color("garage", modifier)]
         else:
