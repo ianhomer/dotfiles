@@ -154,23 +154,31 @@ def search(args):
     )
     fzfIn = fzf.stdin
     encoding = sys.getdefaultencoding()
-    if args.today:
-        fzfIn.write(f"\t(today)\t{getTodayLog()}\n".encode(encoding))
-    for do in dos:
-        fzfIn.write(do.encode(encoding))
+    if fzfIn:
+        if args.today:
+            fzfIn.write(f"\t(today)\t{getTodayLog()}\n".encode(encoding))
+        for do in dos:
+            fzfIn.write(do.encode(encoding))
 
-    fzfIn.flush()
-    fzfIn.close()
+        fzfIn.flush()
+        fzfIn.close()
+    else:
+        raise Exception("Cannot open fzf stdin")
     fzf.wait()
     stdout = fzf.stdout
-    output = stdout.read().decode(encoding)
-    match = re.search("^([^\t]*)\t([^\t]*)\t([^\t]*)\t(.*)$", output)
-    if match:
-        file = match.group(4)
-        subprocess.call(["nvim", file, "+:Goyo"], env={**os.environ, "VIM_KNOB": "4"})
-        return True
+    if stdout:
+        output = stdout.read().decode(encoding)
+        match = re.search("^([^\t]*)\t([^\t]*)\t([^\t]*)\t(.*)$", output)
+        if match:
+            file = match.group(4)
+            subprocess.call(
+                ["nvim", file, "+:Goyo"], env={**os.environ, "VIM_KNOB": "4"}
+            )
+            return True
+        else:
+            print(output)
     else:
-        print(output)
+        raise Exception("Cannot open fzf stdout")
     return False
 
 
