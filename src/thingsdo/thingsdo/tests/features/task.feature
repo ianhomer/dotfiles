@@ -34,6 +34,11 @@ Feature: Task
         Then the task backlog is True
         And the task subject is something in mission
 
+    Scenario: Backlog task
+        Given I have the task a question?
+        Then the task question is True
+        And the task subject is a question?
+
     Scenario: Markdown task
         Given I have the task - [ ] something
         Then the task subject is something

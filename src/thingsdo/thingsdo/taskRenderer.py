@@ -29,6 +29,8 @@ class TaskRenderer:
             parts += [self.palette.color("backlog", modifier)]
         elif task.garage:
             parts += [self.palette.color("garage", modifier)]
+        elif task.question:
+            parts += [self.palette.color("question", modifier)]
         else:
             parts += [self.palette.color("normal", modifier)]
         parts += [task.subject, self.clear]

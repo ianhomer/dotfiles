@@ -94,6 +94,7 @@ class Task:
         self.mission = False
         self.garage = False
         self.backlog = False
+        self.question = False
         self.toDate = None
         if match:
             self.file = match.group(1)
@@ -115,6 +116,7 @@ class Task:
                     self.date = HumanDate(today=self.today)
                     self.dateInclude = True
             subject = match.group(5)
+
             first = subject[:1]
             if first == "~":
                 self.mission = True
@@ -127,6 +129,11 @@ class Task:
                 self.subject = subject[1:].strip()
             else:
                 self.subject = subject
+
+            last = subject[-1]
+            if last == "?":
+                self.question = True
+
             # Extra toDate part
             match = re.search("to ([0-9]{8}) (.*)", subject)
             if match:
@@ -170,12 +177,14 @@ class Task:
             (2000 if self.date.daysAhead < self.near else 4000)
             if self.date is not None
             else (
-                6000
+                7000
                 if self.mission
-                else 5000
+                else 6000
                 if self.garage
-                else 4000
+                else 5000
                 if self.backlog
+                else 4000
+                if self.question
                 else 3000
             )
         )
