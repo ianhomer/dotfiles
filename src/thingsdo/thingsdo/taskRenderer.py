@@ -1,4 +1,3 @@
-from thingsdo import palette
 from . import Palette
 
 
