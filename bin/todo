@@ -10,7 +10,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from subprocess import PIPE
-from thingsdo import ContextFilter, Task, thingity, TaskRenderer
+from thingsdo import Ag, ContextFilter, Task, thingity, TaskRenderer
 
 home = str(Path.home())
 
@@ -40,6 +40,8 @@ END = "\033[0m"
 def run():
     parser = argparse.ArgumentParser(description="todoer")
     parser.add_argument("do", nargs="*", help="do")
+    parser.add_argument("--witharchive", action="store_true")
+    parser.add_argument("--justarchive", action="store_true")
     parser.add_argument("-a", "--all", help="all dos", action="store_true")
     parser.add_argument("-c", "--context", help="all contexts", action="store_true")
     parser.add_argument("-t", "--today", help="add today item", action="store_true")
@@ -112,16 +114,13 @@ def search(args):
         pattern = "\\- \\[ \\](?! ([A-Z]{3} )?[\\.\\-])"
         excludes = contextFilter.excludes()
 
-    ag = [
-        "ag",
-        "--noheading",
-        "--nonumbers",
-        "--nocolor",
-        "--nobreak",
-        pattern,
-        THINGS_DIR,
-    ]
-    result = subprocess.run(ag, stdout=PIPE, text=True)
+    ag = Ag(THINGS_DIR)
+    agParts = ag.parts(
+        pattern, ["--noheading", "--nonumbers", "--nocolor", "--nobreak"]
+    )
+
+    print(agParts)
+    result = subprocess.run(agParts, stdout=PIPE, text=True)
 
     lines = result.stdout.splitlines()
     days = args.days or (365 if args.all else 3)
