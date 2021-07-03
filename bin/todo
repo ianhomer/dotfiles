@@ -114,12 +114,10 @@ def search(args):
         pattern = "\\- \\[ \\](?! ([A-Z]{3} )?[\\.\\-])"
         excludes = contextFilter.excludes()
 
-    ag = Ag(THINGS_DIR)
+    ag = Ag(THINGS_DIR, args.justarchive, args.witharchive or args.all)
     agParts = ag.parts(
         pattern, ["--noheading", "--nonumbers", "--nocolor", "--nobreak"]
     )
-
-    print(agParts)
     result = subprocess.run(agParts, stdout=PIPE, text=True)
 
     lines = result.stdout.splitlines()
