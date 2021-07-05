@@ -216,7 +216,7 @@ return require("packer").startup {
             -- cmd = {"MarkdownPreview"},
             run = "cd app && yarn install"
         }
-        useif {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
+        useif {"lukas-reineke/indent-blankline.nvim"}
 
         useif {"junegunn/vim-peekaboo"}
 
