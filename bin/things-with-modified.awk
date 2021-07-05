@@ -1,8 +1,8 @@
 #!/usr/bin/awk -f
 #
-# Prepend a search stream from ripgrep with last modified date for the file, where 
+# Prepend a search stream from ripgrep with last modified date for the file, where
 # filename is the first column up to the ":"
 #
 
 BEGIN { FS = ":" ; OFS = ":" }
-{ cmd="stat -f '%m' "$1 ; cmd|getline ts ; print ts,$0 ; close(cmd) }
+{ cmd="stat -f '%m' "$1 ; cmd|getline ts ; print (10000000000-ts),$0 ; close(cmd) }
