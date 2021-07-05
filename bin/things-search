@@ -14,6 +14,7 @@ import subprocess
 import sys
 from pathlib import Path
 from subprocess import PIPE
+from typing import Optional
 
 
 config = configparser.ConfigParser()
@@ -51,7 +52,8 @@ class Search:
         self.maxPerFile = 0
         self.filter = "s/^/:/"
         self.matchPrefix = ""
-        self.postFilter = None
+        self.postFilter: Optional[str] = None
+        self.filter: Optional[str] = None
 
     # Command to search for things
     def createCommand(self):
@@ -112,13 +114,14 @@ class Search:
             pipe = subprocess.Popen(
                 sortCommand, stdin=pipe.stdout, stdout=PIPE, text=True, cwd=THINGS_DIR
             )
-        for line in iter(pipe.stdout.readline, b""):
-            sys.stdout.write(line)
-            if not line:
-                if pipeIn.poll() is not None and pipe.poll() is not None:
-                    break
+        if pipe.stdout:
+            for line in iter(pipe.stdout.readline, b""):
+                sys.stdout.write(line)
+                if not line:
+                    if pipeIn.poll() is not None and pipe.poll() is not None:
+                        break
 
-        pipe.stdout.close()
+            pipe.stdout.close()
 
 
 # Ripgrep specific searching
