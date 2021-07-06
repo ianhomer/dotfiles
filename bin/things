@@ -71,24 +71,30 @@ class Fzf:
             "dark",
         ]
         if terminal.columns > 60 or terminal.lines > 10:
-            self.cmd += [
-                "--preview",
-                "bat --style=header --color=always "
-                + "-r (echo {} | cut -d: -f3): "
-                + "(echo {} | cut -d: -f2)",
-            ]
             if terminal.columns > 80:
-                width = "90" if terminal.columns > 110 else "70%"
+                width = 90 if terminal.columns > 110 else int(terminal.columns * 0.7)
                 self.cmd += [
                     "--preview-window",
                     f"right,{width}",
                 ]
             else:
+                width = terminal.columns
                 height = "5" if terminal.lines < 20 else "50%"
                 self.cmd += [
                     "--preview-window",
                     f"bottom,{height}",
                 ]
+            self.cmd += [
+                "--preview",
+                "cat (echo {} | cut -d: -f2) | cut -c 1-"
+                + str(width)
+                + " | "
+                + "bat --style=header --color=always "
+                + "--file-name (echo {} | cut -d: -f2) "
+                + "-l md "
+                + "--wrap character "
+                + "-r (echo {} | cut -d: -f3): "
+            ]
         self.parts = []
         self.defaultCommand = "true"
         self.filenameMatcher = "^[^:]*:([^:]*)"
