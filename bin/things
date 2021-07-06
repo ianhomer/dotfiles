@@ -92,7 +92,6 @@ class Fzf:
                 + "bat --style=header --color=always "
                 + "--file-name (echo {} | cut -d: -f2) "
                 + "-l md "
-                + "--wrap character "
                 + "-r (echo {} | cut -d: -f3): "
             ]
         self.parts = []
