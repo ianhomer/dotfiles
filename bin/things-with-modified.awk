@@ -5,4 +5,4 @@
 #
 
 BEGIN { FS = ":" ; OFS = ":" }
-{ cmd="stat -f '%m' "$1 ; cmd|getline ts ; print (10000000000-ts "-" 10000+$2),$0 ; close(cmd) }
+{ cmd="stat -f '%m' "$1 ; cmd|getline ts ; print (10000000000-ts "-" 10000+$2),$0 }
