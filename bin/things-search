@@ -134,8 +134,8 @@ class Rg(Search):
         parts = [
             "rg",
             "-i",
-            "--glob",
-            "!archive/",
+            # "--glob",
+            # "!archive/",
             "--glob",
             "**/*.md",
             "--no-heading",
