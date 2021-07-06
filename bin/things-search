@@ -139,7 +139,9 @@ class Rg(Search):
             "--glob",
             "**/*.md",
             "--no-heading",
-            "-N",
+            "--color",
+            "never",
+            "-n",
         ]
         if self.maxPerFile > 0:
             parts.extend(["-m", str(self.maxPerFile)])
@@ -153,12 +155,16 @@ def search(args):
     if args.name == "default":
         search = Rg(match)
         search.maxPerFile = 1
+        search.postFilter = "s/^/0:/"
     elif args.name == "sort-modified":
         search = Rg(match)
         search.withModifiedKey = True
         search.sort = True
         search.maxPerFile = 1
-        search.postFilter = "s/\\([^/]*\\).md:\\(.*\\)/\\1.md:\\2 \033[95m(\\1)\033[0m/"
+        search.postFilter = (
+            "s/\\([^/]*\\).md:\\([0-9]*\\):\\(.*\\)/\\1.md:\\2:"
+            + "\\3 \033[95m(\\1)\033[0m/"
+        )
     elif args.name == "bookmarks":
         search = Rg(match)
         search.matchPrefix = "^\\[[0-9A-Za-z\\s\\.\\-]+\\]:.*"
@@ -166,8 +172,8 @@ def search(args):
         search = Rg(match)
         search.matchPrefix = "^#+.*"
         search.postFilter = (
-            "s/\\([^/]*\\).md:#\\(#*\\) \\(.*\\)/\\1.md:"
-            + "\033[30m\\2\033[0m\\3 \033[95m(\\1)\033[0m/"
+            "s/\\([^/]*\\).md:\\([0-9]*\\):#\\(#*\\) \\(.*\\)/\\1.md:\\2:"
+            + "\033[30m\\3\033[0m\\4 \033[95m(\\1)\033[0m/"
         )
         search.withModifiedKey = True
         search.sort = True
