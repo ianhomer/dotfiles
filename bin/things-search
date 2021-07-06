@@ -62,7 +62,7 @@ class Search:
     # Filter command to get output into desired 3 part format
     def createFilterCommand(self):
         if self.withModifiedKey:
-            return ["things-with-modified.awk"]
+            return ["things-with-modified"]
         elif self.filter is not None:
             return ["sed", self.filter]
         else:
