@@ -24,7 +24,7 @@ class ContextFilter:
         excludes = []
         for category in self.localPart.split(","):
             if category.startswith("-"):
-                excludes.append(category[1:])
+                excludes += self.family(category[1:])
         return excludes
 
     def children(self, parent: str):
