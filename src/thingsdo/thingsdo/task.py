@@ -198,3 +198,16 @@ class Task:
             if self.date is not None
             else str(self.rankGroup)
         )
+
+    @property
+    def primaryType(self):
+        if self.mission:
+            return "mission"
+        elif self.backlog:
+            return "backlog"
+        elif self.garage:
+            return "garage"
+        elif self.question:
+            return "question"
+        else:
+            return "normal"

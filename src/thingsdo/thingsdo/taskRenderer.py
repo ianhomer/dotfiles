@@ -6,6 +6,8 @@ class TaskRenderer:
         self.palette = Palette(theme=theme)
         self.clear = self.palette.color("clear")
         self.separator = self.palette.color("separator")
+        self.whostart = self.palette.color("whostart")
+        self.whoend = self.palette.color("whoend")
 
     def renderBody(self, task):
         parts = []
@@ -23,17 +25,14 @@ class TaskRenderer:
             ]
         if task.end:
             parts += [f"to {self.palette.color('end')}{task.end.display}{self.clear}"]
-        if task.mission:
-            parts += [self.palette.color("mission", modifier)]
-        elif task.backlog:
-            parts += [self.palette.color("backlog", modifier)]
-        elif task.garage:
-            parts += [self.palette.color("garage", modifier)]
-        elif task.question:
-            parts += [self.palette.color("question", modifier)]
-        else:
-            parts += [self.palette.color("normal", modifier)]
-        parts += [task.subject, self.clear]
+
+        parts += [
+            self.palette.color(task.primaryType, modifier),
+            task.subject.replace("[", self.whostart).replace(
+                "]", self.whoend + self.palette.color(task.primaryType)
+            ),
+            self.clear,
+        ]
         return "".join(parts)
 
     def modifier(self, task):

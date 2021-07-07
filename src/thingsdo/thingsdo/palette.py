@@ -1,12 +1,18 @@
-PURPLE = "95m"
-ORANGE = "33m"
+BOLD = "1m"
+BOLD_END = "0m"
+BLUE = "34m"
+CLEAR = "0m"
 CYAN = "36m"
 GREEN = "32m"
 GREY = "90m"
-BLUE = "34m"
+INVERSE = "7m"
+INVERSE_END = "27m"
 LIGHT_BLUE = "94m"
 NORMAL = "97m"
-CLEAR = "0m"
+ORANGE = "33m"
+PURPLE = "95m"
+UNDERLINE = "4m"
+UNDERLINE_END = "24m"
 
 
 class Palette:
@@ -15,6 +21,8 @@ class Palette:
         if self.theme:
             self.pre = "\033["
             self.colors = {
+                "whostart": "95;1m",
+                "whoend": BOLD_END,
                 "clear": CLEAR,
                 "context": PURPLE,
                 "date": ORANGE,
