@@ -19,6 +19,8 @@ THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
 def run():
     parser = argparse.ArgumentParser(description="things")
     parser.add_argument("thing", nargs="*", help="thing")
+    parser.add_argument("--witharchive", action="store_true")
+    parser.add_argument("--justarchive", action="store_true")
     parser.add_argument("-s", "--search", help="find things", action="store_true")
     parser.add_argument("-n", "--name", help="find things with named search")
     parser.add_argument("-r", "--recent", help="recent things", action="store_true")
@@ -37,10 +39,10 @@ def run():
 
     more = True
     while more:
-        if args.search or args.name:
-            more = search(args)
-        else:
+        if args.recent:
             more = recent(args)
+        else:
+            more = search(args)
 
 
 def open():
@@ -87,12 +89,12 @@ class Fzf:
             self.cmd += [
                 "--preview",
                 "cat (echo {} | cut -d: -f2) | cut -c 1-"
-                + str(width-2)
+                + str(width - 2)
                 + " | "
                 + "bat --style=header --color=always "
                 + "--file-name (echo {} | cut -d: -f2) "
                 + "-l md "
-                + "-r (echo {} | cut -d: -f3): "
+                + "-r (echo {} | cut -d: -f3): ",
             ]
         self.parts = []
         self.defaultCommand = "true"
@@ -150,18 +152,21 @@ def recent(args):
 
 def search(args):
     fzf = Fzf()
+    thingsSearchArgs = (
+        ""
+        + ("--witharchive " if args.witharchive else "")
+        + ("--justarchive " if args.justarchive else "")
+    )
+
     if args.name:
-        searchPrefix = f"things-search -n {args.name}"
+        searchPrefix = f"things-search {thingsSearchArgs}-n {args.name}"
     else:
-        searchPrefix = "things-search -n sort-modified"
+        searchPrefix = f"things-search {thingsSearchArgs}-n headings"
     if args.thing and len(args.thing) > 0:
         pattern = " ".join(args.thing)
         fzf.defaultCommand = f"{searchPrefix} '{pattern}' || true"
-    elif args.name:
-        fzf.defaultCommand = f"{searchPrefix} || true"
     else:
-        fzf.parts += ["--phony"]
-        fzf.binds = ["change:reload:" + searchPrefix + " {q} || true"]
+        fzf.defaultCommand = f"{searchPrefix} || true"
 
     return fzf.run()
 

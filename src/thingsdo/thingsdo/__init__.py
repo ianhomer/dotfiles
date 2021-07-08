@@ -3,5 +3,7 @@ from .contextFilter import ContextFilter
 from .humanDate import HumanDate
 from .humanTime import HumanTime
 from .palette import Palette
+from .search import Search
+from .rg import Rg
 from .task import Task
 from .taskRenderer import TaskRenderer

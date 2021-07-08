@@ -126,6 +126,7 @@ let g:markdown_fenced_languages = [
   \ 'javascript',
   \ 'json',
   \ 'python',
+  \ 'sh',
   \ 'typescript'
   \ ]
 " Support frontmatter yaml
