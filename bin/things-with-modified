@@ -10,11 +10,19 @@ import sys
 import os.path
 
 if __name__ == "__main__":
+    indexes = {}
     for line in sys.stdin:
         first = line.find(":")
-        second = line.find(":", first+1)
-        file = line[:first]
-        index2 = str(1000 + int(line[first+1:second]))
-        index1 = str(10000000000 - int(os.path.getmtime(file)))
+        second = line.find(":", first + 1)
+        filename = line[:first]
+        index2 = str(1000 + int(line[first + 1 : second]))
+        # index is based on modified time appended with hash of the filename.
+        # Hash of filename mitigates collisions when files have same modified
+        # time, resulting in interlacing of results when sorted
+        if filename not in indexes:
+            indexes[filename] = str(
+                10000000000000 - int(os.path.getmtime(filename))
+            ) + str(hash(filename))
+        index1 = indexes[filename]
         out = index1 + "-" + index2 + ":" + line
         sys.stdout.write(out)

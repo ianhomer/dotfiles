@@ -51,25 +51,26 @@ def fixModifiedTime():
     whatchanged = subprocess.Popen(
         shlex.split("git whatchanged --pretty=%at"), text=True, stdout=subprocess.PIPE
     )
-    for line in whatchanged.stdout:
-        line = line.strip()
-        if not line:
-            continue
+    if whatchanged.stdout:
+        for line in whatchanged.stdout:
+            line = line.strip()
+            if not line:
+                continue
 
-        if line[0] == ":":
-            # The filename is after the first tab
-            file = line.split("\t")[-1]
-            if file in files:
-                files.remove(file)
-                stinfo = os.stat(file)
-                if modifiedTime != int(stinfo.st_mtime):
-                    print(f"set mtime {modifiedTime} -> {file}")
-                    os.utime(file, (modifiedTime, modifiedTime))
-        else:
-            modifiedTime = int(line)
+            if line[0] == ":":
+                # The filename is after the first tab
+                file = line.split("\t")[-1]
+                if file in files:
+                    files.remove(file)
+                    stinfo = os.stat(file)
+                    if modifiedTime != int(stinfo.st_mtime):
+                        print(f"set mtime {modifiedTime} -> {file}")
+                        os.utime(file, (modifiedTime, modifiedTime))
+            else:
+                modifiedTime = int(line)
 
-        if not files:
-            break
+            if not files:
+                break
 
 
 run()
