@@ -110,6 +110,7 @@ class Fzf:
             # opens cheats. Similarly for ctrl-w opening todos.
             "ctrl-x:abort",
             "ctrl-w:abort",
+            "ctrl-o:execute(tmux split-window -v 'nvim {2}')"
         ]
 
     def run(self):
