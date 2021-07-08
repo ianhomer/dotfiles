@@ -79,9 +79,8 @@ function window#cleaner#CloseMe()
     return
   endif
 
-  if &filetype == "startify"
-    " On startify window
-    "   => close vi
+  if &filetype == "startify" || &buftype != ""
+    " Close startify window or non writable buffer
     quit
   elseif len(getbufinfo({'buflisted':1})) > 1
         \ || (&filetype == "nerdtree" && len(getbufinfo({'buflisted':1})) == 1)
@@ -103,6 +102,9 @@ function window#cleaner#CloseMe()
   elseif knobs#("startify") && exists(':Startify')
     execute ":bd"
     execute ":Startify"
+  elseif @% == ""
+    " No filename specified
+    execute ":q"
   else
     execute ":wq"
   endif

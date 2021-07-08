@@ -21,7 +21,7 @@ nvim_set_var(
         dispatch = 5,
         editorconfig = 5,
         endwise = 7,
-        eunuch = 7,
+        eunuch = 3,
         fugitive = 3,
         friendly_snippets = 5,
         fzf = 1,
@@ -217,8 +217,11 @@ return require("packer").startup {
             run = "cd app && yarn install"
         }
         useif {"lukas-reineke/indent-blankline.nvim"}
-
         useif {"junegunn/vim-peekaboo"}
+
+        -- Misc
+
+        useif "tpope/vim-eunuch"
 
         -- Diagnostics
         --
