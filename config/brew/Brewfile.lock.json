@@ -2,7 +2,7 @@
   "entries": {
     "tap": {
       "homebrew/cask-fonts": {
-        "revision": "feda8a29c2eb381997695269543daad965631341"
+        "revision": "1b997db680056b01dca0c34bcb065e83de76ca78"
       },
       "adoptopenjdk/openjdk": {
         "revision": "b58782026b57d6aa84cd0bb4a0fd8c0380b2088c"
@@ -805,6 +805,11 @@
               "cellar": "/usr/local/Cellar",
               "url": "https://ghcr.io/v2/homebrew/core/git/blobs/sha256:3c613c84fbc7410006e4dfed5c0d917c127a0b645c5c3a327a2e14811b0f525a",
               "sha256": "3c613c84fbc7410006e4dfed5c0d917c127a0b645c5c3a327a2e14811b0f525a"
+            },
+            "x86_64_linux": {
+              "cellar": "/home/linuxbrew/.linuxbrew/Cellar",
+              "url": "https://ghcr.io/v2/homebrew/core/git/blobs/sha256:0b4e025475acec1ccb73fe80304008aef90669b4b11abc623efc2801fb949514",
+              "sha256": "0b4e025475acec1ccb73fe80304008aef90669b4b11abc623efc2801fb949514"
             }
           }
         }
@@ -1915,6 +1920,11 @@
               "cellar": ":any_skip_relocation",
               "url": "https://ghcr.io/v2/homebrew/core/code-minimap/blobs/sha256:490595ba892b4bfd1170af45ca829af08015a371f0eedb7e41d7b9db51c9e8a4",
               "sha256": "490595ba892b4bfd1170af45ca829af08015a371f0eedb7e41d7b9db51c9e8a4"
+            },
+            "x86_64_linux": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/code-minimap/blobs/sha256:7bf1ebd18938f21a4fe695f78325e128374c6a5d7d35a47f42cb45e2b451a7f6",
+              "sha256": "7bf1ebd18938f21a4fe695f78325e128374c6a5d7d35a47f42cb45e2b451a7f6"
             }
           }
         }
@@ -2074,9 +2084,9 @@
         "macOS": "10.15.7"
       },
       "big_sur": {
-        "HOMEBREW_VERSION": "3.2.1-68-g625d9db",
+        "HOMEBREW_VERSION": "3.2.1",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "69b916079b6a906de77d02bc1d9aef9c7e38319c",
+        "Homebrew/homebrew-core": "87eb5a306a409c89f918c47ded14da58e8d80dea",
         "CLT": "12.5.0.22.9",
         "Xcode": "12.5.1",
         "macOS": "11.4"
