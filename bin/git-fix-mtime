@@ -20,7 +20,10 @@ class Git:
         self.cmd = ["git"]
         # Getting the root early has the side effect of throwing an error if
         # we're not in a git repository.
-        self.workDirectory, self.gitDirectory = self.root()
+        try:
+            self.workDirectory, self.gitDirectory = self.root()
+        except subprocess.CalledProcessError:
+            print(f"Cannot initialise : {os.getcwd()}")
 
     def ls(self):
         return (normal(_) for _ in self._run("ls-files --full-name"))
