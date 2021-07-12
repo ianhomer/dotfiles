@@ -36,3 +36,7 @@ def getTodayLog(now=datetime.datetime.now()):
 
 def getPath(name):
     return f"{THINGS_DIR}/{MY_NOTES}/stream/{name}.md"
+
+
+def lint():
+    print("Linting")
