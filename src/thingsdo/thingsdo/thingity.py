@@ -1,7 +1,7 @@
 import configparser
 import datetime
+import glob
 import subprocess
-import re
 import time
 from pathlib import Path
 from . import runner
@@ -39,4 +39,5 @@ def getPath(name):
 
 
 def lint():
-    print("Linting")
+    for thing in glob.iglob(f"{THINGS_DIR}/**/*.md", recursive=True):
+        print(f"Linting : {thing}")
