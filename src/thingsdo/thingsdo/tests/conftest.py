@@ -8,9 +8,20 @@ def thing_should_have_field_value(context, thing, field, expected):
     assert str(getattr(context[thing], field)) == expected
 
 
+@then(parsers.parse("the {thing:l} is not {expected}"))
+def thing_should_not_be(context, thing, expected):
+    if hasattr(context[thing], expected):
+        assert not getattr(context[thing], expected)
+    else:
+        assert str(context[thing]) != expected
+
+
 @then(parsers.parse("the {thing:l} is {expected}"))
 def thing_should_be(context, thing, expected):
-    assert str(context[thing]) == expected
+    if hasattr(context[thing], expected):
+        assert getattr(context[thing], expected)
+    else:
+        assert str(context[thing]) == expected
 
 
 @then(parsers.parse("the {thing:l} {field:l} is not set"))

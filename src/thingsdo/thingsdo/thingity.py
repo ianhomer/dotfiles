@@ -43,9 +43,8 @@ def lint():
     for filename in glob.iglob(f"{THINGS_DIR}/**/*.md", recursive=True):
         try:
             thing = Thing(filename, root=THINGS_DIR)
-            print(f"Linting : {thing.filename}")
-            print(f"Normal : {thing.normal}")
             if not thing.normal:
+                print(f"Linting : {thing.filename}")
                 print(f"-> normal : {thing.normalFilename}")
         except Exception as exception:
             errors += [exception]

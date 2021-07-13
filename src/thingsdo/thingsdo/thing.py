@@ -25,10 +25,23 @@ class Thing:
             else:
                 raise Exception(f"Not thing {self.filename}")
 
+        self.normalBase = self.base
+        self.normalPath = self.path
+        if self.path == "stream":
+            match = re.search("([0-9]{4})", self.base)
+            if match:
+                self.normalPath = "stream/archive/2021"
+                self.normalBase = "21" + match.group(1)
+
     @property
     def normal(self):
         return self.filename == self.normalFilename
 
     @property
     def normalFilename(self):
-        return self.filename
+        return (
+            self.collection + "/"
+            + ((self.normalPath + "/") if self.normalPath else "")
+            + self.normalBase
+            + ".md"
+        )
