@@ -17,8 +17,11 @@ def root(context, root):
 
 @when(parsers.parse("I have the thing {thing}"))
 def I_have_thing(context, thing):
-    root = context.get("thing")
+    root = context.get("root")
+    today = context.get("today")
     kwargs = {}
     if root:
         kwargs["root"] = root
-    context["thing"] = Thing(thing, kwargs)
+    if today:
+        kwargs["today"] = today
+    context["thing"] = Thing(thing, **kwargs)
