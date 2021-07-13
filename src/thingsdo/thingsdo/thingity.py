@@ -39,6 +39,16 @@ def getPath(name):
 
 
 def lint():
+    errors = []
     for filename in glob.iglob(f"{THINGS_DIR}/**/*.md", recursive=True):
-        thing = Thing(THINGS_DIR, filename)
-        print(f"Linting : {thing.filename}")
+        try:
+            thing = Thing(filename, root=THINGS_DIR)
+            print(f"Linting : {thing.filename}")
+            print(f"Normal : {thing.normal}")
+            if not thing.normal:
+                print(f"-> normal : {thing.normalFilename}")
+        except Exception as exception:
+            errors += [exception]
+
+    for error in errors:
+        print(f"ERROR : {error}")
