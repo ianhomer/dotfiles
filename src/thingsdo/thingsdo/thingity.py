@@ -40,5 +40,5 @@ def getPath(name):
 
 def lint():
     for filename in glob.iglob(f"{THINGS_DIR}/**/*.md", recursive=True):
-        thing = Thing(filename)
+        thing = Thing(THINGS_DIR, filename)
         print(f"Linting : {thing.filename}")
