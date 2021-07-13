@@ -31,7 +31,7 @@ class Thing:
             match = re.search("([0-9]{4})", self.base)
             if match:
                 self.normalPath = "stream/archive/2021"
-                self.normalBase = "21" + match.group(1)
+                self.normalBase = "2021" + match.group(1)
 
     @property
     def normal(self):
