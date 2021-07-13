@@ -4,7 +4,7 @@ import glob
 import subprocess
 import time
 from pathlib import Path
-from . import runner
+from . import runner, Thing
 
 config = configparser.ConfigParser()
 config.read(str(Path.home()) + "/.config/dotme/shim.ini")
@@ -39,5 +39,6 @@ def getPath(name):
 
 
 def lint():
-    for thing in glob.iglob(f"{THINGS_DIR}/**/*.md", recursive=True):
-        print(f"Linting : {thing}")
+    for filename in glob.iglob(f"{THINGS_DIR}/**/*.md", recursive=True):
+        thing = Thing(filename)
+        print(f"Linting : {thing.filename}")

@@ -7,3 +7,4 @@ from .search import Search
 from .rg import Rg
 from .task import Task
 from .taskRenderer import TaskRenderer
+from .thing import Thing
