@@ -4,7 +4,7 @@ import glob
 import subprocess
 import time
 from pathlib import Path
-from . import runner, Thing
+from . import runner, Level, Signal, Thing
 
 config = configparser.ConfigParser()
 config.read(str(Path.home()) + "/.config/dotme/shim.ini")
@@ -39,7 +39,7 @@ def getPath(name):
 
 
 def lint():
-    errors = []
+    signals = []
     for filename in glob.iglob(f"{THINGS_DIR}/**/*.md", recursive=True):
         try:
             thing = Thing(filename, root=THINGS_DIR)
@@ -47,7 +47,7 @@ def lint():
                 print(f"Linting : {thing.filename}")
                 print(f"-> normal : {thing.normalFilename}")
         except Exception as exception:
-            errors += [exception]
+            signals += [Signal(exception=exception, context=filename)]
 
-    for error in errors:
-        print(f"ERROR : {error}")
+    for signal in signals:
+        print(f"{signal}")

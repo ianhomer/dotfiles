@@ -29,7 +29,7 @@ class Thing:
         self.normalBase = self.base
         self.normalPath = self.path
         if self.path == "stream":
-            match = re.search("([0-9]{2})([0-9]{2})", self.base)
+            match = re.search("^([0-9]{2})([0-9]{2})$", self.base)
             if match:
                 date = today.replace(
                     today.year, int(match.group(1)), int(match.group(2))
