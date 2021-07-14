@@ -1,4 +1,3 @@
-from io import DEFAULT_BUFFER_SIZE
 import os
 import re
 from datetime import date, timedelta
@@ -41,7 +40,7 @@ class Thing:
                     # Year comes from archive path
                     date = date.replace(int(match.group(1)))
                 elif date > today:
-                    # Last year thin
+                    # Last year thing
                     date = date.replace(date.year - 1)
                 if today - timedelta(days=40) > date:
                     self.normalPath = "stream/archive/" + str(date.year)
@@ -49,15 +48,20 @@ class Thing:
 
     def normalise(self):
         if self.root:
-            destination = self.root + "/" + self.normalFilename
-            destinationDirectory = os.path.dirname(destination)
-            if not os.path.exists(destinationDirectory):
-                print(f"Creating directory : {destinationDirectory}")
-                os.makedirs(destinationDirectory)
-            print(f"Moving : {self.filename} -> {self.normalFilename}")
-            os.rename(
-                self.root + "/" + self.filename, destination
-            )
+            # Safe guard on root to reduce risk of normalising files
+            # outside of a things root
+            if "projects/things" in self.root:
+                destination = self.root + "/" + self.normalFilename
+                destinationDirectory = os.path.dirname(destination)
+                if not os.path.exists(destinationDirectory):
+                    print(f"Creating directory : {destinationDirectory}")
+                    os.makedirs(destinationDirectory)
+                print(f"Moving : {self.filename} -> {self.normalFilename}")
+                os.rename(self.root + "/" + self.filename, destination)
+            else:
+                raise Exception(f"Safe guard root {self.root} not a things root")
+        else:
+            raise Exception(f"Cannot normalise {self} since no root set")
 
     @property
     def normal(self):
