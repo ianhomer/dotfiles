@@ -1,3 +1,5 @@
+from io import DEFAULT_BUFFER_SIZE
+import os
 import re
 from datetime import date, timedelta
 
@@ -44,6 +46,18 @@ class Thing:
                 if today - timedelta(days=40) > date:
                     self.normalPath = "stream/archive/" + str(date.year)
                     self.normalBase = date.strftime("%Y%m%d")
+
+    def normalise(self):
+        if self.root:
+            destination = self.root + "/" + self.normalFilename
+            destinationDirectory = os.path.dirname(destination)
+            if not os.path.exists(destinationDirectory):
+                print(f"Creating directory : {destinationDirectory}")
+                os.makedirs(destinationDirectory)
+            print(f"Moving : {self.filename} -> {self.normalFilename}")
+            os.rename(
+                self.root + "/" + self.filename, destination
+            )
 
     @property
     def normal(self):
