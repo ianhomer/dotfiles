@@ -1,5 +1,5 @@
 import re
-from datetime import date
+from datetime import date, timedelta
 
 
 class Thing:
@@ -28,16 +28,22 @@ class Thing:
 
         self.normalBase = self.base
         self.normalPath = self.path
-        if self.path == "stream":
+        if self.path and self.path.startswith("stream"):
             match = re.search("^([0-9]{2})([0-9]{2})$", self.base)
             if match:
                 date = today.replace(
                     today.year, int(match.group(1)), int(match.group(2))
                 )
-                if date > today:
+                match = re.search("(20[0-9]{2})", self.path)
+                if match:
+                    # Year comes from archive path
+                    date = date.replace(int(match.group(1)))
+                elif date > today:
+                    # Last year thin
                     date = date.replace(date.year - 1)
-                self.normalPath = "stream/archive/" + str(date.year)
-                self.normalBase = date.strftime("%Y%m%d")
+                if today - timedelta(days=40) > date:
+                    self.normalPath = "stream/archive/" + str(date.year)
+                    self.normalBase = date.strftime("%Y%m%d")
 
     @property
     def normal(self):

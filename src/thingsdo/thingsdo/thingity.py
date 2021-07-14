@@ -44,8 +44,7 @@ def lint():
         try:
             thing = Thing(filename, root=THINGS_DIR)
             if not thing.normal:
-                print(f"Linting : {thing.filename}")
-                print(f"-> normal : {thing.normalFilename}")
+                print(f"Linting : {thing.filename} -> {thing.normalFilename}")
         except Exception as exception:
             signals += [Signal(exception=exception, context=filename)]
 
