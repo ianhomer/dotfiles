@@ -38,13 +38,13 @@ def getPath(name):
     return f"{THINGS_DIR}/{MY_NOTES}/stream/{name}.md"
 
 
-def lint():
+def lint(fix=False):
     signals = []
     for filename in glob.iglob(f"{THINGS_DIR}/**/*.md", recursive=True):
         try:
             thing = Thing(filename, root=THINGS_DIR)
             if not thing.normal:
-                thing.normalise()
+                thing.normalise(fix)
         except Exception as exception:
             signals += [Signal(exception=exception, context=filename)]
 
