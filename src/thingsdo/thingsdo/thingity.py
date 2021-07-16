@@ -1,6 +1,7 @@
 import configparser
 import datetime
 import glob
+import os
 import subprocess
 import time
 from pathlib import Path
@@ -50,3 +51,7 @@ def lint(fix=False):
 
     for signal in signals:
         print(f"{signal}")
+
+    # Show any todos in the archive, since these will be excluded
+    # from the default todo execution.
+    os.system("todo --justarchive --stream")

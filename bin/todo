@@ -42,6 +42,7 @@ def run():
     parser.add_argument("do", nargs="*", help="do")
     parser.add_argument("--witharchive", action="store_true")
     parser.add_argument("--justarchive", action="store_true")
+    parser.add_argument("--stream", action="store_true")
     parser.add_argument("-a", "--all", help="all dos", action="store_true")
     parser.add_argument("-c", "--context", help="all contexts", action="store_true")
     parser.add_argument("-t", "--today", help="add today item", action="store_true")
@@ -123,12 +124,17 @@ def search(args):
     lines = result.stdout.splitlines()
     days = args.days or (365 if args.all else 3)
     dos = []
-    renderer = TaskRenderer(theme="do")
+    renderer = TaskRenderer(theme=None if args.stream else "do")
     for line in lines:
         task = Task(line, near=days)
         if task.context not in excludes:
-            dos.append(renderer.render(task) + "\n")
+            dos.append(renderer.render(task) + ("" if args.stream else "\n"))
     dos.sort()
+    # Simply stream the output
+    if args.stream:
+        for do in dos:
+            print(do[5:])
+        return False
     fzf = subprocess.Popen(
         [
             "fzf",
