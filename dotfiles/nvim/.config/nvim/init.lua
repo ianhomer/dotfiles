@@ -30,7 +30,7 @@ nvim_set_var(
         gruvbox = 5,
         gruvbuddy = 7,
         gruvbox8 = 1,
-        goyo = 3,
+        goyo = 9,
         gutentags = 5,
         indent_blankline = 5,
         indentline = 5,
@@ -58,7 +58,8 @@ nvim_set_var(
         tabular = 3,
         telescope = 8,
         thingity = 3,
-        treesitter = 5,
+        treesitter = 3,
+        twightlight = 3,
         unimpaired = 5,
         update_spelling = 7,
         which_key = 4,
@@ -67,7 +68,7 @@ nvim_set_var(
         tmux_navigator = 3,
         unicode = 4,
         vsnip = 8,
-        zen_mode = 4,
+        zen_mode = 3,
         zephyr = 9
     }
 )
@@ -189,7 +190,7 @@ return require("packer").startup {
         useif {"norcalli/nvim-colorizer.lua", config = [[require'config.colorizer']]}
 
         -- Git
-        use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Ggrep", "Gpush", "Gpull"}}
+        use {"tpope/vim-fugitive", cmd = {"G", "Git", "Gstatus", "Gblame", "Ggrep", "Gpush", "Gpull"}}
         useif {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
         useif {"airblade/vim-gitgutter"}
         useif {"tpope/vim-dispatch"}
@@ -202,12 +203,20 @@ return require("packer").startup {
         use "tpope/vim-repeat"
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
 
-        useif 'editorconfig/editorconfig-vim'
+        useif "editorconfig/editorconfig-vim"
         useif "chrisbra/unicode.vim"
-        use {
+
+        vim.api.nvim_set_keymap("n", "<space>i", "<cmd>:ZenMode<CR>", {})
+        useif {
             "folke/zen-mode.nvim",
             cmd = {"ZenMode"},
             config = [[require'config.zen_mode']]
+        }
+        useif {
+            "folke/twilight.nvim",
+            config = function()
+                require("twilight").setup {}
+            end
         }
 
         useif "junegunn/goyo.vim"

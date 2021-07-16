@@ -4,7 +4,10 @@ require("zen-mode").setup {
     options = {
       signcolumn = "no",
       number = false
-    }
+    },
+  },
+  plugins = {
+    tmux = { enabled = true }
   }
 }
 
