@@ -4,7 +4,7 @@ import glob
 import subprocess
 import time
 from pathlib import Path
-from . import runner, Level, Signal, Thing
+from . import runner, Signal, Thing
 
 config = configparser.ConfigParser()
 config.read(str(Path.home()) + "/.config/dotme/shim.ini")

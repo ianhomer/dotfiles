@@ -33,7 +33,6 @@ class Thing:
             match = re.search("^[0-9]*([0-9]{2})([0-9]{2})(-.*)?$", self.base)
             if match:
                 postfix = match.group(3) if match.group(3) else ""
-                print(f"{self.path} {self.base} {postfix}")
                 date = today.replace(
                     today.year, int(match.group(1)), int(match.group(2))
                 )
@@ -45,8 +44,8 @@ class Thing:
                     # Last year thing
                     date = date.replace(date.year - 1)
                 if today - timedelta(days=40) > date:
-                    self.normalPath = "stream/archive/"
-                    self.normalBase = date.strftime("%Y%m%d") + str(date.year) + postfix
+                    self.normalPath = "stream/archive/" + str(date.year)
+                    self.normalBase = date.strftime("%Y%m%d") + postfix
 
     def normalise(self, fix=False):
         mode = "+" if fix else "-"
