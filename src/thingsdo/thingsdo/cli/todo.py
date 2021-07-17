@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import argparse
-import configparser
 import os
 import os.path
 import subprocess
@@ -13,12 +12,9 @@ from subprocess import PIPE
 from .. import Ag, ContextFilter, Environment, Task, thingity, TaskRenderer
 
 environment = Environment()
-config = configparser.ConfigParser()
-home = str(Path.home())
-config.read(home + "/.config/dotme/shim.ini")
 
-MY_NOTES = config["DEFAULT"]["MY_NOTES"]
-MY_DO = config["DEFAULT"]["MY_DO"]
+MY_NOTES = environment.config["MY_NOTES"]
+MY_DO = environment.config["MY_DO"]
 
 PURPLE = "\033[95m"
 ORANGE = "\033[33m"
@@ -57,7 +53,7 @@ def run():
 
         # Scan words
         for word in args.do:
-            if home == word:
+            if environment.home == word:
                 words.append("~")
             else:
                 words.append(word)
