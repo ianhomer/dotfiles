@@ -217,6 +217,3 @@ def add(do):
         lines.insert(2, f"- [ ] {task}\n")
         file.seek(0)
         file.writelines(lines)
-
-
-run()

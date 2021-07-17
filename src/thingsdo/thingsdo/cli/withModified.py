@@ -9,7 +9,8 @@
 import sys
 import os.path
 
-if __name__ == "__main__":
+
+def run():
     indexes = {}
     for line in sys.stdin:
         first = line.find(":")

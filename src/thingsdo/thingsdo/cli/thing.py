@@ -54,6 +54,3 @@ def edit(args):
         env={**os.environ, "VIM_KNOB": "4"},
         cwd=thingity.THINGS_DIR,
     )
-
-
-run()

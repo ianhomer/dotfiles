@@ -175,6 +175,3 @@ def search(args):
         fzf.defaultCommand = f"{searchPrefix} || true"
 
     return fzf.run()
-
-
-run()

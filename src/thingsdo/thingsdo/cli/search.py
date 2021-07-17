@@ -61,6 +61,3 @@ def search(args):
         search.filter = None
     # search.maxPerFile = 1
     search.run(args)
-
-
-run()
