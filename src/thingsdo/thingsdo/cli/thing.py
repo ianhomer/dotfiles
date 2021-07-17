@@ -6,6 +6,7 @@ import subprocess
 import re
 from datetime import datetime
 from pathlib import Path
+from thingsdo.environment import Environment
 from .. import thingity
 
 
@@ -51,6 +52,5 @@ def edit(args):
     # Edit a thing.
     subprocess.call(
         ["nvim", filename, "+:$"],
-        env={**os.environ, "VIM_KNOB": "4"},
-        cwd=thingity.THINGS_DIR,
+        cwd=Environment().directory,
     )
