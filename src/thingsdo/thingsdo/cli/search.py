@@ -9,7 +9,7 @@
 #
 
 import argparse
-from thingsdo import Rg, Environment
+from .. import Rg, Environment
 
 
 def run():

@@ -6,7 +6,7 @@ import subprocess
 import re
 from datetime import datetime
 from pathlib import Path
-from thingsdo import thingity
+from .. import thingity
 
 
 def run():

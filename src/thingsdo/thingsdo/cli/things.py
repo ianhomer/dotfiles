@@ -6,7 +6,7 @@ import subprocess
 import re
 import shutil
 from subprocess import PIPE
-from thingsdo import Environment, thingity
+from .. import Environment, thingity
 
 
 environment = Environment()
