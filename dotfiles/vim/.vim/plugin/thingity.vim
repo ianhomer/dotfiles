@@ -8,12 +8,12 @@ if !knobs#("thingity")
   finish
 endif
 
-if knobs#At(4)
+if knobs#At(3)
   " Markdown syntax
   " Enable folding
   let g:markdown_folding = 1
   " Default large fold level start, folding everything up by default feels odd.
-  set foldlevelstart=20
+  set foldlevelstart=1
 endif
 
 nnoremap <silent> <leader>jd :call thingity#DateHeading()<CR>
