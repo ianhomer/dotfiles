@@ -1,6 +1,6 @@
+from .environment import Environment
 from .ag import Ag
 from .contextFilter import ContextFilter
-from .environment import Environment
 from .humanDate import HumanDate
 from .humanTime import HumanTime
 from .palette import Palette

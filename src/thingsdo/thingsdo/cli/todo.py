@@ -10,12 +10,13 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from subprocess import PIPE
-from thingsdo import Ag, ContextFilter, Task, thingity, TaskRenderer
+from .. import Ag, ContextFilter, Environment, Task, thingity, TaskRenderer
 
+environment = Environment()
 config = configparser.ConfigParser()
 home = str(Path.home())
 config.read(home + "/.config/dotme/shim.ini")
-THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
+
 MY_NOTES = config["DEFAULT"]["MY_NOTES"]
 MY_DO = config["DEFAULT"]["MY_DO"]
 
@@ -83,7 +84,7 @@ def context():
             "--nobreak",
             "--nofilename",
             "\\- \\[ \\] [A-Z]{3}",
-            THINGS_DIR,
+            environment.directory,
         ],
         stdout=PIPE,
     )
@@ -114,7 +115,7 @@ def search(args):
         pattern = "\\- \\[ \\](?! ([A-Z]{3} )?[\\.\\-])"
         excludes = contextFilter.excludes()
 
-    ag = Ag(THINGS_DIR, args.justarchive, args.witharchive or args.all)
+    ag = Ag(environment, args.justarchive, args.witharchive or args.all)
     agParts = ag.parts(
         pattern, ["--noheading", "--nonumbers", "--nocolor", "--nobreak"]
     )
@@ -188,7 +189,7 @@ def search(args):
 def getTodayLog(now=datetime.now()):
     now = datetime.now()
     today = now.strftime("%m%d")
-    return f"{THINGS_DIR}/{MY_NOTES}/stream/{today}.md"
+    return f"{environment.directory}/{MY_NOTES}/stream/{today}.md"
 
 
 # Add a do

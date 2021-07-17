@@ -9,7 +9,7 @@ from subprocess import PIPE
 from thingsdo import Environment, thingity
 
 
-THINGS_DIR = Environment().directory
+environment = Environment()
 
 
 def run():
@@ -47,7 +47,9 @@ def run():
 
 
 def open():
-    subprocess.run(["nvim"], env={**os.environ, "VIM_KNOB": "4"}, cwd=THINGS_DIR)
+    subprocess.run(
+        ["nvim"], env={**os.environ, "VIM_KNOB": "4"}, cwd=environment.directory
+    )
 
 
 class Fzf:
@@ -111,7 +113,7 @@ class Fzf:
             # opens cheats. Similarly for ctrl-w opening todos.
             "ctrl-x:abort",
             "ctrl-w:abort",
-            "ctrl-o:execute(tmux split-window -v 'nvim {2}')"
+            "ctrl-o:execute(tmux split-window -v 'nvim {2}')",
         ]
 
     def run(self):
@@ -124,7 +126,7 @@ class Fzf:
             text=True,
             stderr=None,
             env={**os.environ, "FZF_DEFAULT_COMMAND": self.defaultCommand},
-            cwd=THINGS_DIR,
+            cwd=environment.directory,
         )
         lines = process.stdout.splitlines()
         selected = []
@@ -137,7 +139,7 @@ class Fzf:
             subprocess.call(
                 ["nvim"] + selected,
                 env={**os.environ, "VIM_KNOB": "4"},
-                cwd=THINGS_DIR,
+                cwd=environment.directory,
             )
             return True
         return False

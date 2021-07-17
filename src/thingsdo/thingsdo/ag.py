@@ -1,6 +1,9 @@
+from . import Environment
+
+
 class Ag:
-    def __init__(self, path, justArchive=False, withArchive=False):
-        self.path = path
+    def __init__(self, environment: Environment, justArchive=False, withArchive=False):
+        self.path = environment.directory
         self.archiveParts = self.createArchiveParts(justArchive, withArchive)
 
     def createArchiveParts(self, justArchive, withArchive):
