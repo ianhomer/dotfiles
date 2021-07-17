@@ -176,7 +176,7 @@ def search(args):
         if match:
             file = match.group(4)
             subprocess.call(
-                ["nvim", file, "+:Goyo"], env={**os.environ, "VIM_KNOB": "4"}
+                ["nvim", file]
             )
             return True
         else:
