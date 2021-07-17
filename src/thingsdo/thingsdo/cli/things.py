@@ -3,17 +3,13 @@
 import argparse
 import os
 import subprocess
-import configparser
 import re
 import shutil
-from pathlib import Path
 from subprocess import PIPE
-from thingsdo import thingity
+from thingsdo import Environment, thingity
 
 
-config = configparser.ConfigParser()
-config.read(str(Path.home()) + "/.config/dotme/shim.ini")
-THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
+THINGS_DIR = Environment().directory
 
 
 def run():

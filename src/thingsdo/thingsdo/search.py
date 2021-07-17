@@ -1,14 +1,8 @@
 import subprocess
 import sys
 from subprocess import PIPE
+from . import Environment
 from typing import Optional
-import configparser
-from pathlib import Path
-
-
-config = configparser.ConfigParser()
-config.read(str(Path.home()) + "/.config/dotme/shim.ini")
-THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
 
 
 # Make a part safe for executing as shell command. This allows the output from a
@@ -24,7 +18,8 @@ def shellSafe(parts):
 
 
 class Search:
-    def __init__(self):
+    def __init__(self, environment: Environment):
+        self.environment = environment
         self.withModifiedKey = False
         self.sort = False
         self.maxPerFile = 0
@@ -74,11 +69,17 @@ class Search:
                 command += " | " + " ".join(shellSafe(sortCommand))
             print(command)
             return
-        pipe = subprocess.Popen(command, stdout=PIPE, cwd=THINGS_DIR, text=True)
+        pipe = subprocess.Popen(
+            command, stdout=PIPE, cwd=self.environment.directory, text=True
+        )
         pipeIn = pipe
         if len(filterCommand) > 0:
             pipe = subprocess.Popen(
-                filterCommand, stdin=pipe.stdout, stdout=PIPE, text=True, cwd=THINGS_DIR
+                filterCommand,
+                stdin=pipe.stdout,
+                stdout=PIPE,
+                text=True,
+                cwd=self.environment.directory,
             )
         if len(postFilterCommand) > 0:
             pipe = subprocess.Popen(
@@ -86,11 +87,15 @@ class Search:
                 stdin=pipe.stdout,
                 stdout=PIPE,
                 text=True,
-                cwd=THINGS_DIR,
+                cwd=self.environment.directory,
             )
         if len(sortCommand) > 0:
             pipe = subprocess.Popen(
-                sortCommand, stdin=pipe.stdout, stdout=PIPE, text=True, cwd=THINGS_DIR
+                sortCommand,
+                stdin=pipe.stdout,
+                stdout=PIPE,
+                text=True,
+                cwd=self.environment.directory,
             )
         if pipe.stdout:
             for line in iter(pipe.stdout.readline, b""):

@@ -9,7 +9,7 @@
 #
 
 import argparse
-from thingsdo import Rg
+from thingsdo import Rg, Environment
 
 
 def run():
@@ -27,13 +27,14 @@ def run():
 
 def search(args):
     match = " ".join(args.thing)
+    environment = Environment()
 
     if args.name == "default":
-        search = Rg(match)
+        search = Rg(environment, match)
         search.maxPerFile = 1
         search.postFilter = "s/^/0:/"
     elif args.name == "sort-modified":
-        search = Rg(match)
+        search = Rg(environment, match)
         search.withModifiedKey = True
         search.sort = True
         search.maxPerFile = 1
@@ -42,11 +43,11 @@ def search(args):
             + "\\3 \033[95m(\\1)\033[0m/"
         )
     elif args.name == "bookmarks":
-        search = Rg(match)
+        search = Rg(environment, match)
         search.withModifiedKey = True
         search.matchPrefix = "^\\[[0-9A-Za-z\\s\\.\\-]+\\]:.*"
     elif args.name == "headings":
-        search = Rg(match, args.justarchive, args.witharchive)
+        search = Rg(environment, match, args.justarchive, args.witharchive)
         search.matchPrefix = "^#+ .*"
         search.postFilter = (
             "s/\\([^/]*\\).md:\\([0-9]*\\):#\\(#*\\) \\(.*\\)/\\1.md:\\2:"

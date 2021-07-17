@@ -1,10 +1,12 @@
-from . import Search
+from . import Environment, Search
 
 
 # Ripgrep specific searching
 class Rg(Search):
-    def __init__(self, match, justArchive=False, withArchive=False):
-        super(Rg, self).__init__()
+    def __init__(
+        self, environment: Environment, match, justArchive=False, withArchive=False
+    ):
+        super(Rg, self).__init__(environment)
         self.match = match
         self.globParts = self.createGlobParts(justArchive, withArchive)
 

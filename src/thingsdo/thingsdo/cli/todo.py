@@ -12,14 +12,13 @@ from pathlib import Path
 from subprocess import PIPE
 from thingsdo import Ag, ContextFilter, Task, thingity, TaskRenderer
 
-home = str(Path.home())
-
 config = configparser.ConfigParser()
 home = str(Path.home())
 config.read(home + "/.config/dotme/shim.ini")
 THINGS_DIR = config["DEFAULT"]["THINGS_DIR"]
 MY_NOTES = config["DEFAULT"]["MY_NOTES"]
 MY_DO = config["DEFAULT"]["MY_DO"]
+
 PURPLE = "\033[95m"
 ORANGE = "\033[33m"
 CYAN = "\033[36m"
