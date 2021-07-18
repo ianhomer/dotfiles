@@ -6,16 +6,14 @@ import time
 from . import Environment, runner, Signal, Thing
 
 environment = Environment()
-MY_NOTES = environment.config["MY_NOTES"]
-MY_NOTES_DIR = environment.directory + "/" + MY_NOTES
-shouldSynkFile = environment.home + "/.config/dotme/should-run/last-run-git-synk-things"
 
 
 def synk(force, justMyNotes=False):
+    shouldSynkFile = environment.home + "/.config/dotme/should-run/last-run-git-synk-things"
     if not force and not runner.should(shouldSynkFile):
         return
     if force:
-        dir = MY_NOTES_DIR if justMyNotes else environment.directory
+        dir = environment.myNotesDir if justMyNotes else environment.directory
         subprocess.run(["git", "synk"], cwd=dir)
         runner.has(shouldSynkFile)
         time.sleep(1)
@@ -28,11 +26,11 @@ def synk(force, justMyNotes=False):
 
 def getTodayLog(now=datetime.datetime.now()):
     today = now.strftime("%m%d")
-    return f"{environment.directory}/{MY_NOTES}/stream/{today}.md"
+    return f"{environment.directory}/{environment.myNotes}/stream/{today}.md"
 
 
 def getPath(name):
-    return f"{environment.directory}/{MY_NOTES}/stream/{name}.md"
+    return f"{environment.directory}/{environment.myNotes}/stream/{name}.md"
 
 
 def lint(fix=False):
