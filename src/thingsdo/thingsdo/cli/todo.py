@@ -205,6 +205,7 @@ def add(environment, do):
             # file
             lines.append("\n")
 
+        # Space between dos and next paragraph
         if not lines[2].startswith("-"):
             lines.insert(2, "\n")
 
