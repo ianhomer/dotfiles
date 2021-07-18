@@ -51,7 +51,7 @@ def search(args):
         search = Rg(environment, match, args.justarchive, args.witharchive)
         search.matchPrefix = "^#+ .*"
         search.postFilter = (
-            "s/\\([^/]*\\).md:\\([0-9]*\\):#\\(#*\\) \\(.*\\)/\\1.md:\\2:"
+            "s/\\([^/:]*\\).md:\\([0-9]*\\):#\\(#*\\) \\(.*\\)/\\1.md:\\2:"
             + "\033[30m\\3\033[0m\\4 \033[95m(\\1)\033[0m/"
         )
         search.withModifiedKey = True

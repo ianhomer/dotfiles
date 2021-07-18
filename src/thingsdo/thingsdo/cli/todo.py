@@ -31,15 +31,17 @@ END = "\033[0m"
 def run():
     parser = argparse.ArgumentParser(description="todoer")
     parser.add_argument("do", nargs="*", help="do")
-    parser.add_argument("--witharchive", action="store_true")
-    parser.add_argument("--justarchive", action="store_true")
-    parser.add_argument("--stream", action="store_true")
     parser.add_argument("-a", "--all", help="all dos", action="store_true")
     parser.add_argument("-c", "--context", help="all contexts", action="store_true")
-    parser.add_argument("-t", "--today", help="add today item", action="store_true")
-    parser.add_argument("--noconfig", help="ignore config files", action="store_true")
-
     parser.add_argument("--days", type=int, help="days")
+    parser.add_argument("--stream", action="store_true")
+    parser.add_argument("-t", "--today", help="add today item", action="store_true")
+
+    # General settings
+    parser.add_argument("--noconfig", help="ignore config files", action="store_true")
+    parser.add_argument("--justarchive", action="store_true")
+    parser.add_argument("--witharchive", action="store_true")
+
     args = parser.parse_args()
 
     environment = Environment.withConfig(not args.noconfig)
