@@ -7,7 +7,7 @@ if !knobs#("ale")
   finish
 endif
 
-let markdown_linters = ['markdownlint']
+let markdown_linters = ['remark-lint']
 
 " Enable markdown linters that help with good writing
 if knobs#("writegood")
@@ -37,6 +37,7 @@ let g:ale_fixers = {
   \   'javascript': ['eslint', 'prettier'],
   \   'json': ['jq'],
   \   'lua': ['luafmt'],
+  \   'markdown': ['remark-lint'],
   \   'python': ['black'],
   \   'scss': ['prettier'],
   \   'typescript': ['eslint', 'prettier']
