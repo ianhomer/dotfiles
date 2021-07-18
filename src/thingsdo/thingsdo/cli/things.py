@@ -9,9 +9,6 @@ from subprocess import PIPE
 from .. import Environment, thingity
 
 
-environment = Environment()
-
-
 def run():
     parser = argparse.ArgumentParser(description="things")
     parser.add_argument("thing", nargs="*", help="thing")
@@ -23,17 +20,20 @@ def run():
     parser.add_argument("-n", "--name", help="find things with named search")
     parser.add_argument("-r", "--recent", help="recent things", action="store_true")
     parser.add_argument("--synk", help="synk things", action="store_true")
+    parser.add_argument("--noconfig", help="ignore config files", action="store_true")
     # Just sync my notes
     parser.add_argument("-m", "--my", help="synk my things", action="store_true")
     parser.add_argument("-o", "--open", help="open my things", action="store_true")
 
     args = parser.parse_args()
 
+    environment = Environment(configFile=None) if args.noconfig else Environment()
+
     if thingity.synk(args.synk, args.my):
         return
 
     if args.open:
-        return open()
+        return open(environment)
 
     if args.lint:
         return thingity.lint(fix=args.fix)
@@ -41,15 +41,13 @@ def run():
     more = True
     while more:
         if args.recent:
-            more = recent(args)
+            more = recent(environment, args)
         else:
-            more = search(args)
+            more = search(environment, args)
 
 
-def open():
-    subprocess.run(
-        ["nvim"], cwd=environment.directory
-    )
+def open(environment: Environment):
+    subprocess.run(["nvim"], cwd=environment.directory)
 
 
 class Fzf:
@@ -59,7 +57,8 @@ class Fzf:
     # 2) filename
     # 3) line number in file for preview
     # 4) display string
-    def __init__(self):
+    def __init__(self, environment: Environment, thingsSearchArgs: str):
+        self.environment = environment
         terminal = shutil.get_terminal_size((80, 24))
         self.cmd = [
             "fzf",
@@ -102,13 +101,14 @@ class Fzf:
         self.parts = []
         self.defaultCommand = "true"
         self.filenameMatcher = "^[^:]*:([^:]*)"
+        search = "things-search " + thingsSearchArgs
         self.binds = [
             "ctrl-f:reload("
             + "fd --changed-within 3months md --exec stat -f '%m:%N:1:%N' {q} "
             + "| sort -r)",
-            "ctrl-e:reload(things-search -n sort-modified {q} || true)",
-            "ctrl-g:reload(things-search -n bookmarks {q} || true)",
-            "ctrl-s:reload(things-search -n headings {q} || true)",
+            "ctrl-e:reload(" + search + "-n sort-modified {q} || true)",
+            "ctrl-g:reload(" + search + "-n bookmarks {q} || true)",
+            "ctrl-s:reload(" + search + "-n headings {q} || true)",
             # Note that ctrl-x aborts so that a subsequence ctrl-x in fish shell
             # opens cheats. Similarly for ctrl-w opening todos.
             "ctrl-x:abort",
@@ -126,7 +126,7 @@ class Fzf:
             text=True,
             stderr=None,
             env={**os.environ, "FZF_DEFAULT_COMMAND": self.defaultCommand},
-            cwd=environment.directory,
+            cwd=self.environment.directory,
         )
         lines = process.stdout.splitlines()
         selected = []
@@ -138,14 +138,14 @@ class Fzf:
         if len(selected) > 0:
             subprocess.call(
                 ["nvim"] + selected,
-                cwd=environment.directory,
+                cwd=self.environment.directory,
             )
             return True
         return False
 
 
-def recent(args):
-    fzf = Fzf()
+def recent(environment: Environment, args):
+    fzf = Fzf(environment)
     period = args.thing[0] if args.thing else "1week"
     fzf.defaultCommand = (
         f"fd --changed-within {period} md " + "--exec stat -f '%m:%N:1:%N' {} | sort -r"
@@ -153,13 +153,14 @@ def recent(args):
     return fzf.run()
 
 
-def search(args):
-    fzf = Fzf()
+def search(environment: Environment, args):
     thingsSearchArgs = (
         ""
         + ("--witharchive " if args.witharchive else "")
         + ("--justarchive " if args.justarchive else "")
+        + ("--noconfig " if args.noconfig else "")
     )
+    fzf = Fzf(environment, thingsSearchArgs)
 
     if args.name:
         searchPrefix = f"things-search {thingsSearchArgs}-n {args.name}"

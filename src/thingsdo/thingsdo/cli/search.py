@@ -20,6 +20,7 @@ def run():
     parser.add_argument("-n", "--name", help="search name", default="default")
     parser.add_argument("--nofilter", action="store_true")
     parser.add_argument("--dry", action="store_true")
+    parser.add_argument("--noconfig", help="ignore config files", action="store_true")
     args = parser.parse_args()
 
     search(args)
@@ -27,7 +28,7 @@ def run():
 
 def search(args):
     match = " ".join(args.thing)
-    environment = Environment()
+    environment = Environment(configFile=None) if args.noconfig else Environment()
 
     if args.name == "default":
         search = Rg(environment, match)
