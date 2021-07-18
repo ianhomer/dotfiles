@@ -14,20 +14,22 @@ def run():
     parser.add_argument("thing", nargs="*", help="thing")
     parser.add_argument("--lint", action="store_true")
     parser.add_argument("--fix", action="store_true")
-    parser.add_argument("--witharchive", action="store_true")
-    parser.add_argument("--justarchive", action="store_true")
     parser.add_argument("-s", "--search", help="find things", action="store_true")
     parser.add_argument("-n", "--name", help="find things with named search")
     parser.add_argument("-r", "--recent", help="recent things", action="store_true")
     parser.add_argument("--synk", help="synk things", action="store_true")
-    parser.add_argument("--noconfig", help="ignore config files", action="store_true")
     # Just sync my notes
     parser.add_argument("-m", "--my", help="synk my things", action="store_true")
     parser.add_argument("-o", "--open", help="open my things", action="store_true")
 
+    # General settings
+    parser.add_argument("--noconfig", help="ignore config files", action="store_true")
+    parser.add_argument("--witharchive", action="store_true")
+    parser.add_argument("--justarchive", action="store_true")
+
     args = parser.parse_args()
 
-    environment = Environment(configFile=None) if args.noconfig else Environment()
+    environment = Environment.withConfig(not args.noconfig)
 
     if thingity.synk(args.synk, args.my):
         return

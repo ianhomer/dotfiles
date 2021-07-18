@@ -28,7 +28,7 @@ def run():
 
 def search(args):
     match = " ".join(args.thing)
-    environment = Environment(configFile=None) if args.noconfig else Environment()
+    environment = Environment.withConfig(not args.noconfig)
 
     if args.name == "default":
         search = Rg(environment, match)

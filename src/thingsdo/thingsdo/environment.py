@@ -4,6 +4,10 @@ from pathlib import Path
 
 
 class Environment:
+    @staticmethod
+    def withConfig(withConfig=True):
+        return Environment() if withConfig else Environment(configFile=None)
+
     def __init__(self, directory=None, configFile="~/.config/thingsdo/thingsdo.ini"):
         self.home = str(Path.home())
         if directory:
@@ -24,12 +28,13 @@ class Environment:
             self.config = {}
 
     @property
+    def myDo(self):
+        return self.config.get("MY_DO", "")
+
+    @property
     def myNotes(self):
-        return self.config["MY_NOTES"]
+        return self.config.get("MY_NOTES")
 
     @property
     def myNotesDir(self):
-        return self.directory + "/" + self.myNotes if self.myNotes else None
-
-
-
+        return self.directory + "/" + self.myNotes if self.myNotes else self.directory

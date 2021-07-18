@@ -9,12 +9,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from subprocess import PIPE
-from .. import Ag, ContextFilter, Environment, Task, thingity, TaskRenderer
-
-environment = Environment()
-
-MY_NOTES = environment.config["MY_NOTES"]
-MY_DO = environment.config["MY_DO"]
+from .. import Ag, ContextFilter, Environment, Factory, Task, thingity, TaskRenderer
 
 PURPLE = "\033[95m"
 ORANGE = "\033[33m"
@@ -42,8 +37,12 @@ def run():
     parser.add_argument("-a", "--all", help="all dos", action="store_true")
     parser.add_argument("-c", "--context", help="all contexts", action="store_true")
     parser.add_argument("-t", "--today", help="add today item", action="store_true")
+    parser.add_argument("--noconfig", help="ignore config files", action="store_true")
+
     parser.add_argument("--days", type=int, help="days")
     args = parser.parse_args()
+
+    environment = Environment.withConfig(not args.noconfig)
 
     if thingity.synk(False):
         return
@@ -59,20 +58,20 @@ def run():
                 words.append(word)
         # do to add
         do = " ".join(words)
-        add(do)
+        add(environment, do)
         return
 
     if args.context:
-        context()
+        context(environment)
         return
 
     # Repeat search until we exit (Ctrl-C)
     more = True
     while more:
-        more = search(args)
+        more = search(environment, args)
 
 
-def context():
+def context(environment: Environment):
     ag = subprocess.Popen(
         [
             "ag",
@@ -95,9 +94,9 @@ def context():
     return
 
 
-def search(args):
+def search(environment, args):
     excludes = []
-    contextFilter = ContextFilter(MY_DO)
+    contextFilter = ContextFilter(environment.myDo)
     if args.all:
         if args.do:
             pattern = f"\\- \\[ \\] {contextFilter.pattern(args.do[0])}"
@@ -156,7 +155,9 @@ def search(args):
     encoding = sys.getdefaultencoding()
     if fzfIn:
         if args.today:
-            fzfIn.write(f"\t(today)\t{getTodayLog()}\n".encode(encoding))
+            fzfIn.write(
+                f"\t(today)\t{Factory(environment).getTodayLog()}\n".encode(encoding)
+            )
         for do in dos:
             fzfIn.write(do.encode(encoding))
 
@@ -171,9 +172,7 @@ def search(args):
         match = re.search("^([^\t]*)\t([^\t]*)\t([^\t]*)\t(.*)$", output)
         if match:
             file = match.group(4)
-            subprocess.call(
-                ["nvim", file]
-            )
+            subprocess.call(["nvim", file])
             return True
         else:
             print(output)
@@ -182,19 +181,13 @@ def search(args):
     return False
 
 
-def getTodayLog(now=datetime.now()):
-    now = datetime.now()
-    today = now.strftime("%m%d")
-    return f"{environment.directory}/{MY_NOTES}/stream/{today}.md"
-
-
 # Add a do
-def add(do):
+def add(environment, do):
     # MEM (Memento https://www.imdb.com/title/tt0209144/)
     task = Task(f"{do}", defaultContext="MEM", natural=True)
 
     now = datetime.now()
-    todayLog = getTodayLog(now)
+    todayLog = Factory(environment).getTodayLog(now)
     if not os.path.isfile(todayLog):
         Path(todayLog).touch()
     with open(todayLog, "r+") as file:

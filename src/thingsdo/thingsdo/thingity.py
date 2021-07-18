@@ -1,4 +1,3 @@
-import datetime
 import glob
 import os
 import subprocess
@@ -9,7 +8,9 @@ environment = Environment()
 
 
 def synk(force, justMyNotes=False):
-    shouldSynkFile = environment.home + "/.config/dotme/should-run/last-run-git-synk-things"
+    shouldSynkFile = (
+        environment.home + "/.config/dotme/should-run/last-run-git-synk-things"
+    )
     if not force and not runner.should(shouldSynkFile):
         return
     if force:
@@ -22,15 +23,6 @@ def synk(force, justMyNotes=False):
             ["tmux", "split-window", "-d", "-l", "1", "-v", "things --synk -m"]
         )
     return force
-
-
-def getTodayLog(now=datetime.datetime.now()):
-    today = now.strftime("%m%d")
-    return f"{environment.directory}/{environment.myNotes}/stream/{today}.md"
-
-
-def getPath(name):
-    return f"{environment.directory}/{environment.myNotes}/stream/{name}.md"
 
 
 def lint(fix=False):
