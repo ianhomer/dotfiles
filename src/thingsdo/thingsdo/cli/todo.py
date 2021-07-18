@@ -205,6 +205,9 @@ def add(environment, do):
             # file
             lines.append("\n")
 
+        if not lines[2].startswith("-"):
+            lines.insert(2, "\n")
+
         lines.insert(2, f"- [ ] {task}\n")
         file.seek(0)
         file.writelines(lines)
