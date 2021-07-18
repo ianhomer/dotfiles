@@ -10,6 +10,6 @@ class Environment:
             self.confg = {}
         else:
             config = configparser.ConfigParser()
-            config.read(self.home + "/.config/dotme/shim.ini")
+            config.read(self.home + "/.config/thingsdo/thingsdo.ini")
             self.config = config["DEFAULT"]
             self.directory = self.config["THINGS_DIR"]

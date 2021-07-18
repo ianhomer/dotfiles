@@ -54,16 +54,18 @@ if [[ "$UPDATE" = "y" ]] ; then
 $NEW_SHIM
 EOF
   fi
-  # Update shim.ini
-  LOCAL_SHIM=$HOME/.config/dotme/shim.ini
-  if [[ -f "$LOCAL_SHIM" ]] ; then
-    CURRENT_SHIM=$(cat $LOCAL_SHIM)
+  # Update thingsdo.ini
+  THINGSDO_CONFIG_DIR=${HOME}/.config/thingsdo
+  THINGSDO_INI=${THINGSDO_CONFIG_DIR}/thingsdo.ini
+  if [[ -f "${THINGSDO_INI}" ]] ; then
+    CURRENT_INI=$(cat ${THINGSDO_INI})
   fi
-  NEW_SHIM=$(shim -fi)
-  if [[ "${CURRENT_SHIM}" != "${NEW_SHIM}" ]] ; then
-    log:: "updating local shim ini"
-    cat <<EOF > $LOCAL_SHIM
-$NEW_SHIM
+  NEW_INI=$(shim -fi)
+  if [[ "${CURRENT_INI}" != "${NEW_INI}" ]] ; then
+    log:: "updating local thingsdo ini"
+    [[ ! -d "${THINGSDO_CONFIG_DIR}" ]] && mkdir ${THINGSDO_CONFIG_DIR}
+    cat <<EOF > $THINGSDO_INI
+$NEW_INI
 EOF
   fi
   exit 0
@@ -105,7 +107,7 @@ if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
     SHIM_SED="sed"
     SHIM_STAT="stat"
   fi
- 
+
   if command -v dotme &> /dev/null ; then
     DOTFILES_BIN="$(cd "$(dirname `command -v dotme`)" >/dev/null 2>&1 && pwd)"
   else
@@ -117,16 +119,8 @@ if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
   if [[ "$INI" = "y" ]] ; then
     cat <<EOF
 [DEFAULT]
-DOTFILES_BIN = $DOTFILES_BIN
-DOTFILES_DIR = $DOTFILES_DIR
-DOTME_CONFIG = $DOTME_CONFIG
-ME = $DOTFILES_DIR
 MY_NOTES = $MY_NOTES
 MY_DO = $MY_DO
-SHIM_LOADED = 1
-SHIM_OS = $SHIM_OS
-SHIM_SED = $SHIM_SED
-SHIM_STAT = $SHIM_STAT
 THINGS_DIR = $THINGS_DIR
 EOF
   else
