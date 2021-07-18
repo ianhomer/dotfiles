@@ -48,7 +48,7 @@ def run():
 
 def open():
     subprocess.run(
-        ["nvim"], env={**os.environ, "VIM_KNOB": "4"}, cwd=environment.directory
+        ["nvim"], cwd=environment.directory
     )
 
 
@@ -138,7 +138,6 @@ class Fzf:
         if len(selected) > 0:
             subprocess.call(
                 ["nvim"] + selected,
-                env={**os.environ, "VIM_KNOB": "4"},
                 cwd=environment.directory,
             )
             return True
