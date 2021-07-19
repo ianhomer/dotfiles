@@ -46,6 +46,8 @@ let g:ale_fixers = {
 let g:ale_enabled = 1
 let g:ale_linters_explicit = 1
 let g:ale_jq_use_global = 1
+let g:markdown_remark_lint_use_global = 1
+let g:markdown_remark_lint_options = "-r ~/.config/remarkrc.js"
 
 let g:ale_sign_error = '❕'
 let g:ale_sign_warning = '❔'
