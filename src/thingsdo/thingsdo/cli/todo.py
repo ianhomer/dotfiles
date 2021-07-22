@@ -206,7 +206,7 @@ def add(environment, do):
             lines.append("\n")
 
         # Space between dos and next paragraph
-        if not lines[2].startswith("-"):
+        if len(lines) > 1 and not lines[2].startswith("-"):
             lines.insert(2, "\n")
 
         lines.insert(2, f"- [ ] {task}\n")
