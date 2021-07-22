@@ -28,8 +28,8 @@ class TaskRenderer:
 
         parts += [
             self.palette.color(task.primaryType, modifier),
-            task.subject.replace("[", self.whostart).replace(
-                "]", self.whoend + self.palette.color(task.primaryType)
+            task.subject.replace("{", self.whostart).replace(
+                "}", self.whoend + self.palette.color(task.primaryType)
             ),
             self.clear,
         ]
