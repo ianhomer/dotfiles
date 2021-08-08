@@ -21,7 +21,7 @@ nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 Join these lines to make this is a long line, this is a long line, this is a
 long line, this is a long line, this is a long line, this is a long line, this
-is a long line
+is a long line.
 
 This is a spellingmistake.
 
@@ -36,7 +36,7 @@ Long line lists
   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
   quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
   consequat.
-- Lorem ipsum
+- Lorem ipsum.
 - Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
   quis.
@@ -126,6 +126,18 @@ More code:
 ```bash
 another-fenced-block
 second-line
+```
+
+JSON
+
+```json
+{ "field": "value"}
+```
+
+Typescript
+
+```typescript
+const myGlobal = [];
 ```
 
 Test change ..

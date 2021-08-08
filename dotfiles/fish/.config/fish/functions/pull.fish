@@ -1,3 +1,3 @@
 function pull
-  git pull
+  git pullme
 end

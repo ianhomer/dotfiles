@@ -82,7 +82,7 @@ function! s:NextLine()
   elseif l:previous =~ '\v^\|'
     if l:previous =~ '\v^\|\s*$'
       normal k"_ddj
-    else 
+    else
       return '| '
     endif
   endif
@@ -119,6 +119,16 @@ set formatlistpat+=\\\|^:\\s
 set formatlistpat+=\\\|^\|\\s
 " Support fenced blocks
 set formatlistpat+=\\\|^\\s\\{4\\}
+let g:markdown_fenced_languages = [
+  \ 'bash=sh',
+  \ 'html',
+  \ 'java',
+  \ 'javascript',
+  \ 'json',
+  \ 'python',
+  \ 'sh',
+  \ 'typescript'
+  \ ]
 " Support frontmatter yaml
 set formatlistpat+=\\\|^[^:\\s]\\+:\\s
 

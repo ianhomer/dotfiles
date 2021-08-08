@@ -8,18 +8,29 @@ should-run -m 7 dotme-fish || exit 0
 printf "\e[36mConfiguring fish shell\e[0m\n"
 
 #
-# Set up universal variables to improve shell start up times
-#
-
-. ~/.dotfiles/dotfiles/fish/.config/fish/functions/add-to-universal-path.fish
-
-#
 # Set up path note that this include
 #
-# - ~/.dotfiles/bin <- scripts from this dotfiles
+# - ~/.dotfiles/bin <- scripts from these dotfiles
 # - ~/bin           <- local overrides
 #
-add-to-universal-path /usr/local/sbin ~/.dotfiles/bin ~/bin ~/.jenv/bin ~/.jenv/shims ~/.rbenv/shims ~/Library/Python/3.9/bin
+#
+
+fish_add_path ~/.jenv/shims
+fish_add_path ~/.dotfiles/bin
+fish_add_path ~/.jenv/bin
+fish_add_path ~/.rbenv/shims
+fish_add_path ~/Library/Python/3.9/bin
+
+# Why was this in?
+# fish_add_path /usr/local/sbin
+
+#
+# See https://github.com/fish-shell/fish-shell/issues/2639 to
+# remove elements from fish path, e.g.
+#
+# echo $fish_user_paths | tr " " "\n" | nl
+# set --erase --universal fish_user_paths[1]
+#
 
 # Link in docker completions
 set dockerCompletions ~/.config/fish/completions/docker.fish

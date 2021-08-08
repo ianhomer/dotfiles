@@ -10,6 +10,8 @@ should-run -m 30 $0 $REQUIREMENTS || exit 0
 
 printf "\e[36mInstalling pip requirements\e[0m\n"
 
+(cd ~/.dotfiles/src/thingsdo ; pip3 install -e .)
+
 pip3 install --user -r $REQUIREMENTS -U | grep -v "already"
 
 printf "\e[35mInstalled pip packages\e[0m\n"

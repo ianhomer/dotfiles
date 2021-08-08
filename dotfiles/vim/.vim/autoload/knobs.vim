@@ -9,7 +9,7 @@ endif
 let g:knobs_autoloaded = 1
 
 if !exists("g:knobs_default_level")
-  let g:knobs_default_level = 1
+  let g:knobs_default_level = 3
 endif
 
 if !exists('g:knobs_levels')

@@ -39,6 +39,7 @@ else
     " colorscheme gruvbox8
   endif
   set bg=dark
+  highlight ErrorMsg guibg=Grey80 guifg=Grey20
   "finish
 endif
 

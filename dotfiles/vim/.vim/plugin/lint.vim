@@ -7,7 +7,7 @@ if !knobs#("ale")
   finish
 endif
 
-let markdown_linters = ['markdownlint']
+let markdown_linters = ['remark-lint']
 
 " Enable markdown linters that help with good writing
 if knobs#("writegood")
@@ -37,6 +37,7 @@ let g:ale_fixers = {
   \   'javascript': ['eslint', 'prettier'],
   \   'json': ['jq'],
   \   'lua': ['luafmt'],
+  \   'markdown': ['remark-lint'],
   \   'python': ['black'],
   \   'scss': ['prettier'],
   \   'typescript': ['eslint', 'prettier']
@@ -45,6 +46,8 @@ let g:ale_fixers = {
 let g:ale_enabled = 1
 let g:ale_linters_explicit = 1
 let g:ale_jq_use_global = 1
+let g:markdown_remark_lint_use_global = 1
+let g:markdown_remark_lint_options = "-r ~/.config/remarkrc.js"
 
 let g:ale_sign_error = '❕'
 let g:ale_sign_warning = '❔'

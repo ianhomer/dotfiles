@@ -14,13 +14,13 @@ let g:knobs_levels = {
   \   "ale":4,
   \   "apathy":5,
   \   "airline":5,
-  \   "autosave":4,
+  \   "autosave":3,
   \   "conflict_marker":7,
   \   "devicons":5,
   \   "dispatch":5,
   \   "endwise":5,
   \   "eunuch":5,
-  \   "fugitive":4,
+  \   "fugitive":3,
   \   "fzf":1,
   \   "gitgutter":5,
   \   "gruvbox":5,
@@ -50,7 +50,6 @@ let g:knobs_levels = {
 let g:knobs_layers_map = {
   \    "mobile":{
   \      "compactcmd":1,
-  \      "light":1,
   \      "markdown_flow":1,
   \      "markdown_conceal_full":1,
   \      "markdown_syntax_list":1

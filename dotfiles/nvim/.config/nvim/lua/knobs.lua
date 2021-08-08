@@ -12,7 +12,7 @@ function M.has(knob)
 end
 
 function knobFromPackage(package)
-    return (package:match(KNOB_VIM_RE) or package:match(KNOB_VIM_AFTER_RE) or package:match(KNOB_RE)):gsub("-", "_")
+    return (package:match(KNOB_VIM_RE) or package:match(KNOB_VIM_AFTER_RE) or package:match(KNOB_RE)):gsub("-", "_"):lower()
 end
 
 function M.use(use, disableIf)
