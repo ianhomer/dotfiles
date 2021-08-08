@@ -13,6 +13,7 @@ Shortcuts I'm trying to remember.
 | `Ctrl+Alt+s` | Git status      |
 | `Ctrl+Alt+l` | Git log         |
 | `Ctrl+v`     | Shell variables |
+| `Ctrl+x`     | Cheats          |
 
 ### line
 

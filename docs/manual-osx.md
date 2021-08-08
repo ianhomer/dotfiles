@@ -11,7 +11,7 @@ Login Items
 - Todoist - Hide
 - iTerm - Hide
 
-## Initialise a few desktop apps
+## Initialise desktop apps
 
 ### Magnet
 
@@ -72,34 +72,34 @@ mechanical keyboards.
 
 ### Spotlight
 
-Optimise Spotlight so that it's only used for application find.
+Optimise Spotlight for application find.
 
 System Preferences -> Spotlight -> Search Results -> remove all categories
 except Applications
 
 System Preferences -> Spotlight -> Privacy -> add following directories
 
-- /System/Library/Frameworks
-- /System/Library/Perl
-- /System/Library/PrivateFrameworks
-- /System/iOSSupport
-- /Library/Developer
-- /Library/Java/
-- /opt
-- /usr/local/Caskroom
-- /usr/local/Cellar
-- /usr/local/Homebrew
-- /usr/local/lib
-- /usr/local/opt
-- /usr/local/share
-- /usr/local/texlive
+- `/System/Library/Frameworks`
+- `/System/Library/Perl`
+- `/System/Library/PrivateFrameworks`
+- `/System/iOSSupport`
+- `/Library/Developer`
+- `/Library/Java/`
+- `/opt`
+- `/usr/local/Caskroom`
+- `/usr/local/Cellar`
+- `/usr/local/Homebrew`
+- `/usr/local/lib`
+- `/usr/local/opt`
+- `/usr/local/share`
+- `/usr/local/texlive`
 
-- ~/Library/Android
-- ~/Library/Python
+- `~/Library/Android`
+- `~/Library/Python`
 
-- ~/archive
-- ~/projects
-- ~/Downloads
+- `~/archive`
+- `~/projects`
+- `~/Downloads`
 
 To report on what folders are in your index use `show-spotlight`.
 
@@ -107,8 +107,8 @@ To report on what folders are in your index use `show-spotlight`.
 
 Install
 [Surfkeys](https://chrome.google.com/webstore/detail/surfingkeys/gfbliohnnapiefjpjlpjnehglfpaknnc)
-for vim like keys in browser. Type ? in browser for help.
+for vim like keys in browser. Type `?` in browser for help.
 
 ### Gmail
 
-Gmail -> Settings -> Keyboard Shortcuts -> Keyboard shortcuts on
+Settings -> Keyboard Shortcuts -> Keyboard shortcuts on

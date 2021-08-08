@@ -9,7 +9,7 @@
   log-who = "log --format='%C(auto) %h %Cred%ae%Creset %<(30,trunc)%s%Cblue%d'"
   log-when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %Cblue%cd%Creset %<(30,trunc)%s%Cblue%d'"
   log-who-when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h%Cred %ae%Cblue %cd%Creset %<(80,trunc)%s%Cblue%d'"
-  set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+  set-upstream = !git branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)
 
 [color]
   ui = auto

@@ -28,4 +28,4 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 # neovim is the new vim
 alias vi="VIM_KNOB=5 nvim"
 alias v="VIM_KNOB=5 nvim"
-alias pull="git pull"
+alias pull="git pullme"

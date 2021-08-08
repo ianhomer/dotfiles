@@ -38,5 +38,12 @@ for DIR in `ls -d */` ; do
   fi
 done
 
-should-run -fu $shouldRunArgument $0
+# Special case - remarkrc at project root so that global remark works,
+# for example from vim with ALE
 
+if [[ ! -f ~/projects/.remarkrc.yaml ]] ; then
+  log:: "Linking remarkrc.yaml into ~/projects"
+  ln -s ~/.config/.remarkrc.yaml ~/projects
+fi
+
+should-run -fu $shouldRunArgument $0

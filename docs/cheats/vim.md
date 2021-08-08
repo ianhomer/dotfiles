@@ -1,4 +1,4 @@
-# Cheats - vim
+# Vim Cheats
 
 ## vim
 

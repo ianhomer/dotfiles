@@ -1,6 +1,9 @@
 local cmd = vim.cmd
+local g = vim.g
 local o = vim.o
 local nvim_set_var = vim.api.nvim_set_var
+
+vim.opt.shell = "/bin/bash"
 
 -- Levels at which knobs are enabled
 nvim_set_var(
@@ -10,7 +13,7 @@ nvim_set_var(
         apathy = 6,
         airline = 9,
         auto_pairs = 6,
-        autosave = 4,
+        autosave = 3,
         colorbuddy = 7,
         colorizer = 5,
         conflict_marker = 7,
@@ -18,24 +21,28 @@ nvim_set_var(
         compe = 5,
         devicons = 5,
         dispatch = 5,
+        editorconfig = 5,
         endwise = 7,
-        eunuch = 7,
+        eunuch = 3,
         fugitive = 3,
         friendly_snippets = 5,
         fzf = 1,
         gitgutter = 6,
+        gitsigns = 6,
         gruvbox = 5,
         gruvbuddy = 7,
         gruvbox8 = 1,
-        goyo = 3,
+        goyo = 9,
         gutentags = 5,
+        indent_blankline = 5,
+        indentline = 5,
         nerdtree = 2,
         lens = 8,
         lightbulb = 5,
-        lsp = 3,
+        lsp = 5,
         lspconfig = 5,
-        lspkind = 4,
-        lualine = 4,
+        lspkind = 5,
+        lualine = 5,
         markdown_syntax_table = 3,
         markdown_preview = 3,
         material = 9,
@@ -51,17 +58,19 @@ nvim_set_var(
         surround = 3,
         tabcomplete = 9,
         tabular = 3,
-        telescope = 5,
+        telescope = 8,
         thingity = 3,
-        treesitter = 5,
-        unimpaired = 4,
+        treesitter = 3,
+        twightlight = 3,
+        unimpaired = 5,
         update_spelling = 7,
         which_key = 4,
         window_cleaner = 3,
         writegood = 3,
         tmux_navigator = 3,
         unicode = 4,
-        vsnip = 5,
+        vsnip = 8,
+        zen_mode = 3,
         zephyr = 9
     }
 )
@@ -71,7 +80,7 @@ nvim_set_var(
     "knobs_layers_map",
     {
         debug = {
-          debug = 1
+            debug = 1
         },
         mobile = {
             compactcmd = 1,
@@ -88,9 +97,18 @@ nvim_set_var(
     }
 )
 
+g.indentLine_enabled = 1
+g.indent_blankline_char = "▏"
+
+g.indent_blankline_filetype_exclude = {"help", "startify", "terminal"}
+g.indent_blankline_buftype_exclude = {"terminal"}
+
+g.indent_blankline_show_trailing_blankline_indent = false
+g.indent_blankline_show_first_indent_level = false
+
 cmd "packadd packer.nvim" -- load the package manager
 
-return require("packer").startup{
+return require("packer").startup {
     function(use)
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
@@ -174,25 +192,47 @@ return require("packer").startup{
         useif {"norcalli/nvim-colorizer.lua", config = [[require'config.colorizer']]}
 
         -- Git
-        use {"tpope/vim-fugitive", cmd = {"Git", "Gstatus", "Gblame", "Ggrep", "Gpush", "Gpull" }}
+        use {"tpope/vim-fugitive", cmd = {"G", "Git", "Gstatus", "Gblame", "Ggrep", "Gpush", "Gpull"}}
         useif {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
         useif {"airblade/vim-gitgutter"}
         useif {"tpope/vim-dispatch"}
+        useif {"lewis6991/gitsigns.nvim", config = [[require'config.gitsigns']]}
 
         -- Editing
         useif "tpope/vim-surround"
         useif "tpope/vim-commentary"
+        useif "tpope/vim-unimpaired"
+        use "tpope/vim-repeat"
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
 
+        useif "editorconfig/editorconfig-vim"
         useif "chrisbra/unicode.vim"
+
+        vim.api.nvim_set_keymap("n", "<space>i", "<cmd>:ZenMode<CR>", {})
+        useif {
+            "folke/zen-mode.nvim",
+            cmd = {"ZenMode"},
+            config = [[require'config.zen_mode']]
+        }
+        useif {
+            "folke/twilight.nvim",
+            config = function()
+                require("twilight").setup {}
+            end
+        }
+
         useif "junegunn/goyo.vim"
         useif {
             "iamcco/markdown-preview.nvim",
             -- cmd = {"MarkdownPreview"},
             run = "cd app && yarn install"
         }
-
+        useif {"lukas-reineke/indent-blankline.nvim"}
         useif {"junegunn/vim-peekaboo"}
+
+        -- Misc
+
+        useif "tpope/vim-eunuch"
 
         -- Diagnostics
         --
@@ -200,8 +240,8 @@ return require("packer").startup{
         useif "tweekmonster/startuptime.vim"
     end,
     config = {
-      profile = {
-        enable = true
-      }
+        profile = {
+            enable = true
+        }
     }
 }

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+#
+# Improved pull. Auto set upstream if needed and show local and upstream branch
+# names.
+#
+
+upstream=$(git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null)
+if [ -z "$upstream" ] ; then
+  git set-upstream
+fi
+git status -sb
+git pull
