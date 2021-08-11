@@ -7,7 +7,7 @@ if !knobs#("ale")
   finish
 endif
 
-let markdown_linters = ['remark-lint']
+let markdown_linters = ['']
 
 " Enable markdown linters that help with good writing
 if knobs#("writegood")
