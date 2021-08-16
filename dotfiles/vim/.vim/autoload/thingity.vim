@@ -144,34 +144,6 @@ function! thingity#NewThing(createNew,type)
   wincmd l
 endfunction
 
-"
-" TODO : ThingityArchive should be moved to a python script that does a full
-" organisations of things.
-"
-function! s:ThingityArchive()
-  let l:root = s:ThingityGetStreamRoot()
-  if !isdirectory(l:root."/archive")
-    echo "... create stream/archive directory to support archiving"
-  endif
-  let today = strftime("%m%d")
-  let archivePoint = today - 7
-  echo archivePoint
-  let l:logsToArchive = filter(globpath(l:root, '*.md', 0, 1),"fnamemodify(v:val, ':t') < archivePoint")
-  echo l:logsToArchive
-  for log in l:logsToArchive
-    let l:datePartMatch = matchlist(log,'.*/\([0-9]*\)[\/]*.md')
-    if len(l:datePartMatch) > 0
-      let l:datePart = l:datePartMatch[1]
-      let fullDate = l:datePart
-      if len(l:datePart) == 4
-        let fullDate = strftime("%Y").l:datePart
-      endif
-      echo log
-      echo "Date parts ".l:datePart
-    endif
-  endfor
-endfunction
-
 function! thingity#OpenURLUnderCursor()
   let s:uri = expand('<cWORD>')
   let s:uri = matchstr(s:uri, '[a-z]*:\/\/[^ >,;()]*')
