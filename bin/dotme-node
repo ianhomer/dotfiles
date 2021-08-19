@@ -15,8 +15,17 @@ should-run -m 14 $0 $NODE_GLOBAL || exit 0
 #
 # Set up nvm
 #
-
 [ ! -d ~/.nvm ] && mkdir ~/.nvm
+
+#
+# Set up npm to install global in home directory
+# See https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
+#
+
+# [ ! -d ~/.npm-global ] && mkdir ~/.npm-global
+# By default npm prefix is /usr/local, instead we want CLIs and node modules
+# installed relative to home directory
+# npm config set prefix '~/.npm-global'
 
 #
 # Report what's install globally
