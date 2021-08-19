@@ -111,6 +111,7 @@ end
 bind --mode insert \cw do
 bind --mode insert \cx cheat
 bind --mode insert \cf things
+bind --mode insert \ce "things -n sort-modified"
 bind --mode insert \cs "things -n headings"
 bind --mode insert \cg "things -n bookmarks"
 
