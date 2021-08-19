@@ -31,11 +31,11 @@ def search(args):
     environment = Environment.withConfig(not args.noconfig)
 
     if args.name == "default":
-        search = Rg(environment, match)
+        search = Rg(environment, match, args.justarchive, args.witharchive)
         search.maxPerFile = 1
         search.postFilter = "s/^/0:/"
     elif args.name == "sort-modified":
-        search = Rg(environment, match)
+        search = Rg(environment, match, args.justarchive, args.witharchive)
         search.withModifiedKey = True
         search.sort = True
         search.maxPerFile = 1
