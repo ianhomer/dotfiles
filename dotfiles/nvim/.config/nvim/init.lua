@@ -42,7 +42,7 @@ nvim_set_var(
         lsp = 5,
         lspconfig = 5,
         lspkind = 5,
-        lualine = 5,
+        lualine = 3,
         markdown_syntax_table = 3,
         markdown_preview = 3,
         material = 9,
