@@ -96,7 +96,7 @@ def context(environment: Environment):
     return
 
 
-def search(environment, args):
+def search(environment: Environment, args):
     excludes = []
     contextFilter = ContextFilter(environment.myDo)
     if args.all:
@@ -174,7 +174,7 @@ def search(environment, args):
         match = re.search("^([^\t]*)\t([^\t]*)\t([^\t]*)\t(.*)$", output)
         if match:
             file = match.group(4)
-            subprocess.call(["nvim", file])
+            subprocess.call(["nvim", file], cwd=environment.directory)
             return True
         else:
             print(output)
