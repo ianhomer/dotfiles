@@ -31,7 +31,6 @@ let g:knobs_levels = {
   \   "minimap": 5,
   \   "modes":1,
   \   "nerdtree":1,
-  \   "polyglot":5,
   \   "spelling":4,
   \   "startify":1,
   \   "startuptime":5,
@@ -53,14 +52,6 @@ let g:knobs_layers_map = {
   \      "markdown_flow":1,
   \      "markdown_conceal_full":1,
   \      "markdown_syntax_list":1
-  \    },
-  \    "notes":{
-  \      "compactcmd":1,
-  \      "light":1,
-  \      "markdown_conceal_partial":1
-  \    },
-  \    "nvim_0_5":{
-  \      "lsp":1
   \    }
   \  }
 
@@ -149,13 +140,6 @@ IfKnob 'endwise' Plug 'tpope/vim-endwise'
 IfKnob 'dispatch' Plug 'tpope/vim-dispatch'
 
 IfKnob 'ale' Plug 'dense-analysis/ale'
-
-" polyglot
-if knobs#plug#could("polyglot")
-  let g:polyglot_disabled = ['markdown']
-  Plug 'sheerun/vim-polyglot'
-  Plug 'aliou/bats.vim'
-endif
 
 " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
 if knobs#At(5) | Plug 'preservim/nerdcommenter' | endif

@@ -109,9 +109,9 @@ class Fzf:
             "ctrl-f:reload("
             + "fd --changed-within 3months md --exec stat -f '%m:%N:1:%N' {q} "
             + "| sort -r)",
-            "ctrl-e:reload(" + search + "-n sort-modified {q} || true)",
-            "ctrl-g:reload(" + search + "-n bookmarks {q} || true)",
-            "ctrl-s:reload(" + search + "-n headings {q} || true)",
+            "ctrl-e:reload(" + search + "-n sort-modified --witharchive {q} || true)",
+            "ctrl-g:reload(" + search + "-n bookmarks --witharchive {q} || true)",
+            "ctrl-s:reload(" + search + "-n headings --witharchive {q} || true)",
             # Note that ctrl-x aborts so that a subsequence ctrl-x in fish shell
             # opens cheats. Similarly for ctrl-w opening todos.
             "ctrl-x:abort",

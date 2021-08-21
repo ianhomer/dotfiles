@@ -17,10 +17,8 @@ if !exists('g:knobs_levels')
 endif
 
 " Default state of layers
-" iTerm used for notes layer
 let g:knobs_layers = get(g:, "layers",{
   \   "mobile": $ANDROID_DATA == '/data' ? 1 : 0,
-  \   "notes": $ITERM_PROFILE == 'oh-my' ? 1 : 0,
   \   "debug": $VIM_KNOB_DEBUG == "1" ? 1 : 0,
   \   "nvim_0_5": has('nvim-0.5') ? 1 : 0
   \ })
