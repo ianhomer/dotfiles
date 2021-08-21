@@ -28,7 +28,7 @@ set packages                  \
 
 for package in $packages
   fisher ls | grep "$package" || \
-     echo install "$package"
+     fisher install "$package"
   echo $package
 end
 

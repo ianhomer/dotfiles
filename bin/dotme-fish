@@ -15,6 +15,9 @@ printf "\e[36mConfiguring fish shell\e[0m\n"
 #
 #
 
+# See https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
+# fish_add_path ~/.npm-global/bin
+
 fish_add_path ~/.jenv/shims
 fish_add_path ~/.dotfiles/bin
 fish_add_path ~/.jenv/bin
