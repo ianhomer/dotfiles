@@ -19,6 +19,7 @@ nvim_set_var(
         conflict_marker = 7,
         commentary = 5,
         compe = 5,
+        defaults = 1,
         devicons = 5,
         dispatch = 5,
         editorconfig = 5,
