@@ -89,11 +89,6 @@ nvim_set_var(
             markdown_flow = 1,
             markdown_conceal_full = 1,
             markdown_syntax_list = 1
-        },
-        notes = {
-            compactcmd = 1,
-            light = 1,
-            markdown_conceal_partial = 1
         }
     }
 )
