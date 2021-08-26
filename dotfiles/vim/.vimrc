@@ -82,8 +82,6 @@ IfKnob 'conflict-marker' Plug 'rhysd/conflict-marker.vim'
 "
 " Style
 "
-IfKnob 'light' Plug 'rakr/vim-one'
-
 IfKnob 'gruvbox'  Plug 'morhetz/gruvbox'
 IfKnob 'gruvbox8' Plug 'lifepillar/vim-gruvbox8'
 

@@ -14,7 +14,6 @@ nvim_set_var(
         airline = 9,
         auto_pairs = 6,
         autosave = 3,
-        colorbuddy = 7,
         colorizer = 5,
         conflict_marker = 7,
         commentary = 5,
@@ -31,7 +30,6 @@ nvim_set_var(
         gitgutter = 6,
         gitsigns = 6,
         gruvbox = 5,
-        gruvbuddy = 7,
         gruvbox8 = 1,
         goyo = 9,
         gutentags = 5,
@@ -46,7 +44,6 @@ nvim_set_var(
         lualine = 3,
         markdown_syntax_table = 3,
         markdown_preview = 3,
-        material = 9,
         minimap = 4,
         modes = 3,
         nnn = 7,
@@ -177,11 +174,6 @@ return require("packer").startup {
         }
 
         -- Style
-        use {"rakr/vim-one", disable = true}
-        useif {"tjdevries/gruvbuddy.nvim", disable = true}
-        useif {"tjdevries/colorbuddy.nvim", config = [[require'config.colorbuddy']], disable = true}
-        use {"marko-cerovac/material.nvim", disable = true}
-
         useif "morhetz/gruvbox"
         useif {"lifepillar/gruvbox8"}
         use {"glepnir/zephyr-nvim", disable = true}
