@@ -24,7 +24,7 @@ let g:knobs_levels = {
   \   "fugitive":3,
   \   "fzf":1,
   \   "gitgutter":5,
-  \   "gruvbox":5,
+  \   "gruvbox":3,
   \   "gruvbox8":1,
   \   "goyo":4,
   \   "gutentags":5,
@@ -66,13 +66,13 @@ call plug#begin(knobs#GetPluggedDir())
 " Core essentials
 "
 " fzf - Fuzzy Finder
-if knobs#plug#could("fzf")
+if knobs#plug#If("fzf")
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
 endif
 
 " fugitive - Git integration
-if knobs#plug#could("fugitive")
+if knobs#plug#If("fugitive")
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
 endif
@@ -93,7 +93,7 @@ IfKnob 'minimap' Plug 'wfxr/minimap.vim'
 if knobs#At(9) | Plug 'tpope/vim-vinegar' | endif
 " ack - Search files
 if knobs#At(6) | Plug 'mileszs/ack.vim' | endif
-if knobs#plug#could("airline")
+if knobs#plug#If("airline")
   " Airline - status bar
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -116,7 +116,7 @@ IfKnob 'gutentags' Plug 'ludovicchabant/vim-gutentags'
 " Help
 "
 " vim-which-key - guidance on what keys do
-if knobs#plug#could("which_key")
+if knobs#plug#If("which_key")
   Plug 'liuchengxu/vim-which-key',
   \ { 'on': ['WhichKey', 'WhichKey!'] }
 endif
@@ -143,7 +143,7 @@ IfKnob 'ale' Plug 'dense-analysis/ale'
 " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
 if knobs#At(5) | Plug 'preservim/nerdcommenter' | endif
 
-if knobs#plug#could("nerdtree")
+if knobs#plug#If("nerdtree")
   " NERDTree - show git changes
   if knobs#At(9) | Plug 'xuyuanp/nerdtree-git-plugin' | endif
 endif

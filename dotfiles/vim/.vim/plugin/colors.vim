@@ -3,11 +3,7 @@ if !knobs#At(1)
 endif
 
 let g:syntax_cmd = "skip"
-if knobs#("gruvbuddy") || knobs#("material")
-  " no-op - done in init.lua
-elseif knobs#("zephyr")
-  colorscheme zephyr
-elseif knobs#("gruvbox")
+if knobs#("gruvbox")
   try
     "unlet g:syntax_on
     let g:colors_name='gruvbox'
@@ -19,7 +15,7 @@ elseif knobs#("gruvbox")
   endtry
 elseif knobs#("gruvbox8")
   let g:colors_name='gruvbox8'
-  " colorscheme gruvbox8
+  colorscheme gruvbox8
 endif
 set bg=dark
 highlight ErrorMsg guibg=Grey80 guifg=Grey20
