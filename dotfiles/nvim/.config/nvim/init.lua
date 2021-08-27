@@ -33,6 +33,7 @@ nvim_set_var(
         gruvbox8 = 1,
         goyo = 9,
         gutentags = 5,
+        gv = 5,
         indent_blankline = 5,
         indentline = 5,
         nerdtree = 2,
@@ -185,6 +186,7 @@ return require("packer").startup {
         useif {"airblade/vim-gitgutter"}
         useif {"tpope/vim-dispatch"}
         useif {"lewis6991/gitsigns.nvim", config = [[require'config.gitsigns']]}
+        useif {"junegunn/gv.vim",cmd = {"GV"}}
 
         -- Editing
         useif "tpope/vim-surround"
