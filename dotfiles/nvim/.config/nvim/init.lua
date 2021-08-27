@@ -5,6 +5,8 @@ local nvim_set_var = vim.api.nvim_set_var
 
 vim.opt.shell = "/bin/bash"
 
+require("config/core")
+
 -- Levels at which knobs are enabled
 nvim_set_var(
     "knobs_levels",
