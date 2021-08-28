@@ -9,7 +9,8 @@ require("telescope").setup {
             "--column",
             "--smart-case",
             "--hidden"
-        }
+        },
+        path_display = {"shorten"}
     }
 }
 

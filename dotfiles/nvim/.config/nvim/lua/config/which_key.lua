@@ -4,5 +4,6 @@ wk.setup {
 }
 
 wk.register({
-  f = { "<cmd>Telescope find_files hidden=true<cr>", "Find File" }
+  f = { "<cmd>Telescope find_files hidden=true<cr>", "Find File" },
+  s = { "<cmd>Telescope live_grep hidden=true<cr>", "Search" }
 }, { prefix = "<leader>" })
