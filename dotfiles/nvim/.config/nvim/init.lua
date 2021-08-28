@@ -63,7 +63,7 @@ nvim_set_var(
         telescope = 5,
         thingity = 3,
         treesitter = 3,
-        twightlight = 3,
+        twightlight = 7,
         unimpaired = 5,
         update_spelling = 7,
         which_key = 4,
@@ -163,14 +163,19 @@ return require("packer").startup {
         }
         useif {
             "nvim-treesitter/nvim-treesitter",
-            config = [[require'config.treesitter']]
+            config = [[require'config.treesitter']],
+            defer = 2000
         }
-        useif "rafamadriz/friendly-snippets"
+        useif {
+          "rafamadriz/friendly-snippets",
+          defer = 2000
+        }
         useif {
             "hrsh7th/vim-vsnip",
             requires = {
                 "hrsh7th/vim-vsnip-integ"
-            }
+            },
+            defer = 1000
         }
 
         -- Navigation
@@ -189,7 +194,8 @@ return require("packer").startup {
                 {"nvim-lua/popup.nvim", cond = "vim.g['knob_telescope']"},
                 {"nvim-lua/plenary.nvim", cond = "vim.g['knob_telescope']"}
             },
-            config = [[require'config.telescope']]
+            config = [[require'config.telescope']],
+            defer = 1000
         }
         use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
         useif {"ryanoasis/vim-devicons"}
@@ -210,25 +216,37 @@ return require("packer").startup {
         useif "morhetz/gruvbox"
         useif {"lifepillar/gruvbox8"}
         use {"glepnir/zephyr-nvim", disable = true}
-        useif {"norcalli/nvim-colorizer.lua", config = [[require'config.colorizer']]}
+        useif {
+            "norcalli/nvim-colorizer.lua",
+            config = [[require'config.colorizer']],
+            defer = 5000
+        }
 
         -- Git
         use {"tpope/vim-fugitive", cmd = {"G", "Git", "Gstatus", "Gblame", "Ggrep", "Gpush", "Gpull"}}
-        useif {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
+        use {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
         useif {"airblade/vim-gitgutter"}
-        useif {"tpope/vim-dispatch"}
-        use {
-            "lewis6991/gitsigns.nvim",
-            opt = true,
-            config = [[require'config.gitsigns']],
-            setup = [[require "knobs".defer "lewis6991/gitsigns.nvim"]]
+        useif {
+            "tpope/vim-dispatch",
+            defer = 3000
         }
-        useif {"junegunn/gv.vim", cmd = {"GV"}}
+        useif {
+            "lewis6991/gitsigns.nvim",
+            config = [[require'config.gitsigns']],
+            defer = 2000
+        }
+        use {"junegunn/gv.vim", cmd = {"GV"}}
 
         -- Editing
-        useif "tpope/vim-surround"
+        useif {
+          "tpope/vim-surround",
+          defer = 4000
+        }
         useif "tpope/vim-commentary"
-        useif "tpope/vim-unimpaired"
+        useif {
+            "tpope/vim-unimpaired",
+            defer = 2000
+        }
         use "tpope/vim-repeat"
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
 
@@ -236,7 +254,7 @@ return require("packer").startup {
         useif "chrisbra/unicode.vim"
 
         vim.api.nvim_set_keymap("n", "<space>i", "<cmd>:ZenMode<CR>", {})
-        useif {
+        use {
             "folke/zen-mode.nvim",
             cmd = {"ZenMode"},
             config = [[require'config.zen_mode']]
@@ -252,9 +270,13 @@ return require("packer").startup {
         useif {
             "iamcco/markdown-preview.nvim",
             -- cmd = {"MarkdownPreview"},
-            run = "cd app && yarn install"
+            run = "cd app && yarn install",
+            defer = 5000
         }
-        useif {"lukas-reineke/indent-blankline.nvim"}
+        useif {
+            "lukas-reineke/indent-blankline.nvim",
+            defer = 2000
+        }
         useif {"junegunn/vim-peekaboo"}
 
         -- Misc
