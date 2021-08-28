@@ -16,7 +16,8 @@ cmp.setup {
         {name = "nvim_lsp"},
         {name = "buffer"},
         {name = "vsnip"},
-        {name = "nvim_lua"}
+        {name = "nvim_lua"},
+        {name = "path"}
     },
     formatting = {
         format = function(entry, vim_item)

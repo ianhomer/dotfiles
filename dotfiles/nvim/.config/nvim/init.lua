@@ -118,7 +118,7 @@ return require("packer").startup {
         use {
             "neovim/nvim-lspconfig",
             requires = {
-              "hrsh7th/cmp-buffer"
+                "hrsh7th/cmp-buffer"
             },
             config = [[require'config.lspconfig']]
         }
@@ -130,7 +130,7 @@ return require("packer").startup {
 
         use {
             "hrsh7th/cmp-nvim-lua",
-            after = "nvim-cmp",
+            after = "nvim-cmp"
         }
 
         use {
@@ -141,6 +141,11 @@ return require("packer").startup {
         use {
             "hrsh7th/cmp-vsnip",
             after = "cmp-nvim-lsp"
+        }
+
+        use {
+            "hrsh7th/cmp-path",
+            after = "cmp-vsnip"
         }
 
         useif {
@@ -162,10 +167,10 @@ return require("packer").startup {
         }
         useif "rafamadriz/friendly-snippets"
         useif {
-          "hrsh7th/vim-vsnip",
-          requires = {
-            "hrsh7th/vim-vsnip-integ"
-          }
+            "hrsh7th/vim-vsnip",
+            requires = {
+                "hrsh7th/vim-vsnip-integ"
+            }
         }
 
         -- Navigation
