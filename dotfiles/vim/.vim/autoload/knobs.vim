@@ -84,7 +84,7 @@ endfunction
 "
 function! s:DefineCommands()
   if !exists("*IfKnob")
-    command! -nargs=+ -bar IfKnob call knobs#plug#If(<f-args>)
+    command! -nargs=+ -bar IfKnob call knobs#plug#RunIf(<f-args>)
   endif
 endfunction
 

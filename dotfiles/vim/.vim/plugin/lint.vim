@@ -73,4 +73,6 @@ let g:ale_echo_msg_format = '%s [%severity%] [%linter%]'
 " Performance tuning
 let g:ale_cache_executable_check_failures = 1
 
-highlight ALEWarning gui=undercurl guifg=255
+if has('nvim')
+  highlight ALEWarning gui=undercurl guifg=255
+endif
