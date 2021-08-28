@@ -53,6 +53,7 @@ nvim_set_var(
         peekaboo = 3,
         polyglot = 9,
         rhubarb = 7,
+        shortcuts = 1,
         spelling = 4,
         startify = 5,
         startuptime = 1,

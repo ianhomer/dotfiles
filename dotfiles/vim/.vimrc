@@ -32,6 +32,7 @@ let g:knobs_levels = {
   \   "minimap": 5,
   \   "modes":1,
   \   "nerdtree":1,
+  \   "shortcuts":1,
   \   "spelling":4,
   \   "startify":1,
   \   "startuptime":2,
