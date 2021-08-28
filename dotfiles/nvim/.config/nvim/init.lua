@@ -129,24 +129,38 @@ return require("packer").startup {
         }
 
         use {
-            "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-nvim-lsp",
             after = "nvim-cmp"
         }
 
         use {
-            "hrsh7th/cmp-nvim-lsp",
-            after = "cmp-nvim-lua"
-        }
-
-        use {
-            "hrsh7th/cmp-vsnip",
+            "hrsh7th/cmp-nvim-lua",
             after = "cmp-nvim-lsp"
         }
 
         use {
             "hrsh7th/cmp-path",
-            after = "cmp-vsnip"
+            after = "cmp-nvim-lsp"
         }
+
+        use {
+          "hrsh7th/cmp-vsnip",
+          after = "cmp-nvim-lsp"
+        }
+
+        use {
+          "rafamadriz/friendly-snippets",
+          defer = 2000
+        }
+
+        use {
+            "hrsh7th/vim-vsnip",
+            requires = {
+                "hrsh7th/vim-vsnip-integ"
+            },
+            defer = 1000
+        }
+
 
         useif {
             "kosayoda/nvim-lightbulb",
@@ -165,17 +179,6 @@ return require("packer").startup {
             "nvim-treesitter/nvim-treesitter",
             config = [[require'config.treesitter']],
             defer = 2000
-        }
-        useif {
-          "rafamadriz/friendly-snippets",
-          defer = 2000
-        }
-        useif {
-            "hrsh7th/vim-vsnip",
-            requires = {
-                "hrsh7th/vim-vsnip-integ"
-            },
-            defer = 1000
         }
 
         -- Navigation
