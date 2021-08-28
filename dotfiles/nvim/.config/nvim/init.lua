@@ -117,14 +117,14 @@ return require("packer").startup {
         -- LSP, autocomplete and code guidance
         use {
             "neovim/nvim-lspconfig",
-            requires = {
-                "hrsh7th/cmp-buffer"
-            },
             config = [[require'config.lspconfig']]
         }
         use {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
         use {
             "hrsh7th/nvim-cmp",
+            requires = {
+                "hrsh7th/cmp-buffer"
+            },
             config = [[require'config.cmp']]
         }
 
