@@ -103,19 +103,6 @@ g.indent_blankline_buftype_exclude = {"terminal"}
 g.indent_blankline_show_trailing_blankline_indent = false
 g.indent_blankline_show_first_indent_level = false
 
-local defer = function(plugin, timer)
-    print("XX")
-    -- if plugin then
-    --     timer = timer or 0
-    --     vim.defer_fn(
-    --         function()
-    --             require("packer").loader(plugin)
-    --         end,
-    --         timer
-    --     )
-    -- end
-end
-
 cmd "packadd packer.nvim" -- load the package manager
 
 return require("packer").startup {
@@ -234,9 +221,7 @@ return require("packer").startup {
             "lewis6991/gitsigns.nvim",
             opt = true,
             config = [[require'config.gitsigns']],
-            setup = function()
-                require "knobs".defer "gitsigns.nvim"
-            end
+            setup = [[require "knobs".defer "lewis6991/gitsigns.nvim"]]
         }
         useif {"junegunn/gv.vim", cmd = {"GV"}}
 

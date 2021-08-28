@@ -3,6 +3,7 @@ local KNOB_VIM_RE = "^[%w-]+/n?vim%-([%w-]+)"
 local KNOB_VIM_AFTER_RE = "^[%w-]+/([%w-]+)-n?vim"
 local KNOB_RE = "^[%w-]+/([%w-]+)"
 local REPO_RE = "^[%w-]+/([%w-_.]+)$"
+local PLUGIN_RE = "^[^/]*/(.*)$"
 local cmd = vim.api.nvim_command
 
 cmd "call knobs#Init()"
@@ -15,6 +16,10 @@ function knobFromPackage(package)
     return (package:match(KNOB_VIM_RE) or package:match(KNOB_VIM_AFTER_RE) or package:match(KNOB_RE)):gsub("-", "_"):lower(
 
     )
+end
+
+function pluginFromPackage(package)
+  return package:match(PLUGIN_RE)
 end
 
 function M.use(use, disableIf, timer)
@@ -45,12 +50,15 @@ function M.use(use, disableIf, timer)
     end
 end
 
-function M.defer(plugin, timer)
+function M.defer(package, timer)
     timer = timer or 2000
     vim.defer_fn(
         function()
-            print("Loading " .. plugin)
-            require("packer").loader(plugin)
+            knob = knobFromPackage(package)
+            if M.has(knob) then
+              local plugin = pluginFromPackage(package)
+              require("packer").loader(plugin)
+            end
         end,
         timer
     )
