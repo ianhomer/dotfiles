@@ -12,11 +12,14 @@ function M.has(knob)
 end
 
 function knobFromPackage(package)
-    return (package:match(KNOB_VIM_RE) or package:match(KNOB_VIM_AFTER_RE) or package:match(KNOB_RE)):gsub("-", "_"):lower()
+    return (package:match(KNOB_VIM_RE) or package:match(KNOB_VIM_AFTER_RE) or package:match(KNOB_RE)):gsub("-", "_"):lower(
+
+    )
 end
 
-function M.use(use, disableIf)
+function M.use(use, disableIf, timer)
     local disableIf = disableIf ~= nil
+    local timer = timer ~= nil
     return function(args)
         if type(args) == "string" then
             args = {args}
@@ -40,6 +43,17 @@ function M.use(use, disableIf)
         end
         use(args)
     end
+end
+
+function M.defer(plugin, timer)
+    timer = timer or 2000
+    vim.defer_fn(
+        function()
+            print("Loading " .. plugin)
+            require("packer").loader(plugin)
+        end,
+        timer
+    )
 end
 
 return M

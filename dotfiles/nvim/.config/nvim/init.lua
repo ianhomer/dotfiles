@@ -30,7 +30,7 @@ nvim_set_var(
         friendly_snippets = 5,
         fzf = 1,
         gitgutter = 6,
-        gitsigns = 6,
+        gitsigns = 5,
         gruvbox = 5,
         gruvbox8 = 1,
         goyo = 9,
@@ -102,6 +102,19 @@ g.indent_blankline_buftype_exclude = {"terminal"}
 
 g.indent_blankline_show_trailing_blankline_indent = false
 g.indent_blankline_show_first_indent_level = false
+
+local defer = function(plugin, timer)
+    print("XX")
+    -- if plugin then
+    --     timer = timer or 0
+    --     vim.defer_fn(
+    --         function()
+    --             require("packer").loader(plugin)
+    --         end,
+    --         timer
+    --     )
+    -- end
+end
 
 cmd "packadd packer.nvim" -- load the package manager
 
@@ -217,7 +230,14 @@ return require("packer").startup {
         useif {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
         useif {"airblade/vim-gitgutter"}
         useif {"tpope/vim-dispatch"}
-        useif {"lewis6991/gitsigns.nvim", config = [[require'config.gitsigns']]}
+        use {
+            "lewis6991/gitsigns.nvim",
+            opt = true,
+            config = [[require'config.gitsigns']],
+            setup = function()
+                require "knobs".defer "gitsigns.nvim"
+            end
+        }
         useif {"junegunn/gv.vim", cmd = {"GV"}}
 
         -- Editing
