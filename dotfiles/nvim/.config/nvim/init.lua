@@ -71,7 +71,7 @@ nvim_set_var(
         writegood = 3,
         tmux_navigator = 3,
         unicode = 4,
-        vsnip = 8,
+        vsnip = 5,
         zen_mode = 3,
         zephyr = 9
     }
@@ -138,6 +138,11 @@ return require("packer").startup {
             after = "cmp-nvim-lua"
         }
 
+        use {
+            "hrsh7th/cmp-vsnip",
+            after = "cmp-nvim-lsp"
+        }
+
         useif {
             "kosayoda/nvim-lightbulb",
             config = [[require'config.lightbulb']]
@@ -156,7 +161,12 @@ return require("packer").startup {
             config = [[require'config.treesitter']]
         }
         useif "rafamadriz/friendly-snippets"
-        useif "hrsh7th/vim-vsnip"
+        useif {
+          "hrsh7th/vim-vsnip",
+          requires = {
+            "hrsh7th/vim-vsnip-integ"
+          }
+        }
 
         -- Navigation
 
