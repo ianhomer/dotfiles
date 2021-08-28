@@ -166,7 +166,7 @@ return require("packer").startup {
         useif {"ryanoasis/vim-devicons"}
         use {"wfxr/minimap.vim", cmd = {"Minimap"}}
         useif {
-            "liuchengxu/vim-which-key",
+            "folke/which-key.nvim",
             config = [[require'config.which_key']]
         }
         use "christoomey/vim-tmux-navigator"

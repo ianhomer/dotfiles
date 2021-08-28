@@ -15,7 +15,7 @@ require("telescope").setup {
 
 local opt = {noremap = true, silent = true}
 -- core
-vim.api.nvim_set_keymap("n", " f", [[<Cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>]], opt)
+--vim.api.nvim_set_keymap("n", " f", [[<Cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>]], opt)
 
 -- extras
 vim.api.nvim_set_keymap("n", " tt", [[<Cmd>Telescope<CR>]], opt)

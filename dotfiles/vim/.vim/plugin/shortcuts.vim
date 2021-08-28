@@ -34,7 +34,7 @@ if knobs#At(3)
 
   "nnoremap <silent> q :echo "q disabled"<CR>
 
-  if knobs#("which_key")
+  if knobs#("which_key") && !has("nvim")
     nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
     nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
     nnoremap <silent> ' :WhichKey "'"<CR>

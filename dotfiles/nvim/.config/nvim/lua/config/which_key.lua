@@ -1,8 +1,11 @@
-local cmd = vim.api.nvim_command
+local wk = require("which-key")
 
-local map = {
-    f = "Find files",
-    s = "Search"
+wk.setup {
+  plugins = {
+    marks = true
+  }
 }
 
-vim.fn["which_key#register"]("<Space>", map)
+wk.register({
+  f = { "<cmd>Telescope find_files<cr>", "Find File" }
+}, { prefix = "<leader>" })
