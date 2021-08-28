@@ -264,9 +264,7 @@ return require("packer").startup {
         }
         useif {
             "folke/twilight.nvim",
-            config = function()
-                require("twilight").setup {}
-            end
+            config = [[require("twilight").setup {}]]
         }
 
         useif "junegunn/goyo.vim"
