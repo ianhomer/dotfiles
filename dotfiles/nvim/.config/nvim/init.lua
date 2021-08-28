@@ -19,7 +19,7 @@ nvim_set_var(
         colorizer = 5,
         conflict_marker = 7,
         commentary = 5,
-        compe = 5,
+        cmp = 5,
         defaults = 1,
         devicons = 5,
         dispatch = 5,
@@ -115,19 +115,33 @@ return require("packer").startup {
         use "wbthomason/packer.nvim"
 
         -- LSP, autocomplete and code guidance
-        useif {
+        use {
             "neovim/nvim-lspconfig",
+            requires = {
+              "hrsh7th/cmp-buffer"
+            },
             config = [[require'config.lspconfig']]
         }
-        useif {
-            "hrsh7th/nvim-compe",
-            config = [[require'config.compe']]
+        use {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
+        use {
+            "hrsh7th/nvim-cmp",
+            config = [[require'config.cmp']]
         }
+
+        use {
+            "hrsh7th/cmp-nvim-lua",
+            after = "nvim-cmp",
+        }
+
+        use {
+            "hrsh7th/cmp-nvim-lsp",
+            after = "cmp-nvim-lua"
+        }
+
         useif {
             "kosayoda/nvim-lightbulb",
             config = [[require'config.lightbulb']]
         }
-        useif {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
         cmd [[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
         useif {
             "ludovicchabant/vim-gutentags"
@@ -189,7 +203,7 @@ return require("packer").startup {
         useif {"airblade/vim-gitgutter"}
         useif {"tpope/vim-dispatch"}
         useif {"lewis6991/gitsigns.nvim", config = [[require'config.gitsigns']]}
-        useif {"junegunn/gv.vim",cmd = {"GV"}}
+        useif {"junegunn/gv.vim", cmd = {"GV"}}
 
         -- Editing
         useif "tpope/vim-surround"
