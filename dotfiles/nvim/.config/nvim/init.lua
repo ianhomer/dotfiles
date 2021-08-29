@@ -144,13 +144,13 @@ return require("packer").startup {
         }
 
         use {
-          "hrsh7th/cmp-vsnip",
-          after = "cmp-nvim-lsp"
+            "hrsh7th/cmp-vsnip",
+            after = "cmp-nvim-lsp"
         }
 
         use {
-          "rafamadriz/friendly-snippets",
-          defer = 2000
+            "rafamadriz/friendly-snippets",
+            defer = 2000
         }
 
         use {
@@ -161,11 +161,19 @@ return require("packer").startup {
             defer = 1000
         }
 
-
         useif {
             "kosayoda/nvim-lightbulb",
             config = [[require'config.lightbulb']]
         }
+
+        -- Lua
+        use {
+            "folke/trouble.nvim",
+            requires = "kyazdani42/nvim-web-devicons",
+            config = [[require("trouble").setup {}]],
+            cmd = "Trouble"
+        }
+
         cmd [[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
         useif {
             "ludovicchabant/vim-gutentags"
@@ -242,8 +250,8 @@ return require("packer").startup {
 
         -- Editing
         useif {
-          "tpope/vim-surround",
-          defer = 4000
+            "tpope/vim-surround",
+            defer = 4000
         }
         useif "tpope/vim-commentary"
         useif {
