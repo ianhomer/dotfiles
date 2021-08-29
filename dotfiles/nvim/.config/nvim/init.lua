@@ -173,6 +173,7 @@ return require("packer").startup {
             config = [[require("trouble").setup {}]],
             cmd = "Trouble"
         }
+        use 'folke/lsp-colors.nvim'
 
         cmd [[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
         useif {
