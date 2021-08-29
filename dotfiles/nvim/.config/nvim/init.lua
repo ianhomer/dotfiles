@@ -173,7 +173,7 @@ return require("packer").startup {
             config = [[require("trouble").setup {}]],
             cmd = "Trouble"
         }
-        use 'folke/lsp-colors.nvim'
+        use "folke/lsp-colors.nvim"
 
         cmd [[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
         useif {
@@ -222,6 +222,10 @@ return require("packer").startup {
             "hoob3rt/lualine.nvim",
             requires = {"kyazdani42/nvim-web-devicons", opt = true},
             config = [[require'config.lualine']]
+        }
+        use {
+            "romgrk/barbar.nvim",
+            requires = {"kyazdani42/nvim-web-devicons"}
         }
 
         -- Style
