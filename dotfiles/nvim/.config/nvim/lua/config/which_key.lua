@@ -5,7 +5,7 @@ wk.setup {}
 wk.register(
     {
         f = {"<cmd>Telescope find_files hidden=true<cr>", "Find File"},
-        N = {"<cmd>NvimTreeFindFile<cr>", "Files"},
+        n = {"<cmd>NvimTreeFindFile<cr>", "Files"},
         S = {"<cmd>Telescope live_grep hidden=true<cr>", "Search" }
     },
     {prefix = "<leader>"}

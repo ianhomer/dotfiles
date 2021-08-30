@@ -79,25 +79,31 @@ function window#cleaner#CloseMe()
     return
   endif
 
-  if &filetype == "startify" || &buftype != ""
+  if &filetype == "startify" || (&buftype != "" && &filetype != "NvimTree")
     " Close startify window or non writable buffer
     quit
   elseif exists("#Zen")
     " Exit zen mode
     execute ":ZenMode"
   elseif len(getbufinfo({'buflisted':1})) > 1
-        \ || (&filetype == "nerdtree" && len(getbufinfo({'buflisted':1})) == 1)
+        \ || ((&filetype == "nerdtree" || &filetype == "NvimTree")
+        \ && len(getbufinfo({'buflisted':1})) == 1)
     " More than one buffer open or on nerdtree and one buffer open
     "   => close buffer and switch to next
     execute ":bd"
     call window#SwitchToFirstEditableFile()
   elseif &filetype == "nerdtree"
+      \ || &filetype == "NvimTree"
     if knobs#("startify") && exists(':Startify') && winnr('$') == 1
       " Last window and Startify available
       "   => Open startify before closing NERDTree
       execute ":Startify"
     endif
-    NERDTreeClose
+    if &filetype == "nerdtree"
+      NERDTreeClose
+    else
+      NvimTreeClose
+    endif
   elseif exists("g:NERDTree") && g:NERDTree.IsOpen()
     " NERDTree open
     "   => close buffer and leave NERDTree open

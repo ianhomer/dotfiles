@@ -42,4 +42,4 @@ endfunction
 
 command! -nargs=0 NERDTreeFindOrToggle :call NERDTreeFindOrToggle()
 
-nnoremap <silent> <leader>n :NERDTreeFindOrToggle<CR>
+nnoremap <silent> <leader>N :NERDTreeFindOrToggle<CR>
