@@ -207,14 +207,14 @@ return require("packer").startup {
                 {"nvim-lua/plenary.nvim", cond = "vim.g['knob_telescope']"}
             },
             config = [[require'config.telescope']],
-            defer = 1000
+            defer = 500
         }
         use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
         use {
             "kyazdani42/nvim-tree.lua",
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.nvimtree']],
-            cmd = {"NvimTreeToggle"}
+            cmd = {"NvimTreeFindFile", "NvimTreeToggle"}
         }
         useif {"ryanoasis/vim-devicons"}
         use {"wfxr/minimap.vim", cmd = {"Minimap"}}

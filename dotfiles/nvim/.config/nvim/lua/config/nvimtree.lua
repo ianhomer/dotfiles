@@ -1,4 +1,5 @@
 vim.g.nvim_tree_special_files = {}
+vim.g.nvim_tree_ignore = { '.git', '.node_modules', '.pytest_cache' }
 
 vim.g.nvim_tree_show_icons = {
     git = 1,
