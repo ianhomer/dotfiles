@@ -18,4 +18,10 @@ elseif knobs#("gruvbox8")
   colorscheme gruvbox8
 endif
 set bg=dark
+
+" Terminal color 9 (dark red) looks bad on dark
+let g:terminal_color_9="#ffb6c1"
+
 highlight ErrorMsg guibg=Grey80 guifg=Grey20
+highlight Keyword guifg=Grey90
+
