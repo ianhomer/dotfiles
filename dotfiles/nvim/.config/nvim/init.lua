@@ -210,6 +210,11 @@ return require("packer").startup {
             defer = 1000
         }
         use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
+        use {
+            "kyazdani42/nvim-tree.lua",
+            requires = "kyazdani42/nvim-web-devicons",
+            cmd = {"NvimTreeToggle"}
+        }
         useif {"ryanoasis/vim-devicons"}
         use {"wfxr/minimap.vim", cmd = {"Minimap"}}
         useif {
