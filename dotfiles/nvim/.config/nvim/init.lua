@@ -50,6 +50,7 @@ nvim_set_var(
         minimap = 4,
         modes = 3,
         nnn = 7,
+        nvim_tree = 3,
         peekaboo = 3,
         polyglot = 9,
         rhubarb = 7,

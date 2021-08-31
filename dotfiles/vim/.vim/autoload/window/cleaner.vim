@@ -109,6 +109,9 @@ function window#cleaner#CloseMe()
     "   => close buffer and leave NERDTree open
     execute ":q"
   elseif knobs#("startify") && exists(':Startify')
+    if knobs#("nvim_tree")
+      NvimTreeClose
+    endif
     execute ":bd"
     execute ":Startify"
   elseif @% == ""
