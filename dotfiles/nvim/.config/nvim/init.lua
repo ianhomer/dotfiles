@@ -215,7 +215,7 @@ return require("packer").startup {
             "kyazdani42/nvim-tree.lua",
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.nvimtree']],
-            cmd = {"NvimTreeFindFile", "NvimTreeToggle"}
+            cmd = {"NvimTreeClose", "NvimTreeFindFile", "NvimTreeToggle"}
         }
         useif {"ryanoasis/vim-devicons"}
         use {"wfxr/minimap.vim", cmd = {"Minimap"}}
