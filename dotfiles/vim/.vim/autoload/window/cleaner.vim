@@ -90,7 +90,11 @@ function window#cleaner#CloseMe()
         \ && len(getbufinfo({'buflisted':1})) == 1)
     " More than one buffer open or on nerdtree and one buffer open
     "   => close buffer and switch to next
-    execute ":bd"
+    if &filetype == "NvimTree"
+      NvimTreeClose
+    else
+      execute ":bd"
+    endif
     call window#SwitchToFirstEditableFile()
   elseif &filetype == "nerdtree"
       \ || &filetype == "NvimTree"

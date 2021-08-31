@@ -15,7 +15,3 @@ vim.g.nvim_tree_icons = {
 
 vim.cmd [[highlight NvimTreeFolderIcon guifg=#928374]]
 vim.cmd [[highlight NvimTreeFolderName guifg=#8ec07c]]
-
-vim.g.nvim_tree_bindings = {
-  { key = "q", cb = ":call window#cleaner#CloseMe()<cr>"}
-}
