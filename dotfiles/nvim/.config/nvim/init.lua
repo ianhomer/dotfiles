@@ -67,7 +67,7 @@ nvim_set_var(
         twightlight = 7,
         unimpaired = 5,
         update_spelling = 7,
-        which_key = 4,
+        which_key = 3,
         window_cleaner = 3,
         writegood = 3,
         tmux_navigator = 3,
