@@ -262,6 +262,11 @@ return require("packer").startup {
         use {"junegunn/gv.vim", cmd = {"GV"}}
 
         -- Editing
+        use {
+          "windwp/nvim-autopairs",
+          after = "nvim-cmp",
+          config = [[require'config.autopairs']]
+        }
         useif {
             "tpope/vim-surround"
         }
