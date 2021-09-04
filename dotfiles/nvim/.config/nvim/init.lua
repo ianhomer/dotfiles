@@ -114,7 +114,10 @@ return require("packer").startup {
         local knobs = require("knobs")
         local useif = knobs.use(use)
 
-        use "wbthomason/packer.nvim"
+        use {
+          "wbthomason/packer.nvim",
+          event = "VimEnter"
+        }
 
         -- LSP, autocomplete and code guidance
         use {
@@ -188,6 +191,7 @@ return require("packer").startup {
         }
         useif {
             "nvim-treesitter/nvim-treesitter",
+            event = "BufRead",
             config = [[require'config.treesitter']]
         }
 
