@@ -33,6 +33,7 @@ nvim_set_var(
         gitsigns = 5,
         gruvbox = 5,
         gruvbox8 = 1,
+        glow = 3,
         goyo = 9,
         gutentags = 5,
         gv = 5,
@@ -289,6 +290,10 @@ return require("packer").startup {
         }
 
         useif "junegunn/goyo.vim"
+        useif {
+          "ellisonleao/glow.nvim",
+          cmd = {"Glow"}
+        }
         useif {
             "iamcco/markdown-preview.nvim",
             -- cmd = {"MarkdownPreview"},
