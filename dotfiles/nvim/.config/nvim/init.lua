@@ -225,8 +225,9 @@ return require("packer").startup {
         }
         use "christoomey/vim-tmux-navigator"
 
+        -- Note that hoob3rt has stagnated and shadmansaleh continues ...
         useif {
-            "hoob3rt/lualine.nvim",
+            "shadmansaleh/lualine.nvim",
             requires = {"kyazdani42/nvim-web-devicons", opt = true},
             config = [[require'config.lualine']]
         }
