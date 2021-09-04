@@ -111,14 +111,17 @@ return require("packer").startup {
     function(use)
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
+        vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
+        use {"lewis6991/impatient.nvim", rocks = "mpack"}
+        require('impatient')
+
         local knobs = require("knobs")
         local useif = knobs.use(use)
 
         use {
-          "wbthomason/packer.nvim",
-          event = "VimEnter"
+            "wbthomason/packer.nvim",
+            event = "VimEnter"
         }
-
         -- LSP, autocomplete and code guidance
         use {
             "neovim/nvim-lspconfig",
@@ -150,7 +153,7 @@ return require("packer").startup {
 
         use {
             "hrsh7th/cmp-vsnip",
-            after = "cmp-nvim-lsp",
+            after = "cmp-nvim-lsp"
         }
 
         use {
@@ -267,9 +270,9 @@ return require("packer").startup {
 
         -- Editing
         use {
-          "windwp/nvim-autopairs",
-          after = "nvim-cmp",
-          config = [[require'config.autopairs']]
+            "windwp/nvim-autopairs",
+            after = "nvim-cmp",
+            config = [[require'config.autopairs']]
         }
         useif {
             "tpope/vim-surround"
@@ -298,8 +301,8 @@ return require("packer").startup {
 
         useif "junegunn/goyo.vim"
         useif {
-          "ellisonleao/glow.nvim",
-          cmd = {"Glow"}
+            "ellisonleao/glow.nvim",
+            cmd = {"Glow"}
         }
         useif {
             "iamcco/markdown-preview.nvim",
@@ -315,9 +318,9 @@ return require("packer").startup {
         -- Misc
 
         use {
-          "akinsho/toggleterm.nvim",
-          cmd = "ToggleTerm",
-          config = [[require'config.toggleterm']]
+            "akinsho/toggleterm.nvim",
+            cmd = "ToggleTerm",
+            config = [[require'config.toggleterm']]
         }
         useif "tpope/vim-eunuch"
 
