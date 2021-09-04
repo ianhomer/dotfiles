@@ -52,6 +52,7 @@ nvim_set_var(
         markdown_preview = 3,
         minimap = 4,
         modes = 3,
+        neoscroll = 3,
         nnn = 7,
         nvim_tree = 3,
         peekaboo = 3,
@@ -257,6 +258,10 @@ return require("packer").startup {
         useif {
             "norcalli/nvim-colorizer.lua",
             config = [[require'config.colorizer']]
+        }
+        useif {
+          "karb94/neoscroll.nvim",
+          config = [[require'config.neoscroll']]
         }
 
         -- Git
