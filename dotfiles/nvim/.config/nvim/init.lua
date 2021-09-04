@@ -151,16 +151,14 @@ return require("packer").startup {
         }
 
         use {
-            "rafamadriz/friendly-snippets",
-            defer = 2000
+            "rafamadriz/friendly-snippets"
         }
 
         use {
             "hrsh7th/vim-vsnip",
             requires = {
                 "hrsh7th/vim-vsnip-integ"
-            },
-            defer = 1000
+            }
         }
 
         useif {
@@ -188,8 +186,7 @@ return require("packer").startup {
         }
         useif {
             "nvim-treesitter/nvim-treesitter",
-            config = [[require'config.treesitter']],
-            defer = 2000
+            config = [[require'config.treesitter']]
         }
 
         -- Navigation
@@ -208,8 +205,7 @@ return require("packer").startup {
                 {"nvim-lua/popup.nvim", cond = "vim.g['knob_telescope']"},
                 {"nvim-lua/plenary.nvim", cond = "vim.g['knob_telescope']"}
             },
-            config = [[require'config.telescope']],
-            defer = 500
+            config = [[require'config.telescope']]
         }
         use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
         use {
@@ -243,8 +239,7 @@ return require("packer").startup {
         use {"glepnir/zephyr-nvim", disable = true}
         useif {
             "norcalli/nvim-colorizer.lua",
-            config = [[require'config.colorizer']],
-            defer = 5000
+            config = [[require'config.colorizer']]
         }
 
         -- Git
@@ -253,24 +248,21 @@ return require("packer").startup {
         useif {"airblade/vim-gitgutter"}
         useif {
             "tpope/vim-dispatch",
-            defer = 3000
+            defer = 4000
         }
         useif {
             "lewis6991/gitsigns.nvim",
-            config = [[require'config.gitsigns']],
-            defer = 2000
+            config = [[require'config.gitsigns']]
         }
         use {"junegunn/gv.vim", cmd = {"GV"}}
 
         -- Editing
         useif {
-            "tpope/vim-surround",
-            defer = 4000
+            "tpope/vim-surround"
         }
         useif "tpope/vim-commentary"
         useif {
-            "tpope/vim-unimpaired",
-            defer = 2000
+            "tpope/vim-unimpaired"
         }
         use "tpope/vim-repeat"
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
@@ -301,8 +293,7 @@ return require("packer").startup {
             defer = 5000
         }
         useif {
-            "lukas-reineke/indent-blankline.nvim",
-            defer = 2000
+            "lukas-reineke/indent-blankline.nvim"
         }
         useif {"junegunn/vim-peekaboo"}
 
