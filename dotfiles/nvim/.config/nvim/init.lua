@@ -262,7 +262,8 @@ return require("packer").startup {
         }
         useif "tpope/vim-commentary"
         useif {
-            "tpope/vim-unimpaired"
+            "tpope/vim-unimpaired",
+            defer = 5000
         }
         use "tpope/vim-repeat"
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
