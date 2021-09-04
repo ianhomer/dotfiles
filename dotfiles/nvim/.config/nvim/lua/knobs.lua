@@ -36,7 +36,7 @@ function M.use(use, disableIf, timer)
           args.opt = true
           args.setup = 'require "knobs".defer("'..package..'",'..tostring(args.defer)..')'
         else
-          knob = knobFromPackage(package)
+          knob = args.knob or knobFromPackage(package)
           local knobVariable = "knob_" .. knob
           if vim.g["knobs_levels"][knob] ~= nil then
               if M.has("debug") then

@@ -14,8 +14,9 @@ nvim_set_var(
         ale = 3,
         apathy = 6,
         airline = 9,
-        auto_pairs = 6,
+        autopairs = 3,
         autosave = 3,
+        barbar = 3,
         colorizer = 5,
         conflict_marker = 7,
         commentary = 5,
@@ -43,6 +44,7 @@ nvim_set_var(
         lens = 8,
         lightbulb = 5,
         lsp = 5,
+        lsp_colors = 3,
         lspconfig = 5,
         lspkind = 5,
         lualine = 3,
@@ -113,7 +115,7 @@ return require("packer").startup {
 
         vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
         use {"lewis6991/impatient.nvim", rocks = "mpack"}
-        require('impatient')
+        require('impatient').enable_profile()
 
         local knobs = require("knobs")
         local useif = knobs.use(use)
@@ -151,7 +153,8 @@ return require("packer").startup {
             after = "cmp-nvim-lsp"
         }
 
-        use {
+        useif {
+            knob = "vsnip",
             "hrsh7th/cmp-vsnip",
             after = "cmp-nvim-lsp"
         }
@@ -161,11 +164,11 @@ return require("packer").startup {
             event = "InsertCharPre"
         }
 
-        use {
+        useif {
             "hrsh7th/vim-vsnip",
             event = "InsertEnter",
             requires = {
-                "hrsh7th/vim-vsnip-integ"
+                {"hrsh7th/vim-vsnip-integ", cond = "vim.g['knob_vsnip']"}
             }
         }
 
@@ -181,7 +184,10 @@ return require("packer").startup {
             config = [[require("trouble").setup {}]],
             cmd = "Trouble"
         }
-        use "folke/lsp-colors.nvim"
+
+        useif {
+          "folke/lsp-colors.nvim"
+        }
 
         cmd [[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
         useif {
@@ -269,7 +275,7 @@ return require("packer").startup {
         use {"junegunn/gv.vim", cmd = {"GV"}}
 
         -- Editing
-        use {
+        useif {
             "windwp/nvim-autopairs",
             after = "nvim-cmp",
             config = [[require'config.autopairs']]
