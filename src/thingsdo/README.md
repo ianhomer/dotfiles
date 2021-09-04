@@ -1,4 +1,4 @@
-# Notes and todo library
+# CLI tool for Notes and Things To Do
 
 ## tl;dr
 

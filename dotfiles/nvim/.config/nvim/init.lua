@@ -147,15 +147,17 @@ return require("packer").startup {
 
         use {
             "hrsh7th/cmp-vsnip",
-            after = "cmp-nvim-lsp"
+            after = "cmp-nvim-lsp",
         }
 
         use {
-            "rafamadriz/friendly-snippets"
+            "rafamadriz/friendly-snippets",
+            event = "InsertCharPre"
         }
 
         use {
             "hrsh7th/vim-vsnip",
+            event = "InsertEnter",
             requires = {
                 "hrsh7th/vim-vsnip-integ"
             }
@@ -218,6 +220,7 @@ return require("packer").startup {
         use {"wfxr/minimap.vim", cmd = {"Minimap"}}
         useif {
             "folke/which-key.nvim",
+            event = "BufWinEnter",
             config = [[require'config.which_key']]
         }
         use "christoomey/vim-tmux-navigator"
@@ -252,6 +255,7 @@ return require("packer").startup {
         }
         useif {
             "lewis6991/gitsigns.nvim",
+            event = "BufRead",
             config = [[require'config.gitsigns']]
         }
         use {"junegunn/gv.vim", cmd = {"GV"}}
@@ -300,6 +304,11 @@ return require("packer").startup {
 
         -- Misc
 
+        use {
+          "akinsho/toggleterm.nvim",
+          cmd = "ToggleTerm",
+          config = [[require'config.toggleterm']]
+        }
         useif "tpope/vim-eunuch"
 
         -- Diagnostics

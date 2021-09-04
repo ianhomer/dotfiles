@@ -4,6 +4,7 @@ wk.setup {}
 
 wk.register(
     {
+        a = {"<cmd>ToggleTerm<cr>", "Terminal"},
         f = {"<cmd>Telescope find_files hidden=true<cr>", "Find File"},
         n = {"<cmd>NvimTreeFindFile<cr>", "Files"},
         S = {"<cmd>Telescope live_grep hidden=true<cr>", "Search" }
