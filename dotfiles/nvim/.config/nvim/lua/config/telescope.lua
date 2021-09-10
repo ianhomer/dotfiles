@@ -1,3 +1,6 @@
+local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
+
 require("telescope").setup {
     defaults = {
         vimgrep_arguments = {
@@ -9,6 +12,10 @@ require("telescope").setup {
             "--column",
             "--smart-case",
             "--hidden"
+        },
+        mappings = {
+            i = {["<c-t>"] = trouble.open_with_trouble},
+            n = {["<c-t>"] = trouble.open_with_trouble}
         },
         path_display = {"shorten"}
     }

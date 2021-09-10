@@ -182,8 +182,7 @@ return require("packer").startup {
         use {
             "folke/trouble.nvim",
             requires = "kyazdani42/nvim-web-devicons",
-            config = [[require("trouble").setup {}]],
-            cmd = "Trouble"
+            config = [[require'config.trouble']]
         }
 
         useif {
