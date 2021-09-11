@@ -38,14 +38,21 @@ endfunction
 
 function window#cleaner#CloseAllBuffersButCurrent()
   call window#cleaner#Close("fzf")
-
+  if exists(':NvimTreeClose')
+    NvimTreeClose
+  endif
   let current = bufnr("%")
-  let buffers = filter(range(1, bufnr('$')), 'bufloaded(v:val)')
+  " Find the listed buffers
+  let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val)')
   let first = buffers[0]
   let last = buffers[-1]
 
-  if current > first | silent! execute first.",".(current-1)."bd" | endif
-  if current < last  | silent! execute (current+1).",".last."bd"  | endif
+  for buffer in buffers
+    " Close every buffer except the current
+    if current != buffer
+      execute buffer."bd"
+    endif
+  endfor
 endfunction
 
 function window#cleaner#CloseOtherBuffers()
@@ -57,7 +64,9 @@ function window#cleaner#CloseOtherBuffers()
     NERDTreeClose
   endif
   call window#cleaner#CloseAllBuffersButCurrent()
-  call window#NERDTreeFindIfRoom()
+  if exists('*NERDTreeClose')
+    call window#NERDTreeFindIfRoom()
+  endif
   " Return to saved mark
   normal `A
 endfunction
