@@ -15,6 +15,7 @@ if status --is-login
   set DOT_FUNCTIONS 1
 else if status --is-interactive
   set DOT_LOG_LEVEL 1
+  set DOT_ALIASES 1
 end
 
 if [ {$DOT_LOG_LEVEL} -gt 2 ]
