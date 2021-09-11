@@ -39,6 +39,8 @@ endfunction
 function window#cleaner#CloseAllBuffersButCurrent()
   call window#cleaner#Close("fzf")
   if exists(':NvimTreeClose')
+    " Close Nvim cleanly since using bd on NvimTree leads to a file named
+    " NvimTree being created
     NvimTreeClose
   endif
   let current = bufnr("%")
