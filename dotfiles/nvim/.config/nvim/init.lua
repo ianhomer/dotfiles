@@ -11,12 +11,12 @@ require("config/core")
 nvim_set_var(
     "knobs_levels",
     {
-        ale = 3,
+        ale = 6,
         apathy = 6,
         airline = 9,
         autopairs = 3,
         autosave = 3,
-        barbar = 3,
+        barbar = 6,
         colorizer = 5,
         conflict_marker = 7,
         commentary = 5,
@@ -36,11 +36,11 @@ nvim_set_var(
         gruvbox8 = 1,
         glow = 3,
         goyo = 9,
-        gutentags = 5,
+        gutentags = 6,
         gv = 5,
         indent_blankline = 5,
         indentline = 5,
-        nerdtree = 2,
+        nerdtree = 9,
         lens = 8,
         lightbulb = 5,
         lsp = 5,
@@ -50,12 +50,12 @@ nvim_set_var(
         lualine = 3,
         markdown_syntax_table = 3,
         markdown_preview = 3,
-        minimap = 4,
+        minimap = 9,
         modes = 3,
         neoscroll = 3,
-        nnn = 7,
+        nnn = 9,
         nvim_tree = 3,
-        peekaboo = 3,
+        peekaboo = 9,
         polyglot = 9,
         rhubarb = 7,
         shortcuts = 1,
@@ -68,16 +68,16 @@ nvim_set_var(
         telescope = 5,
         thingity = 3,
         treesitter = 3,
-        twightlight = 7,
+        twightlight = 9,
         unimpaired = 5,
         update_spelling = 7,
         which_key = 3,
         window_cleaner = 3,
-        writegood = 3,
+        writegood = 6,
         tmux_navigator = 3,
         unicode = 4,
         vsnip = 5,
-        zen_mode = 3,
+        zen_mode = 6,
         zephyr = 9
     }
 )
@@ -223,7 +223,6 @@ return require("packer").startup {
             config = [[require'config.telescope']]
         }
         use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-        use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
         use {
             "kyazdani42/nvim-tree.lua",
             requires = "kyazdani42/nvim-web-devicons",
