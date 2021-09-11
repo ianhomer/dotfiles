@@ -1,7 +1,8 @@
 local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
+local telescope = require("telescope")
 
-require("telescope").setup {
+telescope.setup {
     defaults = {
         vimgrep_arguments = {
             "rg",
@@ -20,6 +21,7 @@ require("telescope").setup {
         path_display = {"shorten"}
     }
 }
+telescope.load_extension('fzf')
 
 local opt = {noremap = true, silent = true}
 -- core

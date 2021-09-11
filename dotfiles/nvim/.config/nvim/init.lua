@@ -222,6 +222,7 @@ return require("packer").startup {
             },
             config = [[require'config.telescope']]
         }
+        use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
         use {"preservim/nerdtree", cmd = {"NERDTreeFind", "NERDTreeToggle"}}
         use {
             "kyazdani42/nvim-tree.lua",
