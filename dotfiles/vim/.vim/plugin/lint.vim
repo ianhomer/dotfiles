@@ -23,6 +23,21 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_info_str = 'I'
 let g:ale_echo_msg_format = 'ALE : %s [%severity%] [%linter%]'
 
+let g:ale_enabled = 1
+let g:ale_linters_explicit = 1
+let g:ale_jq_use_global = 1
+
+"let g:ale_markdown_remark_lint_use_global = 1
+"let g:ale_markdown_remark_lint_executable = "remark"
+let g:ale_markdown_remark_lint_options = "-r ~/.config/remarkrc.js"
+
+let g:ale_set_quickfix = 1
+let g:ale_set_loclist = 0
+let g:ale_open_list = 0
+let g:ale_keep_list_window_open = 0
+let g:ale_hover_to_preview = 0
+
+
 " Performance tuning
 let g:ale_cache_executable_check_failures = 1
 
@@ -30,8 +45,7 @@ if has('nvim')
   highlight ALEWarning gui=undercurl guifg=255
 endif
 
-finish
-let markdown_linters = ['']
+let markdown_linters = ['remark-lint']
 
 " Enable markdown linters that help with good writing
 if knobs#("writegood")
@@ -66,16 +80,4 @@ let g:ale_fixers = {
   \   'scss': ['prettier'],
   \   'typescript': ['eslint', 'prettier']
   \}
-
-let g:ale_enabled = 1
-let g:ale_linters_explicit = 1
-let g:ale_jq_use_global = 1
-let g:markdown_remark_lint_use_global = 1
-let g:markdown_remark_lint_options = "-r ~/.config/remarkrc.js"
-
-let g:ale_set_quickfix = 1
-let g:ale_set_loclist = 0
-let g:ale_open_list = 0
-let g:ale_keep_list_window_open = 0
-let g:ale_hover_to_preview = 0
 

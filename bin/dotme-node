@@ -17,7 +17,8 @@ should-run -m 14 $0 $NODE_GLOBAL || exit 0
 #
 [ ! -d ~/.nvm ] && mkdir ~/.nvm
 
-
+which node
+node -v
 #
 # Report what's install globally
 #

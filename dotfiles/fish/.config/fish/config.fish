@@ -39,6 +39,13 @@ if status --is-login
   set -x NNN_PLUG 'b:bookmarks;c:fzcd;p:preview-tui;f:fzopen'
   set -x NNN_FIFO "/tmp/nnn.fifo"
   set -x VISUAL ewrap
+
+  time-me "BEFORE nvm use"
+  # Efficient switching to latest node by default for shell
+  _nvm_list | string match --entire "latest" | read v __
+  set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
+  _nvm_version_activate $v
+  time-me "AFTER nvm use"
 end
 
 if status --is-interactive
