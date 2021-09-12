@@ -2,7 +2,7 @@
 
 ## Known issues
 
-My mac keyboard got it's ~ character mapped incorrectly I had to reset the
+My Mac keyboard got it's ~ character mapped incorrectly I had to reset the
 keyboard with
 
 ```bash
@@ -39,6 +39,6 @@ To change Alfred to use local preferences, not synced one :
 
 Look at the bottom of the log file for a sorted summary
 
-Also generate a start up time report with:
+Also generate a start-up time report with:
 
     :StartupTime
