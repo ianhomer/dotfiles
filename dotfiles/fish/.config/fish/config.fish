@@ -41,7 +41,8 @@ if status --is-login
   set -x VISUAL ewrap
 
   time-me "BEFORE nvm use"
-  # Efficient switching to latest node by default for shell
+  # Efficient switching to latest node by default for shell. nvm use is a little
+  # slower and does not force activation if node installed globally
   _nvm_list | string match --entire "latest" | read v __
   set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
   _nvm_version_activate $v
