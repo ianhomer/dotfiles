@@ -214,15 +214,16 @@ return require("packer").startup {
             requires = {{"junegunn/fzf", opt = true, fn = {"fzf#shellescape"}}}
         }
         use {"nvim-lua/plenary.nvim"}
+        use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
         useif {
             "nvim-telescope/telescope.nvim",
             requires = {
                 {"nvim-lua/popup.nvim", cond = "vim.g['knob_telescope']"},
-                {"nvim-lua/plenary.nvim", cond = "vim.g['knob_telescope']"}
+                {"nvim-lua/plenary.nvim", cond = "vim.g['knob_telescope']"},
+                {"nvim-telescope/telescope-fzf-native.nvim"}
             },
             config = [[require'config.telescope']]
         }
-        use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
         use {
             "kyazdani42/nvim-tree.lua",
             requires = "kyazdani42/nvim-web-devicons",
