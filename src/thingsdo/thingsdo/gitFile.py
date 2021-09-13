@@ -7,7 +7,9 @@ class GitFile:
         fullPath = base + "/" + path
         directory = os.path.dirname(base + "/" + path)
         kwargs = {}
-        if cmd[0] == "git":
+        # No need to change directory if just echo which is done from unit test
+        # when mock command is injected
+        if cmd[0] != "echo":
             kwargs["cwd"] = directory
 
         self._root = (
