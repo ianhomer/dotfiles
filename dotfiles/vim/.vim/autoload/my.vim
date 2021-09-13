@@ -12,7 +12,7 @@ function! my#GitSynk(onlyPush)
   call window#cleaner#CloseFugitive()
   if a:onlyPush || !knobs#("dispatch")
     if knobs#("toggleterm")
-      2TermExec cmd="git push && exit 0" size=4
+      2TermExec cmd="git push && exit 0" size=6
     else
       Git push
     endif
