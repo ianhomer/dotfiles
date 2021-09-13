@@ -6,7 +6,7 @@ import subprocess
 import re
 import shutil
 from subprocess import PIPE
-from .. import Environment, Git, thingity
+from .. import Environment, GitFile, thingity
 
 
 def run():
@@ -139,10 +139,8 @@ class Fzf:
                 selected.append(match.group(1))
 
         if len(selected) > 0:
-            subprocess.call(
-                ["nvim"] + selected,
-                cwd=Git(self.environment.directory, selected[0]).root
-            )
+            gitFile = GitFile(self.environment.directory, selected[0])
+            subprocess.call(["nvim"] + [gitFile.path], cwd=gitFile.root)
             return True
         return False
 
