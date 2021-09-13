@@ -11,7 +11,7 @@ require("config/core")
 nvim_set_var(
     "knobs_levels",
     {
-        ale = 5,
+        ale = 3,
         apathy = 6,
         airline = 9,
         autopairs = 3,
