@@ -67,15 +67,16 @@ nvim_set_var(
         tabular = 3,
         telescope = 5,
         thingity = 3,
+        tmux_navigator = 3,
+        toggleterm = 3,
         treesitter = 3,
         twightlight = 9,
+        unicode = 4,
         unimpaired = 5,
         update_spelling = 7,
         which_key = 3,
         window_cleaner = 3,
         writegood = 6,
-        tmux_navigator = 3,
-        unicode = 4,
         vsnip = 5,
         zen_mode = 6,
         zephyr = 9
@@ -330,7 +331,7 @@ return require("packer").startup {
 
         use {
             "akinsho/toggleterm.nvim",
-            cmd = "ToggleTerm",
+            cmd = {"ToggleTerm", "TermExec"},
             config = [[require'config.toggleterm']]
         }
         useif "tpope/vim-eunuch"
