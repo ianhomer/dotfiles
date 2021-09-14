@@ -32,7 +32,7 @@ def run():
     parser = argparse.ArgumentParser(description="todoer")
     parser.add_argument("do", nargs="*", help="do")
     parser.add_argument("-a", "--all", help="all dos", action="store_true")
-    parser.add_argument("-c", "--context", help="all contexts", action="store_true")
+    parser.add_argument("-c", "--context", help="list all contexts", action="store_true")
     parser.add_argument("--days", type=int, help="days")
     parser.add_argument("--stream", action="store_true")
     parser.add_argument("-t", "--today", help="add today item", action="store_true")
