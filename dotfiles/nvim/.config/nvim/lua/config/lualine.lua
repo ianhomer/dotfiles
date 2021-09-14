@@ -16,7 +16,9 @@ require("lualine").setup {
             {
                 "diagnostics",
                 sources = {"ale", "nvim_lsp"},
-                color_error = "white"
+                diagnostics_color = {
+                  error = "white"
+                }
             }
         }
     }
