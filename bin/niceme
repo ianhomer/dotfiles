@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# MS Teams with video calls consumes cpu, renicing limits impact on other
+# processes
+
+echo "Renicing Teams ..."
+ps -ef                      |
+  grep -i "Microsoft Teams" |
+  grep -v "grep"            |
+  awk '{print $2}'          |
+  while read proc; do
+    ps -co pid=,command= $proc
+    renice 20 $proc
+  done
