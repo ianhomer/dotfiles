@@ -31,7 +31,8 @@ END = "\033[0m"
 def run():
     parser = argparse.ArgumentParser(description="todoer")
     parser.add_argument("do", nargs="*", help="do")
-    parser.add_argument("-a", "--all", help="all dos", action="store_true")
+    parser.add_argument("-a", "--all", help="show all types of todos", action="store_true")
+    parser.add_argument("-i", "--include", help="include all contexts", action="store_true")
     parser.add_argument("-c", "--context", help="list all contexts", action="store_true")
     parser.add_argument("--days", type=int, help="days")
     parser.add_argument("--stream", action="store_true")
@@ -97,8 +98,9 @@ def context(environment: Environment):
 
 
 def search(environment: Environment, args):
-    excludes = []
     contextFilter = ContextFilter(environment.myDo)
+    excludes = [] if args.include or args.do else contextFilter.excludes()
+
     if args.all:
         if args.do:
             pattern = f"\\- \\[ \\] {contextFilter.pattern(args.do[0])}"
@@ -110,7 +112,6 @@ def search(environment: Environment, args):
     else:
         # By default ignore todos
         pattern = "\\- \\[ \\](?! ([A-Z]{3} )?[\\.\\-])"
-        excludes = contextFilter.excludes()
 
     ag = Ag(environment, args.justarchive, args.witharchive or args.all)
     agParts = ag.parts(
