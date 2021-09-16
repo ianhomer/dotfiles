@@ -45,7 +45,8 @@ if has('nvim')
   highlight ALEWarning gui=undercurl guifg=255
 endif
 
-let markdown_linters = ['remark-lint']
+"let markdown_linters = ['remark-lint']
+let markdown_linters = ['']
 
 " Enable markdown linters that help with good writing
 if knobs#("writegood")
