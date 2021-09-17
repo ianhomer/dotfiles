@@ -146,6 +146,8 @@ def search(environment: Environment, args):
             "2,3",
             "--tabstop",
             "4",
+            "--layout",
+            "reverse",
             "--tiebreak",
             "begin",
             "--bind=ctrl-s:abort,ctrl-x:abort",
