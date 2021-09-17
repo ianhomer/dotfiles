@@ -1,6 +1,5 @@
 tap "homebrew/cask-fonts"
 tap "wfxr/code-minimap"
-tap "isen-ng/dotnet-sdk-versions"
 
 # The awesome Hack Nerd fonts combining the Hack source code font
 # -  https://github.com/source-foundry/Hack
@@ -35,6 +34,7 @@ brew "fasd"
 brew "fd"
 brew "findutils"
 brew "fish"
+brew "glow"
 brew "gnupg"
 brew "htop"
 brew "httpie"
@@ -86,7 +86,6 @@ brew "fzf"
 brew "duti"
 
 cask "alfred"
-cask "amethyst"
 cask "evernote"
 
 #
@@ -106,17 +105,16 @@ cask "drawio"
 # dev tools
 #
 
-brew "docker-compose"
 brew "gh"
 brew "git"
 brew "gradle"
 brew "jenv"
 brew "jq"
+brew "nvm"
 brew "k9s"
 
 brew "maven"
 brew "neofetch"
-brew "nvm"
 brew "rbenv"
 brew "warrensbox/tap/tfswitch"
 brew "yarn"
@@ -124,8 +122,6 @@ brew "yarn"
 cask "docker"
 cask "google-cloud-sdk"
 cask "lens"
-cask "visual-studio-code"
-cask "dotnet-sdk5-0-200"
 
 #
 # media tools

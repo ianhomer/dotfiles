@@ -1,5 +1,5 @@
 import pytest
-from pytest_bdd import scenarios, when, then, parsers
+from pytest_bdd import scenarios, when, parsers
 from .. import HumanDate
 
 scenarios("features/date.feature")

@@ -11,19 +11,20 @@ let g:knobs_defaults = {
 
 " Levels at which knobs are enabled
 let g:knobs_levels = {
-  \   "ale":4,
+  \   "ale":3,
   \   "apathy":5,
-  \   "airline":5,
+  \   "airline":3,
   \   "autosave":3,
   \   "conflict_marker":7,
   \   "devicons":5,
+  \   "defaults":1,
   \   "dispatch":5,
   \   "endwise":5,
   \   "eunuch":5,
   \   "fugitive":3,
   \   "fzf":1,
-  \   "gitgutter":5,
-  \   "gruvbox":5,
+  \   "gitgutter":3,
+  \   "gruvbox":3,
   \   "gruvbox8":1,
   \   "goyo":4,
   \   "gutentags":5,
@@ -31,18 +32,18 @@ let g:knobs_levels = {
   \   "minimap": 5,
   \   "modes":1,
   \   "nerdtree":1,
-  \   "polyglot":5,
+  \   "shortcuts":1,
   \   "spelling":4,
   \   "startify":1,
-  \   "startuptime":5,
-  \   "surround":4,
-  \   "tabcomplete":4,
+  \   "startuptime":2,
+  \   "surround":3,
+  \   "tabcomplete":3,
   \   "tabular":4,
-  \   "thingity":4,
-  \   "unimpaired":4,
+  \   "thingity":3,
+  \   "unimpaired":3,
   \   "update_spelling":6,
-  \   "which_key":5,
-  \   "window_cleaner":4,
+  \   "which_key":3,
+  \   "window_cleaner":3,
   \   "writegood":8
   \ }
 
@@ -53,14 +54,6 @@ let g:knobs_layers_map = {
   \      "markdown_flow":1,
   \      "markdown_conceal_full":1,
   \      "markdown_syntax_list":1
-  \    },
-  \    "notes":{
-  \      "compactcmd":1,
-  \      "light":1,
-  \      "markdown_conceal_partial":1
-  \    },
-  \    "nvim_0_5":{
-  \      "lsp":1
   \    }
   \  }
 
@@ -74,13 +67,13 @@ call plug#begin(knobs#GetPluggedDir())
 " Core essentials
 "
 " fzf - Fuzzy Finder
-if knobs#plug#could("fzf")
+if knobs#("fzf")
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
 endif
 
 " fugitive - Git integration
-if knobs#plug#could("fugitive")
+if knobs#("fugitive")
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
 endif
@@ -90,8 +83,6 @@ IfKnob 'conflict-marker' Plug 'rhysd/conflict-marker.vim'
 "
 " Style
 "
-IfKnob 'light' Plug 'rakr/vim-one'
-
 IfKnob 'gruvbox'  Plug 'morhetz/gruvbox'
 IfKnob 'gruvbox8' Plug 'lifepillar/vim-gruvbox8'
 
@@ -103,7 +94,7 @@ IfKnob 'minimap' Plug 'wfxr/minimap.vim'
 if knobs#At(9) | Plug 'tpope/vim-vinegar' | endif
 " ack - Search files
 if knobs#At(6) | Plug 'mileszs/ack.vim' | endif
-if knobs#plug#could("airline")
+if knobs#("airline")
   " Airline - status bar
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -126,9 +117,9 @@ IfKnob 'gutentags' Plug 'ludovicchabant/vim-gutentags'
 " Help
 "
 " vim-which-key - guidance on what keys do
-if knobs#plug#could("which_key")
+if knobs#('which_key')
   Plug 'liuchengxu/vim-which-key',
-  \ { 'on': ['WhichKey', 'WhichKey!'] }
+    \ { 'on': ['WhichKey', 'WhichKey!'] }
 endif
 
 "
@@ -150,17 +141,10 @@ IfKnob 'dispatch' Plug 'tpope/vim-dispatch'
 
 IfKnob 'ale' Plug 'dense-analysis/ale'
 
-" polyglot
-if knobs#plug#could("polyglot")
-  let g:polyglot_disabled = ['markdown']
-  Plug 'sheerun/vim-polyglot'
-  Plug 'aliou/bats.vim'
-endif
-
 " Commenter - loads maps prefixed with <leader>c <- don't use for local maps
 if knobs#At(5) | Plug 'preservim/nerdcommenter' | endif
 
-if knobs#plug#could("nerdtree")
+if knobs#("nerdtree")
   " NERDTree - show git changes
   if knobs#At(9) | Plug 'xuyuanp/nerdtree-git-plugin' | endif
 endif

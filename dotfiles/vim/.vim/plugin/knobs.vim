@@ -33,7 +33,6 @@ command! -nargs=1 -complete=customlist,knobs#runtime#ListKnobs
 nnoremap <silent> <leader>v :ReloadConfig<CR>
 
 nnoremap <silent> <leader>9a :call knobs#runtime#Toggle("autosave")<CR>
-nnoremap <silent> <leader>9l :call knobs#runtime#Toggle("light")<CR>
 
 nnoremap <silent> <leader>90 :call knobs#runtime#SetLevel(0)<CR>
 nnoremap <silent> <leader>91 :call knobs#runtime#SetLevel(1)<CR>

@@ -29,6 +29,8 @@ class Thing:
 
         self.normalBase = self.base
         self.normalPath = self.path
+        date = None
+        postfix = ""
         if self.path and self.path.startswith("stream"):
             match = re.search("^[0-9]*([0-9]{2})([0-9]{2})(-.*)?$", self.base)
             if match:
@@ -43,9 +45,19 @@ class Thing:
                 elif date > today:
                     # Last year thing
                     date = date.replace(date.year - 1)
-                if today - timedelta(days=40) > date:
-                    self.normalPath = "stream/archive/" + str(date.year)
-                    self.normalBase = date.strftime("%Y%m%d") + postfix
+
+        if not self.path:
+            match = re.search("^([0-9]{4})-([0-9]{2})-([0-9]{2})$", self.base)
+            if match:
+                date = today.replace(
+                    int(match.group(1)), int(match.group(2)), int(match.group(3))
+
+                )
+
+        if date:
+            if today - timedelta(days=40) > date:
+                self.normalPath = "stream/archive/" + str(date.year)
+                self.normalBase = date.strftime("%Y%m%d") + postfix
 
     def normalise(self, fix=False):
         mode = "+" if fix else "-"

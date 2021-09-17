@@ -1,8 +1,9 @@
 [ {$DOT_SKIP} -eq 2 ]; and exit
 [ {$DOT_ALIASES} -eq 0 ]; and exit
+set -q DOT_ALIASES_LOADED; or set DOT_ALIASES_LOADED 0
+[ {$DOT_ALIASES_LOADED} -eq 1 ]; and exit
 
 # Shortcuts
-
 if type which-dotme-aliases 2>/dev/null
   echo "‼︎ dotme aliases have already been defined"
   which-dotme-aliases
@@ -50,4 +51,6 @@ else
 
   [ {$DOT_LOG_LEVEL} -gt 1 ] ;and \
     echo "◎ loaded ~/.config/fish/aliases.fish"
+
+  set DOT_ALIASES_LOADED 1
 end

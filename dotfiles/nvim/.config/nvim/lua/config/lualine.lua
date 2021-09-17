@@ -3,6 +3,12 @@ require("lualine").setup {
         sources = {"ale"},
         theme = "gruvbox"
     },
+    extensions = {
+        "fugitive",
+        "fzf",
+        "nvim-tree",
+        "toggleterm"
+    },
     sections = {
         lualine_c = {
             {"filename"},
@@ -10,7 +16,9 @@ require("lualine").setup {
             {
                 "diagnostics",
                 sources = {"ale", "nvim_lsp"},
-                color_error = "#ffffff"
+                diagnostics_color = {
+                  error = "white"
+                }
             }
         }
     }
