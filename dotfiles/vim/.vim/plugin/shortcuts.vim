@@ -40,10 +40,8 @@ if knobs#At(3)
     nnoremap <silent> ' :WhichKey "'"<CR>
   endif
 
-  if knobs#At(4)
-    nnoremap <silent> <leader>p :MarkdownPreview<CR>
-    nnoremap <silent> <leader>.m :!mind-map %:p<CR>
-  endif
+  nnoremap <silent> <leader>p :MarkdownPreview<CR>
+  nnoremap <silent> <leader>.m :!mind-map %:p<CR>
 endif
 
 command! -nargs=0 LintMe :call my#LintMe()

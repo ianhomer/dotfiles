@@ -316,11 +316,11 @@ return require("packer").startup {
             "ellisonleao/glow.nvim",
             cmd = {"Glow"}
         }
-        useif {
+        use {
             "iamcco/markdown-preview.nvim",
             -- cmd = {"MarkdownPreview"},
             run = "cd app && yarn install",
-            defer = 5000
+            defer = 1000
         }
         useif {
             "lukas-reineke/indent-blankline.nvim"
