@@ -38,14 +38,23 @@ endfunction
 
 function window#cleaner#CloseAllBuffersButCurrent()
   call window#cleaner#Close("fzf")
-
+  if exists(':NvimTreeClose')
+    " Close Nvim cleanly since using bd on NvimTree leads to a file named
+    " NvimTree being created
+    NvimTreeClose
+  endif
   let current = bufnr("%")
-  let buffers = filter(range(1, bufnr('$')), 'bufloaded(v:val)')
+  " Find the listed buffers
+  let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val)')
   let first = buffers[0]
   let last = buffers[-1]
 
-  if current > first | silent! execute first.",".(current-1)."bd" | endif
-  if current < last  | silent! execute (current+1).",".last."bd"  | endif
+  for buffer in buffers
+    " Close every buffer except the current
+    if current != buffer
+      execute buffer."bd"
+    endif
+  endfor
 endfunction
 
 function window#cleaner#CloseOtherBuffers()
@@ -57,7 +66,9 @@ function window#cleaner#CloseOtherBuffers()
     NERDTreeClose
   endif
   call window#cleaner#CloseAllBuffersButCurrent()
-  call window#NERDTreeFindIfRoom()
+  if exists('*NERDTreeClose')
+    call window#NERDTreeFindIfRoom()
+  endif
   " Return to saved mark
   normal `A
 endfunction
@@ -79,30 +90,43 @@ function window#cleaner#CloseMe()
     return
   endif
 
-  if &filetype == "startify" || &buftype != ""
+  if &filetype == "startify" || (&buftype != "" && &filetype != "NvimTree")
     " Close startify window or non writable buffer
     quit
   elseif exists("#Zen")
     " Exit zen mode
     execute ":ZenMode"
   elseif len(getbufinfo({'buflisted':1})) > 1
-        \ || (&filetype == "nerdtree" && len(getbufinfo({'buflisted':1})) == 1)
+        \ || ((&filetype == "nerdtree" || &filetype == "NvimTree")
+        \ && len(getbufinfo({'buflisted':1})) == 1)
     " More than one buffer open or on nerdtree and one buffer open
     "   => close buffer and switch to next
-    execute ":bd"
+    if &filetype == "NvimTree"
+      NvimTreeClose
+    else
+      execute ":bd"
+    endif
     call window#SwitchToFirstEditableFile()
   elseif &filetype == "nerdtree"
+      \ || &filetype == "NvimTree"
     if knobs#("startify") && exists(':Startify') && winnr('$') == 1
       " Last window and Startify available
       "   => Open startify before closing NERDTree
       execute ":Startify"
     endif
-    NERDTreeClose
+    if &filetype == "nerdtree"
+      NERDTreeClose
+    else
+      NvimTreeClose
+    endif
   elseif exists("g:NERDTree") && g:NERDTree.IsOpen()
     " NERDTree open
     "   => close buffer and leave NERDTree open
     execute ":q"
   elseif knobs#("startify") && exists(':Startify')
+    if exists('g:loaded_tree')
+      NvimTreeClose
+    endif
     execute ":bd"
     execute ":Startify"
   elseif @% == ""

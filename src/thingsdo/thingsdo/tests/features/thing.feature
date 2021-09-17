@@ -36,6 +36,14 @@ Feature: Things
         And the thing is not normal
         And the thing normalFilename is my-collection/stream/archive/2020/20200425.md
 
+    Scenario: No path date thing
+        Given today is 20210812
+        When I have the thing my-collection/2021-01-25.md
+        Then the thing base is 2021-01-25
+        And the thing is not normal
+        And the thing path is not set
+        And the thing normalFilename is my-collection/stream/archive/2021/20210125.md
+
     Scenario: No path thing
         When I have the thing my-collection/thing.md
         Then the thing base is thing

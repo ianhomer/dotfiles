@@ -1,4 +1,8 @@
-require("telescope").setup {
+local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
+local telescope = require("telescope")
+
+telescope.setup {
     defaults = {
         vimgrep_arguments = {
             "rg",
@@ -9,13 +13,19 @@ require("telescope").setup {
             "--column",
             "--smart-case",
             "--hidden"
-        }
+        },
+        mappings = {
+            i = {["<c-t>"] = trouble.open_with_trouble},
+            n = {["<c-t>"] = trouble.open_with_trouble}
+        },
+        path_display = {"shorten"}
     }
 }
+telescope.load_extension('fzf')
 
 local opt = {noremap = true, silent = true}
 -- core
-vim.api.nvim_set_keymap("n", " f", [[<Cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>]], opt)
+--vim.api.nvim_set_keymap("n", " f", [[<Cmd>lua require('telescope.builtin').find_files({hidden = true})<CR>]], opt)
 
 -- extras
 vim.api.nvim_set_keymap("n", " tt", [[<Cmd>Telescope<CR>]], opt)

@@ -11,6 +11,8 @@ endfunction
 
 function! thingity#LintMarkdown()
   normal ma
+  " Linting needs all folds expanded
+  normal zR
   let currentLine=line("'a")
   call my#PruneWhiteSpace()
   normal gg

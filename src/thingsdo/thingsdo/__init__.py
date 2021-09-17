@@ -2,6 +2,7 @@ from .environment import Environment
 from .ag import Ag
 from .contextFilter import ContextFilter
 from .factory import Factory
+from .gitFile import GitFile
 from .humanDate import HumanDate
 from .humanTime import HumanTime
 from .palette import Palette

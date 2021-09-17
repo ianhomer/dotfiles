@@ -6,7 +6,7 @@ import subprocess
 import re
 import shutil
 from subprocess import PIPE
-from .. import Environment, thingity
+from .. import Environment, GitFile, thingity
 
 
 def run():
@@ -58,7 +58,7 @@ class Fzf:
     # 2) filename
     # 3) line number in file for preview
     # 4) display string
-    def __init__(self, environment: Environment, thingsSearchArgs: str):
+    def __init__(self, environment: Environment, thingsSearchArgs: str = None):
         self.environment = environment
         terminal = shutil.get_terminal_size((80, 24))
         self.cmd = [
@@ -102,7 +102,9 @@ class Fzf:
         self.parts = []
         self.defaultCommand = "true"
         self.filenameMatcher = "^[^:]*:([^:]*)"
-        search = "things-search " + thingsSearchArgs
+        search = (
+            "things-search " + thingsSearchArgs if thingsSearchArgs else "things-search"
+        )
         self.binds = [
             "ctrl-f:reload("
             + "fd --changed-within 3months md --exec stat -f '%m:%N:1:%N' {q} "
@@ -137,10 +139,8 @@ class Fzf:
                 selected.append(match.group(1))
 
         if len(selected) > 0:
-            subprocess.call(
-                ["nvim"] + selected,
-                cwd=self.environment.directory,
-            )
+            gitFile = GitFile(self.environment.directory, selected[0])
+            subprocess.call(["nvim"] + [gitFile.path], cwd=gitFile.root)
             return True
         return False
 

@@ -39,6 +39,14 @@ if status --is-login
   set -x NNN_PLUG 'b:bookmarks;c:fzcd;p:preview-tui;f:fzopen'
   set -x NNN_FIFO "/tmp/nnn.fifo"
   set -x VISUAL ewrap
+
+  time-me "BEFORE nvm use"
+  # Efficient switching to latest node by default for shell. nvm use is a little
+  # slower and does not force activation if node installed globally
+  _nvm_list | string match --entire "latest" | read v __
+  set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
+  _nvm_version_activate $v
+  time-me "AFTER nvm use"
 end
 
 if status --is-interactive
@@ -102,7 +110,10 @@ end
 
 if [ {$DOT_LOG_LEVEL} -gt 0 ]
   set DATE (dateme +%s%3N)
-  echo "◎ up in "(math $DATE - $SHELL_START_DATE)"ms"
+  # Don't show up time in shell within vim
+  if not set -q VIM
+    echo "◎ up in "(math $DATE - $SHELL_START_DATE)"ms"
+  end
   status --is-interactive; and set_color normal
 end
 

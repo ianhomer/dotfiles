@@ -1,8 +1,13 @@
-local cmd = vim.api.nvim_command
+local wk = require("which-key")
 
-local map = {
-    f = "Find files",
-    s = "Search"
-}
+wk.setup {}
 
-vim.fn["which_key#register"]("<Space>", map)
+wk.register(
+    {
+        a = {"<cmd>ToggleTerm<cr>", "Terminal"},
+        f = {"<cmd>Telescope find_files hidden=true<cr>", "Find File"},
+        n = {"<cmd>NvimTreeFindFile<cr>", "Files"},
+        S = {"<cmd>Telescope live_grep hidden=true<cr>", "Search" }
+    },
+    {prefix = "<leader>"}
+)

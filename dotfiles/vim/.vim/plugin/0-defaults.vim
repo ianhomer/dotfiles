@@ -1,3 +1,7 @@
+if !knobs#("defaults")
+  finish
+endif
+
 " CORE Configuration - START
 "
 let mapleader = "\<Space>"

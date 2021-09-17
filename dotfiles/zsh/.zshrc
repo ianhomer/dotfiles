@@ -73,7 +73,6 @@ plugins=(
   fasd
   fzf
   npm
-  nvm
   osx
   git
   terraform
@@ -109,11 +108,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 . ~/.config/sh/aliases.sh
-
-export NVM_DIR=~/.nvm
-if command -v brew &> /dev/null ; then
-  source $(brew --prefix nvm)/nvm.sh
-fi
 
 fpath+=~/.config/zsh/functions
 autoload br
