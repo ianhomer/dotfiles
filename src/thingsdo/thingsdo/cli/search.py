@@ -47,6 +47,7 @@ def search(args):
         search = Rg(environment)
         search.withModifiedKey = True
         matchPattern = "(?=.*" + match + ")" if match else ""
+        matchPattern += "(?!.*#reject)"
         search.matchPrefix = f"^{matchPattern}(?=\\[[0-9A-Za-z\\s\\.\\-]+\\]:).*"
     elif args.name == "headings":
         search = Rg(environment, match, args.justarchive, args.witharchive)
