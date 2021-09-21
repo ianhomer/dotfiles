@@ -115,9 +115,9 @@ return require("packer").startup {
     function(use)
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
-        vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
-        use {"lewis6991/impatient.nvim", rocks = "mpack"}
-        require('impatient').enable_profile()
+        -- vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
+        -- use {"lewis6991/impatient.nvim", rocks = "mpack"}
+        -- require('impatient').enable_profile()
 
         local knobs = require("knobs")
         local useif = knobs.use(use)

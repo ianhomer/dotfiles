@@ -116,7 +116,7 @@ class Fzf:
             # Note that ctrl-x aborts so that a subsequence ctrl-x in fish shell
             # opens cheats. Similarly for ctrl-w opening todos.
             "ctrl-x:abort",
-            "ctrl-w:abort",
+            "ctrl-space:execute(todo)+abort",
             "ctrl-o:execute(tmux split-window -v 'nvim {2}')",
         ]
 

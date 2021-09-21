@@ -150,7 +150,7 @@ def search(environment: Environment, args):
             "reverse",
             "--tiebreak",
             "begin",
-            "--bind=ctrl-s:abort,ctrl-x:abort",
+            "--bind=ctrl-s:abort,ctrl-x:abort,ctrl-space:abort",
         ],
         stdin=PIPE,
         stdout=PIPE,
