@@ -119,8 +119,8 @@ end
 
 # Things bind
 
-bind --mode insert \cw do
-bind --mode insert \cx cheat
+bind --mode insert \cx do
+bind --mode insert \cw cheat
 bind --mode insert -k nul "things -n headings --witharchive"
 
 time-me "END config.fish"
