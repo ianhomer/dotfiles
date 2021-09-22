@@ -31,9 +31,15 @@ END = "\033[0m"
 def run():
     parser = argparse.ArgumentParser(description="todoer")
     parser.add_argument("do", nargs="*", help="do")
-    parser.add_argument("-a", "--all", help="show all types of todos", action="store_true")
-    parser.add_argument("-i", "--include", help="include all contexts", action="store_true")
-    parser.add_argument("-c", "--context", help="list all contexts", action="store_true")
+    parser.add_argument(
+        "-a", "--all", help="show all types of todos", action="store_true"
+    )
+    parser.add_argument(
+        "-i", "--include", help="include all contexts", action="store_true"
+    )
+    parser.add_argument(
+        "-c", "--context", help="list all contexts", action="store_true"
+    )
     parser.add_argument("--days", type=int, help="days")
     parser.add_argument("--stream", action="store_true")
     parser.add_argument("-t", "--today", help="add today item", action="store_true")
@@ -150,7 +156,8 @@ def search(environment: Environment, args):
             "reverse",
             "--tiebreak",
             "begin",
-            "--bind=ctrl-s:abort,ctrl-w:abort,ctrl-space:abort",
+            "--bind=ctrl-s:abort,ctrl-w:abort,ctrl-space:abort,"
+            + "ctrl-o:execute(tmux split-window -v 'nvim {4}')",
         ],
         stdin=PIPE,
         stdout=PIPE,
