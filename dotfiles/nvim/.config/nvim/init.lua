@@ -135,23 +135,22 @@ return require("packer").startup {
         use {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
         use {
             "hrsh7th/nvim-cmp",
-            requires = {
-                "hrsh7th/cmp-buffer"
-            },
+            requires = "hrsh7th/cmp-buffer",
             config = [[require'config.cmp']]
         }
 
-        use {
+        useif {
+            knob = "cmp",
             "hrsh7th/cmp-nvim-lsp",
             after = "nvim-cmp"
         }
 
-        use {
+        useif {
             "hrsh7th/cmp-nvim-lua",
             after = "cmp-nvim-lsp"
         }
 
-        use {
+        useif {
             "hrsh7th/cmp-path",
             after = "cmp-nvim-lsp"
         }
@@ -162,7 +161,8 @@ return require("packer").startup {
             after = "cmp-nvim-lsp"
         }
 
-        use {
+        useif {
+            knob = "vsnip",
             "rafamadriz/friendly-snippets",
             event = "InsertCharPre"
         }
@@ -203,7 +203,8 @@ return require("packer").startup {
         useif {
             "nvim-treesitter/nvim-treesitter",
             event = "BufRead",
-            config = [[require'config.treesitter']]
+            config = [[require'config.treesitter']],
+            run = ':TSUpdate'
         }
 
         -- Navigation
