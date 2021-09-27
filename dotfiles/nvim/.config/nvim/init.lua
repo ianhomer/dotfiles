@@ -225,6 +225,7 @@ return require("packer").startup {
             },
             config = [[require'config.telescope']]
         }
+        use "kyazdani42/nvim-web-devicons"
         use {
             "kyazdani42/nvim-tree.lua",
             requires = "kyazdani42/nvim-web-devicons",

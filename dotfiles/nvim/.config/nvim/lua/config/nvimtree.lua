@@ -1,4 +1,3 @@
-vim.g.nvim_tree_lsp_diagnostics = 1
 vim.g.nvim_tree_special_files = {}
 vim.g.nvim_tree_ignore = {".DS_Store", ".git", ".pytest_cache", "node_modules"}
 
@@ -15,3 +14,7 @@ vim.g.nvim_tree_icons = {
 
 vim.cmd [[highlight NvimTreeFolderIcon guifg=#928374]]
 vim.cmd [[highlight NvimTreeFolderName guifg=#8ec07c]]
+
+require'nvim-tree'.setup{
+  lsp_diagnostics = 1
+}
