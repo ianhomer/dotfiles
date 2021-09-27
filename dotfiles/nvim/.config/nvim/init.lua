@@ -187,6 +187,11 @@ return require("packer").startup {
             config = [[require'config.trouble']]
         }
 
+        use {
+          "majutsushi/tagbar",
+          cmd = "TagbarToggle"
+        }
+
         useif {
           "folke/lsp-colors.nvim"
         }
@@ -225,6 +230,7 @@ return require("packer").startup {
                 {"nvim-lua/plenary.nvim", cond = "vim.g['knob_telescope']"},
                 {"nvim-telescope/telescope-fzf-native.nvim"}
             },
+            after = "trouble.nvim",
             config = [[require'config.telescope']]
         }
         use {
