@@ -70,6 +70,7 @@ nvim_set_var(
         tmux_navigator = 3,
         toggleterm = 3,
         treesitter = 3,
+        trouble = 5,
         twightlight = 9,
         unicode = 4,
         unimpaired = 5,
@@ -180,7 +181,7 @@ return require("packer").startup {
         }
 
         -- Lua
-        use {
+        useif {
             "folke/trouble.nvim",
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.trouble']]
@@ -225,7 +226,6 @@ return require("packer").startup {
             },
             config = [[require'config.telescope']]
         }
-        use "kyazdani42/nvim-web-devicons"
         use {
             "kyazdani42/nvim-tree.lua",
             requires = "kyazdani42/nvim-web-devicons",
@@ -279,7 +279,7 @@ return require("packer").startup {
             event = "BufRead",
             config = [[require'config.gitsigns']]
         }
-        use {"junegunn/gv.vim", cmd = {"GV"}}
+        use { "junegunn/gv.vim", cmd = {"GV"} }
 
         -- Editing
         useif {
