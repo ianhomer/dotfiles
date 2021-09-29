@@ -132,6 +132,9 @@ return require("packer").startup {
             "neovim/nvim-lspconfig",
             config = [[require'config.lspconfig']]
         }
+        use {
+          "ray-x/lsp_signature.nvim",
+        }
         use {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
         use {
             "hrsh7th/nvim-cmp",
@@ -180,6 +183,11 @@ return require("packer").startup {
             config = [[require'config.lightbulb']]
         }
 
+        use {
+            cmd = "Vista",
+            "liuchengxu/vista.vim"
+        }
+
         -- Lua
         use {
             "folke/trouble.nvim",
@@ -188,13 +196,13 @@ return require("packer").startup {
         }
 
         use {
-          "majutsushi/tagbar",
-          cmd = "TagbarToggle",
-          config = [[require'config.tagbar']]
+            "majutsushi/tagbar",
+            cmd = "TagbarToggle",
+            config = [[require'config.tagbar']]
         }
 
         useif {
-          "folke/lsp-colors.nvim"
+            "folke/lsp-colors.nvim"
         }
 
         cmd [[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
@@ -210,7 +218,7 @@ return require("packer").startup {
             "nvim-treesitter/nvim-treesitter",
             event = "BufRead",
             config = [[require'config.treesitter']],
-            run = ':TSUpdate'
+            run = ":TSUpdate"
         }
 
         -- Navigation
@@ -223,7 +231,7 @@ return require("packer").startup {
             requires = {{"junegunn/fzf", opt = true, fn = {"fzf#shellescape"}}}
         }
         use {"nvim-lua/plenary.nvim"}
-        use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+        use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
         useif {
             "nvim-telescope/telescope.nvim",
             requires = {
@@ -270,8 +278,8 @@ return require("packer").startup {
             config = [[require'config.colorizer']]
         }
         useif {
-          "karb94/neoscroll.nvim",
-          config = [[require'config.neoscroll']]
+            "karb94/neoscroll.nvim",
+            config = [[require'config.neoscroll']]
         }
 
         -- Git
@@ -287,7 +295,7 @@ return require("packer").startup {
             event = "BufRead",
             config = [[require'config.gitsigns']]
         }
-        use { "junegunn/gv.vim", cmd = {"GV"} }
+        use {"junegunn/gv.vim", cmd = {"GV"}}
 
         -- Editing
         useif {
