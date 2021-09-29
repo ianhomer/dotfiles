@@ -1,7 +1,11 @@
---exclude=.git
---exclude=dist
 --exclude=.next
---exclude=node_modules
+--exclude=build
+--exclude=dist
+--exclude=target
+--exclude-exception=node_modules
+--exclude-exception=package.json
+
+--languages=css,kotlin,markdown,python,powershell,sh,typescript,vim
 
 --langmap=TypeScript:.ts.tsx
 --langmap=vim:.vimrc.vim
