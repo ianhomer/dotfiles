@@ -24,8 +24,8 @@ if knobs#At(3)
   nnoremap <silent> <leader>k :ToggleQuickFix<CR>
   nnoremap <silent> <leader>K :ToggleLocationList<CR>
   nnoremap <silent> <leader>g :ToggleFugitive<CR>
-  nnoremap gdh :diffget //2<CR>
-  nnoremap gdl :diffget //3<CR>
+  nnoremap <leader>,gdh :diffget //2<CR>
+  nnoremap <leader>,gdl :diffget //3<CR>
   nnoremap <silent> <leader>b :GPush<CR>
   nnoremap <silent> <leader>e :GSynk<CR>
 
