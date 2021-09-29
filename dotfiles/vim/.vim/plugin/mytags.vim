@@ -5,9 +5,9 @@
 " Run on start up if file does not exist
 " To refresh ctags run :MyTags
 "
-let g:mytags_root = trim(system("git rev-parse --show-toplevel"))
+let g:mytags_root = trim(system("git rev-parse --show-toplevel 2>/dev/null"))
 if g:mytags_root != ""
-  let g:mytags_file = expand("~/.cache/tags/".substitute(g:mytags_root, '[/\.]', '-', 'g')."-tags")
+  let g:mytags_file = expand("~/.cache/tags/".substitute(g:mytags_root[1:], '[/\.]', '-', 'g')."-tags")
   let &tags = g:mytags_file
   set notagrelative
 
