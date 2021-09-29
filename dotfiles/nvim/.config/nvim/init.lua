@@ -181,7 +181,7 @@ return require("packer").startup {
         }
 
         -- Lua
-        useif {
+        use {
             "folke/trouble.nvim",
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.trouble']]
@@ -189,7 +189,8 @@ return require("packer").startup {
 
         use {
           "majutsushi/tagbar",
-          cmd = "TagbarToggle"
+          cmd = "TagbarToggle",
+          config = [[require'config.tagbar']]
         }
 
         useif {
