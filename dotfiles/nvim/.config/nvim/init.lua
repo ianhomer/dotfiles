@@ -133,7 +133,7 @@ return require("packer").startup {
             config = [[require'config.lspconfig']]
         }
         use {
-          "ray-x/lsp_signature.nvim",
+            "ray-x/lsp_signature.nvim"
         }
         use {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
         use {
@@ -254,6 +254,10 @@ return require("packer").startup {
             "folke/which-key.nvim",
             event = "BufWinEnter",
             config = [[require'config.which_key']]
+        }
+        use {
+          "phaazon/hop.nvim",
+          config = [[require'config.hop']]
         }
         use "christoomey/vim-tmux-navigator"
 
