@@ -17,4 +17,6 @@ if knobs.has("nvim_tree") then
     map["n"] = {"<cmd>NvimTreeFindFile<cr>", "Files"}
 end
 
+map["h"] = {"<cmd>lua require'hop'.hint_words()<cr>", "Hop"}
+
 wk.register(map, {prefix = "<leader>"})
