@@ -1,4 +1,4 @@
-export function foo(a) {
+function foo(a) {
   if (true) {
     console.log("It's true");
   }
@@ -6,3 +6,5 @@ export function foo(a) {
   console.log("Hello, World!");
   return a;
 }
+
+foo(true)

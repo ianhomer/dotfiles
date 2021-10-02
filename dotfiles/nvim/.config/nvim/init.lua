@@ -21,6 +21,7 @@ nvim_set_var(
         conflict_marker = 7,
         commentary = 5,
         cmp = 5,
+        dap = 5,
         defaults = 1,
         devicons = 5,
         dispatch = 5,
@@ -78,6 +79,7 @@ nvim_set_var(
         which_key = 3,
         window_cleaner = 3,
         writegood = 6,
+        vimspector = 9,
         vsnip = 5,
         zen_mode = 6,
         zephyr = 9
@@ -224,6 +226,24 @@ return require("packer").startup {
             config = [[require'config.treesitter']],
             run = ":TSUpdate"
         }
+        useif {
+            knob = "dap",
+            "nvim-telescope/telescope-dap.nvim"
+        }
+        useif {
+            "mfussenegger/nvim-dap",
+            config = [[require'config.dap']]
+        }
+        useif {
+            knob = "dap",
+            "rcarriga/nvim-dap-ui",
+            requires = "mfussenegger/nvim-dap",
+            config = [[require'config.dapui']]
+        }
+        useif {
+            "puremourning/vimspector",
+            config = [[require'config.vimspector']]
+        }
 
         -- Navigation
 
@@ -260,8 +280,8 @@ return require("packer").startup {
             config = [[require'config.which_key']]
         }
         use {
-          "phaazon/hop.nvim",
-          config = [[require'config.hop']]
+            "phaazon/hop.nvim",
+            config = [[require'config.hop']]
         }
         use "christoomey/vim-tmux-navigator"
 
