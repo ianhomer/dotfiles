@@ -135,6 +135,10 @@ return require("packer").startup {
         use {
             "ray-x/lsp_signature.nvim"
         }
+        use {
+            "weilbith/nvim-code-action-menu",
+            cmd = "CodeActionMenu"
+        }
         use {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
         use {
             "hrsh7th/nvim-cmp",
