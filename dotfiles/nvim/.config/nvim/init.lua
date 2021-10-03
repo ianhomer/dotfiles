@@ -5,7 +5,11 @@ local nvim_set_var = vim.api.nvim_set_var
 
 vim.opt.shell = "/bin/bash"
 
-require("impatient").enable_profile()
+local ok, _ = pcall(require, 'impatient')
+if ok then
+  _.enable_profile()
+end
+
 require("config/core")
 
 -- Levels at which knobs are enabled
