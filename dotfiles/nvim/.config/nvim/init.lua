@@ -21,7 +21,7 @@ nvim_set_var(
         conflict_marker = 7,
         commentary = 5,
         cmp = 5,
-        dap = 5,
+        dap = 9,
         defaults = 1,
         devicons = 5,
         dispatch = 5,
@@ -126,8 +126,7 @@ return require("packer").startup {
         local useif = knobs.use(use)
 
         use {
-            "wbthomason/packer.nvim",
-            event = "VimEnter"
+            "wbthomason/packer.nvim"
         }
         -- LSP, autocomplete and code guidance
         use {
