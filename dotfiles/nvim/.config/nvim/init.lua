@@ -5,6 +5,7 @@ local nvim_set_var = vim.api.nvim_set_var
 
 vim.opt.shell = "/bin/bash"
 
+require("impatient").enable_profile()
 require("config/core")
 
 -- Levels at which knobs are enabled
@@ -114,8 +115,6 @@ g.indent_blankline_show_first_indent_level = false
 
 cmd "packadd packer.nvim" -- load the package manager
 
-require("impatient").enable_profile()
-
 return require("packer").startup {
     function(use)
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
@@ -195,7 +194,7 @@ return require("packer").startup {
         }
 
         -- Lua
-        use {
+        useif {
             "folke/trouble.nvim",
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.trouble']]
@@ -255,13 +254,20 @@ return require("packer").startup {
             requires = {{"junegunn/fzf", opt = true, fn = {"fzf#shellescape"}}}
         }
         use {"nvim-lua/plenary.nvim"}
-        use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
+        useif {
+            knob = "telescope",
+            "nvim-telescope/telescope-fzf-native.nvim",
+            run = "make"
+        }
         useif {
             "nvim-telescope/telescope.nvim",
             requires = {
                 {"nvim-lua/popup.nvim", cond = "vim.g['knob_telescope']"},
                 {"nvim-lua/plenary.nvim", cond = "vim.g['knob_telescope']"},
-                {"nvim-telescope/telescope-fzf-native.nvim"}
+                {
+                    "nvim-telescope/telescope-fzf-native.nvim",
+                    cond = "vim.g['knob_telescope']"
+                }
             },
             after = "trouble.nvim",
             config = [[require'config.telescope']]

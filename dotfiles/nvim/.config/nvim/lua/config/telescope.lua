@@ -21,7 +21,7 @@ telescope.setup {
         path_display = {"shorten"}
     }
 }
-telescope.load_extension('fzf')
+--telescope.load_extension('fzf')
 
 local opt = {noremap = true, silent = true}
 -- core
