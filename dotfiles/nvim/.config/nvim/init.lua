@@ -114,13 +114,14 @@ g.indent_blankline_show_first_indent_level = false
 
 cmd "packadd packer.nvim" -- load the package manager
 
+require("impatient").enable_profile()
+
 return require("packer").startup {
     function(use)
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
-        -- vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
-        -- use {"lewis6991/impatient.nvim", rocks = "mpack"}
-        -- require('impatient').enable_profile()
+        vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
+        use {"lewis6991/impatient.nvim", rocks = "mpack"}
 
         local knobs = require("knobs")
         local useif = knobs.use(use)
@@ -387,7 +388,8 @@ return require("packer").startup {
     end,
     config = {
         profile = {
-            enable = true
+            enable = true,
+            compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua"
         }
     }
 }
