@@ -309,7 +309,8 @@ return require("packer").startup {
         use {"glepnir/zephyr-nvim", disable = true}
         useif {
             "norcalli/nvim-colorizer.lua",
-            config = [[require'config.colorizer']]
+            config = [[require'config.colorizer']],
+            cmd = "BufRead"
         }
         useif {
             "karb94/neoscroll.nvim",
