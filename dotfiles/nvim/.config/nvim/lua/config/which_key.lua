@@ -14,7 +14,7 @@ if knobs.has("toggleterm") then
 end
 
 if knobs.has("nvim_tree") then
-    map["n"] = {"<cmd>NvimTreeFindFile<cr>", "Files"}
+    map["n"] = {"<cmd>NvimTreeOpen<cr>" .. "<cmd>NvimTreeFindFile<cr>", "Files"}
 end
 
 map["h"] = {"<cmd>lua require'hop'.hint_words()<cr>", "Hop"}

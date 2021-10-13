@@ -5,9 +5,9 @@ local nvim_set_var = vim.api.nvim_set_var
 
 vim.opt.shell = "/bin/bash"
 
-local ok, _ = pcall(require, 'impatient')
+local ok, _ = pcall(require, "impatient")
 if ok then
-  _.enable_profile()
+    _.enable_profile()
 end
 
 require("config/core")
@@ -280,7 +280,7 @@ return require("packer").startup {
             "kyazdani42/nvim-tree.lua",
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.nvimtree']],
-            cmd = {"NvimTreeFindFile", "NvimTreeToggle"}
+            cmd = {"NvimTreeFindFile", "NvimTreeOpen", "NvimTreeToggle"}
         }
         useif {"ryanoasis/vim-devicons"}
         use {"wfxr/minimap.vim", cmd = {"Minimap"}}
