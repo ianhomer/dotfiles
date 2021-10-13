@@ -23,5 +23,7 @@ vim.cmd [[highlight NvimTreeFolderIcon guifg=#928374]]
 vim.cmd [[highlight NvimTreeFolderName guifg=#8ec07c]]
 
 require "nvim-tree".setup {
-    lsp_diagnostics = 1
+    diagnostics = {
+      enable = true
+    }
 }
