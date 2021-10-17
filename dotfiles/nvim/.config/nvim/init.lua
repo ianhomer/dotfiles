@@ -301,7 +301,7 @@ return require("packer").startup {
             requires = {"kyazdani42/nvim-web-devicons", opt = true},
             config = [[require'config.lualine']]
         }
-        use {
+        useif {
             "romgrk/barbar.nvim",
             requires = {"kyazdani42/nvim-web-devicons"},
             config = [[require'config.barbar']]
