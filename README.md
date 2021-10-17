@@ -63,7 +63,7 @@ MacOS with
 **[alfred](https://www.alfredapp.com/)**
 : better hotkeys
 
-**[dozer](https://github.com/Mortennn/Dozer)**
+**[hiddenbar](https://github.com/dwarvesf/hidden)**
 : focused status bar
 
 **[magnet](https://magnet.crowdcafe.com/)**

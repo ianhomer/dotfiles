@@ -22,9 +22,9 @@ Change key board shortcuts.
 | `Ctrl-Alt-,` | Previous Display |
 | `Ctrl-Alt-.  | Next Display     |
 
-### Dozer
+### Hidden Bar
 
-Open dozer and configure menu hiding.
+Open Hidden Bar and configure menu hiding.
 
 ### Alfred
 
