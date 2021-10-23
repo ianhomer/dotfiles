@@ -126,11 +126,11 @@ def search(environment: Environment, args):
     result = subprocess.run(agParts, stdout=PIPE, text=True)
 
     lines = result.stdout.splitlines()
-    days = args.days or (365 if args.all else 3)
+    days = args.days or (30 if args.all else 3)
     dos = []
     renderer = TaskRenderer(theme=None if args.stream else "do")
     for line in lines:
-        task = Task(line, near=days)
+        task = Task(line, nearDays=days)
         if task.context not in excludes:
             dos.append(renderer.render(task) + ("" if args.stream else "\n"))
     dos.sort()

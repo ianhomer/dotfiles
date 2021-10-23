@@ -41,12 +41,12 @@ class Task:
         line,
         natural=False,
         # How many days are considered near
-        near=3,
+        nearDays=3,
         defaultContext=None,
         today: date = date.today(),
     ):
         self.dateInclude = False
-        self.near = near
+        self.nearDays = nearDays
         self.defaultContext = defaultContext
         self.end = None
         self.line = line
@@ -176,9 +176,13 @@ class Task:
         return TaskRenderer().render(self)
 
     @property
+    def near(self):
+        return self.date and self.date.daysAhead < self.nearDays
+
+    @property
     def rankGroup(self):
         return (
-            (2000 if self.date.daysAhead < self.near else 4000)
+            (2000 if self.near else 4000)
             if self.date is not None
             else (
                 7000

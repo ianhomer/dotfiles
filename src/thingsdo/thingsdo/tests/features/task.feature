@@ -75,12 +75,14 @@ Feature: Task
         And the task context is ABC
         And the task date is FRI
         And the task is ABC 20210611 something
+        And the task is near
 
     Scenario: Task with relative date
         Given today is 20210609
         And natural mode
         And I have the task ABC JUL 8 something
         Then the task is ABC 20210708 something
+        And the task is not near
 
     Scenario: Task with relative day without context
         Given today is 20210609
