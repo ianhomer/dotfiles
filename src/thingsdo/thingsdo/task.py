@@ -95,6 +95,7 @@ class Task:
         self.garage = False
         self.backlog = False
         self.question = False
+        self.next = False
         self.toDate = None
         if match:
             self.file = match.group(1)
@@ -120,6 +121,9 @@ class Task:
             first = subject[:1]
             if first == "~":
                 self.mission = True
+                self.subject = subject[1:].strip()
+            elif first == "*":
+                self.next = True
                 self.subject = subject[1:].strip()
             elif first == ".":
                 self.backlog = True
@@ -179,12 +183,14 @@ class Task:
             else (
                 7000
                 if self.mission
-                else 6000
+                else 7000
                 if self.garage
-                else 5000
+                else 6000
                 if self.backlog
-                else 4000
+                else 5000
                 if self.question
+                else 4000
+                if not self.next
                 else 3000
             )
         )

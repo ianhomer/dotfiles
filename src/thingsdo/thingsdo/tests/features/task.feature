@@ -8,7 +8,7 @@ Feature: Task
         And the task date is not set
         And the task mission is False
         And the task subject is something
-        And the task rank is 3000
+        And the task rank is 4000
 
     Scenario: Task in file
         Given I am in the file my.md
@@ -16,6 +16,13 @@ Feature: Task
         Then the task file is my.md
         And the task context is ABC
         And the task subject is something
+
+    Scenario: Next task
+        Given I have the task * something next
+        Then the task next is True
+        Then the task mission is False
+        And the task subject is something next
+        And the task rank is 3000
 
     Scenario: Garage task
         Given I have the task - something in garage
