@@ -8,8 +8,6 @@ Login Items
 - Alfred 4
 - Keybase
 - Magnet
-- Todoist - Hide
-- iTerm - Hide
 
 ## Initialise desktop apps
 
