@@ -23,7 +23,7 @@ if ! is-executable brew ; then
     | ruby
 fi
 
-adminFormula="adoptopenjdk8 adoptopenjdk11 java11 openjdk@11"
+adminFormula="adoptopenjdk8 adoptopenjdk11 java11 languagetool openjdk@11"
 adminFormula="${adminFormula} powershell"
 
 installed=`brew list -1 --formula`

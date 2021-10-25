@@ -297,7 +297,7 @@ return require("packer").startup {
 
         -- Note that hoob3rt has stagnated and shadmansaleh continues ...
         useif {
-            "shadmansaleh/lualine.nvim",
+            "nvim-lualine/lualine.nvim",
             requires = {"kyazdani42/nvim-web-devicons", opt = true},
             config = [[require'config.lualine']]
         }

@@ -41,12 +41,12 @@ class Task:
         line,
         natural=False,
         # How many days are considered near
-        near=3,
+        nearDays=3,
         defaultContext=None,
         today: date = date.today(),
     ):
         self.dateInclude = False
-        self.near = near
+        self.nearDays = nearDays
         self.defaultContext = defaultContext
         self.end = None
         self.line = line
@@ -95,6 +95,7 @@ class Task:
         self.garage = False
         self.backlog = False
         self.question = False
+        self.next = False
         self.toDate = None
         if match:
             self.file = match.group(1)
@@ -120,6 +121,9 @@ class Task:
             first = subject[:1]
             if first == "~":
                 self.mission = True
+                self.subject = subject[1:].strip()
+            elif first == "*":
+                self.next = True
                 self.subject = subject[1:].strip()
             elif first == ".":
                 self.backlog = True
@@ -172,19 +176,25 @@ class Task:
         return TaskRenderer().render(self)
 
     @property
+    def near(self):
+        return self.date and self.date.daysAhead < self.nearDays
+
+    @property
     def rankGroup(self):
         return (
-            (2000 if self.date.daysAhead < self.near else 4000)
+            (2000 if self.near else 4000)
             if self.date is not None
             else (
                 7000
                 if self.mission
-                else 6000
+                else 7000
                 if self.garage
-                else 5000
+                else 6000
                 if self.backlog
-                else 4000
+                else 5000
                 if self.question
+                else 4000
+                if not self.next
                 else 3000
             )
         )
