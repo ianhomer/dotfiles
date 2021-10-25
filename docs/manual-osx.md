@@ -8,8 +8,6 @@ Login Items
 - Alfred 4
 - Keybase
 - Magnet
-- Todoist - Hide
-- iTerm - Hide
 
 ## Initialise desktop apps
 
@@ -22,9 +20,9 @@ Change key board shortcuts.
 | `Ctrl-Alt-,` | Previous Display |
 | `Ctrl-Alt-.  | Next Display     |
 
-### Dozer
+### Hidden Bar
 
-Open dozer and configure menu hiding.
+Open Hidden Bar and configure menu hiding.
 
 ### Alfred
 

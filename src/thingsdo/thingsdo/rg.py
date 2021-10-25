@@ -4,7 +4,7 @@ from . import Environment, Search
 # Ripgrep specific searching
 class Rg(Search):
     def __init__(
-        self, environment: Environment, match, justArchive=False, withArchive=False
+        self, environment: Environment, match=None, justArchive=False, withArchive=False
     ):
         super(Rg, self).__init__(environment)
         self.match = match
@@ -26,10 +26,11 @@ class Rg(Search):
                 "--no-heading",
                 "--color",
                 "never",
+                "--pcre2",
                 "-n",
             ]
         )
         if self.maxPerFile > 0:
             parts.extend(["-m", str(self.maxPerFile)])
-        parts.append(self.matchPrefix + self.match)
+        parts.append(self.matchPrefix + (self.match or ""))
         return parts

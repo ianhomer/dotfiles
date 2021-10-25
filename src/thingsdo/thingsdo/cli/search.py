@@ -44,9 +44,15 @@ def search(args):
             + "\\3 \033[95m(\\1)\033[0m/"
         )
     elif args.name == "bookmarks":
-        search = Rg(environment, match)
+        search = Rg(environment)
         search.withModifiedKey = True
-        search.matchPrefix = "^\\[[0-9A-Za-z\\s\\.\\-]+\\]:.*"
+        matchPattern = "(?=.*" + match + ")" if match else ""
+        matchPattern += "(?!.*#reject)"
+        search.matchPrefix = f"^{matchPattern}(?=\\[[0-9A-Za-z\\s\\.\\-]+\\]:).*"
+    elif args.name == "links":
+        search = Rg(environment)
+        search.withModifiedKey = True
+        search.matchPrefix = "^.*<[0-9A-Za-z\\s\\:\\/\\.\\-]+>.*"
     elif args.name == "headings":
         search = Rg(environment, match, args.justarchive, args.witharchive)
         search.matchPrefix = "^#+ .*"

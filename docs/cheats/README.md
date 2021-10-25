@@ -8,14 +8,6 @@
 - [tmux](./tmux.md)
 - [vim](./vim.md)
 
-## Todoist
-
-**Ctrl+Cmd+a**
-: Create task
-
-**Ctrl+Cmd+t**
-: Open up tasks list
-
 ## Magnet
 
 **Ctrl+Opt+return**

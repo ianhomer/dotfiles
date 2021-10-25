@@ -1,11 +1,7 @@
 local lspconfig = require("lspconfig")
 local on_attach = function(client, bufnr)
-    local function buf_set_keymap(...)
-        vim.api.nvim_buf_set_keymap(bufnr, ...)
-    end
-    local function buf_set_option(...)
-        vim.api.nvim_buf_set_option(bufnr, ...)
-    end
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
@@ -16,7 +12,6 @@ local on_attach = function(client, bufnr)
     buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
     buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
     buf_set_keymap("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
-    buf_set_keymap("n", "ga", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
     buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
     -- C-k conflicts with tmux split navigation
     -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -25,6 +20,7 @@ local on_attach = function(client, bufnr)
     buf_set_keymap("n", "<space>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
     buf_set_keymap("n", "<space>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
     buf_set_keymap("n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+    buf_set_keymap("n", "<space>ca", "<Cmd>lua vim.lsp.buf.code_action()<CR>", opts)
     buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
     buf_set_keymap("n", "<leader>d", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
     buf_set_keymap("n", "[d", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
@@ -46,7 +42,7 @@ local on_attach = function(client, bufnr)
               hi LspReferenceRead cterm=bold ctermbg=red guibg=DarkSlateGray
               hi LspReferenceText cterm=bold ctermbg=red guibg=DarkSlateGray
               hi LspReferenceWrite cterm=bold ctermbg=red guibg=DarkSlateGray
-              hi LspDiagnosticsDefaultHint ctermbg=bg guifg=Grey30 guibg=bg
+              hi LspDiagnosticsDefaultHint ctermbg=grey guifg=Grey30 guibg=DarkSlateGray
 
               augroup lsp_document_highlight
                 autocmd! * <buffer>
@@ -57,6 +53,8 @@ local on_attach = function(client, bufnr)
             false
         )
     end
+
+   require"lsp_signature".on_attach()
 end
 
 -- Use a loop to conveniently both setup defined servers
