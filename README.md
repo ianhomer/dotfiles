@@ -37,7 +37,7 @@ of working to streamline distraction free coding. This includes:
 **git**
 : source control
 
-**kitty** and **alacritty**
+**kitty**
 : slick terminals
 
 **tmux**
@@ -63,7 +63,7 @@ MacOS with
 **[alfred](https://www.alfredapp.com/)**
 : better hotkeys
 
-**[dozer](https://github.com/Mortennn/Dozer)**
+**[hiddenbar](https://github.com/dwarvesf/hidden)**
 : focused status bar
 
 **[magnet](https://magnet.crowdcafe.com/)**
@@ -83,7 +83,7 @@ actually happens.
 You can also update parts of the initialisation separately, see `dotme -h` to
 get a list of each part. `man dotme` will give you more guidance on usage.
 
-I configure something on my system [./docs/manual-configuration.md](manually)
+I configure something on my system [manually](./docs/manual-configuration.md)
 for minor tweaks and enhancements.
 
 To customise local dotme configuration, `vi ~/.config/dotme/.env` and edit a

@@ -306,8 +306,12 @@ if [[ -n "$FORCE_ALL" ]] ; then
   for f in ~/.dotfiles/bin/dotme-* ; do
     should-run -c ${f##*/}
   done
+  for f in ~/.dotfiles/bin/clean-* ; do
+    should-run -c ${f##*/}
+  done
 elif [[ -n "$FORCE" ]] ; then
   should-run -c "dotme-$FORCE"
+  should-run -c "clean-$FORCE"
 fi
 
 if [[ -n "$EXCLUDES" ]] || [[ -n "$INCLUDES" ]] ; then

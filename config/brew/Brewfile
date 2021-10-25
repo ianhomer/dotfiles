@@ -26,8 +26,8 @@ brew "bash"
 brew "bat"
 brew "bats-core"
 brew "broot"
+#brew "busted"
 brew "coreutils"
-brew "ctags"
 brew "dos2unix"
 brew "exa"
 brew "fasd"
@@ -44,6 +44,7 @@ brew "code-minimap"
 brew "neovim"
 brew "nmap"
 brew "nnn"
+brew "podman"
 brew "ripgrep"
 brew "speedtest-cli"
 brew "stow"
@@ -53,6 +54,7 @@ brew "thefuck"
 brew "tig"
 brew "tmux"
 brew "tree"
+brew "universal-ctags"
 brew "vim"
 brew "watch"
 brew "wget"
@@ -80,13 +82,13 @@ brew "fzf"
 # macos tools
 #
 # * duti - externision to tool mapping configuration
-# * dozer - menubar optimisation
 #
 
 brew "duti"
 
 cask "alfred"
 cask "evernote"
+cask "hiddenbar"
 
 #
 # office tools
@@ -119,7 +121,6 @@ brew "rbenv"
 brew "warrensbox/tap/tfswitch"
 brew "yarn"
 
-cask "docker"
 cask "google-cloud-sdk"
 cask "lens"
 

@@ -8,7 +8,7 @@ Feature: Task
         And the task date is not set
         And the task mission is False
         And the task subject is something
-        And the task rank is 3000
+        And the task rank is 4000
 
     Scenario: Task in file
         Given I am in the file my.md
@@ -16,6 +16,13 @@ Feature: Task
         Then the task file is my.md
         And the task context is ABC
         And the task subject is something
+
+    Scenario: Next task
+        Given I have the task * something next
+        Then the task next is True
+        Then the task mission is False
+        And the task subject is something next
+        And the task rank is 3000
 
     Scenario: Garage task
         Given I have the task - something in garage
@@ -68,12 +75,14 @@ Feature: Task
         And the task context is ABC
         And the task date is FRI
         And the task is ABC 20210611 something
+        And the task is near
 
     Scenario: Task with relative date
         Given today is 20210609
         And natural mode
         And I have the task ABC JUL 8 something
         Then the task is ABC 20210708 something
+        And the task is not near
 
     Scenario: Task with relative day without context
         Given today is 20210609

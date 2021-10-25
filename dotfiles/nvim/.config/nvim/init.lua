@@ -5,6 +5,11 @@ local nvim_set_var = vim.api.nvim_set_var
 
 vim.opt.shell = "/bin/bash"
 
+local ok, _ = pcall(require, "impatient")
+if ok then
+    _.enable_profile()
+end
+
 require("config/core")
 
 -- Levels at which knobs are enabled
@@ -21,6 +26,7 @@ nvim_set_var(
         conflict_marker = 7,
         commentary = 5,
         cmp = 5,
+        dap = 9,
         defaults = 1,
         devicons = 5,
         dispatch = 5,
@@ -70,6 +76,7 @@ nvim_set_var(
         tmux_navigator = 3,
         toggleterm = 3,
         treesitter = 3,
+        trouble = 5,
         twightlight = 9,
         unicode = 4,
         unimpaired = 5,
@@ -77,6 +84,7 @@ nvim_set_var(
         which_key = 3,
         window_cleaner = 3,
         writegood = 6,
+        vimspector = 9,
         vsnip = 5,
         zen_mode = 6,
         zephyr = 9
@@ -117,40 +125,44 @@ return require("packer").startup {
 
         vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
         use {"lewis6991/impatient.nvim", rocks = "mpack"}
-        require('impatient').enable_profile()
 
         local knobs = require("knobs")
         local useif = knobs.use(use)
 
         use {
-            "wbthomason/packer.nvim",
-            event = "VimEnter"
+            "wbthomason/packer.nvim"
         }
         -- LSP, autocomplete and code guidance
         use {
             "neovim/nvim-lspconfig",
             config = [[require'config.lspconfig']]
         }
+        use {
+            "ray-x/lsp_signature.nvim"
+        }
+        use {
+            "weilbith/nvim-code-action-menu",
+            cmd = "CodeActionMenu"
+        }
         use {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
         use {
             "hrsh7th/nvim-cmp",
-            requires = {
-                "hrsh7th/cmp-buffer"
-            },
+            requires = "hrsh7th/cmp-buffer",
             config = [[require'config.cmp']]
         }
 
-        use {
+        useif {
+            knob = "cmp",
             "hrsh7th/cmp-nvim-lsp",
             after = "nvim-cmp"
         }
 
-        use {
+        useif {
             "hrsh7th/cmp-nvim-lua",
             after = "cmp-nvim-lsp"
         }
 
-        use {
+        useif {
             "hrsh7th/cmp-path",
             after = "cmp-nvim-lsp"
         }
@@ -161,7 +173,8 @@ return require("packer").startup {
             after = "cmp-nvim-lsp"
         }
 
-        use {
+        useif {
+            knob = "vsnip",
             "rafamadriz/friendly-snippets",
             event = "InsertCharPre"
         }
@@ -179,15 +192,26 @@ return require("packer").startup {
             config = [[require'config.lightbulb']]
         }
 
-        -- Lua
         use {
+            cmd = "Vista",
+            "liuchengxu/vista.vim"
+        }
+
+        -- Lua
+        useif {
             "folke/trouble.nvim",
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.trouble']]
         }
 
+        use {
+            "majutsushi/tagbar",
+            cmd = "TagbarToggle",
+            config = [[require'config.tagbar']]
+        }
+
         useif {
-          "folke/lsp-colors.nvim"
+            "folke/lsp-colors.nvim"
         }
 
         cmd [[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
@@ -202,7 +226,26 @@ return require("packer").startup {
         useif {
             "nvim-treesitter/nvim-treesitter",
             event = "BufRead",
-            config = [[require'config.treesitter']]
+            config = [[require'config.treesitter']],
+            run = ":TSUpdate"
+        }
+        useif {
+            knob = "dap",
+            "nvim-telescope/telescope-dap.nvim"
+        }
+        useif {
+            "mfussenegger/nvim-dap",
+            config = [[require'config.dap']]
+        }
+        useif {
+            knob = "dap",
+            "rcarriga/nvim-dap-ui",
+            requires = "mfussenegger/nvim-dap",
+            config = [[require'config.dapui']]
+        }
+        useif {
+            "puremourning/vimspector",
+            config = [[require'config.vimspector']]
         }
 
         -- Navigation
@@ -215,21 +258,29 @@ return require("packer").startup {
             requires = {{"junegunn/fzf", opt = true, fn = {"fzf#shellescape"}}}
         }
         use {"nvim-lua/plenary.nvim"}
-        use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+        useif {
+            knob = "telescope",
+            "nvim-telescope/telescope-fzf-native.nvim",
+            run = "make"
+        }
         useif {
             "nvim-telescope/telescope.nvim",
             requires = {
                 {"nvim-lua/popup.nvim", cond = "vim.g['knob_telescope']"},
                 {"nvim-lua/plenary.nvim", cond = "vim.g['knob_telescope']"},
-                {"nvim-telescope/telescope-fzf-native.nvim"}
+                {
+                    "nvim-telescope/telescope-fzf-native.nvim",
+                    cond = "vim.g['knob_telescope']"
+                }
             },
+            after = "trouble.nvim",
             config = [[require'config.telescope']]
         }
         use {
             "kyazdani42/nvim-tree.lua",
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.nvimtree']],
-            cmd = {"NvimTreeFindFile", "NvimTreeToggle"}
+            cmd = {"NvimTreeFindFile", "NvimTreeOpen", "NvimTreeToggle"}
         }
         useif {"ryanoasis/vim-devicons"}
         use {"wfxr/minimap.vim", cmd = {"Minimap"}}
@@ -238,15 +289,19 @@ return require("packer").startup {
             event = "BufWinEnter",
             config = [[require'config.which_key']]
         }
+        use {
+            "phaazon/hop.nvim",
+            config = [[require'config.hop']]
+        }
         use "christoomey/vim-tmux-navigator"
 
         -- Note that hoob3rt has stagnated and shadmansaleh continues ...
         useif {
-            "shadmansaleh/lualine.nvim",
+            "nvim-lualine/lualine.nvim",
             requires = {"kyazdani42/nvim-web-devicons", opt = true},
             config = [[require'config.lualine']]
         }
-        use {
+        useif {
             "romgrk/barbar.nvim",
             requires = {"kyazdani42/nvim-web-devicons"},
             config = [[require'config.barbar']]
@@ -258,11 +313,12 @@ return require("packer").startup {
         use {"glepnir/zephyr-nvim", disable = true}
         useif {
             "norcalli/nvim-colorizer.lua",
-            config = [[require'config.colorizer']]
+            config = [[require'config.colorizer']],
+            cmd = "BufRead"
         }
         useif {
-          "karb94/neoscroll.nvim",
-          config = [[require'config.neoscroll']]
+            "karb94/neoscroll.nvim",
+            config = [[require'config.neoscroll']]
         }
 
         -- Git
@@ -316,11 +372,11 @@ return require("packer").startup {
             "ellisonleao/glow.nvim",
             cmd = {"Glow"}
         }
-        useif {
+        use {
             "iamcco/markdown-preview.nvim",
             -- cmd = {"MarkdownPreview"},
             run = "cd app && yarn install",
-            defer = 5000
+            defer = 1000
         }
         useif {
             "lukas-reineke/indent-blankline.nvim"
@@ -343,7 +399,8 @@ return require("packer").startup {
     end,
     config = {
         profile = {
-            enable = true
+            enable = true,
+            compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua"
         }
     }
 }

@@ -31,9 +31,15 @@ END = "\033[0m"
 def run():
     parser = argparse.ArgumentParser(description="todoer")
     parser.add_argument("do", nargs="*", help="do")
-    parser.add_argument("-a", "--all", help="show all types of todos", action="store_true")
-    parser.add_argument("-i", "--include", help="include all contexts", action="store_true")
-    parser.add_argument("-c", "--context", help="list all contexts", action="store_true")
+    parser.add_argument(
+        "-a", "--all", help="show all types of todos", action="store_true"
+    )
+    parser.add_argument(
+        "-i", "--include", help="include all contexts", action="store_true"
+    )
+    parser.add_argument(
+        "-c", "--context", help="list all contexts", action="store_true"
+    )
     parser.add_argument("--days", type=int, help="days")
     parser.add_argument("--stream", action="store_true")
     parser.add_argument("-t", "--today", help="add today item", action="store_true")
@@ -120,11 +126,11 @@ def search(environment: Environment, args):
     result = subprocess.run(agParts, stdout=PIPE, text=True)
 
     lines = result.stdout.splitlines()
-    days = args.days or (365 if args.all else 3)
+    days = args.days or (30 if args.all else 3)
     dos = []
     renderer = TaskRenderer(theme=None if args.stream else "do")
     for line in lines:
-        task = Task(line, near=days)
+        task = Task(line, nearDays=days)
         if task.context not in excludes:
             dos.append(renderer.render(task) + ("" if args.stream else "\n"))
     dos.sort()
@@ -146,9 +152,12 @@ def search(environment: Environment, args):
             "2,3",
             "--tabstop",
             "4",
+            "--layout",
+            "reverse",
             "--tiebreak",
             "begin",
-            "--bind=ctrl-s:abort,ctrl-x:abort",
+            "--bind=ctrl-s:abort,ctrl-w:abort,ctrl-space:abort,"
+            + "ctrl-o:execute(tmux split-window -v 'nvim {4}')",
         ],
         stdin=PIPE,
         stdout=PIPE,
