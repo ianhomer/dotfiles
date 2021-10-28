@@ -20,7 +20,7 @@ nvim_set_var(
         apathy = 6,
         airline = 9,
         autopairs = 3,
-        autosave = 3,
+        autosave = 6,
         barbar = 6,
         colorizer = 5,
         conflict_marker = 7,
