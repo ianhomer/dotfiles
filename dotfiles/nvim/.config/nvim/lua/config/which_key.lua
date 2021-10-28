@@ -5,8 +5,16 @@ wk.setup {}
 
 local map = {}
 if knobs.has("telescope") then
-    map["f"] = {"<cmd>Telescope find_files hidden=true<cr>", "Find File"}
-    map["S"] = {"<cmd>Telescope live_grep hidden=true<cr>", "Search"}
+    map["fb"] = {"<cmd>Telescope bcommits<cr>", "Buffer commits"}
+    map["fc"] = {"<cmd>Telescope command<cr>", "Recent commands"}
+    map["fd"] = {"<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols"}
+    map["ff"] = {"<cmd>Telescope find_files hidden=true<cr>", "Find File"}
+    map["ft"] = {"<cmd>Telescope<cr>", "Telescope"}
+    map["fS"] = {"<cmd>Telescope live_grep hidden=true<cr>", "Search"}
+    map["fh"] = {"<cmd>Telescope oldfiles<cr>", "File History"}
+    map["fH"] = {"<cmd>Telescope help_tags<cr>", "Help"}
+    map["ft"] = {"<cmd>Telescope tags<cr>", "Tags"}
+    map["<space>"] = {"<cmd>Telescope buffers<cr>", "Buffers"}
 end
 
 if knobs.has("toggleterm") then
