@@ -5,8 +5,8 @@ wk.setup {}
 
 local map = {}
 if knobs.has("telescope") then
-    map["fb"] = {"<cmd>Telescope bcommits<cr>", "Buffer commits"}
-    map["fc"] = {"<cmd>Telescope command<cr>", "Recent commands"}
+    map["fb"] = {"<cmd>Telescope git_bcommits<cr>", "Buffer commits"}
+    map["fc"] = {"<cmd>Telescope commands<cr>", "Recent commands"}
     map["fd"] = {"<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols"}
     map["ff"] = {"<cmd>Telescope find_files hidden=true<cr>", "Find File"}
     map["ft"] = {"<cmd>Telescope<cr>", "Telescope"}
