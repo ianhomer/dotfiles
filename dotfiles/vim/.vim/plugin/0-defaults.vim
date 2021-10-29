@@ -168,7 +168,7 @@ augroup dotme
   " Override shiftwidth for python
   autocmd Filetype python set shiftwidth=4
 
-  if exists("g:knobs_autosave")
+  if exists("g:knob_autosave")
     "
     " *** Scope : IO ***
     "
@@ -179,8 +179,8 @@ augroup dotme
     " entry. If we save too often then tools that watch for change will get too
     " busy.
     autocmd TextChangedI,TextChangedP * ++nested silent!
-      \ call my#DebouncedSave(3000)
-    autocmd InsertLeave,TextChanged * ++nested silent! call my#DebouncedSave(500)
+      \ call my#DebouncedSave(4000)
+    autocmd InsertLeave,TextChanged * ++nested silent! call my#DebouncedSave(1000)
   endif
 augroup end
 

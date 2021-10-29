@@ -43,6 +43,7 @@ local on_attach = function(client, bufnr)
               hi LspReferenceText cterm=bold ctermbg=red guibg=DarkSlateGray
               hi LspReferenceWrite cterm=bold ctermbg=red guibg=DarkSlateGray
               hi LspDiagnosticsDefaultHint ctermbg=grey guifg=Grey30 guibg=DarkSlateGray
+              hi DiagnosticError guifg=White
 
               augroup lsp_document_highlight
                 autocmd! * <buffer>

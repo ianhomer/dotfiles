@@ -5,15 +5,16 @@ wk.setup {}
 
 local map = {}
 if knobs.has("telescope") then
-    map["fb"] = {"<cmd>Telescope git_bcommits<cr>", "Buffer commits"}
-    map["fc"] = {"<cmd>Telescope commands<cr>", "Recent commands"}
-    map["fd"] = {"<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols"}
-    map["ff"] = {"<cmd>Telescope find_files hidden=true<cr>", "Find File"}
-    map["ft"] = {"<cmd>Telescope<cr>", "Telescope"}
-    map["fS"] = {"<cmd>Telescope live_grep hidden=true<cr>", "Search"}
-    map["fh"] = {"<cmd>Telescope oldfiles<cr>", "File History"}
-    map["fH"] = {"<cmd>Telescope help_tags<cr>", "Help"}
-    map["ft"] = {"<cmd>Telescope tags<cr>", "Tags"}
+    map["tb"] = {"<cmd>Telescope git_bcommits<cr>", "Buffer commits"}
+    map["tc"] = {"<cmd>Telescope commands<cr>", "Recent commands"}
+    map["td"] = {"<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols"}
+    map["f"] = {"<cmd>Telescope find_files hidden=true<cr>", "Find File"}
+    map["tt"] = {"<cmd>Telescope<cr>", "Telescope"}
+    map["tS"] = {"<cmd>Telescope live_grep hidden=true<cr>", "Search"}
+    map["th"] = {"<cmd>Telescope oldfiles<cr>", "File History"}
+    map["tH"] = {"<cmd>Telescope help_tags<cr>", "Help"}
+    map["tt"] = {"<cmd>Telescope tags<cr>", "Tags"}
+    map["tl"] = {"<cmd>Telescope highlights<cr>", "Telescope"}
     map["<space>"] = {"<cmd>Telescope buffers<cr>", "Buffers"}
 end
 
