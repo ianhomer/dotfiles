@@ -27,7 +27,6 @@ if get(g:, "knobs_level", 0) > 2
   nnoremap <leader>,gdh :diffget //2<CR>
   nnoremap <leader>,gdl :diffget //3<CR>
   nnoremap <silent> <leader>b :GPush<CR>
-  nnoremap <silent> <leader>e :GSynk<CR>
 
   " ... and let this q mapping apply for NERDTree
   let NERDTreeMapQuit='qq'

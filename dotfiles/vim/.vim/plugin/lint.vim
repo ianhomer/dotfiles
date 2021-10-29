@@ -43,6 +43,10 @@ let g:ale_cache_executable_check_failures = 1
 
 if has('nvim')
   highlight ALEWarning gui=undercurl guifg=255
+  " LSP for neovim is better
+  let js_linters = []
+else
+  let js_linters = ['eslint']
 endif
 
 "let markdown_linters = ['remark-lint']
@@ -60,12 +64,12 @@ endif
 
 let g:ale_linters = {
   \   'html': ['tidy'],
-  \   'javascript': ['eslint'],
+  \   'javascript': js_linters,
   \   'json': ['jsonlint'],
   \   'lua': ['luac'],
   \   'markdown': markdown_linters,
   \   'python': ['flake8'],
-  \   'typescript': ['eslint'],
+  \   'typescript': js_linters,
   \   'yaml': ['yamllint']
   \}
 
