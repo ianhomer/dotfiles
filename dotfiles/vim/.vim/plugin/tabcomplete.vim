@@ -1,4 +1,4 @@
-if !knobs#("tabcomplete")
+if !exists("g:knob_tabcomplete")
   finish
 endif
 

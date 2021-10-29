@@ -1,9 +1,9 @@
-if knobs#At(3)
+if get(g:, "knobs_level" > 2)
   command! -nargs=0 LintSpace :call my#LintSpace()
   nnoremap <leader>L :LintSpace<CR>
 endif
 
-if !knobs#("ale")
+if !exists("g:knob_ale")
   finish
 endif
 

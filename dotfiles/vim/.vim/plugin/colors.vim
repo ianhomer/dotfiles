@@ -1,9 +1,9 @@
-if !knobs#At(1)
+if get(g:, "knobs_level", 0) < 1
   finish
 endif
 
 let g:syntax_cmd = "skip"
-if knobs#("gruvbox")
+if exists("g:knob_gruvbox")
   try
     "unlet g:syntax_on
     let g:colors_name='gruvbox'
@@ -13,7 +13,7 @@ if knobs#("gruvbox")
   catch /^Vim\%((\a\+)\)\=:E185/
     echo "gruvbox color scheme not loaded, does it need to be installed?"
   endtry
-elseif knobs#("gruvbox8")
+elseif exists("g:knob_gruvbox8")
   let g:colors_name='gruvbox8'
   colorscheme gruvbox8
 endif

@@ -1,4 +1,4 @@
-if !knobs#("shortcuts")
+if !exists("g:knob_shortcuts")
   finish
 endif
 
@@ -13,7 +13,7 @@ nnoremap <silent> <leader>h :History<CR>
 " Hide all windows except the current one
 nnoremap <silent> <leader>O :only<CR>
 
-if knobs#At(3)
+if get(g:, "knobs_level", 0) > 2
   command! -nargs=0 ToggleQuickFix :call my#ToggleQuickFix()
   command! -nargs=0 ToggleLocationList :call my#ToggleLocationList()
   command! -nargs=0 ToggleFugitive :call window#ToggleFugitive()
@@ -34,7 +34,7 @@ if knobs#At(3)
 
   "nnoremap <silent> q :echo "q disabled"<CR>
 
-  if knobs#("which_key") && !has("nvim")
+  if exists("g:knob_which_key") && !has("nvim")
     nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
     nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
     nnoremap <silent> ' :WhichKey "'"<CR>

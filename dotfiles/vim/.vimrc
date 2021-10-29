@@ -1,7 +1,6 @@
 "
 " See init.lua for more recent configuration
 "
-
 let g:init_vim = 1
 
 " Default values for knobs

@@ -1,4 +1,4 @@
-if !knobs#("spelling")
+if !exists("g:knob_spelling")
   finish
 endif
 
@@ -10,6 +10,6 @@ set spellfile=~/.config/vim/spell/en.utf-8.add
 
 set complete+=kspell
 
-if knobs#("update_spelling")
+if exists("g:knob_update_spelling")
   call spelling#Update()
 endif
