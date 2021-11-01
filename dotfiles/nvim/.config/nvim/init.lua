@@ -362,10 +362,6 @@ return require("packer").startup {
             cmd = {"ZenMode"},
             config = [[require'config.zen_mode']]
         }
-        useif {
-            "folke/twilight.nvim",
-            config = [[require("twilight").setup {}]]
-        }
 
         useif "junegunn/goyo.vim"
         useif {

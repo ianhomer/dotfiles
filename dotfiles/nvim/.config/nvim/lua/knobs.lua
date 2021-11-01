@@ -38,6 +38,10 @@ function M.use(use, disableIf, timer)
         else
           knob = args.knob or knobFromPackage(package)
           local knobVariable = "knob_" .. knob
+          --Exclude plugins disabled at knob level at time of setting up pack
+          if not M.has(knob) then
+            return
+          end
           if vim.g["knobs_levels"][knob] ~= nil then
               if M.has("debug") then
                   print(package .. ":" .. knob .. ":" .. tostring(vim.g[knobVariable]))
