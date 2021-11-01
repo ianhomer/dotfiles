@@ -76,7 +76,7 @@ nvim_set_var(
         tmux_navigator = 3,
         toggleterm = 3,
         treesitter = 3,
-        trouble = 5,
+        trouble = 6,
         twightlight = 9,
         unicode = 4,
         unimpaired = 5,
@@ -85,7 +85,7 @@ nvim_set_var(
         window_cleaner = 3,
         writegood = 6,
         vimspector = 9,
-        vsnip = 5,
+        vsnip = 6,
         zen_mode = 6,
         zephyr = 9
     }
