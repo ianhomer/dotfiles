@@ -273,7 +273,6 @@ return require("packer").startup {
                     cond = "vim.g['knob_telescope']"
                 }
             },
-            after = "trouble.nvim",
             config = [[require'config.telescope']]
         }
         use {
