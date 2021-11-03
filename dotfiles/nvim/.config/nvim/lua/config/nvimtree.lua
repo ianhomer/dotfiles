@@ -1,5 +1,4 @@
 vim.g.nvim_tree_special_files = {}
-vim.g.nvim_tree_ignore = {".DS_Store", ".git", ".pytest_cache", "node_modules"}
 vim.g.nvim_tree_window_picker_exclude = {
     filetype = {},
     buftype = {
@@ -28,5 +27,8 @@ require "nvim-tree".setup {
     },
     update_focused_file = {
       enable = true
+    },
+    filters = {
+        custom = {".DS_Store", ".git", ".pytest_cache", "node_modules"}
     }
 }
