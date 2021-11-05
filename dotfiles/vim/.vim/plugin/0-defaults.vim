@@ -174,13 +174,7 @@ augroup dotme
     "
     " Auto reload when focus gained or buffer entered
     autocmd FocusGained,WinEnter,BufEnter * :checktime
-
-    " Auto write when text changes using debouncing to wait for pause in text
-    " entry. If we save too often then tools that watch for change will get too
-    " busy.
-    autocmd TextChangedI,TextChangedP * ++nested silent!
-      \ call my#DebouncedSave(4000)
-    autocmd InsertLeave,TextChanged * ++nested silent! call my#DebouncedSave(300)
+    call my#EnableAutoSave()
   endif
 augroup end
 

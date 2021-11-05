@@ -92,7 +92,32 @@ function my#DebouncedSave(wait) abort
     call timer_stop( s:debouncedSaveTimer )
     let s:debouncedSaveTimer = timer_start(a:wait, { timerId -> execute('wall') })
   endif
-endf
+endfunction
+
+function my#EnableAutoSave()
+  augroup MyAutoSave
+     " Auto write when text changes using debouncing to wait for pause in text
+    " entry. If we save too often then tools that watch for change will get too
+    " busy.
+    autocmd TextChangedI,TextChangedP * ++nested silent!
+      \ call my#DebouncedSave(4000)
+    autocmd InsertLeave,TextChanged * ++nested silent! call my#DebouncedSave(300)
+  augroup end
+endfunction
+
+function my#DisabledAutoSave()
+  autocmd! MyAutoSave
+endfunction
+
+function my#ToggleAutoSave()
+  if exists("#MyAutoSave#InsertLeave")
+    call my#DisabledAutoSave()
+    echo "Auto Save Disabled"
+  else
+    call my#EnableAutoSave()
+    echo "Auto Save Enabled"
+  endif
+endfunction
 
 function my#gitModified()
     let files = systemlist('git ls-files -m 2>/dev/null')
