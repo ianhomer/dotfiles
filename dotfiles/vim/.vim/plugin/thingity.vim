@@ -45,6 +45,3 @@ nnoremap <silent> <leader>js :Search<CR>
 nnoremap <silent> <leader>jT :Ag! \[\ \]<CR>
 " todos (aligned with task filtering in bin/todo)
 nnoremap <silent> <leader>jt :AgPopup \[\ \]<CR>
-
-autocmd BufWritePre,FileWritePre *.md :call thingity#UpdateMeta()
-

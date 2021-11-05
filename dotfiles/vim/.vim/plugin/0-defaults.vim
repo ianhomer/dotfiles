@@ -180,7 +180,7 @@ augroup dotme
     " busy.
     autocmd TextChangedI,TextChangedP * ++nested silent!
       \ call my#DebouncedSave(4000)
-    autocmd InsertLeave,TextChanged * ++nested silent! call my#DebouncedSave(1000)
+    autocmd InsertLeave,TextChanged * ++nested silent! call my#DebouncedSave(300)
   endif
 augroup end
 
