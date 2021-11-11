@@ -109,6 +109,7 @@ class Fzf:
             "ctrl-f:reload("
             + "fd --changed-within 3months md --exec stat -f '%m:%N:1:%N' {q} "
             + "| sort -r)",
+            "ctrl-t:reload(" + search + "-n tags --witharchive {q} || true)",
             "ctrl-e:reload(" + search + "-n sort-modified --witharchive {q} || true)",
             "ctrl-b:reload(" + search + "-n bookmarks --witharchive {q} || true)",
             "ctrl-g:reload(" + search + "-n links --witharchive {q} || true)",
