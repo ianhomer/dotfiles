@@ -18,7 +18,7 @@ Shortcuts I'm trying to remember.
 
 |              |                 |
 | --           | --              |
-| `Ctrl+Alt+s` | Git status      |
+| `Ctrl+r`     | Shell History   |
 | `Ctrl+Alt+l` | Git log         |
 | `Ctrl+v`     | Shell variables |
 | `Ctrl+w`     | Cheats          |
