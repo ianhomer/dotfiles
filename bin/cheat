@@ -10,7 +10,6 @@
 
 cheat=$(cat ~/.dotfiles/docs/cheats/*.md |
   fzf-cheats |
-  sort |
   fzf --ansi --height 100% -d : --with-nth 2..        \
   --tiebreak=index --no-hscroll                       \
   --bind "ctrl-s:abort,ctrl-x:abort,ctrl-space:abort" |

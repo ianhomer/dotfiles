@@ -116,6 +116,7 @@ class Fzf:
             "ctrl-s:reload(" + search + "-n headings --witharchive {q} || true)",
             # Note that ctrl-x aborts so that a subsequence ctrl-x in fish shell
             # opens cheats. Similarly for ctrl-w opening todos.
+            "ctrl-w:abort",
             "ctrl-x:abort",
             "ctrl-space:abort",
             "ctrl-o:execute(tmux split-window -v 'nvim {2}')",
