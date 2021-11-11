@@ -58,10 +58,10 @@ def search(args):
         if match:
             search.matchPrefix = "#" + match
         else:
-            search.matchPrefix = "#[a-z]+"
+            search.matchPrefix = "(^|\\s)#[A-Za-z]+"
         search.withModifiedKey = True
         search.postFilter = (
-            "s/\\(#[a-z\\-]*\\)/\033[95m\\1\033[0m/g"
+            "s/\\(#[A-Za-z\\-]*\\)/\033[95m\\1\033[0m/g"
         )
     elif args.name == "headings":
         search = Rg(environment, match, args.justarchive, args.witharchive)
