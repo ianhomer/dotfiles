@@ -122,10 +122,7 @@ g.indent_blankline_show_first_indent_level = false
 cmd "packadd packer.nvim" -- load the package manager
 local status, _ = pcall(cmd, "packadd knobs.vim")
 if status then
-  local status, knobs = pcall(require,"knobs")
-  if status then
-     knobs.setup()
-  end
+  require('knobs').setup()
 end
 
 return require("packer").startup {
