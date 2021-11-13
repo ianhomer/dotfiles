@@ -1,5 +1,4 @@
-local knobs = require("knobs")
-if knobs.has("cmp") then
+if vim.g.knob_cmp then
     require("nvim-autopairs").setup {
     }
 end

@@ -18,11 +18,11 @@ if knobs.has("telescope") then
     map["<space>"] = {"<cmd>Telescope buffers<cr>", "Buffers"}
 end
 
-if knobs.has("toggleterm") then
+if vim.g.knob_toggleterm then
     map["a"] = {"<cmd>ToggleTerm<cr>", "Terminal"}
 end
 
-if knobs.has("nvim_tree") then
+if vim.g.knob_nvim_tree then
     map["n"] = {"<cmd>NvimTreeOpen<cr>" .. "<cmd>NvimTreeFindFile<cr>", "Files"}
 end
 
