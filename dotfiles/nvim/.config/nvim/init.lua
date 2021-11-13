@@ -123,7 +123,6 @@ cmd "packadd packer.nvim" -- load the package manager
 cmd "packadd knobs.vim"
 local status, knobs = pcall(require,"knobs")
 if status then
-    print("Knobs setup")
     knobs.setup()
 end
 
