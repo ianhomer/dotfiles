@@ -5,12 +5,14 @@ local nvim_set_var = vim.api.nvim_set_var
 
 vim.opt.shell = "/bin/bash"
 
-local ok, _ = pcall(require, "impatient")
-if ok then
-    _.enable_profile()
-end
+--local ok, _ = pcall(require, "impatient")
+--if ok then
+--    _.enable_profile()
+--end
 
 require("config/core")
+
+nvim_set_var("knobs_default_level", 5)
 
 -- Levels at which knobs are enabled
 nvim_set_var(
@@ -118,19 +120,27 @@ g.indent_blankline_show_trailing_blankline_indent = false
 g.indent_blankline_show_first_indent_level = false
 
 cmd "packadd packer.nvim" -- load the package manager
+cmd "packadd knobs.vim"
+local status, knobs = pcall(require,"knobs")
+if status then
+    print("Knobs setup")
+    knobs.setup()
+end
 
 return require("packer").startup {
-    function(use)
+    function(_use)
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
-        vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
-        use {"lewis6991/impatient.nvim", rocks = "mpack"}
+        --vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
+        --use {"lewis6991/impatient.nvim", rocks = "mpack"}
 
-        local knobs = require("knobs")
-        local useif = knobs.use(use)
+        local status, knobs = pcall(require,"knobs")
 
+        use = status and knobs.use(_use) or _use
+
+        use "wbthomason/packer.nvim"
         use {
-            "wbthomason/packer.nvim"
+            "ianhomer/knobs.vim", config = [[require'knobs'.setup()]]
         }
         -- LSP, autocomplete and code guidance
         use {
@@ -144,42 +154,45 @@ return require("packer").startup {
             "weilbith/nvim-code-action-menu",
             cmd = "CodeActionMenu"
         }
-        use {"onsails/lspkind-nvim", config = [[require("lspkind").init()]]}
-        use {
+        _use {
+            "onsails/lspkind-nvim", config = [[require("lspkind").init()]]
+        }
+
+        _use {
             "hrsh7th/nvim-cmp",
             requires = "hrsh7th/cmp-buffer",
             config = [[require'config.cmp']]
         }
 
-        useif {
+        use {
             knob = "cmp",
             "hrsh7th/cmp-nvim-lsp",
             after = "nvim-cmp"
         }
 
-        useif {
+        use {
             "hrsh7th/cmp-nvim-lua",
             after = "cmp-nvim-lsp"
         }
 
-        useif {
+        use {
             "hrsh7th/cmp-path",
             after = "cmp-nvim-lsp"
         }
 
-        useif {
+        use {
             knob = "vsnip",
             "hrsh7th/cmp-vsnip",
             after = "cmp-nvim-lsp"
         }
 
-        useif {
+        use {
             knob = "vsnip",
             "rafamadriz/friendly-snippets",
             event = "InsertCharPre"
         }
 
-        useif {
+        use {
             "hrsh7th/vim-vsnip",
             event = "InsertEnter",
             requires = {
@@ -187,7 +200,7 @@ return require("packer").startup {
             }
         }
 
-        useif {
+        use {
             "kosayoda/nvim-lightbulb",
             config = [[require'config.lightbulb']]
         }
@@ -198,7 +211,7 @@ return require("packer").startup {
         }
 
         -- Lua
-        useif {
+        use {
             "folke/trouble.nvim",
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.trouble']]
@@ -210,12 +223,12 @@ return require("packer").startup {
             config = [[require'config.tagbar']]
         }
 
-        useif {
+        use {
             "folke/lsp-colors.nvim"
         }
 
         cmd [[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
-        useif {
+        use {
             "ludovicchabant/vim-gutentags"
         }
         use {
@@ -223,34 +236,34 @@ return require("packer").startup {
             ft = {"sh", "javascript", "markdown", "lua", "python", "typescript", "vim"},
             cmd = {"ALEFix"}
         }
-        useif {
+        use {
             "nvim-treesitter/nvim-treesitter",
             event = "BufRead",
             config = [[require'config.treesitter']],
             run = ":TSUpdate"
         }
-        useif {
+        use {
             knob = "dap",
             "nvim-telescope/telescope-dap.nvim"
         }
-        useif {
+        use {
             "mfussenegger/nvim-dap",
             config = [[require'config.dap']]
         }
-        useif {
+        use {
             knob = "dap",
             "rcarriga/nvim-dap-ui",
             requires = "mfussenegger/nvim-dap",
             config = [[require'config.dapui']]
         }
-        useif {
+        use {
             "puremourning/vimspector",
             config = [[require'config.vimspector']]
         }
 
         -- Navigation
 
-        useif {"mhinz/vim-startify"}
+        _use {"mhinz/vim-startify"}
         use {
             "junegunn/fzf.vim",
             cmd = {"Ag", "Buffers", "Commits", "Files", "History"},
@@ -258,12 +271,12 @@ return require("packer").startup {
             requires = {{"junegunn/fzf", opt = true, fn = {"fzf#shellescape"}}}
         }
         use {"nvim-lua/plenary.nvim"}
-        useif {
+        use {
             knob = "telescope",
             "nvim-telescope/telescope-fzf-native.nvim",
             run = "make"
         }
-        useif {
+        use {
             "nvim-telescope/telescope.nvim",
             requires = {
                 {"nvim-lua/popup.nvim", cond = "vim.g['knob_telescope']"},
@@ -281,9 +294,9 @@ return require("packer").startup {
             config = [[require'config.nvimtree']],
             cmd = {"NvimTreeFindFile", "NvimTreeOpen", "NvimTreeToggle"}
         }
-        useif {"ryanoasis/vim-devicons"}
+        use {"ryanoasis/vim-devicons"}
         use {"wfxr/minimap.vim", cmd = {"Minimap"}}
-        useif {
+        use {
             "folke/which-key.nvim",
             event = "BufWinEnter",
             config = [[require'config.which_key']]
@@ -295,27 +308,27 @@ return require("packer").startup {
         use "christoomey/vim-tmux-navigator"
 
         -- Note that hoob3rt has stagnated and shadmansaleh continues ...
-        useif {
+        use {
             "nvim-lualine/lualine.nvim",
             requires = {"kyazdani42/nvim-web-devicons", opt = true},
             config = [[require'config.lualine']]
         }
-        useif {
+        use {
             "romgrk/barbar.nvim",
             requires = {"kyazdani42/nvim-web-devicons"},
             config = [[require'config.barbar']]
         }
 
         -- Style
-        useif "morhetz/gruvbox"
-        useif {"lifepillar/gruvbox8"}
+        use "morhetz/gruvbox"
+        use {"lifepillar/gruvbox8"}
         use {"glepnir/zephyr-nvim", disable = true}
-        useif {
+        use {
             "norcalli/nvim-colorizer.lua",
             config = [[require'config.colorizer']],
             cmd = "BufRead"
         }
-        useif {
+        use {
             "karb94/neoscroll.nvim",
             config = [[require'config.neoscroll']]
         }
@@ -323,11 +336,11 @@ return require("packer").startup {
         -- Git
         use {"tpope/vim-fugitive", cmd = {"G", "Git", "Gstatus", "Gblame", "Ggrep", "Gpush", "Gpull"}}
         use {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
-        useif {"airblade/vim-gitgutter"}
-        useif {
+        use {"airblade/vim-gitgutter"}
+        use {
             "tpope/vim-dispatch"
         }
-        useif {
+        use {
             "lewis6991/gitsigns.nvim",
             event = "BufRead",
             config = [[require'config.gitsigns']]
@@ -335,23 +348,23 @@ return require("packer").startup {
         use {"junegunn/gv.vim", cmd = {"GV"}}
 
         -- Editing
-        useif {
+        use {
             "windwp/nvim-autopairs",
             after = "nvim-cmp",
             config = [[require'config.autopairs']]
         }
-        useif {
+        use {
             "tpope/vim-surround"
         }
-        useif "tpope/vim-commentary"
-        useif {
+        use "tpope/vim-commentary"
+        use {
             "tpope/vim-unimpaired"
         }
         use "tpope/vim-repeat"
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
 
-        useif "editorconfig/editorconfig-vim"
-        useif "chrisbra/unicode.vim"
+        use "editorconfig/editorconfig-vim"
+        use "chrisbra/unicode.vim"
 
         vim.api.nvim_set_keymap("n", "<space>i", "<cmd>:ZenMode<CR>", {})
         use {
@@ -360,8 +373,8 @@ return require("packer").startup {
             config = [[require'config.zen_mode']]
         }
 
-        useif "junegunn/goyo.vim"
-        useif {
+        use "junegunn/goyo.vim"
+        use {
             "ellisonleao/glow.nvim",
             cmd = {"Glow"}
         }
@@ -370,10 +383,10 @@ return require("packer").startup {
             -- cmd = {"MarkdownPreview"},
             run = "cd app && yarn install"
         }
-        useif {
+        use {
             "lukas-reineke/indent-blankline.nvim"
         }
-        useif {"junegunn/vim-peekaboo"}
+        use {"junegunn/vim-peekaboo"}
 
         -- Misc
 
@@ -382,12 +395,12 @@ return require("packer").startup {
             cmd = {"ToggleTerm", "TermExec"},
             config = [[require'config.toggleterm']]
         }
-        useif "tpope/vim-eunuch"
+        use "tpope/vim-eunuch"
 
         -- Diagnostics
         --
         -- use {'dstein64/vim-startuptime'}
-        useif "tweekmonster/startuptime.vim"
+        use "tweekmonster/startuptime.vim"
     end,
     config = {
         profile = {

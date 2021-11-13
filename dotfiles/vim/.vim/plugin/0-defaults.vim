@@ -132,10 +132,6 @@ if exists("g:knob_startify")
         \ ]
 endif
 
-if !knobs#At(2)
-  finish
-endif
-
 let g:which_key_hspace = 2
 
 " Write all buffers before navigating from Vim to tmux pane
