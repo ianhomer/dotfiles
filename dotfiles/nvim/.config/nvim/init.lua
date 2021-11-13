@@ -120,9 +120,10 @@ g.indent_blankline_show_trailing_blankline_indent = false
 g.indent_blankline_show_first_indent_level = false
 
 cmd "packadd packer.nvim" -- load the package manager
-local status, _ = pcall(cmd, "packadd knobs.vim")
-if status then
-  require('knobs').setup()
+local hasKnobs, _ = pcall(cmd, "packadd knobs.vim")
+if hasKnobs then
+  knobs = require("knobs")
+  knobs.setup()
 end
 
 return require("packer").startup {
@@ -132,8 +133,7 @@ return require("packer").startup {
         --vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
         --use {"lewis6991/impatient.nvim", rocks = "mpack"}
 
-        local status, knobs = pcall(require,"knobs")
-        use = status and knobs.use(_use) or _use
+        use = knobs and knobs.use(_use) or _use
 
         use "wbthomason/packer.nvim"
         use "ianhomer/knobs.vim"
