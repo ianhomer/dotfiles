@@ -134,13 +134,11 @@ return require("packer").startup {
         --use {"lewis6991/impatient.nvim", rocks = "mpack"}
 
         local status, knobs = pcall(require,"knobs")
-
         use = status and knobs.use(_use) or _use
 
         use "wbthomason/packer.nvim"
-        use {
-            "ianhomer/knobs.vim", config = [[require'knobs'.setup()]]
-        }
+        use "ianhomer/knobs.vim"
+
         -- LSP, autocomplete and code guidance
         use {
             "neovim/nvim-lspconfig",
@@ -262,7 +260,7 @@ return require("packer").startup {
 
         -- Navigation
 
-        _use {"mhinz/vim-startify"}
+        use {"mhinz/vim-startify"}
         use {
             "junegunn/fzf.vim",
             cmd = {"Ag", "Buffers", "Commits", "Files", "History"},
