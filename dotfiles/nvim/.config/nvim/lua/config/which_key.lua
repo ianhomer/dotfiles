@@ -4,7 +4,7 @@ local knobs = require("knobs")
 wk.setup {}
 
 local map = {}
-if knobs.has("telescope") then
+if vim.g.knob_telescope then
     map["tb"] = {"<cmd>Telescope git_bcommits<cr>", "Buffer commits"}
     map["tc"] = {"<cmd>Telescope commands<cr>", "Recent commands"}
     map["td"] = {"<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols"}

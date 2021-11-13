@@ -325,8 +325,7 @@ return require("packer").startup {
         use {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
         useif {"airblade/vim-gitgutter"}
         useif {
-            "tpope/vim-dispatch",
-            defer = 4000
+            "tpope/vim-dispatch"
         }
         useif {
             "lewis6991/gitsigns.nvim",
@@ -346,8 +345,7 @@ return require("packer").startup {
         }
         useif "tpope/vim-commentary"
         useif {
-            "tpope/vim-unimpaired",
-            defer = 5000
+            "tpope/vim-unimpaired"
         }
         use "tpope/vim-repeat"
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
@@ -370,8 +368,7 @@ return require("packer").startup {
         use {
             "iamcco/markdown-preview.nvim",
             -- cmd = {"MarkdownPreview"},
-            run = "cd app && yarn install",
-            defer = 1000
+            run = "cd app && yarn install"
         }
         useif {
             "lukas-reineke/indent-blankline.nvim"
