@@ -44,7 +44,6 @@ nvim_set_var(
         gruvbox8 = 1,
         glow = 3,
         goyo = 9,
-        gutentags = 6,
         gv = 5,
         indent_blankline = 4,
         indentline = 4,
@@ -217,10 +216,6 @@ return require("packer").startup {
             "folke/lsp-colors.nvim"
         }
 
-        cmd [[let g:gutentags_cache_dir = expand('~/.cache/tags')]]
-        use {
-            "ludovicchabant/vim-gutentags"
-        }
         use {
             "dense-analysis/ale",
             ft = {"sh", "javascript", "markdown", "lua", "python", "typescript", "vim"},
