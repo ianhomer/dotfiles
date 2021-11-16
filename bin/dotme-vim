@@ -46,10 +46,4 @@ if [ ! -d ~/.cache/tags ] ; then
   mkdir ~/.cache/tags
 fi
 
-# Update plugins at 11
-export VIM_KNOB=5
-
-# update neovim
-nvim +TSUpdate +qa
-
 should-run -fu $0
