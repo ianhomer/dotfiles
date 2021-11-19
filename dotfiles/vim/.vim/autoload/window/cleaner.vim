@@ -18,6 +18,7 @@
 " Some non-modifiable windows weren't closed either e.g. help windows.
 "
 
+
 if exists('g:window_cleaner_autoloaded')
   finish
 endif
@@ -104,6 +105,7 @@ function window#cleaner#CloseMe()
     if &filetype == "NvimTree"
       NvimTreeClose
     else
+      execute ":w"
       execute ":bd"
     endif
     call window#SwitchToFirstEditableFile()
@@ -122,11 +124,12 @@ function window#cleaner#CloseMe()
   elseif exists("g:NERDTree") && g:NERDTree.IsOpen()
     " NERDTree open
     "   => close buffer and leave NERDTree open
-    execute ":q"
+    execute ":wq"
   elseif knobs#("startify") && exists(':Startify')
     if exists('g:loaded_tree')
       NvimTreeClose
     endif
+    execute ":w"
     execute ":bd"
     execute ":Startify"
   elseif @% == ""

@@ -109,12 +109,14 @@ class Fzf:
             "ctrl-f:reload("
             + "fd --changed-within 3months md --exec stat -f '%m:%N:1:%N' {q} "
             + "| sort -r)",
+            "ctrl-t:reload(" + search + "-n tags --witharchive {q} || true)",
             "ctrl-e:reload(" + search + "-n sort-modified --witharchive {q} || true)",
             "ctrl-b:reload(" + search + "-n bookmarks --witharchive {q} || true)",
             "ctrl-g:reload(" + search + "-n links --witharchive {q} || true)",
             "ctrl-s:reload(" + search + "-n headings --witharchive {q} || true)",
             # Note that ctrl-x aborts so that a subsequence ctrl-x in fish shell
             # opens cheats. Similarly for ctrl-w opening todos.
+            "ctrl-w:abort",
             "ctrl-x:abort",
             "ctrl-space:abort",
             "ctrl-o:execute(tmux split-window -v 'nvim {2}')",

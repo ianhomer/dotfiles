@@ -16,6 +16,12 @@ if [ ! -f  ~/.vim/autoload/plug.vim ] ; then
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
+mkdir -p ~/.vim/pack/my-plugins/start
+if [ ! -f  ~/.vim/pack/my-plugins/start/knobs.vim/README.md ] ; then
+  git clone https://github.com/ianhomer/knobs.vim\
+    ~/.vim/pack/my-plugins/opt/knobs.vim
+fi
+
 # Slim vim
 if [ ! -f  ~/.vim-slim/autoload/plug.vim ] ; then
   curl -fLo ~/.vim-slim/autoload/plug.vim --create-dirs \
@@ -38,11 +44,5 @@ fi
 if [ ! -d ~/.cache/tags ] ; then
   mkdir ~/.cache/tags
 fi
-
-# Update plugins at 11
-export VIM_KNOB=5
-
-# update neovim
-nvim +TSUpdate +qa
 
 should-run -fu $0
