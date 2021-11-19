@@ -154,29 +154,34 @@ return require("packer").startup {
         _use {
             "hrsh7th/nvim-cmp",
             requires = "hrsh7th/cmp-buffer",
-            config = [[require'config.cmp']]
+            config = [[require'config.cmp']],
+            commit = "1c7f73aa4ad2ca1d25ea57ba5ab4e43df85d3479"
         }
 
         use {
             knob = "cmp",
             "hrsh7th/cmp-nvim-lsp",
-            after = "nvim-cmp"
+            after = "nvim-cmp",
+            commit = "134117299ff9e34adde30a735cd8ca9cf8f3db81"
         }
 
         use {
             "hrsh7th/cmp-nvim-lua",
-            after = "cmp-nvim-lsp"
+            after = "cmp-nvim-lsp",
+            commit = "d276254e7198ab7d00f117e88e223b4bd8c02d21"
         }
 
         use {
             "hrsh7th/cmp-path",
-            after = "cmp-nvim-lsp"
+            after = "cmp-nvim-lsp",
+            commit = "d276254e7198ab7d00f117e88e223b4bd8c02d21"
         }
 
         use {
             knob = "vsnip",
             "hrsh7th/cmp-vsnip",
-            after = "cmp-nvim-lsp"
+            after = "cmp-nvim-lsp",
+            commit = "0abfa1860f5e095a07c477da940cfcb0d273b700"
         }
 
         use {
