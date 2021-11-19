@@ -13,31 +13,6 @@ jobs:
           npm install
           npm test
 
-  test-py:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        python-version: [3.9]
-
-    steps:
-      - uses: actions/checkout@v1
-      - name: set up python
-        uses: actions/setup-python@v2
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: install pythong dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install flake8 pytest pytest-bdd
-      - name: lint with flake8
-        run: |
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: python tests
-        run: |
-          pytest
-
   test-dotme:
     runs-on: ubuntu-latest
     steps:
