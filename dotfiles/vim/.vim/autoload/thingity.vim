@@ -156,20 +156,3 @@ function! thingity#OpenURLUnderCursor()
     :redraw!
   endif
 endfunction
-
-function thingity#UpdateMeta()
-  if line("$") > 10
-    let l = 10
-  else
-    let l = line("$")
-  endif
-  let win = winsaveview()
-  exe "1," . l . "g/^id:$/s/^id:$/id: ".system('uuidgen')
-  exe "1," . l . "g/^created:$/s/^created:$/created: \"".strftime("%a %d %b %Y %H:%M:%S")."\""
-  try
-    undojoin
-    keepj keepp exe "1," . l . "g/^modified:/s/^modified:.*/modified: \"".strftime("%a %d %b %Y %H:%M:%S")."\""
-  catch /^Vim\%((\a\+)\)\=:E790/
-  endtry
-  call winrestview(win)
-endfunction

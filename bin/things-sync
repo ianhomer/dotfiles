@@ -4,7 +4,7 @@ set -e
 
 $(shim)
 
-is-connected || echo "Not connected, no sync" ; exit 1
+is-connected || (echo "Not connected, no sync" ; exit 1)
 
 FETCH_WINDOW=600
 while getopts "w:" o; do case "$o" in

@@ -1,4 +1,4 @@
-if !knobs#("fzf")
+if !exists("g:knob_fzf")
   finish
 endif
 
@@ -40,13 +40,13 @@ function! fzf#GetX()
   return 1.0 * screencol() / &columns
 endfunction
 
-function! fzf#CompletePath() 
+function! fzf#CompletePath()
   return fzf#vim#complete#path(
     \ "find . -path '*/\.*' -prune -o -print \| sed '1d;s:^..::'",
     \ fzf#wrap({
     \   'dir': expand('%:p:h'),
-    \   'window': { 
-    \     'width': fzf#GetWidth(), 'height': fzf#GetHeight(), 
+    \   'window': {
+    \     'width': fzf#GetWidth(), 'height': fzf#GetHeight(),
     \     'xoffset': fzf#GetX(), 'yoffset': fzf#GetY()
     \    },
     \ }))
@@ -57,11 +57,11 @@ command! -nargs=* -bang CompletePath call fzf#CompletePath()
 inoremap <expr> <c-x><c-f> fzf#CompletePath()
 
 function! fzf#SearchWithRipGrep(query, fullscreen)
-  let command_fmt = 
+  let command_fmt =
         \ 'rg --column --line-number --no-heading --color=always --smart-case -m 1 -- %s'
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 
+  let spec = {'options': ['--phony', '--query', a:query, '--bind',
         \ 'change:reload:'.reload_command]}
   call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
@@ -73,21 +73,21 @@ nnoremap <silent> <leader>S :Ag!<CR>
 nnoremap <silent> <leader>jk :Ag<CR>'
 nnoremap <silent> <leader>jK :Ag!<CR>'
 
-" Make Ag match on just content of file and not search on the 
+" Make Ag match on just content of file and not search on the
 " not including file path name
 command! -bang -nargs=* AgWithOutFileName
-  \ call fzf#vim#ag(<q-args>, 
+  \ call fzf#vim#ag(<q-args>,
   \  '--hidden -p ~/.dotfiles/config/ag/.ignore', {
   \   'options': '--delimiter : --nth 4..'
-  \ }, 
+  \ },
   \ <bang>0)
 
 command! -bang -nargs=* AgPopup
-  \ call fzf#vim#ag(<q-args>, 
+  \ call fzf#vim#ag(<q-args>,
   \  '-p ~/.dotfiles/config/ag/.ignore', {
   \   'window': { 'width': 0.9, 'height': 0.9},
   \   'options': '--delimiter : --nth 4..'
-  \ }, 
+  \ },
   \ <bang>0)
 
 nnoremap <silent> <leader>,m :Maps<CR>

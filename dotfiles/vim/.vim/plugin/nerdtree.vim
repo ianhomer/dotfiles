@@ -1,4 +1,4 @@
-if !knobs#("nerdtree")
+if !exists("g:knob_nerdtree")
   finish
 endif
 

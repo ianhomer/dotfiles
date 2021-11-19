@@ -1,4 +1,4 @@
-if !knobs#("defaults")
+if !exists("g:knob_defaults")
   finish
 endif
 
@@ -51,7 +51,7 @@ if has('macunix')
   nnoremap gx :call thingity#OpenURLUnderCursor()<CR>
 endif
 
-if !knobs#At(1)
+if get(g:, 'knobs_level', 0) < 1
   finish
 endif
 
@@ -61,13 +61,13 @@ endif
 
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
-if knobs#("compactcmd")
+if exists("g:knob_compactcmd")
   set cmdheight=1
 else
   set cmdheight=2
 endif
 
-if knobs#("minimap")
+if exists("g:knob_minimap")
   nnoremap <silent> <leader>m :MinimapToggle<CR>
 endif
 
@@ -77,12 +77,12 @@ nnoremap <leader>.o :profile stop<CR>
 nnoremap <leader>.i :profile dump<CR>
 
 " save all files
-if !knobs#("autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | endif
+if !exists("g:knob_autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | endif
 
 " reset highlighting
 nnoremap <silent> <leader>z :noh<CR>
 
-if knobs#("modes")
+if exists("g:knob_modes")
   command! -nargs=0 ResetMode :call modes#ResetMode()
   command! -nargs=0 PersonalDevMode :call modes#PersonalDevMode()
   command! -nargs=0 MobbingMode :call modes#MobbingMode()
@@ -98,16 +98,16 @@ endif
 let g:minimap_auto_start = 0
 let g:minimap_close_filetypes = ['nerdtree','startify']
 
-if knobs#("gutentags")
+if exists("g:knob_gutentags")
   let g:gutentags_cache_dir = expand('~/.cache/tags')
 endif
 
-if knobs#("dispatch")
+if exists("g:knob_dispatch")
   let g:dispatch_no_tmux_make = 1
   let g:dispatch_quickfix_height = 4
 endif
 
-if knobs#("gitgutter")
+if exists("g:knob_gitgutter")
   let g:gitgutter_map_keys = 0
   let g:gitgutter_highlight_linenrs = 1
 endif
@@ -116,7 +116,7 @@ endif
 let g:mkdp_auto_close = 0
 let g:mkdp_page_title = '${name}'
 
-if knobs#("startify")
+if exists("g:knob_startify")
   let g:startify_custom_header = ""
   let g:startify_session_autoload = 0
   let g:startify_change_to_dir = 0
@@ -130,10 +130,6 @@ if knobs#("startify")
         \ { 'type': function('my#nerdtreeBookmarks'),
         \ 'header': ['   NERDTree Bookmarks']}
         \ ]
-endif
-
-if !knobs#At(2)
-  finish
 endif
 
 let g:which_key_hspace = 2
@@ -155,6 +151,7 @@ augroup dotme
   autocmd BufNewFile,BufRead *.fish set filetype=fish
   autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
+  autocmd BufNewFile,BufRead *.json set filetype=jsonc
   autocmd BufNewFile *.sh 0r ~/.vim/skeletons/skeleton.sh
   autocmd BufNewFile *.md 0r ~/.vim/skeletons/skeleton.md
 
@@ -168,19 +165,13 @@ augroup dotme
   " Override shiftwidth for python
   autocmd Filetype python set shiftwidth=4
 
-  if knobs#("autosave")
+  if exists("g:knob_autosave")
     "
     " *** Scope : IO ***
     "
     " Auto reload when focus gained or buffer entered
     autocmd FocusGained,WinEnter,BufEnter * :checktime
-
-    " Auto write when text changes using debouncing to wait for pause in text
-    " entry. If we save too often then tools that watch for change will get too
-    " busy.
-    autocmd TextChangedI,TextChangedP * ++nested silent!
-      \ call my#DebouncedSave(3000)
-    autocmd InsertLeave,TextChanged * ++nested silent! call my#DebouncedSave(500)
+    call my#EnableAutoSave()
   endif
 augroup end
 
@@ -212,7 +203,7 @@ nmap 'b ysiWb
 
 " *** Scope : IO ***
 "
-if knobs#("autosave")
+if exists("g:knob_autosave")
   " Auto reload underlying file if it changes, although
   " it only really reloads when external command run like :!ls
   set autoread
@@ -240,7 +231,7 @@ set backspace=indent,eol,start
 " *** Scope : Status Bar ***
 "
 
-if knobs#("airline")
+if exists("g:knob_airline")
   " Less accurate highlighting, but improved performance
   let g:airline_highlighting_cache = 1
   " Explicit airline extensions for quicker start up

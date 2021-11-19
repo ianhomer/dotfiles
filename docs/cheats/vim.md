@@ -17,6 +17,7 @@ Shortcuts I'm trying to remember.
 | `ctrl-X`  | In FZF open in horizontal split                       |
 | `%norm`   | Do operation on each line in file                     |
 | `csw"`    | Quote word                                            |
+| `:xa`     | Save all and exit                                     |
 
 ### misc
 

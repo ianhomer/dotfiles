@@ -1,14 +1,14 @@
 " Goyo distraction free writing
-if knobs#("goyo")
+if exists("g:knob_goyo")
   nnoremap <leader>i :Goyo<CR>
   let g:goyo_width = 85
 endif
 
-if !knobs#("thingity")
+if !exists("g:knob_thingity")
   finish
 endif
 
-if knobs#At(3)
+if get(g:,"knobs_level", 0) > 2
   " Markdown syntax
   " Enable folding
   let g:markdown_folding = 1
@@ -45,6 +45,3 @@ nnoremap <silent> <leader>js :Search<CR>
 nnoremap <silent> <leader>jT :Ag! \[\ \]<CR>
 " todos (aligned with task filtering in bin/todo)
 nnoremap <silent> <leader>jt :AgPopup \[\ \]<CR>
-
-autocmd BufWritePre,FileWritePre *.md :call thingity#UpdateMeta()
-

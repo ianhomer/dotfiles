@@ -1,7 +1,6 @@
 "
 " See init.lua for more recent configuration
 "
-
 let g:init_vim = 1
 
 " Default values for knobs
@@ -57,23 +56,25 @@ let g:knobs_layers_map = {
   \    }
   \  }
 
-if !knobs#At(1)
-  finish
-endif
+packadd knobs.vim
+call knobs#Init()
 
 " Load plugins
-call plug#begin(knobs#GetPluggedDir())
+call plug#begin("~/.vim/plugged")
+
+Plug 'ianhomer/knobs.vim'
+
 "
 " Core essentials
 "
 " fzf - Fuzzy Finder
-if knobs#("fzf")
+if exists("g:knob_fzf")
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
 endif
 
 " fugitive - Git integration
-if knobs#("fugitive")
+if exists("g:knob_fugitive")
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-rhubarb'
 endif
@@ -91,10 +92,11 @@ IfKnob 'nerdtree' Plug 'ryanoasis/vim-devicons'
 IfKnob 'minimap' Plug 'wfxr/minimap.vim'
 
 " Vinegar - better file expore than NERD
-if knobs#At(9) | Plug 'tpope/vim-vinegar' | endif
+if exists("g:knob_vinegar") | Plug 'tpope/vim-vinegar' | endif
+
 " ack - Search files
 if knobs#At(6) | Plug 'mileszs/ack.vim' | endif
-if knobs#("airline")
+if exists("g:knob_airline")
   " Airline - status bar
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'

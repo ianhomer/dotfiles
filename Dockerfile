@@ -3,7 +3,7 @@
 #
 FROM archlinux:latest
 RUN pacman -Syu --noconfirm \
-  git \ 
+  git \
   openssh \
   stow \
   sudo \

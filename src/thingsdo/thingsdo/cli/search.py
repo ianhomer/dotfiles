@@ -53,6 +53,16 @@ def search(args):
         search = Rg(environment)
         search.withModifiedKey = True
         search.matchPrefix = "^.*<[0-9A-Za-z\\s\\:\\/\\.\\-]+>.*"
+    elif args.name == "tags":
+        search = Rg(environment, "", args.justarchive, args.witharchive)
+        if match:
+            search.matchPrefix = "#" + match
+        else:
+            search.matchPrefix = "(^|\\s)#[A-Za-z]+"
+        search.withModifiedKey = True
+        search.postFilter = (
+            "s/\\(#[A-Za-z\\-]*\\)/\033[95m\\1\033[0m/g"
+        )
     elif args.name == "headings":
         search = Rg(environment, match, args.justarchive, args.witharchive)
         search.matchPrefix = "^#+ .*"
