@@ -15,7 +15,7 @@ cmp.setup {
     sources = {
         {name = "nvim_lsp"},
         {name = "buffer"},
-        {name = "vsnip"},
+        -- {name = "vsnip"},
         {name = "nvim_lua"},
         {name = "path"}
     },
@@ -25,11 +25,11 @@ cmp.setup {
             return vim_item
         end
     },
-    snippet = {
-        expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
-        end
-    },
+    -- snippet = {
+    --     expand = function(args)
+    --         vim.fn["vsnip#anonymous"](args.body)
+    --     end
+    -- },
     mapping = {
         ["<CR>"] = cmp.mapping.confirm(
             {
@@ -42,8 +42,8 @@ cmp.setup {
                 vim.fn.feedkeys(termcodes("<C-n>"),'n')
             elseif check_back_space() then
                 vim.fn.feedkeys(termcodes("<Tab>"), 'n')
-            elseif vim.g.knob_vsnip and vim.fn["vsnip#available"]() == 1 then
-                vim.fn.feedkeys(termcodes("<Plug>(vsnip-expand-or-jump)"), '')
+            -- elseif vim.g.knob_vsnip and vim.fn["vsnip#available"]() == 1 then
+            --     vim.fn.feedkeys(termcodes("<Plug>(vsnip-expand-or-jump)"), '')
             else
                 fallback()
             end

@@ -29,7 +29,7 @@ nvim_set_var(
         commentary = 4,
         cmp = 4,
         dap = 9,
-        defaults = 1,
+        defaults = 2,
         devicons = 4,
         dispatch = 4,
         editorconfig = 4,
@@ -45,6 +45,7 @@ nvim_set_var(
         glow = 3,
         goyo = 9,
         gv = 5,
+        hop = 6,
         indent_blankline = 4,
         indentline = 4,
         nerdtree = 9,
@@ -82,7 +83,7 @@ nvim_set_var(
         unicode = 4,
         unimpaired = 4,
         update_spelling = 7,
-        which_key = 3,
+        which_key = 1,
         window_cleaner = 9,
         writegood = 6,
         vimspector = 9,
@@ -195,7 +196,7 @@ return require("packer").startup {
             "hrsh7th/vim-vsnip",
             event = "InsertEnter",
             requires = {
-                {"hrsh7th/vim-vsnip-integ", cond = "vim.g['knob_vsnip']"}
+                {"hrsh7th/vim-vsnip-integ", cond = "return vim.g.knob_vsnip ~= nil"}
             },
             commit = "60ee20318550f4a5b6f7a5a8b827540c2c386898"
         }
