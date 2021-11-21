@@ -83,7 +83,7 @@ nvim_set_var(
         unimpaired = 4,
         update_spelling = 7,
         which_key = 3,
-        window_cleaner = 3,
+        window_cleaner = 9,
         writegood = 6,
         vimspector = 9,
         vsnip = 6,
