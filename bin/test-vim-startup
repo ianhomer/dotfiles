@@ -75,7 +75,7 @@ def timeAll(args):
 
 def timeOne(command, knob, args, label, baseline=0):
     def process():
-        subprocess.call(command, env={**os.environ, "VIM_KNOB": f"{knob}"})
+        subprocess.call(command, env={**os.environ, "VIM_KNOBS": f"{knob}"})
 
     t = Timer(process)
     timeMs = int(t.timeit(args.iterations) * 1000 / args.iterations)
