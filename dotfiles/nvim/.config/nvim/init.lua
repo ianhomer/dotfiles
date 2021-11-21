@@ -178,28 +178,28 @@ return require("packer").startup {
             commit = "d276254e7198ab7d00f117e88e223b4bd8c02d21"
         }
 
-        use {
-            knob = "vsnip",
-            "hrsh7th/cmp-vsnip",
-            after = "cmp-nvim-lsp",
-            commit = "0abfa1860f5e095a07c477da940cfcb0d273b700"
-        }
+        -- use {
+        --     knob = "vsnip",
+        --     "hrsh7th/cmp-vsnip",
+        --     after = "cmp-nvim-lsp",
+        --     commit = "0abfa1860f5e095a07c477da940cfcb0d273b700"
+        -- }
 
-        use {
-            knob = "vsnip",
-            "rafamadriz/friendly-snippets",
-            event = "InsertCharPre",
-            commit = "05bfa7681b8f11b664fab657001c2efb6f3ec85e"
-        }
+        -- use {
+        --     knob = "vsnip",
+        --     "rafamadriz/friendly-snippets",
+        --     event = "InsertCharPre",
+        --     commit = "05bfa7681b8f11b664fab657001c2efb6f3ec85e"
+        -- }
 
-        use {
-            "hrsh7th/vim-vsnip",
-            event = "InsertEnter",
-            requires = {
-                {"hrsh7th/vim-vsnip-integ", cond = "return vim.g.knob_vsnip ~= nil"}
-            },
-            commit = "60ee20318550f4a5b6f7a5a8b827540c2c386898"
-        }
+        -- use {
+        --     "hrsh7th/vim-vsnip",
+        --     event = "InsertEnter",
+        --     requires = {
+        --         {"hrsh7th/vim-vsnip-integ", cond = "return vim.g.knob_vsnip ~= nil"}
+        --     },
+        --     commit = "60ee20318550f4a5b6f7a5a8b827540c2c386898"
+        -- }
 
         use {
             "kosayoda/nvim-lightbulb",
