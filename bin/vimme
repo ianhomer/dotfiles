@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+#
+# Experimental vim with restart. Command ":q" quits for good and command ":cq"
+# quits with error code, triggering a restart of vim
+#
+
+again=1
+
+while [ $again -eq 1 ] ; do
+    VIM_KNOBS=5 nvim
+    again=$?
+done
+
