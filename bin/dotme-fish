@@ -24,6 +24,10 @@ fish_add_path ~/.dotfiles/bin
 fish_add_path ~/.jenv/bin
 fish_add_path ~/.rbenv/shims
 fish_add_path ~/Library/Python/3.9/bin
+if is-silicon
+  fish_add_path /opt/homebrew/bin
+  fish_add_path /opt/homebrew/sbin
+end
 
 # Why was this in?
 # fish_add_path /usr/local/sbin
