@@ -19,8 +19,7 @@ fi
 
 if ! is-executable brew ; then
   log:: "installing brew"
-  curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install \
-    | ruby
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 adminFormula="adoptopenjdk8 adoptopenjdk11 java11 languagetool openjdk@11"
