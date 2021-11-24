@@ -18,7 +18,7 @@ Change key board shortcuts.
 |              |                  |
 | --           | --               |
 | `Ctrl-Alt-,` | Previous Display |
-| `Ctrl-Alt-.  | Next Display     |
+| `Ctrl-Alt-.` | Next Display     |
 
 ### Hidden Bar
 
