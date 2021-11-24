@@ -7,7 +7,7 @@ coding and text editing a breeze.
 
 First time clone repository and install:
 
-    git clone git@github.com:ianhomer/dotfiles.git ~/.dotfiles
+    git clone https://github.com/ianhomer/dotfiles.git ~/.dotfiles
     ~/.dotfiles/start
 
 Update at any time with:
