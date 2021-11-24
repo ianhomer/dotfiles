@@ -11,6 +11,10 @@ Login Items
 
 ## Initialise desktop apps
 
+### Brave
+
+Install [brave](https://brave.com/)
+
 ### Magnet
 
 Change key board shortcuts.
