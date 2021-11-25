@@ -114,3 +114,29 @@ for vim like keys in browser. Type `?` in browser for help.
 ### Gmail
 
 Settings -> Keyboard Shortcuts -> Keyboard shortcuts on
+
+### M1 Tweaks
+
+#### .NET
+
+Install v3.1, v5 and v6 as needed from Microsoft Downloads. Don't use Brew,
+since a little bleeding edge at the moment.
+
+v6 on M1
+
+    dotnet --list-sdks
+
+V5 and v3.1 on x64 (with Rosetta)
+
+    dotnetx64 --list-sdks
+
+#### JetBrains Rider
+
+For .NET 5 and .NET 3.5 development
+
+- -> Properties
+- -> Build, Execution & Deployment
+- -> Toolset and Build
+- -> .NET Core CLI Execution path = /use/local/share/dotnet/x64/dotnet
+
+Restart and on solution -> Manage .NET SDK -> Select 5.0
