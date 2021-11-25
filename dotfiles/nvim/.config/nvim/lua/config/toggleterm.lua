@@ -1,5 +1,5 @@
 require("toggleterm").setup{
-  shell = "/usr/local/bin/fish"
+  shell = vim.env.SHELL
 }
 
 function _G.set_terminal_keymaps()
