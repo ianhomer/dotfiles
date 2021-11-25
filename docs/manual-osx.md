@@ -140,3 +140,9 @@ For .NET 5 and .NET 3.5 development
 - -> .NET Core CLI Execution path = /use/local/share/dotnet/x64/dotnet
 
 Restart and on solution -> Manage .NET SDK -> Select 5.0
+
+#### Xcode
+
+Find Xcode in Application, click Get Info and select open in Rosetta.
+
+
