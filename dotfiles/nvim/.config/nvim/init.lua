@@ -175,7 +175,7 @@ return require("packer").startup {
         use {
             "hrsh7th/cmp-path",
             after = "cmp-nvim-lsp",
-            commit = "d276254e7198ab7d00f117e88e223b4bd8c02d21"
+            commit = "4fe14cf56288200614950fe57525ac6340f49d5a"
         }
 
         -- use {
