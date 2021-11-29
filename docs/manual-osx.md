@@ -51,6 +51,7 @@ System preferences
 - Disable Mission Control Ctrl-arrow short cuts
 - Disable Ctrl-space and Shift-Ctrl-space for selecting input source
 - Disable any other shortcuts that would never get used
+- Change Press **globe/fn** to "Show Emoji and Symbols"
 
 -> Mission Control - remove all keyboard and mouse shortcuts
 
