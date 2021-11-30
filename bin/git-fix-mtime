@@ -20,6 +20,13 @@ class Git:
         self.cmd = ["git"]
         # Getting the root early has the side effect of throwing an error if
         # we're not in a git repository.
+        self.isGit = subprocess.call(
+            ["git", "rev-parse", "--is-inside-work-tree"],
+            stderr=subprocess.STDOUT,
+            stdout=open(os.devnull, "w"),
+        ) == 0
+        if not self.isGit:
+            return
         try:
             self.workDirectory, self.gitDirectory = self.root()
         except subprocess.CalledProcessError:
@@ -43,6 +50,8 @@ def run():
 
 def fixModifiedTime():
     git = Git()
+    if not git.isGit:
+        return
     # get all files in git repository
     files = set()
     for path in git.ls():

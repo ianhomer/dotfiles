@@ -110,7 +110,7 @@ function gitSynk() {
     else
       # Otherwise if there are local changes and the autocommit is not set then
       # we bomb
-      printf "$current - local changes and autocommit not set"
+      printf "∷ ◉ $current - set autocommit with git synk -a to commit local"
       return 128
     fi
   fi
