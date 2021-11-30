@@ -116,7 +116,12 @@ function gitSynk() {
   fi
 
   now=`date +%s`
-  lastModified=`$SHIM_STAT -c '%Y' .git/FETCH_HEAD`
+  datedFile=".git/FETCH_HEAD"
+  if [ ! -f "$datedFile" ] ; then
+    datedFile=".git/HEAD"
+  fi
+
+  lastModified=`$SHIM_STAT -c '%Y' $datedFile`
   if [[ $((lastModified + FETCH_WINDOW)) < $now ]] ; then
     printf "."
     gitQuiet fetch
