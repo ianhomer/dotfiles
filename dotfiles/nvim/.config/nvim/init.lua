@@ -239,11 +239,12 @@ return require("packer").startup {
             cmd = {"ALEFix"},
             commit = "de67f4743d9ffd1694d15b1b91fedfaa0a5cda7"
         }
+
         use {
             "nvim-treesitter/nvim-treesitter",
             event = "BufRead",
             config = [[require'config.treesitter']],
-            run = ":TSUpdate"
+            run = ":TSUpdate",
             commit = "d6a0a26b8563409d4660def7320a4f4bc23954df"
         }
         use {
