@@ -55,8 +55,8 @@ $NEW_SHIM
 EOF
   fi
   # Update thingsdo.ini
-  THINGSDO_CONFIG_DIR=${HOME}/.config/thingsdo
-  THINGSDO_INI=${THINGSDO_CONFIG_DIR}/thingsdo.ini
+  THINGSDO_CONFIG_DIR=${HOME}/.config/thingity
+  THINGSDO_INI=${THINGSDO_CONFIG_DIR}/thingity.ini
   if [[ -f "${THINGSDO_INI}" ]] ; then
     CURRENT_INI=$(cat ${THINGSDO_INI})
   fi
