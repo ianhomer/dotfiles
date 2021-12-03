@@ -139,7 +139,7 @@ return require("packer").startup {
         }
         use {
             "ray-x/lsp_signature.nvim",
-            commit = "600111e6249bcc948e2b811ef09adf4ea84ebfc1"
+            commit = "82c463e5e639fc61eea7be03a68bea272f828cc1"
         }
         use {
             "weilbith/nvim-code-action-menu",
@@ -149,21 +149,21 @@ return require("packer").startup {
         _use {
             "onsails/lspkind-nvim",
             config = [[require("lspkind").init()]],
-            commit = "1557ce5b3b8e497c1cb1d0b9d967a873136b0c23"
+            commit = "1557ce5b3b8e497c1cb1d0b9d967a873136b0c2"
         }
 
         _use {
             "hrsh7th/nvim-cmp",
             requires = "hrsh7th/cmp-buffer",
             config = [[require'config.cmp']],
-            commit = "1c7f73aa4ad2ca1d25ea57ba5ab4e43df85d3479"
+            commit = "10f5883c986967fa49b5219ece2404339dcfb84"
         }
 
         use {
             knob = "cmp",
             "hrsh7th/cmp-nvim-lsp",
             after = "nvim-cmp",
-            commit = "134117299ff9e34adde30a735cd8ca9cf8f3db81"
+            commit = "134117299ff9e34adde30a735cd8ca9cf8f3db8"
         }
 
         use {
@@ -175,7 +175,7 @@ return require("packer").startup {
         use {
             "hrsh7th/cmp-path",
             after = "cmp-nvim-lsp",
-            commit = "4fe14cf56288200614950fe57525ac6340f49d5a"
+            commit = "d83839ae510d18530c6d36b662a9e806d4dceb7"
         }
 
         -- use {
@@ -204,13 +204,13 @@ return require("packer").startup {
         use {
             "kosayoda/nvim-lightbulb",
             config = [[require'config.lightbulb']],
-            commit = "cd5267d2d708e908dbd668c7de74e1325eb1e1da"
+            commit = "cd5267d2d708e908dbd668c7de74e1325eb1e1d"
         }
 
         use {
             cmd = "Vista",
             "liuchengxu/vista.vim",
-            commit = "a0469c645dcbe4033b857da27d35491f39e2f776"
+            commit = "a0469c645dcbe4033b857da27d35491f39e2f77"
         }
 
         -- Lua
@@ -218,19 +218,19 @@ return require("packer").startup {
             "folke/trouble.nvim",
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.trouble']],
-            commit = "756f09de113a775ab16ba6d26c090616b40a999d"
+            commit = "4d0a711e7432eed022611ce385f3a7714e81f63"
         }
 
         use {
             "majutsushi/tagbar",
             cmd = "TagbarToggle",
             config = [[require'config.tagbar']],
-            commit = "b6669c7c9de542c53f2d19a806abb7610e9ef813"
+            commit = "dd2f46af80d614e3305847845c2a4a4b7447017"
         }
 
         use {
             "folke/lsp-colors.nvim",
-            commit = "517fe3ab6b63f9907b093bc9443ef06b56f804f3"
+            commit = "517fe3ab6b63f9907b093bc9443ef06b56f804f"
         }
 
         use {
