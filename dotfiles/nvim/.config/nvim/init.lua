@@ -237,46 +237,47 @@ return require("packer").startup {
             "dense-analysis/ale",
             ft = {"sh", "javascript", "markdown", "lua", "python", "typescript", "vim"},
             cmd = {"ALEFix"},
-            commit = "31dc6a61a07839ea906f6f0b80be713fb8cad1c7"
+            commit = "de67f4743d9ffd1694d15b1b91fedfaa0a5cda7"
         }
         use {
             "nvim-treesitter/nvim-treesitter",
             event = "BufRead",
             config = [[require'config.treesitter']],
             run = ":TSUpdate"
+            commit = "d6a0a26b8563409d4660def7320a4f4bc23954df"
         }
         use {
             knob = "dap",
             "nvim-telescope/telescope-dap.nvim",
-            commit = "b4134fff5cbaf3b876e6011212ed60646e56f060"
+            commit = "b4134fff5cbaf3b876e6011212ed60646e56f06"
         }
         use {
             "mfussenegger/nvim-dap",
             config = [[require'config.dap']],
-            commit = "1a87456d280e8e308df7983650a5ea2b5a6bfb63"
+            commit = "ce4e56f76598881d020e68037ae91310ea8b9d5"
         }
         use {
             knob = "dap",
             "rcarriga/nvim-dap-ui",
             requires = "mfussenegger/nvim-dap",
             config = [[require'config.dapui']],
-            commit = "649e0fee4f0b8dc6305dd29065c7623c3dc6a032"
+            commit = "a5183531c2b29199a8a0ad0187697ee7c9cdcee"
         }
         use {
             "puremourning/vimspector",
             config = [[require'config.vimspector']],
-            commit = "14fc10923fb29da1947767e746aa2fbd8147a9ab"
+            commit = "a371a162c3378bc50b74a4e5536228c2cc2c9c3"
         }
 
         -- Navigation
 
-        use {"mhinz/vim-startify", commit = "81e36c352a8deea54df5ec1e2f4348685569bed2"}
+        use {"mhinz/vim-startify", commit = "81e36c352a8deea54df5ec1e2f4348685569bed"}
         use {
             "junegunn/fzf.vim",
             cmd = {"Ag", "Buffers", "Commits", "Files", "History"},
             fn = {"fzf#vim#ag"},
             requires = {{"junegunn/fzf", opt = true, fn = {"fzf#shellescape"}}},
-            commit = "d6aa21476b2854694e6aa7b0941b8992a906c5ec"
+            commit = "d6aa21476b2854694e6aa7b0941b8992a906c5e"
         }
         use {
             "nvim-lua/plenary.nvim",
@@ -286,7 +287,7 @@ return require("packer").startup {
             knob = "telescope",
             "nvim-telescope/telescope-fzf-native.nvim",
             run = "make",
-            commit = "59e38e1661ffdd586cb7fc22ca0b5a05c7caf988"
+            commit = "b8662b076175e75e6497c59f3e2799b879d7b95"
         }
         use {
             "nvim-telescope/telescope.nvim",
@@ -299,14 +300,14 @@ return require("packer").startup {
                 }
             },
             config = [[require'config.telescope']],
-            commit = "9ac89ebf6755e9a3f4bae86625ec76106526e57b"
+            commit = "27294d73e4562cbc83c9c488b4618f012deade7"
         }
         use {
             "kyazdani42/nvim-tree.lua",
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.nvimtree']],
             cmd = {"NvimTreeFindFile", "NvimTreeOpen", "NvimTreeToggle"},
-            commit = "5d8453dfbd34ab00cb3e8ce39660f9a54cdd35f3"
+            commit = "e842f088847c98da59e14eb543bde11c45c87ef"
         }
         use {
             "ryanoasis/vim-devicons",
@@ -317,7 +318,7 @@ return require("packer").startup {
             "folke/which-key.nvim",
             event = "BufWinEnter",
             config = [[require'config.which_key']],
-            commit = "d3032b6d3e0adb667975170f626cb693bfc66baa"
+            commit = "d3032b6d3e0adb667975170f626cb693bfc66ba"
         }
         use {
             "phaazon/hop.nvim",
@@ -333,7 +334,8 @@ return require("packer").startup {
         use {
             "nvim-lualine/lualine.nvim",
             requires = {"kyazdani42/nvim-web-devicons", opt = true},
-            config = [[require'config.lualine']]
+            config = [[require'config.lualine']],
+            commit = "1ae4f0aa74f0b34222c5ef3281b34602a76b2b00"
         }
         use {
             "romgrk/barbar.nvim",
@@ -364,7 +366,11 @@ return require("packer").startup {
         }
 
         -- Git
-        use {"tpope/vim-fugitive", cmd = {"G", "Git", "Gstatus", "Gblame", "Ggrep", "Gpush", "Gpull"}}
+        use {
+            "tpope/vim-fugitive",
+            cmd = {"G", "Git", "Gstatus", "Gblame", "Ggrep", "Gpush", "Gpull"},
+            commit = "2064312ad7bb80050baf9acbdfb7641162919e53"
+        }
         use {"tpope/vim-rhubarb", cmd = {"GBrowse"}}
         use {
             "airblade/vim-gitgutter",
@@ -448,7 +454,7 @@ return require("packer").startup {
             "akinsho/toggleterm.nvim",
             cmd = {"ToggleTerm", "TermExec"},
             config = [[require'config.toggleterm']],
-            commit = "ff168c8218b963cc7fc9d80b684d840488839bb5"
+            commit = "265bbff68fbb8b2a5fb011272ec469850254ec9"
         }
         use {
             "tpope/vim-eunuch",
