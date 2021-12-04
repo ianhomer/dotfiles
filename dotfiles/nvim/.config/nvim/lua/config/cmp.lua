@@ -12,6 +12,9 @@ end
 local lspkind = require("lspkind")
 local cmp = require("cmp")
 cmp.setup {
+    completion = {
+      completeopt = 'menu,menuone,noinsert',
+    },
     sources = {
         {name = "nvim_lsp"},
         {name = "buffer"},
@@ -42,8 +45,6 @@ cmp.setup {
                 vim.fn.feedkeys(termcodes("<C-n>"),'n')
             elseif check_back_space() then
                 vim.fn.feedkeys(termcodes("<Tab>"), 'n')
-            -- elseif vim.g.knob_vsnip and vim.fn["vsnip#available"]() == 1 then
-            --     vim.fn.feedkeys(termcodes("<Plug>(vsnip-expand-or-jump)"), '')
             else
                 fallback()
             end

@@ -55,6 +55,7 @@ nvim_set_var(
         lsp_colors = 3,
         lspconfig = 4,
         lspkind = 4,
+        lsp_signature = 6,
         lualine = 3,
         markdown_syntax_table = 3,
         markdown_preview = 3,
@@ -137,10 +138,11 @@ return require("packer").startup {
             "neovim/nvim-lspconfig",
             config = [[require'config.lspconfig']]
         }
-        use {
-            "ray-x/lsp_signature.nvim",
-            commit = "82c463e5e639fc61eea7be03a68bea272f828cc1"
-        }
+        -- use {
+        --     knob = "lsp_signature",
+        --     "ray-x/lsp_signature.nvim",
+        --     commit = "82c463e5e639fc61eea7be03a68bea272f828cc1"
+        -- }
         use {
             "weilbith/nvim-code-action-menu",
             cmd = "CodeActionMenu",
@@ -402,9 +404,8 @@ return require("packer").startup {
             "tpope/vim-surround"
         }
         use "tpope/vim-commentary"
-        use {
-            "tpope/vim-unimpaired"
-        }
+        use "tpope/vim-unimpaired"
+
         use "tpope/vim-repeat"
         use {"godlygeek/tabular", cmd = {"Tabularize"}}
 

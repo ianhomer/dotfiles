@@ -55,7 +55,7 @@ local on_attach = function(client, bufnr)
         )
     end
 
-   require"lsp_signature".on_attach()
+    -- require"lsp_signature".on_attach()
 end
 
 -- Use a loop to conveniently both setup defined servers
