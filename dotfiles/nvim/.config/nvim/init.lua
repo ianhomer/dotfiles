@@ -37,7 +37,7 @@ nvim_set_var(
         eunuch = 3,
         fugitive = 3,
         friendly_snippets = 5,
-        fzf = 1,
+        fzf = 9,
         gitgutter = 6,
         gitsigns = 4,
         gruvbox = 4,

@@ -9,6 +9,7 @@ if vim.g.knob_telescope then
     map["tc"] = {"<cmd>Telescope commands<cr>", "Recent commands"}
     map["td"] = {"<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols"}
     map["f"] = {"<cmd>Telescope find_files hidden=true<cr>", "Find File"}
+    map["s"] = {"<cmd>Telescope live_grep<cr>", "Search"}
     map["tt"] = {"<cmd>Telescope<cr>", "Telescope"}
     map["tS"] = {"<cmd>Telescope live_grep hidden=true<cr>", "Search"}
     map["th"] = {"<cmd>Telescope oldfiles<cr>", "File History"}

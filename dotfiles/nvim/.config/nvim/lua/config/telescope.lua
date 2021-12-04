@@ -12,15 +12,25 @@ telescope.setup {
             "--line-number",
             "--column",
             "--smart-case",
-            "--hidden"
+            "--trim"
         },
-        -- mappings = {
+        mappings = {
+            i = {
+                ["<esc>"] = actions.close
+            }
+        },
         --    i = {["<c-t>"] = trouble.open_with_trouble},
         --    n = {["<c-t>"] = trouble.open_with_trouble}
         --},
-        path_display = {"shorten"}
+        path_display = {"shorten"},
+        layout_config = {
+            horizontal = {
+                height = 0.95,
+                width = 0.95
+            }
+        }
     }
 }
---telescope.load_extension('fzf')
+telescope.load_extension("fzf")
 
 local opt = {noremap = true, silent = true}
