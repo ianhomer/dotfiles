@@ -12,6 +12,7 @@ if vim.g.knob_telescope then
 
     -- Alternatives
     map["tS"] = {"<cmd>Telescope live_grep hidden=true<cr>", "Search"}
+    map["tg"] = {"<cmd>Telescope grep_string<cr>", "Grep String"}
 
     -- File
     map["tF"] = {"<cmd>Telescope file_browser<cr>", "File Browser"}

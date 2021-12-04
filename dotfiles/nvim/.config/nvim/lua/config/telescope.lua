@@ -12,7 +12,10 @@ telescope.setup {
             "--line-number",
             "--column",
             "--smart-case",
-            "--trim"
+            "--trim",
+            "--glob",
+            "!**/.git/**",
+            "--hidden"
         },
         mappings = {
             i = {
