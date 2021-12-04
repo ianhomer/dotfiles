@@ -13,12 +13,16 @@ local lspkind = require("lspkind")
 local cmp = require("cmp")
 cmp.setup {
     completion = {
-      completeopt = 'menu,menuone,noinsert',
+        completeopt = "menu,menuone,noinsert"
+    },
+    experimental = {
+        native_menu = true,
+        ghost_text = true
     },
     sources = {
         {name = "nvim_lsp"},
         {name = "buffer"},
-        -- {name = "vsnip"},
+        {name = "vsnip"},
         {name = "nvim_lua"},
         {name = "path"}
     },
@@ -28,32 +32,32 @@ cmp.setup {
             return vim_item
         end
     },
-    -- snippet = {
-    --     expand = function(args)
-    --         vim.fn["vsnip#anonymous"](args.body)
-    --     end
-    -- },
+    snippet = {
+        expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+        end
+    },
     mapping = {
         ["<CR>"] = cmp.mapping.confirm(
             {
                 behavior = cmp.ConfirmBehavior.Insert,
-                select = false
+                select = true
             }
         ),
         ["<Tab>"] = function(fallback)
             if vim.fn.pumvisible() == 1 then
-                vim.fn.feedkeys(termcodes("<C-n>"),'n')
+                vim.fn.feedkeys(termcodes("<C-n>"), "n")
             elseif check_back_space() then
-                vim.fn.feedkeys(termcodes("<Tab>"), 'n')
+                vim.fn.feedkeys(termcodes("<Tab>"), "n")
             else
                 fallback()
             end
         end,
         ["<S-Tab>"] = function(fallback)
             if vim.fn.pumvisible() == 1 then
-                vim.fn.feedkeys(termcodes("<C-p>"), 'n')
+                vim.fn.feedkeys(termcodes("<C-p>"), "n")
             elseif check_back_space() then
-                vim.fn.feedkeys(termcodes("<S-Tab>"), 'n')
+                vim.fn.feedkeys(termcodes("<S-Tab>"), "n")
             else
                 fallback()
             end
