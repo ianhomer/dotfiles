@@ -8,6 +8,7 @@ if vim.g.knob_telescope then
     -- Common Searches
     map["f"] = {"<cmd>Telescope find_files hidden=true<cr>", "Find File"}
     map["s"] = {"<cmd>Telescope live_grep<cr>", "Search"}
+    map["S"] = {"<cmd>Telescope grep_string search=.<cr>", "Fuzzy Search"}
     map["<space>"] = {"<cmd>Telescope buffers<cr>", "Buffers"}
 
     -- Alternatives
