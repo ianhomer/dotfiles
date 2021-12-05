@@ -12,9 +12,6 @@ end
 local lspkind = require("lspkind")
 local cmp = require("cmp")
 cmp.setup {
-    completion = {
-        completeopt = "menu,menuone,noinsert"
-    },
     experimental = {
         native_menu = true,
         ghost_text = true
@@ -53,7 +50,7 @@ cmp.setup {
         ["<Right>"] = cmp.mapping.confirm(
             {
                 behavior = cmp.ConfirmBehavior.Replace,
-                select = true
+                select = false
             }
         ),
         ["<CR>"] = cmp.mapping.confirm(
