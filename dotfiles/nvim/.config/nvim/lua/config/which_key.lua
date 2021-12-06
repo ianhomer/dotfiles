@@ -9,6 +9,7 @@ if vim.g.knob_telescope then
     map["f"] = {"<cmd>Telescope find_files hidden=true<cr>", "Find File"}
     map["s"] = {"<cmd>Telescope grep_string search=.<cr>", "Fuzzy Search"}
     map["S"] = {"<cmd>Telescope live_grep<cr>", "Search"}
+    map["h"] = {"<cmd>Telescope oldfiles<cr>", "File History"}
     map["<space>"] = {"<cmd>Telescope buffers<cr>", "Buffers"}
 
     -- Alternatives
@@ -20,7 +21,6 @@ if vim.g.knob_telescope then
 
     -- Pickers
     map["tt"] = {"<cmd>Telescope<cr>", "Telescope"}
-    map["th"] = {"<cmd>Telescope oldfiles<cr>", "File History"}
     map["tH"] = {"<cmd>Telescope help_tags<cr>", "Help"}
     map["tt"] = {"<cmd>Telescope tags<cr>", "Tags"}
     map["tl"] = {"<cmd>Telescope highlights<cr>", "Telescope"}
@@ -37,7 +37,6 @@ if vim.g.knob_telescope then
     map["t1"] = {"<cmd>Telescope git_stash<cr>", "Git Stash"}
     map["t2"] = {"<cmd>Telescope git_branches<cr>", "Git Branches"}
 
-
     -- LSP
     map["td"] = {"<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols"}
 end
@@ -51,6 +50,8 @@ if vim.g.knob_nvim_tree then
 end
 
 map["e"] = {"<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics"}
-map["h"] = {"<cmd>lua require'hop'.hint_words()<cr>", "Hop"}
+if vim.g.knob_hop then
+    map["h"] = {"<cmd>lua require'hop'.hint_words()<cr>", "Hop"}
+end
 
 wk.register(map, {prefix = "<leader>"})

@@ -7,8 +7,10 @@ command! -nargs=0 SearchFiles :call my#SearchFiles()
 if !knobs#("telescope")
    nnoremap <silent> <leader>f :Files!<CR>
 endif
-nnoremap <silent> <leader>F :Files!<CR>
-nnoremap <silent> <leader>h :History<CR>
+if knobs#("fzf")
+  nnoremap <silent> <leader>F :Files!<CR>
+  nnoremap <silent> <leader>h :History<CR>
+endif
 
 " Hide all windows except the current one
 nnoremap <silent> <leader>O :only<CR>
