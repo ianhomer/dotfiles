@@ -5,10 +5,10 @@ local nvim_set_var = vim.api.nvim_set_var
 
 vim.opt.shell = "/bin/bash"
 
---local ok, _ = pcall(require, "impatient")
---if ok then
---    _.enable_profile()
---end
+local ok, _ = pcall(require, "impatient")
+if ok then
+    _.enable_profile()
+end
 
 require("config/core")
 
@@ -124,8 +124,7 @@ return require("packer").startup {
     function(_use)
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
-        --vim.fn.setenv("MACOSX_DEPLOYMENT_TARGET", "10.15")
-        --use {"lewis6991/impatient.nvim", rocks = "mpack"}
+        use "lewis6991/impatient.nvim"
 
         local ok, knobs = pcall(require, "knobs")
         use = ok and knobs.use(_use) or _use
