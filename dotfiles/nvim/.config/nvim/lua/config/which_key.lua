@@ -50,6 +50,7 @@ if vim.g.knob_nvim_tree then
     map["n"] = {"<cmd>NvimTreeOpen<cr>" .. "<cmd>NvimTreeFindFile<cr>", "Files"}
 end
 
+map["e"] = {"<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics"}
 map["h"] = {"<cmd>lua require'hop'.hint_words()<cr>", "Hop"}
 
 wk.register(map, {prefix = "<leader>"})
