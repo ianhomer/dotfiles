@@ -154,7 +154,7 @@ augroup dotme
   " autocmd BufNewFile,BufRead *.json set filetype=jsonc
   autocmd BufNewFile *.sh 0r ~/.vim/skeletons/skeleton.sh
   autocmd BufNewFile *.md 0r ~/.vim/skeletons/skeleton.md
-
+  autocmd BufEnter * if &ft == 'NvimTree' | stopinsert | endif
 
   "
   " *** Scope : Editing ***
