@@ -214,7 +214,7 @@ if [[ $shouldRun -eq 0 ]] ; then
   elif [[ -n "$modified" ]] ; then
     shouldNotRunMessage="ran in last"
     if [[ "$modified" == "1" ]]; then
-      shouldNotRunMessage="$notChangedMessage day"
+      shouldNotRunMessage="$notChangedMessage 1 day"
     elif [[ "$modified" =~ ^[0-9]+$ ]] ; then
       shouldNotRunMessage="$notChangedMessage $modified days"
     else
