@@ -135,7 +135,8 @@ return require("packer").startup {
         -- LSP, autocomplete and code guidance
         use {
             "neovim/nvim-lspconfig",
-            config = [[require'config.lspconfig']]
+            config = [[require'config.lspconfig']],
+            commit = "e6d95863a336b7e52c92b38c62aa60b469254d14"
         }
         -- use {
         --     knob = "lsp_signature",
