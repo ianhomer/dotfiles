@@ -19,6 +19,7 @@ SCRIPTS=~/.tmux/plugins/tpm/scripts
 
 . "$SCRIPTS/helpers/tmux_echo_functions.sh"
 . "$SCRIPTS/helpers/tmux_utils.sh"
+$SCRIPTS/install_plugins.sh --tmux-echo all
 $SCRIPTS/update_plugin.sh --tmux-echo all
 reload_tmux_environment
 
