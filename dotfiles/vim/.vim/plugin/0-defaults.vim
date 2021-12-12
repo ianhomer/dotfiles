@@ -152,8 +152,8 @@ augroup dotme
   autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
   " autocmd BufNewFile,BufRead *.json set filetype=jsonc
-  autocmd BufNewFile *.sh 0r ~/.vim/skeletons/skeleton.sh
-  autocmd BufNewFile *.md 0r ~/.vim/skeletons/skeleton.md
+  " autocmd BufNewFile *.sh 0r ~/.vim/skeletons/skeleton.sh
+  " autocmd BufNewFile *.md 0r ~/.vim/skeletons/skeleton.md
   autocmd BufEnter * if &ft == 'NvimTree' | stopinsert | endif
 
   "
