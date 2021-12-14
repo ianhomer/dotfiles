@@ -247,7 +247,7 @@ return require("packer").startup {
             event = "BufRead",
             config = [[require'config.treesitter']],
             run = ":TSUpdate",
-            commit = "d6a0a26b8563409d4660def7320a4f4bc23954df"
+            commit = "be741e256895c5ead5254b85366a136382c64ba8"
         }
         use {
             knob = "dap",

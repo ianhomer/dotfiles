@@ -8,6 +8,7 @@ treesitter.setup {
         "json",
         "html",
         "lua",
+        "markdown",
         "python",
         "javascript",
         "scss",
