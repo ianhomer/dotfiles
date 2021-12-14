@@ -7,8 +7,8 @@ local map = {}
 if vim.g.knob_telescope then
     -- Common Searches
     map["f"] = {"<cmd>Telescope find_files hidden=true<cr>", "Find File"}
-    map["s"] = {"<cmd>Telescope grep_string search=.<cr>", "Fuzzy Search"}
-    map["S"] = {"<cmd>Telescope live_grep<cr>", "Search"}
+    map["s"] = {"<cmd>Telescope live_grep<cr>", "Search"}
+    map["S"] = {"<cmd>Telescope grep_string<cr>", "Fuzzy Search"}
     map["h"] = {"<cmd>Telescope oldfiles<cr>", "File History"}
     map["<space>"] = {"<cmd>Telescope buffers<cr>", "Buffers"}
 
@@ -22,7 +22,7 @@ if vim.g.knob_telescope then
     -- Pickers
     map["tt"] = {"<cmd>Telescope<cr>", "Telescope"}
     map["tH"] = {"<cmd>Telescope help_tags<cr>", "Help"}
-    map["tt"] = {"<cmd>Telescope tags<cr>", "Tags"}
+    map["tT"] = {"<cmd>Telescope tags<cr>", "Tags"}
     map["tl"] = {"<cmd>Telescope highlights<cr>", "Telescope"}
     map["tc"] = {"<cmd>Telescope command_history<cr>", "Recent Commands"}
     map["tC"] = {"<cmd>Telescope commands<cr>", "Available Commands"}
