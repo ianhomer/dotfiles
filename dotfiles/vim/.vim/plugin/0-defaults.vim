@@ -190,6 +190,10 @@ onoremap af :<C-u>normal! ggVG<CR>
 vnoremap < <gv
 vnoremap > >gv
 
+" Shift + J/K moves selected lines down/up in visual mode
+vnoremap <silent> J :m '>+1<CR>gv=gv
+vnoremap <silent> K :m '<-2<CR>gv=gv
+
 " Surround customisation
 let g:surround_{char2nr('b')} = "**\r**"
 let g:surround_{char2nr('<')} = "<\r>"
