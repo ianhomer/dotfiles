@@ -220,7 +220,10 @@ set nobackup
 set nowritebackup
 " Keep swap and backups centrally
 set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
+" Swap directory ends with double slash to ensure uniqueness across
+" directories
+" See https://github.com/tpope/vim-eunuch/issues/18
+set directory=~/.vim/swaps//
 
 " Scroll 3 lines before border
 set scrolloff=3
