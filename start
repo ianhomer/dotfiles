@@ -13,4 +13,5 @@ ${_DIR}/bin/dotme-start
 ${_DIR}/bin/dotme
 
 cd ${_DIR}
+export PATH=${_DIR}/bin:${PATH}
 ${_DIR}/bin/git-remote-to-ssh
