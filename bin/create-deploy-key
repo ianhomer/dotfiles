@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ -z "$1" ]] ; then
-  . dotenv
+  dotenv
 else
   MY_EMAIL=$1
 fi
@@ -16,7 +16,7 @@ keyFile=~/.ssh/id_rsa
 
 if [[ ! -f $keyFile ]] ; then
   echo "... creating SSH key for : $MY_EMAIL"
-  ssh-keygen -t rsa -b 4096 -C $MY_EMAIL \
+  ssh-keygen -t ed25519 -C $MY_EMAIL \
     -f $keyFile                          \
     -q -N ""
 fi
