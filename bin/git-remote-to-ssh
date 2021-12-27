@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# Change repository to ssh
+
+$(shim) && . ${ME}/i.sh
+
+remoteUrl=`git config --get remote.origin.url`
+
+if [[ "$remoteUrl" != *ianhomer/dotfiles* ]] ; then
+  log:: NOK "${remoteUrl} not supported for conversion"
+  exit 1
+fi
+
+if [[ "$remoteUrl" == https://* ]] ; then
+  log::info "Remote URL currently ${remoteUrl}"
+  git remote set-url origin git@github.com:ianhomer/dotfiles.git
+  remoteUrl=`git config --get remote.origin.url`
+  log::info "Remote URL now ${remoteUrl}"
+  log:: OK "Change git remote to ssh"
+elif [[ "$remoteUrl" == git@github.com:* ]] ; then
+  log::info "Remote is already SSH : ${remoteUrl}"
+else
+  log:: NOK "Remote not recognised ${remoteUrl}"
+fi

@@ -11,6 +11,10 @@ Login Items
 
 ## Initialise desktop apps
 
+### Brave
+
+Install [brave](https://brave.com/)
+
 ### Magnet
 
 Change key board shortcuts.
@@ -18,7 +22,7 @@ Change key board shortcuts.
 |              |                  |
 | --           | --               |
 | `Ctrl-Alt-,` | Previous Display |
-| `Ctrl-Alt-.  | Next Display     |
+| `Ctrl-Alt-.` | Next Display     |
 
 ### Hidden Bar
 
@@ -45,7 +49,9 @@ System preferences
 -> Keyboard -> Shortcuts ->
 
 - Disable Mission Control Ctrl-arrow short cuts
+- Disable Ctrl-space and Shift-Ctrl-space for selecting input source
 - Disable any other shortcuts that would never get used
+- Change Press **globe/fn** to "Show Emoji and Symbols"
 
 -> Mission Control - remove all keyboard and mouse shortcuts
 
@@ -110,3 +116,35 @@ for vim like keys in browser. Type `?` in browser for help.
 ### Gmail
 
 Settings -> Keyboard Shortcuts -> Keyboard shortcuts on
+
+### M1 Tweaks
+
+#### .NET
+
+Install v3.1, v5 and v6 as needed from Microsoft Downloads. Don't use Brew,
+since a little bleeding edge at the moment.
+
+v6 on M1
+
+    dotnet --list-sdks
+
+V5 and v3.1 on x64 (with Rosetta)
+
+    dotnetx64 --list-sdks
+
+#### JetBrains Rider
+
+For .NET 5 and .NET 3.5 development
+
+- -> Properties
+- -> Build, Execution & Deployment
+- -> Toolset and Build
+- -> .NET Core CLI Execution path = /use/local/share/dotnet/x64/dotnet
+
+Restart and on solution -> Manage .NET SDK -> Select 5.0
+
+#### Xcode
+
+Find Xcode in Application, click Get Info and select open in Rosetta.
+
+

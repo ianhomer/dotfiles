@@ -1,13 +1,11 @@
 tap "homebrew/cask-fonts"
-tap "wfxr/code-minimap"
 
 # The awesome Hack Nerd fonts combining the Hack source code font
 # -  https://github.com/source-foundry/Hack
 # with the Nerd aggregation of icons - https://www.nerdfonts.com/
 #
-cask "font-firacode-nerd-font"
+cask "font-fira-code-nerd-font"
 cask "font-inconsolata-nerd-font"
-cask "font-jetbrainsmono-nerd-font"
 
 #
 # core tools
@@ -21,12 +19,15 @@ cask "font-jetbrainsmono-nerd-font"
 # - the_silver_searcher - ack, recursive grep alternative a.k.a ag
 # - tmux - terminal multiplexer
 
+
+# brew "podman"
+# brew "busted"
 brew "ack"
 brew "bash"
 brew "bat"
 brew "bats-core"
 brew "broot"
-#brew "busted"
+brew "code-minimap"
 brew "coreutils"
 brew "dos2unix"
 brew "exa"
@@ -40,11 +41,10 @@ brew "htop"
 brew "httpie"
 brew "lastpass-cli"
 brew "mas"
-brew "code-minimap"
 brew "neovim"
 brew "nmap"
 brew "nnn"
-# brew "podman"
+brew "pass"
 brew "ripgrep"
 brew "speedtest-cli"
 brew "stow"
@@ -58,17 +58,13 @@ brew "universal-ctags"
 brew "vim"
 brew "watch"
 brew "wget"
-
-cask "alacritty"
-cask "iterm2"
-cask "keybase"
 cask "kitty"
 
 #
 # linitng tools
 #
 
-brew "languagetool"
+# brew "languagetool"
 brew "yamllint"
 
 #
@@ -87,7 +83,6 @@ brew "fzf"
 brew "duti"
 
 cask "alfred"
-cask "evernote"
 cask "hiddenbar"
 
 #
@@ -107,19 +102,21 @@ cask "drawio"
 # dev tools
 #
 
+brew "corepack"
 brew "gh"
 brew "git"
 brew "gradle"
 brew "jenv"
 brew "jq"
+# Default node is latest, but nvm used to drop version
+brew "node"
 brew "nvm"
 brew "k9s"
 
 brew "maven"
 brew "neofetch"
 brew "rbenv"
-brew "warrensbox/tap/tfswitch"
-brew "yarn"
+# brew "warrensbox/tap/tfswitch"
 
 cask "google-cloud-sdk"
 cask "lens"
@@ -130,5 +127,5 @@ cask "lens"
 
 brew "catimg"
 brew "eye-d3"
-brew "ffmpeg", args: ["with-libvpx"]
-brew "imagemagick", args: ["with-webp"]
+# brew "ffmpeg", args: ["with-libvpx"]
+# brew "imagemagick", args: ["with-webp"]

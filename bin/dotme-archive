@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+should-run -m 7 dotme-archive || exit 0
+
+$(shim)
+repository=${1:-$MY_NOTES}
+recipient=${1:-$MY_RECIPIENT}
+things=${THINGS_DIR}/$repository
+
+if [ ! -d "$things" ] ; then
+  echo "Not a directory $things"
+  exit 1
+fi
+
+if [ -z "$recipient" ] ; then
+   echo "recipient is empty"
+   exit 1
+fi
+
+if [ ! -d "$HOME/backups" ] ; then
+  echo "Creating backups directory"
+  mkdir ~/backups
+fi
+
+stamp=$(date "+%Y%m%d-%H%M%S")
+base=$(basename $things)
+
+echo "Archiving directory : $things ($base) for $recipient : $stamp"
+
+tar -C ${THINGS_DIR} --exclude .git -chzf - $base |
+  gpg --encrypt --recipient $recipient            \
+  --output ~/backups/back-$base-$stamp.tar.gz.gpg
+
+should-run -fu dotme-archive

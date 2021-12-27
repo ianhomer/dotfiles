@@ -37,8 +37,8 @@ else
 
   alias draw="/usr/bin/open -a /Applications/draw.io.app/"
 
-  alias pass="lpass show --password -c"
-  alias passes="lpass ls"
+  alias lastpass="lpass show --password -c"
+  alias lastpasses="lpass ls"
 
   alias findmd="find . -type f -name '*.md' -not -path '*/node_modules/*' | sort"
   # cat markdown files with a space between each

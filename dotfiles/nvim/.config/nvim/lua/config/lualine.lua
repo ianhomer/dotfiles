@@ -1,3 +1,15 @@
+local function repositoryName()
+  filename = vim.fn.expand '%:p'
+  i,j = string.find(filename, "projects/things/")
+  if j > 0 then
+    k,l = string.find(filename, "/", j + 1)
+    if k > 0 then
+      return filename.sub(filename, j+1, k-1)
+    end
+  end
+  return nil
+end
+
 require("lualine").setup {
     options = {
         sources = {"ale"},
@@ -11,6 +23,9 @@ require("lualine").setup {
     },
     sections = {
         lualine_c = {
+            {repositoryName,
+              color = {fg=225, gui='bold'}
+            },
             {"filename"},
             {"diff"},
             {
@@ -20,6 +35,7 @@ require("lualine").setup {
                   error = "white"
                 }
             }
-        }
+        },
+        lualine_x = {'filetype'}
     }
 }
