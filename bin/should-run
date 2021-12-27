@@ -156,7 +156,7 @@ if [[ "$excluded" -eq 1 ]] ; then
 elif [[ -z "$force" ]] && [[ -f "$shouldRunFile" ]] ; then
   fullScriptName="${_DIR}/${scriptName}"
   if [[ ! -f $fullScriptName ]] ; then
-    fullScriptName=`which ${scriptName}`
+    fullScriptName=`command -v ${scriptName}`
   fi
   [[ -z "$fullScriptName" ]] && \
     log::exit "Cannot find $scriptName to check whether it should run"
