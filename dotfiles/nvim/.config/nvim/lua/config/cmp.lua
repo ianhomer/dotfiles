@@ -50,7 +50,7 @@ cmp.setup {
         ["<Right>"] = cmp.mapping.confirm(
             {
                 behavior = cmp.ConfirmBehavior.Replace,
-                select = true
+                select = false
             }
         ),
         ["<CR>"] = cmp.mapping.confirm(
