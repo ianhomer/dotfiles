@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ -z "$1" ]] ; then
-  dotenv
+  . dotenv
 else
   MY_EMAIL=$1
 fi
