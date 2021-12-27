@@ -6,7 +6,7 @@ $(shim) && . ${ME}/i.sh
 
 remoteUrl=`git config --get remote.origin.url`
 
-if [[ "$remoteUrl" != *ianhomer/dotfiles.git ]] ; then
+if [[ "$remoteUrl" != *ianhomer/dotfiles* ]] ; then
   log:: NOK "${remoteUrl} not supported for conversion"
   exit 1
 fi
