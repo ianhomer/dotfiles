@@ -73,7 +73,7 @@ plugins=(
   fasd
   fzf
   npm
-  osx
+  macos
   git
   terraform
   vi-mode
