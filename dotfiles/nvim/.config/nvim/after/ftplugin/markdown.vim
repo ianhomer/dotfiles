@@ -18,6 +18,11 @@ function! s:LintTable()
     return
   endif
 
+  " Skip if starts with 4 spaces, i.e. a code block
+  if getline(l:line) =~ '^\s\s\s\s'
+    return
+  endif
+
   " Add heading to table if not already there
   " First check if next line is the header marker (in case we're on the
   " first line of the table

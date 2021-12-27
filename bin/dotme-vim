@@ -19,7 +19,7 @@ fi
 mkdir -p ~/.vim/pack/my-plugins/start
 if [ ! -f  ~/.vim/pack/my-plugins/start/knobs.vim/README.md ] ; then
   git clone https://github.com/ianhomer/knobs.vim\
-    ~/.vim/pack/my-plugins/opt/knobs.vim
+    ~/.vim/pack/my-plugins/start/knobs.vim
 fi
 
 # Slim vim

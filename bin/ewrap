@@ -4,8 +4,8 @@
 # Edit file in a new window
 #
 if ! { [ "$TERM" = "xterm-kitty" ] && [ -n "$TMUX" ]; } then
-  VIM_KNOB=3 vim $*
+  VIM_KNOBS=3 vim $*
 else
   # tmux session running
-  tmux split-window -v "VIM_KNOB=3 vim \"$*\""
+  tmux split-window -v "VIM_KNOBS=3 vim \"$*\""
 fi

@@ -5,9 +5,12 @@ coding and text editing a breeze.
 
 ## tl;dr
 
-First time clone repository and install:
+First time, clone repository:
 
-    git clone git@github.com:ianhomer/dotfiles.git ~/.dotfiles
+    git clone https://github.com/ianhomer/dotfiles.git ~/.dotfiles
+
+And install with
+
     ~/.dotfiles/start
 
 Update at any time with:
@@ -83,7 +86,7 @@ actually happens.
 You can also update parts of the initialisation separately, see `dotme -h` to
 get a list of each part. `man dotme` will give you more guidance on usage.
 
-I configure something on my system [manually](./docs/manual-configuration.md)
+I configure something on my system [manually](./docs/manual-osx.md)
 for minor tweaks and enhancements.
 
 To customise local dotme configuration, `vi ~/.config/dotme/.env` and edit a

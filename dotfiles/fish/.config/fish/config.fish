@@ -30,6 +30,8 @@ if status --is-login
   # dotfiled
   set -gx RBENV_SHELL fish
 
+  set -g SHELL (which fish)
+
   # Use fd for fzf by default
   set -gx FZF_DEFAULT_COMMAND 'fd --type f'
 

@@ -151,10 +151,10 @@ augroup dotme
   autocmd BufNewFile,BufRead *.fish set filetype=fish
   autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
   autocmd BufNewFile,BufRead *.tsx set filetype=typescript.tsx
-  autocmd BufNewFile,BufRead *.json set filetype=jsonc
-  autocmd BufNewFile *.sh 0r ~/.vim/skeletons/skeleton.sh
-  autocmd BufNewFile *.md 0r ~/.vim/skeletons/skeleton.md
-
+  " autocmd BufNewFile,BufRead *.json set filetype=jsonc
+  " autocmd BufNewFile *.sh 0r ~/.vim/skeletons/skeleton.sh
+  " autocmd BufNewFile *.md 0r ~/.vim/skeletons/skeleton.md
+  autocmd BufEnter * if &ft == 'NvimTree' | stopinsert | endif
 
   "
   " *** Scope : Editing ***
@@ -190,6 +190,10 @@ onoremap af :<C-u>normal! ggVG<CR>
 vnoremap < <gv
 vnoremap > >gv
 
+" Shift + J/K moves selected lines down/up in visual mode
+vnoremap <silent> J :m '>+1<CR>gv=gv
+vnoremap <silent> K :m '<-2<CR>gv=gv
+
 " Surround customisation
 let g:surround_{char2nr('b')} = "**\r**"
 let g:surround_{char2nr('<')} = "<\r>"
@@ -216,7 +220,10 @@ set nobackup
 set nowritebackup
 " Keep swap and backups centrally
 set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
+" Swap directory ends with double slash to ensure uniqueness across
+" directories
+" See https://github.com/tpope/vim-eunuch/issues/18
+set directory=~/.vim/swaps//
 
 " Scroll 3 lines before border
 set scrolloff=3

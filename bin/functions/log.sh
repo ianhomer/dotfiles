@@ -35,7 +35,8 @@ function log::box() {
 function log::status() {
   status=$1
   thing=$2
-  message=$3
+  shift; shift
+  message=$@
   [[ "$status" == "NOK" ]] && color="33" || color="36"
   printf "\e[36m%-10s \e[${color}m \e[1m%-5s\e[38;5;238m%s\e[0m\n" "$thing" \
     "$status" "$message"
@@ -108,7 +109,7 @@ function log::palette() {
   printf "\e[0m\n"
   printf "\e[38;5;238m%10s\e[0m\n" "very light grey"
   printf "\e[48;5;238m%10s\e[0m\n" "very light grey"
-  for i in {1..7} ; do for j in {1..31} ; do 
+  for i in {1..7} ; do for j in {1..31} ; do
     printf "\e[38;5;$(( i*32 + j))m─\e[0m" ;
   done ; printf "\n" ; done ; echo
   for i in {0..7} ; do for j in {0..31} ; do

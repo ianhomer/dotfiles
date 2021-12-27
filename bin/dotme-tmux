@@ -8,19 +8,29 @@ should-run -m 7 $0 || exit 0
 
 $(shim) && . ${ME}/i.sh
 
-if [ ! -d  ~/.tmux/plugins/tpm ] ; then
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-fi
+# Clone specific hash of plugin to explciitly control updates
 
-git -C ~/.tmux/plugins/tpm pull
+declare -A plugins=( \
+  ["tmux-plugins/tmux-continuum"]="912149820bf48a3a128732854815009352dd2598"        \
+  ["tmux-plugins/tmux-prefix-highlight"]="15acc6172300bc2eb13c81718dc53da6ae69de4f" \
+  ["tmux-plugins/tmux-resurrect"]="6be2f34b5f06c8a6a23dc3dc835e69c132d58a18"        \
+  ["christoomey/vim-tmux-navigator"]="9ca5bfe5bd274051b5dd796cc150348afc993b80"     \
+  ["sainnhe/tmux-fzf"]="1801dd525b39154745ea668fb6916035023949e3"
+)
 
-log:: "Updating tmux plugins"
-SCRIPTS=~/.tmux/plugins/tpm/scripts
+for plugin in "${!plugins[@]}" ; do
+  hash=${plugins[$plugin]}
+  directory=${plugin##*/}
+  absoluteDirectory="$HOME/.tmux/plugins/${directory}"
+  log:: "Tmux plug : $plugin"
+  if [ ! -d "${absoluteDirectory}" ] ; then
+    log:: "Cloning - $plugin - $hash"
+    log:: "$absoluteDirectory"
+    git clone https://github.com/${plugin} ~/.tmux/plugins/${directory}
+  fi
+  (cd $absoluteDirectory ; git reset --hard $hash)
+done
 
-. "$SCRIPTS/helpers/tmux_echo_functions.sh"
-. "$SCRIPTS/helpers/tmux_utils.sh"
-$SCRIPTS/update_plugin.sh --tmux-echo all
-reload_tmux_environment
+tmux source ~/.tmux.conf
 
 should-run -fu $0
-

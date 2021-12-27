@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+#
+# Prepare environment during bootstrap
+#
+
+if [[ ! -d ~/projects ]] ; then
+  echo "Creating ~/projects directory"
+  mkdir ~/projects/
+fi
+
+if [[ "$OSTYPE" =~ ^linux-android ]]; then
+  echo "Removing default termux properties since this is dotfiles managed"
+  if [[ -f ~/.termux/termux.properties ]] ; then
+    rm ~/.termux/termux.properties
+  fi
+fi
+

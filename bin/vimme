@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+#
+# Experimental vim with restart. Command ":q" quits and restarts, whilst ":cq"
+# quits with error code and exits
+#
+
+while command nvim $@ ; do : ; done

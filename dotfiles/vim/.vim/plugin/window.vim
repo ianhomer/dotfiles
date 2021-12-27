@@ -1,3 +1,7 @@
+if !exists("g:knob_window_cleaner")
+  finish
+endif
+
 command! -nargs=0 CloseOtherBuffers :call window#cleaner#CloseOtherBuffers()
 command! -nargs=0 CloseMe :call window#cleaner#CloseMe()
 

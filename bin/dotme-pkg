@@ -6,17 +6,17 @@
 
 should-run -m 7 $0 || exit 0
 
-pkg install ctags
-pkg install fasd
-pkg install fish
-pkg install fzf
-pkg install git
-pkg install keybase
-pkg install neovim
-pkg install openssh
-pkg install silversearcher-ag
-pkg install stow
-pkg install termux-api
-pkg install zsh
+pkg install -y ctags
+pkg install -y fasd
+pkg install -y fish
+pkg install -y fzf
+pkg install -y git
+pkg install -y keybase
+pkg install -y neovim
+pkg install -y openssh
+pkg install -y silversearcher-ag
+pkg install -y stow
+pkg install -y termux-api
+pkg install -y zsh
 
 should-run -fu $0

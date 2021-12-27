@@ -8,4 +8,10 @@ set -e
 
 echo "initialising dotfiles"
 _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
+
+${_DIR}/bin/dotme-start
 ${_DIR}/bin/dotme
+
+cd ${_DIR}
+export PATH=${_DIR}/bin:${PATH}
+${_DIR}/bin/git-remote-to-ssh
