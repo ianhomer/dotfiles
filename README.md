@@ -5,9 +5,12 @@ coding and text editing a breeze.
 
 ## tl;dr
 
-First time clone repository and install:
+First time, clone repository:
 
     git clone https://github.com/ianhomer/dotfiles.git ~/.dotfiles
+
+And install with
+
     ~/.dotfiles/start
 
 Update at any time with:
