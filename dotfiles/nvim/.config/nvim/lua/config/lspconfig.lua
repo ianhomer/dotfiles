@@ -61,6 +61,7 @@ end
 -- and map buffer local keybindings when the language server attaches
 local servers = {"bashls", "cssls", "html", "jsonls", "pyright", "tsserver", "vimls"}
 local lspsettings = {}
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in ipairs(servers) do
     local module = lspconfig[lsp]
     if module then
@@ -69,7 +70,8 @@ for _, lsp in ipairs(servers) do
             flags = {
                 debounce_text_changes = 150
             },
-            settings = lspsettings[lsp]
+            settings = lspsettings[lsp],
+            capabilities = capabilities
         }
     else
         print("Can't set up LSP for" .. lsp)

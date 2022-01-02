@@ -12,23 +12,6 @@ end
 local lspkind = require("lspkind")
 local cmp = require("cmp")
 cmp.setup {
-    experimental = {
-        native_menu = true,
-        ghost_text = true
-    },
-    sources = {
-        {name = "nvim_lsp"},
-        {name = "buffer"},
-        {name = "vsnip"},
-        {name = "nvim_lua"},
-        {name = "path"}
-    },
-    formatting = {
-        format = function(entry, vim_item)
-            vim_item.kind = lspkind.presets.default[vim_item.kind]
-            return vim_item
-        end
-    },
     snippet = {
         expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)
@@ -43,10 +26,15 @@ cmp.setup {
                 behavior = cmp.SelectBehavior.Select
             }
         ),
-        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.close(),
+        ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), {"i", "c"}),
+        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), {"i", "c"}),
+        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
+        ["<C-e>"] = cmp.mapping(
+            {
+                i = cmp.mapping.abort(),
+                c = cmp.mapping.close()
+            }
+        ),
         ["<Right>"] = cmp.mapping.confirm(
             {
                 behavior = cmp.ConfirmBehavior.Replace,
@@ -55,7 +43,6 @@ cmp.setup {
         ),
         ["<CR>"] = cmp.mapping.confirm(
             {
-                behavior = cmp.ConfirmBehavior.Replace,
                 select = false
             }
         ),
@@ -77,5 +64,47 @@ cmp.setup {
                 fallback()
             end
         end
+    },
+    experimental = {
+        native_menu = true,
+        ghost_text = true
+    },
+    sources = cmp.config.sources(
+        {
+            {name = "nvim_lsp"},
+            {name = "buffer"},
+            {name = "vsnip"},
+            {name = "nvim_lua"},
+            {name = "path"}
+        }
+    ),
+    formatting = {
+        format = function(entry, vim_item)
+            vim_item.kind = lspkind.presets.default[vim_item.kind]
+            return vim_item
+        end
     }
 }
+
+cmp.setup.cmdline(
+    "/",
+    {
+        sources = {
+            {name = "buffer"}
+        }
+    }
+)
+
+cmp.setup.cmdline(
+    ":",
+    {
+        sources = cmp.config.sources(
+            {
+                {name = "path"}
+            },
+            {
+                {name = "cmdline"}
+            }
+        )
+    }
+)
