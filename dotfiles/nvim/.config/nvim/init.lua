@@ -48,6 +48,7 @@ nvim_set_var(
         hop = 6,
         indent_blankline = 4,
         indentline = 4,
+        kanagawa = 3,
         nerdtree = 9,
         lens = 8,
         lightbulb = 4,
@@ -349,6 +350,11 @@ return require("packer").startup {
         use {
             "lifepillar/gruvbox8",
             commit = "1e205910e67003ff9efb77e7730f1e49d8aae29c"
+        }
+        use {
+            "rebelot/kanagawa.nvim",
+            commit = "6913a25c53917e6c610a976b1258ddea7bfb8431",
+            config = [[vim.cmd("colorscheme kanagawa")]]
         }
         use {
             "norcalli/nvim-colorizer.lua",
