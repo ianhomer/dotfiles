@@ -30,7 +30,7 @@ require("lualine").setup {
             {"diff"},
             {
                 "diagnostics",
-                sources = {"ale", "nvim_lsp"},
+                sources = {"ale", "nvim_diagnostic"},
                 diagnostics_color = {
                   error = "white"
                 }

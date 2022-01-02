@@ -247,7 +247,7 @@ return require("packer").startup {
             event = "BufRead",
             config = [[require'config.treesitter']],
             run = ":TSUpdate",
-            commit = "nvim-treesitter/nvim-treesitter"
+            commit = "fa2a6b68aaa6df0187b5bbebe6cbadc120d4a65a"
         }
         use {
             knob = "dap",
