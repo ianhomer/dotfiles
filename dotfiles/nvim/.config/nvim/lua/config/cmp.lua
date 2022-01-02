@@ -1,4 +1,4 @@
-vim.o.completeopt = "menuone,noselect"
+vim.o.completeopt = "menu,menuone,noselect"
 
 local check_back_space = function()
     local col = vim.fn.col(".") - 1
@@ -72,8 +72,8 @@ cmp.setup {
     sources = cmp.config.sources(
         {
             {name = "nvim_lsp"},
-            {name = "buffer"},
             {name = "vsnip"},
+            {name = "buffer"},
             {name = "nvim_lua"},
             {name = "path"}
         }

@@ -162,7 +162,6 @@ return require("packer").startup {
         }
 
         use {
-            knob = "cmp",
             "hrsh7th/cmp-nvim-lsp",
             after = "nvim-cmp",
             commit = "134117299ff9e34adde30a735cd8ca9cf8f3db81"
@@ -174,10 +173,15 @@ return require("packer").startup {
             commit = "d276254e7198ab7d00f117e88e223b4bd8c02d21"
         }
 
-        use {
+        _use {
             "hrsh7th/cmp-path",
-            after = "cmp-nvim-lsp",
             commit = "4d58224e315426e5ac4c5b218ca86cab85f80c79"
+        }
+
+        use {
+            "hrsh7th/cmp-cmdline",
+            after = "cmp-nvim-lsp",
+            commit = "29ca81a6f0f288e6311b3377d9d9684d22eac2ec"
         }
 
         use {
@@ -186,13 +190,6 @@ return require("packer").startup {
             after = "cmp-nvim-lsp",
             commit = "0abfa1860f5e095a07c477da940cfcb0d273b700"
         }
-
-        -- use {
-        --     knob = "vsnip",
-        --     "rafamadriz/friendly-snippets",
-        --     event = "InsertCharPre",
-        --     commit = "05bfa7681b8f11b664fab657001c2efb6f3ec85e"
-        -- }
 
         use {
             "hrsh7th/vim-vsnip",
