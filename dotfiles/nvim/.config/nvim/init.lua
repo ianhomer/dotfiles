@@ -133,16 +133,11 @@ return require("packer").startup {
         use "ianhomer/knobs.vim"
 
         -- LSP, autocomplete and code guidance
-        use {
+        _use {
             "neovim/nvim-lspconfig",
             config = [[require'config.lspconfig']],
             commit = "4b21740aae18ecec2d527b79d1072b3b01bb5a2a"
         }
-        -- use {
-        --     knob = "lsp_signature",
-        --     "ray-x/lsp_signature.nvim",
-        --     commit = "82c463e5e639fc61eea7be03a68bea272f828cc1"
-        -- }
         use {
             "weilbith/nvim-code-action-menu",
             cmd = "CodeActionMenu",
@@ -155,22 +150,13 @@ return require("packer").startup {
         }
 
         _use {
-            "hrsh7th/nvim-cmp",
-            requires = "hrsh7th/cmp-buffer",
-            config = [[require'config.cmp']],
-            commit = "1b94aacada96d2a33fef2ecf87748b27a2f50630"
-        }
-
-        use {
             "hrsh7th/cmp-nvim-lsp",
-            after = "nvim-cmp",
             commit = "134117299ff9e34adde30a735cd8ca9cf8f3db81"
         }
 
-        use {
-            "hrsh7th/cmp-nvim-lua",
-            after = "cmp-nvim-lsp",
-            commit = "d276254e7198ab7d00f117e88e223b4bd8c02d21"
+        _use {
+            "hrsh7th/cmp-buffer",
+            commit = "a01cfeca70594f505b2f086501e90fb6c2f2aaaa"
         }
 
         _use {
@@ -178,10 +164,21 @@ return require("packer").startup {
             commit = "4d58224e315426e5ac4c5b218ca86cab85f80c79"
         }
 
-        use {
+        _use {
             "hrsh7th/cmp-cmdline",
-            after = "cmp-nvim-lsp",
             commit = "29ca81a6f0f288e6311b3377d9d9684d22eac2ec"
+        }
+
+        _use {
+            "hrsh7th/cmp-nvim-lua",
+            commit = "d276254e7198ab7d00f117e88e223b4bd8c02d21"
+        }
+
+        _use {
+            "hrsh7th/nvim-cmp",
+            requires = "hrsh7th/cmp-buffer",
+            config = [[require'config.cmp']],
+            commit = "1b94aacada96d2a33fef2ecf87748b27a2f50630"
         }
 
         use {
