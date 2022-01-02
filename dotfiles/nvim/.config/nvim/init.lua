@@ -27,6 +27,7 @@ nvim_set_var(
         colorizer = 4,
         conflict_marker = 7,
         commentary = 4,
+        compactcmd = 1,
         cmp = 4,
         dap = 9,
         defaults = 2,
