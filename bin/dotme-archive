@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
-should-run -m 7 dotme-archive || exit 0
+if [ $# -eq 0 ] ; then
+  should-run -m 7 dotme-archive || exit 0
+fi
 
 $(shim)
 repository=${1:-$MY_NOTES}
-recipient=${1:-$MY_RECIPIENT}
+recipient=${2:-$MY_RECIPIENT}
 things=${THINGS_DIR}/$repository
 
 if [ ! -d "$things" ] ; then
