@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+crypt="$HOME/local/box"
+stamp=$(date "+%Y%m%d-%H%M%S")
+bw export --format json --output "$crypt/bw-export-$stamp-box.json"

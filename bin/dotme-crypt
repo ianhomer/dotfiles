@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+$(shim)
+crypt="$HOME/local/box"
+recipient=${1:-$MY_RECIPIENT}
+
+if [ -z "$recipient" ] ; then
+   echo "recipient is empty"
+   exit 1
+fi
+
+if [ ! -d "$crypt" ] ; then
+  echo "Crypt directory $crypt does not exist"
+  mkdir ~/backups
+fi
+
+for file in $crypt/*-box.json ; do
+  echo $file
+done
+
+
