@@ -91,7 +91,7 @@ nvim_set_var(
         writegood = 6,
         vimspector = 9,
         vsnip = 3,
-        zen_mode = 6,
+        zen_mode = 3,
         zephyr = 9
     }
 )
