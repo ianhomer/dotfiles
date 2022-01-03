@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
+$(shim)
+crypt="$HOME/local/box"
+recipient=${1:-$MY_RECIPIENT}
+
+echo "Exporting bitwarden for $recipient"
+
 crypt="$HOME/local/box"
 stamp=$(date "+%Y%m%d-%H%M%S")
-bw export --format json --output "$crypt/bw-export-$stamp-box.json"
+bw export --format json --raw            |
+  gpg --encrypt --recipient $recipient   \
+  --output "$crypt/bw-export-$stamp.json.gpg"

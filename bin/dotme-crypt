@@ -11,10 +11,10 @@ fi
 
 if [ ! -d "$crypt" ] ; then
   echo "Crypt directory $crypt does not exist"
-  mkdir ~/backups
+  exit 1
 fi
 
-for file in $crypt/*-box.json ; do
+for file in $crypt/*.gpg ; do
   echo $file
 done
 
