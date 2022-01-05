@@ -9,7 +9,6 @@ function my#SearchFiles()
 endfunction
 
 function! my#GitSynk(onlyPush)
-  call window#cleaner#CloseFugitive()
   if a:onlyPush || !knobs#("dispatch")
     if knobs#("toggleterm")
       2TermExec dir="%:p:h" cmd="git push && exit 0" size=6
@@ -19,6 +18,7 @@ function! my#GitSynk(onlyPush)
   else
     Dispatch! Git synk
   endif
+  call window#cleaner#CloseFugitive()
 endfunction
 
 function my#LintMe()
