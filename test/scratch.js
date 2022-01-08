@@ -8,10 +8,10 @@ function foo(a) {
   }
 
   if (a) {
-    A: a++;
+    a++;
   }
 
-  B: for (var i = 0; i < 10; i--) {}
+  for (var i = 0; i < 10; i--) {}
   console.log("Hello, World!");
   return a;
 }
