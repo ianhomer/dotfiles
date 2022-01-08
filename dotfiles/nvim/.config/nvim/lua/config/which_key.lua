@@ -39,6 +39,8 @@ if vim.g.knob_telescope then
 
     -- LSP
     map["td"] = {"<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols"}
+    map[";"] = {"<cmd>lua vim.lsp.buf.formatting()<CR>", "LSP Format"}
+    map[":"] = {"<cmd>lua vim.lsp.buf.range_formatting()<CR>", "LSP Range Format"}
 end
 
 if vim.g.knob_toggleterm then
