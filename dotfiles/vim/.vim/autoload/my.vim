@@ -22,7 +22,10 @@ function! my#GitSynk(onlyPush)
 endfunction
 
 function my#LintMe()
-  if &filetype == "markdown"
+  if knobs#("null_ls")
+    let linter="lsp"
+    lua vim.lsp.buf.formatting()
+  elseif &filetype == "markdown"
     let linter="thingity"
     call thingity#LintMarkdown()
   elseif knobs#("ale")

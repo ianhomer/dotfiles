@@ -1,12 +1,16 @@
 local lspconfig = require("lspconfig")
 local on_attach = function(client, bufnr)
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+    local function buf_set_keymap(...)
+        vim.api.nvim_buf_set_keymap(bufnr, ...)
+    end
+    local function buf_set_option(...)
+        vim.api.nvim_buf_set_option(bufnr, ...)
+    end
 
     buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
     -- Mappings
-    local opts = {noremap = true, silent = true}
+    local opts = { noremap = true, silent = true }
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -26,13 +30,14 @@ local on_attach = function(client, bufnr)
     buf_set_keymap("n", "]d", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
     buf_set_keymap("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 
-    -- Use null-ls for formatting
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    if vim.g.knob_null_ls then
+        -- Use null-ls for formatting
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+    end
 
     -- Set autocommands conditional on server_capabilities
     if client.resolved_capabilities.document_highlight then
-
         vim.api.nvim_exec(
             [[
               hi LspReferenceRead cterm=bold ctermbg=red guibg=DarkSlateGray
@@ -56,20 +61,20 @@ end
 
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches
-local servers = {"bashls", "cssls", "html", "jsonls", "pyright", "tsserver", "vimls"}
+local servers = { "bashls", "cssls", "html", "jsonls", "pyright", "tsserver", "vimls" }
 local lspsettings = {}
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in ipairs(servers) do
     local module = lspconfig[lsp]
     if module then
-        module.setup {
+        module.setup({
             on_attach = on_attach,
             flags = {
-                debounce_text_changes = 150
+                debounce_text_changes = 150,
             },
             settings = lspsettings[lsp],
-            capabilities = capabilities
-        }
+            capabilities = capabilities,
+        })
     else
         print("Can't set up LSP for" .. lsp)
     end
