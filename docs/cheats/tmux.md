@@ -3,13 +3,13 @@
 ## tmux
 
 |          |        |
-| --       | --     |
+| -------- | ------ |
 | `Ctrl+a` | prefix |
 
 ### sessions
 
 |               |                     |
-| --            | --                  |
+| ------------- | ------------------- |
 | `Ctrl+a+$`    | rename session      |
 | `Ctrl+a+s`    | choose session      |
 | `Ctrl+a+d`    | detach from session |
@@ -18,7 +18,7 @@
 ### windows
 
 |                   |                                        |
-| --                | --                                     |
+| ----------------- | -------------------------------------- |
 | `Ctrl+a+c`        | new window                             |
 | `Ctrl+a+w`        | show windows                           |
 | `Ctrl+a+,`        | rename window                          |
@@ -28,7 +28,7 @@
 ### panes
 
 |                |                                                  |
-| --             | --                                               |
+| -------------- | ------------------------------------------------ |
 | `Ctrl+a+z`     | zoom in / out of current pane                    |
 | `Ctrl+a+\`     | split pane right                                 |
 | `Ctrl+a+-`     | split pane below                                 |
@@ -42,19 +42,19 @@
 ### maps
 
 |            |               |
-| --         | --            |
+| ---------- | ------------- |
 | `Ctrl+a+?` | show bindings |
 
 ### edit
 
 |            |                                           |
-| --         | --                                        |
+| ---------- | ----------------------------------------- |
 | `Ctrl+a+[` | vi copy mode with Enter to copy selection |
 
 ### misc
 
 |                            |                           |
-| --                         | --                        |
+| -------------------------- | ------------------------- |
 | `Ctrl+a+t`                 | show time                 |
 | `Ctrl+a+r`                 | reload tmux configuration |
 | `Ctrl+a+Ctrl+r`            | reload tmux state         |
@@ -71,4 +71,3 @@ click command click
 ### links
 
 [more tmux cheats](https://tmuxcheatsheet.com/)
-

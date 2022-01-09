@@ -3,7 +3,7 @@
 ## Brave
 
 |                      |                                |
-| --                   | --                             |
+| -------------------- | ------------------------------ |
 | `Cmd+l`              | Jump to address bar            |
 | `Opt+Cmd+left/right` | Go to previous/next tab        |
 | `Cmd+w`              | Close tab                      |
@@ -17,7 +17,7 @@
 Doesn't work in extension tabs due to security constraints.
 
 |       |                                   |
-| --    | --                                |
+| ----- | --------------------------------- |
 | `?`   | Help                              |
 | `e`   | page up                           |
 | `d`   | page down                         |
