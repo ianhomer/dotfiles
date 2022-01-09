@@ -25,22 +25,24 @@ function my#LintMe()
   if knobs#("null_ls")
     let linter="lsp"
     lua vim.lsp.buf.formatting()
-  elseif &filetype == "markdown"
-    let linter="thingity"
-    call thingity#LintMarkdown()
-  elseif knobs#("ale")
-    let linter="ale"
-    ALEFix
-  elseif &filetype == "json"
-    let linter="jq"
-    execute "%!jq ."
   else
-    let linter="prune"
-    normal ma
-    call my#PruneWhiteSpace()
-    normal `a
+    if &filetype == "markdown"
+      let linter="thingity"
+      call thingity#LintMarkdown()
+    elseif knobs#("ale")
+      let linter="ale"
+      ALEFix
+    elseif &filetype == "json"
+      let linter="jq"
+      execute "%!jq ."
+    else
+      let linter="prune"
+      normal ma
+      call my#PruneWhiteSpace()
+      normal `a
+    endif
+    echo "Linted ".&filetype." with ".linter
   endif
-  echo "Linted ".&filetype." with ".linter
 endfunction
 
 function my#ToggleQuickFix()
