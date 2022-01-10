@@ -9,7 +9,6 @@ function my#SearchFiles()
 endfunction
 
 function! my#GitSynk(onlyPush)
-  call window#cleaner#CloseFugitive()
   if a:onlyPush || !knobs#("dispatch")
     if knobs#("toggleterm")
       2TermExec dir="%:p:h" cmd="git push && exit 0" size=6
@@ -19,25 +18,31 @@ function! my#GitSynk(onlyPush)
   else
     Dispatch! Git synk
   endif
+  call window#cleaner#CloseFugitive()
 endfunction
 
 function my#LintMe()
-  if &filetype == "markdown"
-    let linter="thingity"
-    call thingity#LintMarkdown()
-  elseif knobs#("ale")
-    let linter="ale"
-    ALEFix
-  elseif &filetype == "json"
-    let linter="jq"
-    execute "%!jq ."
+  if knobs#("null_ls")
+    let linter="lsp"
+    lua vim.lsp.buf.formatting()
   else
-    let linter="prune"
-    normal ma
-    call my#PruneWhiteSpace()
-    normal `a
+    if &filetype == "markdown"
+      let linter="thingity"
+      call thingity#LintMarkdown()
+    elseif knobs#("ale")
+      let linter="ale"
+      ALEFix
+    elseif &filetype == "json"
+      let linter="jq"
+      execute "%!jq ."
+    else
+      let linter="prune"
+      normal ma
+      call my#PruneWhiteSpace()
+      normal `a
+    endif
+    echo "Linted ".&filetype." with ".linter
   endif
-  echo "Linted ".&filetype." with ".linter
 endfunction
 
 function my#ToggleQuickFix()

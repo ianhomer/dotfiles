@@ -136,6 +136,7 @@ command_inner() {
   [ $DRY -eq 0 ] && dotme-vim
   [ $DRY -eq 0 ] && is-pc && dotme-tmux
   [ $DRY -eq 0 ] && is-pc && dotme-node
+  [ $DRY -eq 0 ] && is-pc && dotme-rust
   [ $DRY -eq 0 ] && is-pc && dotme-jenv
   if command -v fish &> /dev/null ; then
     [ $DRY -eq 0 ] && dotme-fish

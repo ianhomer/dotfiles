@@ -8,4 +8,3 @@
 - **,** - move focus
 - **e** - archive message
 - **s** - star message
-

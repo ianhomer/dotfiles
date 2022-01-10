@@ -65,6 +65,7 @@ nvim_set_var(
         modes = 3,
         neoscroll = 3,
         nnn = 9,
+        null_ls = 3,
         nvim_tree = 3,
         peekaboo = 9,
         polyglot = 9,
@@ -203,6 +204,13 @@ return require("packer").startup {
             "kosayoda/nvim-lightbulb",
             config = [[require'config.lightbulb']],
             commit = "cd5267d2d708e908dbd668c7de74e1325eb1e1d"
+        }
+
+        use {
+            "jose-elias-alvarez/null-ls.nvim",
+            config = [[require'config.null_ls']],
+            commit = "48ac5bcd4d766b371d91024d10c7c83fb909e388",
+            requires = {"nvim-lua/plenary.nvim"}
         }
 
         use {
