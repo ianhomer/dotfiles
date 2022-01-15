@@ -36,9 +36,8 @@ esac done
 $(shim) && . ${ME}/i.sh
 
 #
-# Execute git quietly ... keybase output messages in stderr
-# this function safely removes these known errors, but
-# keeps unknown errors
+# Execute git quietly ... keybase logic on its way out, just an alert now to
+# with its removal
 #
 function gitQuiet() {
   if [[ "$protocol" == "keybase" ]] ; then
