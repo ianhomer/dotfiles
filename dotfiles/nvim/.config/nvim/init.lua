@@ -139,7 +139,7 @@ return require("packer").startup {
         _use {
             "neovim/nvim-lspconfig",
             config = [[require'config.lspconfig']],
-            commit = "4b21740aae18ecec2d527b79d1072b3b01bb5a2a"
+            commit = "5dc61fa6bf837b91c4de2ed95ba6c840e47d25ac"
         }
         use {
             "weilbith/nvim-code-action-menu",
@@ -189,6 +189,13 @@ return require("packer").startup {
             "hrsh7th/cmp-vsnip",
             after = "cmp-nvim-lsp",
             commit = "0abfa1860f5e095a07c477da940cfcb0d273b700"
+        }
+
+        use {
+            knob = "vsnip",
+            "hrsh7th/vim-vsnip-integ",
+            after = "cmp-nvim-lsp",
+            commit = "5541e4ac18c732700c4310c86384bea19644d4a7"
         }
 
         use {
