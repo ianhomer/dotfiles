@@ -18,7 +18,7 @@ nvim_set_var("knobs_default_level", 5)
 nvim_set_var(
     "knobs_levels",
     {
-        ale = 3,
+        ale = 9,
         apathy = 6,
         airline = 9,
         autopairs = 3,
