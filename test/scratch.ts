@@ -12,6 +12,16 @@ function add(x: number, y: number): number {
 export const hello = (): string => "Hello World!";
 
 export function foo(a: string): string {
+  if (a) {
+    console.log("branch 1")
+  } else if (a == "x") {
+    console.log("branch 2");
+  }
+
+  if (!(a === 2)) {
+    console.log("sonarjs smell");
+  }
+
   return a;
 }
 
