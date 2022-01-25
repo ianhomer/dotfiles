@@ -1,5 +1,5 @@
 function foo(a) {
-  if (true) {
+  if (a) {
     console.log("It's true");
   }
 
@@ -13,6 +13,13 @@ function foo(a) {
 
   for (var i = 0; i < 10; i--) {}
   console.log("Hello, World!");
+
+  if (a==1) {
+    // if (a==2) {
+      console.log("uncomment inner if to get a sonarjs code smell");
+    // }
+  }
+
   return a;
 }
 
