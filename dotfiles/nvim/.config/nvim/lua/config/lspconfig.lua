@@ -56,6 +56,12 @@ local on_attach = function(client, bufnr)
         )
     end
 
+    vim.diagnostic.config({
+      float = {
+        source = "yes"
+      },
+    })
+
     -- require"lsp_signature".on_attach()
 end
 

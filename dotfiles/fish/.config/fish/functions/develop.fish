@@ -1,4 +1,4 @@
 function develop
-  git checkout develop
-  git pull
+    git checkout develop
+    git pull
 end
