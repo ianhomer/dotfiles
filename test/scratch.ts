@@ -18,7 +18,7 @@ export function foo(a: string): string {
     console.log("branch 2");
   }
 
-  if (!(a == "2")) {
+  if (a != "2") {
     console.log("sonarjs smell");
   }
 
