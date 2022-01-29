@@ -18,7 +18,6 @@ telescope.setup({
             "--hidden",
         },
         prompt_prefix = "   ",
-        selection_caret = "  ",
         entry_prefix = "  ",
         mappings = {
             i = {
@@ -58,3 +57,4 @@ telescope.setup({
 telescope.load_extension("fzf")
 
 local opt = { noremap = true, silent = true }
+
