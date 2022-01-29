@@ -39,3 +39,11 @@ require("nvim-tree").setup({
         exclude = { ".env", ".config" }
     },
 })
+
+vim.api.nvim_exec([[
+augroup nvimttree
+    au!
+    au BufLeave NvimTree NvimTreeRefresh
+    au BufEnter NvimTree NvimTreeRefresh
+augroup END
+]], false)
