@@ -6,6 +6,7 @@ telescope.setup({
     defaults = {
         vimgrep_arguments = {
             "rg",
+            "--color=never",
             "--no-heading",
             "--with-filename",
             "--line-number",
@@ -16,6 +17,9 @@ telescope.setup({
             "!**/.git/**",
             "--hidden",
         },
+        prompt_prefix = "   ",
+        selection_caret = "  ",
+        entry_prefix = "  ",
         mappings = {
             i = {
                 ["<esc>"] = actions.close,
@@ -28,14 +32,17 @@ telescope.setup({
         layout_strategy = "vertical",
         layout_config = {
             horizontal = {
-                height = 0.95,
-                width = 0.95,
+                prompt_position = "bottom",
             },
             vertical = {
-                height = 0.95,
-                width = 0.95,
+              mirror = false,
             },
+            height = 0.95,
+            width = 0.95,
         },
+        winblend = 0,
+        border = {},
+        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     },
     pickers = {
         buffers = {

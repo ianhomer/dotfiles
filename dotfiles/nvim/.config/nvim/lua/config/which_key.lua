@@ -23,7 +23,7 @@ if vim.g.knob_telescope then
     map["tt"] = {"<cmd>Telescope<cr>", "Telescope"}
     map["tH"] = {"<cmd>Telescope help_tags<cr>", "Help"}
     map["tT"] = {"<cmd>Telescope tags<cr>", "Tags"}
-    map["tl"] = {"<cmd>Telescope highlights<cr>", "Telescope"}
+    map["th"] = {"<cmd>Telescope highlights<cr>", "Highlights"}
     map["tc"] = {"<cmd>Telescope command_history<cr>", "Recent Commands"}
     map["tC"] = {"<cmd>Telescope commands<cr>", "Available Commands"}
     map["t3"] = {"<cmd>Telescope search_history<cr>", "Search History"}
