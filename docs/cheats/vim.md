@@ -19,6 +19,12 @@ Shortcuts I'm trying to remember.
 | `csw"`    | Quote word                                            |
 | `:xa`     | Save all and exit                                     |
 
+### telescope
+
+|          |                        |
+| --       | --                     |
+| `ctrl-/` | show telescope mappngs |
+
 ### misc
 
 |            |                       |

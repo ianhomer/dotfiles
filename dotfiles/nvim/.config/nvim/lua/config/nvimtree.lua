@@ -18,7 +18,7 @@ vim.g.nvim_tree_icons = {
     default = "",
 }
 vim.g.nvim_tree_disable_window_picker = 1
-vim.g.nvim_tree_highlight_opened_files = 1
+vim.g.nvim_tree_highlight_opened_files = 2
 
 require("nvim-tree").setup({
     diagnostics = {
@@ -36,5 +36,6 @@ require("nvim-tree").setup({
     filters = {
         dotfiles = true,
         custom = { ".DS_Store", ".git", ".pytest_cache", "node_modules" },
+        exclude = { ".env", ".config" }
     },
 })
