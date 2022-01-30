@@ -14,6 +14,6 @@ The following should be equivalent
 - **-** : List with bold
 
 |            |                         |
-| --         | --                      |
+| ---------- | ----------------------- |
 | `{pipe}`   | Table row with backtick |
 | **{pipe}** | Table row with bold     |

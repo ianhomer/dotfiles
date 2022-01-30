@@ -6,7 +6,6 @@ I manually do on each environment.
 Login Items
 
 - Alfred 4
-- Keybase
 - Magnet
 
 ## Initialise desktop apps

@@ -5,7 +5,7 @@
 ### Windows
 
 |                       |                                                 |
-| --                    | --                                              |
+| --------------------- | ----------------------------------------------- |
 | `Ctrl+Cmd+click+drag` | Move Window                                     |
 | `Ctrl+Cmd+space`      | Open special character window                   |
 | `Cmd+Tab`             | Switch Application. Shift reverses.             |
@@ -31,7 +31,7 @@ See System Preferences -> Keyboard -> Shortcuts for details
 ### Finder
 
 |                                  |                   |
-| --                               | --                |
+| -------------------------------- | ----------------- |
 | `Shift+Cmd+.` - in finder window | Show hidden files |
 
 ## Links

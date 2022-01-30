@@ -4,6 +4,7 @@
 # Python scratch pad
 #
 
+
 def foo(bar):
     print(f"foo executed with {bar}")
 

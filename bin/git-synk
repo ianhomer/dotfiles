@@ -36,32 +36,13 @@ esac done
 $(shim) && . ${ME}/i.sh
 
 #
-# Execute git quietly ... keybase output messages in stderr
-# this function safely removes these known errors, but
-# keeps unknown errors
+# Execute git quietly ... keybase logic on its way out, just an alert now to
+# with its removal
 #
 function gitQuiet() {
   if [[ "$protocol" == "keybase" ]] ; then
-    # Strip out noise from Keybase
-    output=$(git $1 --quiet 2>&1)
-
-    # If key base is not running then start it up
-    if [[ $output =~ "keybase isn't running" ]] ; then
-      if [[ $output =~ "run_keybase" ]] ; then
-        keybase login
-      elif [[ $output =~ "open the Keybase app" ]] ; then
-        open -a Keybase.app
-        sleep 5
-      else
-        echo $output
-        return 1
-      fi
-      output=$(git $1 --quiet 2>&1)
-    fi
-    printf "$output"                   \
-      | grep -v 'Initializing Keybase' \
-      | grep -v 'Syncing with Keybase' \
-      || :
+    echo "keybase no longer supported"
+    return 1
   else
     if ! git $1 --quiet ; then
       if [[ "$1" == "fetch" ]] ; then

@@ -128,7 +128,6 @@ command_inner() {
   fi
   dotme-stow -d $DOTFILES_DOTFILES
   [ $DRY -eq 0 ] && dotme-git
-  [ $DRY -eq 0 ] && is-macos && dotme-archive
   [ $DRY -eq 0 ] && is-macos && dotme-osx
   [ $DRY -eq 0 ] && is-android && dotme-termux
   [ $DRY -eq 0 ] && is-pc && dotme-pip
@@ -137,6 +136,7 @@ command_inner() {
   [ $DRY -eq 0 ] && dotme-vim
   [ $DRY -eq 0 ] && is-pc && dotme-tmux
   [ $DRY -eq 0 ] && is-pc && dotme-node
+  [ $DRY -eq 0 ] && is-pc && dotme-rust
   [ $DRY -eq 0 ] && is-pc && dotme-jenv
   if command -v fish &> /dev/null ; then
     [ $DRY -eq 0 ] && dotme-fish

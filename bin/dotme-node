@@ -19,6 +19,7 @@ should-run -m 14 $0 $NODE_GLOBAL || exit 0
 
 which node
 node -v
+
 #
 # Report what's install globally
 #
@@ -28,7 +29,7 @@ npm list --global --depth=0
 
 cat $NODE_GLOBAL | grep -v '#' | grep '@' |
   grep -F -v "`npm list --global --depth=0 2>/dev/null | grep "@" |
-  sed 's/.* \(.*\)@[^@]*/\1/'`" |
+  sed 's/.* \(.*\)@[^@]*/\1@/'`" |
   xargs npm install --global
 
 npm -g outdated

@@ -10,7 +10,7 @@ should-run $0 || exit 0
 # settings end up in that config file
 gitConfigFile=~/.gitconfig
 if [[ ! -f $gitConfigFile ]] ; then
-  echo "Creating $gitConfigFile" 
+  echo "Creating $gitConfigFile"
   touch $gitConfigFile
 fi
 
@@ -19,8 +19,5 @@ git config user.email > /dev/null ||
 
 git config user.name > /dev/null ||
   git config --global user.name "ian"
-
-git config pull.rebase > /dev/null ||
-  git config --global pull.rebase false
 
 should-run -fu $0

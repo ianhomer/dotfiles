@@ -17,12 +17,12 @@ echo "... setting up OSX keyboards"
 # Manual guidance
 
 mkdir -p ~/.dotfiles/tmp
-export-osx-config ~/.dotfiles/tmp
+export-config-osx ~/.dotfiles/tmp
 symbolicKeyDiffCount=`diff ~/.dotfiles/tmp/AppleSymbolicHotKeys.config \
      ~/.dotfiles/config/osx/AppleSymbolicHotKeys.config | wc -l`
 if [[ $symbolicKeyDiffCount -gt 0 ]] ; then
   diff ~/.dotfiles/tmp/AppleSymbolicHotKeys.config \
-     ~/.dotfiles/config/osx/AppleSymbolicHotKeys.config 
+     ~/.dotfiles/config/osx/AppleSymbolicHotKeys.config
   echo <<EOF
 Please unset all Mission Control keyboard shortcuts in System \
 preferences. Also for Keyboard Shortcuts unset Mission Control

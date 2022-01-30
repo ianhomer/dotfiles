@@ -14,5 +14,9 @@ if [[ "$OSTYPE" =~ ^linux-android ]]; then
   if [[ -f ~/.termux/termux.properties ]] ; then
     rm ~/.termux/termux.properties
   fi
+  echo "Setting up storage"
+  if [[ ! -d ~/storage ]] ; then
+    termux-setup-storage
+  fi
 fi
 

@@ -3,7 +3,10 @@ if get(g:, "knobs_level", 0) < 1
 endif
 
 let g:syntax_cmd = "skip"
-if exists("g:knob_gruvbox")
+if exists("g:knob_kanagawa")
+  " let g:colors_name='kanagawa'
+  " colorscheme "kanagawa"
+elseif exists("g:knob_gruvbox")
   try
     "unlet g:syntax_on
     let g:colors_name='gruvbox'
@@ -24,4 +27,3 @@ let g:terminal_color_9="#ffb6c1"
 
 highlight ErrorMsg guibg=Grey80 guifg=Grey20
 highlight Keyword guifg=Grey90
-
