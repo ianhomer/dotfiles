@@ -34,7 +34,7 @@ telescope.setup({
                 prompt_position = "bottom",
             },
             vertical = {
-              mirror = false,
+                mirror = false,
             },
             height = 0.95,
             width = 0.95,
@@ -56,5 +56,17 @@ telescope.setup({
 })
 telescope.load_extension("fzf")
 
-local opt = { noremap = true, silent = true }
+local colors = require("kanagawa.colors").setup()
 
+vim.cmd("hi TelescopeBorder guibg = " .. colors.bg_dim .. " guifg = " .. colors.bg_dim)
+
+vim.cmd("hi TelescopePromptBorder guibg = " .. colors.bg_light1 .. " guifg = " .. colors.bg_light1)
+vim.cmd("hi TelescopePromptNormal guibg = " .. colors.bg_light1 .. " guifg = " .. colors.nu)
+vim.cmd("hi TelescopePromptPrefix guibg = " .. colors.bg_light1 .. " guifg = " .. colors.nu)
+vim.cmd("hi TelescopeSelection guibg = " .. colors.bg_light1 .. " guifg = " .. colors.nu)
+
+vim.cmd("hi TelescopePreviewTitle guibg = " .. colors.bg_dim .. " guifg = " .. colors.co)
+vim.cmd("hi TelescopePromptTitle guibg = " .. colors.bg_light1 .. " guifg = " .. colors.co)
+vim.cmd("hi TelescopeResultsTitle guibg = " .. colors.bg_dim .. " guifg = " .. colors.co)
+
+local opt = { noremap = true, silent = true }
