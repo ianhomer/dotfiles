@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+should-run -m 7 $0 || exit 0
+$(shim) && . ${ME}/i.sh
+
+log:: "configuring rust"
+
+if ! command -v cargo ; then
+  rustup-init -y
+fi
+
+cargo install stylua
+
+should-run -fu $0
+
+

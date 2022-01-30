@@ -31,7 +31,7 @@ if has("nvim")
   set termguicolors
 endif
 " Keep messages short and don't give ins-completion-messages (c)
-set shortmess=catIF
+set shortmess=catOIF
 " Tab support with 2 spaces
 set tabstop=2
 set shiftwidth=2

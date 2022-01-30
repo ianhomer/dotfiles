@@ -4,6 +4,7 @@
     "es2020": true
   },
   "extends": [
+    "plugin:sonarjs/recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
@@ -17,8 +18,10 @@
     "ecmaVersion": 11,
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint"],
-  "rules": {},
+  "plugins": ["react", "@typescript-eslint", "sonarjs"],
+  "rules": {
+    "curly": ["error", "all"]
+  },
   "settings": {
     "react": {
       "version": "latest"

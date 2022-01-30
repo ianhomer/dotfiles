@@ -1,3 +1,3 @@
 if type -q thefuck
-  thefuck --alias | source
+    thefuck --alias | source
 end

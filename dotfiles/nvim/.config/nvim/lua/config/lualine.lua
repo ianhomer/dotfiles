@@ -13,7 +13,7 @@ end
 require("lualine").setup {
     options = {
         sources = {"ale"},
-        theme = "gruvbox"
+        theme = "kanagawa"
     },
     extensions = {
         "fugitive",
@@ -30,7 +30,7 @@ require("lualine").setup {
             {"diff"},
             {
                 "diagnostics",
-                sources = {"ale", "nvim_lsp"},
+                sources = {"ale", "nvim_diagnostic"},
                 diagnostics_color = {
                   error = "white"
                 }

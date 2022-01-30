@@ -60,8 +60,7 @@ Todos
 - [ ] Do this
 - [ ] And this, and this, and this, and this, and this, and this, and this, and
       this, and this, and this, and this, and this, and this, and this, and
-      this,
-      and this.
+      this, and this.
 - [x] This too
 
 ## Links
@@ -79,25 +78,20 @@ Todos
 
 Long line definitions
 
-Term 1
-: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat.
+Term 1 : Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat.
 
-Term with definitions
-: Definition 1
-: Definition 2
+Term with definitions : Definition 1 : Definition 2
 
-Term with definitions and long lines
-: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat.
-: Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat.
+Term with definitions and long lines : Lorem ipsum dolor sit amet, consectetur
+adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+ut aliquip ex ea commodo consequat. : Lorem ipsum dolor sit amet, consectetur
+adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+ut aliquip ex ea commodo consequat.
 
 ## Tables
 
@@ -131,7 +125,7 @@ second-line
 JSON
 
 ```json
-{ "field": "value"}
+{ "field": "value" }
 ```
 
 Typescript
@@ -139,5 +133,3 @@ Typescript
 ```typescript
 const myGlobal = [];
 ```
-
-Test change ..

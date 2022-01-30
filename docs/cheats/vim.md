@@ -7,7 +7,7 @@
 Shortcuts I'm trying to remember.
 
 |           |                                                       |
-| --        | --                                                    |
+| --------- | ----------------------------------------------------- |
 | `gd`      | Go to definition                                      |
 | `ctrl-]`  | Go to tag                                             |
 | `ctrl-o`  | Jump back to previous location (after `gd` or `ctr-]` |
@@ -19,10 +19,16 @@ Shortcuts I'm trying to remember.
 | `csw"`    | Quote word                                            |
 | `:xa`     | Save all and exit                                     |
 
+### telescope
+
+|          |                        |
+| --       | --                     |
+| `ctrl-/` | show telescope mappngs |
+
 ### misc
 
 |            |                       |
-| --         | --                    |
+| ---------- | --------------------- |
 | `space+r`  | Open (paste) registry |
 | `space+c`  | Commits               |
 | `space+cw` | Clear white space     |
@@ -31,7 +37,7 @@ Shortcuts I'm trying to remember.
 ### maps
 
 |            |                              |
-| --         | --                           |
+| ---------- | ---------------------------- |
 | `space+m`  | Keyboard map for normal mode |
 | `:Maps!`   | Open maps in full screen     |
 | `space+l`  | Keyboard map for insert mode |
@@ -40,26 +46,26 @@ Shortcuts I'm trying to remember.
 
 ### files
 
-|                       |                                |
-| --                    | --                             |
-| `space+n`             | Open nerd tree                 |
-| `space+s`             | Save all files                 |
-| `space+f`             | Open file browser              |
-| `:cd`                 | change directory               |
-| `space + r` or `:reg` | show paste registry            |
-| `"2p`                 | paste a previous cut           |
-| `gf`                  | go to file under cursor        |
-| `gx`                  | open link in browser           |
-| `gt`                  | go to next tab                 |
-| `tabe`                | open file in new tab           |
-| `m + letter`          | set mark                       |
-| `' + letter`          | go to mark                     |
-| `Ctrl+^`              | switch to previous buffer      |
-| `:tab h foo`          | open help in a new tab         |
-| `Ctrl+w o`            | make pane the visible one |
-| `:noh`                | clear last highlight           |
-| `"add`                | Delete line into registry a    |
-| `"ap`                 | Paste line from registry a     |
+|                       |                             |
+| --------------------- | --------------------------- |
+| `space+n`             | Open nerd tree              |
+| `space+s`             | Save all files              |
+| `space+f`             | Open file browser           |
+| `:cd`                 | change directory            |
+| `space + r` or `:reg` | show paste registry         |
+| `"2p`                 | paste a previous cut        |
+| `gf`                  | go to file under cursor     |
+| `gx`                  | open link in browser        |
+| `gt`                  | go to next tab              |
+| `tabe`                | open file in new tab        |
+| `m + letter`          | set mark                    |
+| `' + letter`          | go to mark                  |
+| `Ctrl+^`              | switch to previous buffer   |
+| `:tab h foo`          | open help in a new tab      |
+| `Ctrl+w o`            | make pane the visible one   |
+| `:noh`                | clear last highlight        |
+| `"add`                | Delete line into registry a |
+| `"ap`                 | Paste line from registry a  |
 
 `:enew | pu=execute('autocmd')`
 : copy output of command, e.g. autocmd, into buffer
@@ -67,7 +73,7 @@ Shortcuts I'm trying to remember.
 ### buffers
 
 |               |                                      |
-| --            | --                                   |
+| ------------- | ------------------------------------ |
 | `:bd`         | close buffer                         |
 | `:bn`         | next buffer                          |
 | `bufdo bd`    | close all buffers                    |
@@ -78,7 +84,7 @@ Shortcuts I'm trying to remember.
 ### NERDTree
 
 |           |                                            |
-| --        | --                                         |
+| --------- | ------------------------------------------ |
 | `m`       | open file action                           |
 | `Shift+i` | show hidden files                          |
 | `Shift+r` | reload node                                |
@@ -90,7 +96,7 @@ Shortcuts I'm trying to remember.
 ### motion
 
 |             |                                                 |
-| --          | --                                              |
+| ----------- | ----------------------------------------------- |
 | `0`         | beginning of line                               |
 | `\$`        | end of line                                     |
 | `}`         | next block                                      |
@@ -116,7 +122,7 @@ Shortcuts I'm trying to remember.
 ### windows
 
 |                 |                                   |
-| --              | --                                |
+| --------------- | --------------------------------- |
 | `:split`        | split pane                        |
 | `:vsplit`       | split pan vertically              |
 | `80 Ctrl+w`     | set current pane to 80 characters |
@@ -125,7 +131,7 @@ Shortcuts I'm trying to remember.
 ### edit
 
 |                  |                                        |
-| --               | --                                     |
+| ---------------- | -------------------------------------- |
 | `space+g`        | distraction free coding with Goyo      |
 | `gw{motion}`     | reformat content                       |
 | `select+gw`      | reformat content                       |
@@ -148,14 +154,14 @@ Shortcuts I'm trying to remember.
 ### insert mode
 
 |                 |                      |
-| --              | --                   |
+| --------------- | -------------------- |
 | `Ctrl+x+Ctrl+f` | File name completion |
 | `Ctrl+[`        | Exit insert mode     |
 
 ### Spell
 
 |          |                                           |
-| --       | --                                        |
+| -------- | ----------------------------------------- |
 | `zg`     | Add word to dictionary                    |
 | `2zg`    | Add word to second dictionary             |
 | `z=`     | Show spell options                        |
@@ -165,7 +171,7 @@ Shortcuts I'm trying to remember.
 ### Git
 
 |            |                                        |
-| --         | --                                     |
+| ---------- | -------------------------------------- |
 | `:G`       | Fugitive status window (or refresh it) |
 | `:Gwrite`  | Git add current file                   |
 | `:Gcommit` | Git commit staged                      |
@@ -175,7 +181,7 @@ Shortcuts I'm trying to remember.
 ### Fugitive
 
 |       |                                                 |
-| --    | --                                              |
+| ----- | ----------------------------------------------- |
 | `=`   | Show diff for selected file                     |
 | `-`   | Stage of selected file (toggle)                 |
 | `-`   | Push current commit or HEAD if on unpushed line |
@@ -189,13 +195,13 @@ Shortcuts I'm trying to remember.
 ### Quickfix
 
 |      |                |
-| --   | --             |
+| ---- | -------------- |
 | `]q` | Next quick fix |
 
 ### Markdown
 
 |             |                  |
-| --          | --               |
+| ----------- | ---------------- |
 | `viWS+`     | make a word bold |
 | `zR`        | open all folds   |
 | `zM`        | close all folds  |
@@ -204,21 +210,21 @@ Shortcuts I'm trying to remember.
 ### Selections
 
 |       |                                                  |
-| --    | --                                               |
+| ----- | ------------------------------------------------ |
 | `vip` | select paragraph                                 |
 | `viW` | select current word (including non-alphanumeric) |
 
 ### Configuration
 
 |           |                            |
-| --        | --                         |
+| --------- | -------------------------- |
 | `space+p` | Toggle power configuration |
 | `space+v` | Reload vim configuration   |
 
 ### fzf
 
 |          |                           |
-| --       | --                        |
+| -------- | ------------------------- |
 | `Ctrl+x` | Open in horizontal split  |
 | `Ctrl+v` | Open in vertical split    |
 | `Ctrl+/` | Toggle preview window off |
