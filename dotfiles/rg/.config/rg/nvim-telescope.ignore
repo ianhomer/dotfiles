@@ -1,9 +1,43 @@
-# Ripgrep default ignore
+# Default search ignore for Telescope search in vim with Ripgrep
+
+# Git internals
+.git/
+
+
+# JavaScript and node internals
 .yarn/
+node_modules/
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+*.js.map
+webpack-runtime-*.js
+pages-manifest-*.js
+
+# Gatsby internals
+path--*.json
+component---*.js
+**/static/d/
+
+# Misc web internals
+**/assets/js/*.js
+**/assets/css/*.css
+**/assets/packed/
+
+# Python internals
 __pycache__/
+
+# Ruby internals
+Gemfile.lock
+
+# Java internals
+target/
 build/
 dist/
-node_modules/
-target/
+
+# Jetbrains internals
 .idea/
-.git/
+*.iml
+
+# Misc files that have little value in search results
+.svg
