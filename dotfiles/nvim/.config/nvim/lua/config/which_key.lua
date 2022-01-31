@@ -30,12 +30,13 @@ if vim.g.knob_telescope then
     map["tq"] = { "<cmd>Telescope quickfix<cr>", "Quick Fix" }
     map["tl"] = { "<cmd>Telescope loclist<cr>", "Location List" }
     map["tj"] = { "<cmd>Telescope jumplist<cr>", "Jump List" }
-    map["t4"] = { "<cmd>Telescope spell_suggest", "Spell Suggest" }
+    map["t9"] = { "<cmd>Telescope spell_suggest", "Spell Suggest" }
 
     -- Git
     map["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
-    map["t1"] = { "<cmd>Telescope git_stash<cr>", "Git Stash" }
+    map["t1"] = { "<cmd>Telescope git_commits<cr>", "Git Commits" }
     map["t2"] = { "<cmd>Telescope git_branches<cr>", "Git Branches" }
+    map["t3"] = { "<cmd>Telescope git_stash<cr>", "Git Stash" }
 
     -- LSP
     map["td"] = { "<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols" }
