@@ -1,7 +1,26 @@
-local wk = require("which-key")
+local whichKey = require("which-key")
 local knobs = require("knobs")
 
-wk.setup({})
+whichKey.setup({
+  plugins = {
+    spelling = {
+      enabled = true
+    }
+  },
+  window = {
+    border = "none", -- none, single, double, shadow
+    position = "bottom", -- bottom, top
+    margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
+    padding = { 1, 2, 1, 0 }, -- extra window padding [top, right, bottom, left]
+    winblend = 0
+  },
+  layout = {
+    height = { min = 4, max = 25 }, -- min and max height of the columns
+    width = { min = 20, max = 30 }, -- min and max width of the columns
+    spacing = 2, -- spacing between columns
+    align = "left", -- align columns left, center or right
+  },
+})
 
 local map = {}
 if vim.g.knob_telescope then
@@ -20,17 +39,19 @@ if vim.g.knob_telescope then
     map["tF"] = { "<cmd>Telescope file_browser<cr>", "File Browser" }
 
     -- Pickers
-    map["tt"] = { "<cmd>Telescope<cr>", "Telescope" }
+    map["t3"] = { "<cmd>Telescope search_history<cr>", "Search History" }
+    map["t9"] = { "<cmd>Telescope spell_suggest<cr>", "Spell Suggest" }
+    map["tC"] = { "<cmd>Telescope commands<cr>", "Available Commands" }
     map["tH"] = { "<cmd>Telescope help_tags<cr>", "Help" }
     map["tT"] = { "<cmd>Telescope tags<cr>", "Tags" }
-    map["th"] = { "<cmd>Telescope highlights<cr>", "Highlights" }
     map["tc"] = { "<cmd>Telescope command_history<cr>", "Recent Commands" }
-    map["tC"] = { "<cmd>Telescope commands<cr>", "Available Commands" }
-    map["t3"] = { "<cmd>Telescope search_history<cr>", "Search History" }
-    map["tq"] = { "<cmd>Telescope quickfix<cr>", "Quick Fix" }
-    map["tl"] = { "<cmd>Telescope loclist<cr>", "Location List" }
+    map["th"] = { "<cmd>Telescope highlights<cr>", "Highlights" }
     map["tj"] = { "<cmd>Telescope jumplist<cr>", "Jump List" }
-    map["t9"] = { "<cmd>Telescope spell_suggest<cr>", "Spell Suggest" }
+    map["tk"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" }
+    map["tl"] = { "<cmd>Telescope loclist<cr>", "Location List" }
+    map["tr"] = { "<cmd>Telescope registers<cr>", "Registers" }
+    map["tq"] = { "<cmd>Telescope quickfix<cr>", "Quick Fix" }
+    map["tt"] = { "<cmd>Telescope<cr>", "Telescope" }
 
     -- Git
     map["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
@@ -57,4 +78,5 @@ if vim.g.knob_hop then
     map["h"] = { "<cmd>lua require'hop'.hint_words()<cr>", "Hop" }
 end
 
-wk.register(map, { prefix = "<leader>" })
+whichKey.register(map, { prefix = "<leader>" })
+
