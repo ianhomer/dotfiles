@@ -134,7 +134,7 @@ return require("packer").startup({
         _use({
             "neovim/nvim-lspconfig",
             config = [[require'config.lspconfig']],
-            commit = "58d2ba6b968539a20d701be0bf98ae154456e265",
+            commit = "531751ef03d77bf094f1fc07844b6c03ec4862bb",
         })
         use({
             "weilbith/nvim-code-action-menu",
@@ -176,7 +176,7 @@ return require("packer").startup({
             "hrsh7th/nvim-cmp",
             requires = "hrsh7th/cmp-buffer",
             config = [[require'config.cmp']],
-            commit = "1797f9e1acd2e0b5b4b6805928aebc1dcc0ecbff",
+            commit = "de69c657ebbb2fa1ed918b97f27733b801ee639c",
         })
 
         use({
@@ -211,7 +211,7 @@ return require("packer").startup({
         use({
             "jose-elias-alvarez/null-ls.nvim",
             config = [[require'config.null_ls']],
-            commit = "5213916f51a178287cf5162354f2f7c2c4e204bb",
+            commit = "1ebe15833e93c15404db0c59a5ed5c5e4bfe07a2",
             requires = { "nvim-lua/plenary.nvim" },
         })
 
@@ -253,7 +253,7 @@ return require("packer").startup({
             event = "BufRead",
             config = [[require'config.treesitter']],
             run = ":TSUpdate",
-            commit = "3c462d362f49611c295e6c4870c97e2ae7f530cd",
+            commit = "3cfbde4db05dc9f3f38fcee212849799bb6f2e54",
         })
         use({
             knob = "dap",
@@ -296,7 +296,7 @@ return require("packer").startup({
             knob = "telescope",
             "nvim-telescope/telescope-fzf-native.nvim",
             run = "make",
-            commit = "b8662b076175e75e6497c59f3e2799b879d7b95",
+            commit = "b8662b076175e75e6497c59f3e2799b879d7b954",
         })
         use({
             "nvim-telescope/telescope.nvim",
@@ -309,7 +309,7 @@ return require("packer").startup({
                 },
             },
             config = [[require'config.telescope']],
-            commit = "0011b1148d3975600f5a9f0be8058cdaac4e30d9",
+            commit = "f262e7d56d37625613c5de0df5a933cccacf13c5",
         })
         use({
             "kyazdani42/nvim-tree.lua",
@@ -378,11 +378,11 @@ return require("packer").startup({
             config = [[require'config.neoscroll']],
             commit = "cd4278795ed8ee120a97078b03aa6436802126d9",
         })
-        use({
-            "p00f/nvim-ts-rainbow",
-            config = [[require'config.rainbow']],
-            commit = "ac5032edc1d3e9216d081d130a14d4fcaf6cd3b3"
-        })
+        -- use({
+        --     "p00f/nvim-ts-rainbow",
+        --     config = [[require'config.rainbow']],
+        --     commit = "ac5032edc1d3e9216d081d130a14d4fcaf6cd3b3"
+        -- })
 
         -- Git
         use({
