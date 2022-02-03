@@ -22,7 +22,8 @@
     "eslint": "npx eslint . --ext js,ts,tsx",
     "eslint:debug": "DEBUG=eslint:cli-engine npx eslint . --ext js,ts,tsx",
     "eslint:fix": "npx eslint . --ext js,ts,tsx --fix",
-    "lint": "pnpm prettier && pnpm eslint",
+    "gherkin-lint": "npx gherkin-lint",
+    "lint": "pnpm prettier && pnpm eslint && pnpm gherkin-lint",
     "lint:fix": "pnpm prettier:fix && pnpm eslint:fix",
     "prettier": "npx prettier --check .",
     "prettier:fix": "npx prettier --write .",
@@ -31,5 +32,8 @@
     "update": "npx npm-check-updates -u",
     "update:package-lock": "npm install --package-lock-only"
   },
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": {
+    "gherkin-lint": "^4.2.2"
+  }
 }
