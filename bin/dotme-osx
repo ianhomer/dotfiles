@@ -97,7 +97,7 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 # 13: Lock Screen
 
 # Bottom left screen corner → put to sleep
-defaults write com.apple.dock wvous-bl-corner -int 13
+defaults write com.apple.dock wvous-bl-corner -int 0
 defaults write com.apple.dock wvous-bl-modifier -int 0
 # Bottom right screen corner → Desktop
 defaults write com.apple.dock wvous-br-corner -int 4
