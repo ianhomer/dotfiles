@@ -81,7 +81,8 @@ end
 whichKey.register(map, { prefix = "<leader>" })
 
 local cheats = {}
-map["m"] = { ":let @m=@+<cr>", ":let @m=@+" }
-map["M"] = { 'viw"mp<cr>', 'viw"mp' }
+cheats["m"] = { ":let @m=@+<cr>", ":let @m=@+" }
+cheats["M"] = { 'viw"mp<cr>', 'viw"mp' }
+cheats["a"] = { ":messages<cr>", ":messages" }
 
-whichKey.register(map, { prefix = "," })
+whichKey.register(cheats, { prefix = "," })

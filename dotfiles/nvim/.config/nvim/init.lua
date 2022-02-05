@@ -316,7 +316,7 @@ return require("packer").startup({
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.nvimtree']],
             cmd = { "NvimTreeFindFile", "NvimTreeOpen", "NvimTreeToggle" },
-            commit = "2dfed89af7724f9e71d2fdbe3cde791a93e9b9e0",
+            commit = "99d65afd6ef05cc57f835451126e5c44db03cef1",
         })
         use({
             "ryanoasis/vim-devicons",
