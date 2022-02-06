@@ -36,6 +36,7 @@ if vim.g.knob_telescope then
     map["tg"] = { "<cmd>Telescope grep_string<cr>", "Grep String" }
 
     -- File
+    map["tf"] = { "<cmd>lua require'telescope.builtin'.find_files({find_command={'fd', vim.fn.expand('<cword>')}})<cr>", "Find named file" }
     map["tF"] = { "<cmd>Telescope file_browser<cr>", "File Browser" }
 
     -- Pickers
@@ -84,5 +85,6 @@ local cheats = {}
 cheats["m"] = { ":let @m=@+<cr>", ":let @m=@+" }
 cheats["M"] = { 'viw"mp<cr>', 'viw"mp' }
 cheats["a"] = { ":messages<cr>", ":messages" }
+cheats["s"] = { ":let @+ = execute('messages')<cr>", ":let @+ = execute('messages')" }
 
 whichKey.register(cheats, { prefix = "," })
