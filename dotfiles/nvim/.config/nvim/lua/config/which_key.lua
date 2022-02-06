@@ -36,7 +36,7 @@ if vim.g.knob_telescope then
     map["tg"] = { "<cmd>Telescope grep_string<cr>", "Grep String" }
 
     -- File
-    map["tf"] = { "<cmd>lua require'telescope.builtin'.find_files({find_command={'fd', vim.fn.expand('<cword>')}})<cr>", "Find named file" }
+    map["tf"] = { "<cmd>lua require'telescope.builtin'.find_files({find_command={'fd', '-H', '-i', vim.fn.expand('<cword>')}})<cr>", "Find named file" }
     map["tF"] = { "<cmd>Telescope file_browser<cr>", "File Browser" }
 
     -- Pickers
