@@ -11,6 +11,7 @@
 
 NODE_GLOBAL=~/.dotfiles/config/node/global.txt
 should-run -m 14 $0 $NODE_GLOBAL || exit 0
+$(shim) && . ${ME}/i.sh
 
 #
 # Set up nvm
@@ -27,13 +28,16 @@ npm list --global --depth=0
 
 # Install missing packages
 
+log:: install global missing packages
 cat $NODE_GLOBAL | grep -v '#' | grep '@' |
   grep -F -v "`npm list --global --depth=0 2>/dev/null | grep "@" |
   sed 's/.* \(.*\)@[^@]*/\1@/'`" |
   xargs npm install --global
 
-npm -g outdated
-npm -g update
+log:: npm --global outdated
+npm --global outdated
+log:: npm --global update
+npm --global update
 
 echo
 echo "... Global node packages installed"

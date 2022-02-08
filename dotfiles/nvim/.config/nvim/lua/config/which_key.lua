@@ -23,6 +23,9 @@ whichKey.setup({
 })
 
 local map = {}
+
+local findNamedFile = { "<cmd>lua require'telescope.builtin'.find_files({find_command={'fd', '-H', '-i', vim.fn.expand('<cword>')}})<cr>", "Find named file" }
+
 if vim.g.knob_telescope then
     -- Common Searches
     map["f"] = { "<cmd>Telescope find_files hidden=true<cr>", "Find File" }
@@ -36,7 +39,7 @@ if vim.g.knob_telescope then
     map["tg"] = { "<cmd>Telescope grep_string<cr>", "Grep String" }
 
     -- File
-    map["tf"] = { "<cmd>lua require'telescope.builtin'.find_files({find_command={'fd', '-H', '-i', vim.fn.expand('<cword>')}})<cr>", "Find named file" }
+    map["tf"] = findNamedFile
     map["tF"] = { "<cmd>Telescope file_browser<cr>", "File Browser" }
 
     -- Pickers
@@ -82,6 +85,7 @@ end
 whichKey.register(map, { prefix = "<leader>" })
 
 local cheats = {}
+cheats["'"] = findNamedFile
 cheats["m"] = { ":let @m=@+<cr>", ":let @m=@+" }
 cheats["M"] = { 'viw"mp<cr>', 'viw"mp' }
 cheats["a"] = { ":messages<cr>", ":messages" }
