@@ -61,7 +61,7 @@ cmp.setup({
         ghost_text = true,
     },
     view = {
-      entries = "native"
+        entries = "native",
     },
     sources = cmp.config.sources({
         { name = "nvim_lsp" },

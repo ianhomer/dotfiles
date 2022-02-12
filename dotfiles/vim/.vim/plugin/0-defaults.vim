@@ -49,6 +49,9 @@ set iskeyword+=-
 " I don't use modelines
 set nomodeline
 
+" Don't show mode, lualine does that for me
+set noshowmode
+
 " work around for https://github.com/vim/vim/issues/4738
 if has('macunix')
   nnoremap gx :call thingity#OpenURLUnderCursor()<CR>
