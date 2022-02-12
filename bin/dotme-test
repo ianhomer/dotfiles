@@ -11,6 +11,6 @@ should-run -m 7 $0 || exit 0
 cd ${ME}/test
 # packages must be installed in test so that LSP completion works on test files
 
-npm install
+pnpm install
 
 should-run -fu $0
