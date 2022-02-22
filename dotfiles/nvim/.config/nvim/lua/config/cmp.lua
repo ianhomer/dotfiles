@@ -58,8 +58,10 @@ cmp.setup({
         end,
     },
     experimental = {
-        native_menu = true,
         ghost_text = true,
+    },
+    view = {
+        entries = "native",
     },
     sources = cmp.config.sources({
         { name = "nvim_lsp" },

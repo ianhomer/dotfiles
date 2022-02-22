@@ -181,7 +181,7 @@ return require("packer").startup {
             "hrsh7th/nvim-cmp",
             requires = "hrsh7th/cmp-buffer",
             config = [[require'config.cmp']],
-            commit = "1797f9e1acd2e0b5b4b6805928aebc1dcc0ecbff"
+            commit = "13d64460cba64950aff41e230cc801225bd9a3e2"
         }
 
         use {
