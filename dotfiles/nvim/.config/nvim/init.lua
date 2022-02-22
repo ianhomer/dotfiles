@@ -22,6 +22,7 @@ nvim_set_var("knobs_levels", {
     autopairs = 3,
     autosave = 3,
     barbar = 6,
+    bqf = 5,
     colorizer = 4,
     conflict_marker = 7,
     commentary = 4,
@@ -227,6 +228,11 @@ return require("packer").startup({
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.trouble']],
             commit = "20469be985143d024c460d95326ebeff9971d714",
+        })
+        use({
+            "kevinhwang91/nvim-bqf",
+            ft = "qf",
+            commit = "2558ee1d3a0c518301bd9bee97ddd61eb21b629c"
         })
 
         use({
