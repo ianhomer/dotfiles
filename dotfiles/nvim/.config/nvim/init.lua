@@ -37,7 +37,7 @@ nvim_set_var("knobs_levels", {
     eunuch = 3,
     fugitive = 3,
     friendly_snippets = 5,
-    fzf = 9,
+    fzf = 3,
     gitgutter = 6,
     gitsigns = 4,
     gruvbox = 9,
@@ -232,7 +232,7 @@ return require("packer").startup({
         use({
             "kevinhwang91/nvim-bqf",
             ft = "qf",
-            commit = "2558ee1d3a0c518301bd9bee97ddd61eb21b629c"
+            commit = "2558ee1d3a0c518301bd9bee97ddd61eb21b629c",
         })
 
         use({
@@ -291,7 +291,8 @@ return require("packer").startup({
             "junegunn/fzf.vim",
             cmd = { "Ag", "Buffers", "Commits", "Files", "History" },
             fn = { "fzf#vim#ag" },
-            requires = { { "junegunn/fzf", opt = true, fn = { "fzf#shellescape" } } },
+            ft = { "qf" },
+            requires = { { "junegunn/fzf", opt = true, fn = { "fzf#shellescape" }, ft = { "qf" } } },
             commit = "d6aa21476b2854694e6aa7b0941b8992a906c5e",
         })
         use({
