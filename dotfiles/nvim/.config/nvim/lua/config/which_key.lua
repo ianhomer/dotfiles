@@ -43,7 +43,8 @@ if vim.g.knob_telescope then
     map["tF"] = { "<cmd>Telescope file_browser<cr>", "File Browser" }
 
     -- Pickers
-    map["t3"] = { "<cmd>Telescope search_history<cr>", "Search History" }
+    map["t4"] = { "<cmd>Telescope search_history<cr>", "Search History" }
+    map["/"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search Buffer" }
     map["t9"] = { "<cmd>Telescope spell_suggest<cr>", "Spell Suggest" }
     map["tC"] = { "<cmd>Telescope commands<cr>", "Available Commands" }
     map["tH"] = { "<cmd>Telescope help_tags<cr>", "Help" }
