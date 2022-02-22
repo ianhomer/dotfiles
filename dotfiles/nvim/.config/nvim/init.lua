@@ -233,6 +233,7 @@ return require("packer").startup({
             "kevinhwang91/nvim-bqf",
             ft = "qf",
             commit = "2558ee1d3a0c518301bd9bee97ddd61eb21b629c",
+            config = [[require'config.bqf']]
         })
 
         use({
