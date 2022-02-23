@@ -78,6 +78,7 @@ nvim_set_var("knobs_levels", {
     tabcomplete = 9,
     tabular = 3,
     telescope = 4,
+    test = 9,
     thingity = 3,
     tmux_navigator = 3,
     toggleterm = 3,
@@ -261,6 +262,10 @@ return require("packer").startup({
             config = [[require'config.treesitter']],
             run = ":TSUpdate",
             commit = "a13b40248a1f467dd7794b2860492fe23fdad098",
+        })
+        use({
+            "vim-test/vim-test",
+            commit = "0422b7fa087eb7dd1270dfcb1f3d634b57829b6e"
         })
         use({
             knob = "dap",
