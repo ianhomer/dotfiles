@@ -28,7 +28,7 @@ nvim_set_var("knobs_levels", {
     commentary = 4,
     compactcmd = 1,
     cmp = 4,
-    dap = 9,
+    dap = 5,
     defaults = 2,
     devicons = 4,
     dispatch = 4,
@@ -275,15 +275,15 @@ return require("packer").startup({
         use({
             "mfussenegger/nvim-dap",
             config = [[require'config.dap']],
-            commit = "a6fa644f9de62c594a8a9cf6f2aaf324b5a6108b",
+            commit = "9fcff6e02e1a549d47a2c559a4b833798537c0bc",
         })
-        use({
-            knob = "dap",
-            "rcarriga/nvim-dap-ui",
-            requires = "mfussenegger/nvim-dap",
-            config = [[require'config.dapui']],
-            commit = "96813c9a42651b729f50f5d880a8919a155e9721",
-        })
+        -- use({
+        --     knob = "dap",
+        --     "rcarriga/nvim-dap-ui",
+        --     after = "mfussenegger/nvim-dap",
+        --     config = [[require'config.dapui']],
+        --     commit = "840aabc2d2b2d0a982c549933f9940d37eb2b324",
+        -- })
         use({
             "puremourning/vimspector",
             config = [[require'config.vimspector']],
