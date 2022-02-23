@@ -277,13 +277,13 @@ return require("packer").startup({
             config = [[require'config.dap']],
             commit = "9fcff6e02e1a549d47a2c559a4b833798537c0bc",
         })
-        -- use({
-        --     knob = "dap",
-        --     "rcarriga/nvim-dap-ui",
-        --     after = "mfussenegger/nvim-dap",
-        --     config = [[require'config.dapui']],
-        --     commit = "840aabc2d2b2d0a982c549933f9940d37eb2b324",
-        -- })
+        use({
+            knob = "dap",
+            "rcarriga/nvim-dap-ui",
+            requires = "mfussenegger/nvim-dap",
+            config = [[require'config.dapui']],
+            commit = "840aabc2d2b2d0a982c549933f9940d37eb2b324",
+        })
         use({
             "puremourning/vimspector",
             config = [[require'config.vimspector']],

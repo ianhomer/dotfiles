@@ -24,7 +24,10 @@ whichKey.setup({
 
 local map = {}
 
-local findNamedFile = { "<cmd>lua require'telescope.builtin'.find_files({find_command={'fd', '-H', '-i', vim.fn.expand('<cword>')}})<cr>", "Find named file" }
+local findNamedFile = {
+    "<cmd>lua require'telescope.builtin'.find_files({find_command={'fd', '-H', '-i', vim.fn.expand('<cword>')}})<cr>",
+    "Find named file",
+}
 
 if vim.g.knob_telescope then
     -- Common Searches
@@ -93,3 +96,23 @@ cheats["a"] = { ":messages<cr>", ":messages" }
 cheats["s"] = { ":let @+ = execute('messages')<cr>", ":let @+ = execute('messages')" }
 
 whichKey.register(cheats, { prefix = "\\" })
+
+if vim.g.knob_dap then
+    local runners = {}
+    runners["c"] = { "<cmd>lua require'dap'.continue()<CR>", "attach/continue" }
+    runners["t"] = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "toggle breakpoint" }
+    runners["v"] = { "<cmd>lua require'telescope'.extensions.dap.variables{}<CR>", "variables" }
+    runners["r"] = { "<cmd>lua require'dap'.repl.open()<CR>", "REPL" }
+    runners["d"] = { "<cmd>Telescope dap commands<CR>", "DAP commands" }
+    runners["f"] = {
+        "<cmd>lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>",
+        "Scopes",
+    }
+    runners["o"] = { "<cmd>lua require'dapui'.open()<CR>", "UI Open" }
+
+    runners["k"] = { "<cmd>lua require'dapui'.close()<CR>", "UI Close" }
+    runners["i"] = { "<cmd>lua require'dapui'.toggle()<CR>", "UI Toggle" }
+    runners["p"] = { "<cmd>lua require'dapui'.eval()<CR>", "Show Variable" }
+
+    whichKey.register(runners, { prefix = "," })
+end

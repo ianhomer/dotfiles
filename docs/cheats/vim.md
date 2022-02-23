@@ -22,8 +22,20 @@ Shortcuts I'm trying to remember.
 ### telescope
 
 |          |                        |
-| --       | --                     |
+| -------- | ---------------------- |
 | `ctrl-/` | show telescope mappngs |
+
+### debug
+
+Start a process in debug mode, e.g. `--inspect-brk` in node. Then use the `,`
+shortcuts for run and debug features.
+
+|      |                                   |
+| ---- | ------------------------------    |
+| `,t` | toggle a break point              |
+| `,c` | attach to debugger or continue    |
+| `,o` | open debugger UI                  |
+| `,p` | hover window for current variable |
 
 ### misc
 
@@ -180,51 +192,5 @@ Shortcuts I'm trying to remember.
 
 ### Fugitive
 
-|       |                                                 |
-| ----- | ----------------------------------------------- |
-| `=`   | Show diff for selected file                     |
-| `-`   | Stage of selected file (toggle)                 |
-| `-`   | Push current commit or HEAD if on unpushed line |
-| `s`   | Stage selected file                             |
-| `X`   | Discard changes on selected file                |
-| `cc`  | Commit staged files                             |
-| `cw`  | Change commit message for selected commit       |
-| `gq`  | Quit fugitive window                            |
-| `gpa` | Go to unpushed and push                         |
-
-### Quickfix
-
-|      |                |
-| ---- | -------------- |
-| `]q` | Next quick fix |
-
-### Markdown
-
-|             |                  |
-| ----------- | ---------------- |
-| `viWS+`     | make a word bold |
-| `zR`        | open all folds   |
-| `zM`        | close all folds  |
-| `<space>+l` | Lint file        |
-
-### Selections
-
-|       |                                                  |
-| ----- | ------------------------------------------------ |
-| `vip` | select paragraph                                 |
-| `viW` | select current word (including non-alphanumeric) |
-
-### Configuration
-
-|           |                            |
-| --------- | -------------------------- |
-| `space+p` | Toggle power configuration |
-| `space+v` | Reload vim configuration   |
-
-### fzf
-
-|          |                           |
-| -------- | ------------------------- |
-| `Ctrl+x` | Open in horizontal split  |
-| `Ctrl+v` | Open in vertical split    |
-| `Ctrl+/` | Toggle preview window off |
+| | |
+| -----
