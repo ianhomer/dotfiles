@@ -108,7 +108,7 @@ if vim.g.knob_dap then
 
     runners["z"] = { "<cmd>lua require'dap'.step_out()<CR>", "step out" }
     runners["x"] = { "<cmd>lua require'dap'.step_over()<CR>", "step over" }
-    runners["c"] = { "<cmd>lua require'dap'.step_in()<CR>", "step in" }
+    runners["c"] = { "<cmd>lua require'dap'.step_into()<CR>", "step into" }
     runners["a"] = { "<cmd>lua require'dap'.up()<CR>", "up stack" }
     runners["s"] = { "<cmd>lua require'dap'.down()<CR>", "down stack" }
     runners["v"] = { "<cmd>lua require'telescope'.extensions.dap.variables{}<CR>", "variables" }
