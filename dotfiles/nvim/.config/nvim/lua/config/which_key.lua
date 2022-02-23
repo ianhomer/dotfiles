@@ -92,4 +92,4 @@ cheats["M"] = { 'viw"mp<cr>', 'viw"mp' }
 cheats["a"] = { ":messages<cr>", ":messages" }
 cheats["s"] = { ":let @+ = execute('messages')<cr>", ":let @+ = execute('messages')" }
 
-whichKey.register(cheats, { prefix = "," })
+whichKey.register(cheats, { prefix = "\\" })
