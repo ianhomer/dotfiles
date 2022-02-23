@@ -99,8 +99,18 @@ whichKey.register(cheats, { prefix = "\\" })
 
 if vim.g.knob_dap then
     local runners = {}
-    runners["c"] = { "<cmd>lua require'dap'.continue()<CR>", "attach/continue" }
+    runners["m"] = { "<cmd>lua require'dap'.continue()<CR>", "attach/continue" }
+    runners["n"] = { "<cmd>lua require'dap'.terminate()<CR>", "terminate" }
     runners["t"] = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "toggle breakpoint" }
+    runners["y"] = { "<cmd>lua require'dap'.list_breakpoints()<CR>", "list breakpoints" }
+    runners["h"] = { "<cmd>lua require'dap'.clear_breakpoints()<CR>", "clear breakpoints" }
+    runners["h"] = { "<cmd>lua require'dap'.set_exception_breakpoints()<CR>", "exception breakpoints" }
+
+    runners["z"] = { "<cmd>lua require'dap'.step_out()<CR>", "step out" }
+    runners["x"] = { "<cmd>lua require'dap'.step_over()<CR>", "step over" }
+    runners["c"] = { "<cmd>lua require'dap'.step_in()<CR>", "step in" }
+    runners["a"] = { "<cmd>lua require'dap'.up()<CR>", "up stack" }
+    runners["s"] = { "<cmd>lua require'dap'.down()<CR>", "down stack" }
     runners["v"] = { "<cmd>lua require'telescope'.extensions.dap.variables{}<CR>", "variables" }
     runners["r"] = { "<cmd>lua require'dap'.repl.open()<CR>", "REPL" }
     runners["d"] = { "<cmd>Telescope dap commands<CR>", "DAP commands" }
