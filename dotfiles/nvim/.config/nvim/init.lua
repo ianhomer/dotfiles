@@ -180,7 +180,6 @@ return require("packer").startup({
             config = [[require'config.cmp']],
             commit = "13d64460cba64950aff41e230cc801225bd9a3e2",
         })
-        }
 
         use({
             knob = "vsnip",

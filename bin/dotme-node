@@ -10,7 +10,8 @@
 #
 
 NODE_GLOBAL=~/.dotfiles/config/node/global.txt
-should-run -m 14 $0 $NODE_GLOBAL || exit 0
+should-run -m 14 $@ $0 $NODE_GLOBAL || exit 0
+$(shim) && . ${ME}/i.sh
 
 #
 # Set up nvm
@@ -27,24 +28,31 @@ node -v
 #
 # Uninstall all npm globals so that we can use pnpm
 #
+
+log:: "Cleaning npm globals"
 npm ls --global --json                                                 |
   jq --raw-output  '.dependencies | keys[] | select(. != "npm")' |
   xargs -r npm -g rm
 
+log:: "Updating pnpm"
 #
 # pnpm needs one package to be able start listing globals
 #
+log:: "pnpm global list"
 pnpm --global list 2>/dev/null || pnpm --global install pyright
 
 # Install missing packages
 
+log:: "pnpm install missing global"
 cat $NODE_GLOBAL | grep -v '#' | grep '@'          |
   grep -F -v "`pnpm --global --json list           |
     jq --raw-output '.[0].dependencies | keys[]'`" |
   xargs pnpm install --global
 
-pnpm -g outdated
-pnpm -g update
+log:: "pnpm outdated"
+pnpm --global outdated
+# log:: "pnpm update"
+# pnpm -g update
 
 echo
 echo "... Global node packages installed"
