@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+#
+# Set up hooks
+#
+
+should-run -m 14 $@ $0 || exit 0
+$(shim) && . ${ME}/i.sh
+
+cd ${ME}
+.hooks/install
+
+should-run -fu $0
