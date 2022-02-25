@@ -9,6 +9,8 @@ tag: bar
 
 ## Heading 1
 
+This is a scratch pad.
+
 This is **Bold**.
 
 This is _Emphasis_.

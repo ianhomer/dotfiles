@@ -1,0 +1,17 @@
+#!/bin/sh
+
+#
+# git hooks installer
+#
+
+printf "\e[36mInstalling git hooks\n"
+for hook in .hooks/* ; do
+  hookName="${hook##*/}"
+  [ "$hookName" == "install" ] && continue
+  if [[ -L .git/hooks/$hookName ]] ; then
+    printf "  \e[33m$hookName\t\e[36m already installed\n"
+  else
+    ln -sv ../../$hook .git/hooks
+  fi
+done
+printf "\e[0m"

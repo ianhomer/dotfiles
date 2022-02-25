@@ -2,17 +2,18 @@
   "author": "anon",
   "description": "",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "5.10.1",
-    "@typescript-eslint/parser": "5.10.1",
-    "bats": "1.5.0",
-    "bats-assert": "2.0.0",
-    "bats-support": "0.3.0",
-    "eslint": "8.7.0",
-    "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-react": "7.28.0",
-    "eslint-plugin-sonarjs": "0.11.0",
+    "@types/node": "17.0.21",
+    "@typescript-eslint/eslint-plugin": "5.12.1",
+    "@typescript-eslint/parser": "5.12.1",
+    "bats": "1.6.0",
+    "bats-assert": "^2.0.0",
+    "bats-support": "^0.3.0",
+    "eslint": "8.9.0",
+    "eslint-config-prettier": "8.4.0",
+    "eslint-plugin-react": "7.29.1",
+    "eslint-plugin-sonarjs": "0.12.0",
     "prettier": "2.5.1",
-    "ts-node": "10.4.0",
+    "ts-node": "10.5.0",
     "typescript": "4.5.5"
   },
   "license": "ISC",
@@ -22,7 +23,8 @@
     "eslint": "npx eslint . --ext js,ts,tsx",
     "eslint:debug": "DEBUG=eslint:cli-engine npx eslint . --ext js,ts,tsx",
     "eslint:fix": "npx eslint . --ext js,ts,tsx --fix",
-    "lint": "pnpm prettier && pnpm eslint",
+    "gherkin-lint": "npx gherkin-lint",
+    "lint": "pnpm prettier && pnpm eslint && pnpm gherkin-lint",
     "lint:fix": "pnpm prettier:fix && pnpm eslint:fix",
     "prettier": "npx prettier --check .",
     "prettier:fix": "npx prettier --write .",
@@ -31,5 +33,8 @@
     "update": "npx npm-check-updates -u",
     "update:package-lock": "npm install --package-lock-only"
   },
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": {
+    "gherkin-lint": "^4.2.2"
+  }
 }
