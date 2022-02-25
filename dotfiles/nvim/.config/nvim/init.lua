@@ -178,8 +178,9 @@ return require("packer").startup({
             "hrsh7th/nvim-cmp",
             requires = "hrsh7th/cmp-buffer",
             config = [[require'config.cmp']],
-            commit = "7e473b99d3f977703f56591ccd4a7f8d197e1d61",
+            commit = "13d64460cba64950aff41e230cc801225bd9a3e2",
         })
+        }
 
         use({
             knob = "vsnip",
