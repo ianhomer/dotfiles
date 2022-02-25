@@ -1,34 +1,15 @@
 local dap = require("dap")
-
+local myutils = require("myutils")
 
 function pick_node_debug_process()
-    local processOnPort = find_process_on_port(9229)
+    local processOnPort = myutils.find_process_on_port(9229)
     if processOnPort then
-      return processOnPort
+        print("Process found on port "..processOnPort)
+        return processOnPort
     end
-    local output = vim.fn.system({ "ps", "a" })
-    local lines = vim.split(output, "\n")
-    local procs = {}
-    for _, line in pairs(lines) do
-        -- output format
-        --    " 107021 pts/4    Ss     0:00 /bin/zsh <args>"
-        local parts = vim.fn.split(vim.fn.trim(line), " \\+")
-        local pid = parts[1]
-        local name = table.concat({ unpack(parts, 5) }, " ")
-        if pid and pid ~= "PID" then
-            pid = tonumber(pid)
-            if pid ~= vim.fn.getpid() and string.match(name, "node") then
-                table.insert(procs, { pid = pid, name = name })
-            end
-        end
-    end
-    local result = pick_one(procs)
-    return result and result.pid or nil
-end
-
-function pick_one(procs)
-    if table.getn(procs) == 1 then
-        return table[0]
+    local procs = myutils.find_named_processes("node")
+    if table.getn(procs) == 1  then
+        return procs[0].pid
     end
     local label_fn = function(proc)
         return string.format("id=%d name=%s", proc.pid, proc.name)
@@ -50,4 +31,3 @@ dap.configurations.javascript = {
     },
 }
 dap.configurations.typescript = dap.configurations.javascript
-
