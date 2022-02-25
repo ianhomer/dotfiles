@@ -22,7 +22,7 @@ set incsearch
 " Default updatetime is 4000 and too slow
 set updatetime=300
 " Quicker timeout between key presses
-set timeoutlen=500
+set timeoutlen=1000
 " Always show sign column to stop flip-flopping
 set signcolumn=yes
 if has("nvim")
@@ -43,8 +43,14 @@ set linebreak
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
+" Word can have hyphen in
+set iskeyword+=-
+
 " I don't use modelines
 set nomodeline
+
+" Don't show mode, lualine does that for me
+set noshowmode
 
 " work around for https://github.com/vim/vim/issues/4738
 if has('macunix')

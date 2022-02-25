@@ -122,11 +122,17 @@ command_initialise() {
 #
 command_inner() {
   command_initialise
+  if command -v stow &> /dev/null ; then
+    # stow early if stow alreay installed, otherwise we have to wait for package
+    # to be installed
+    dotme-stow -d $DOTFILES_DOTFILES
+    stowedEarly="y"
+  fi
   command_packages
   if ! command -v stow &> /dev/null ; then
     log::exit "stow is needed, but not found"
   fi
-  dotme-stow -d $DOTFILES_DOTFILES
+  [ -z "$stowedEarly" ] && dotme-stow -d $DOTFILES_DOTFILES
   [ $DRY -eq 0 ] && dotme-git
   [ $DRY -eq 0 ] && is-macos && dotme-osx
   [ $DRY -eq 0 ] && is-android && dotme-termux
@@ -146,7 +152,7 @@ command_inner() {
     [ $DRY -eq 0 ] && dotme-zsh
   fi
   [ $DRY -eq 0 ] && dotme-gitme
-  [ $DRY -eq 0 ] && is-pc && dotme-test
+  # [ $DRY -eq 0 ] && is-pc && dotme-test
   #[ $DRY -eq 0 ] && is-pc && dotme-nnn
   command_clean
 }

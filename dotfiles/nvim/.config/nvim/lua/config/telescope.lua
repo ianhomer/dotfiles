@@ -2,6 +2,16 @@ local actions = require("telescope.actions")
 -- local trouble = require("trouble.providers.telescope")
 local telescope = require("telescope")
 
+local git_command = {
+    "git",
+    "log",
+    "--date=format:%Y-%m-%d %H:%M",
+    "--format=%h %cd %<(8,trunc)%aN %s",
+    "--abbrev-commit",
+    "--",
+    ".",
+}
+
 telescope.setup({
     defaults = {
         vimgrep_arguments = {
@@ -51,6 +61,12 @@ telescope.setup({
                     ["<c-k>"] = "delete_buffer",
                 },
             },
+        },
+        git_bcommits = {
+            git_command = git_command,
+        },
+        git_commits = {
+            git_command = git_command,
         },
     },
 })

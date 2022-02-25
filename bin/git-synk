@@ -68,10 +68,10 @@ function gitSynk() {
   git rev-parse
 
   printf "▻ "
-  fullBranchName=$(git symbolic-ref -q HEAD)
-  branchName=${fullBranchName##refs/heads/}
+  branchName=$(git name-rev --name-only HEAD)
   originUrl=$(git config --get remote.origin.url)
   remoteName=$(git config --get branch.$branchName.remote)
+
   protocol=${originUrl%%\:*}
 
   current=`pwd | sed 's|.*/||g'`
@@ -111,21 +111,25 @@ function gitSynk() {
     printf "∷ "
   fi
 
-  leftRight=$(git rev-list --count --left-right $remoteName/$branchName...HEAD)
-  left=$(echo $leftRight | awk '{print $1}')
-  right=$(echo $leftRight | awk '{print $2}')
+  if [[ -n "${remoteName}" ]] ; then
+    leftRight=$(git rev-list --count --left-right $remoteName/$branchName...HEAD)
+    left=$(echo $leftRight | awk '{print $1}')
+    right=$(echo $leftRight | awk '{print $2}')
 
-  # Determine action about to take place
-  if [[ $left -gt 0 ]] ; then
-    if [[ $right -gt 0 ]] ; then
-      action="↓ $left ↑ $right"
+    # Determine action about to take place
+    if [[ $left -gt 0 ]] ; then
+      if [[ $right -gt 0 ]] ; then
+        action="↓ $left ↑ $right"
+      else
+        action="↓ $left"
+      fi
+    elif [[ $right -gt 0 ]] ; then
+      action="↑ $right"
     else
-      action="↓ $left"
+      action="≡"
     fi
-  elif [[ $right -gt 0 ]] ; then
-    action="↑ $right"
   else
-    action="≡"
+    action="✧"
   fi
 
   reducer='s|\([a-z]\)[\.a-z]*\([\/@\:]\)|\1\2|g'
@@ -155,7 +159,10 @@ EOF
 
   if [[ $right -gt 0 ]] ; then
     printf " ↑"
-    gitQuiet "push"
+    git push
+  elif [[ -z "${remoteName}" ]] ; then
+    printf " ↟\n"
+    git push -u
   fi
 
   # Print AOK signal
