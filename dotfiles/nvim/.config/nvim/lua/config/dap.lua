@@ -4,7 +4,6 @@ local myutils = require("myutils")
 function pick_node_debug_process()
     local processOnPort = myutils.find_process_on_port(9229)
     if processOnPort then
-        print("Process found on port "..processOnPort)
         return processOnPort
     end
     local procs = myutils.find_named_processes("node")
