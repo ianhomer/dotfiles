@@ -17,23 +17,34 @@ should-run -m 14 $0 $NODE_GLOBAL || exit 0
 #
 [ ! -d ~/.nvm ] && mkdir ~/.nvm
 
+
+#
+# Node is installed with brew and pnpm installed with corepack
+#
 which node
 node -v
 
 #
-# Report what's install globally
+# Uninstall all npm globals so that we can use pnpm
 #
-npm list --global --depth=0
+npm ls --global --json                                                 |
+  jq --raw-output  '.dependencies | keys[] | select(. != "npm")' |
+  xargs -r npm -g rm
+
+#
+# pnpm needs one package to be able start listing globals
+#
+pnpm --global list 2>/dev/null || pnpm --global install pyright
 
 # Install missing packages
 
-cat $NODE_GLOBAL | grep -v '#' | grep '@' |
-  grep -F -v "`npm list --global --depth=0 2>/dev/null | grep "@" |
-  sed 's/.* \(.*\)@[^@]*/\1@/'`" |
-  xargs npm install --global
+cat $NODE_GLOBAL | grep -v '#' | grep '@'          |
+  grep -F -v "`pnpm --global --json list           |
+    jq --raw-output '.[0].dependencies | keys[]'`" |
+  xargs pnpm install --global
 
-npm -g outdated
-npm -g update
+pnpm -g outdated
+pnpm -g update
 
 echo
 echo "... Global node packages installed"
