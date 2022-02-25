@@ -1,6 +1,11 @@
 local dap = require("dap")
 
+
 function pick_node_debug_process()
+    local processOnPort = find_process_on_port(9229)
+    if processOnPort then
+      return processOnPort
+    end
     local output = vim.fn.system({ "ps", "a" })
     local lines = vim.split(output, "\n")
     local procs = {}
@@ -12,7 +17,7 @@ function pick_node_debug_process()
         local name = table.concat({ unpack(parts, 5) }, " ")
         if pid and pid ~= "PID" then
             pid = tonumber(pid)
-            if pid ~= vim.fn.getpid() and string.match(name, "node.*--inspect") then
+            if pid ~= vim.fn.getpid() and string.match(name, "node") then
                 table.insert(procs, { pid = pid, name = name })
             end
         end

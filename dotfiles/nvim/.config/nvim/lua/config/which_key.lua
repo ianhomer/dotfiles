@@ -104,7 +104,7 @@ if vim.g.knob_dap then
     runners["t"] = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "toggle breakpoint" }
     runners["y"] = { "<cmd>lua require'dap'.list_breakpoints()<CR>", "list breakpoints" }
     runners["h"] = { "<cmd>lua require'dap'.clear_breakpoints()<CR>", "clear breakpoints" }
-    runners["h"] = { "<cmd>lua require'dap'.set_exception_breakpoints()<CR>", "exception breakpoints" }
+    runners["g"] = { "<cmd>lua require'dap'.set_exception_breakpoints()<CR>", "exception breakpoints" }
 
     runners["z"] = { "<cmd>lua require'dap'.step_out()<CR>", "step out" }
     runners["x"] = { "<cmd>lua require'dap'.step_over()<CR>", "step over" }
