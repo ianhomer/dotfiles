@@ -6,11 +6,13 @@
 
 set -e
 
-should-run -m 7 $0 || exit 0
+should-run -m 7 $@ $0 || exit 0
+$(shim) && . ${ME}/i.sh
 
 cd ${ME}/test
 # packages must be installed in test so that LSP completion works on test files
 
 pnpm install
+pnpm update --latest
 
 should-run -fu $0
