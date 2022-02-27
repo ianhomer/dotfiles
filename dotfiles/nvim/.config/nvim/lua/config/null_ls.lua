@@ -13,6 +13,7 @@ null_ls.setup({
         formatting.markdownlint,
         diagnostics.eslint_d,
         diagnostics.flake8,
+        diagnostics.proselint,
         null_ls.builtins.code_actions.eslint_d,
         null_ls.builtins.completion.spell,
     },

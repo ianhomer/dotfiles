@@ -98,9 +98,11 @@ cheats["s"] = { ":let @+ = execute('messages')<cr>", ":let @+ = execute('message
 whichKey.register(cheats, { prefix = "\\" })
 
 if vim.g.knob_dap then
+    local dap = require("dap")
     local runners = {}
     runners["m"] = { "<cmd>lua require'dap'.continue()<CR>", "attach/continue" }
-    runners["n"] = { "<cmd>lua require'dap'.terminate()<CR>", "terminate" }
+    runners["n"] = { "<cmd>lua require'dap'.run_last()<CR>", "terminate" }
+    runners["b"] = { "<cmd>lua require'dap'.terminate()<CR>", "terminate" }
     runners["t"] = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "toggle breakpoint" }
     runners["y"] = { "<cmd>lua require'dap'.list_breakpoints()<CR>", "list breakpoints" }
     runners["h"] = { "<cmd>lua require'dap'.clear_breakpoints()<CR>", "clear breakpoints" }
