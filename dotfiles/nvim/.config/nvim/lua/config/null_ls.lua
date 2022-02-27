@@ -14,6 +14,7 @@ null_ls.setup({
         diagnostics.eslint_d,
         diagnostics.flake8,
         diagnostics.proselint,
+        diagnostics.write_good,
         null_ls.builtins.code_actions.eslint_d,
         null_ls.builtins.completion.spell,
     },
