@@ -12,8 +12,7 @@ end
 
 require("lualine").setup {
     options = {
-        sources = {"ale"},
-        theme = "kanagawa"
+        theme = "gruvbox"
     },
     extensions = {
         "fugitive",

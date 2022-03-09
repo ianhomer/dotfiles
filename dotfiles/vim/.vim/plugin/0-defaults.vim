@@ -43,9 +43,6 @@ set linebreak
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
-" Word can have hyphen in
-set iskeyword+=-
-
 " I don't use modelines
 set nomodeline
 
