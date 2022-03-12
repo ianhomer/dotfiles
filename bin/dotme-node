@@ -49,7 +49,7 @@ cat $NODE_GLOBAL | grep -v '#' | grep '@'          |
     jq --raw-output '.[0].dependencies | keys[]'`" |
   xargs pnpm install --global
 
-log:: "pnpm outdated"
+log:: "checking pnpm outdated"
 pnpm --global outdated
 # log:: "pnpm update"
 # pnpm -g update
