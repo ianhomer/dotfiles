@@ -9,7 +9,6 @@ vim.g.nvim_tree_show_icons = {
 vim.g.nvim_tree_icons = {
     default = "",
 }
-vim.g.nvim_tree_disable_window_picker = 1
 vim.g.nvim_tree_highlight_opened_files = 1
 
 require("nvim-tree").setup({
@@ -36,6 +35,7 @@ require("nvim-tree").setup({
     actions = {
         open_file = {
             window_picker = {
+                enable = true,
                 exclude = {
                     filetype = {},
                     buftype = {
