@@ -14,6 +14,12 @@
 | `Shift+Alt+Cmd+t`  | Change window title |
 | `Shift+Cmd+[]`     | Previous / next tab |
 
+### functional
+
+|                    |          |
+| --                 | --       |
+| `Ctrl+Shift+click` | Open URL |
+
 ### style
 
 |               |                   |
