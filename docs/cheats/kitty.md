@@ -10,18 +10,18 @@
 
 ### Windows
 
-|                   |                        |
-| --                | --                     |
-| `Cmd+enter`       | New window             |
-| `Cmd+t`           | New tab                |
-| `Cmd+w`           | Close tag              |
-| `Ctrl+Cmd+arrows` | Resize window          |
-| `Shift+Cmd+d`     | Close window           |
-| `Alt+Cmd+t`       | Change window title    |
-| `Cmd+[]`          | Previous / next window |
+|                    |                     |
+| --                 | --                  |
+| `Shift+Cmd+enter`  | New window          |
+| `Shift+Cmd+t`      | New tab             |
+| `Shift+Cmd+w`      | Close tag           |
+| `Shift+Cmd+arrows` | Resize window       |
+| `Shift+Cmd+d`      | Close window        |
+| `Shift+Alt+Cmd+t`  | Change window title |
+| `Shift+Cmd+[]`     | Previous / next tab |
 
 ### Help
 
-|          |                   |
-| --       | --                |
-| `Cmd+F6` | Show kitty config |
+|                |                   |
+| --             | --                |
+| `Shift+Cmd+F6` | Show kitty config |
