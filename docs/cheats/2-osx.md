@@ -8,7 +8,7 @@
 | --------------------- | ----------------------------------------------- |
 | `Ctrl+Cmd+click+drag` | Move Window                                     |
 
-### Windows
+### windows
 
 |                       |                                                 |
 | --------------------- | ----------------------------------------------- |
@@ -34,12 +34,12 @@
 
 See System Preferences -> Keyboard -> Shortcuts for details
 
-### Finder
+### finder
 
 |                                  |                   |
 | -------------------------------- | ----------------- |
 | `Shift+Cmd+.` - in finder window | Show hidden files |
 
-## Links
+## links
 
 <https://duckduckgo.com/?q=mac+shortcuts&t=brave&ia=cheatsheet&iax=1>

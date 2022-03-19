@@ -1,17 +1,11 @@
 # Kitty Cheats
 
-## Kitty
+## kitty
 
-### Config
-
-|              |               |
-| ------------ | ------------- |
-| `Ctrl+Cmd+,` | Reload config |
-
-### Windows
+### windows
 
 |                    |                     |
-| --                 | --                  |
+| ------------------ | ------------------- |
 | `Shift+Cmd+enter`  | New window          |
 | `Shift+Cmd+t`      | New tab             |
 | `Shift+Cmd+w`      | Close tag           |
@@ -20,8 +14,9 @@
 | `Shift+Alt+Cmd+t`  | Change window title |
 | `Shift+Cmd+[]`     | Previous / next tab |
 
-### Help
+### config
 
 |                |                   |
-| --             | --                |
+| -------------- | ----------------- |
+| `Ctrl+Cmd+,`   | Reload config     |
 | `Shift+Cmd+F6` | Show kitty config |

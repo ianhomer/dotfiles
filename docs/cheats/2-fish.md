@@ -32,11 +32,13 @@ Shortcuts I'm trying to remember.
 
 ### in things
 
-| `Ctrl+e` | Search last modified |
-| `Ctrl+t` | Search tags |
-| `Ctrl+x` | Abort |
-| `Ctrl+f` | Search filen ames |
-| `Ctrl+s` | Search headings |
-| `Ctrl+b` | Search bookmarks |
-| `Ctrl+g` | Search links |
+|          |                         |
+| -------- | ----------------------- |
+| `Ctrl+e` | Search last modified    |
+| `Ctrl+t` | Search tags             |
+| `Ctrl+x` | Abort                   |
+| `Ctrl+f` | Search filen ames       |
+| `Ctrl+s` | Search headings         |
+| `Ctrl+b` | Search bookmarks        |
+| `Ctrl+g` | Search links            |
 | `Ctrl+o` | Open in new tmux window |

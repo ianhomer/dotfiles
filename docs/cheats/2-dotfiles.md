@@ -2,7 +2,7 @@
 
 Commands provided by this dotfiles repository
 
-## dotfiles
+## dot
 
 ### aliases
 
