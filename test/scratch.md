@@ -107,6 +107,19 @@ ut aliquip ex ea commodo consequat.
 | ---- | --- |
 | this |     |
 
+## Ligatures
+
+- =>
+- ===
+- !=
+
+## Digraphs
+
+`ctrl+k` and 2 characters.
+
+- é
+- ë
+
 ## Code
 
 ```bash

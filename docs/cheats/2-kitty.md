@@ -14,6 +14,15 @@
 | `Shift+Alt+Cmd+t`  | Change window title |
 | `Shift+Cmd+[]`     | Previous / next tab |
 
+### style
+
+|               |                   |
+| --            | --                |
+| `Shift+Cmd+9` | Smaller font      |
+| `Shift+Cmd+0` | Larger font       |
+| `Shift+Cmd+k` | Disable ligatures |
+| `Shift+Cmd+l` | Enable ligatures  |
+
 ### config
 
 |                |                   |
