@@ -11,9 +11,9 @@ local function repositoryName()
 end
 
 require("lualine").setup {
-    options = {
-        theme = "kanagawa"
-    },
+    -- options = {
+    --     theme = "kanagawa"
+    -- },
     extensions = {
         "fugitive",
         "fzf",

@@ -10,8 +10,18 @@
 
 ### Windows
 
-|          |              |
-| --       | --           |
-| `Cmd+CR` | New Window   |
-| `Cmd+t`  | New Tab      |
-| `Cmd+w`  | Close Window |
+|                   |                        |
+| --                | --                     |
+| `Cmd+enter`       | New window             |
+| `Cmd+t`           | New tab                |
+| `Cmd+w`           | Close tag              |
+| `Ctrl+Cmd+arrows` | Resize window          |
+| `Shift+Cmd+d`     | Close window           |
+| `Alt+Cmd+t`       | Change window title    |
+| `Cmd+[]`          | Previous / next window |
+
+### Help
+
+|          |                   |
+| --       | --                |
+| `Cmd+F6` | Show kitty config |
