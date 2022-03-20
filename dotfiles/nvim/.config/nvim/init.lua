@@ -62,6 +62,7 @@ nvim_set_var("knobs_levels", {
     markdown_preview = 3,
     minimap = 9,
     modes = 3,
+    mundo = 3,
     neoscroll = 3,
     nnn = 9,
     null_ls = 3,
@@ -483,6 +484,11 @@ return require("packer").startup({
         use({
             "junegunn/vim-peekaboo",
             commit = "cc4469c204099c73dd7534531fa8ba271f704831",
+        })
+        use({
+          "simnalamburt/vim-mundo",
+          commit = "595ee332719f397c2441d85f79608113957cc78f",
+          cmd = { "MundoToggle" }
         })
 
         -- Misc
