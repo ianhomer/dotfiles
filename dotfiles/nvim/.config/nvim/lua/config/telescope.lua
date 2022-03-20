@@ -53,6 +53,12 @@ telescope.setup({
         border = {},
         borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     },
+    extensions = {
+        frecency = {
+            default_workspace = "CWD",
+            show_scores = true,
+        },
+    },
     pickers = {
         buffers = {
             sort_lastused = true,
@@ -71,6 +77,7 @@ telescope.setup({
     },
 })
 telescope.load_extension("fzf")
+telescope.load_extension("frecency")
 
 local colors = require("kanagawa.colors").setup()
 

@@ -35,6 +35,7 @@ if vim.g.knob_telescope then
     map["s"] = { "<cmd>Telescope live_grep<cr>", "Search" }
     map["S"] = { "<cmd>Fuzzy<cr>", "Fuzzy Search" }
     map["h"] = { "<cmd>Telescope oldfiles<cr>", "File History" }
+    map["H"] = { "<cmd>Telescope frecency<cr>", "Frequent" }
     map["<space>"] = { "<cmd>Telescope buffers<cr>", "Buffers" }
 
     -- Alternatives

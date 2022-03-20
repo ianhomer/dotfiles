@@ -37,6 +37,7 @@ nvim_set_var("knobs_levels", {
     eunuch = 3,
     fidget = 3,
     fugitive = 3,
+    frecency = 3,
     friendly_snippets = 5,
     fzf = 3,
     gitgutter = 6,
@@ -174,6 +175,16 @@ return require("packer").startup({
         _use({
             "hrsh7th/cmp-nvim-lua",
             commit = "d276254e7198ab7d00f117e88e223b4bd8c02d21",
+        })
+
+        _use({
+            "hrsh7th/cmp-nvim-lsp-signature-help",
+            commit = "414619286928901600cf5b5ccb2f62666f82d3bd",
+        })
+
+        _use({
+            "hrsh7th/cmp-nvim-lsp-document-symbol",
+            commit = "29d12e55cf49ee07b829114ad39b161cad2544ab",
         })
 
         _use({
@@ -318,6 +329,14 @@ return require("packer").startup({
             run = "make",
             commit = "8ec164b541327202e5e74f99bcc5fe5845720e18",
         })
+        use({ knob = "frecency", "tami5/sqlite.lua", commit = "9ccd2a6538d8a201d1ea08784bd866950e1b4130" })
+
+        use({
+            "nvim-telescope/telescope-frecency.nvim",
+            after = { "sqlite.lua" },
+            commit = "979a6f3d882b7b5352cc6a751faa9c9427d40e74",
+        })
+
         use({
             "nvim-telescope/telescope.nvim",
             requires = {
@@ -327,10 +346,12 @@ return require("packer").startup({
                     "nvim-telescope/telescope-fzf-native.nvim",
                     cond = "vim.g['knob_telescope']",
                 },
+                { "nvim-telescope/telescope-frecency.nvim", cond = "vim.g['knob_frecency']" },
             },
             config = [[require'config.telescope']],
             commit = "1daf0917cf859c3c089c62e960b128fe3382fc6d",
         })
+
         use({
             "kyazdani42/nvim-tree.lua",
             requires = "kyazdani42/nvim-web-devicons",
