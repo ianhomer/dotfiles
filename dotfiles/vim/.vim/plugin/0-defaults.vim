@@ -214,6 +214,11 @@ nmap '` ysiW`
 nmap '< ysiW<
 nmap 'b ysiWb
 
+
+" easy align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
 " *** Scope : IO ***
 "
 if exists("g:knob_autosave")

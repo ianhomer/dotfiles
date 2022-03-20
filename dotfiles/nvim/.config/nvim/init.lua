@@ -32,6 +32,7 @@ nvim_set_var("knobs_levels", {
     defaults = 2,
     devicons = 4,
     dispatch = 4,
+    easy_align = 3,
     editorconfig = 4,
     endwise = 7,
     eunuch = 3,
@@ -491,6 +492,11 @@ return require("packer").startup({
         use({
             "junegunn/goyo.vim",
             commit = "a865dec7ca7616dbbd69315ad1417b84d0c411f8",
+        })
+
+        use({
+            "junegunn/vim-easy-align",
+            commit = "12dd6316974f71ce333e360c0260b4e1f81169c3",
         })
 
         use({
