@@ -35,6 +35,7 @@ nvim_set_var("knobs_levels", {
     editorconfig = 4,
     endwise = 7,
     eunuch = 3,
+    fidget = 3,
     fugitive = 3,
     friendly_snippets = 5,
     fzf = 3,
@@ -204,6 +205,11 @@ return require("packer").startup({
             },
             commit = "70a1131d64d75150ece513b983b0f42939bcb03c",
         })
+        use({
+            "j-hui/fidget.nvim",
+            commit = "d47f2bbf7d984f69dc53bf2d37f9292e3e99ae8a",
+            config = [[require'fidget'.setup{}]],
+        })
 
         use({
             "kosayoda/nvim-lightbulb",
@@ -235,7 +241,7 @@ return require("packer").startup({
             "kevinhwang91/nvim-bqf",
             ft = "qf",
             commit = "dcb8a8762d9c93ddf7dc8f06009299c0bf11a14c",
-            config = [[require'config.bqf']]
+            config = [[require'config.bqf']],
         })
 
         use({
@@ -266,7 +272,7 @@ return require("packer").startup({
         })
         use({
             "vim-test/vim-test",
-            commit = "0422b7fa087eb7dd1270dfcb1f3d634b57829b6e"
+            commit = "0422b7fa087eb7dd1270dfcb1f3d634b57829b6e",
         })
         use({
             knob = "dap",
@@ -486,9 +492,9 @@ return require("packer").startup({
             commit = "cc4469c204099c73dd7534531fa8ba271f704831",
         })
         use({
-          "simnalamburt/vim-mundo",
-          commit = "595ee332719f397c2441d85f79608113957cc78f",
-          cmd = { "MundoToggle" }
+            "simnalamburt/vim-mundo",
+            commit = "595ee332719f397c2441d85f79608113957cc78f",
+            cmd = { "MundoToggle" },
         })
 
         -- Misc
