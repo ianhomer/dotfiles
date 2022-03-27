@@ -38,7 +38,7 @@ nvim_set_var("knobs_levels", {
     eunuch = 3,
     fidget = 3,
     fugitive = 3,
-    frecency = 3,
+    frecency = 9,
     friendly_snippets = 5,
     fzf = 3,
     gitgutter = 6,
