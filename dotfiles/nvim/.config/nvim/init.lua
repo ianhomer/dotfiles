@@ -333,6 +333,7 @@ return require("packer").startup({
         use({ knob = "frecency", "tami5/sqlite.lua", commit = "9ccd2a6538d8a201d1ea08784bd866950e1b4130" })
 
         use({
+            knob = "frecency",
             "nvim-telescope/telescope-frecency.nvim",
             after = { "sqlite.lua" },
             commit = "979a6f3d882b7b5352cc6a751faa9c9427d40e74",
