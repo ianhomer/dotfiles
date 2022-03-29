@@ -5,7 +5,9 @@
 
 set -e
 
-while getopts "a" o; do case "$o" in
+SHOULD_RUN_ARGS=""
+while getopts "af" o; do case "$o" in
+  f) SHOULD_RUN_ARGS="${SHOULD_RUN_ARGS} -f" ;;
   a) ADMIN=y ;;
 esac done
 
@@ -14,7 +16,7 @@ $(shim) && . ${ME}/i.sh
 BREW_DIR=${DOTFILES_DIR}/config/brew
 
 if [[ "$ADMIN" != "y" ]] ; then
-  should-run -m 14 $0 $BREW_DIR/Brewfile || exit 0
+  should-run -m 14 $@ $0 $BREW_DIR/Brewfile || exit 0
 fi
 
 if ! is-executable brew ; then
