@@ -56,9 +56,6 @@ cmp.setup({
     experimental = {
         ghost_text = true,
     },
-    view = {
-        entries = "native",
-    },
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
         { name = "vsnip" },
