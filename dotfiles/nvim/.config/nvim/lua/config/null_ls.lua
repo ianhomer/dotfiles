@@ -1,6 +1,8 @@
 local null_ls = require("null-ls")
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
+local code_actions = null_ls.builtins.code_actions
+local completion = null_ls.builtins.completion
 
 null_ls.setup({
     debug = true,
@@ -16,7 +18,9 @@ null_ls.setup({
         diagnostics.proselint,
         -- diagnostics.write_good,
         diagnostics.proselint,
-        null_ls.builtins.code_actions.eslint_d,
-        null_ls.builtins.completion.spell,
+
+        code_actions.eslint_d,
+        code_actions.gitsigns,
+        completion.spell,
     },
 })
