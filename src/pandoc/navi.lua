@@ -1,9 +1,9 @@
+---@diagnostic disable: undefined-global, unused-local, unused-function, lowercase-global
 -- Convert markdown cheats files to navi format
 --
 -- Test with
 --    cat docs/cheats/vim.md | pandoc -t src/pandoc/navi.lua
 
-local pipe = pandoc.pipe
 local stringify = (require "pandoc.utils").stringify
 
 -- The global variable PANDOC_DOCUMENT contains the full AST of
@@ -55,15 +55,12 @@ local function attributes(attr)
   return table.concat(attr_table)
 end
 
--- Table to store footnotes, so they can be included at the end.
-local notes = {}
-
 -- Blocksep is used to separate block elements.
 function Blocksep()
   return "\n\n"
 end
 
-function dump(o)
+local function dump(o)
    if type(o) == 'table' then
       local s = '{ '
       for k,v in pairs(o) do
@@ -287,11 +284,11 @@ end
 -- The following code will produce runtime warnings when you haven't defined
 -- all of the functions you need for the custom writer, so it's useful
 -- to include when you're working on a writer.
-local meta = {}
-meta.__index =
+local extraMeta = {}
+extraMeta.__index =
   function(_, key)
     io.stderr:write(string.format("WARNING: Undefined function '%s'\n",key))
     return function() return "" end
   end
-setmetatable(_G, meta)
+setmetatable(_G, extraMeta)
 

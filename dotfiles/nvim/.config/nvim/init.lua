@@ -1,12 +1,11 @@
-local cmd = vim.cmd
 local g = vim.g
 local o = vim.o
 local nvim_set_var = vim.api.nvim_set_var
 
 vim.opt.shell = "/bin/bash"
 
-local ok, _ = pcall(require, "impatient")
-if ok then
+local impatientOk, _ = pcall(require, "impatient")
+if impatientOk then
     _.enable_profile()
 end
 
@@ -87,7 +86,7 @@ nvim_set_var("knobs_levels", {
     tmux_navigator = 3,
     toggleterm = 3,
     treesitter = 3,
-    trouble = 6,
+    trouble = 5,
     twightlight = 9,
     unicode = 4,
     unimpaired = 4,
@@ -128,10 +127,10 @@ return require("packer").startup({
     function(_use)
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
-        use("lewis6991/impatient.nvim")
+        _use("lewis6991/impatient.nvim")
 
         local ok, knobs = pcall(require, "knobs")
-        use = ok and knobs.use(_use) or _use
+        local use = ok and knobs.use(_use) or _use
 
         use("wbthomason/packer.nvim")
         use("ianhomer/knobs.vim")

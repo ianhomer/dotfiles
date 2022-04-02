@@ -1,5 +1,4 @@
 local whichKey = require("which-key")
-local knobs = require("knobs")
 
 whichKey.setup({
     plugins = {
@@ -103,7 +102,6 @@ cheats["s"] = { ":let @+ = execute('messages')<cr>", ":let @+ = execute('message
 whichKey.register(cheats, { prefix = "\\" })
 
 if vim.g.knob_dap then
-    local dap = require("dap")
     local runners = {}
     runners["m"] = { "<cmd>lua require'dap'.continue()<CR>", "attach/continue" }
     runners["n"] = { "<cmd>lua require'dap'.run_last()<CR>", "terminate" }

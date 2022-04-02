@@ -1,7 +1,8 @@
+---@diagnostic disable: undefined-field
 local dap = require("dap")
 local myutils = require("myutils")
 
-function pick_node_debug_process()
+local function pick_node_debug_process()
     local processOnPort = myutils.find_process_on_port(9229)
     if processOnPort then
         return processOnPort
