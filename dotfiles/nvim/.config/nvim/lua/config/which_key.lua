@@ -65,7 +65,7 @@ if vim.g.knob_telescope then
     -- Git
     map["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
     map["t1"] = { "<cmd>Telescope git_commits<cr>", "Git Commits" }
-    map["t2"] = { "<cmd>Telescope git_branches<cr>", "Git Branches" }
+    map["t2"] = { "<cmd>Telescope: git_branches<cr>", "Git Branches" }
     map["t3"] = { "<cmd>Telescope git_stash<cr>", "Git Stash" }
 
     -- LSP
@@ -75,7 +75,7 @@ if vim.g.knob_telescope then
 
     -- Modes
     map["8"] = { "<cmd>call my#ToggleGitBlame()<cr>", "Blame"}
-    map["9"] = { "<cmd>set wrap!<cr>", "Wrap"}
+    map["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap"}
 end
 
 if vim.g.knob_toggleterm then
