@@ -43,6 +43,9 @@ set linebreak
 " No wrap
 set nowrap
 set sidescroll=1
+" Wildignore
+set wildignore+=*/node_modules/*,*/__pycache__/*
+
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 

@@ -73,6 +73,7 @@ if vim.g.knob_telescope then
     map[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "LSP Range Format" }
 
     -- Modes
+    map["7"] = { "<cmd>TroubleToggle<cr>", "Blame"}
     map["8"] = { "<cmd>call my#ToggleGitBlame()<cr>", "Blame"}
     map["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap"}
 end
