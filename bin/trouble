@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# The start of trouble
+
+pnpx eslint . -f json |
+  jq '.[] | select((.messages | length) > 0) | .filePath' -r |
+  xargs realpath --relative-to=$PWD |
+  fzf -m --bind ctrl-t:toggle-all |
+  xargs nvim "+Trouble" "+silent argdo e"
+
