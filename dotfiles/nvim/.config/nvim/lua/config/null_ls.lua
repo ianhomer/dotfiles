@@ -18,9 +18,7 @@ null_ls.setup({
         diagnostics.proselint,
         -- diagnostics.write_good,
         diagnostics.proselint,
-
         code_actions.eslint_d,
-        code_actions.gitsigns,
         completion.spell,
     },
 })

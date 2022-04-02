@@ -40,6 +40,9 @@ set expandtab
 set textwidth=80
 " Softbreak on space between words
 set linebreak
+" No wrap
+set nowrap
+set sidescroll=1
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 

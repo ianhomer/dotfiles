@@ -72,6 +72,9 @@ if vim.g.knob_telescope then
     map["td"] = { "<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols" }
     map[";"] = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "LSP Format" }
     map[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<CR>", "LSP Range Format" }
+
+    -- Modes
+    map["9"] = { "<cmd>set wrap!<cr>", "Toggle Wrap"}
 end
 
 if vim.g.knob_toggleterm then
