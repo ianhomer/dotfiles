@@ -63,6 +63,19 @@ function my#ToggleLocationList()
   endif
 endfunction
 
+function! my#ToggleBlame() abort
+  let found = 0
+  for winnr in range(1, winnr('$'))
+    if getbufvar(winbufnr(winnr), '&filetype') ==# 'fugitiveblame'
+      exe winnr . 'close'
+      let found = 1
+    endif
+  endfor
+  if !found
+    Git blame
+  endif
+endfunction
+
 " Clear whitespace
 function my#PruneWhiteSpace()
   %s/\s\+$//ge

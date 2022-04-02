@@ -70,11 +70,12 @@ if vim.g.knob_telescope then
 
     -- LSP
     map["td"] = { "<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols" }
-    map[";"] = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "LSP Format" }
-    map[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<CR>", "LSP Range Format" }
+    map[";"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "LSP Format" }
+    map[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "LSP Range Format" }
 
     -- Modes
-    map["9"] = { "<cmd>set wrap!<cr>", "Toggle Wrap"}
+    map["8"] = { "<cmd>call my#ToggleGitBlame()<cr>", "Blame"}
+    map["9"] = { "<cmd>set wrap!<cr>", "Wrap"}
 end
 
 if vim.g.knob_toggleterm then

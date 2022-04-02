@@ -77,7 +77,9 @@ telescope.setup({
     },
 })
 telescope.load_extension("fzf")
-telescope.load_extension("frecency")
+if vim.g.knob_frecency then
+  telescope.load_extension("frecency")
+end
 
 local colors = require("kanagawa.colors").setup()
 
