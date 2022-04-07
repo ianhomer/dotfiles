@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+$(shim) && . ${ME}/i.sh
+
+OPTIND=1
+while getopts "a" o; do case "$o" in
+  a) APPLY="y" ;;
+esac done
+
+log::trace "remote prune origin"
+git remote prune origin
+
+#
+# Prune branches that have squash merged into master
+#
+log::trace "pruning squash merged branches"
+for candidate in main master ; do
+  if git show-ref --quiet --verify -- "refs/remotes/origin/${candidate}" ; then
+    MAIN=$candidate
+    break
+  fi
+done
+[[ -z "$MAIN" ]] && log::exit "Cannot find main branch"
+
+git for-each-ref refs/heads/ "--format=%(refname:short)" |
+  while read branch ; do
+    if [[ "${branch}" == "${MAIN}" ]] ; then
+      continue
+    fi
+    mergePoint=$(git merge-base ${MAIN} ${branch})
+    # If we have a merge point
+    if [[ -n "$mergePoint" ]]; then
+      log::trace "candidate from ${mergePoint} ${branch}"
+      # This is the git tree object for the branch
+      branchTreeObject=$(git rev-parse "${branch}^{tree}")
+      log::trace "branch tree object ${branchTreeObject}"
+      # This is commit for the tree object that is the branch
+      branchCommitTree=$(
+        git commit-tree ${branchTreeObject} -p ${mergePoint} -m "§"
+      )
+      log::trace "branch commit tree ${branchCommitTree}"
+      cherry=$(git cherry ${MAIN} ${branchCommitTree})
+      log::trace "${cherry}"
+      if [[ "${TRACEME}" == "y" ]] ; then
+        git log --graph --oneline --decorate --boundary ${MAIN}...${branchCommitTree}
+      fi
+      if [[ "${cherry}" == "-"* ]] ; then
+        # Cherries starting with "-" have an equivalent in up stream
+        # hence have merged - see https://git-scm.com/docs/git-cherry
+        if [[ "${APPLY}" == "y" ]] ; then
+          git branch -D "${branch}"
+          log::status deleted "${branch}"
+        else
+          log::status prunable "${branch}"
+        fi
+      else
+        log::status not-prunable "${branch}"
+      fi
+    else
+      log::status not-from-main "${branch}"
+    fi
+  done
+
+if [[ -z "${APPLY}" ]] ; then
+  log:: "\n(set -a flag to make deletes)"
+fi

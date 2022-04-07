@@ -54,6 +54,7 @@ nvim_set_var("knobs_levels", {
     nerdtree = 9,
     lens = 8,
     lightbulb = 4,
+    lightspeed = 5,
     lsp = 4,
     lsp_colors = 3,
     lspconfig = 4,
@@ -375,6 +376,10 @@ return require("packer").startup({
             "phaazon/hop.nvim",
             config = [[require'config.hop']],
             commit = "235ca561e1074da53858fa6f9f706cb4bfff0dc3",
+        })
+        use({
+          "ggandor/lightspeed.nvim",
+          commit = "cfde2b2fe0dafc5684780399961595357998f611"
         })
         use({
             "christoomey/vim-tmux-navigator",
