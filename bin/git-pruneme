@@ -7,8 +7,10 @@ while getopts "a" o; do case "$o" in
   a) APPLY="y" ;;
 esac done
 
+git fetch -p
 log::trace "remote prune origin"
 git remote prune origin
+
 
 #
 # Prune branches that have squash merged into master
