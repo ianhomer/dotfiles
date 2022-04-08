@@ -23,7 +23,7 @@ Shortcuts I'm trying to remember.
 
 |          |                        |
 | -------- | ---------------------- |
-| `ctrl-/` | show telescope mappngs |
+| `ctrl-/` | show telescope mappings |
 
 ### debug
 
@@ -31,7 +31,7 @@ Start a process in debug mode, e.g. `--inspect-brk` in node. Then use the `,`
 shortcuts for run and debug features.
 
 |      |                                   |
-| ---- | ------------------------------    |
+| ---- | --------------------------------- |
 | `,t` | toggle a break point              |
 | `,c` | attach to debugger or continue    |
 | `,o` | open debugger UI                  |
@@ -93,43 +93,6 @@ shortcuts for run and debug features.
 | `space+o`     | Close all buffers except current one |
 | `space+space` | Show buffers                         |
 
-### NERDTree
-
-|           |                                            |
-| --------- | ------------------------------------------ |
-| `m`       | open file action                           |
-| `Shift+i` | show hidden files                          |
-| `Shift+r` | reload node                                |
-| `U`       | Up directory                               |
-| `C`       | Set root directory                         |
-| `cd`      | Change current directory to current note   |
-| `CD`      | Change root directory to current directory |
-
-### motion
-
-|             |                                                 |
-| ----------- | ----------------------------------------------- |
-| `0`         | beginning of line                               |
-| `\$`        | end of line                                     |
-| `}`         | next block                                      |
-| `{`         | previous block                                  |
-| `[[`        | next header                                     |
-| `]]`        | previous header                                 |
-| `:nn`       | line nn                                         |
-| `gd`        | go to definition                                |
-| `gg`        | beginning of file                               |
-| `GG`        | end of file                                     |
-| `percent %` | next / previous bracket                         |
-| `*`         | Search for next occurrence of word under cursor |
-| `Ctrl+o`    | Jump to previous cursor position (jumplist)     |
-| `Ctrl+i`    | Jump to next cursor position (jumplist)         |
-| `Ctrl+u`    | Scroll up                                       |
-| `Ctrl+d`    | Scroll down                                     |
-| `zz`        | Scroll window center current line               |
-| `zt`        | Scroll down with current line at top            |
-| `zb`        | Scroll up with current line at bottom           |
-| `Ctrl+]`    | Go to tag definition                            |
-| `Ctrl+t`    | Go back up call stack                           |
 
 ### windows
 
@@ -192,5 +155,51 @@ shortcuts for run and debug features.
 
 ### Fugitive
 
-| | |
-| -----
+|       |                                                 |
+| ----- | ----------------------------------------------- |
+| `=`   | Show diff for selected file                     |
+| `-`   | Stage of selected file (toggle)                 |
+| `-`   | Push current commit or HEAD if on unpushed line |
+| `s`   | Stage selected file                             |
+| `X`   | Discard changes on selected file                |
+| `cc`  | Commit staged files                             |
+| `cw`  | Change commit message for selected commit       |
+| `gq`  | Quit fugitive window                            |
+| `gpa` | Go to unpushed and push                         |
+
+### Quickfix
+
+|      |                |
+| ---- | -------------- |
+| `]q` | Next quick fix |
+
+### Markdown
+
+|             |                  |
+| ----------- | ---------------- |
+| `viWS+`     | make a word bold |
+| `zR`        | open all folds   |
+| `zM`        | close all folds  |
+| `<space>+l` | Lint file        |
+
+### Selections
+
+|       |                                                  |
+| ----- | ------------------------------------------------ |
+| `vip` | select paragraph                                 |
+| `viW` | select current word (including non-alphanumeric) |
+
+### Configuration
+
+|           |                            |
+| --------- | -------------------------- |
+| `space+p` | Toggle power configuration |
+| `space+v` | Reload vim configuration   |
+
+### fzf
+
+|          |                           |
+| -------- | ------------------------- |
+| `Ctrl+x` | Open in horizontal split  |
+| `Ctrl+v` | Open in vertical split    |
+| `Ctrl+/` | Toggle preview window off |
