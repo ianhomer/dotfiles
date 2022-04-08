@@ -19,10 +19,38 @@ Shortcuts I'm trying to remember.
 | `csw"`    | Quote word                                            |
 | `:xa`     | Save all and exit                                     |
 
+### motion
+
+|             |                                                 |
+| ----------- | ----------------------------------------------- |
+| `0`         | beginning of line                               |
+| `$`         | end of line                                     |
+| `}`         | next block                                      |
+| `{`         | previous block                                  |
+| `[[`        | next header                                     |
+| `]]`        | previous header                                 |
+| `:nn`       | line nn                                         |
+| `gd`        | go to definition                                |
+| `gg`        | beginning of file                               |
+| `GG`        | end of file                                     |
+| `percent %` | next / previous bracket                         |
+| `*`         | Search for next occurrence of word under cursor |
+| `Ctrl+o`    | Jump to previous cursor position (jumplist)     |
+| `Ctrl+i`    | Jump to next cursor position (jumplist)         |
+| `Ctrl+u`    | Scroll up                                       |
+| `Ctrl+d`    | Scroll down                                     |
+| `zz`        | Scroll window center current line               |
+| `zt`        | Scroll down with current line at top            |
+| `zb`        | Scroll up with current line at bottom           |
+| `Ctrl+]`    | Go to tag definition                            |
+| `Ctrl+t`    | Go back up call stack                           |
+
+|
+
 ### telescope
 
-|          |                        |
-| -------- | ---------------------- |
+|          |                         |
+| -------- | ----------------------- |
 | `ctrl-/` | show telescope mappings |
 
 ### debug
@@ -92,7 +120,6 @@ shortcuts for run and debug features.
 | `space+b`     | Commits for current buffer           |
 | `space+o`     | Close all buffers except current one |
 | `space+space` | Show buffers                         |
-
 
 ### windows
 
