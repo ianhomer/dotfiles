@@ -7,11 +7,11 @@ local completion = null_ls.builtins.completion
 null_ls.setup({
     debug = true,
     sources = {
-        formatting.black,
+        formatting.prettierd,
         formatting.eslint_d,
+        formatting.black,
         formatting.fish_indent,
         formatting.stylua,
-        formatting.prettierd,
         diagnostics.markdownlint,
         diagnostics.eslint_d,
         diagnostics.flake8,
