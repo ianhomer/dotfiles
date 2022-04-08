@@ -45,7 +45,24 @@ Shortcuts I'm trying to remember.
 | `Ctrl+]`    | Go to tag definition                            |
 | `Ctrl+t`    | Go back up call stack                           |
 
-|
+### cmdline
+
+command-line-mode
+
+|                    |                     |
+| ------------------ | ------------------  |
+| `ctrl-b`           | Beginning of line   |
+| `ctrl-e`           | End of line         |
+| `ctrl-shift-arrow` | Left or right word  |
+| `ctrl-f`           | Command line window |
+
+### cmdwin
+
+command-line-window
+
+|      |                          |
+| --   | --                       |
+| `q:` | Open command-line window |
 
 ### telescope
 
@@ -118,7 +135,6 @@ shortcuts for run and debug features.
 | `:bn`         | next buffer                          |
 | `bufdo bd`    | close all buffers                    |
 | `space+b`     | Commits for current buffer           |
-| `space+o`     | Close all buffers except current one |
 | `space+space` | Show buffers                         |
 
 ### windows

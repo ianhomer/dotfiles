@@ -12,7 +12,7 @@ null_ls.setup({
         formatting.fish_indent,
         formatting.stylua,
         formatting.prettierd,
-        formatting.markdownlint,
+        diagnostics.markdownlint,
         diagnostics.eslint_d,
         diagnostics.flake8,
         diagnostics.proselint,
