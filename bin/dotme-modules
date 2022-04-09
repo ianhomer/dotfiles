@@ -8,7 +8,9 @@
 
 dotmoduleDirectory=$HOME/projects/dotmodules
 
-for d in ${dotmoduleDirectory}/dot*/ ; do
+if [[ -d ${dotmoduleDirectory} ]] ; then
+  for d in ${dotmoduleDirectory}/dot*/ ; do
     command=$(basename $d)
     $command
-done
+  done
+fi
