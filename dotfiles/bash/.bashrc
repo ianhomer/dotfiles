@@ -29,3 +29,4 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 alias vi="VIM_KNOBS=5 nvim"
 alias v="VIM_KNOBS=5 nvim"
 alias pull="git pullme"
+. "$HOME/.cargo/env"
