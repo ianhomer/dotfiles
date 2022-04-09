@@ -29,17 +29,16 @@
 
 ### panes
 
-|                |                                                  |
-| -------------- | ------------------------------------------------ |
-| `Ctrl+a+z`     | zoom in / out of current pane                    |
-| `Ctrl+a+\`     | split pane right                                 |
-| `Ctrl+a+-`     | split pane below                                 |
-| `Ctrl+a+x`     | close pane                                       |
-| `Opt+arrow`    | move between panes                               |
-| `Ctrl+hjkl`    | move between panes ; including through vim panes |
-| `Ctrl+arrow` r | move between panes ; including through vim panes |
-| `Ctrl+a+{`     | move pane left                                   |
-| `Ctrl+a+}`     | move pane right                                  |
+|              |                                                  |
+| ------------ | ------------------------------------------------ |
+| `Ctrl+a+z`   | zoom in / out of current pane                    |
+| `Ctrl+a+\`   | split pane right                                 |
+| `Ctrl+a+-`   | split pane below                                 |
+| `Ctrl+a+x`   | close pane                                       |
+| `Ctrl+hjkl`  | move between panes ; including through vim panes |
+| `Ctrl+arrow` | move between panes ; including through vim panes |
+| `Ctrl+a+{`   | move pane left                                   |
+| `Ctrl+a+}`   | move pane right                                  |
 
 ### maps
 
