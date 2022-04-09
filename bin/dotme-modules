@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#
+# Execute dotfile modules
+#
+# A dotmodule is a directory in the dotmodule directory. The name of the
+# directory must match the name of a binary that should be run.
+#
+
+dotmoduleDirectory=$HOME/projects/dotmodules
+
+for d in ${dotmoduleDirectory}/dot*/ ; do
+    command=$(basename $d)
+    $command
+done
