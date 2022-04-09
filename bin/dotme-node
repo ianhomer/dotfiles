@@ -52,10 +52,17 @@ cat $NODE_GLOBAL | grep -v '#' | grep '@'          |
 
 log:: "checking pnpm outdated"
 pnpm --global outdated
-# log:: "pnpm update"
-# pnpm -g update
+log:: "pnpm update"
+pnpm -g update
 
 echo
-echo "... Global node packages installed"
+log:: "... Global node packages installed"
+
+# Running lint daemons might have been updated, stop to
+# allow a restart when needed
+log:: "... Stopping lint daemons"
+
+pkill -f prettierd
+pkill -f eslint_d
 
 should-run -fu $0
