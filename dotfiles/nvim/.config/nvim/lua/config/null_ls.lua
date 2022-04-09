@@ -7,12 +7,13 @@ local completion = null_ls.builtins.completion
 null_ls.setup({
     debug = true,
     sources = {
-        formatting.black,
+        -- order is important, prettier should be before eslint
+        formatting.prettierd,
         formatting.eslint_d,
+        formatting.black,
         formatting.fish_indent,
         formatting.stylua,
-        formatting.prettierd,
-        formatting.markdownlint,
+        diagnostics.markdownlint,
         diagnostics.eslint_d,
         diagnostics.flake8,
         diagnostics.proselint,
