@@ -4,9 +4,15 @@
 
 ### memento
 
-|                       |                                                 |
-| --------------------- | ----------------------------------------------- |
-| `Ctrl+Cmd+click+drag` | Move Window                                     |
+|                       |             |
+| --------------------- | ----------- |
+| `Ctrl+Cmd+click+drag` | Move Window |
+
+### finder
+
+|               |                   |
+| ------------- | ----------------- |
+| `Shift+Cmd+.` | Show hidden files |
 
 ### windows
 
@@ -15,7 +21,7 @@
 | `Ctrl+Cmd+click+drag` | Move Window                                     |
 | `Ctrl+Cmd+space`      | Open special character window                   |
 | `Cmd+Tab`             | Switch Application. Shift reverses.             |
-| **Cmd+backtick**      | Switch between windows in app. Shift reverses.  |
+| `Cmd+backtick`        | Switch between windows in app. Shift reverses.  |
 | `Ctrl+Tab`            | Cycle through tabs in a window. Shift reverses. |
 | `Cmd+h`               | Hide window                                     |
 | `Cmd+c`               | Copy                                            |
@@ -33,12 +39,6 @@
 : Reset bluetooth
 
 See System Preferences -> Keyboard -> Shortcuts for details
-
-### finder
-
-|                                  |                   |
-| -------------------------------- | ----------------- |
-| `Shift+Cmd+.` - in finder window | Show hidden files |
 
 ## links
 
