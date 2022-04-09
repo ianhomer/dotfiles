@@ -19,7 +19,7 @@ Install [brave](https://brave.com/)
 Change key board shortcuts.
 
 |              |                  |
-| --           | --               |
+| ------------ | ---------------- |
 | `Ctrl-Alt-,` | Previous Display |
 | `Ctrl-Alt-.` | Next Display     |
 
@@ -145,5 +145,3 @@ Restart and on solution -> Manage .NET SDK -> Select 5.0
 #### Xcode
 
 Find Xcode in Application, click Get Info and select open in Rosetta.
-
-
