@@ -5,3 +5,4 @@
 echo "... running .bash_profile from dotfiles"
 
 PATH=$PATH:$HOME/.dotfiles/bin
+. "$HOME/.cargo/env"
