@@ -7,6 +7,7 @@
 |                       |             |
 | --------------------- | ----------- |
 | `Ctrl+Cmd+click+drag` | Move Window |
+| `Ctrl+Cmd+q`          | Lock Screen |
 
 ### finder
 
