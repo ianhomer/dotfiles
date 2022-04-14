@@ -218,6 +218,11 @@ return require("packer").startup({
             commit = "70a1131d64d75150ece513b983b0f42939bcb03c",
         })
         use({
+          "rafamadriz/friendly-snippets",
+          commit = "e302658e765cf20e6af5a1be8cc07a996d6ee2cc"
+        })
+
+        use({
             "j-hui/fidget.nvim",
             commit = "d47f2bbf7d984f69dc53bf2d37f9292e3e99ae8a",
             config = [[require'fidget'.setup{}]],
