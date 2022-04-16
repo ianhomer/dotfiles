@@ -416,7 +416,7 @@ return require("packer").startup({
         use({
             "rebelot/kanagawa.nvim",
             commit = "acf0f5d61236b416c804d649cd76db8390de9ae6",
-            config = [[vim.cmd("colorscheme kanagawa")]],
+            config = [[require'config.kanagawa']],
         })
         use({
             "norcalli/nvim-colorizer.lua",

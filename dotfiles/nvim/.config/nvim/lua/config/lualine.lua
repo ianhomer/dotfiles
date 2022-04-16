@@ -11,6 +11,10 @@ local function repositoryName()
 end
 
 require("lualine").setup {
+    options = {
+      -- => localstatus = 3
+      globalstatus = true
+    },
     -- options = {
     --     theme = "kanagawa"
     -- },
