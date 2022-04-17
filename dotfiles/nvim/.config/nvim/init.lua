@@ -73,6 +73,7 @@ nvim_set_var("knobs_levels", {
     peekaboo = 9,
     polyglot = 9,
     rainbow = 9,
+    refactoring = 3,
     rhubarb = 7,
     shortcuts = 1,
     spelling = 4,
@@ -312,6 +313,16 @@ return require("packer").startup({
             "puremourning/vimspector",
             config = [[require'config.vimspector']],
             commit = "ebeebc121423a5ab9a31c996f9881880b658c644",
+        })
+
+        use({
+            "ThePrimeagen/refactoring.nvim",
+            commit = "94eaa199ad892f26d2c8594dbbc5656314cf5bdb",
+            config = [[require'config.refactoring']],
+            requires = {
+                { "nvim-lua/plenary.nvim" },
+                { "nvim-treesitter/nvim-treesitter" },
+            },
         })
 
         -- Navigation

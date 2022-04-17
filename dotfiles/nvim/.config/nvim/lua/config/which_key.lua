@@ -60,6 +60,10 @@ if vim.g.knob_telescope then
     map["tr"] = { "<cmd>Telescope registers<cr>", "Registers" }
     map["tq"] = { "<cmd>Telescope quickfix<cr>", "Quick Fix" }
     map["tt"] = { "<cmd>Telescope<cr>", "Telescope" }
+    if vim.g.knob_refactoring then
+      map["tr"] = { "<cmd>lua require'telescope'.extensions.refactoring.refactors()<cr>" }
+    end
+
 
     -- Git
     map["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }

@@ -81,6 +81,10 @@ if vim.g.knob_frecency then
   telescope.load_extension("frecency")
 end
 
+if vim.g.knob_refactoring then
+  telescope.load_extension("refactoring")
+end
+
 local colors = require("kanagawa.colors").setup()
 
 vim.cmd("hi TelescopeBorder guibg = " .. colors.bg_dim .. " guifg = " .. colors.bg_dim)
