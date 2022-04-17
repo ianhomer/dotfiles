@@ -73,7 +73,7 @@ nvim_set_var("knobs_levels", {
     peekaboo = 9,
     polyglot = 9,
     rainbow = 9,
-    refactoring = 3,
+    refactoring = 7,
     rhubarb = 7,
     shortcuts = 1,
     spelling = 4,
