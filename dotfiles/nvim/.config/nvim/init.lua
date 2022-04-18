@@ -72,7 +72,7 @@ nvim_set_var("knobs_levels", {
     nvim_tree = 3,
     peekaboo = 9,
     polyglot = 9,
-    rainbow = 9,
+    rainbow = 5,
     refactoring = 7,
     rhubarb = 7,
     shortcuts = 1,
@@ -440,11 +440,12 @@ return require("packer").startup({
             config = [[require'config.neoscroll']],
             commit = "cd4278795ed8ee120a97078b03aa6436802126d9",
         })
-        -- use({
-        --     "p00f/nvim-ts-rainbow",
-        --     config = [[require'config.rainbow']],
-        --     commit = "ac5032edc1d3e9216d081d130a14d4fcaf6cd3b3"
-        -- })
+        use({
+            "p00f/nvim-ts-rainbow",
+            after = "nvim-treesitter",
+            config = [[require'config.rainbow']],
+            commit = "04284dc97eac0d0ecfea68e10be824d1a6585de0"
+        })
 
         -- Git
         use({
