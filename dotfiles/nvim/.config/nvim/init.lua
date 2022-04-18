@@ -80,6 +80,7 @@ nvim_set_var("knobs_levels", {
     startify = 4,
     startuptime = 1,
     surround = 3,
+    symbols_outline = 5,
     tabcomplete = 9,
     tabular = 3,
     telescope = 4,
@@ -323,6 +324,12 @@ return require("packer").startup({
                 { "nvim-lua/plenary.nvim" },
                 { "nvim-treesitter/nvim-treesitter" },
             },
+        })
+
+        use({
+          'simrat39/symbols-outline.nvim',
+          commit = "1361738c47892c3cee0d0b7a3b3bc7a8b48139c2",
+          config = [[require'config.symbols_outline']]
         })
 
         -- Navigation
