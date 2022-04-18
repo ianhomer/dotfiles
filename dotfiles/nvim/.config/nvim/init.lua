@@ -329,7 +329,7 @@ return require("packer").startup({
         use({
           'simrat39/symbols-outline.nvim',
           commit = "1361738c47892c3cee0d0b7a3b3bc7a8b48139c2",
-          config = [[require'config.symbols_outline']]
+          setup = [[require'config.symbols_outline']]
         })
 
         -- Navigation
