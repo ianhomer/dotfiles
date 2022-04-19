@@ -209,6 +209,9 @@ vnoremap > >gv
 vnoremap <silent> J :m '>+1<CR>gv=gv
 vnoremap <silent> K :m '<-2<CR>gv=gv
 
+" jk to exit insert mode
+imap jk <Esc>
+
 " Surround customisation
 let g:surround_{char2nr('b')} = "**\r**"
 let g:surround_{char2nr('<')} = "<\r>"

@@ -50,7 +50,7 @@ Shortcuts I'm trying to remember.
 command-line-mode
 
 |                    |                     |
-| ------------------ | ------------------  |
+| ------------------ | ------------------- |
 | `ctrl-b`           | Beginning of line   |
 | `ctrl-e`           | End of line         |
 | `ctrl-shift-arrow` | Left or right word  |
@@ -61,7 +61,7 @@ command-line-mode
 command-line-window
 
 |      |                          |
-| --   | --                       |
+| ---- | ------------------------ |
 | `q:` | Open command-line window |
 
 ### telescope
@@ -84,58 +84,65 @@ shortcuts for run and debug features.
 
 ### misc
 
-|            |                       |
-| ---------- | --------------------- |
-| `space+r`  | Open (paste) registry |
-| `space+c`  | Commits               |
-| `space+cw` | Clear white space     |
-| `space+h`  | File open history     |
+|            |                   |
+| ---------- | ----------------- |
+| `space+c`  | Commits           |
+| `space+cw` | Clear white space |
+| `space+h`  | File open history |
 
 ### maps
 
-|            |                              |
-| ---------- | ---------------------------- |
-| `space+m`  | Keyboard map for normal mode |
-| `:Maps!`   | Open maps in full screen     |
-| `space+l`  | Keyboard map for insert mode |
-| `:dig`     | List di-graphs               |
-| `ctrl-k Co | Insert di-graph e.g. ©       |
+|             |                              |
+| ----------- | ---------------------------- |
+| `space+m`   | Keyboard map for normal mode |
+| `:Maps!`    | Open maps in full screen     |
+| `space+l`   | Keyboard map for insert mode |
+| `:dig`      | List di-graphs               |
+| `ctrl-k Co` | Insert di-graph e.g. ©       |
+
+### registers
+
+|                        |                                              |
+| ---------------------- | -------------------------------------------- |
+| `"`                    | Show registers                               |
+| `ctrl-r`               | Select register in insert mode and Telescope |
+| `call setreg('a', [])` | Clear a register                             |
+| `"add`                 | Delete line into register a                  |
+| `"ap`                  | Paste line from register a                   |
+| `space + r` or `:reg`  | show paste register                          |
 
 ### files
 
-|                       |                             |
-| --------------------- | --------------------------- |
-| `space+n`             | Open nerd tree              |
-| `space+s`             | Save all files              |
-| `space+f`             | Open file browser           |
-| `:cd`                 | change directory            |
-| `space + r` or `:reg` | show paste registry         |
-| `"2p`                 | paste a previous cut        |
-| `gf`                  | go to file under cursor     |
-| `gx`                  | open link in browser        |
-| `gt`                  | go to next tab              |
-| `tabe`                | open file in new tab        |
-| `m + letter`          | set mark                    |
-| `' + letter`          | go to mark                  |
-| `Ctrl+^`              | switch to previous buffer   |
-| `:tab h foo`          | open help in a new tab      |
-| `Ctrl+w o`            | make pane the visible one   |
-| `:noh`                | clear last highlight        |
-| `"add`                | Delete line into registry a |
-| `"ap`                 | Paste line from registry a  |
+|              |                           |
+| ------------ | ------------------------- |
+| `space+n`    | Open nerd tree            |
+| `space+s`    | Save all files            |
+| `space+f`    | Open file browser         |
+| `:cd`        | change directory          |
+| `"2p`        | paste a previous cut      |
+| `gf`         | go to file under cursor   |
+| `gx`         | open link in browser      |
+| `gt`         | go to next tab            |
+| `tabe`       | open file in new tab      |
+| `m + letter` | set mark                  |
+| `' + letter` | go to mark                |
+| `Ctrl+^`     | switch to previous buffer |
+| `:tab h foo` | open help in a new tab    |
+| `Ctrl+w o`   | make pane the visible one |
+| `:noh`       | clear last highlight      |
 
 `:enew | pu=execute('autocmd')`
 : copy output of command, e.g. autocmd, into buffer
 
 ### buffers
 
-|               |                                      |
-| ------------- | ------------------------------------ |
-| `:bd`         | close buffer                         |
-| `:bn`         | next buffer                          |
-| `bufdo bd`    | close all buffers                    |
-| `space+b`     | Commits for current buffer           |
-| `space+space` | Show buffers                         |
+|               |                            |
+| ------------- | -------------------------- |
+| `:bd`         | close buffer               |
+| `:bn`         | next buffer                |
+| `bufdo bd`    | close all buffers          |
+| `space+b`     | Commits for current buffer |
+| `space+space` | Show buffers               |
 
 ### windows
 

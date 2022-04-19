@@ -16,6 +16,7 @@ null_ls.setup({
         diagnostics.markdownlint,
         diagnostics.eslint_d,
         diagnostics.flake8,
+        diagnostics.tidy,
         diagnostics.proselint,
         -- diagnostics.write_good,
         diagnostics.proselint,

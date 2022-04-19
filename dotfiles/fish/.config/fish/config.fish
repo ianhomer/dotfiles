@@ -127,3 +127,6 @@ bind --mode insert \cw cheat
 bind --mode insert -k nul "things -n headings --witharchive"
 
 time-me "END config.fish"
+
+set -gx PNPM_HOME "/Users/ian/Library/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
