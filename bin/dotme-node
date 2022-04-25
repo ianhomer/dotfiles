@@ -64,7 +64,7 @@ log:: "... Global node packages installed"
 # allow a restart when needed
 log:: "... Stopping lint daemons"
 
-pkill -f prettierd
-pkill -f eslint_d
+pkill -f prettierd || log:: "no pettier daemon to stop"
+pkill -f eslint_d || log:: "no eslint daemon to stop"
 
 should-run -fu $0
