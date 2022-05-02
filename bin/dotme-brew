@@ -72,6 +72,9 @@ if [[ "$ADMIN" == "y" ]] ; then
   brew bundle
 fi
 
+# Force pnpm overwrite, we'll always take an upgrade
+brew link --overwrite pnpm
+
 # Restart Alfred - it might have updated, and it's quick to recycle, so until I
 # can be cleverer about restarting when updated ...
 osascript -e 'tell application "Alfred" to quit'
