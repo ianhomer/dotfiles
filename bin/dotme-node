@@ -47,9 +47,9 @@ pnpm --global list 2>/dev/null || pnpm --global install pyright
 # Install missing packages
 
 log:: "pnpm install missing global"
-cat $NODE_GLOBAL | grep -v '#' | grep '@'          |
-  grep -F -v "`pnpm --global --json list           |
-    jq --raw-output '.[0].dependencies | keys[]'`" |
+cat $NODE_GLOBAL | grep -v '#' | grep '@'                |
+  grep -F -v "`pnpm --global --json list                 |
+  jq --raw-output '.[0].dependencies | keys[] + \"@\"'`" |
   xargs pnpm install --global
 
 log:: "checking pnpm outdated"
