@@ -35,7 +35,7 @@ require("nvim-tree").setup({
     actions = {
         open_file = {
             window_picker = {
-                enable = true,
+                enable = false,
                 exclude = {
                     filetype = {},
                     buftype = {

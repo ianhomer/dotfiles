@@ -60,6 +60,9 @@ pnpm -g update
 echo
 log:: "... Global node packages installed"
 
+# Force pnpm overwrite, we'll always take an upgrade
+brew link --overwrite pnpm
+
 # Running lint daemons might have been updated, stop to
 # allow a restart when needed
 log:: "... Stopping lint daemons"
