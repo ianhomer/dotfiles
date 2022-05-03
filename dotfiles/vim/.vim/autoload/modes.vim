@@ -13,6 +13,7 @@ function modes#ResetMode()
   set nornu
   set backspace=indent,eol,start
   set nohlsearch
+  set laststatus=3
 
   silent! nunmap <Up>
   silent! nunmap <Down>
@@ -35,11 +36,13 @@ function modes#PersonalDevMode()
   call modes#ResetMode()
   set rnu
   set nu
+  set laststatus=3
 endfunction
 
 " 3 = mobbing mode
 function modes#MobbingMode()
   call modes#ResetMode()
+  set laststatus=2
   set nu
 endfunction
 
