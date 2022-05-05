@@ -40,6 +40,7 @@ nvim_set_var("knobs_levels", {
     frecency = 9,
     friendly_snippets = 5,
     fzf = 3,
+    git_conflict = 5,
     gitgutter = 6,
     gitsigns = 5,
     gruvbox = 9,
@@ -469,6 +470,11 @@ return require("packer").startup({
         use({
             "airblade/vim-gitgutter",
             commit = "988a6dbad9a9777cd94aab18ba7821a41068685b",
+        })
+        use({
+            "akinsho/git-conflict.nvim",
+            config = [[require'config.git_conflict']],
+            commit = "dc64f73266894359d31c117a4f371867ba59beec",
         })
         use({
             "tpope/vim-dispatch",
