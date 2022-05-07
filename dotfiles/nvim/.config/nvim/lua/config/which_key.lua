@@ -106,6 +106,11 @@ cheats["s"] = { ":let @+ = execute('messages')<cr>", ":let @+ = execute('message
 
 whichKey.register(cheats, { prefix = "\\" })
 
+local goes = {}
+goes["w"] = { ":FindWord<cr>", "Find word" }
+goes["W"] = { ":GrepWord<cr>", "Grep word" }
+whichKey.register(goes, { prefix = "g" })
+
 if vim.g.knob_dap then
     local runners = {}
     runners["m"] = { "<cmd>lua require'dap'.continue()<CR>", "attach/continue" }

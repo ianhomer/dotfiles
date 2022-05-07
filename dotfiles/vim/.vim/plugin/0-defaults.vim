@@ -46,6 +46,9 @@ set sidescroll=1
 " Wildignore
 set wildignore+=*/node_modules/*,*/__pycache__/*
 
+" Grep command
+set grepprg=ag\ --vimgrep
+
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 
@@ -188,6 +191,10 @@ augroup dotme
     autocmd FocusGained,WinEnter,BufEnter * :checktime
     call my#EnableAutoSave()
   endif
+
+  " Auto open quickfix window after quickfix commands
+  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost l* lwindow
 augroup end
 
 "
