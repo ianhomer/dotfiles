@@ -5,7 +5,7 @@ $(shim) && . ${ME}/i.sh
 
 log:: "Cleaning files"
 
-find ~/projects/try -name .DS_Store -exec rm -i {} \;
+find ~/projects -name .DS_Store -exec rm -i {} \;
 
 should-run -fu $0
 
