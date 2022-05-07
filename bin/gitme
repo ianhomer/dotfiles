@@ -50,7 +50,12 @@ for d in `git-get-directories` ; do
       log:: "no remote"
     else
       now=`date +%s`
-      lastModified=`stat -f '%c' .git/FETCH_HEAD`
+      if [[ -f .git/FETCH_HEAD ]] ; then
+        lastModifiedFile=".git/FETCH_HEAD"
+      else
+        lastModifiedFile=".git/HEAD"
+      fi
+      lastModified=`stat -f '%c' ${lastModifiedFile}`
       if [[ $((lastModified + FETCH_WINDOW)) < $now ]] ; then
         printf '\033[0;33m'
         git remote update
