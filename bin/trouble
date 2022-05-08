@@ -1,10 +1,45 @@
 #!/usr/bin/env bash
 
+help() {
+  cat << EOF
+  -e eslint
+  -h this help
+  -p prettier
+EOF
+}
+
+OPTIND=1
+while getopts "ehp" o; do case "$o" in
+  e) ESLINT=y ;;
+  p) PRETTIER=y ;;
+  h) HELP=y ;;
+  *) exit 1 ;;
+esac done
+shift $((OPTIND-1))
+
+if [[ "${HELP}" == "y" || -z "${ESLINT}${PRETTIER}" ]] ; then
+  help
+  exit 1
+fi
+
 # The start of trouble
 
-pnpx eslint . -f json |
-  jq '.[] | select((.messages | length) > 0) | .filePath' -r |
-  xargs realpath --relative-to=$PWD |
-  fzf -m --bind ctrl-t:toggle-all |
-  xargs nvim "+Trouble" "+silent argdo e"
+if [[ "$ESLINT" == "y" ]] ; then
+  pnpx eslint . -f json               |
+    jq '.[] | select((.messages | length) > 0) | .filePath' -r |
+    xargs realpath --relative-to=$PWD |
+    fzf -m --bind ctrl-t:toggle-all   |
+    xargs nvim "+Trouble" "+silent argdo e"
+fi
+
+if [[ "$PRETTIER" == "y" ]] ; then
+  pnpx prettier . -c 2>&1    |
+    grep -v "run Prettier?"  |
+    grep "warn"              |
+    sed 's/\[warn\] //'      |
+    head -n 20               |
+    xargs realpath --relative-to=$PWD |
+    fzf -m --bind ctrl-t:toggle-all   |
+    xargs nvim "+Trouble" "+silent argdo e"
+fi
 
