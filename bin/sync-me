@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+$(shim) && . ${ME}/i.sh
+if [[ -z "$2" ]] ; then
+  log::exit "Please provide source and destination"
+fi
+
+if [[ "$1" == */ ]] ; then
+  log::exit "Please remote / from end of source"
+fi
+if [[ "$2" == */ ]] ; then
+  log::exit "Please remote / from end of destination"
+fi
+
+
+source="$1"
+destination="$2"
+
+sourceBasename=`basename $source`
+destinationBasename=`basename $destination`
+
+if [[ "${sourceBasename}" != "${destinationBasename}" ]] ; then
+  log::exit "Source (${sourceBasename}) and destination (${destinationBasename}) base name should match"
+fi
+
+EXCLUDES_FILE=~/.dotfiles/dotfiles/rsync/.config/rsync/rsync-excludes.txt
+
+log:: "$source -> $destination"
+
+# Ensure destination directory exists so that bootstrapping of
+# of sync process starts OK
+if [[ ! -d "$destination" ]] ; then
+  log:: "Making directory $destination"
+  mkdir $destination
+fi
+
+# -P => --progress & --partial (keep partially transferred files)
+# -r => recursive
+# -z => compress
+# -v => verbose
+# -i => --itemize-changes (output a change summary)
+# -u => --update (skip files that are newer on the receiver)
+
+args="--exclude-from=${EXCLUDES_FILE} -rzui"
+
+# args="${args}P"
+# args="${args}v"
+# args="${args} --dry-run"
+
+log:: "sync up"
+rsync ${args} "$source"/* "$destination"
+
+log:: "sync down"
+rsync ${args} "$destination"/* "$source"
+
