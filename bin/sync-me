@@ -85,6 +85,6 @@ log:: "sync down"
 rsync ${args} "$to"/* "$from"
 
 # Eyes on thing cound in case something going odd with syncing
-thingCount=`find ~/Dropbox/things/ -type f | wc -l`
+thingCount=`find ~/Dropbox/things -type f | wc -l`
 log:: "thing count : ${thingCount}"
 
