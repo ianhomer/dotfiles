@@ -1,23 +1,54 @@
 #!/usr/bin/env bash
 
+help() {
+  cat << EOF
+
+sync-me thing-dir
+
+  where thing-dir is a directory in ~/project/things or
+
+sync-me ~/full-path-source/thing-dir ~/full-path-destination/thing-dir
+
+  -h this help
+  -d dry run
+  -v verbose
+EOF
+}
+
+OPTIND=1
+while getopts "dhv" o; do case "$o" in
+  h) help && exit 0 ;;
+  v) VERBOSE=y ;;
+  d) DRY=y ;;
+  *) exit 1 ;;
+esac done
+shift $((OPTIND-1))
+
 $(shim) && . ${ME}/i.sh
-if [[ -z "$2" ]] ; then
-  log::exit "Please provide source and destination"
+
+if [[ "$1" == *\/* ]] ; then
+  # Two arguments, expect absolute paths
+  if [[ -z "$2" ]] ; then
+    log::exit "Please provide source and destination"
+  fi
+
+  if [[ "$1" == */ ]] ; then
+    log::exit "Please remote / from end of source"
+  fi
+  if [[ "$2" == */ ]] ; then
+    log::exit "Please remote / from end of destination"
+  fi
+
+  from="$1"
+  to="$2"
+else
+  # One argument, thing directory to sync
+  from=${HOME}/projects/things/$1
+  to=${HOME}/Dropbox/things/$1
 fi
 
-if [[ "$1" == */ ]] ; then
-  log::exit "Please remote / from end of source"
-fi
-if [[ "$2" == */ ]] ; then
-  log::exit "Please remote / from end of destination"
-fi
-
-
-source="$1"
-destination="$2"
-
-sourceBasename=`basename $source`
-destinationBasename=`basename $destination`
+sourceBasename=`basename $from`
+destinationBasename=`basename $to`
 
 if [[ "${sourceBasename}" != "${destinationBasename}" ]] ; then
   log::exit "Source (${sourceBasename}) and destination (${destinationBasename}) base name should match"
@@ -25,13 +56,13 @@ fi
 
 EXCLUDES_FILE=~/.dotfiles/dotfiles/rsync/.config/rsync/rsync-excludes.txt
 
-log:: "$source -> $destination"
+log:: "$from -> $to"
 
 # Ensure destination directory exists so that bootstrapping of
 # of sync process starts OK
-if [[ ! -d "$destination" ]] ; then
-  log:: "Making directory $destination"
-  mkdir $destination
+if [[ ! -d "$to" ]] ; then
+  log:: "Making directory $to"
+  mkdir $to
 fi
 
 # -P => --progress & --partial (keep partially transferred files)
@@ -41,15 +72,19 @@ fi
 # -i => --itemize-changes (output a change summary)
 # -u => --update (skip files that are newer on the receiver)
 
-args="--exclude-from=${EXCLUDES_FILE} -rzui"
+args="--stats --exclude-from=${EXCLUDES_FILE} -Przui"
 
-# args="${args}P"
-# args="${args}v"
-# args="${args} --dry-run"
+[[ "${VERBOSE}" == "y" ]] && args="${args}v"
+[[ "${DRY}" == "y" ]] && args="${args} --dry-run"
+log:: "${args}"
 
 log:: "sync up"
-rsync ${args} "$source"/* "$destination"
+rsync ${args} "$from"/* "$to"
 
 log:: "sync down"
-rsync ${args} "$destination"/* "$source"
+rsync ${args} "$to"/* "$from"
+
+# Eyes on thing cound in case something going odd with syncing
+thingCount=`find ~/Dropbox/things/ -type f | wc -l`
+log:: "thing count : ${thingCount}"
 
