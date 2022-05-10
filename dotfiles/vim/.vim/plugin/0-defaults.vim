@@ -58,12 +58,6 @@ set nomodeline
 " Don't show mode, lualine does that for me
 set noshowmode
 
-" Persistent undo file
-set undofile
-set undodir=~/.vim/undo
-let g:mundo_width = 60
-let g:mundo_right = 1
-
 " work around for https://github.com/vim/vim/issues/4738
 if has('macunix')
   nnoremap gx :call thingity#OpenURLUnderCursor()<CR>
@@ -304,3 +298,4 @@ set splitbelow
 
 " Don't conceal any syntax
 set conceallevel=0
+
