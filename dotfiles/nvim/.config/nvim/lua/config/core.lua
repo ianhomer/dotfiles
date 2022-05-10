@@ -32,7 +32,8 @@ command! -nargs=* Fuzzy Telescope grep_string search=<args>
 
 -- Persistent undo file
 vim.opt.undofile = true
-vim.opt.undodir = "~/.vim/undo"
+-- Use HOME expansion instead of ~ - https://github.com/neovim/neovim/issues/15720
+vim.opt.undodir = os.getenv( "HOME" ) .. "/.vim/undo"
 g.mundo_width = 60
 g.mundo_right = 1
 

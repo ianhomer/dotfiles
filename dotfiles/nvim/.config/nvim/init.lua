@@ -37,6 +37,7 @@ nvim_set_var("knobs_levels", {
     endwise = 7,
     eunuch = 3,
     fidget = 3,
+    flog = 5,
     fugitive = 3,
     frecency = 9,
     friendly_snippets = 5,
@@ -462,6 +463,10 @@ return require("packer").startup({
             "tpope/vim-fugitive",
             cmd = { "G", "Git", "Gstatus", "Gblame", "Ggrep", "Gpush", "Gpull" },
             commit = "b7287bd5421da62986d9abf9131509b2c9f918e4",
+        })
+        use({
+            "rbong/vim-flog",
+            commit = "47123282f501fc77965e1d3c08357209d991c7f4"
         })
         use({
             "tpope/vim-rhubarb",
