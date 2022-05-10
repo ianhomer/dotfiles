@@ -15,6 +15,7 @@ nvim_set_var("knobs_default_level", 5)
 
 -- Levels at which knobs are enabled
 nvim_set_var("knobs_levels", {
+    abolish = 5,
     ale = 9,
     apathy = 6,
     airline = 9,
@@ -510,13 +511,15 @@ return require("packer").startup({
             "tpope/vim-unimpaired",
             commit = "98427183e2b35acee15c7628b1cd587b98025719",
         })
-
         use({
             "tpope/vim-repeat",
             commit = "24afe922e6a05891756ecf331f39a1f6743d3d5a",
         })
+        use({
+            "tpope/vim-abolish",
+            commit = "3f0c8faadf0c5b68bcf40785c1c42e3731bfa522",
+        })
         use({ "godlygeek/tabular", cmd = { "Tabularize" }, command = "339091ac4dd1f17e225fe7d57b48aff55f99b23a" })
-
         use({
             "editorconfig/editorconfig-vim",
             commit = "a8e3e66deefb6122f476c27cee505aaae93f7109",
