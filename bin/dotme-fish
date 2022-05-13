@@ -36,6 +36,9 @@ fish_add_path ~/Library/Python/3.9/bin
 if is-silicon
   fish_add_path /opt/homebrew/bin
   fish_add_path /opt/homebrew/sbin
+  if test -d /opt/homebrew/opt/python@3.9
+    fish_add_path /opt/homebrew/opt/python@3.9/Frameworks/Python.framework/Versions/3.9/bin
+  end
 else
   fish_add_path /usr/local/opt/python@3.9/Frameworks/Python.framework/Versions/3.9/bin
 end
