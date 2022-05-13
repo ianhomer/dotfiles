@@ -5,7 +5,9 @@
 
 set -e
 
-while getopts "a" o; do case "$o" in
+SHOULD_RUN_ARGS=""
+while getopts "af" o; do case "$o" in
+  f) SHOULD_RUN_ARGS="${SHOULD_RUN_ARGS} -f" ;;
   a) ADMIN=y ;;
 esac done
 
@@ -14,14 +16,19 @@ $(shim) && . ${ME}/i.sh
 BREW_DIR=${DOTFILES_DIR}/config/brew
 
 if [[ "$ADMIN" != "y" ]] ; then
-  should-run -m 14 $0 $BREW_DIR/Brewfile || exit 0
+  should-run -m 14 $@ $0 $BREW_DIR/Brewfile || exit 0
 fi
 
 if ! is-executable brew ; then
-  log:: "installing brew"
+  log:: "installing brew (sudo required)"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+if ! grep -q "/brew shellenv" ~/.zprofile ; then
+  log:: "initialising ~/.zprofile"
+  brewCommand=$(which brew)
+  echo 'eval $('${brewCommand}' shellenv)' >> ~/.zprofile
+  eval "$(${brewCommand} shellenv)"
 fi
 
 adminFormula="adoptopenjdk8 adoptopenjdk11 java11 languagetool openjdk@11"
@@ -64,6 +71,9 @@ if [[ "$ADMIN" == "y" ]] ; then
   cd $DOTFILES_DIR/config/brew/admin
   brew bundle
 fi
+
+# Force pnpm overwrite, we'll always take an upgrade
+brew link --overwrite pnpm
 
 # Restart Alfred - it might have updated, and it's quick to recycle, so until I
 # can be cleverer about restarting when updated ...

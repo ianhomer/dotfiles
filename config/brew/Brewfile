@@ -89,35 +89,31 @@ cask "hiddenbar"
 
 #
 # office tools
-#
-# * pandoc + basictex => doc conversion, e.g. markdown to PDF
-#
 brew "pandoc"
-
-# pandoc-citeproc,basictex disabled for now since password prompt appearing
-# after this in brew install, need to troubleshoot why.
-#brew "pandoc-citeproc"
-#cask "basictex"
 cask "drawio"
 
 #
 # dev tools
 #
 
-brew "corepack"
+brew "bitwarden-cli"
 brew "gh"
 brew "git"
 brew "gradle"
 brew "jenv"
 brew "jq"
+brew "lua-language-server"
 # Default node is latest, but nvm used to drop version
 brew "node"
 brew "nvm"
+brew "pnpm"
 brew "k9s"
+brew "yarn"
 
 brew "maven"
 brew "neofetch"
 brew "rbenv"
+brew "tidy-html5"
 # brew "warrensbox/tap/tfswitch"
 
 cask "google-cloud-sdk"

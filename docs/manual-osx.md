@@ -3,12 +3,7 @@
 I've not worked out how to automate all configuration. Until I do, this is what
 I manually do on each environment.
 
-Login Items
-
-- Alfred 4
-- Magnet
-
-## Initialise desktop apps
+## Configure core apps
 
 ### Brave
 
@@ -16,24 +11,33 @@ Install [brave](https://brave.com/)
 
 ### Magnet
 
-Change key board shortcuts.
+Install Magnet and change keyboard shortcuts.
 
 |              |                  |
-| --           | --               |
+| ------------ | ---------------- |
 | `Ctrl-Alt-,` | Previous Display |
 | `Ctrl-Alt-.` | Next Display     |
 
 ### Hidden Bar
 
-Open Hidden Bar and configure menu hiding.
+Open Hidden Bar. Select "Start Hidden Bar when I log in" and "Enable always
+hidden section".
 
 ### Alfred
 
-Open Alfred, set up privacy options, point configuration to a cloud storage of
-your choosing, and configure Alfred to your choosing.
+Open Alfred and add powerpack license
 
 Alfred Preferences -> Advanced -> Set Preferences folder ->
 ~/.dotfiles/config/alfred
+
+## Login Items
+
+Set the following to start on login
+
+- Alfred 4
+- Magnet
+
+## Configure other apps
 
 ### Slack
 
@@ -145,5 +149,3 @@ Restart and on solution -> Manage .NET SDK -> Select 5.0
 #### Xcode
 
 Find Xcode in Application, click Get Info and select open in Rosetta.
-
-

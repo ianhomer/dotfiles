@@ -1,8 +1,8 @@
 local function repositoryName()
-  filename = vim.fn.expand '%:p'
-  i,j = string.find(filename, "projects/things/")
+  local filename = vim.fn.expand '%:p'
+  local _,j = string.find(filename, "projects/things/")
   if j > 0 then
-    k,l = string.find(filename, "/", j + 1)
+    local k,_ = string.find(filename, "/", j + 1)
     if k > 0 then
       return filename.sub(filename, j+1, k-1)
     end
@@ -12,9 +12,12 @@ end
 
 require("lualine").setup {
     options = {
-        sources = {"ale"},
-        theme = "kanagawa"
+      -- => localstatus = 3
+      globalstatus = true
     },
+    -- options = {
+    --     theme = "kanagawa"
+    -- },
     extensions = {
         "fugitive",
         "fzf",

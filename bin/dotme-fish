@@ -7,6 +7,14 @@ should-run -m 7 dotme-fish || exit 0
 
 printf "\e[36mConfiguring fish shell\e[0m\n"
 
+if not grep -q "/fish" /etc/shells
+  echo "! Please add "(which fish)" to /etc/shells"
+  echo "! You'll need to enter your password for this"
+  echo "! echo "(which fish)" | sudo tee -a /etc/shells"
+  echo "! chsh -s "(which fish)
+  exit 1
+end
+
 #
 # Set up path note that this include
 #
@@ -28,6 +36,8 @@ fish_add_path ~/Library/Python/3.9/bin
 if is-silicon
   fish_add_path /opt/homebrew/bin
   fish_add_path /opt/homebrew/sbin
+else
+  fish_add_path /usr/local/opt/python@3.9/Frameworks/Python.framework/Versions/3.9/bin
 end
 
 # Why was this in?

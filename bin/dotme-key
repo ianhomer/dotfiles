@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+$(shim) && . ${ME}/i.sh
+
 if [[ -z "$1" ]] ; then
   . dotenv
 else
@@ -7,24 +9,36 @@ else
 fi
 
 if [[ -z $MY_EMAIL ]] ; then
-  echo "... set email with"
-  echo "    dotme set EMAIL my@com"
+  log:: "... set email with"
+  log:: "    dotme set EMAIL my@com"
   exit 1
 fi
 
-keyFile=~/.ssh/id_rsa
+keyFile=~/.ssh/id_dotme
 
 if [[ ! -f $keyFile ]] ; then
-  echo "... creating SSH key for : $MY_EMAIL"
+  log:: "... creating SSH key for : $MY_EMAIL"
   ssh-keygen -t ed25519 -C $MY_EMAIL \
     -f $keyFile                          \
     -q -N ""
 fi
 
-echo "... key file = ${keyFile}.pub"
+log:: "... key file = ${keyFile}.pub"
 if hash pbcopy 2>/dev/null ; then
   cat "${keyFile}.pub" | pbcopy
-  echo "... public key is in clipboard"
+  log:: "... public key is in clipboard"
 else
   cat "${keyFile}.pub"
 fi
+
+sshConfig="$HOME/.ssh/config"
+if [[ ! -f ${sshConfig} ]] ; then
+  log:: "Creating "
+cat <<EOF > ${sshConfig}
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ${keyFile}
+EOF
+fi
+

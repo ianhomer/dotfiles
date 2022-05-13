@@ -1,12 +1,4 @@
 vim.g.nvim_tree_special_files = {}
-vim.g.nvim_tree_window_picker_exclude = {
-    filetype = {},
-    buftype = {
-        "terminal",
-        "nofile",
-    },
-}
-
 vim.g.nvim_tree_show_icons = {
     git = 1,
     folders = 1,
@@ -17,8 +9,7 @@ vim.g.nvim_tree_show_icons = {
 vim.g.nvim_tree_icons = {
     default = "",
 }
-vim.g.nvim_tree_disable_window_picker = 1
-vim.g.nvim_tree_highlight_opened_files = 2
+vim.g.nvim_tree_highlight_opened_files = 1
 
 require("nvim-tree").setup({
     diagnostics = {
@@ -31,22 +22,40 @@ require("nvim-tree").setup({
         },
     },
     update_focused_file = {
-        enable = true
+        enable = true,
     },
     git = {
-      ignore = false
+        ignore = false,
     },
     filters = {
         dotfiles = true,
-        custom = { ".DS_Store", ".git", ".pytest_cache", "node_modules" },
-        exclude = { ".env", ".config" }
+        custom = { "^\\.DS_Store", "^\\.git$", "^\\.pytest_cache", "^node_modules" },
+        exclude = { ".env", ".config" },
+    },
+    actions = {
+        open_file = {
+            window_picker = {
+                enable = true,
+                exclude = {
+                    filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
+                    buftype = {
+                        "terminal",
+                        "nofile",
+                        "Help",
+                    },
+                },
+            },
+        },
     },
 })
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+    [[
 augroup nvimttree
     au!
     au BufLeave NvimTree NvimTreeRefresh
     au BufEnter NvimTree NvimTreeRefresh
 augroup END
-]], false)
+]],
+    false
+)

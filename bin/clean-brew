@@ -4,9 +4,10 @@
 # Clean brew packages
 #
 
-should-run -m 7 $0 || exit 0
+should-run -m 7 $@ $0 || exit 0
+$(shim) && . ${ME}/i.sh
 
-echo "Cleaning up brew caches"
+log:: "Cleaning up brew caches"
 brew cleanup
 
 should-run -fu $0

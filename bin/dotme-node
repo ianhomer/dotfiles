@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 #
 # Install node packages
 #
@@ -35,6 +37,7 @@ npm ls --global --json                                                 |
   xargs -r npm -g rm
 
 log:: "Updating pnpm"
+pnpm add -g pnpm
 #
 # pnpm needs one package to be able start listing globals
 #
@@ -44,17 +47,24 @@ pnpm --global list 2>/dev/null || pnpm --global install pyright
 # Install missing packages
 
 log:: "pnpm install missing global"
-cat $NODE_GLOBAL | grep -v '#' | grep '@'          |
-  grep -F -v "`pnpm --global --json list           |
-    jq --raw-output '.[0].dependencies | keys[]'`" |
+cat $NODE_GLOBAL | grep -v '#' | grep '@'                |
+  grep -F -v "`pnpm --global --json list                 |
+  jq --raw-output '.[0].dependencies | keys[] + \"@\"'`" |
   xargs pnpm install --global
 
-log:: "pnpm outdated"
-pnpm --global outdated
-# log:: "pnpm update"
-# pnpm -g update
+log:: "checking pnpm outdated"
+pnpm --global outdated || log:: "pnpm is outdated"
+log:: "pnpm update"
+pnpm -g update
 
 echo
-echo "... Global node packages installed"
+log:: "... Global node packages installed"
+
+# Running lint daemons might have been updated, stop to
+# allow a restart when needed
+log:: "... Stopping lint daemons"
+
+pkill -f prettierd || log:: "no pettier daemon to stop"
+pkill -f eslint_d || log:: "no eslint daemon to stop"
 
 should-run -fu $0
