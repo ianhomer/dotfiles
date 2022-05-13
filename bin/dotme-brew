@@ -20,7 +20,7 @@ if [[ "$ADMIN" != "y" ]] ; then
 fi
 
 if ! is-executable brew ; then
-  log:: "installing brew"
+  log:: "installing brew (sudo required)"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
