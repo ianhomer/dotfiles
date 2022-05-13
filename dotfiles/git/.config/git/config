@@ -13,6 +13,9 @@
   log-when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %Cblue%cd%Creset %<(30,trunc)%s%Cblue%d'"
   set-upstream = !git branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)
 
+[core]
+  editor = nvim
+
 [color]
   ui = auto
 

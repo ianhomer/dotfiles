@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+should-run -m 1 $@ $0 || exit 0
+$(shim) && . ${ME}/i.sh
+
+log:: "Cleaning files"
+
+find ~/projects -name .DS_Store -exec rm -i {} \;
+
+should-run -fu $0
+

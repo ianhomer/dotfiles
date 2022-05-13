@@ -27,6 +27,8 @@ is a long line.
 
 This is a spellingmistake.
 
+i.e. test.
+
 ## Lists
 
 - List 1
@@ -106,6 +108,19 @@ ut aliquip ex ea commodo consequat.
 | x    | y   |
 | ---- | --- |
 | this |     |
+
+## Ligatures
+
+- =>
+- ===
+- !=
+
+## Digraphs
+
+`ctrl+k` and 2 characters.
+
+- é
+- ë
 
 ## Code
 

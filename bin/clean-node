@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+$(shim) && . ${ME}/i.sh
+
+log:: "Cleaning npm globals"
+pnpm ls --global --json                                             |
+  jq --raw-output  '.[].dependencies | keys[] | select(. != "pnpm")' |
+  xargs -r pnpm -g rm
+

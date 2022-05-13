@@ -1,0 +1,8 @@
+# These excludes are not applied by default, explicitly exclude with
+#
+#   rsync --exclude-from=~/.config/rsync/rsync-excludes.txt
+
+.DS*
+.git/
+.hooks/
+.obsidian/

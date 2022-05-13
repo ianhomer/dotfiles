@@ -13,6 +13,7 @@ function modes#ResetMode()
   set nornu
   set backspace=indent,eol,start
   set nohlsearch
+  set laststatus=3
 
   silent! nunmap <Up>
   silent! nunmap <Down>
@@ -35,11 +36,13 @@ function modes#PersonalDevMode()
   call modes#ResetMode()
   set rnu
   set nu
+  set laststatus=3
 endfunction
 
 " 3 = mobbing mode
 function modes#MobbingMode()
   call modes#ResetMode()
+  set laststatus=2
   set nu
 endfunction
 
@@ -49,19 +52,19 @@ function modes#TrainingMode()
   set rnu
   set backspace=0
 
-  noremap <Up> :call DisabledEcho("normal mode up")<CR>
-  noremap <Down> :call DisabledEcho("normal mode down")<CR>
-  noremap <Left> :call DisabledEcho("normal mode left")<CR>
-  noremap <Right> :call DisabledEcho("normal mode right")<CR>
+  noremap <Up> :call modes#DisabledEcho("normal mode up")<CR>
+  noremap <Down> :call modes#DisabledEcho("normal mode down")<CR>
+  noremap <Left> :call modes#DisabledEcho("normal mode left")<CR>
+  noremap <Right> :call modes#DisabledEcho("normal mode right")<CR>
 
-  inoremap <Up> <ESC>:call DisabledEcho("insert mode up")<CR>
-  inoremap <Down> <ESC>:call DisabledEcho("insert mode down")<CR>
-  inoremap <Left> <ESC>:call DisabledEcho("insert mode left")<CR>
-  inoremap <Right> <ESC>:call DisabledEcho("insert mode right")<CR>
+  inoremap <Up> <ESC>:call modes#DisabledEcho("insert mode up")<CR>
+  inoremap <Down> <ESC>:call modes#DisabledEcho("insert mode down")<CR>
+  inoremap <Left> <ESC>:call modes#DisabledEcho("insert mode left")<CR>
+  inoremap <Right> <ESC>:call modes#DisabledEcho("insert mode right")<CR>
 
-  vnoremap <Up> :call DisabledEcho("visual mode up")<CR>
-  vnoremap <Down> :call DisabledEcho("visual mode down")<CR>
-  vnoremap <Left> :call DisabledEcho("visual mode left")<CR>
-  vnoremap <Right> :call DisabledEcho("visual mode right")<CR>
+  vnoremap <Up> :call modes#DisabledEcho("visual mode up")<CR>
+  vnoremap <Down> :call modes#DisabledEcho("visual mode down")<CR>
+  vnoremap <Left> :call modes#DisabledEcho("visual mode left")<CR>
+  vnoremap <Right> :call modes#DisabledEcho("visual mode right")<CR>
 endfunction
 

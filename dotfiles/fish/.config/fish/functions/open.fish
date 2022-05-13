@@ -10,6 +10,8 @@ function open
         set extension (get-extension $filename)
         if string match -qr "^http(s)?://.*" $filename
             /usr/bin/open $filename
+        else if test "$extension" = html
+            /usr/bin/open $filename
         else if test "$extension" = svg
             /usr/bin/open -a /Applications/draw.io.app/ $filename
         else if test (file -b --mime-encoding $filename) = binary

@@ -1,8 +1,16 @@
 "
 " Refresh spelling files
 "
+function spelling#GetSpellingDirectoryName()
+  return $HOME . "/.config/" . (has("nvim") ? "nvim" : "vim") . '/spell'
+endfunction
+
+function spelling#IsInitialised()
+  return filereadable(spelling#GetSpellingDirectoryName() . '/local.utf-8.spl')
+endfunction
+
 function! spelling#Update()
-  let l:spelldir = $HOME . "/.config/" . (has("nvim") ? "nvim" : "vim") . '/spell'
+  let l:spelldir = spelling#GetSpellingDirectoryName()
   if !isdirectory(l:spelldir)
     echo 'Creating local spell directory ' . l:spelldir
     call mkdir(l:spelldir)
@@ -26,11 +34,12 @@ function! spelling#Update()
   "
   " Create single spell file with all local words
   "
-  if l:updated == 1
-    let l:localSpell = 'local.utf-8.spl'
+  let l:localSpell = 'local.utf-8.spl'
+  let l:localSpellFullName = l:spelldir . '/' . l:localSpell
+  if l:updated == 1 || !filereadable(l:localSpellFullName)
     let l:allDictionaries = $TMPDIR . 'all-dictionaries.txt'
     exec '!cat' . l:dictionaries . ' > ' . l:allDictionaries
     echo 'Creating ' . l:localSpell
-    exec 'mkspell! ' . l:spelldir . '/' . l:localSpell . ' ' . l:allDictionaries
+    exec 'mkspell! ' . l:localSpellFullName . ' ' . l:allDictionaries
   endif
 endfunction

@@ -10,6 +10,7 @@ let g:knobs_defaults = {
 
 " Levels at which knobs are enabled
 let g:knobs_levels = {
+  \   "abolish":3,
   \   "ale":3,
   \   "apathy":5,
   \   "airline":3,
@@ -162,6 +163,7 @@ IfKnob 'unimpaired' Plug 'tpope/vim-unimpaired'
 "
 " Writing
 "
+IfKnob 'abolish' Plug 'tpope/vim-abolish'
 " goyo - Distraction free writing
 if knobs#At(5) | Plug 'junegunn/goyo.vim' | endif
 

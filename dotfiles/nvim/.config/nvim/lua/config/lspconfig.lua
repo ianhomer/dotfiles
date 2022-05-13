@@ -66,8 +66,26 @@ end
 
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches
-local servers = { "bashls", "cssls", "html", "jsonls", "pyright", "tsserver", "vimls" }
-local lspsettings = {}
+local servers = {
+    "bashls",
+    "cssls",
+    "html",
+    "jsonls",
+    "pyright",
+    "sumneko_lua",
+    "terraform_lsp",
+    "tsserver",
+    "vimls",
+}
+local lspsettings = {
+    sumneko_lua = {
+        Lua = {
+            diagnostics = {
+                globals = { "vim" },
+            },
+        },
+    },
+}
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in ipairs(servers) do
     local module = lspconfig[lsp]

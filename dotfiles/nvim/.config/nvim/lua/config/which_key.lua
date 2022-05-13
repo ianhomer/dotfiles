@@ -1,5 +1,4 @@
 local whichKey = require("which-key")
-local knobs = require("knobs")
 
 whichKey.setup({
     plugins = {
@@ -35,6 +34,7 @@ if vim.g.knob_telescope then
     map["s"] = { "<cmd>Telescope live_grep<cr>", "Search" }
     map["S"] = { "<cmd>Fuzzy<cr>", "Fuzzy Search" }
     map["h"] = { "<cmd>Telescope oldfiles<cr>", "File History" }
+    map["H"] = { "<cmd>Telescope frecency<cr>", "Frequent" }
     map["<space>"] = { "<cmd>Telescope buffers<cr>", "Buffers" }
 
     -- Alternatives
@@ -60,17 +60,26 @@ if vim.g.knob_telescope then
     map["tr"] = { "<cmd>Telescope registers<cr>", "Registers" }
     map["tq"] = { "<cmd>Telescope quickfix<cr>", "Quick Fix" }
     map["tt"] = { "<cmd>Telescope<cr>", "Telescope" }
+    if vim.g.knob_refactoring then
+      map["tr"] = { "<cmd>lua require'telescope'.extensions.refactoring.refactors()<cr>" }
+    end
+
 
     -- Git
     map["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
     map["t1"] = { "<cmd>Telescope git_commits<cr>", "Git Commits" }
-    map["t2"] = { "<cmd>Telescope git_branches<cr>", "Git Branches" }
+    map["t2"] = { "<cmd>Telescope: git_branches<cr>", "Git Branches" }
     map["t3"] = { "<cmd>Telescope git_stash<cr>", "Git Stash" }
 
     -- LSP
     map["td"] = { "<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols" }
-    map[";"] = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "LSP Format" }
-    map[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<CR>", "LSP Range Format" }
+    map[";"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "LSP Format" }
+    map[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "LSP Range Format" }
+
+    -- Modes
+    map["7"] = { "<cmd>TroubleToggle<cr>", "Trouble"}
+    map["8"] = { "<cmd>call my#ToggleGitBlame()<cr>", "Blame"}
+    map["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap"}
 end
 
 if vim.g.knob_toggleterm then
@@ -97,10 +106,16 @@ cheats["s"] = { ":let @+ = execute('messages')<cr>", ":let @+ = execute('message
 
 whichKey.register(cheats, { prefix = "\\" })
 
+local goes = {}
+goes["w"] = { ":FindWord<cr>", "Find word" }
+goes["W"] = { ":GrepWord<cr>", "Grep word" }
+whichKey.register(goes, { prefix = "g" })
+
 if vim.g.knob_dap then
     local runners = {}
     runners["m"] = { "<cmd>lua require'dap'.continue()<CR>", "attach/continue" }
-    runners["n"] = { "<cmd>lua require'dap'.terminate()<CR>", "terminate" }
+    runners["n"] = { "<cmd>lua require'dap'.run_last()<CR>", "terminate" }
+    runners["b"] = { "<cmd>lua require'dap'.terminate()<CR>", "terminate" }
     runners["t"] = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "toggle breakpoint" }
     runners["y"] = { "<cmd>lua require'dap'.list_breakpoints()<CR>", "list breakpoints" }
     runners["h"] = { "<cmd>lua require'dap'.clear_breakpoints()<CR>", "clear breakpoints" }

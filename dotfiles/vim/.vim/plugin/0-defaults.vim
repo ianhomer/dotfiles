@@ -40,11 +40,17 @@ set expandtab
 set textwidth=80
 " Softbreak on space between words
 set linebreak
+" No wrap
+set nowrap
+set sidescroll=1
+" Wildignore
+set wildignore+=*/node_modules/*,*/__pycache__/*
+
+" Grep command
+set grepprg=ag\ --vimgrep
+
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
-
-" Word can have hyphen in
-set iskeyword+=-
 
 " I don't use modelines
 set nomodeline
@@ -179,6 +185,10 @@ augroup dotme
     autocmd FocusGained,WinEnter,BufEnter * :checktime
     call my#EnableAutoSave()
   endif
+
+  " Auto open quickfix window after quickfix commands
+  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost l* lwindow
 augroup end
 
 "
@@ -200,6 +210,9 @@ vnoremap > >gv
 vnoremap <silent> J :m '>+1<CR>gv=gv
 vnoremap <silent> K :m '<-2<CR>gv=gv
 
+" jk to exit insert mode
+imap jk <Esc>
+
 " Surround customisation
 let g:surround_{char2nr('b')} = "**\r**"
 let g:surround_{char2nr('<')} = "<\r>"
@@ -210,6 +223,11 @@ nmap '' ysiW'
 nmap '` ysiW`
 nmap '< ysiW<
 nmap 'b ysiWb
+
+
+" easy align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " *** Scope : IO ***
 "
@@ -280,3 +298,4 @@ set splitbelow
 
 " Don't conceal any syntax
 set conceallevel=0
+

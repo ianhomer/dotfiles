@@ -13,6 +13,12 @@ $(shim) && . ${ME}/i.sh
 if git config pull.rebase > /dev/null ; then
   cd ${DOTFILES_DIR}
   if [[ -d .git ]]; then
+    remoteUrl=`git config --get remote.origin.url`
+    if [[ "$remoteUrl" == git@* ]] && [[ ! -f "${HOME}/.ssh/id_dotme" ]] ; then
+      log:: NOK "${remoteUrl} is SSH URL, however dotme key not set up"
+      log:: Please run dotme-key
+      exit 1
+    fi
     log:: "pulling latest version of dotfiles"
     printf "\e[35m"
     git pull
