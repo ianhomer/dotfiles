@@ -120,6 +120,20 @@ for vim like keys in browser. Type `?` in browser for help.
 
 Settings -> Keyboard Shortcuts -> Keyboard shortcuts on
 
+### Additional developer tools
+
+JDK 11
+
+    brew tap homebrew/cask-versions
+    brew install --cask zulu11
+
+- Visual Studio 2022
+- Android Studio and generate a .env in your project hierarchy
+
+```sh
+cat-dotenv-android > .env
+```
+
 ### M1 Tweaks
 
 #### .NET

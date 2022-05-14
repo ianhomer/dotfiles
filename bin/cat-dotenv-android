@@ -1,0 +1,38 @@
+#!/usr/bin/env sh
+
+# Genereate dotenv file for Android development, that will then get loaded by
+# dotenv tooling
+
+ANDROID_HOME=~/Library/Android/sdk
+PERSONAL_JAVA_HOME=~/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home
+SYSTEM_JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home
+
+# `brew tap homebrew/cask-versions` and `brew install --cask zulu11`
+
+if [[ ! -d "$ANDROID_HOME" ]] ; then
+  echo "Please install Android studio"
+  exit 1
+fi
+
+echo $SYSTEM_JAVA_HOME
+if [[ -d "$PERSONAL_JAVA_HOME" ]] ; then
+  JAVA_HOME=$PERSONAL_JAVA_HOME
+else
+  if [[ -d "$SYSTEM_JAVA_HOME" ]] ; then
+    JAVA_HOME=$SYSTEM_JAVA_HOME
+  else
+    echo "Please install Java SDK"
+    exit 1
+  fi
+fi
+
+cat <<EOF
+ANDROID_HOME=${ANDROID_HOME}
+ANDROID_SDK_ROOT=${ANDROID_HOME}
+JAVA_HOME=${JAVA_HOME}
+
+PATH=
+PATH=
+PATH=
+PATH=
+EOF
