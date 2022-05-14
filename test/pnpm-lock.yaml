@@ -4,7 +4,7 @@ specifiers:
   '@types/node': 17.0.33
   '@typescript-eslint/eslint-plugin': 5.23.0
   '@typescript-eslint/parser': 5.23.0
-  bats: 1.6.0
+  bats: 1.7.0
   bats-assert: 2.0.0
   bats-support: 0.3.0
   eslint: 8.15.0
@@ -23,9 +23,9 @@ devDependencies:
   '@types/node': 17.0.33
   '@typescript-eslint/eslint-plugin': 5.23.0_c63nfttrfhylg3zmgcxfslaw44
   '@typescript-eslint/parser': 5.23.0_hcfsmds2fshutdssjqluwm76uu
-  bats: 1.6.0
+  bats: 1.7.0
   bats-assert: 2.0.0_bats-support@0.3.0
-  bats-support: 0.3.0_bats@1.6.0
+  bats-support: 0.3.0_bats@1.7.0
   eslint: 8.15.0
   eslint-config-prettier: 8.5.0_eslint@8.15.0
   eslint-plugin-react: 7.29.4_eslint@8.15.0
@@ -383,19 +383,19 @@ packages:
     peerDependencies:
       bats-support: git+https://github.com/ztombol/bats-support.git#v0.2.0
     dependencies:
-      bats-support: 0.3.0_bats@1.6.0
+      bats-support: 0.3.0_bats@1.7.0
     dev: true
 
-  /bats-support/0.3.0_bats@1.6.0:
+  /bats-support/0.3.0_bats@1.7.0:
     resolution: {integrity: sha512-z+2WzXbI4OZgLnynydqH8GpI3+DcOtepO66PlK47SfEzTkiuV9hxn9eIQX+uLVFbt2Oqoc7Ky3TJ/N83lqD+cg==}
     peerDependencies:
       bats: 0.4 || ^1
     dependencies:
-      bats: 1.6.0
+      bats: 1.7.0
     dev: true
 
-  /bats/1.6.0:
-    resolution: {integrity: sha512-DodA14LKCr49ZIVCgv5zWVo/ipySGHOgmJ3YzhDUBNg5k3GKwxhwxoDkErVTPHBgtmqmGswDxayfd161aINmcg==}
+  /bats/1.7.0:
+    resolution: {integrity: sha512-pt5zjJQUB4+JI8Si+z/IAWc8yhMyhdZs6IXMCKgzF768dUIyW5xyBstWtDI5uGSa80v7UQOhh+w0GA4p4+01Bg==}
     hasBin: true
     dev: true
 
@@ -888,8 +888,8 @@ packages:
       path-is-absolute: 1.0.1
     dev: false
 
-  /glob/7.2.0:
-    resolution: {integrity: sha512-lmLf6gtyrPq8tTjSmrO94wBeQbFR3HbLHbuyD69wuyQkImp2hWqMGB47OX65FBkPffO641IP9jWa1z4ivqG26Q==}
+  /glob/7.2.2:
+    resolution: {integrity: sha512-NzDgHDiJwKYByLrL5lONmQFpK/2G78SMMfo+E9CuGlX4IkvfKDsiQSNPwAYxEy+e6p7ZQ3uslSLlwlJcqezBmQ==}
     dependencies:
       fs.realpath: 1.0.0
       inflight: 1.0.6
@@ -1370,7 +1370,7 @@ packages:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     hasBin: true
     dependencies:
-      glob: 7.2.0
+      glob: 7.2.2
     dev: true
 
   /run-parallel/1.2.0:

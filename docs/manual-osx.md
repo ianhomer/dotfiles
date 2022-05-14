@@ -5,9 +5,18 @@ I manually do on each environment.
 
 ## Configure core apps
 
-### Brave
+### Browsers
 
-Install [brave](https://brave.com/)
+I use multiple browsers to 1) allow different persistent sessions I can jump
+between and 2) test cross browser functionality:
+
+The ones I install by default (in order of my preferred browser):
+
+1. [brave](https://brave.com/)
+2. [edge](https://www.microsoft.com/en-us/edge)
+3. [chrome](https://www.google.com/intl/en_uk/chrome/)
+
+I install bitwarden extension in each browser
 
 ### Magnet
 
@@ -36,6 +45,25 @@ Set the following to start on login
 
 - Alfred 4
 - Magnet
+
+## Install Apps
+
+I often use the following, installing them manually as needed
+
+- Slack
+- YubiKey manager
+- [Wally](https://www.zsa.io/wally/) - Moonlander configuration
+- ObinsKit - AnnePro configuration
+
+## Uninstall Apps
+
+I uninstall the follow apps since they provide no value to me:
+
+- Garage Band
+- iMovie
+- Numbers
+- Pages
+- Keynote
 
 ## Configure other apps
 
