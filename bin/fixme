@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+set -e
+
+#
+# Non destructive fix of my environment
+#
+
+$(shim) && . ${ME}/i.sh
+log:: "OK" fixme "linting and fixing of environment"
+
+fixme-ssh
