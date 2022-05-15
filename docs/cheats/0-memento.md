@@ -16,7 +16,7 @@
 
 ## fish
 
-### memento
+### shortcuts
 
 Shortcuts I'm trying to remember.
 
