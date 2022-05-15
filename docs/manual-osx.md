@@ -73,6 +73,14 @@ Optimise slack performance
 
 Preferences -> Accessibility -> Allow animated images and emoji
 
+### Trackpad Configuration - MacOs
+
+System preferences
+
+-> Trackpad -> Point & Click
+
+- Disable Look up & data detectors
+
 ### Keyboard Configuration - MacOS
 
 System preferences
