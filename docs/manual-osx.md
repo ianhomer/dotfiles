@@ -170,6 +170,12 @@ JDK 11
 cat-dotenv-android > .env
 ```
 
+More tools installed adhoc
+
+    brew install azure-cli
+    brew install k6
+    brew install --cask powershell
+
 ### M1 Tweaks
 
 #### .NET
