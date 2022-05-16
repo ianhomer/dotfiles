@@ -51,6 +51,7 @@ Set the following to start on login
 I often use the following, installing them manually as needed
 
 - Slack
+- Miro
 - YubiKey manager
 - [Wally](https://www.zsa.io/wally/) - Moonlander configuration
 - ObinsKit - AnnePro configuration
@@ -158,6 +159,8 @@ Settings -> Keyboard Shortcuts -> Keyboard shortcuts on
 
 ### Additional developer tools
 
+xcode
+
 JDK 11
 
     brew tap homebrew/cask-versions
@@ -174,6 +177,7 @@ More tools installed adhoc
 
     brew install azure-cli
     brew install k6
+    brew isntall cocoapods
     brew install --cask powershell
 
 ### M1 Tweaks
