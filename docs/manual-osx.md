@@ -56,6 +56,31 @@ I often use the following, installing them manually as needed
 - [Wally](https://www.zsa.io/wally/) - Moonlander configuration
 - ObinsKit - AnnePro configuration
 
+### Additional developer tools
+
+- xcode
+- Visual Studio 2022
+- Android Studio
+
+More tools installed adhoc
+
+    brew install azure-cli
+    brew install k6
+    brew install cocoapods
+    brew install --cask powershell
+    brew install --cask flipper
+
+JDK 11
+
+    brew tap homebrew/cask-versions
+    brew install --cask zulu11
+
+For Android Studio projects generate a .env in your project hierarchy
+
+```sh
+cat-dotenv-android > .env
+```
+
 ## Uninstall Apps
 
 I uninstall the follow apps since they provide no value to me:
@@ -156,29 +181,6 @@ for vim like keys in browser. Type `?` in browser for help.
 ### Gmail
 
 Settings -> Keyboard Shortcuts -> Keyboard shortcuts on
-
-### Additional developer tools
-
-xcode
-
-JDK 11
-
-    brew tap homebrew/cask-versions
-    brew install --cask zulu11
-
-- Visual Studio 2022
-- Android Studio and generate a .env in your project hierarchy
-
-```sh
-cat-dotenv-android > .env
-```
-
-More tools installed adhoc
-
-    brew install azure-cli
-    brew install k6
-    brew isntall cocoapods
-    brew install --cask powershell
 
 ### M1 Tweaks
 
