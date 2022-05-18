@@ -139,6 +139,13 @@ mechanical keyboards.
 
 -> Keyboard -> Input Sources -> U.S.
 
+### Finder - Set list by default
+
+- Open Finder
+- Select Macintosh HD
+- `Command-J`
+- Select Always open in list mode
+
 ### Spotlight
 
 Optimise Spotlight for application find.
