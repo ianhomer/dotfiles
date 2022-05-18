@@ -23,8 +23,9 @@ else
 fi
 
 OPTIND=1
-while getopts "c:v" o; do case "$o" in
+while getopts "c:xv" o; do case "$o" in
   c) context=$OPTARG ;; # context of repository
+  x) NOCONTEXT="y" ;;
   v) verbose="y" ;;
 esac done
 
@@ -42,6 +43,7 @@ function setMyGitUrl {
       exit 1
       ;;
   esac
+  echo $host
 
   [[ -n "${context}" ]] && postFix="-${context}"
 
@@ -52,7 +54,12 @@ function setMyGitUrl {
     myRemoteUrl=${currentRemoteUrl}
   fi
 
-  myRemoteUrl=${myRemoteUrl/${host}:/${host}${postFix}:}
+  if [[ "$NOCONTEXT" == "y" ]] ; then
+    # Desired state is without context
+    myRemoteUrl=${myRemoteUrl/-*:/:}
+  else
+    myRemoteUrl=${myRemoteUrl/${host}:/${host}${postFix}:}
+  fi
 
   if [ ${currentRemoteUrl} != ${myRemoteUrl} ] ; then
     echo "current remote   $currentRemoteUrl"
