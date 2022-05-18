@@ -43,7 +43,6 @@ function setMyGitUrl {
       exit 1
       ;;
   esac
-  echo $host
 
   [[ -n "${context}" ]] && postFix="-${context}"
 
