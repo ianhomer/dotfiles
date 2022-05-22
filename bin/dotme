@@ -182,7 +182,6 @@ command_update() {
 
 # Housekeeping and keeping things clean.
 command_clean() {
-  log:: "cleaning"
   is-macos && clean-brew
   return 0
 }
@@ -319,6 +318,7 @@ if [[ -n "$FORCE_ALL" ]] ; then
   done
 elif [[ -n "$FORCE" ]] ; then
   should-run -c "dotme-$FORCE"
+  should-run -c "dotbox-$FORCE"
   should-run -c "clean-$FORCE"
 fi
 
