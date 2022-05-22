@@ -23,10 +23,14 @@ fi
 
 stamp=$(date "+%Y%m%d-%H%M%S")
 base=$(basename $things)
+outputFilename=back-$base-$stamp.tar.gz.gpg
+outputFullFilename=~/backups/$outputFilename
 
-log:: "Archiving directory : $things ($base) for $recipient : $stamp"
+log:: "Archiving directory"
+log::  "$things ($base) for $recipient : $stamp"
+log:: "... $outputFilename"
 
 tar -C ${THINGS_DIR} --exclude .git -chzf - $base |
   gpg --encrypt --recipient $recipient            \
-  --output ~/backups/back-$base-$stamp.tar.gz.gpg
+  --output $outputFullFilename
 
