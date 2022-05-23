@@ -53,6 +53,7 @@ I often use the following, installing them manually as needed
 - Slack
 - Miro
 - YubiKey manager
+- Bitwarden Desktop <https://bitwarden.com/download/>
 - [Wally](https://www.zsa.io/wally/) - Moonlander configuration
 - ObinsKit - AnnePro configuration
 

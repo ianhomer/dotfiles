@@ -78,6 +78,6 @@ brew link --overwrite pnpm
 # Restart Alfred - it might have updated, and it's quick to recycle, so until I
 # can be cleverer about restarting when updated ...
 osascript -e 'tell application "Alfred" to quit'
-/usr/bin/open -a "Alfred 4"
+/usr/bin/open -a "Alfred 4" || echo "Cannot open Alfred"
 
 should-run -fu $0
