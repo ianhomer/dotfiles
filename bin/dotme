@@ -144,6 +144,7 @@ command_inner() {
   [ $DRY -eq 0 ] && is-pc && dotme-node
   [ $DRY -eq 0 ] && is-pc && dotme-rust
   [ $DRY -eq 0 ] && is-pc && dotme-jenv
+  [ $DRY -eq 0 ] && dotme-bash
   if command -v fish &> /dev/null ; then
     [ $DRY -eq 0 ] && dotme-fish
     [ $DRY -eq 0 ] && dotme-fisher
