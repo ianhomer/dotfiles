@@ -1,3 +1,4 @@
+# .bashrc is executed each time shell starts
 echo "... running ~/.bashrc from dotfiles"
 
 if command -v fasd &> /dev/null ; then
@@ -10,12 +11,23 @@ if command -v fasd &> /dev/null ; then
   unset fasd_cache
 fi
 
-
-# Initialise broot
-if [[ "$OSTYPE" =~ ^darwin ]]; then
-  source ~/Library/Preferences/org.dystroy.broot/launcher/bash/br
-  source /Users/ian/Library/Preferences/org.dystroy.broot/launcher/bash/br
-fi
+# Inline br function, this comes from
+# /Users/ian/Library/Application\ Support/org.dystroy.broot/launcher/bash/1
+# which comes from the broot --install process see
+# https://dystroy.org/broot/documentation/installation
+function br {
+    local cmd cmd_file code
+    cmd_file=$(mktemp)
+    if broot --outcmd "$cmd_file" "$@"; then
+        cmd=$(<"$cmd_file")
+        rm -f "$cmd_file"
+        eval "$cmd"
+    else
+        code=$?
+        rm -f "$cmd_file"
+        return "$code"
+    fi
+}
 
 if [[ -x thefuck ]] ; then
   eval "$(thefuck --alias)"
@@ -24,6 +36,12 @@ fi
 
 # FZF better with fd
 export FZF_DEFAULT_COMMAND='fd --type f'
+
+export NVM_DIR="$HOME/.nvm"
+# with --no-use we postpone nvm until we use it so we can take explicit
+# control
+. "$NVM_DIR/nvm.sh" --no-use
+. "$NVM_DIR/Bash_completion.d/nvm"
 
 # neovim is the new vim
 alias vi="VIM_KNOBS=5 nvim"
