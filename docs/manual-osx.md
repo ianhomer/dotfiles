@@ -46,6 +46,16 @@ Set the following to start on login
 - Alfred 4
 - Magnet
 
+## Finder
+
+- Preferences
+  - Keep folders on top when sorting by name
+  - Set explicit tags, e.g. "admin", "projects", "personal"
+- Click on Macintosh HD - `cmd-J` select always open in list view
+- Services - Services Preferences, just
+  - new Kitty Window
+  - Folder Actions set up
+
 ## Install Apps
 
 I often use the following, installing them manually as needed
