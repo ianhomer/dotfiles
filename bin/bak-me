@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+#
+# Backup my files
+#
+
 set -e
 
 $(shim) && . ${ME}/i.sh
@@ -8,7 +12,7 @@ EXCLUDES_FILE=~/.dotfiles/dotfiles/rsync/.config/rsync/rsync-excludes.txt
 LOG_DIR=~/local/logs
 [[ ! -d $LOG_DIR ]] && echo hello && mkdir $LOG_DIR
 LOG_LOCATION=~/local/logs/bak-me-$(date "++%Y%m%d-%H%M%S").log
-stamp=$(date "+%Y%m%d/%H%M%S")
+stamp=$(date "+%Y/%m/%d/%H%M%S")
 
 # r - archive => -rlptgoD
 # P - partial and progress
