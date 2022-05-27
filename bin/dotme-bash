@@ -7,19 +7,29 @@ should-run -m 7d $@ $0 || exit 0
 $(shim) && . ${ME}/i.sh
 
 log:: "initialising bash shell"
-# source bashrc which sources nvm and acts as a test that the bash shell is
-# set up OK
-. ~/.bashrc
 
+export NVM_DIR="$HOME/.nvm"
 if [[ ! -L "$NVM_DIR/bash_completion.d" ]] ; then
   if [[ `uname -m` == 'arm64' ]] ; then
     # Silicon
     ln -s /opt/homebrew/opt/nvm/etc/bash_completion.d $NVM_DIR
   else
-    echo "WARN : set up non-silicon"
-    exit 1
+    ln -s /usr/local/opt/nvm/etc/bash_completion.d $NVM_DIR
   fi
 fi
+
+if [[ ! -L "$NVM_DIR/nvm.sh" ]] ; then
+  if [[ `uname -m` == 'arm64' ]] ; then
+    # Silicon
+    ln -s /opt/homebrew/opt/nvm/nvm.sh $NVM_DIR
+  else
+    ln -s /usr/local/opt/nvm/nvm.sh $NVM_DIR
+  fi
+fi
+
+# source bashrc which sources nvm and acts as a test that the bash shell is
+# set up OK
+. ~/.bashrc
 
 # nvm set up is in dotme-bash since it's explictly set here for bash purposes
 # with the bash nvm aliases

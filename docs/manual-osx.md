@@ -50,11 +50,21 @@ Set the following to start on login
 
 - Preferences
   - Keep folders on top when sorting by name
+  - Remove AirDrop
   - Set explicit tags, e.g. "admin", "projects", "personal"
+  - Open folders in tabs, not windows
+- Customise toolbar
+  - name
+  - show
+  - info
+  - path
+  - view
+  - (remove search, since never use finder search)
 - Click on Macintosh HD - `cmd-J` select always open in list view
 - Services - Services Preferences, just
   - new Kitty Window
   - Folder Actions set up
+- Show preview
 
 ## Install Apps
 
