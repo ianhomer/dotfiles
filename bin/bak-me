@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+set -e
+
+$(shim) && . ${ME}/i.sh
+
+EXCLUDES_FILE=~/.dotfiles/dotfiles/rsync/.config/rsync/rsync-excludes.txt
+LOG_DIR=~/local/logs
+[[ ! -d $LOG_DIR ]] && echo hello && mkdir $LOG_DIR
+LOG_LOCATION=~/local/logs/bak-me-$(date "++%Y%m%d-%H%M%S").log
+stamp=$(date "+%Y%m%d/%H%M%S")
+
+# r - archive => -rlptgoD
+# P - partial and progress
+# b - make incremental backups
+
+args="--stats --exclude-from=${EXCLUDES_FILE}"
+args="$args -Pab --delete --backup-dir $stamp"
+args="$args --log-file=$LOG_LOCATION"
+log:: "rsync args : $args"
+
+BACKUP_LOCATION=~/tmp/backup
+
+rsync ${args} ~/gdrive $BACKUP_LOCATION
+rsync ${args} ~/projects/things $BACKUP_LOCATION
+rsync ${args} ~/.dotfiles $BACKUP_LOCATION
