@@ -39,3 +39,19 @@ fi
 rsync ${args} ~/gdrive $BACKUP_DESTINATION
 rsync ${args} ~/projects/things $BACKUP_DESTINATION
 rsync ${args} ~/.dotfiles $BACKUP_DESTINATION
+
+log:: "Backup size"
+fileCount=$(find $BACKUP_DESTINATION -type f | wc -l)
+log:: "File count destination : $fileCount"
+if compgen -G "$BACKUP_DESTINATION/20*" > /dev/null ; then
+  for history in $BACKUP_DESTINATION/20* ; do
+    historyFileCount=$(find $history -type f | wc -l)
+    log:: "File count history $(basename $history) : $historyFileCount"
+  done
+else
+  log:: "No files in history (yet)"
+fi
+
+log:: "Files size"
+du -sch $BACKUP_DESTINATION
+
