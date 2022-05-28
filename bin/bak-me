@@ -44,9 +44,16 @@ stamp=$(date "+%Y/%m/%d/%H%M%S")
 args="--stats --exclude-from=${EXCLUDES_FILE}"
 args="$args -Pab --delete --backup-dir $stamp"
 args="$args --log-file=$LOG"
+# args="$args --dry-run"
 log:: "rsync args : $args"
 
-for location in gdrive projects/things .dotfiles ; do
+LOCATIONS="gdrive .dotfiles"
+PROJECT_ROOTS="things dotmodules my try"
+for root in $PROJECT_ROOTS ; do
+  LOCATIONS="$LOCATIONS projects/$root"
+done
+echo $DEFAULT_PROJECT_ROOTS
+for location in $LOCATIONS ; do
   LOCATION="$HOME/$location"
   if [[ -d "$LOCATION" ]] ; then
     log:: "Backing up $LOCATION"
