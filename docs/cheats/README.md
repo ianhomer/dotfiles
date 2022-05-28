@@ -7,5 +7,3 @@
 - [osx](./osx.md)
 - [tmux](./tmux.md)
 - [vim](./vim.md)
-
-

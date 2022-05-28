@@ -46,10 +46,18 @@ args="$args -Pab --delete --backup-dir $stamp"
 args="$args --log-file=$LOG"
 log:: "rsync args : $args"
 
-rsync ${args} ~/gdrive $BACKUP_DESTINATION | tee -a $OUT_LOG
-rsync ${args} ~/projects/things $BACKUP_DESTINATION | tee -a $OUT_LOG
-rsync ${args} ~/.dotfiles $BACKUP_DESTINATION | tee -a $OUT_LOG
+for location in gdrive projects/things .dotfiles ; do
+  LOCATION="$HOME/$location"
+  if [[ -d "$LOCATION" ]] ; then
+    log:: "Backing up $LOCATION"
+    rsync ${args} $LOCATION $BACKUP_DESTINATION >> $OUT_LOG
+  else
+    log:: "Location not found : $LOCATION"
+  fi
+done
 
+log:: "rsync log : $LOG"
+log:: "Command output : $OUT_LOG"
 echo
 log:: "Backup size"
 fileCount=$(find $BACKUP_DESTINATION -type f | wc -l)
