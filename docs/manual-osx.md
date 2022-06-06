@@ -120,7 +120,12 @@ Optimise slack performance
 
 Preferences -> Accessibility -> Allow animated images and emoji
 
-### Trackpad Configuration - MacOs
+### Dock & Menu Bar Configuration - MacOS
+
+- Clock - Show Date - Always
+- Now Playing - Untick Show in Menu Bar
+
+### Trackpad Configuration - MacOS
 
 System preferences
 
