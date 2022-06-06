@@ -107,6 +107,12 @@ function fixUpstream() {
   fi
 }
 
+function fixWho() {
+  gitUserEmail=$(git config user.email)
+  gitUserName=$(git config user.name)
+  log:: AOK user $gitUserEmail $gitUserName
+}
+
 
 [[ -n "${verbose}" ]] && echo "deleting identites from SSH agent"
 ssh-add -q -D
@@ -115,6 +121,7 @@ ssh-add -q -D
 setMyGitUrl
 fixMain
 fixUpstream
+fixWho
 
 # Clear authentication agent
 
