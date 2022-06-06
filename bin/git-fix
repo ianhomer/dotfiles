@@ -39,8 +39,9 @@ function setMyGitUrl {
     *github.com*)    host="github.com"    ;;
     *bitbucket.org*) host="bitbucket.org" ;;
     *)
-      echo "Host for current remote URL not recognised"
-      exit 1
+      log:: NOK origin current remote URL not recognised
+      echo $currentRemoteUrl
+      return 1
       ;;
   esac
 
@@ -84,13 +85,13 @@ function fixMain() {
         if [[ "${action}" == "main" ]] ; then
           git checkout main
         else
-          echo "Repository uses main not master - use \"main\" action to fix"
+          echo "Repository uses master not main - use \"main\" action to fix"
         fi
       else
         echo "No master or main in remote"
       fi
     else
-      log:: NOK master
+      log:: NOK master prefer main
     fi
   elif [[ "$branch" == "main" ]] ; then
     log:: AOK $branch
