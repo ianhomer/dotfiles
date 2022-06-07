@@ -73,7 +73,7 @@ local servers = {
     "jsonls",
     "pyright",
     "sumneko_lua",
-    "terraform_lsp",
+    "terraformls",
     "tsserver",
     "vimls",
 }
