@@ -11,9 +11,7 @@ function dotenv
     echo ".env file loaded : $envFile"
 
     for i in (grep -vh '^#' $envFile | awk 'NF')
-        echo $i
         set arr (echo $i |sed 's/=/\n/')
-        echo $arr
         if [ $arr[1] = PATH ]
             set -gx $arr[1] $PATH $arr[2]
         else
