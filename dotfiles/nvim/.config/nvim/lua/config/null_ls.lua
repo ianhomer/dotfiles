@@ -15,7 +15,11 @@ null_ls.setup({
         formatting.black,
         formatting.fish_indent,
         formatting.stylua,
-        diagnostics.markdownlint,
+        diagnostics.markdownlint.with({
+            diagnostics_postprocess = function(diagnostic)
+                diagnostic.severity = vim.diagnostic.severity["HINT"]
+            end,
+        }),
         diagnostics.eslint_d,
         diagnostics.flake8,
         diagnostics.tidy,
@@ -27,12 +31,17 @@ null_ls.setup({
 
 function M.setLevel(level)
     if level > 4 then
-      null_ls.enable("markdownlint")
-      null_ls.enable("vale")
+        null_ls.enable("markdownlint")
+        null_ls.enable("vale")
     else
-      null_ls.disable("markdownlint")
-      null_ls.disable("vale")
+        null_ls.disable("markdownlint")
+        null_ls.disable("vale")
     end
+end
+
+function M.toggle()
+    null_ls.toggle("markdownlint")
+    null_ls.toggle("vale")
 end
 
 return M
