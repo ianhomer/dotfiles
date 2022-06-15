@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+$(shim) && . ${ME}/i.sh
+
+# Close apps
+
+# Close all nvim proceses without lock in the process name
+# Start vim with nvim +lock to withstand this close process
+# This process of closing nvim relies on nvim autosaving files, this process
+# does not save files
+for process in $(ps ax | grep nvim | grep -v -E 'lock|grep' | awk '{ print $1; }') ; do
+  name=$(ps -o command= -p $process)
+  directory=$(lsof -p $process | grep cwd | sed 's/  */ /g' | cut -d " " -f9- )
+  kill -3 $process
+  log:: OK closed $process $name $directory
+done

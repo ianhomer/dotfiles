@@ -20,5 +20,5 @@ if [[ -n "$cheat" ]] ; then
     rg -i --glob '*.md' --no-heading -N -l "# $cheat" |
     head -n 1)
 
-  vi ~/.dotfiles/docs/cheats/$file
+  nvim ~/.dotfiles/docs/cheats/$file
 fi
