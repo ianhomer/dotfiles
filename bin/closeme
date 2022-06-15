@@ -3,6 +3,8 @@
 set -e
 $(shim) && . ${ME}/i.sh
 
+i=0
+
 # Close apps
 
 # Close all nvim proceses without lock in the process name
@@ -14,4 +16,9 @@ for process in $(ps ax | grep nvim | grep -v -E 'lock|grep' | awk '{ print $1; }
   directory=$(lsof -p $process | grep cwd | sed 's/  */ /g' | cut -d " " -f9- )
   kill -3 $process
   log:: OK closed $process $name $directory
+  ((i=i+1))
 done
+
+[ $i -eq 1 ] && plural="" || plural="s"
+
+log:: DONE close closed ${i} app${plural}
