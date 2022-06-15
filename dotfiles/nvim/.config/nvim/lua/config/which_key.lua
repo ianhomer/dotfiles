@@ -79,7 +79,7 @@ if vim.g.knob_telescope then
     map["5"] = { "<cmd>lua require'config/null_ls'.setLevel(3)<cr>", "Core Lints" }
     map["6"] = { "<cmd>lua require'config/null_ls'.setLevel(5)<cr>", "All Lint" }
     map["7"] = { "<cmd>TroubleToggle<cr>", "Trouble" }
-    map["8"] = { "<cmd>call my#ToggleGitBlame()<cr>", "Blame" }
+    map["8"] = { "<cmd>call my#ToggleBlame()<cr>", "Blame" }
     map["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap" }
 end
 
