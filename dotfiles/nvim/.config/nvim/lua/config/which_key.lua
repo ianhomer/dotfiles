@@ -1,5 +1,5 @@
 local whichKey = require("which-key")
-
+local nullLsConfig =
 whichKey.setup({
     plugins = {
         spelling = {
@@ -61,9 +61,8 @@ if vim.g.knob_telescope then
     map["tq"] = { "<cmd>Telescope quickfix<cr>", "Quick Fix" }
     map["tt"] = { "<cmd>Telescope<cr>", "Telescope" }
     if vim.g.knob_refactoring then
-      map["tr"] = { "<cmd>lua require'telescope'.extensions.refactoring.refactors()<cr>" }
+        map["tr"] = { "<cmd>lua require'telescope'.extensions.refactoring.refactors()<cr>" }
     end
-
 
     -- Git
     map["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
@@ -77,9 +76,11 @@ if vim.g.knob_telescope then
     map[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "LSP Range Format" }
 
     -- Modes
-    map["7"] = { "<cmd>TroubleToggle<cr>", "Trouble"}
-    map["8"] = { "<cmd>call my#ToggleGitBlame()<cr>", "Blame"}
-    map["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap"}
+    map["5"] = { "<cmd>lua require'config/null_ls'.setLevel(3)<cr>", "Core Lints" }
+    map["6"] = { "<cmd>lua require'config/null_ls'.setLevel(5)<cr>", "All Lint" }
+    map["7"] = { "<cmd>TroubleToggle<cr>", "Trouble" }
+    map["8"] = { "<cmd>call my#ToggleGitBlame()<cr>", "Blame" }
+    map["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap" }
 end
 
 if vim.g.knob_toggleterm then

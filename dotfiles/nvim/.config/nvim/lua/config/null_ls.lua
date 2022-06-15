@@ -1,3 +1,5 @@
+local M = {}
+
 local null_ls = require("null-ls")
 local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
@@ -22,3 +24,15 @@ null_ls.setup({
         completion.spell,
     },
 })
+
+function M.setLevel(level)
+    if level > 4 then
+      null_ls.enable("markdownlint")
+      null_ls.enable("vale")
+    else
+      null_ls.disable("markdownlint")
+      null_ls.disable("vale")
+    end
+end
+
+return M
