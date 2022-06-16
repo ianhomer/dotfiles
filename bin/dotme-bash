@@ -9,7 +9,7 @@ $(shim) && . ${ME}/i.sh
 log:: "initialising bash shell"
 
 export NVM_DIR="$HOME/.nvm"
-if [[ ! -L "$NVM_DIR/bash_completion.d" ]] ; then
+if [[ ! -f "$NVM_DIR/bash_completion.d" ]] ; then
   if [[ `uname -m` == 'arm64' ]] ; then
     # Silicon
     ln -s /opt/homebrew/opt/nvm/etc/bash_completion.d $NVM_DIR
@@ -18,7 +18,7 @@ if [[ ! -L "$NVM_DIR/bash_completion.d" ]] ; then
   fi
 fi
 
-if [[ ! -L "$NVM_DIR/nvm.sh" ]] ; then
+if [[ ! -f "$NVM_DIR/nvm.sh" ]] ; then
   if [[ `uname -m` == 'arm64' ]] ; then
     # Silicon
     ln -s /opt/homebrew/opt/nvm/nvm.sh $NVM_DIR
