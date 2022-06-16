@@ -41,7 +41,7 @@ export NVM_DIR="$HOME/.nvm"
 # with --no-use we postpone nvm until we use it so we can take explicit
 # control
 . "$NVM_DIR/nvm.sh" --no-use
-. "$NVM_DIR/Bash_completion.d/nvm"
+. "$NVM_DIR/bash_completion.d/nvm"
 
 # neovim is the new vim
 alias vi="VIM_KNOBS=5 nvim"
