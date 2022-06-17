@@ -33,7 +33,7 @@ nvim_set_var("knobs_levels", {
     devicons = 4,
     dispatch = 4,
     easy_align = 3,
-    editorconfig = 5,
+    editorconfig = 9,
     endwise = 7,
     eunuch = 3,
     fidget = 3,
