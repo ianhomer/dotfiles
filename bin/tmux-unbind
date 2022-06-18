@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+tmux list-keys | awk '{print $3}' | sort -u | xargs -L 1 tmux unbind-key -a -T
+
