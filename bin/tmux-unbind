@@ -2,3 +2,6 @@
 
 tmux list-keys | awk '{print $3}' | sort -u | xargs -L 1 tmux unbind-key -a -T
 
+tmux bind-key -T root MouseDown1Pane select-pane -t = \; send-keys -M
+
+
