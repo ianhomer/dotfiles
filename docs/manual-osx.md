@@ -127,17 +127,15 @@ Preferences -> Accessibility -> Allow animated images and emoji
 
 ### Trackpad Configuration - MacOS
 
-System preferences
-
--> Trackpad -> Point & Click
+System preferences -> Trackpad -> Point & Click
 
 - Disable Look up & data detectors
 
 ### Keyboard Configuration - MacOS
 
-System preferences
+Disable all keyboard shortcuts I don't use.
 
--> Keyboard -> Shortcuts ->
+System preferences -> Keyboard -> Shortcuts ->
 
 - Disable Mission Control Ctrl-arrow short cuts
 - Disable Ctrl-space and Shift-Ctrl-space for selecting input source

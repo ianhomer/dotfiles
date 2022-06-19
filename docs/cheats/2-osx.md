@@ -9,11 +9,14 @@
 | `Ctrl+Cmd+click+drag` | Move Window |
 | `Ctrl+Cmd+q`          | Lock Screen |
 
-### finder
+### find
 
-|               |                   |
-| ------------- | ----------------- |
-| `Shift+Cmd+.` | Show hidden files |
+|                  |                          |
+| ---------------- | ------------------------ |
+| `Shift+Cmd+.`    | Show hidden files finder |
+| `Cmd+space`      | Open spotlight search    |
+| `Opt+space`      | Open alfred search       |
+| `Ctrl+Cmd+space` | Bring up emoji selection |
 
 ### windows
 
@@ -34,12 +37,20 @@
 | `Cmd+Alt+d`           | Show or hide dock                               |
 | `Ctrl+Fn+F3`          | Use dock with arrow keys                        |
 | `Ctrl+Fn+F2`          | Use menu with arrow keys                        |
-| `Cmd+j`               | iterm window to front                           |
+| `Fn+F11`              | Show desktop                                    |
 
 `Shift+Opt+ bluetooth -> debug`
 : Reset bluetooth
 
 See System Preferences -> Keyboard -> Shortcuts for details
+
+## Screenshots
+
+|               |                                         |
+| ------------- | --------------------------------------- |
+| `Shift+Opt+3` | Save picture of screen as a file        |
+| `Shift+Opt+4` | Save picture of selected area as a file |
+| `Shift+Opt+5` | Screenshot and recording options        |
 
 ## links
 
