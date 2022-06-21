@@ -1,5 +1,3 @@
-local g = vim.g
-
 -- disable some builtin vim plugins
 local disabled_built_ins = {
     "2html_plugin",
@@ -23,7 +21,7 @@ local disabled_built_ins = {
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-    g["loaded_" .. plugin] = 1
+    vim.g["loaded_" .. plugin] = 1
 end
 
 vim.api.nvim_exec(
@@ -37,9 +35,13 @@ command! -nargs=* Fuzzy Telescope grep_string search=<args>
 vim.opt.undofile = true
 -- Use HOME expansion instead of ~ - https://github.com/neovim/neovim/issues/15720
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undo"
-g.mundo_width = 60
-g.mundo_right = 1
+vim.g.mundo_width = 60
+vim.g.mundo_right = 1
 
--- vim.o.foldcolumn = "2"
+vim.o.foldenable = true
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.o.foldcolumn = "auto:2"
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+-- vim.o.foldtext = "substitute(foldtext(), '\\(.*\\) \\(\\d\\+\\) lines: \\(.*\\)', '\\3 (\\2 lines)', 'g')"
+

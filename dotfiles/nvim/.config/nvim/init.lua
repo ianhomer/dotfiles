@@ -95,6 +95,7 @@ nvim_set_var("knobs_levels", {
     treesitter = 3,
     trouble = 5,
     twightlight = 9,
+    ufo = 9,
     unicode = 4,
     unimpaired = 4,
     update_spelling = 7,
@@ -138,6 +139,8 @@ return require("packer").startup({
 
         local ok, knobs = pcall(require, "knobs")
         local use = ok and knobs.use(_use) or _use
+
+        require"config.config"
 
         use("wbthomason/packer.nvim")
         use("ianhomer/knobs.vim")
@@ -457,6 +460,17 @@ return require("packer").startup({
             config = [[require'config.rainbow']],
             commit = "18cb3a45e0ff843d48e8637a36b9cc6cd89d71b0",
         })
+        -- use({
+        --   knob = "ufo",
+        --   "kevinhwang91/promise-async",
+        --   commit = "1a30ecd708b08adaa7de8ad3d207147aadf3e081"
+        -- })
+        -- use({
+        --   "kevinhwang91/nvim-ufo",
+        --   require = "kevinhwang91/promise-async",
+        --   config = [[require'config.ufo']],
+        --   commit = "24067ef90dd33da08e5a27e18e0de03b93fe4c2d"
+        -- })
 
         -- Git
         use({
