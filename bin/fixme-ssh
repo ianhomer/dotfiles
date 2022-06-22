@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+set -e
+
+#
+# Non destructive fix of my environment
+#
+
+$(shim) && . ${ME}/i.sh
+log:: OK "ssh" "linting and fixing of SSH"
+
+ssh-add -D
+log:: OK "ssh-add -D" "deleted all identities from agent (forcing reload)"

@@ -253,3 +253,9 @@ shortcuts for run and debug features.
 | `Ctrl+x` | Open in horizontal split  |
 | `Ctrl+v` | Open in vertical split    |
 | `Ctrl+/` | Toggle preview window off |
+
+### tricks
+
+|     |            |
+| --- | ---------- |
+| ``  | Vim tricks |

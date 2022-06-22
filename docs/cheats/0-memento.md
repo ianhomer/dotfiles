@@ -4,18 +4,19 @@
 
 ### memento
 
-|          |                      |
-| -------- | -------------------- |
-| `Ctrl+e` | Search last modified |
-| `Ctrl+s` | Search headings      |
-| `Ctrl+w` | These cheats         |
-| `Ctrl+t` | Search tags          |
-| `Ctrl+f` | Search file names    |
-| `Ctrl+b` | Search bookmarks     |
+|              |                                             |
+| ------------ | ------------------------------------------- |
+| `Ctrl+space` | Search in headings                          |
+| `Ctrl+e`     | Search for needle, ordered by last modified |
+| `Ctrl+s`     | Search in headings                          |
+| `Ctrl+w`     | Show these cheats                           |
+| `Ctrl+t`     | Search tags                                 |
+| `Ctrl+f`     | Search in file names                        |
+| `Ctrl+b`     | Search bookmarks                            |
 
 ## fish
 
-### memento
+### shortcuts
 
 Shortcuts I'm trying to remember.
 

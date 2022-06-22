@@ -1,16 +1,3 @@
-vim.g.nvim_tree_special_files = {}
-vim.g.nvim_tree_show_icons = {
-    git = 1,
-    folders = 1,
-    files = 1,
-    folder_arrows = 0,
-}
-
-vim.g.nvim_tree_icons = {
-    default = "",
-}
-vim.g.nvim_tree_highlight_opened_files = 1
-
 require("nvim-tree").setup({
     diagnostics = {
         enable = true,
@@ -31,6 +18,21 @@ require("nvim-tree").setup({
         dotfiles = true,
         custom = { "^\\.DS_Store", "^\\.git$", "^\\.pytest_cache", "^node_modules" },
         exclude = { ".env", ".config" },
+    },
+    renderer = {
+        special_files = {},
+        highlight_opened_files = "icon",
+        icons = {
+            show = {
+                git = true,
+                folder = true,
+                file = true,
+                folder_arrow = false,
+            },
+            glyphs = {
+                default = "",
+            },
+        },
     },
     actions = {
         open_file = {

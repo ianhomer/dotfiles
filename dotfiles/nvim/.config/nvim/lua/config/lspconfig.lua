@@ -73,7 +73,7 @@ local servers = {
     "jsonls",
     "pyright",
     "sumneko_lua",
-    "terraform_lsp",
+    "terraformls",
     "tsserver",
     "vimls",
 }
@@ -90,6 +90,11 @@ local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protoco
 for _, lsp in ipairs(servers) do
     local module = lspconfig[lsp]
     if module then
+        -- experimental ufo folding configuration
+        -- capabilities.textDocument.foldingRange = {
+        --     dynamicRegistration = false,
+        --     lineFoldingOnly = true
+        -- }
         module.setup({
             on_attach = on_attach,
             flags = {

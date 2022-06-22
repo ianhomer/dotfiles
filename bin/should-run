@@ -206,9 +206,7 @@ if [[ "$update" == "y" ]] && [[ $shouldRun -eq 1 ]] ; then
   [[ -n "$verbose" ]] && echo "Updating should run file : $shouldRunFile"
   [[ ! -d $shouldRunDir ]] && mkdir -p $shouldRunDir
   touch $shouldRunFile
-fi
-
-if [[ $shouldRun -eq 0 ]] ; then
+elif [[ $shouldRun -eq 0 ]] ; then
   if [[ $excluded -eq 1 ]] ; then
     shouldNotRunMessage="excluded globally"
   elif [[ -n "$modified" ]] ; then
@@ -225,4 +223,6 @@ if [[ $shouldRun -eq 0 ]] ; then
   fi
   [[ -z "$silent" ]] && log:: skip $scriptName $shouldNotRunMessage
   exit 1
+else
+  log:: run $scriptName
 fi
