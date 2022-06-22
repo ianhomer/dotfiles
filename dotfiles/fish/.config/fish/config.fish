@@ -120,6 +120,8 @@ if [ {$DOT_LOG_LEVEL} -gt 0 ]
     status --is-interactive; and set_color normal
 end
 
+starship init fish | source
+
 # Things bind
 
 bind --mode insert \cx do

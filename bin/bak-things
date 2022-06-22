@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+$(shim) && . ${ME}/i.sh
+repository=${1:-$MY_NOTES}
+recipient=${2}
+if [[ -z "${recipient}" ]] ; then
+  recipient=$(get-recipient)
+fi
+things=${THINGS_DIR}/$repository
+
+if [ ! -d "$things" ] ; then
+  log::exit "Not a directory $things"
+fi
+
+if [ -z "$recipient" ] ; then
+   log::exit "recipient is empty"
+fi
+
+if [ ! -d "$HOME/backups" ] ; then
+  log:: "Creating backups directory"
+  mkdir ~/backups
+fi
+
+stamp=$(date "+%Y%m%d-%H%M%S")
+base=$(basename $things)
+outputFilename=back-$base-$stamp.tar.gz.gpg
+outputFullFilename=~/backups/$outputFilename
+
+log:: "Archiving directory"
+log::  "$things ($base) for $recipient : $stamp"
+log:: "... $outputFilename"
+
+tar -C ${THINGS_DIR} --exclude .git -chzf - $base |
+  gpg --encrypt --recipient $recipient            \
+  --output $outputFullFilename
+

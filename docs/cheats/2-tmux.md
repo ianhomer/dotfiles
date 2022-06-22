@@ -50,7 +50,8 @@
 
 |            |                                           |
 | ---------- | ----------------------------------------- |
-| `Ctrl+a+[` | vi copy mode with Enter to copy selection |
+| `Ctrl+a+[` | vi copy mode with enter to copy selection |
+| `Ctrl+a+]` | paste from buffer                         |
 
 ### misc
 

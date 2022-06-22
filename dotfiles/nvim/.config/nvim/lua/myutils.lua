@@ -36,7 +36,7 @@ function M.find_node_process()
     local processOnPort = M.find_process_on_port(9220)
     if processOnPort then
         return processOnPort
-      end
+    end
     local processesMatchingNode = M.find_named_processes("node")
     if table.getn(processesMatchingNode) == 1  then
         return processesMatchingNode[0].pid

@@ -1,4 +1,5 @@
 tap "homebrew/cask-fonts"
+tap "hashicorp/tap"
 
 # The awesome Hack Nerd fonts combining the Hack source code font
 # -  https://github.com/source-foundry/Hack
@@ -49,6 +50,7 @@ brew "pass"
 brew "ripgrep"
 brew "rustup"
 brew "speedtest-cli"
+brew "starship"
 brew "stow"
 brew "switchaudio-osx"
 brew "the_silver_searcher"
@@ -68,6 +70,7 @@ cask "kitty"
 
 # brew "languagetool"
 brew "yamllint"
+brew "vale"
 
 #
 # supporting tools
@@ -83,6 +86,7 @@ brew "fzf"
 #
 
 brew "duti"
+brew "pinentry-mac"
 
 cask "alfred"
 cask "hiddenbar"
@@ -100,22 +104,24 @@ brew "bitwarden-cli"
 brew "gh"
 brew "git"
 brew "gradle"
+brew "hashicorp/tap/terraform-ls"
 brew "jenv"
 brew "jq"
 brew "lua-language-server"
-# Default node is latest, but nvm used to drop version
 brew "node"
 brew "nvm"
-brew "pnpm"
 brew "k9s"
-brew "yarn"
 
 brew "maven"
 brew "neofetch"
 brew "rbenv"
+brew "terragrunt"
 brew "tidy-html5"
-# brew "warrensbox/tap/tfswitch"
+brew "warrensbox/tap/tfswitch"
+brew "warrensbox/tap/tgswitch"
+brew "watchman"
 
+cask "visual-studio-code"
 cask "google-cloud-sdk"
 cask "lens"
 

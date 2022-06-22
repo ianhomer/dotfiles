@@ -73,11 +73,15 @@ if [[ "$ADMIN" == "y" ]] ; then
 fi
 
 # Force pnpm overwrite, we'll always take an upgrade
-brew link --overwrite pnpm
+# brew link --overwrite pnpm
 
 # Restart Alfred - it might have updated, and it's quick to recycle, so until I
 # can be cleverer about restarting when updated ...
 osascript -e 'tell application "Alfred" to quit'
-/usr/bin/open -a "Alfred 4"
+/usr/bin/open -a "Alfred 4" || echo "Cannot open Alfred"
+
+if [[ ! -d ~/.cache/vale ]] ; then
+  vale sync || echo "failed to sync vale"
+fi
 
 should-run -fu $0

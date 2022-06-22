@@ -20,7 +20,6 @@ $(shim) && . ${ME}/i.sh
 #
 [ ! -d ~/.nvm ] && mkdir ~/.nvm
 
-
 #
 # Node is installed with brew and pnpm installed with corepack
 #
@@ -55,7 +54,7 @@ cat $NODE_GLOBAL | grep -v '#' | grep '@'                |
 log:: "checking pnpm outdated"
 pnpm --global outdated || log:: "pnpm is outdated"
 log:: "pnpm update"
-pnpm -g update
+pnpm --global update --latest
 
 echo
 log:: "... Global node packages installed"

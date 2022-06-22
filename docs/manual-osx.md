@@ -5,9 +5,18 @@ I manually do on each environment.
 
 ## Configure core apps
 
-### Brave
+### Browsers
 
-Install [brave](https://brave.com/)
+I use multiple browsers to 1) allow different persistent sessions I can jump
+between and 2) test cross browser functionality:
+
+The ones I install by default (in order of my preferred browser):
+
+1. [brave](https://brave.com/)
+2. [edge](https://www.microsoft.com/en-us/edge)
+3. [chrome](https://www.google.com/intl/en_uk/chrome/)
+
+I install bitwarden extension in each browser
 
 ### Magnet
 
@@ -37,6 +46,72 @@ Set the following to start on login
 - Alfred 4
 - Magnet
 
+## Finder
+
+- Preferences
+  - Keep folders on top when sorting by name
+  - Remove AirDrop
+  - Set explicit tags, e.g. "admin", "projects", "personal"
+  - Open folders in tabs, not windows
+- Customise toolbar
+  - name
+  - show
+  - info
+  - path
+  - view
+  - (remove search, since never use finder search)
+- Click on Macintosh HD - `cmd-J` select always open in list view
+- Services - Services Preferences, just
+  - new Kitty Window
+  - Folder Actions set up
+- Show preview
+
+## Install Apps
+
+I often use the following, installing them manually as needed
+
+- Slack
+- Miro
+- YubiKey manager
+- Bitwarden Desktop <https://bitwarden.com/download/>
+- [Wally](https://www.zsa.io/wally/) - Moonlander configuration
+- ObinsKit - AnnePro configuration
+
+### Additional developer tools
+
+- xcode
+- Visual Studio 2022
+- Android Studio
+
+More tools installed adhoc
+
+    brew install azure-cli
+    brew install k6
+    brew install cocoapods
+    brew install --cask powershell
+    brew install --cask flipper
+
+JDK 11
+
+    brew tap homebrew/cask-versions
+    brew install --cask zulu11
+
+For Android Studio projects generate a .env in your project hierarchy
+
+```sh
+cat-dotenv-android > .env
+```
+
+## Uninstall Apps
+
+I uninstall the follow apps since they provide no value to me:
+
+- Garage Band
+- iMovie
+- Numbers
+- Pages
+- Keynote
+
 ## Configure other apps
 
 ### Slack
@@ -45,11 +120,22 @@ Optimise slack performance
 
 Preferences -> Accessibility -> Allow animated images and emoji
 
+### Dock & Menu Bar Configuration - MacOS
+
+- Clock - Show Date - Always
+- Now Playing - Untick Show in Menu Bar
+
+### Trackpad Configuration - MacOS
+
+System preferences -> Trackpad -> Point & Click
+
+- Disable Look up & data detectors
+
 ### Keyboard Configuration - MacOS
 
-System preferences
+Disable all keyboard shortcuts I don't use.
 
--> Keyboard -> Shortcuts ->
+System preferences -> Keyboard -> Shortcuts ->
 
 - Disable Mission Control Ctrl-arrow short cuts
 - Disable Ctrl-space and Shift-Ctrl-space for selecting input source
@@ -76,6 +162,13 @@ Use `Shift-3` for # and `Alt-3` for £. Feels more natural to me and aligns with
 mechanical keyboards.
 
 -> Keyboard -> Input Sources -> U.S.
+
+### Finder - Set list by default
+
+- Open Finder
+- Select Macintosh HD
+- `Command-J`
+- Select Always open in list mode
 
 ### Spotlight
 

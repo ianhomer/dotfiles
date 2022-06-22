@@ -8,7 +8,7 @@ else
   MY_EMAIL=$1
 fi
 
-if [[ -z $MY_EMAIL ]] ; then
+if [[ -z "$MY_EMAIL" ]] ; then
   log:: "... set email with"
   log:: "    dotme set EMAIL my@com"
   exit 1

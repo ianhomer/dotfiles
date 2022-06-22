@@ -78,7 +78,7 @@ if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
   MY_NOTES="my-notes"
   MY_DO="-WOR"
   export ENV=~/.config/dotme/.env
-  [[ -f $ENV ]] && export $(cat $ENV| xargs)
+  [[ -f $ENV ]] && export $(grep -v "^#" $ENV | xargs)
 
   #
   # Imply the OS value from the underlying OSTYPE

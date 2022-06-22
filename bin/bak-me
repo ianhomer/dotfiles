@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+
+#
+# Backup my files
+#
+
+set -e
+
+$(shim) && . ${ME}/i.sh
+
+BACKUP_ROOT=${1:-/Volumes/my-backup}
+
+if [[ ! -d "$BACKUP_ROOT" ]] ; then
+  if [[ "$BACKUP_ROOT" =~ ^/Volumes/ ]] ; then
+    echo "Please plug in backup drive : ${BACKUP_ROOT}"
+  else
+    echo "Backup location does not exist : ${BACKUP_ROOT}"
+  fi
+  exit 1
+fi
+
+BACKUP_DESTINATION=$BACKUP_ROOT/backup/$(scutil --get ComputerName)-$USER
+
+if [[ ! -d $BACKUP_DESTINATION ]] ; then
+  #
+  # Prefer explicit creation of backup destination to prevent unintended
+  # consequences if destination not as expected
+  #
+  echo "Create directory $BACKUP_DESTINATION to enable backup flow"
+  exit 1
+fi
+
+EXCLUDES_FILE=~/.dotfiles/dotfiles/rsync/.config/rsync/rsync-excludes.txt
+LOG_DIR=~/local/logs
+[[ ! -d $LOG_DIR ]] && mkdir $LOG_DIR
+LOG=$LOG_DIR/bak-me-$(date "+%Y%m%d-%H%M%S").log
+OUT_LOG=$LOG_DIR/bak-me-$(date "+%Y%m%d-%H%M%S")-out.log
+stamp=$(date "+%Y/%m/%d/%H%M%S")
+
+# r - archive => -rlptgoD
+# P - partial and progress
+# b - make incremental backups
+
+args="--stats --exclude-from=${EXCLUDES_FILE}"
+args="$args -Pab --delete --backup-dir $stamp"
+args="$args --log-file=$LOG"
+# args="$args --dry-run"
+log:: "rsync args : $args"
+
+LOCATIONS="gdrive .dotfiles"
+PROJECT_ROOTS="things dotmodules my try"
+for root in $PROJECT_ROOTS ; do
+  LOCATIONS="$LOCATIONS projects/$root"
+done
+echo $DEFAULT_PROJECT_ROOTS
+for location in $LOCATIONS ; do
+  LOCATION="$HOME/$location"
+  if [[ -d "$LOCATION" ]] ; then
+    log:: "Backing up $LOCATION"
+    rsync ${args} $LOCATION $BACKUP_DESTINATION >> $OUT_LOG
+  else
+    log:: "Location not found : $LOCATION"
+  fi
+done
+
+log:: "rsync log : $LOG"
+log:: "Command output : $OUT_LOG"
+echo
+log:: "Backup size"
+fileCount=$(find $BACKUP_DESTINATION -type f | wc -l)
+log:: "File count destination : $fileCount"
+if compgen -G "$BACKUP_DESTINATION/20*" > /dev/null ; then
+  for history in $BACKUP_DESTINATION/20* ; do
+    historyFileCount=$(find $history -type f | wc -l)
+    log:: "File count history $(basename $history) : $historyFileCount"
+  done
+else
+  log:: "No files in history (yet)"
+fi
+
+echo
+log:: "Transferred files"
+grep "transferred" $OUT_LOG
+
+echo
+log:: "Files size"
+du -sch $BACKUP_DESTINATION

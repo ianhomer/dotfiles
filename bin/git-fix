@@ -23,8 +23,9 @@ else
 fi
 
 OPTIND=1
-while getopts "c:v" o; do case "$o" in
+while getopts "c:xv" o; do case "$o" in
   c) context=$OPTARG ;; # context of repository
+  x) NOCONTEXT="y" ;;
   v) verbose="y" ;;
 esac done
 
@@ -38,8 +39,9 @@ function setMyGitUrl {
     *github.com*)    host="github.com"    ;;
     *bitbucket.org*) host="bitbucket.org" ;;
     *)
-      echo "Host for current remote URL not recognised"
-      exit 1
+      log:: NOK origin current remote URL not recognised
+      echo $currentRemoteUrl
+      return 1
       ;;
   esac
 
@@ -52,7 +54,12 @@ function setMyGitUrl {
     myRemoteUrl=${currentRemoteUrl}
   fi
 
-  myRemoteUrl=${myRemoteUrl/${host}:/${host}${postFix}:}
+  if [[ "$NOCONTEXT" == "y" ]] ; then
+    # Desired state is without context
+    myRemoteUrl=${myRemoteUrl/-*:/:}
+  else
+    myRemoteUrl=${myRemoteUrl/${host}:/${host}${postFix}:}
+  fi
 
   if [ ${currentRemoteUrl} != ${myRemoteUrl} ] ; then
     echo "current remote   $currentRemoteUrl"
@@ -78,13 +85,13 @@ function fixMain() {
         if [[ "${action}" == "main" ]] ; then
           git checkout main
         else
-          echo "Repository uses main not master - use \"main\" action to fix"
+          echo "Repository uses master not main - use \"main\" action to fix"
         fi
       else
         echo "No master or main in remote"
       fi
     else
-      log:: NOK master
+      log:: NOK master prefer main
     fi
   elif [[ "$branch" == "main" ]] ; then
     log:: AOK $branch
@@ -101,6 +108,12 @@ function fixUpstream() {
   fi
 }
 
+function fixWho() {
+  gitUserEmail=$(git config user.email)
+  gitUserName=$(git config user.name)
+  log:: AOK user $gitUserEmail $gitUserName
+}
+
 
 [[ -n "${verbose}" ]] && echo "deleting identites from SSH agent"
 ssh-add -q -D
@@ -109,6 +122,7 @@ ssh-add -q -D
 setMyGitUrl
 fixMain
 fixUpstream
+fixWho
 
 # Clear authentication agent
 

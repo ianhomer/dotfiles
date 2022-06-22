@@ -13,7 +13,7 @@ if get(g:,"knobs_level", 0) > 2
   " Enable folding
   let g:markdown_folding = 1
   " Default large fold level start, folding everything up by default feels odd.
-  set foldlevelstart=4
+  set foldlevelstart=8
 endif
 
 nnoremap <silent> <leader>jd :call thingity#DateHeading()<CR>
