@@ -92,6 +92,7 @@ nvim_set_var("knobs_levels", {
     thingity = 3,
     tmux_navigator = 3,
     toggleterm = 3,
+    tpipeline = 9,
     treesitter = 3,
     trouble = 5,
     twightlight = 9,
@@ -140,7 +141,7 @@ return require("packer").startup({
         local ok, knobs = pcall(require, "knobs")
         local use = ok and knobs.use(_use) or _use
 
-        require"config.config"
+        require("config.config")
 
         use("wbthomason/packer.nvim")
         use("ianhomer/knobs.vim")
@@ -421,6 +422,10 @@ return require("packer").startup({
             requires = { "kyazdani42/nvim-web-devicons", opt = true },
             config = [[require'config.lualine']],
             commit = "3362b28f917acc37538b1047f187ff1b5645ecdd",
+        })
+        use({
+            "vimpostor/vim-tpipeline",
+            commit = "7945984fd56bd69506c73f68bb300aaceae72e82",
         })
         use({
             "romgrk/barbar.nvim",
