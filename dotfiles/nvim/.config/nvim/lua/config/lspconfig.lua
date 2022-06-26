@@ -86,6 +86,10 @@ local lspsettings = {
         },
     },
 }
+
+local filetypes = {
+    terraformls = { "terraform", "hcl" }
+}
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in ipairs(servers) do
     local module = lspconfig[lsp]
@@ -100,6 +104,7 @@ for _, lsp in ipairs(servers) do
             flags = {
                 debounce_text_changes = 150,
             },
+            filetypes = filetypes[lsp],
             settings = lspsettings[lsp],
             capabilities = capabilities,
         })
