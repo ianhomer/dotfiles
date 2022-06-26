@@ -4,16 +4,21 @@ treesitter.setup {
     ensure_installed = {
         "bash",
         "css",
+        "go",
+        "hcl",
         "java",
         "json",
         "html",
         "lua",
+        "make",
         "markdown",
         "python",
         "javascript",
         "scss",
+        "toml",
         "tsx",
         "typescript",
+        "vim",
         "yaml"
     },
     highlight = {
