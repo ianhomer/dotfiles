@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+help() {
+  cat << EOF
+
+md-to-pdx ~/full-path-source/thing-dir ~/full-path-pdf/thing-dir
+
+  -h this help
+  -d dry run
+  -v verbose
+EOF
+}
+
+OPTIND=1
+while getopts "dhv" o; do case "$o" in
+  h) help && exit 0 ;;
+  v) VERBOSE=y ;;
+  d) DRY=y ;;
+  *) exit 1 ;;
+esac done
+shift $((OPTIND-1))
+
+$(shim) && . ${ME}/i.sh
+
+if [[ -n "$1" ]] ; then
+  # Two arguments, expect absolute paths
+  if [[ -z "$2" ]] ; then
+    log::exit "Please provide source and destination"
+  fi
+
+  if [[ "$1" == */ ]] ; then
+    log::exit "Please remote / from end of source"
+  fi
+  if [[ "$2" == */ ]] ; then
+    log::exit "Please remote / from end of destination"
+  fi
+
+  from="$1"
+  to="$2"
+else
+  log::exit "Please provide source and destination"
+fi
+
+sourceBasename=`basename $from`
+destinationBasename=`basename $to`
+
+if [[ "${sourceBasename}" != "${destinationBasename}" ]] ; then
+  log::exit "Source (${sourceBasename}) and destination (${destinationBasename}) base name should match"
+fi
+
+# Ensure destination directory exists so that bootstrapping of
+# of sync process starts OK
+if [[ ! -d "$to" ]] ; then
+  log:: "Making directory $to"
+  mkdir $to
+fi
+
+log:: "from ${from}"
+log:: "to ${to}"
+
+find $from -name '*.md' | while read file; do
+  pdfFile=$to/`basename ${file%.md}.pdf`
+  log:: "$pdfFile"
+  pandoc $file -o $pdfFile \
+    -V fontsize:12pt \
+    -V geometry:margin=2cm
+done
+
+    # -V fontfamily:electrum \
+    # -V mainfont=Arial \
+
+# To see fonts installed view the file
+# 
+#   kpsewhich pdftex.map
+
