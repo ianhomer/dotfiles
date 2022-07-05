@@ -58,8 +58,9 @@ fi
 log:: "from ${from}"
 log:: "to ${to}"
 
-find $from -name '*.md' | while read file; do
-  pdfFile=$to/`basename ${file%.md}.pdf`
+cd $from
+find . -name '*.md' | while read file; do
+  pdfFile=$to/${file%.md}.pdf
   log:: "$pdfFile"
   pandoc $file -o $pdfFile \
     -V fontsize:12pt \
