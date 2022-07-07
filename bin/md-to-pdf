@@ -61,10 +61,15 @@ log:: "to ${to}"
 cd $from
 find . -name '*.md' | while read file; do
   pdfFile=$to/${file%.md}.pdf
-  log:: "$pdfFile"
-  pandoc $file -o $pdfFile \
-    -V fontsize:12pt \
-    -V geometry:margin=2cm
+  if [ -f "$pdfFile" -a "$pdfFile" -nt "$file" ] ; then
+    [ "$verbose" == "y" ] && log:: OK pdf $file
+  else
+    log:: UP pdf "$file"
+    pandoc $file -o $pdfFile \
+      --pdf-engine=xelatex \
+      -V fontsize:12pt \
+      -V geometry:margin=2cm
+  fi
 done
 
     # -V fontfamily:electrum \
