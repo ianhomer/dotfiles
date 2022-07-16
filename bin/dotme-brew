@@ -78,7 +78,7 @@ fi
 # Restart Alfred - it might have updated, and it's quick to recycle, so until I
 # can be cleverer about restarting when updated ...
 osascript -e 'tell application "Alfred" to quit'
-/usr/bin/open -a "Alfred 4" || echo "Cannot open Alfred"
+/usr/bin/open -a "Alfred 5" || echo "Cannot open Alfred"
 
 if [[ ! -d ~/.cache/vale ]] ; then
   vale sync || echo "failed to sync vale"
