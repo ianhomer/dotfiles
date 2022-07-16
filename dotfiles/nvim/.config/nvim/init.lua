@@ -608,7 +608,7 @@ return require("packer").startup({
             "akinsho/toggleterm.nvim",
             cmd = { "ToggleTerm", "TermExec" },
             config = [[require'config.toggleterm']],
-            commit = "91505816335a93b10f026409228aef5e8d48e6d9",
+            commit = "0c1dc87fa9779a3de8d33acf1253b1ca88be25d5",
         })
         use({
             "tpope/vim-eunuch",
