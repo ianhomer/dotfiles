@@ -72,8 +72,6 @@ MacOS with
 **[magnet](https://magnet.crowdcafe.com/)**
 : window manager
 
-**Fantastical** calendar.
-
 Other tools woven into these dotfiles include **ag**, **fzf**, **pandoc**,
 **cspell**, **fugitive**, **java**, **node** and **python**.
 
