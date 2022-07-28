@@ -299,3 +299,10 @@ set splitbelow
 " Don't conceal any syntax
 set conceallevel=0
 
+
+" vim-test
+let test#strategy = "vimux"
+let g:test#preserve_screen = 1
+let g:test#echo_command = 0
+let g:VimuxOrientation = "h"
+let g:VimuxHeight = "40"

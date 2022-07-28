@@ -4,6 +4,6 @@ require("neotest").setup({
         --     jestCommand = "npm test --",
         --     jestConfigFile = "custom.jest.config.ts",
         -- }),
-        require("neotest-vim-test")()
+        require("neotest-vim-test")({allow_file_types = { "javascript" }})
     },
 })
