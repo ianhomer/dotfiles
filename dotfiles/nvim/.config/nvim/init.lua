@@ -70,6 +70,7 @@ nvim_set_var("knobs_levels", {
     modes = 3,
     mundo = 3,
     neoscroll = 3,
+    neotest = 9,
     nnn = 9,
     null_ls = 3,
     nvim_tree = 3,
@@ -298,8 +299,29 @@ return require("packer").startup({
             commit = "3bd228781bf4a927c5ceaf7a4687fed9f96d12b5",
         })
         use({
+            knob = "neotest",
             "vim-test/vim-test",
             commit = "f20a5572d310051dbd1a258740833bca27a106a6",
+        })
+        _use({
+            "antoinemadec/FixCursorHold.nvim",
+            commit = "5aa5ff18da3cdc306bb724cf1a138533768c9f5e",
+        })
+        -- _use({
+        --     "haydenmeade/neotest-jest",
+        --     commit = "22a676198d1c69013431f7d2071cf927f0a1f4cd",
+        -- })
+        use({
+            "nvim-neotest/neotest",
+            requires = {
+                "nvim-lua/plenary.nvim",
+                "nvim-treesitter/nvim-treesitter",
+                "antoinemadec/FixCursorHold.nvim",
+                "vim-test/vim-test"
+                -- "haydenmeade/neotest-jest",
+            },
+            commit = "2f5e9f634fd66351f323bd3c97eaa82f3dfbcb61",
+            config = [[require'config.neotest']],
         })
         use({
             knob = "dap",
