@@ -70,7 +70,7 @@ nvim_set_var("knobs_levels", {
     modes = 3,
     mundo = 3,
     neoscroll = 3,
-    neotest = 5,
+    neotest = 9,
     nnn = 9,
     null_ls = 3,
     nvim_tree = 3,
@@ -303,15 +303,17 @@ return require("packer").startup({
           "preservim/vimux",
           commit = "89604a4464c3069dbe31f7bc8dd16a5fbc88a303"
         })
-        _use({
+        use({
             "vim-test/vim-test",
             commit = "a5b122e8c5eb47db5a034908172ccbee44f4e520",
         })
-        _use({
+        use({
+            knob = "neotest",
             "antoinemadec/FixCursorHold.nvim",
             commit = "5aa5ff18da3cdc306bb724cf1a138533768c9f5e",
         })
-        _use({
+        use({
+            knob = "neotest",
             "nvim-neotest/neotest-vim-test",
             commit = "f95a60d89be8c7098d33306c1d13b412c4c21f9d",
         })

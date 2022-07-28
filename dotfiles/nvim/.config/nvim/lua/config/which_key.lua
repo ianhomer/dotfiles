@@ -64,6 +64,11 @@ if vim.g.knob_telescope then
         map["tr"] = { "<cmd>lua require'telescope'.extensions.refactoring.refactors()<cr>" }
     end
 
+    -- Dev
+    map["y"] = { "<cmd>TestNearest<cr>", "Test nearest"}
+    map["Y"] = { "<cmd>TestFile<cr>", "Test file"}
+    map["T"] = { "<cmd>let test#project_root=@0<cr>", "Set test directory to clipboard"}
+
     -- Git
     map["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
     map["t1"] = { "<cmd>Telescope git_commits<cr>", "Git Commits" }
