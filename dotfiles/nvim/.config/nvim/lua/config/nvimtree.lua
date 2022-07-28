@@ -21,7 +21,8 @@ require("nvim-tree").setup({
     },
     renderer = {
         special_files = {},
-        highlight_opened_files = "icon",
+        highlight_opened_files = "all",
+        highlight_git = true,
         icons = {
             show = {
                 git = true,
