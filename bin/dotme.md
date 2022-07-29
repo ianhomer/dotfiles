@@ -11,8 +11,8 @@
 ## DESCRIPTION
 
 The **dotme** utility installs and configures a local computer environment based
-driven by an opinionated set of "dot files". These "dot files" drive a common
-configuration for tools like vim, tmux and brew. By running this on all local
+driven by an opinionated set of "dot files". These "dotfiles" drive a common
+configuration for tools like vim, tmux, and brew. By running this on all local
 environment you can ensure that all local environments worked on are the
 configured the same.
 
