@@ -50,7 +50,7 @@ nvim_set_var("knobs_levels", {
     glow = 3,
     goyo = 9,
     gv = 5,
-    hop = 6,
+    hop = 6, -- alternative to lightspeed
     indent_blankline = 5,
     indentline = 5,
     kanagawa = 3,
