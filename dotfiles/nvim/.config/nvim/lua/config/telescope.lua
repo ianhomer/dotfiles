@@ -78,11 +78,11 @@ telescope.setup({
 })
 telescope.load_extension("fzf")
 if vim.g.knob_frecency then
-  telescope.load_extension("frecency")
+    telescope.load_extension("frecency")
 end
 
 if vim.g.knob_refactoring then
-  telescope.load_extension("refactoring")
+    telescope.load_extension("refactoring")
 end
 
 local colors = require("kanagawa.colors").setup()
@@ -101,9 +101,11 @@ vim.cmd("hi TelescopeResultsTitle guibg = " .. colors.bg_dim .. " guifg = " .. c
 -- Disable which-key registry help in TelescopePrompt so that C-R can be used to
 -- insert from registry
 -- https://github.com/nvim-telescope/telescope.nvim/issues/1047
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+    [[
     augroup telescope
         autocmd!
         autocmd FileType TelescopePrompt inoremap <buffer> <silent> <C-r> <C-r>
-    augroup END]], false)
-
+    augroup END]],
+    false
+)

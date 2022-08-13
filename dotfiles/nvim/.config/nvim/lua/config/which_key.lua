@@ -1,5 +1,4 @@
 local whichKey = require("which-key")
-local nullLsConfig =
 whichKey.setup({
     plugins = {
         spelling = {
