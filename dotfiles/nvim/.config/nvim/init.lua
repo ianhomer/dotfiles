@@ -256,7 +256,7 @@ return require("packer").startup({
         use({
             "jose-elias-alvarez/null-ls.nvim",
             config = [[require'config.null_ls']],
-            commit = "9caa5d6d19e4d0bc8782c2a75988af0c20eed59e",
+            commit = "5b745e5fa2a18a2c0df8966080f4321fad4f42d7",
             requires = { "nvim-lua/plenary.nvim" },
         })
 
