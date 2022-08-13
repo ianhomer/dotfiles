@@ -99,7 +99,7 @@ nvim_set_var("knobs_levels", {
     trouble = 5,
     twightlight = 9,
     ufo = 9,
-    unicode = 4,
+    unicode = 9,
     unimpaired = 4,
     update_spelling = 7,
     which_key = 1,

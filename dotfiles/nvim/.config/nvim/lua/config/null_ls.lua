@@ -7,7 +7,7 @@ local code_actions = null_ls.builtins.code_actions
 local completion = null_ls.builtins.completion
 
 null_ls.setup({
-    debug = true,
+    debug = false,
     sources = {
         -- order is important, prettier should be before eslint
         formatting.prettierd,
