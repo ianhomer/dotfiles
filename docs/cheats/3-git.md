@@ -9,4 +9,3 @@
 
 **git fix context personal**
 : Use personal context for current repository
-
