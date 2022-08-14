@@ -4,8 +4,8 @@
 
 ### git
 
-**git fix**
-: Fix git remote, e.g. use personal context, use SSH, reset SSH keys
+**git lint**
+: Lint git set up, e.g. use personal context, use SSH, reset SSH keys
 
-**git fix context personal**
+**git lint context personal**
 : Use personal context for current repository
