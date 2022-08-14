@@ -46,6 +46,7 @@ function setMyGitUrl {
       log:: NOK remote-url URL not recognised
       if [[ -z "$currentRemoteUrl" ]] ; then
         log:: NOK remote-url is empty
+        log:: "set with 'git remote add origin my-url'"
       else
         log:: IS remote-url $currentRemoteUrl
       fi
