@@ -9,7 +9,7 @@
 
 $(shim) && . ${ME}/i.sh
 
-if git rev-parse --is-inside-work-tree 2>/dev/null ; then
+if git rev-parse --is-inside-work-tree 2>&1 >/dev/null ; then
   INSIDE_GIT_REPOSITORY=y
 fi
 
@@ -43,8 +43,12 @@ function setMyGitUrl {
     *github.com*)    host="github.com"    ;;
     *bitbucket.org*) host="bitbucket.org" ;;
     *)
-      log:: NOK origin current remote URL not recognised
-      echo $currentRemoteUrl
+      log:: NOK remote-url URL not recognised
+      if [[ -z "$currentRemoteUrl" ]] ; then
+        log:: NOK remote-url is empty
+      else
+        log:: IS remote-url $currentRemoteUrl
+      fi
       return 1
       ;;
   esac
@@ -129,7 +133,7 @@ ssh-add -q -D
 [[ -n "${verbose}" ]] && ssh-add -l
 
 if [[ "${INSIDE_GIT_REPOSITORY}" == "y" ]] ; then
-  setMyGitUrl
+  setMyGitUrl || log::exit "Cannot process git URL"
   fixMain
   fixUpstream
 else
