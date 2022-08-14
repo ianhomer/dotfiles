@@ -15,7 +15,7 @@ if [[ ! -f $gitConfigFile ]] ; then
 fi
 
 git config user.email > /dev/null ||
-  git config --global user.email "ian@local"
+  git config --global user.email "code@ianhomer.com"
 
 git config user.name > /dev/null ||
   git config --global user.name "Ian Homer"

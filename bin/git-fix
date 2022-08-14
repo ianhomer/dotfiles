@@ -9,6 +9,10 @@
 
 $(shim) && . ${ME}/i.sh
 
+if git rev-parse --is-inside-work-tree 2>/dev/null ; then
+  INSIDE_GIT_REPOSITORY=y
+fi
+
 #
 # If "personal" host is set up in .ssh config them that's the
 # default context, otherwise the default context is empty.
@@ -109,9 +113,14 @@ function fixUpstream() {
 }
 
 function fixWho() {
-  gitUserEmail=$(git config user.email)
-  gitUserName=$(git config user.name)
-  log:: AOK user $gitUserEmail $gitUserName
+  if [[ "${INSIDE_GIT_REPOSITORY}" == "y" ]] ; then
+    gitUserEmail=$(git config user.email)
+    gitUserName=$(git config user.name)
+    log:: IS "local" $gitUserEmail $gitUserName
+  fi 
+  gitGlobalUserEmail=$(git config --global user.email)
+  gitGlobalUserName=$(git config --global user.name)
+  log:: IS "global" $gitGlobalUserEmail $gitGlobalUserName
 }
 
 
@@ -119,9 +128,13 @@ function fixWho() {
 ssh-add -q -D
 [[ -n "${verbose}" ]] && ssh-add -l
 
-setMyGitUrl
-fixMain
-fixUpstream
+if [[ "${INSIDE_GIT_REPOSITORY}" == "y" ]] ; then
+  setMyGitUrl
+  fixMain
+  fixUpstream
+else
+  log:: "not in a git repository"
+fi
 fixWho
 
 # Clear authentication agent
