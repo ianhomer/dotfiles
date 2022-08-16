@@ -12,6 +12,7 @@ fi
 if [ -z "$directory" ] ; then
   if git rev-parse --is-inside-work-tree 2>&1 >/dev/null ; then
     # If we're in git directory then backup this directory
+    git gc
     directory=$(basename `pwd`)
     cd ..
   else
@@ -40,3 +41,4 @@ tar --exclude-from ~/.config/tar/ignore -chzf - $base |
   --output $outputFullFilename
 
 cksum $outputFullFilename
+log:: "unpack with 'gpg --decrypt my.gz.gpg | tar xvf -'"
