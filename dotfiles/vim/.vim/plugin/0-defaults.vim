@@ -15,8 +15,9 @@ set noerrorbells
 set wildmenu
 " Highlight current line
 set cursorline
-" Ignore case of searches
+" Ignore case of searches unless I mix case
 set ignorecase
+set smartcase
 " Highlight dynamically as pattern is typed
 set incsearch
 " Default updatetime is 4000 and too slow
