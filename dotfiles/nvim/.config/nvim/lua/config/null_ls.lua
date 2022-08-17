@@ -7,10 +7,14 @@ local code_actions = null_ls.builtins.code_actions
 local completion = null_ls.builtins.completion
 
 null_ls.setup({
-    debug = false,
+    debug = true,
     sources = {
         -- order is important, prettier should be before eslint
-        formatting.prettierd,
+        formatting.prettierd.with({
+            env = {
+                PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/.config/.prettierrc.toml"),
+            },
+        }),
         formatting.eslint_d,
         formatting.black,
         formatting.fish_indent,
