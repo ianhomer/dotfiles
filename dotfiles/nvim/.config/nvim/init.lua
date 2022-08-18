@@ -73,6 +73,7 @@ nvim_set_var("knobs_levels", {
     neoscroll = 3,
     neotest = 9,
     nnn = 9,
+    notify = 5,
     null_ls = 3,
     nvim_tree = 3,
     peekaboo = 9,
@@ -266,7 +267,13 @@ return require("packer").startup({
             commit = "f9c8c8ad4135346a945e1ebfb00b723976d92dfc",
         })
 
-        -- Lua
+        use({
+            "rcarriga/nvim-notify",
+            config = [[require'config.notify']],
+            commit = "60bb6bfd6992549ee5336bbb761705b62797ce1d",
+        })
+
+
         use({
             "folke/trouble.nvim",
             requires = "kyazdani42/nvim-web-devicons",

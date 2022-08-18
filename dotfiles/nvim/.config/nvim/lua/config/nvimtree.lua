@@ -60,13 +60,19 @@ require("nvim-tree").setup({
     },
 })
 
-vim.api.nvim_exec(
-    [[
-augroup nvimttree
-    au!
-    au BufLeave NvimTree NvimTreeRefresh
-    au BufEnter NvimTree NvimTreeRefresh
-augroup END
-]],
-    false
-)
+local Event = require('nvim-tree.api').events.Event
+local api = require('nvim-tree.api')
+api.events.subscribe(Event.FileCreated, function(data)
+  vim.api.nvim_command(":edit " .. data.fname)
+end)
+
+-- vim.api.nvim_exec(
+--     [[
+-- augroup nvimttree
+--     au!
+--     au BufLeave NvimTree NvimTreeRefresh
+--     au BufEnter NvimTree NvimTreeRefresh
+-- augroup END
+-- ]],
+--     false
+-- )
