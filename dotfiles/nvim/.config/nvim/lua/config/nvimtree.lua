@@ -1,6 +1,8 @@
 require("nvim-tree").setup({
+    create_in_closed_folder = true,
+    hijack_cursor = true,
     diagnostics = {
-        enable = false,
+        enable = true,
         icons = {
             hint = ".",
             info = "~",
@@ -20,10 +22,13 @@ require("nvim-tree").setup({
         exclude = { ".env", ".config" },
     },
     renderer = {
+        full_name = true,
+        group_empty = true,
         special_files = {},
         highlight_opened_files = "all",
         highlight_git = true,
         icons = {
+            git_placement = "after",
             show = {
                 git = true,
                 folder = true,
@@ -34,6 +39,9 @@ require("nvim-tree").setup({
                 default = "",
             },
         },
+    },
+    live_filter = {
+      always_show_folders = false
     },
     actions = {
         open_file = {
