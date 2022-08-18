@@ -68,6 +68,9 @@ telescope.setup({
                 },
             },
         },
+        find_files = {
+            find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*" },
+        },
         git_bcommits = {
             git_command = git_command,
         },
