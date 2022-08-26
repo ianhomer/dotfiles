@@ -141,6 +141,7 @@ return require("packer").startup({
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
         _use("lewis6991/impatient.nvim")
+        _use("antoinemadec/FixCursorHold.nvim") -- fixes https://github.com/neovim/neovim/issues/12587
 
         local ok, knobs = pcall(require, "knobs")
         local use = ok and knobs.use(_use) or _use
