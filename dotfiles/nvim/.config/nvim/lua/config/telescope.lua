@@ -51,7 +51,7 @@ telescope.setup({
         },
         winblend = 0,
         border = {},
-        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
     },
     extensions = {
         frecency = {
