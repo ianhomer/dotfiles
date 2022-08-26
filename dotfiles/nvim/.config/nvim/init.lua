@@ -42,7 +42,7 @@ nvim_set_var("knobs_levels", {
     frecency = 9,
     friendly_snippets = 5,
     fzf = 3,
-    git_conflict = 5,
+    git_conflict = 9,
     gitgutter = 6,
     gitsigns = 5,
     gruvbox = 9,
