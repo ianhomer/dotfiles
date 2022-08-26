@@ -15,6 +15,7 @@ set noerrorbells
 set wildmenu
 " Highlight current line
 set cursorline
+set guicursor+=v:CurSearch
 " Ignore case of searches unless I mix case
 set ignorecase
 set smartcase
