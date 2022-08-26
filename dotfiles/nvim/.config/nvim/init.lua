@@ -141,7 +141,10 @@ return require("packer").startup({
         o["runtimepath"] = o["runtimepath"] .. ",~/.vim"
 
         _use("lewis6991/impatient.nvim")
-        _use("antoinemadec/FixCursorHold.nvim") -- fixes https://github.com/neovim/neovim/issues/12587
+        _use({
+            "antoinemadec/FixCursorHold.nvim",
+            commit = "5aa5ff18da3cdc306bb724cf1a138533768c9f5e",
+        }) -- fixes https://github.com/neovim/neovim/issues/12587
 
         local ok, knobs = pcall(require, "knobs")
         local use = ok and knobs.use(_use) or _use
@@ -321,11 +324,6 @@ return require("packer").startup({
         use({
             "vim-test/vim-test",
             commit = "dfb99b8867556ea63e67f4a7cbc2ee10dda4b3be",
-        })
-        use({
-            knob = "neotest",
-            "antoinemadec/FixCursorHold.nvim",
-            commit = "5aa5ff18da3cdc306bb724cf1a138533768c9f5e",
         })
         use({
             knob = "neotest",
