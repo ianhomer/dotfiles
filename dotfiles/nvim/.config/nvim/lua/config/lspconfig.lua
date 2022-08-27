@@ -88,6 +88,13 @@ local lspsettings = {
             },
         },
     },
+    cssls = {
+        css = {
+            lint = {
+                unknownAtRules = "ignore",
+            },
+        },
+    },
 }
 
 local filetypes = {
