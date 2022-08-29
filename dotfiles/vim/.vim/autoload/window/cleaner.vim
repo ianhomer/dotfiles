@@ -34,7 +34,7 @@ function window#cleaner#Close(type)
 endfunction
 
 function window#cleaner#CloseFugitive()
-  return window#cleaner#Close(".git")
+  return window#cleaner#Close("fugitive://*")
 endfunction
 
 function window#cleaner#CloseAllBuffersButCurrent()

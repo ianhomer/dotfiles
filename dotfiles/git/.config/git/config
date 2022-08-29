@@ -19,6 +19,9 @@
 [color]
   ui = auto
 
+[commit]
+  gpgsign = true
+
 [core]
   autocrlf = input
 
@@ -36,3 +39,6 @@
 
 [push]
   default = current
+
+[gpg]
+  program = gpg
