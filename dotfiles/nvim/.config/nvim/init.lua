@@ -51,6 +51,7 @@ nvim_set_var("knobs_levels", {
     goyo = 9,
     gv = 9,
     hop = 6, -- alternative to lightspeed
+    icon_picker = 5,
     indent_blankline = 5,
     indentline = 5,
     kanagawa = 3,
@@ -583,6 +584,16 @@ return require("packer").startup({
         use({
             "tpope/vim-abolish",
             commit = "3f0c8faadf0c5b68bcf40785c1c42e3731bfa522",
+        })
+        _use({
+          "stevearc/dressing.nvim",
+          commit = "9cdb3e0f0973447b940b35d3175dc780301de427"
+        })
+        use({
+          "ziontee113/icon-picker.nvim",
+          commit = "0f3b2648f6f8e788bc8dfe37bc9bb18b565cfc3c",
+          config = [[require'config.icon_picker']],
+          after = "dressing.nvim"
         })
         use({ "godlygeek/tabular", cmd = { "Tabularize" }, command = "339091ac4dd1f17e225fe7d57b48aff55f99b23a" })
         use({
