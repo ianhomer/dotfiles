@@ -6,6 +6,7 @@
 
   # See https://git-scm.com/docs/pretty-formats
   l = "log --pretty=oneline -n 20 --graph --abbrev-commit"
+  log-branch = "log --format='%C(auto)%h %Cgreen%<(8,trunc)%cr %Creset %<(20,trunc)%s %Cblue%d'"
   log-what = "log --format='%C(auto) %h %s %Cblue%ae%d'"
   log-what-when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %s%Cgreen %cd% %Cblue %Cblue%ae%d'"
   log-who = "log --format='%C(auto) %h %Cblue%ae %G?%Creset %<(30,trunc)%s%Cblue%d'"
@@ -26,7 +27,7 @@
   autocrlf = input
 
 [format]
-  pretty = "format:%C(auto) %h %Cblue%<(8,trunc)%aN %Cgreen%<(10,trunc)%cr %Creset %<(30,trunc)%s %Cblue%d"
+  pretty = "format:%C(auto) %h %Cblue%<(8,trunc)%aN %Cgreen%<(10,trunc)%cr %Creset %<(50,trunc)%s"
 
 [log]
   date = relative
