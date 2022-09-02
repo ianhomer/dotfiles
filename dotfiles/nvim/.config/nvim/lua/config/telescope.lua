@@ -51,7 +51,7 @@ telescope.setup({
         },
         winblend = 0,
         border = {},
-        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" }
+        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     },
     extensions = {
         frecency = {
@@ -100,6 +100,13 @@ vim.cmd("hi TelescopeSelection guibg = " .. colors.bg_light1 .. " guifg = " .. c
 vim.cmd("hi TelescopePreviewTitle guibg = " .. colors.bg_dim .. " guifg = " .. colors.co)
 vim.cmd("hi TelescopePromptTitle guibg = " .. colors.bg_light1 .. " guifg = " .. colors.co)
 vim.cmd("hi TelescopeResultsTitle guibg = " .. colors.bg_dim .. " guifg = " .. colors.co)
+
+vim.keymap.set(
+    "i",
+    "<C-l>",
+    "<cmd>lua require'telescope.builtin'.symbols{ sources = {'gitmoj'}}<cr>",
+    { noremap = true, silent = true }
+)
 
 -- Disable which-key registry help in TelescopePrompt so that C-R can be used to
 -- insert from registry
