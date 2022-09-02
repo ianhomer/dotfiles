@@ -13,6 +13,7 @@ set mouse=a
 set noerrorbells
 " Enhance command-line completion
 set wildmenu
+set wildmode=longest:full,full
 " Highlight current line
 set cursorline
 set guicursor+=v:CurSearch
