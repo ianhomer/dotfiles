@@ -8,9 +8,14 @@ vim.opt.fillchars:append({
     verthoriz = '╋',
 })
 
+local my_colors = {
+  bg = "#16161D"
+}
+
 require('kanagawa').setup({
-  dimInactive = true,
-  globalStatus = true
+  dimInactive = false,
+  globalStatus = true,
+  colors = my_colors
 })
 vim.cmd("colorscheme kanagawa")
 

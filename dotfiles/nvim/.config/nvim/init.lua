@@ -438,7 +438,7 @@ return require("packer").startup({
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.nvimtree']],
             cmd = { "NvimTreeFindFile", "NvimTreeOpen", "NvimTreeToggle" },
-            commit = "09a51266bca28dd87febd63c66bdbd74f7764a63",
+            commit = "e8bf3d778a74882d748f55d67af206fa8b321d99",
         })
         use({
             "ryanoasis/vim-devicons",
@@ -493,7 +493,7 @@ return require("packer").startup({
         })
         use({
             "rebelot/kanagawa.nvim",
-            commit = "6fe60d5f9d1cae16084f8051c02bf2613187c4f6",
+            commit = "dda1b8c13e0e7588c014064e5e8baf7f2953dd29",
             config = [[require'config.kanagawa']],
         })
         use({
