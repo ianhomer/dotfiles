@@ -32,6 +32,8 @@ require("lualine").setup({
     extensions = {
         "fugitive",
         "fzf",
+        "mundo",
+        "nvim-dap-ui",
         "nvim-tree",
         "toggleterm",
     },
@@ -47,7 +49,7 @@ require("lualine").setup({
                 diagnostics_color = {
                     error = "white",
                 },
-            },
+            }
         },
         lualine_x = { { "filetype", icon_only = true } },
         lualine_y = { "progress" },

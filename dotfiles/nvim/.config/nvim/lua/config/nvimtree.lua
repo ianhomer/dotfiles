@@ -10,6 +10,9 @@ require("nvim-tree").setup({
             error = "!",
         },
     },
+    view = {
+      adaptive_size = false
+    },
     update_focused_file = {
         enable = true,
     },
