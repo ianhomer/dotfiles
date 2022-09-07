@@ -1,10 +1,3 @@
-local opt = { noremap = true, silent = false }
-vim.api.nvim_set_keymap("n", "≤", [[<Cmd>:BufferPrevious<CR>]], opt)
-vim.api.nvim_set_keymap("n", "≥", [[<Cmd>:BufferNext<CR>]], opt)
-vim.api.nvim_set_keymap("n", "¯", [[<Cmd>:BufferMovePrevious<CR>]], opt)
-vim.api.nvim_set_keymap("n", "˘", [[<Cmd>:BufferMoveNext<CR>]], opt)
-vim.api.nvim_set_keymap("n", "÷", [[<Cmd>:BufferPin<CR>]], opt)
-
 local nvim_tree_events = require('nvim-tree.events')
 local bufferline_state = require('bufferline.state')
 
@@ -26,7 +19,7 @@ end)
 
 require'bufferline'.setup {
   animation = true,
-  auto_hide = false,
+  auto_hide = true,
   icon_pinned = "",
   closable = true,
   icon_custom_colors = true
