@@ -9,11 +9,12 @@ endfunction
 
 " 1 = vanilla mode
 function modes#ResetMode()
-  set nonu
-  set nornu
+  bufdo windo set nonu
+  bufdo windo set nornu
   set backspace=indent,eol,start
   set nohlsearch
   set laststatus=3
+  lua require"lualine".setup({options={globalstatus=true}})
 
   silent! nunmap <Up>
   silent! nunmap <Down>
@@ -34,16 +35,18 @@ endfunction
 " 2 = personal dev mode
 function modes#PersonalDevMode()
   call modes#ResetMode()
-  set rnu
-  set nu
+  windo set rnu
+  windo set nu
   set laststatus=3
+  lua require"lualine".setup({options={globalstatus=true}})
 endfunction
 
 " 3 = mobbing mode
 function modes#MobbingMode()
   call modes#ResetMode()
   set laststatus=2
-  set nu
+  bufdo windo set nu
+  lua require"lualine".setup({options={globalstatus=false}})
 endfunction
 
 " 4 = vi training mode

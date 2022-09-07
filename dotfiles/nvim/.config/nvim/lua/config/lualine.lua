@@ -49,7 +49,7 @@ require("lualine").setup({
                 diagnostics_color = {
                     error = "white",
                 },
-            }
+            },
         },
         lualine_x = { { "filetype", icon_only = true } },
         lualine_y = { "progress" },
@@ -58,9 +58,9 @@ require("lualine").setup({
     inactive_sections = {
         lualine_a = {},
         lualine_b = {},
-        lualine_c = { "filename" },
-        lualine_x = { "location" },
+        lualine_c = {},
+        lualine_x = {},
         lualine_y = {},
-        lualine_z = {},
+        lualine_z = { { "filename", icon = "⤷" } },
     },
 })
