@@ -449,7 +449,7 @@ return require("packer").startup({
             "folke/which-key.nvim",
             event = "BufWinEnter",
             config = [[require'config.which_key']],
-            commit = "bd4411a2ed4dd8bb69c125e339d837028a6eea71",
+            commit = "439637d6a75fe27e369190df7910ed2a454109f6",
         })
         use({
             "phaazon/hop.nvim",
