@@ -43,10 +43,10 @@ endfunction
 
 " 1 = vanilla mode
 function modes#ResetMode()
-  call modes#enableBarbar(0)
   " not sure why, but commands below cause Trouble to error, so let's just close
   " when we rest
   TroubleClose
+  call modes#enableBarbar(0)
   windo call modes#setLineNumbers(0, 0)
   bufdo call modes#setLineNumbers(0, 0)
   set backspace=indent,eol,start
@@ -68,6 +68,10 @@ endfunction
 " 3 = mobbing mode
 function modes#MobbingMode()
   call modes#enableBarbar(1)
+  " start mode with nvim tree closed, barbar resets offset with closed, and
+  " possibly a better state to start mobbing, since focusses on file
+  NvimTreeClose
+
   set laststatus=2
   windo call modes#setLineNumbers(1,0)
   lua require"lualine".setup({options={globalstatus=false}})
