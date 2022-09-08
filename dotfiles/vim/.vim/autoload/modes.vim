@@ -1,4 +1,4 @@
-if exists('g:modes_autoloaded')
+if exists('g:modes_autoloaded') || !exists("g:knob_modes") 
   finish
 endif
 let g:modes_autoloaded = 1
