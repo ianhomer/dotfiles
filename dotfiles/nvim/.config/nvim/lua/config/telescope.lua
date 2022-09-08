@@ -79,7 +79,10 @@ telescope.setup({
         },
     },
 })
-telescope.load_extension("fzf")
+
+if vim.g.knob_telescope_fzf_native then
+  telescope.load_extension("fzf")
+end
 if vim.g.knob_frecency then
     telescope.load_extension("frecency")
 end

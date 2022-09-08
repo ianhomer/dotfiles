@@ -91,6 +91,7 @@ nvim_set_var("knobs_levels", {
     tabcomplete = 9,
     tabular = 3,
     telescope = 4,
+    telescope_fzf_native = 6,
     telescope_symbols = 5,
     telekasten = 9,
     test = 5,
@@ -396,10 +397,9 @@ return require("packer").startup({
         })
         use({
             "nvim-lua/plenary.nvim",
-            commit = "4b66054e75356ac0b909bbfee9c682e703f535c2",
+            commit = "31807eef4ed574854b8a53ae40ea3292033a78ea",
         })
         use({
-            knob = "telescope",
             "nvim-telescope/telescope-fzf-native.nvim",
             run = "make",
             commit = "65c0ee3d4bb9cb696e262bca1ea5e9af3938fc90",
@@ -414,7 +414,7 @@ return require("packer").startup({
         })
 
         use({
-          "https://github.com/nvim-telescope/telescope-symbols.nvim",
+          "nvim-telescope/telescope-symbols.nvim",
           commit = "f7d7c84873c95c7bd5682783dd66f84170231704"
         })
         use({
@@ -424,7 +424,7 @@ return require("packer").startup({
                 { "nvim-lua/plenary.nvim", cond = "vim.g['knob_telescope']" },
                 {
                     "nvim-telescope/telescope-fzf-native.nvim",
-                    cond = "vim.g['knob_telescope']",
+                    cond = "vim.g['knob_telescope_fzf_native']",
                 },
                 { "nvim-telescope/telescope-symbols.nvim", cond = "vim.g['knob_telescope_symbols']"},
                 { "nvim-telescope/telescope-frecency.nvim", cond = "vim.g['knob_frecency']" },
