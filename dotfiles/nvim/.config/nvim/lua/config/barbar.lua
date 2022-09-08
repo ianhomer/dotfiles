@@ -24,7 +24,7 @@ nvim_tree_events.subscribe("TreeClose", function()
 end)
 
 require("bufferline").setup({
-    animation = true,
+    animation = false,
     auto_hide = false,
     icon_pinned = "",
     closable = true,
@@ -33,3 +33,5 @@ require("bufferline").setup({
 
 -- Barbar only enabled in mob mode, so disable for now
 vim.o.showtabline=0
+
+

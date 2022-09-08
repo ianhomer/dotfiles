@@ -11,7 +11,7 @@ end
 
 require("config/core")
 
-nvim_set_var("knobs_default_level", 5)
+nvim_set_var("knobs_default_level", 3)
 
 -- Levels at which knobs are enabled
 nvim_set_var("knobs_levels", {
@@ -41,7 +41,7 @@ nvim_set_var("knobs_levels", {
     fugitive = 3,
     frecency = 9,
     friendly_snippets = 5,
-    fzf = 3,
+    fzf = 6,
     git_conflict = 9,
     gitgutter = 6,
     gitsigns = 5,
@@ -90,9 +90,9 @@ nvim_set_var("knobs_levels", {
     symbols_outline = 9,
     tabcomplete = 9,
     tabular = 3,
-    telescope = 4,
-    telescope_fzf_native = 6,
-    telescope_symbols = 6,
+    telescope = 5,
+    telescope_fzf_native = 5,
+    telescope_symbols = 5,
     telekasten = 9,
     test = 5,
     thingity = 3,
