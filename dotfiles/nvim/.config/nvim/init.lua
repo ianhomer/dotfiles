@@ -92,7 +92,7 @@ nvim_set_var("knobs_levels", {
     tabular = 3,
     telescope = 4,
     telescope_fzf_native = 6,
-    telescope_symbols = 5,
+    telescope_symbols = 6,
     telekasten = 9,
     test = 5,
     thingity = 3,
@@ -449,7 +449,7 @@ return require("packer").startup({
             "folke/which-key.nvim",
             event = "BufWinEnter",
             config = [[require'config.which_key']],
-            commit = "439637d6a75fe27e369190df7910ed2a454109f6",
+            commit = "bd4411a2ed4dd8bb69c125e339d837028a6eea71",
         })
         use({
             "phaazon/hop.nvim",
