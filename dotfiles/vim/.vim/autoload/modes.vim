@@ -9,8 +9,13 @@ endfunction
 
 " 1 = vanilla mode
 function modes#ResetMode()
-  bufdo windo set nonu
-  bufdo windo set nornu
+  set showtabline=0
+  BarbarDisable
+  " not sure why, but commands below cause Trouble to error, so let's just close
+  " when we rest
+  TroubleClose
+  bufdo windo if &modifiable | set nonu | endif
+  bufdo windo if &modifiable | set nornu | endif
   set backspace=indent,eol,start
   set nohlsearch
   set laststatus=3
@@ -35,17 +40,18 @@ endfunction
 " 2 = personal dev mode
 function modes#PersonalDevMode()
   call modes#ResetMode()
-  windo set rnu
-  windo set nu
+  bufdo windo if &modifable | set rnu | endif
+  bufdo windo if &modifiable | set nu | endif
   set laststatus=3
   lua require"lualine".setup({options={globalstatus=true}})
 endfunction
 
 " 3 = mobbing mode
 function modes#MobbingMode()
-  call modes#ResetMode()
+  BarbarEnable
+  set showtabline=2
   set laststatus=2
-  bufdo windo set nu
+  bufdo windo if &modifiable | set nu | endif
   lua require"lualine".setup({options={globalstatus=false}})
 endfunction
 
