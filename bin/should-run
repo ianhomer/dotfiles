@@ -224,5 +224,5 @@ elif [[ $shouldRun -eq 0 ]] ; then
   [[ -z "$silent" ]] && log:: skip $scriptName $shouldNotRunMessage
   exit 1
 else
-  [[ -z "$silent" ]] && log:: run $scriptName
+  log:: run $scriptName
 fi
