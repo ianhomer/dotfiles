@@ -19,13 +19,14 @@
 
 ### windows
 
-|                   |                                        |
-| ----------------- | -------------------------------------- |
-| `Ctrl+a+c`        | new window                             |
-| `Ctrl+a+w`        | show windows                           |
-| `Ctrl+a+,`        | rename window                          |
-| `Alt+arrow`       | move to window left or right           |
-| `Shift+Alt+arrow` | move window left or right in tab order |
+|                     |                                        |
+| -----------------   | -------------------------------------- |
+| `Ctrl+a+c`          | new window                             |
+| `Ctrl+a+w`          | show windows                           |
+| `Ctrl+a+,`          | rename window                          |
+| `Alt+arrow`         | move to window left or right           |
+| `Shift+Alt+arrow`   | move window left or right in tab order |
+| `Ctrl+a+Ctrl+arrow` | resize window in direction             |
 
 ### panes
 

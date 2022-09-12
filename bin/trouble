@@ -17,15 +17,28 @@ while getopts "ehp" o; do case "$o" in
 esac done
 shift $((OPTIND-1))
 
+resource=${1:-.}
+
 if [[ "${HELP}" == "y" || -z "${ESLINT}${PRETTIER}" ]] ; then
   help
   exit 1
 fi
 
 # The start of trouble
+if [[ -f yarn.lock ]] ; then
+  command="yarn -s"
+elif [[ -f pnpm.lock ]] ; then
+  command="pnpm"
+elif [[ -f npm.lock ]] ; then
+  command="npm"
+fi
+if [[ -z $command ]] ; then
+  echo "Cannot determine command, are you in the root of the repository"
+  exit 1
+fi
 
 if [[ "$ESLINT" == "y" ]] ; then
-  pnpx eslint . -f json               |
+  ${command} eslint ${resource} -f json               |
     jq '.[] | select((.messages | length) > 0) | .filePath' -r |
     xargs realpath --relative-to=$PWD |
     fzf -m --bind ctrl-t:toggle-all   |
@@ -33,7 +46,7 @@ if [[ "$ESLINT" == "y" ]] ; then
 fi
 
 if [[ "$PRETTIER" == "y" ]] ; then
-  pnpx prettier . -c 2>&1    |
+  ${command} prettier ${resource} -c 2>&1    |
     grep -v "run Prettier?"  |
     grep "warn"              |
     sed 's/\[warn\] //'      |

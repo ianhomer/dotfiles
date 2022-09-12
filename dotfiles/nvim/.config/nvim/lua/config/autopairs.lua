@@ -1,3 +1,6 @@
 if vim.g.knob_cmp then
-    require("nvim-autopairs").setup({})
+    local autopairs = require("nvim-autopairs")
+    autopairs.setup({})
+    autopairs.remove_rule('`')
+    autopairs.remove_rule('```')
 end

@@ -6,20 +6,21 @@ function! s:LintTodo()
   let l:line = line('.')
 
   if getline(l:line) =~ '^-\s*[\s*$'
-call setline(l:line,'- [ ] ')
+    call setline(l:line,'- [ ] ')
   endif
 endfunction
 
 function! s:LintTable()
   let l:line = line('.')
+  let l:lineValue = getline(l:line) 
 
   " Skip if not a table
-  if getline(l:line) !~ '|'
+  if len(l:lineValue) > 0 && l:lineValue[0] != '|'
     return
   endif
 
   " Skip if starts with 4 spaces, i.e. a code block
-  if getline(l:line) =~ '^\s\s\s\s'
+  if l:lineValue =~ '^\s\s\s\s'
     return
   endif
 

@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+set -e
+
+$(shim) && . ${ME}/i.sh
+directory=${1}
+recipient=${2}
+if [[ -z "${recipient}" ]] ; then
+  recipient=$(get-recipient)
+fi
+
+if [ -z "$directory" ] ; then
+  if git rev-parse --is-inside-work-tree 2>&1 >/dev/null ; then
+    # If we're in git directory then backup this directory
+    git gc
+    directory=$(basename `pwd`)
+    cd ..
+  else
+    log::exit "directory not set and not in git repository"
+  fi
+elif [ ! -d "$directory" ] ; then
+  log::exit "Not a directory $directory"
+fi
+
+if [ ! -d "$HOME/backups" ] ; then
+  log:: "Creating backups directory"
+  mkdir ~/backups
+fi
+
+stamp=$(date "+%Y%m%d-%H%M%S")
+base=$(basename $directory)
+outputFilename=back-$base-$stamp.tar.gz.gpg
+outputFullFilename=~/backups/$outputFilename
+
+log:: "Archiving directory"
+log::  "$directory ($base) for $recipient : $stamp"
+log:: "... $outputFilename"
+
+tar --exclude-from ~/.config/tar/ignore -chzf - $base |
+  gpg --encrypt --recipient $recipient            \
+  --output $outputFullFilename
+
+cksum $outputFullFilename
+log:: "unpack with 'gpg --decrypt my.gz.gpg | tar xvf -'"

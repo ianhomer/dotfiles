@@ -68,6 +68,9 @@ telescope.setup({
                 },
             },
         },
+        find_files = {
+            find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/**" },
+        },
         git_bcommits = {
             git_command = git_command,
         },
@@ -76,13 +79,16 @@ telescope.setup({
         },
     },
 })
-telescope.load_extension("fzf")
+
+if vim.g.knob_telescope_fzf_native then
+  telescope.load_extension("fzf")
+end
 if vim.g.knob_frecency then
-  telescope.load_extension("frecency")
+    telescope.load_extension("frecency")
 end
 
 if vim.g.knob_refactoring then
-  telescope.load_extension("refactoring")
+    telescope.load_extension("refactoring")
 end
 
 local colors = require("kanagawa.colors").setup()
@@ -98,12 +104,19 @@ vim.cmd("hi TelescopePreviewTitle guibg = " .. colors.bg_dim .. " guifg = " .. c
 vim.cmd("hi TelescopePromptTitle guibg = " .. colors.bg_light1 .. " guifg = " .. colors.co)
 vim.cmd("hi TelescopeResultsTitle guibg = " .. colors.bg_dim .. " guifg = " .. colors.co)
 
+local opts = { noremap = true, silent = true }
+
+vim.keymap.set("i", "<C-l>", "<cmd>lua require'telescope.builtin'.symbols{ sources = {'gitmoj'}}<cr>", opts)
+vim.keymap.set("i", "<C-k><C-l>", "<cmd>Telescope symbols<cr>", opts)
+
 -- Disable which-key registry help in TelescopePrompt so that C-R can be used to
 -- insert from registry
 -- https://github.com/nvim-telescope/telescope.nvim/issues/1047
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+    [[
     augroup telescope
         autocmd!
         autocmd FileType TelescopePrompt inoremap <buffer> <silent> <C-r> <C-r>
-    augroup END]], false)
-
+    augroup END]],
+    false
+)

@@ -4,7 +4,7 @@ function rbenv
 
     switch "$command"
         case rehash shell
-            source (rbenv "sh-$command" $argv|psub)
+            rbenv "sh-$command" $argv|source
         case '*'
             command rbenv "$command" $argv
     end

@@ -17,4 +17,3 @@ Install and run with `test/os/ubuntu/install.sh` than run tests
     cd test/vim
     make test
 
-

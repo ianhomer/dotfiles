@@ -11,7 +11,9 @@ endfunction
 function! my#GitSynk(onlyPush)
   if a:onlyPush || !knobs#("dispatch")
     if knobs#("toggleterm")
-      2TermExec dir="%:p:h" cmd="git push && exit 0" size=6
+      " Clean up path that is generated if this run in fugitive window
+      let dir=substitute(expand("%:p:h"), "\\(fugitive://\\|/.git\\)", "", "g")
+      :execute '2TermExec dir='.dir.' cmd="git push && exit 0" size=6'
     else
       Git push
     endif

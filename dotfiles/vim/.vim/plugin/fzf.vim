@@ -54,7 +54,7 @@ endfunction
 
 command! -nargs=* -bang CompletePath call fzf#CompletePath()
 
-inoremap <expr> <c-x><c-f> fzf#CompletePath()
+" inoremap <expr> <c-x><c-f> fzf#CompletePath()
 
 function! fzf#SearchWithRipGrep(query, fullscreen)
   let command_fmt =
