@@ -1,5 +1,4 @@
 local whichKey = require("which-key")
-local nullLsConfig =
 whichKey.setup({
     plugins = {
         spelling = {
@@ -7,7 +6,7 @@ whichKey.setup({
         },
     },
     window = {
-        border = "none", -- none, single, double, shadow
+        border = "single", -- none, single, double, shadow
         position = "bottom", -- bottom, top
         margin = { 1, 0, 1, 0 }, -- extra window margin [top, right, bottom, left]
         padding = { 1, 2, 1, 0 }, -- extra window padding [top, right, bottom, left]
@@ -63,6 +62,11 @@ if vim.g.knob_telescope then
     if vim.g.knob_refactoring then
         map["tr"] = { "<cmd>lua require'telescope'.extensions.refactoring.refactors()<cr>" }
     end
+
+    -- Dev
+    map["y"] = { "<cmd>TestNearest<cr>", "Test nearest"}
+    map["Y"] = { "<cmd>TestFile<cr>", "Test file"}
+    map["T"] = { "<cmd>let test#project_root=@0<cr>", "Set test directory to clipboard"}
 
     -- Git
     map["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }

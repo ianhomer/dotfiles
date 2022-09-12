@@ -13,10 +13,13 @@ set mouse=a
 set noerrorbells
 " Enhance command-line completion
 set wildmenu
+set wildmode=longest:full,full
 " Highlight current line
 set cursorline
-" Ignore case of searches
+set guicursor+=v:CurSearch
+" Ignore case of searches unless I mix case
 set ignorecase
+set smartcase
 " Highlight dynamically as pattern is typed
 set incsearch
 " Default updatetime is 4000 and too slow
@@ -299,3 +302,10 @@ set splitbelow
 " Don't conceal any syntax
 set conceallevel=0
 
+
+" vim-test
+let test#strategy = "vimux"
+let g:test#preserve_screen = 1
+let g:test#echo_command = 0
+let g:VimuxOrientation = "h"
+let g:VimuxHeight = "40"

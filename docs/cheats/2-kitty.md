@@ -17,13 +17,13 @@
 ### functional
 
 |                    |          |
-| --                 | --       |
+| ------------------ | -------- |
 | `Ctrl+Shift+click` | Open URL |
 
 ### style
 
 |               |                   |
-| --            | --                |
+| ------------- | ----------------- |
 | `Shift+Cmd+9` | Smaller font      |
 | `Shift+Cmd+0` | Larger font       |
 | `Shift+Cmd+k` | Disable ligatures |
@@ -35,3 +35,4 @@
 | -------------- | ----------------- |
 | `Ctrl+Cmd+,`   | Reload config     |
 | `Shift+Cmd+F6` | Show kitty config |
+| `Opt+Cmd+,     | Show kitty config |

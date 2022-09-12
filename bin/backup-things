@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 $(shim) && . ${ME}/i.sh
 repository=${1:-$MY_NOTES}
 recipient=${2}

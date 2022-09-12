@@ -15,4 +15,3 @@
 
 **z**
 : list recently opened folder
-

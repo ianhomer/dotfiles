@@ -33,8 +33,8 @@ fi
 EXCLUDES_FILE=~/.dotfiles/dotfiles/rsync/.config/rsync/rsync-excludes.txt
 LOG_DIR=~/local/logs
 [[ ! -d $LOG_DIR ]] && mkdir $LOG_DIR
-LOG=$LOG_DIR/bak-me-$(date "+%Y%m%d-%H%M%S").log
-OUT_LOG=$LOG_DIR/bak-me-$(date "+%Y%m%d-%H%M%S")-out.log
+LOG=$LOG_DIR/back-me-$(date "+%Y%m%d-%H%M%S").log
+OUT_LOG=$LOG_DIR/back-me-$(date "+%Y%m%d-%H%M%S")-out.log
 stamp=$(date "+%Y/%m/%d/%H%M%S")
 
 # r - archive => -rlptgoD
@@ -47,7 +47,7 @@ args="$args --log-file=$LOG"
 # args="$args --dry-run"
 log:: "rsync args : $args"
 
-LOCATIONS="gdrive .dotfiles"
+LOCATIONS="gdrive .dotfiles Dropbox"
 PROJECT_ROOTS="things dotmodules my try"
 for root in $PROJECT_ROOTS ; do
   LOCATIONS="$LOCATIONS projects/$root"

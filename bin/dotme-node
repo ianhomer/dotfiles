@@ -37,6 +37,9 @@ npm ls --global --json                                                 |
 
 log:: "Updating pnpm"
 pnpm add -g pnpm
+log:: "Updating npm"
+npm install -g npm
+
 #
 # pnpm needs one package to be able start listing globals
 #

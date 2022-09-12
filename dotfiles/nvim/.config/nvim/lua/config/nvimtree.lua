@@ -1,4 +1,6 @@
 require("nvim-tree").setup({
+    create_in_closed_folder = true,
+    hijack_cursor = true,
     diagnostics = {
         enable = true,
         icons = {
@@ -7,6 +9,9 @@ require("nvim-tree").setup({
             warning = "!",
             error = "!",
         },
+    },
+    view = {
+      adaptive_size = false
     },
     update_focused_file = {
         enable = true,
@@ -20,9 +25,13 @@ require("nvim-tree").setup({
         exclude = { ".env", ".config" },
     },
     renderer = {
+        full_name = true,
+        group_empty = true,
         special_files = {},
-        highlight_opened_files = "icon",
+        highlight_opened_files = "all",
+        highlight_git = true,
         icons = {
+            git_placement = "after",
             show = {
                 git = true,
                 folder = true,
@@ -34,8 +43,12 @@ require("nvim-tree").setup({
             },
         },
     },
+    live_filter = {
+      always_show_folders = false
+    },
     actions = {
         open_file = {
+            resize_window = false,
             window_picker = {
                 enable = true,
                 exclude = {
@@ -51,13 +64,19 @@ require("nvim-tree").setup({
     },
 })
 
-vim.api.nvim_exec(
-    [[
-augroup nvimttree
-    au!
-    au BufLeave NvimTree NvimTreeRefresh
-    au BufEnter NvimTree NvimTreeRefresh
-augroup END
-]],
-    false
-)
+local Event = require('nvim-tree.api').events.Event
+local api = require('nvim-tree.api')
+api.events.subscribe(Event.FileCreated, function(data)
+  vim.api.nvim_command(":edit " .. data.fname)
+end)
+
+-- vim.api.nvim_exec(
+--     [[
+-- augroup nvimttree
+--     au!
+--     au BufLeave NvimTree NvimTreeRefresh
+--     au BufEnter NvimTree NvimTreeRefresh
+-- augroup END
+-- ]],
+--     false
+-- )
