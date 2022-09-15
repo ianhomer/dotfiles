@@ -57,7 +57,7 @@ nvim_set_var("knobs_levels", {
     kanagawa = 3,
     nerdtree = 9,
     lens = 8,
-    lightbulb = 5,
+    lightbulb = 9,
     lightspeed = 5,
     lsp = 4,
     lsp_colors = 3,
@@ -177,7 +177,7 @@ return require("packer").startup({
         use({
             "glepnir/lspsaga.nvim",
             config = [[require'config.lspsaga']],
-            commit = "5b95fbb3e7d5cf39a257caab6a9bc9dd3bc01ac1",
+            commit = "db209940a471aff4bf36e501e56a51fc6a861e63",
         })
 
         _use({
@@ -438,7 +438,7 @@ return require("packer").startup({
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.nvimtree']],
             cmd = { "NvimTreeFindFile", "NvimTreeOpen", "NvimTreeToggle" },
-            commit = "3e49d9b7484e21f0b24ebdf21b8b7af227ea97a6",
+            commit = "fb8735e96cecf004fbefb086ce85371d003c5129",
         })
         use({
             "ryanoasis/vim-devicons",
@@ -569,7 +569,7 @@ return require("packer").startup({
             "windwp/nvim-autopairs",
             after = "nvim-cmp",
             config = [[require'config.autopairs']],
-            commit = "5fe24419e7a7ec536d78d60be1515b018ab41b15§",
+            commit = "5fe24419e7a7ec536d78d60be1515b018ab41b15",
         })
         use({
             "tpope/vim-surround",

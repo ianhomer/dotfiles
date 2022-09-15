@@ -68,10 +68,6 @@ endfunction
 " 3 = mobbing mode
 function modes#MobbingMode()
   call modes#enableBarbar(1)
-  " start mode with nvim tree closed, barbar resets offset with closed, and
-  " possibly a better state to start mobbing, since focusses on file
-  NvimTreeClose
-
   set laststatus=2
   windo call modes#setLineNumbers(1,0)
   lua require"lualine".setup({options={globalstatus=false}})
