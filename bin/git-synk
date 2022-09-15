@@ -67,7 +67,11 @@ function gitSynk() {
   git rev-parse
 
   printf "▻ "
-  branchName=$(git name-rev --name-only HEAD)
+  headsName=$(git describe --all)
+  if [[ "$headsName" != heads/* ]] ; then
+    log::exit "$headsName from describe --all shoud start with heads/ "
+  fi
+  branchName=${headsName:6}
   originUrl=$(git config --get remote.origin.url)
   remoteName=$(git config --get branch.$branchName.remote)
 

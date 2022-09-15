@@ -100,7 +100,7 @@ nvim_set_var("knobs_levels", {
     toggleterm = 3,
     tpipeline = 9,
     treesitter = 3,
-    trouble = 5,
+    trouble = 3,
     twightlight = 9,
     ufo = 9,
     unicode = 9,
