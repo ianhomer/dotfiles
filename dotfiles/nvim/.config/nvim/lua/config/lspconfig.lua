@@ -76,6 +76,7 @@ local servers = {
     "jsonls",
     "pyright",
     "sumneko_lua",
+    "tailwindcss",
     "terraformls",
     "tsserver",
     "vimls",

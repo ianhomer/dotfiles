@@ -32,6 +32,7 @@ nvim_set_var("knobs_levels", {
     defaults = 2,
     devicons = 4,
     dispatch = 4,
+    document_color = 9,
     easy_align = 3,
     editorconfig = 9,
     endwise = 7,
@@ -60,7 +61,7 @@ nvim_set_var("knobs_levels", {
     lightbulb = 9,
     lightspeed = 5,
     lsp = 4,
-    lsp_colors = 3,
+    lsp_colors = 9,
     lspconfig = 4,
     lspkind = 4,
     lsp_signature = 6,
@@ -280,7 +281,6 @@ return require("packer").startup({
             commit = "7076ce8e8f042e193668b7ac67f776858df5206b",
         })
 
-
         use({
             "folke/trouble.nvim",
             requires = "kyazdani42/nvim-web-devicons",
@@ -414,8 +414,8 @@ return require("packer").startup({
         })
 
         use({
-          "nvim-telescope/telescope-symbols.nvim",
-          commit = "f7d7c84873c95c7bd5682783dd66f84170231704"
+            "nvim-telescope/telescope-symbols.nvim",
+            commit = "f7d7c84873c95c7bd5682783dd66f84170231704",
         })
         use({
             "nvim-telescope/telescope.nvim",
@@ -426,7 +426,7 @@ return require("packer").startup({
                     "nvim-telescope/telescope-fzf-native.nvim",
                     cond = "vim.g['knob_telescope_fzf_native']",
                 },
-                { "nvim-telescope/telescope-symbols.nvim", cond = "vim.g['knob_telescope_symbols']"},
+                { "nvim-telescope/telescope-symbols.nvim", cond = "vim.g['knob_telescope_symbols']" },
                 { "nvim-telescope/telescope-frecency.nvim", cond = "vim.g['knob_frecency']" },
             },
             config = [[require'config.telescope']],
@@ -497,10 +497,15 @@ return require("packer").startup({
             config = [[require'config.kanagawa']],
         })
         use({
-            "norcalli/nvim-colorizer.lua",
+            "NvChad/nvim-colorizer.lua",
             config = [[require'config.colorizer']],
-            cmd = "BufRead",
-            commit = "36c610a9717cc9ec426a07c8e6bf3b3abcb139d6",
+            event = "BufRead",
+            commit = "004a2b3ef62b01d3d1db454d1efe76d31934d43b",
+        })
+        use({
+            "mrshmllow/document-color.nvim",
+            config = [[require'config.document_color']],
+            commit = "74c487f0e5accfaae033755451b9e367220693fd",
         })
         use({
             "karb94/neoscroll.nvim",
@@ -592,14 +597,14 @@ return require("packer").startup({
             commit = "3f0c8faadf0c5b68bcf40785c1c42e3731bfa522",
         })
         _use({
-          "stevearc/dressing.nvim",
-          commit = "b188b7750c78c0dbe0c61d79d824673a53ff82db"
+            "stevearc/dressing.nvim",
+            commit = "b188b7750c78c0dbe0c61d79d824673a53ff82db",
         })
         use({
-          "ziontee113/icon-picker.nvim",
-          commit = "0f3b2648f6f8e788bc8dfe37bc9bb18b565cfc3c",
-          config = [[require'config.icon_picker']],
-          after = "dressing.nvim"
+            "ziontee113/icon-picker.nvim",
+            commit = "0f3b2648f6f8e788bc8dfe37bc9bb18b565cfc3c",
+            config = [[require'config.icon_picker']],
+            after = "dressing.nvim",
         })
         use({ "godlygeek/tabular", cmd = { "Tabularize" }, command = "339091ac4dd1f17e225fe7d57b48aff55f99b23a" })
         use({
