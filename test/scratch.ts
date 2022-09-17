@@ -25,8 +25,6 @@ export function foo(a: string): string {
   return a;
 }
 
-const a;
-
 const thing: Thing = { title: "My Title", content: "My Content" };
 
 console.log(myGlobal);
