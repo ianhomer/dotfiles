@@ -25,7 +25,7 @@ set incsearch
 " Default updatetime is 4000 and too slow
 set updatetime=300
 " Quicker timeout between key presses
-set timeoutlen=1000
+set timeoutlen=300
 " Always show sign column to stop flip-flopping
 set signcolumn=yes
 if has("nvim")

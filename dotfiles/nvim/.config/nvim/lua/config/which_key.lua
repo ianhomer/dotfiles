@@ -69,16 +69,17 @@ if vim.g.knob_telescope then
 
     -- LSP
     map["td"] = { "<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols" }
-    map[";"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "LSP Format" }
-    map[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "LSP Range Format" }
-
-    -- Modes
-    map["5"] = { "<cmd>lua require'config/null_ls'.setLevel(3)<cr>", "Core Lints" }
-    map["6"] = { "<cmd>lua require'config/null_ls'.toggle()<cr>", "Toggle Some Lints" }
-    map["7"] = { "<cmd>TroubleToggle<cr>", "Trouble" }
-    map["8"] = { "<cmd>call my#ToggleBlame()<cr>", "Blame" }
-    map["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap" }
 end
+
+map[";"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "LSP Format" }
+map[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "LSP Range Format" }
+
+-- Modes
+map["5"] = { "<cmd>lua require'config/null_ls'.setLevel(3)<cr>", "Core Lints" }
+map["6"] = { "<cmd>lua require'config/null_ls'.toggle()<cr>", "Toggle Some Lints" }
+map["7"] = { "<cmd>TroubleToggle<cr>", "Trouble" }
+map["8"] = { "<cmd>call my#ToggleBlame()<cr>", "Blame" }
+map["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap" }
 
 map["rg"] = { ":reg<cr>", "Registers" }
 
