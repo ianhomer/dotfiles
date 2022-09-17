@@ -5,10 +5,8 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
 
-vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
-
 vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]])
-vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]])
+vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=grey guibg=#1f2335]])
 
 local border = {
     { "╭", "FloatBorder" },
@@ -67,15 +65,29 @@ local on_attach = function(client, bufnr)
               hi LspDiagnosticsDefaultHint ctermbg=grey guifg=Grey30 guibg=DarkSlateGray
               hi DiagnosticError guifg=White
 
-              augroup lsp_document_highlight
-                autocmd! * <buffer>
-                autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-                autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-              augroup END
             ]],
             false
         )
+              -- augroup lsp_document_highlight
+              --   autocmd! * <buffer>
+              --   autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+              --   autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+              -- augroup END
     end
+
+    vim.api.nvim_create_autocmd("CursorHold", {
+        buffer = bufnr,
+        callback = function()
+            vim.diagnostic.open_float(nil, {
+                focusable = false,
+                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+                border = "rounded",
+                source = "always",
+                prefix = " ",
+                scope = "cursor",
+            })
+        end,
+    })
 
     vim.diagnostic.config({
         float = {
