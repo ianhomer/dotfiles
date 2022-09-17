@@ -76,7 +76,7 @@ map[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "LSP Range Format" }
 
 -- Modes
 map["5"] = { "<cmd>lua require'config/null_ls'.setLevel(3)<cr>", "Core Lints" }
-map["6"] = { "<cmd>lua require'config/null_ls'.toggle()<cr>", "Toggle Some Lints" }
+map["6"] = { "<cmd>lua require'config/null_ls'.toggle()<cr>", "Toggle Lints" }
 map["7"] = { "<cmd>TroubleToggle<cr>", "Trouble" }
 map["8"] = { "<cmd>call my#ToggleBlame()<cr>", "Blame" }
 map["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap" }
@@ -86,7 +86,7 @@ map["rg"] = { ":reg<cr>", "Registers" }
 -- Dev
 map["y"] = { "<cmd>TestNearest<cr>", "Test nearest" }
 map["Y"] = { "<cmd>TestFile<cr>", "Test file" }
-map["T"] = { "<cmd>let test#project_root=@0<cr>", "Test dir to clipboard" }
+map["q"] = { vim.diagnostic.setloclist, "Set Loc List" }
 
 if vim.g.knob_toggleterm then
     map["a"] = { "<cmd>ToggleTerm<cr>", "Terminal" }
@@ -134,6 +134,8 @@ cheats["m"] = { ":let @m=@+<cr>", ":let @m=@+" }
 cheats["M"] = { 'viw"mp<cr>', 'viw"mp' }
 cheats["a"] = { ":messages<cr>", ":messages" }
 cheats["s"] = { ":let @+ = execute('messages')<cr>", ":let @+ = execute('messages')" }
+cheats["T"] = { "<cmd>let test#project_root=@0<cr>", "Test dir to clipboard" }
+
 
 whichKey.register(cheats, { prefix = "\\" })
 
