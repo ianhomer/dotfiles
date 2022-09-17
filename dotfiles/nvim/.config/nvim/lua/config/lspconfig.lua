@@ -5,6 +5,27 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
 
+vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]])
+vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]])
+
+local border = {
+    { "╭", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╮", "FloatBorder" },
+    { "│", "FloatBorder" },
+    { "╯", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╰", "FloatBorder" },
+    { "│", "FloatBorder" },
+}
+
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+    opts = opts or {}
+    opts.border = opts.border or border
+    return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
 local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
@@ -21,14 +42,11 @@ local on_attach = function(client, bufnr)
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
     -- C-k conflicts with tmux split navigation
     -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    vim.keymap.set("n", "<leader>,sh", vim.lsp.buf.signature_help, opts)
+
     vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
     vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set(
-        "n",
-        "<leader>wl",
-        "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-        opts
-    )
+    vim.keymap.set("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
     vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
 
     if vim.g.knob_null_ls then
