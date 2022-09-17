@@ -21,6 +21,7 @@ whichKey.setup({
 })
 
 local map = {}
+local vmap = {}
 
 local findNamedFile = {
     "<cmd>lua require'telescope.builtin'.find_files({find_command={'fd', '-H', '-i', vim.fn.expand('<cword>')}})<cr>",
@@ -64,9 +65,9 @@ if vim.g.knob_telescope then
     end
 
     -- Dev
-    map["y"] = { "<cmd>TestNearest<cr>", "Test nearest"}
-    map["Y"] = { "<cmd>TestFile<cr>", "Test file"}
-    map["T"] = { "<cmd>let test#project_root=@0<cr>", "Set test directory to clipboard"}
+    map["y"] = { "<cmd>TestNearest<cr>", "Test nearest" }
+    map["Y"] = { "<cmd>TestFile<cr>", "Test file" }
+    map["T"] = { "<cmd>let test#project_root=@0<cr>", "Set test directory to clipboard" }
 
     -- Git
     map["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
@@ -100,7 +101,29 @@ if vim.g.knob_hop then
     map["h"] = { "<cmd>lua require'hop'.hint_words()<cr>", "Hop" }
 end
 
+if vim.g.knob_refactoring then
+    map["rc"] = { ":lua require('refactoring').debug.cleanup({})<CR>", "Refactor debug cleanup" }
+    map["rn"] =
+        { ":lua require('refactoring').debug.print_var({ normal = true })<CR>", "Refactor debug print variable" }
+
+    map["rb"] = { [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], "Extract Block" }
+    map["rbf"] = { [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], "Extract Block to File" }
+    map["ri"] = { [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], "Inline Variable" }
+
+    vmap["re"] = { [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<cr>]], "Extract function" }
+    vmap["rr"] = { "<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<cr>", "Refactor select" }
+    vmap["rv"] = { ":lua require('refactoring').debug.print_var({})<CR>", "Refactor debug print variable" }
+
+    vmap["rf"] = {
+        [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
+        "Extract function to file",
+    }
+    vmap["rv"] = { [[<Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], "Extract variable" }
+    vmap["ri"] = { [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], "Inline variable" }
+end
+
 whichKey.register(map, { prefix = "<leader>" })
+whichKey.register(vmap, { prefix = "<leader>", mode = "v" })
 
 local cheats = {}
 cheats["'"] = findNamedFile
