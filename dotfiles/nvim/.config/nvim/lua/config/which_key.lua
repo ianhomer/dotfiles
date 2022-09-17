@@ -67,7 +67,7 @@ if vim.g.knob_telescope then
     -- Dev
     map["y"] = { "<cmd>TestNearest<cr>", "Test nearest" }
     map["Y"] = { "<cmd>TestFile<cr>", "Test file" }
-    map["T"] = { "<cmd>let test#project_root=@0<cr>", "Set test directory to clipboard" }
+    map["T"] = { "<cmd>let test#project_root=@0<cr>", "Test dir to clipboard" }
 
     -- Git
     map["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
@@ -102,24 +102,27 @@ if vim.g.knob_hop then
 end
 
 if vim.g.knob_refactoring then
-    map["rc"] = { ":lua require('refactoring').debug.cleanup({})<CR>", "Refactor debug cleanup" }
+    map["rc"] = { ":lua require('refactoring').debug.cleanup({})<cr>", "Refactor debug cleanup" }
     map["rn"] =
-        { ":lua require('refactoring').debug.print_var({ normal = true })<CR>", "Refactor debug print variable" }
+        { ":lua require('refactoring').debug.print_var({ normal = true })<cr>", "Refactor debug print variable" }
 
-    map["rb"] = { [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], "Extract Block" }
-    map["rbf"] = { [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], "Extract Block to File" }
-    map["ri"] = { [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], "Inline Variable" }
+    map["rb"] = { [[ <cmd>lua require('refactoring').refactor('Extract Block')<cr>]], "Extract Block" }
+    map["rbf"] = { [[ <cmd>lua require('refactoring').refactor('Extract Block To File')<cr>]], "Extract Block to File" }
+    map["ri"] = { [[ <cmd>lua require('refactoring').refactor('Inline Variable')<cr>]], "Inline Variable" }
+    map["rd"] =
+        { ":lua require('refactoring').debug.print_var({ normal = true })<cr>", "Refactor debug print variable" }
 
-    vmap["re"] = { [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<cr>]], "Extract function" }
-    vmap["rr"] = { "<Esc><cmd>lua require('telescope').extensions.refactoring.refactors()<cr>", "Refactor select" }
-    vmap["rv"] = { ":lua require('refactoring').debug.print_var({})<CR>", "Refactor debug print variable" }
+    vmap["re"] = { [[ <esc><cmd>lua require('refactoring').refactor('Extract Function')<cr>]], "Extract function" }
+    vmap["rr"] = { "<esc><cmd>lua require('telescope').extensions.refactoring.refactors()<cr>", "Refactor select" }
+    vmap["rd"] =
+        { ":lua require('refactoring').debug.print_var({ normal = true})<cr>", "Refactor debug print variable" }
 
     vmap["rf"] = {
-        [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
+        [[ <esc><cmd>lua require('refactoring').refactor('Extract Function To File')<cr>]],
         "Extract function to file",
     }
-    vmap["rv"] = { [[<Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], "Extract variable" }
-    vmap["ri"] = { [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], "Inline variable" }
+    vmap["rv"] = { [[<esc><cmd>lua require('refactoring').refactor('Extract Variable')<cr>]], "Extract variable" }
+    vmap["ri"] = { [[ <esc><cmd>lua require('refactoring').refactor('Inline Variable')<cr>]], "Inline variable" }
 end
 
 whichKey.register(map, { prefix = "<leader>" })
