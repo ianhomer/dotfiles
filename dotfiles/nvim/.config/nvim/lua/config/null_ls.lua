@@ -19,6 +19,9 @@ null_ls.setup({
         formatting.black,
         formatting.fish_indent,
         formatting.stylua,
+        formatting.trim_whitespace.with({
+            filetypes = {"cucumber"}
+        }),
         diagnostics.markdownlint.with({
             diagnostics_postprocess = function(diagnostic)
                 diagnostic.severity = vim.diagnostic.severity["HINT"]
@@ -38,6 +41,9 @@ null_ls.setup({
         }),
         diagnostics.tidy,
         diagnostics.vale,
+        diagnostics.trail_space.with({
+          filetypes = {"cucumber"}
+        }),
         code_actions.eslint_d,
         completion.spell,
     },
