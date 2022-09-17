@@ -22,7 +22,6 @@ if get(g:, "knobs_level", 0) > 2
   command! -nargs=0 GPush :call my#GitSynk(1)
   command! -nargs=0 GSynk :call my#GitSynk(0)
 
-  nnoremap <silent> <leader>r :reg<CR>
   nnoremap <silent> <leader>k :ToggleQuickFix<CR>
   nnoremap <silent> <leader>K :ToggleLocationList<CR>
   nnoremap <silent> <leader>g :ToggleFugitive<CR>

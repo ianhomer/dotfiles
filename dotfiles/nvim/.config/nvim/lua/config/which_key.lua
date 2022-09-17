@@ -60,14 +60,6 @@ if vim.g.knob_telescope then
     map["tr"] = { "<cmd>Telescope registers<cr>", "Registers" }
     map["tq"] = { "<cmd>Telescope quickfix<cr>", "Quick Fix" }
     map["tt"] = { "<cmd>Telescope<cr>", "Telescope" }
-    if vim.g.knob_refactoring then
-        map["tr"] = { "<cmd>lua require'telescope'.extensions.refactoring.refactors()<cr>" }
-    end
-
-    -- Dev
-    map["y"] = { "<cmd>TestNearest<cr>", "Test nearest" }
-    map["Y"] = { "<cmd>TestFile<cr>", "Test file" }
-    map["T"] = { "<cmd>let test#project_root=@0<cr>", "Test dir to clipboard" }
 
     -- Git
     map["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
@@ -87,6 +79,13 @@ if vim.g.knob_telescope then
     map["8"] = { "<cmd>call my#ToggleBlame()<cr>", "Blame" }
     map["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap" }
 end
+
+map["rg"] = { ":reg<cr>", "Registers" }
+
+-- Dev
+map["y"] = { "<cmd>TestNearest<cr>", "Test nearest" }
+map["Y"] = { "<cmd>TestFile<cr>", "Test file" }
+map["T"] = { "<cmd>let test#project_root=@0<cr>", "Test dir to clipboard" }
 
 if vim.g.knob_toggleterm then
     map["a"] = { "<cmd>ToggleTerm<cr>", "Terminal" }
