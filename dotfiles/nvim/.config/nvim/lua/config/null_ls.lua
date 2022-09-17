@@ -25,7 +25,17 @@ null_ls.setup({
             end,
         }),
         diagnostics.eslint_d,
-        diagnostics.flake8,
+        diagnostics.flake8.with({
+            args = {
+                "--format",
+                "default",
+                "--stdin-display-name",
+                "$FILENAME",
+                "-",
+                "--config",
+                vim.fn.expand("~/.flake8"),
+            },
+        }),
         diagnostics.tidy,
         diagnostics.vale,
         code_actions.eslint_d,

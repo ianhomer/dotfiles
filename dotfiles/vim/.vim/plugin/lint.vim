@@ -37,7 +37,7 @@ let g:ale_open_list = 0
 let g:ale_keep_list_window_open = 0
 let g:ale_hover_to_preview = 0
 
-let g:ale_python_flake8_options = "--append-config ~/.config/flake8"
+let g:ale_python_flake8_options = "--append-config ~/.flake8"
 
 " Performance tuning
 let g:ale_cache_executable_check_failures = 1
