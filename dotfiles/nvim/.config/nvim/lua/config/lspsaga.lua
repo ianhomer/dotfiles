@@ -1,3 +1,6 @@
+-- lspsaga is an interesting plugin, and some of the interactions do look
+-- better, but there are glitches with no real productivity gain
+
 local keymap = vim.keymap.set
 local saga = require("lspsaga")
 
