@@ -65,6 +65,7 @@ cmp.setup({
         { name = "nvim_lua" },
         { name = "path" },
         { name = "git" },
+        { name = "nvim_lsp_signature_help" }
     }),
     formatting = {
         format = function(entry, vim_item)
