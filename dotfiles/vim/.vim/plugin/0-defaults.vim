@@ -212,6 +212,12 @@ vnoremap > >gv
 " Shift + J/K moves selected lines down/up in visual mode
 vnoremap <silent> J :m '>+1<CR>gv=gv
 vnoremap <silent> K :m '<-2<CR>gv=gv
+vnoremap <silent> <S-Up> :m '<-2<CR>gv=gv
+vnoremap <silent> <S-Down> :m '>+1<CR>gv=gv
+nnoremap <silent> <S-Up> :m-2<CR>
+nnoremap <silent> <S-Down> :m+<CR>
+inoremap <silent> <S-Up> <Esc>:m-2<CR>
+inoremap <silent> <S-Down> <Esc>:m+<CR>
 
 " jk to exit insert mode
 imap jk <Esc>
