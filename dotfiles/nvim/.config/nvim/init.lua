@@ -159,8 +159,9 @@ return require("packer").startup({
         use("ianhomer/knobs.vim")
 
         -- LSP, autocomplete and code guidance
-        _use({
+        use({
             "neovim/nvim-lspconfig",
+            event = "BufWinEnter",
             config = [[require'config.lspconfig']],
             commit = "8e65dbb6e187604cdaf0e0ef2e90c790760912e7",
         })
