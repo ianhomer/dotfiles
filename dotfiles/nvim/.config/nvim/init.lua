@@ -178,6 +178,7 @@ return require("packer").startup({
 
         use({
             "glepnir/lspsaga.nvim",
+            event = "BufWinEnter",
             config = [[require'config.lspsaga']],
             commit = "db209940a471aff4bf36e501e56a51fc6a861e63",
         })
@@ -222,6 +223,12 @@ return require("packer").startup({
             requires = "hrsh7th/cmp-buffer",
             config = [[require'config.cmp']],
             commit = "913eb8599816b0b71fe959693080917d8063b26a",
+        })
+
+        _use({
+            "petertriho/cmp-git",
+            requires = "nvim-lua/plenary.nvim",
+            commit = "fae6cdb407ad6c63a0b1928670bad1a67a55b887",
         })
 
         use({
