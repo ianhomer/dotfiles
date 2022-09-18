@@ -68,10 +68,10 @@ cmp.setup({
         { name = "nvim_lsp_signature_help" },
     }),
     formatting = {
-        format = function(entry, vim_item)
-            vim_item.kind = lspkind.presets.default[vim_item.kind]
-            return vim_item
-        end,
+        format = lspkind.cmp_format({ mode = "symbol" }),
+    },
+    view = {
+        entries = "custom",
     },
 })
 
