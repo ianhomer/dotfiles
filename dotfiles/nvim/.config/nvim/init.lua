@@ -213,10 +213,10 @@ return require("packer").startup({
             commit = "3dd40097196bdffe5f868d5dddcc0aa146ae41eb",
         })
 
-        _use({
-            "hrsh7th/cmp-nvim-lsp-document-symbol",
-            commit = "c3f0086ed9882e52e0ae38dd5afa915f69054941",
-        })
+        -- _use({
+        --     "hrsh7th/cmp-nvim-lsp-document-symbol",
+        --     commit = "c3f0086ed9882e52e0ae38dd5afa915f69054941",
+        -- })
 
         _use({
             "hrsh7th/nvim-cmp",
@@ -225,12 +225,12 @@ return require("packer").startup({
             commit = "913eb8599816b0b71fe959693080917d8063b26a",
         })
 
-        _use({
-            "petertriho/cmp-git",
-            requires = "nvim-lua/plenary.nvim",
-            config = [[require'config.cmp_git']],
-            commit = "fae6cdb407ad6c63a0b1928670bad1a67a55b887",
-        })
+        -- _use({
+        --     "petertriho/cmp-git",
+        --     requires = "nvim-lua/plenary.nvim",
+        --     config = [[require'config.cmp_git']],
+        --     commit = "fae6cdb407ad6c63a0b1928670bad1a67a55b887",
+        -- })
 
         use({
             knob = "vsnip",
