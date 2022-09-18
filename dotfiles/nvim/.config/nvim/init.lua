@@ -329,6 +329,14 @@ return require("packer").startup({
             run = ":TSUpdate",
             commit = "557123a6168936983d7b980df195057ca6b370ed",
         })
+
+        use({
+          knob = "treesitter",
+          "nvim-treesitter/nvim-treesitter-textobjects",
+          config = [[require'config.treesitter_textobjects']],
+          commit = "e63c2ff8e38fad77299dd74e14c7c9360e1b3181"
+        })
+
         use({
             "preservim/vimux",
             commit = "740320b798106c5de6758fb35bf39e79ee1ce0f0",
