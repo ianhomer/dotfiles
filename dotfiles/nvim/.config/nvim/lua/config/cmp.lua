@@ -64,6 +64,7 @@ cmp.setup({
         { name = "buffer" },
         { name = "nvim_lua" },
         { name = "path" },
+        { name = "git" },
     }),
     formatting = {
         format = function(entry, vim_item)
@@ -81,7 +82,7 @@ cmp.setup.cmdline("/", {
 
 cmp.setup.filetype("gitcommit", {
     sources = cmp.config.sources({
-        { name = "cmp_git" },
+        { name = "git" },
     }, {
         { name = "buffer" },
     }),

@@ -228,6 +228,7 @@ return require("packer").startup({
         _use({
             "petertriho/cmp-git",
             requires = "nvim-lua/plenary.nvim",
+            config = [[require'config.cmp_git']],
             commit = "fae6cdb407ad6c63a0b1928670bad1a67a55b887",
         })
 
