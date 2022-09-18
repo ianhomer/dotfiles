@@ -27,26 +27,27 @@ end
 
 local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+    local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
     if not vim.g.knob_lspsaga then
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
+        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
     end
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
     -- C-k conflicts with tmux split navigation
     -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    vim.keymap.set("n", "<leader>,sh", vim.lsp.buf.signature_help, opts)
+    vim.keymap.set("n", "<leader>,sh", vim.lsp.buf.signature_help, bufopts)
 
-    vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
-    vim.keymap.set("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", opts)
-    vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
+    vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", bufopts)
+    vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
 
     if vim.g.knob_null_ls then
         -- Use null-ls for formatting
