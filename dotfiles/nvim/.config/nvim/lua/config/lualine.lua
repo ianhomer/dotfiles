@@ -65,6 +65,6 @@ require("lualine").setup({
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
-        lualine_z = { { "filename", icon = "⤷" } },
+        lualine_z = { { "filename", path = 1, icon = "⤷" } },
     },
 })
