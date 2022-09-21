@@ -15,7 +15,11 @@ local my_colors = {
 require('kanagawa').setup({
   dimInactive = false,
   globalStatus = true,
-  colors = my_colors
+  colors = my_colors,
+  overrides = {
+    WinSeparator  = { fg = "#223249", bg = "NONE" },
+    VertSplit  = { fg = "#223249", bg = "NONE" },
+  }
 })
 vim.cmd("colorscheme kanagawa")
 
