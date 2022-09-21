@@ -91,7 +91,7 @@ nvim_set_var("knobs_levels", {
     symbols_outline = 9,
     tabcomplete = 9,
     tabular = 3,
-    telescope = 5,
+    telescope = 3,
     telescope_fzf_native = 5,
     telescope_symbols = 5,
     telekasten = 9,
@@ -434,7 +434,7 @@ return require("packer").startup({
             "nvim-telescope/telescope-symbols.nvim",
             commit = "f7d7c84873c95c7bd5682783dd66f84170231704",
         })
-        use({
+        _use({
             "nvim-telescope/telescope.nvim",
             requires = {
                 { "nvim-lua/popup.nvim", cond = "vim.g['knob_telescope']" },
