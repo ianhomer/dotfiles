@@ -40,7 +40,6 @@ nvim_set_var("knobs_levels", {
     fidget = 3,
     flog = 9,
     fugitive = 3,
-    frecency = 9,
     friendly_snippets = 5,
     fzf = 6,
     git_conflict = 9,
@@ -92,7 +91,7 @@ nvim_set_var("knobs_levels", {
     tabcomplete = 9,
     tabular = 3,
     telescope = 3,
-    telescope_fzf_native = 5,
+    telescope_fzf_native = 3,
     telescope_symbols = 5,
     telekasten = 9,
     test = 5,
@@ -331,10 +330,10 @@ return require("packer").startup({
         })
 
         use({
-          knob = "treesitter",
-          "nvim-treesitter/nvim-treesitter-textobjects",
-          config = [[require'config.treesitter_textobjects']],
-          commit = "e63c2ff8e38fad77299dd74e14c7c9360e1b3181"
+            knob = "treesitter",
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            config = [[require'config.treesitter_textobjects']],
+            commit = "e63c2ff8e38fad77299dd74e14c7c9360e1b3181",
         })
 
         use({
@@ -412,39 +411,31 @@ return require("packer").startup({
             requires = { { "junegunn/fzf", opt = true, fn = { "fzf#shellescape" }, ft = { "qf" } } },
             commit = "ecbf9cd98e65e9170ef743d229f35bf1306efde1",
         })
-        use({
+        _use({
             "nvim-lua/plenary.nvim",
             commit = "62dc2a7acd2fb2581871a36c1743b29e26c60390",
         })
-        use({
+        _use({
             "nvim-telescope/telescope-fzf-native.nvim",
             run = "make",
             commit = "65c0ee3d4bb9cb696e262bca1ea5e9af3938fc90",
         })
-        use({ knob = "frecency", "tami5/sqlite.lua", commit = "56c5aacd5e31496d9b3cd3d1b0e570bb9a65d35b" })
 
-        use({
-            knob = "frecency",
-            "nvim-telescope/telescope-frecency.nvim",
-            after = { "sqlite.lua" },
-            commit = "d51c7631dcc0f598692676f554c4e79d7596d541",
-        })
-
-        use({
+        _use({
             "nvim-telescope/telescope-symbols.nvim",
             commit = "f7d7c84873c95c7bd5682783dd66f84170231704",
         })
         _use({
+            "nvim-lua/popup.nvim",
+            commit = "b7404d35d5d3548a82149238289fa71f7f6de4ac",
+        })
+        _use({
             "nvim-telescope/telescope.nvim",
             requires = {
-                { "nvim-lua/popup.nvim", cond = "vim.g['knob_telescope']" },
-                { "nvim-lua/plenary.nvim", cond = "vim.g['knob_telescope']" },
-                {
-                    "nvim-telescope/telescope-fzf-native.nvim",
-                    cond = "vim.g['knob_telescope_fzf_native']",
-                },
-                { "nvim-telescope/telescope-symbols.nvim", cond = "vim.g['knob_telescope_symbols']" },
-                { "nvim-telescope/telescope-frecency.nvim", cond = "vim.g['knob_frecency']" },
+                { "nvim-lua/popup.nvim" },
+                { "nvim-lua/plenary.nvim" },
+                { "nvim-telescope/telescope-fzf-native.nvim" },
+                { "nvim-telescope/telescope-symbols.nvim" },
             },
             config = [[require'config.telescope']],
             commit = "30e2dc5232d0dd63709ef8b44a5d6184005e8602",
