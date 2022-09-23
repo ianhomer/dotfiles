@@ -97,6 +97,9 @@ if !exists("g:knob_autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | 
 " reset highlighting
 nnoremap <silent> <leader>z :noh<CR>
 
+" non-clobbering paste
+xnoremap <expr> p 'pgv"'.v:register.'y'
+
 if exists("g:knob_modes")
   command! -nargs=0 ResetMode :call modes#ResetMode()
   command! -nargs=0 PersonalDevMode :call modes#PersonalDevMode()
