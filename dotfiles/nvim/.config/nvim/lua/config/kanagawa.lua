@@ -20,7 +20,7 @@ require('kanagawa').setup({
     WinSeparator  = { fg = "#223249", bg = "NONE" },
     VertSplit  = { fg = "#223249", bg = "NONE" },
     -- darken current window beyond default palette
-    Normal = { bg = "#0f0f13" },
+    Normal = { bg = "#121218" },
   }
 })
 vim.cmd("colorscheme kanagawa")
