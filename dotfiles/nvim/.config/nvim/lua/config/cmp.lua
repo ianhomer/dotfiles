@@ -64,7 +64,6 @@ cmp.setup({
         { name = "buffer" },
         { name = "nvim_lua" },
         { name = "path" },
-        -- { name = "git" },
         { name = "nvim_lsp_signature_help" },
     }),
     formatting = {
@@ -75,22 +74,22 @@ cmp.setup({
     },
 })
 
-cmp.setup.cmdline("/", {
-    sources = {
-        { name = "buffer" },
-    },
-})
-
 cmp.setup.filetype("gitcommit", {
     sources = cmp.config.sources(
-        -- {
-        --     { name = "git" },
-        -- },
         {
             { name = "buffer" },
         }
     ),
 })
+
+for _,v in pairs({ '/', '?' }) do
+  cmp.setup.cmdline(v, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+end
 
 cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
