@@ -13,12 +13,14 @@ local my_colors = {
 }
 
 require('kanagawa').setup({
-  dimInactive = false,
+  dimInactive = true,
   globalStatus = true,
   colors = my_colors,
   overrides = {
     WinSeparator  = { fg = "#223249", bg = "NONE" },
     VertSplit  = { fg = "#223249", bg = "NONE" },
+    -- darken current window beyond default palette
+    Normal = { bg = "#0f0f13" },
   }
 })
 vim.cmd("colorscheme kanagawa")
