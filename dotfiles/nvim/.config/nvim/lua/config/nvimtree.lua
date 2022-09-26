@@ -20,7 +20,7 @@ require("nvim-tree").setup({
         ignore = false,
     },
     filters = {
-        dotfiles = true,
+        dotfiles = false,
         custom = { "^\\.DS_Store", "^\\.git$", "^\\.pytest_cache", "^node_modules" },
         exclude = { ".env", ".config" },
     },
