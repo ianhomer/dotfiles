@@ -5,6 +5,10 @@ $(shim) && . ${ME}/i.sh
 
 i=0
 
+# Get user ID so that it can be used in grep of ps to find process that start
+# with named command
+uid=$(id -u)
+
 # Close apps that are reasonable safe to just close. Useful as a housekeeping
 # step to free up resources
 
@@ -12,9 +16,9 @@ i=0
 # Start vim with nvim +lock to withstand this close process
 # This process of closing nvim relies on nvim autosaving files, this process
 # does not save files
-for application in nvim Flipper.app ; do
+for application in nvim Flipper.app node ; do
   log:: closing $application
-  for process in $(ps ax | grep $application | grep -v -E 'lock|grep' | awk '{ print $1; }') ; do
+  for process in $(ps -o pid,uid,command | grep "$uid $application" | grep -v -E 'lock|grep' | awk '{ print $1; }') ; do
     name=$(ps -o command= -p $process)
     directory=$(lsof -p $process | grep cwd | sed 's/  */ /g' | cut -d " " -f9- )
     kill -3 $process
