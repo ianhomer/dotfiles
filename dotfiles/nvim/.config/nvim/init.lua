@@ -223,30 +223,30 @@ return require("packer").startup({
         --     commit = "c3f0086ed9882e52e0ae38dd5afa915f69054941",
         -- })
         --
-        _use({
-            "rafamadriz/friendly-snippets",
-            commit = "2be79d8a9b03d4175ba6b3d14b082680de1b31b1",
-        })
+        -- _use({
+        --     "rafamadriz/friendly-snippets",
+        --     commit = "2be79d8a9b03d4175ba6b3d14b082680de1b31b1",
+        -- })
 
-        _use({
-            knob = "luasnip",
-            "saadparwaiz1/cmp_luasnip",
-            commit = "a9de941bcbda508d0a45d28ae366bb3f08db2e36",
-        })
+        -- _use({
+        --     knob = "luasnip",
+        --     "saadparwaiz1/cmp_luasnip",
+        --     commit = "a9de941bcbda508d0a45d28ae366bb3f08db2e36",
+        -- })
 
-        _use({
-            knob = "luasnip",
-            "L3MON4D3/LuaSnip",
-            requires = { "saadparwaiz1/cmp_luasnip" },
-            commit = "8f8d493e7836f2697df878ef9c128337cbf2bb84",
-        })
+        -- _use({
+        --     knob = "luasnip",
+        --     "L3MON4D3/LuaSnip",
+        --     requires = { "saadparwaiz1/cmp_luasnip" },
+        --     commit = "8f8d493e7836f2697df878ef9c128337cbf2bb84",
+        -- })
 
         _use({
             "hrsh7th/nvim-cmp",
             requires = "hrsh7th/cmp-buffer",
             config = [[require'config.cmp']],
             commit = "913eb8599816b0b71fe959693080917d8063b26a",
-            after = "LuaSnip",
+            -- after = "LuaSnip",
         })
 
         -- _use({
@@ -256,28 +256,28 @@ return require("packer").startup({
         --     commit = "fae6cdb407ad6c63a0b1928670bad1a67a55b887",
         -- })
 
-        use({
-            knob = "vsnip",
-            "hrsh7th/cmp-vsnip",
-            after = "cmp-nvim-lsp",
-            commit = "0abfa1860f5e095a07c477da940cfcb0d273b700",
-        })
+        -- use({
+        --     knob = "vsnip",
+        --     "hrsh7th/cmp-vsnip",
+        --     after = "cmp-nvim-lsp",
+        --     commit = "0abfa1860f5e095a07c477da940cfcb0d273b700",
+        -- })
 
-        use({
-            knob = "vsnip",
-            "hrsh7th/vim-vsnip-integ",
-            after = "cmp-nvim-lsp",
-            commit = "64c2ed66406c58163cf81fb5e13ac2f9fcdfb52b",
-        })
+        -- use({
+        --     knob = "vsnip",
+        --     "hrsh7th/vim-vsnip-integ",
+        --     after = "cmp-nvim-lsp",
+        --     commit = "64c2ed66406c58163cf81fb5e13ac2f9fcdfb52b",
+        -- })
 
-        use({
-            "hrsh7th/vim-vsnip",
-            event = "InsertEnter",
-            requires = {
-                { "hrsh7th/vim-vsnip-integ", cond = "vim.g.knob_vsnip ~= nil" },
-            },
-            commit = "8f199ef690ed26dcbb8973d9a6760d1332449ac9",
-        })
+        -- use({
+        --     "hrsh7th/vim-vsnip",
+        --     event = "InsertEnter",
+        --     requires = {
+        --         { "hrsh7th/vim-vsnip-integ", cond = "vim.g.knob_vsnip ~= nil" },
+        --     },
+        --     commit = "8f199ef690ed26dcbb8973d9a6760d1332449ac9",
+        -- })
 
         use({
             "j-hui/fidget.nvim",
