@@ -157,6 +157,10 @@ return require("packer").startup({
         use("wbthomason/packer.nvim")
         use("ianhomer/knobs.vim")
 
+        _use({
+          "b0o/schemastore.nvim",
+          commit = "b11510e6d05c7fcbd66ed8c0d6a3ebbaef8dc0f4"
+        })
         -- LSP, autocomplete and code guidance
         use({
             "neovim/nvim-lspconfig",

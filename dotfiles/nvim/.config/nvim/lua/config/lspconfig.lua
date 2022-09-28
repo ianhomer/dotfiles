@@ -68,11 +68,11 @@ local on_attach = function(client, bufnr)
             ]],
             false
         )
-              -- augroup lsp_document_highlight
-              --   autocmd! * <buffer>
-              --   autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-              --   autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-              -- augroup END
+        -- augroup lsp_document_highlight
+        --   autocmd! * <buffer>
+        --   autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        --   autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        -- augroup END
     end
 
     vim.api.nvim_create_autocmd("CursorHold", {
@@ -125,6 +125,12 @@ local lspsettings = {
             lint = {
                 unknownAtRules = "ignore",
             },
+        },
+    },
+    jsonls = {
+        json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
         },
     },
 }
