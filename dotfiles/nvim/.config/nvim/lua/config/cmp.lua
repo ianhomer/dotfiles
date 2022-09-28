@@ -17,6 +17,7 @@ end
 local lspkind = require("lspkind")
 local luasnip = require("luasnip")
 local cmp = require("cmp")
+require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup({
     snippet = {
@@ -47,7 +48,6 @@ cmp.setup({
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
-                print("X")
                 luasnip.expand_or_jump()
             elseif has_words_before() then
                 cmp.complete()
@@ -73,12 +73,12 @@ cmp.setup({
         ghost_text = true,
     },
     sources = {
-        -- { name = "nvim_lsp" },
+        { name = "nvim_lsp" },
         { name = "luasnip" },
-        -- { name = "buffer" },
-        -- { name = "nvim_lua" },
-        -- { name = "path" },
-        -- { name = "nvim_lsp_signature_help" },
+        { name = "buffer" },
+        { name = "nvim_lua" },
+        { name = "path" },
+        { name = "nvim_lsp_signature_help" },
     },
     formatting = {
         format = lspkind.cmp_format({ mode = "symbol" }),

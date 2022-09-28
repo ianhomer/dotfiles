@@ -22,7 +22,7 @@ export function foo(a: string): string {
     console.log("sonarjs smell");
   }
 
-  return a;
+  return a;L
 }
 
 const thing: Thing = { title: "My Title", content: "My Content" };
