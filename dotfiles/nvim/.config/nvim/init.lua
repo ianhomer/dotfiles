@@ -66,6 +66,7 @@ nvim_set_var("knobs_levels", {
     lsp_signature = 3,
     lspsaga = 9,
     lualine = 3,
+    luasnip = 3,
     markdown_syntax_table = 3,
     markdown_preview = 3,
     minimap = 9,
@@ -111,7 +112,7 @@ nvim_set_var("knobs_levels", {
     window_cleaner = 9,
     writegood = 6,
     vimspector = 9,
-    vsnip = 3,
+    vsnip = 9,
     vimux = 5,
     zen_mode = 5,
     zephyr = 9,
@@ -168,6 +169,7 @@ return require("packer").startup({
             event = "BufWinEnter",
             config = [[require'config.lspconfig']],
             commit = "51775b12cfbf1b6462c7b13cd020cc09e6767aea",
+            after = "LuaSnip",
         })
         use({
             "weilbith/nvim-code-action-menu",
@@ -248,6 +250,19 @@ return require("packer").startup({
             "hrsh7th/vim-vsnip-integ",
             after = "cmp-nvim-lsp",
             commit = "64c2ed66406c58163cf81fb5e13ac2f9fcdfb52b",
+        })
+
+        _use({
+            knob = "luasnip",
+            "saadparwaiz1/cmp_luasnip",
+            commit = "a9de941bcbda508d0a45d28ae366bb3f08db2e36",
+        })
+
+        _use({
+            knob = "luasnip",
+            "L3MON4D3/LuaSnip",
+            requires = { "saadparwaiz1/cmp_luasnip" },
+            commit = "8f8d493e7836f2697df878ef9c128337cbf2bb84",
         })
 
         use({
