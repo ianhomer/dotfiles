@@ -43,6 +43,7 @@ set expandtab
 set textwidth=80
 " Softbreak on space between words
 set linebreak
+set breakindent
 " No wrap
 set nowrap
 set sidescroll=1

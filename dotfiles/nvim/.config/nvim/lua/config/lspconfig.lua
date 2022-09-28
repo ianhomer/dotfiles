@@ -1,8 +1,10 @@
 local lspconfig = require("lspconfig")
-local opts = { noremap = true, silent = true }
+local outer_nmap = function(keys, func, desc)
+    vim.keymap.set("n", keys, func, { silent = true, noremap = true, desc = desc })
+end
 
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+outer_nmap("[d", vim.diagnostic.goto_prev, "Previous diagnostic")
+outer_nmap("]d", vim.diagnostic.goto_next, "Next diagnostic")
 
 vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]])
 vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=grey guibg=#1f2335]])
@@ -19,35 +21,38 @@ local border = {
 }
 
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-    opts = opts or {}
+function vim.lsp.util.open_floating_preview(contents, syntax, _opts, ...)
+    local opts = _opts or {}
     opts.border = opts.border or border
     return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
 local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-    local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
+    local nmap = function(keys, func, desc)
+        vim.keymap.set("n", keys, func, { buffer = bufnr, silent = true, noremap = true, desc = desc })
+    end
 
     if not vim.g.knob_lspsaga then
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
-        vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+        nmap("K", vim.lsp.buf.hover, "Hover")
+        nmap("<leader>rn", vim.lsp.buf.rename, "Rename")
+        nmap("<leader>ca", vim.lsp.buf.code_action, "Code action")
     end
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+    nmap("gr", vim.lsp.buf.references, "Go to references")
+    nmap("gd", vim.lsp.buf.definition, "Go to definition")
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+    nmap("gD", vim.lsp.buf.declaration, "Go to declaration")
+    nmap("gi", vim.lsp.buf.implementation, "Go to implementation")
     -- C-k conflicts with tmux split navigation
     -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    vim.keymap.set("n", "<leader>,sh", vim.lsp.buf.signature_help, bufopts)
+    nmap("<leader>,sh", vim.lsp.buf.signature_help, "Signature help")
 
-    vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
-    vim.keymap.set("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", bufopts)
-    vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
+    nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
+    nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder")
+    nmap("<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", "List workspaces")
+    nmap("<leader>D", vim.lsp.buf.type_definition, "Type definition")
 
     if vim.g.knob_null_ls then
         -- Use null-ls for formatting

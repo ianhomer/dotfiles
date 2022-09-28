@@ -83,6 +83,7 @@ nvim_set_var("knobs_levels", {
     refactoring = 5,
     rhubarb = 7,
     shortcuts = 1,
+    sleuth = 3,
     spelling = 5,
     startify = 4,
     startuptime = 1,
@@ -158,8 +159,8 @@ return require("packer").startup({
         use("ianhomer/knobs.vim")
 
         _use({
-          "b0o/schemastore.nvim",
-          commit = "b11510e6d05c7fcbd66ed8c0d6a3ebbaef8dc0f4"
+            "b0o/schemastore.nvim",
+            commit = "b11510e6d05c7fcbd66ed8c0d6a3ebbaef8dc0f4",
         })
         -- LSP, autocomplete and code guidance
         use({
@@ -412,7 +413,6 @@ return require("packer").startup({
             cmd = { "Ag", "Buffers", "Commits", "Files", "History" },
             fn = { "fzf#vim#ag" },
             ft = { "qf" },
-            requires = { { "junegunn/fzf", opt = true, fn = { "fzf#shellescape" }, ft = { "qf" } } },
             commit = "ecbf9cd98e65e9170ef743d229f35bf1306efde1",
         })
         _use({
@@ -591,6 +591,10 @@ return require("packer").startup({
         use({
             "tpope/vim-surround",
             commit = "bf3480dc9ae7bea34c78fbba4c65b4548b5b1fea",
+        })
+        use({
+            "tpope/vim-sleuth",
+            commit = "1d25e8e5dc4062e38cab1a461934ee5e9d59e5a8",
         })
         use({
             "tpope/vim-commentary",
