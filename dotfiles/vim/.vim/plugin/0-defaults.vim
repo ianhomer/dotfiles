@@ -78,7 +78,11 @@ endif
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
 if exists("g:knob_compactcmd")
-  set cmdheight=1
+  if has('nvim')
+    set cmdheight=0
+  else
+    set cmdheight=1
+  endif
 else
   set cmdheight=2
 endif

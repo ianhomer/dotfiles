@@ -56,12 +56,12 @@ local on_attach = function(client, bufnr)
 
     if vim.g.knob_null_ls then
         -- Use null-ls for formatting
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+        client.server_capabilities.document_formatting = false
+        client.server_capabilities.document_range_formatting = false
     end
 
     -- Set autocommands conditional on server_capabilities
-    if client.resolved_capabilities.document_highlight then
+    if client.server_capabilities.document_highlight then
         vim.api.nvim_exec(
             [[
               hi LspReferenceRead cterm=bold ctermbg=red guibg=DarkSlateGray
