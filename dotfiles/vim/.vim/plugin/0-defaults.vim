@@ -79,7 +79,8 @@ endif
 " need to press ENTER after fugitive commands
 if exists("g:knob_compactcmd")
   if has('nvim')
-    set cmdheight=0
+    " change to 0 when https://github.com/hrsh7th/nvim-cmp/pull/1196 merged
+    set cmdheight=1
   else
     set cmdheight=1
   endif
