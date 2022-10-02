@@ -44,8 +44,8 @@ set textwidth=80
 " Softbreak on space between words
 set linebreak
 set breakindent
-" No wrap
-set nowrap
+" Wrap by default
+set wrap
 set sidescroll=1
 " Wildignore
 set wildignore+=*/node_modules/*,*/__pycache__/*
