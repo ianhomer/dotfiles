@@ -245,7 +245,7 @@ return require("packer").startup({
             "hrsh7th/nvim-cmp",
             requires = "hrsh7th/cmp-buffer",
             config = [[require'config.cmp']],
-            commit = "2427d06b6508489547cd30b6e86b1c75df363411",
+            commit = "b0dff0ec4f2748626aae13f011d1a47071fe9abc",
             -- after = "LuaSnip",
         })
 

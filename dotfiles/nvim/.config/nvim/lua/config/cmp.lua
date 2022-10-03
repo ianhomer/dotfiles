@@ -19,11 +19,11 @@ local lspkind = require("lspkind")
 local cmp = require("cmp")
 
 cmp.setup({
-    -- snippet = {
-    --     expand = function(args)
-    --         luasnip.lsp_expand(args.body)
-    --     end,
-    -- },
+    snippet = {
+        expand = function(args)
+            -- luasnip.lsp_expand(args.body)
+        end,
+    },
     mapping = cmp.mapping.preset.insert({
         ["<C-p>"] = cmp.mapping.select_prev_item(),
         ["<C-n>"] = cmp.mapping.select_next_item(),
