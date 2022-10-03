@@ -15,13 +15,13 @@ end
 -- end
 
 local lspkind = require("lspkind")
--- local luasnip = require("luasnip")
+local luasnip = require("luasnip")
 local cmp = require("cmp")
 
 cmp.setup({
     snippet = {
         expand = function(args)
-            -- luasnip.lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
         end,
     },
     mapping = cmp.mapping.preset.insert({
@@ -41,7 +41,7 @@ cmp.setup({
             select = false,
         }),
         ["<CR>"] = cmp.mapping.confirm({
-            select = false,
+            select = true,
         }),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then

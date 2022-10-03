@@ -228,18 +228,18 @@ return require("packer").startup({
         --     commit = "2be79d8a9b03d4175ba6b3d14b082680de1b31b1",
         -- })
 
-        -- _use({
-        --     knob = "luasnip",
-        --     "saadparwaiz1/cmp_luasnip",
-        --     commit = "a9de941bcbda508d0a45d28ae366bb3f08db2e36",
-        -- })
+        _use({
+            knob = "luasnip",
+            "saadparwaiz1/cmp_luasnip",
+            commit = "a9de941bcbda508d0a45d28ae366bb3f08db2e36",
+        })
 
-        -- _use({
-        --     knob = "luasnip",
-        --     "L3MON4D3/LuaSnip",
-        --     requires = { "saadparwaiz1/cmp_luasnip" },
-        --     commit = "8f8d493e7836f2697df878ef9c128337cbf2bb84",
-        -- })
+        _use({
+            knob = "luasnip",
+            "L3MON4D3/LuaSnip",
+            requires = { "saadparwaiz1/cmp_luasnip" },
+            commit = "8f8d493e7836f2697df878ef9c128337cbf2bb84",
+        })
 
         _use({
             "hrsh7th/nvim-cmp",
