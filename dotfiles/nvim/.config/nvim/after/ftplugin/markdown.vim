@@ -168,14 +168,12 @@ function! AddLocalSpellFile(directory, depth)
     let l:localvimdir = a:directory . "/.vim"
     if isdirectory(l:localvimdir)
       " Add all *.add files found in parent .vim directory to local spellfile
-      for l:localspellfile in split(glob(l:localvimdir . "/*.add"))
-        if &spellfile !~ l:localspellfile
-          echo "Adding ".l:localspellfile
-          if &spellfile != ''
-            set spellfile=l:localspellfile . "," . &spellfile
-          else
-            set spellfile=l:localspellfile
-          endif
+      for l:relativespellfile in split(glob(l:localvimdir . "/*.add"))
+        let l:spellfile=fnamemodify(l:relativespellfile, ":p")
+        if &spellfile != ''
+          exec 'set spellfile='.l:spellfile . "," . &spellfile
+        else
+          exec 'set spellfile='.l:spellfile
         endif
       endfor
     endif
@@ -186,11 +184,9 @@ function! AddLocalSpellFile(directory, depth)
   endif
 endfunction
 
-" TODO : fix spellfile
-finish
 let mypath = expand("%p:h")
 try
   call AddLocalSpellFile(mypath, 0)
 catch
-  echo "Cannot add local spell file for ".mypath
+  echo "*** Cannot add local spell file for ".mypath
 endtry
