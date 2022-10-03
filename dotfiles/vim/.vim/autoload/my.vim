@@ -26,7 +26,7 @@ endfunction
 function my#LintMe()
   if knobs#("null_ls")
     let linter="lsp"
-    lua vim.lsp.buf.formatting()
+    lua vim.lsp.buf.format { async = true}
   else
     if &filetype == "markdown"
       let linter="thingity"
