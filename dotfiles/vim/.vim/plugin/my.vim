@@ -1,3 +1,7 @@
+if get(g:, "knobs_level", 0) < 3
+  finish
+endif
+
 command! -nargs=0 ToggleAutoSave :call my#ToggleAutoSave()
 
 " Thanks https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3

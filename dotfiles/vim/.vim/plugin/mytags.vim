@@ -1,3 +1,6 @@
+if get(g:, "knobs_level", 0) < 3
+  finish
+endif
 ""
 " Lightweight ctags loader since gutentags heavy weight and I've seen excessive
 " calls by it for regeneration of ctags

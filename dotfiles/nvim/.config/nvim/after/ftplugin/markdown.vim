@@ -159,7 +159,6 @@ nmap <buffer> <silent> <leader>jc 0f*ds*cs*`j
 
 " Convert defintion list to table, move to next definition
 nmap <buffer> <silent> <leader>jr 0ds*cs*`Jf:r\|I\|\|<ESC>jj
-
 setlocal spell
 
 " A local spell file for the current file should be located in a .vim directory
@@ -170,13 +169,28 @@ function! AddLocalSpellFile(directory, depth)
     if isdirectory(l:localvimdir)
       " Add all *.add files found in parent .vim directory to local spellfile
       for l:localspellfile in split(glob(l:localvimdir . "/*.add"))
-        if &l:spellfile !~ l:localspellfile
-          let &l:spellfile = l:localspellfile . "," . &l:spellfile
+        if &spellfile !~ l:localspellfile
+          echo "Adding ".l:localspellfile
+          if &spellfile != ''
+            set spellfile=l:localspellfile . "," . &spellfile
+          else
+            set spellfile=l:localspellfile
+          endif
         endif
       endfor
     endif
-    call AddLocalSpellFile(fnamemodify(a:directory, ":h"), a:depth + 1)
+    let parent = fnamemodify(a:directory, ":h")
+    if parent != a:directory
+      call AddLocalSpellFile(parent, a:depth + 1)
+    endif
   endif
 endfunction
 
-call AddLocalSpellFile(expand('%:p:h'), 0)
+" TODO : fix spellfile
+finish
+let mypath = expand("%p:h")
+try
+  call AddLocalSpellFile(mypath, 0)
+catch
+  echo "Cannot add local spell file for ".mypath
+endtry

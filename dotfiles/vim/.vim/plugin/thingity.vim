@@ -1,3 +1,6 @@
+if get(g:, "knobs_level", 0) < 3
+  finish
+endif
 " Goyo distraction free writing
 if exists("g:knob_goyo")
   nnoremap <leader>i :Goyo<CR>

@@ -1,3 +1,7 @@
+if get(g:, "knobs_level", 0) < 3
+  finish
+endif
+
 if get(g:, "knobs_level" > 2)
   command! -nargs=0 LintSpace :call my#LintSpace()
   nnoremap <leader>L :LintSpace<CR>
