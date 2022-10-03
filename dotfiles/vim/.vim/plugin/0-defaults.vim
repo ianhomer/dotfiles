@@ -9,6 +9,10 @@ let maplocalleader = "\\"
 
 " Enable mouse support
 set mouse=a
+" No horizontal scrolling
+if has("nvim")
+  set mousescroll=ver:3,hor:0
+endif
 " Disable error bells
 set noerrorbells
 " Enhance command-line completion
