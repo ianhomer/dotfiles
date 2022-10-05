@@ -9,10 +9,12 @@ vim.opt.fillchars:append({
 })
 
 local my_colors = {
-  bg = "#16161D"
+  bg = "#16161D",
+  samuraiRed = "#dddddd"
 }
 
 require('kanagawa').setup({
+  undercurl = true,
   dimInactive = true,
   globalStatus = true,
   colors = my_colors,
