@@ -7,6 +7,7 @@
 
 def foo(bar):
     print(f"foo executed with {bar}")
+    return "value"
 
 
 bar = "hello"

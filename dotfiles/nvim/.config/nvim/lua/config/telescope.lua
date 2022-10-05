@@ -106,7 +106,7 @@ vim.cmd("hi TelescopeResultsTitle guibg = " .. colors.bg_dim .. " guifg = " .. c
 
 local opts = { noremap = true, silent = true }
 
-vim.keymap.set("i", "<C-l>", "<cmd>lua require'telescope.builtin'.symbols{ sources = {'gitmoj'}}<cr>", opts)
+vim.keymap.set("i", "<C-l>", "<cmd>lua require'telescope.builtin'.symbols{ sources = {'gitmoji'}}<cr>", opts)
 vim.keymap.set("i", "<C-k><C-l>", "<cmd>Telescope symbols<cr>", opts)
 
 -- Disable which-key registry help in TelescopePrompt so that C-R can be used to

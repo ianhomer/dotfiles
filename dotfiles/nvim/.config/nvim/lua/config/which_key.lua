@@ -21,6 +21,7 @@ whichKey.setup({
 })
 
 local map = {}
+local vmap = {}
 
 local findNamedFile = {
     "<cmd>lua require'telescope.builtin'.find_files({find_command={'fd', '-H', '-i', vim.fn.expand('<cword>')}})<cr>",
@@ -59,14 +60,6 @@ if vim.g.knob_telescope then
     map["tr"] = { "<cmd>Telescope registers<cr>", "Registers" }
     map["tq"] = { "<cmd>Telescope quickfix<cr>", "Quick Fix" }
     map["tt"] = { "<cmd>Telescope<cr>", "Telescope" }
-    if vim.g.knob_refactoring then
-        map["tr"] = { "<cmd>lua require'telescope'.extensions.refactoring.refactors()<cr>" }
-    end
-
-    -- Dev
-    map["y"] = { "<cmd>TestNearest<cr>", "Test nearest"}
-    map["Y"] = { "<cmd>TestFile<cr>", "Test file"}
-    map["T"] = { "<cmd>let test#project_root=@0<cr>", "Set test directory to clipboard"}
 
     -- Git
     map["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
@@ -76,16 +69,24 @@ if vim.g.knob_telescope then
 
     -- LSP
     map["td"] = { "<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols" }
-    map[";"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "LSP Format" }
-    map[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "LSP Range Format" }
-
-    -- Modes
-    map["5"] = { "<cmd>lua require'config/null_ls'.setLevel(3)<cr>", "Core Lints" }
-    map["6"] = { "<cmd>lua require'config/null_ls'.toggle()<cr>", "Toggle Some Lints" }
-    map["7"] = { "<cmd>TroubleToggle<cr>", "Trouble" }
-    map["8"] = { "<cmd>call my#ToggleBlame()<cr>", "Blame" }
-    map["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap" }
 end
+
+map[";"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "LSP Format" }
+map[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "LSP Range Format" }
+
+-- Modes
+map["5"] = { "<cmd>lua require'config/null_ls'.setLevel(3)<cr>", "Core Lints" }
+map["6"] = { "<cmd>lua require'config/null_ls'.toggle()<cr>", "Toggle Lints" }
+map["7"] = { "<cmd>TroubleToggle<cr>", "Trouble" }
+map["8"] = { "<cmd>call my#ToggleBlame()<cr>", "Blame" }
+map["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap" }
+
+map["rg"] = { ":reg<cr>", "Registers" }
+
+-- Dev
+map["y"] = { "<cmd>TestNearest<cr>", "Test nearest" }
+map["Y"] = { "<cmd>TestFile<cr>", "Test file" }
+map["q"] = { vim.diagnostic.setloclist, "Set Loc List" }
 
 if vim.g.knob_toggleterm then
     map["a"] = { "<cmd>ToggleTerm<cr>", "Terminal" }
@@ -100,7 +101,32 @@ if vim.g.knob_hop then
     map["h"] = { "<cmd>lua require'hop'.hint_words()<cr>", "Hop" }
 end
 
+if vim.g.knob_refactoring then
+    map["rc"] = { ":lua require('refactoring').debug.cleanup({})<cr>", "Refactor debug cleanup" }
+    map["rn"] =
+        { ":lua require('refactoring').debug.print_var({ normal = true })<cr>", "Refactor debug print variable" }
+
+    map["rb"] = { [[ <cmd>lua require('refactoring').refactor('Extract Block')<cr>]], "Extract Block" }
+    map["rbf"] = { [[ <cmd>lua require('refactoring').refactor('Extract Block To File')<cr>]], "Extract Block to File" }
+    map["ri"] = { [[ <cmd>lua require('refactoring').refactor('Inline Variable')<cr>]], "Inline Variable" }
+    map["rd"] =
+        { ":lua require('refactoring').debug.print_var({ normal = true })<cr>", "Refactor debug print variable" }
+
+    vmap["re"] = { [[ <esc><cmd>lua require('refactoring').refactor('Extract Function')<cr>]], "Extract function" }
+    vmap["rr"] = { "<esc><cmd>lua require('telescope').extensions.refactoring.refactors()<cr>", "Refactor select" }
+    vmap["rd"] =
+        { ":lua require('refactoring').debug.print_var({ normal = true})<cr>", "Refactor debug print variable" }
+
+    vmap["rf"] = {
+        [[ <esc><cmd>lua require('refactoring').refactor('Extract Function To File')<cr>]],
+        "Extract function to file",
+    }
+    vmap["rv"] = { [[<esc><cmd>lua require('refactoring').refactor('Extract Variable')<cr>]], "Extract variable" }
+    vmap["ri"] = { [[ <esc><cmd>lua require('refactoring').refactor('Inline Variable')<cr>]], "Inline variable" }
+end
+
 whichKey.register(map, { prefix = "<leader>" })
+whichKey.register(vmap, { prefix = "<leader>", mode = "v" })
 
 local cheats = {}
 cheats["'"] = findNamedFile
@@ -108,6 +134,8 @@ cheats["m"] = { ":let @m=@+<cr>", ":let @m=@+" }
 cheats["M"] = { 'viw"mp<cr>', 'viw"mp' }
 cheats["a"] = { ":messages<cr>", ":messages" }
 cheats["s"] = { ":let @+ = execute('messages')<cr>", ":let @+ = execute('messages')" }
+cheats["T"] = { "<cmd>let test#project_root=@0<cr>", "Test dir to clipboard" }
+
 
 whichKey.register(cheats, { prefix = "\\" })
 

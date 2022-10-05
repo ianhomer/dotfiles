@@ -57,7 +57,7 @@ cat $NODE_GLOBAL | grep -v '#' | grep '@'                |
 log:: "checking pnpm outdated"
 pnpm --global outdated || log:: "pnpm is outdated"
 log:: "pnpm update"
-pnpm --global update --latest
+pnpm --global update
 
 echo
 log:: "... Global node packages installed"

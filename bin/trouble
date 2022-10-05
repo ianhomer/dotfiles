@@ -5,54 +5,71 @@ help() {
   -e eslint
   -h this help
   -p prettier
+  -t tsc
+  -v vale
 EOF
 }
 
 OPTIND=1
-while getopts "ehp" o; do case "$o" in
+while getopts "ehpvt" o; do case "$o" in
   e) ESLINT=y ;;
-  p) PRETTIER=y ;;
   h) HELP=y ;;
+  p) PRETTIER=y ;;
+  t) TSC=y ;;
+  v) VALE=y ;;
   *) exit 1 ;;
 esac done
 shift $((OPTIND-1))
 
 resource=${1:-.}
 
-if [[ "${HELP}" == "y" || -z "${ESLINT}${PRETTIER}" ]] ; then
+if [[ "${HELP}" == "y" || -z "${ESLINT}${PRETTIER}${VALE}${TSC}" ]] ; then
   help
   exit 1
 fi
 
-# The start of trouble
-if [[ -f yarn.lock ]] ; then
-  command="yarn -s"
-elif [[ -f pnpm.lock ]] ; then
-  command="pnpm"
-elif [[ -f npm.lock ]] ; then
-  command="npm"
-fi
-if [[ -z $command ]] ; then
-  echo "Cannot determine command, are you in the root of the repository"
-  exit 1
-fi
+if [[ "$ESLINT" == "y" || "$PRETTIER" == "y" || "$TSC" == "y" ]] ; then
+  # The start of trouble
+  if [[ -f yarn.lock ]] ; then
+    command="yarn -s"
+  elif [[ -f pnpm.lock || pnpm-lock.yaml ]] ; then
+    command="pnpm"
+  elif [[ -f npm.lock ]] ; then
+    command="npm"
+  fi
+  if [[ -z $command ]] ; then
+    echo "Cannot determine command, are you in the root of the repository"
+    exit 1
+  fi
 
-if [[ "$ESLINT" == "y" ]] ; then
-  ${command} eslint ${resource} -f json               |
-    jq '.[] | select((.messages | length) > 0) | .filePath' -r |
-    xargs realpath --relative-to=$PWD |
-    fzf -m --bind ctrl-t:toggle-all   |
-    xargs nvim "+Trouble" "+silent argdo e"
-fi
-
-if [[ "$PRETTIER" == "y" ]] ; then
-  ${command} prettier ${resource} -c 2>&1    |
-    grep -v "run Prettier?"  |
-    grep "warn"              |
-    sed 's/\[warn\] //'      |
-    head -n 20               |
-    xargs realpath --relative-to=$PWD |
-    fzf -m --bind ctrl-t:toggle-all   |
-    xargs nvim "+Trouble" "+silent argdo e"
+  if [[ "$ESLINT" == "y" ]] ; then
+    ${command} eslint ${resource} -f json               |
+      jq '.[] | select((.messages | length) > 0) | .filePath' -r |
+      xargs realpath --relative-to=$PWD |
+      fzf -m --bind ctrl-t:toggle-all   |
+      xargs nvim "+Trouble" "+silent argdo e"
+  elif [[ "$TSC" == "y" ]] ; then
+    ${command} tsc --noEmit --incremental false |
+      grep ": error T"                          |
+      awk -F\( '{print $1}' | sort -u           |
+      fzf -m --bind ctrl-t:toggle-all           |
+      xargs nvim "+Trouble" "+silent argdo e"
+  elif [[ "$PRETTIER" == "y" ]] ; then
+    ${command} prettier ${resource} -c 2>&1    |
+      grep -v "run Prettier?"  |
+      grep "warn"              |
+      sed 's/\[warn\] //'      |
+      head -n 20               |
+      xargs realpath --relative-to=$PWD |
+      fzf -m --bind ctrl-t:toggle-all   |
+      xargs nvim "+Trouble" "+silent argdo e"
+  fi
+else
+  if [[ "$VALE" == "y" ]] ; then
+    vale --output JSON . | jq 'keys[]'  |
+      xargs realpath --relative-to=$PWD |
+      fzf -m --bind ctrl-t:toggle-all   |
+      xargs nvim "+Trouble" "+silent argdo e"
+  fi
 fi
 

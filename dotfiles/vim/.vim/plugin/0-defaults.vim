@@ -9,6 +9,10 @@ let maplocalleader = "\\"
 
 " Enable mouse support
 set mouse=a
+" No horizontal scrolling
+if has("nvim")
+  set mousescroll=ver:3,hor:0
+endif
 " Disable error bells
 set noerrorbells
 " Enhance command-line completion
@@ -25,7 +29,7 @@ set incsearch
 " Default updatetime is 4000 and too slow
 set updatetime=300
 " Quicker timeout between key presses
-set timeoutlen=1000
+set timeoutlen=500
 " Always show sign column to stop flip-flopping
 set signcolumn=yes
 if has("nvim")
@@ -43,8 +47,9 @@ set expandtab
 set textwidth=80
 " Softbreak on space between words
 set linebreak
-" No wrap
-set nowrap
+set breakindent
+" Wrap by default
+set wrap
 set sidescroll=1
 " Wildignore
 set wildignore+=*/node_modules/*,*/__pycache__/*
@@ -70,6 +75,7 @@ if get(g:, 'knobs_level', 0) < 1
   finish
 endif
 
+
 "
 " CORE Configuration - END
 "
@@ -77,7 +83,11 @@ endif
 " Provide more space for command output (e.g. fugitive) - with it this you may
 " need to press ENTER after fugitive commands
 if exists("g:knob_compactcmd")
-  set cmdheight=1
+  if has('nvim')
+    set cmdheight=0
+  else
+    set cmdheight=1
+  endif
 else
   set cmdheight=2
 endif
@@ -96,6 +106,9 @@ if !exists("g:knob_autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | 
 
 " reset highlighting
 nnoremap <silent> <leader>z :noh<CR>
+
+" non-clobbering paste
+xnoremap <expr> p 'pgv"'.v:register.'y'
 
 if exists("g:knob_modes")
   command! -nargs=0 ResetMode :call modes#ResetMode()
@@ -212,6 +225,12 @@ vnoremap > >gv
 " Shift + J/K moves selected lines down/up in visual mode
 vnoremap <silent> J :m '>+1<CR>gv=gv
 vnoremap <silent> K :m '<-2<CR>gv=gv
+vnoremap <silent> <S-Up> :m '<-2<CR>gv=gv
+vnoremap <silent> <S-Down> :m '>+1<CR>gv=gv
+nnoremap <silent> <S-Up> :m-2<CR>
+nnoremap <silent> <S-Down> :m+<CR>
+inoremap <silent> <S-Up> <Esc>:m-2<CR>
+inoremap <silent> <S-Down> <Esc>:m+<CR>
 
 " jk to exit insert mode
 imap jk <Esc>

@@ -21,7 +21,6 @@ export function foo(a: string): string {
   if (a != "2") {
     console.log("sonarjs smell");
   }
-
   return a;
 }
 

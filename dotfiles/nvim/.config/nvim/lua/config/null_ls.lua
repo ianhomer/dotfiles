@@ -19,15 +19,31 @@ null_ls.setup({
         formatting.black,
         formatting.fish_indent,
         formatting.stylua,
+        formatting.trim_whitespace.with({
+            filetypes = {"cucumber"}
+        }),
         diagnostics.markdownlint.with({
             diagnostics_postprocess = function(diagnostic)
                 diagnostic.severity = vim.diagnostic.severity["HINT"]
             end,
         }),
         diagnostics.eslint_d,
-        diagnostics.flake8,
+        diagnostics.flake8.with({
+            args = {
+                "--format",
+                "default",
+                "--stdin-display-name",
+                "$FILENAME",
+                "-",
+                "--config",
+                vim.fn.expand("~/.flake8"),
+            },
+        }),
         diagnostics.tidy,
         diagnostics.vale,
+        diagnostics.trail_space.with({
+          filetypes = {"cucumber"}
+        }),
         code_actions.eslint_d,
         completion.spell,
     },

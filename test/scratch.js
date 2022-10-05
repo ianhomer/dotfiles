@@ -1,10 +1,10 @@
 function foo(a) {
   if (a) {
-    console.log("It's true");
+    console.log("it's true");
   }
 
-  if (a == NaN) {
-    console.log("NaN");
+  if (a == nan) {
+    console.log("nan");
   }
 
   if (a) {
@@ -12,7 +12,7 @@ function foo(a) {
   }
 
   for (var i = 0; i < 10; i--) {}
-  console.log("Hello, World!");
+  console.log("hello, world!");
 
   if (a == 1) {
     // if (a==2) {
