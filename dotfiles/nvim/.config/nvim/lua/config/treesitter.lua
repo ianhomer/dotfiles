@@ -25,6 +25,9 @@ treesitter.setup {
         enable = true,
         use_languagetree = true
     },
+    indent = {
+      enable = true
+    },
     incremental_selection = {
         enable = true,
         keymaps = {

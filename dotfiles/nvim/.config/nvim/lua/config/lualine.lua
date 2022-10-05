@@ -21,14 +21,18 @@ local function diff_source()
     end
 end
 
+local kanagawa = require("lualine.themes.kanagawa")
+
+kanagawa.inactive.a.bg = kanagawa.normal.b.bg
+kanagawa.inactive.b.bg = kanagawa.normal.b.bg
+kanagawa.inactive.c.bg = kanagawa.normal.b.bg
+
 require("lualine").setup({
     options = {
         -- => localstatus = 3
         globalstatus = true,
+        theme = kanagawa,
     },
-    -- options = {
-    --     theme = "kanagawa"
-    -- },
     extensions = {
         "fugitive",
         "fzf",
@@ -61,6 +65,6 @@ require("lualine").setup({
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
-        lualine_z = { { "filename", icon = "⤷" } },
+        lualine_z = { { "filename", path = 1, icon = "⤷" } },
     },
 })

@@ -1,45 +1,67 @@
 local lspconfig = require("lspconfig")
-local opts = { noremap = true, silent = true }
+local outer_nmap = function(keys, func, desc)
+    vim.keymap.set("n", keys, func, { silent = true, noremap = true, desc = desc })
+end
 
-vim.api.nvim_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-vim.api.nvim_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-vim.api.nvim_set_keymap("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+outer_nmap("[d", vim.diagnostic.goto_prev, "Previous diagnostic")
+outer_nmap("]d", vim.diagnostic.goto_next, "Next diagnostic")
+
+vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]])
+vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=grey guibg=#1f2335]])
+
+local border = {
+    { "╭", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╮", "FloatBorder" },
+    { "│", "FloatBorder" },
+    { "╯", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╰", "FloatBorder" },
+    { "│", "FloatBorder" },
+}
+
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+function vim.lsp.util.open_floating_preview(contents, syntax, _opts, ...)
+    local opts = _opts or {}
+    opts.border = opts.border or border
+    return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
 
 local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
-    if not vim.g.knob_lspsaga then
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-        vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+    local nmap = function(keys, func, desc)
+        vim.keymap.set("n", keys, func, { buffer = bufnr, silent = true, noremap = true, desc = desc })
     end
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+
+    if not vim.g.knob_lspsaga then
+        nmap("K", vim.lsp.buf.hover, "Hover")
+        nmap("<leader>rn", vim.lsp.buf.rename, "Rename")
+        nmap("<leader>ca", vim.lsp.buf.code_action, "Code action")
+    end
+    nmap("gr", vim.lsp.buf.references, "Go to references")
+    nmap("gd", vim.lsp.buf.definition, "Go to definition")
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+    nmap("gD", vim.lsp.buf.declaration, "Go to declaration")
+    nmap("gi", vim.lsp.buf.implementation, "Go to implementation")
     -- C-k conflicts with tmux split navigation
     -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-    vim.api.nvim_buf_set_keymap(
-        bufnr,
-        "n",
-        "<leader>wl",
-        "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-        opts
-    )
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+    nmap("<leader>,sh", vim.lsp.buf.signature_help, "Signature help")
+
+    nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
+    nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder")
+    nmap("<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", "List workspaces")
+    nmap("<leader>D", vim.lsp.buf.type_definition, "Type definition")
 
     if vim.g.knob_null_ls then
         -- Use null-ls for formatting
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+        client.server_capabilities.document_formatting = false
+        client.server_capabilities.document_range_formatting = false
     end
 
     -- Set autocommands conditional on server_capabilities
-    if client.resolved_capabilities.document_highlight then
+    if client.server_capabilities.document_highlight then
         vim.api.nvim_exec(
             [[
               hi LspReferenceRead cterm=bold ctermbg=red guibg=DarkSlateGray
@@ -48,15 +70,29 @@ local on_attach = function(client, bufnr)
               hi LspDiagnosticsDefaultHint ctermbg=grey guifg=Grey30 guibg=DarkSlateGray
               hi DiagnosticError guifg=White
 
-              augroup lsp_document_highlight
-                autocmd! * <buffer>
-                autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-                autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-              augroup END
             ]],
             false
         )
+        -- augroup lsp_document_highlight
+        --   autocmd! * <buffer>
+        --   autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
+        --   autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
+        -- augroup END
     end
+
+    vim.api.nvim_create_autocmd("CursorHold", {
+        buffer = bufnr,
+        callback = function()
+            vim.diagnostic.open_float(nil, {
+                focusable = false,
+                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+                border = "rounded",
+                source = "always",
+                prefix = " ",
+                scope = "cursor",
+            })
+        end,
+    })
 
     vim.diagnostic.config({
         float = {
@@ -76,6 +112,7 @@ local servers = {
     "jsonls",
     "pyright",
     "sumneko_lua",
+    "tailwindcss",
     "terraformls",
     "tsserver",
     "vimls",
@@ -86,6 +123,10 @@ local lspsettings = {
             diagnostics = {
                 globals = { "vim" },
             },
+            runtime = {
+                version = "LuaJIT",
+            },
+            telemetry = { enable = false },
         },
     },
     cssls = {
@@ -93,6 +134,12 @@ local lspsettings = {
             lint = {
                 unknownAtRules = "ignore",
             },
+        },
+    },
+    jsonls = {
+        json = {
+            schemas = require("schemastore").json.schemas(),
+            validate = { enable = true },
         },
     },
 }

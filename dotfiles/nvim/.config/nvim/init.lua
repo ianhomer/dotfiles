@@ -26,12 +26,13 @@ nvim_set_var("knobs_levels", {
     colorizer = 4,
     conflict_marker = 7,
     commentary = 4,
-    compactcmd = 1,
-    cmp = 5,
+    compactcmd = 3,
+    cmp = 3,
     dap = 6,
-    defaults = 2,
-    devicons = 4,
-    dispatch = 4,
+    defaults = 3,
+    devicons = 3,
+    dispatch = 3,
+    document_color = 9,
     easy_align = 3,
     editorconfig = 9,
     endwise = 7,
@@ -39,15 +40,14 @@ nvim_set_var("knobs_levels", {
     fidget = 3,
     flog = 9,
     fugitive = 3,
-    frecency = 9,
-    friendly_snippets = 5,
+    friendly_snippets = 3,
     fzf = 6,
     git_conflict = 9,
     gitgutter = 6,
     gitsigns = 5,
     gruvbox = 9,
     gruvbox8 = 9,
-    glow = 3,
+    glow = 5,
     goyo = 9,
     gv = 9,
     hop = 6, -- alternative to lightspeed
@@ -57,18 +57,19 @@ nvim_set_var("knobs_levels", {
     kanagawa = 3,
     nerdtree = 9,
     lens = 8,
-    lightbulb = 5,
-    lightspeed = 5,
-    lsp = 4,
-    lsp_colors = 3,
-    lspconfig = 4,
-    lspkind = 4,
-    lsp_signature = 6,
-    lspsaga = 3,
+    lightbulb = 3,
+    lightspeed = 3,
+    lsp = 3,
+    lsp_colors = 9,
+    lspconfig = 3,
+    lspkind = 3,
+    lsp_signature = 3,
+    lspsaga = 9,
     lualine = 3,
+    luasnip = 3,
     markdown_syntax_table = 3,
     markdown_preview = 3,
-    minimap = 9,
+    minimap = 5,
     modes = 3,
     mundo = 3,
     neoscroll = 3,
@@ -79,20 +80,21 @@ nvim_set_var("knobs_levels", {
     nvim_tree = 3,
     peekaboo = 9,
     polyglot = 9,
-    rainbow = 5,
-    refactoring = 7,
+    rainbow = 3,
+    refactoring = 5,
     rhubarb = 7,
-    shortcuts = 1,
-    spelling = 5,
+    shortcuts = 3,
+    sleuth = 3,
+    spelling = 3,
     startify = 4,
-    startuptime = 1,
+    startuptime = 3,
     surround = 3,
     symbols_outline = 9,
     tabcomplete = 9,
     tabular = 3,
-    telescope = 5,
-    telescope_fzf_native = 5,
-    telescope_symbols = 5,
+    telescope = 3,
+    telescope_fzf_native = 3,
+    telescope_symbols = 3,
     telekasten = 9,
     test = 5,
     thingity = 3,
@@ -100,19 +102,19 @@ nvim_set_var("knobs_levels", {
     toggleterm = 3,
     tpipeline = 9,
     treesitter = 3,
-    trouble = 5,
+    trouble = 3,
     twightlight = 9,
     ufo = 9,
     unicode = 9,
     unimpaired = 4,
     update_spelling = 7,
-    which_key = 1,
+    which_key = 3,
     window_cleaner = 9,
-    writegood = 6,
+    writegood = 3,
     vimspector = 9,
-    vsnip = 3,
+    vsnip = 9,
     vimux = 5,
-    zen_mode = 3,
+    zen_mode = 5,
     zephyr = 9,
 })
 
@@ -146,7 +148,7 @@ return require("packer").startup({
         _use("lewis6991/impatient.nvim")
         _use({
             "antoinemadec/FixCursorHold.nvim",
-            commit = "5aa5ff18da3cdc306bb724cf1a138533768c9f5e",
+            commit = "70a9516a64668cbfe59f31b66d0a21678c5e9b12",
         }) -- fixes https://github.com/neovim/neovim/issues/12587
 
         local ok, knobs = pcall(require, "knobs")
@@ -157,11 +159,16 @@ return require("packer").startup({
         use("wbthomason/packer.nvim")
         use("ianhomer/knobs.vim")
 
-        -- LSP, autocomplete and code guidance
         _use({
+            "b0o/schemastore.nvim",
+            commit = "33873c71335a31988b62025c3b2224f3a9fe8e15",
+        })
+        -- LSP, autocomplete and code guidance
+        use({
             "neovim/nvim-lspconfig",
+            event = "BufWinEnter",
             config = [[require'config.lspconfig']],
-            commit = "8e65dbb6e187604cdaf0e0ef2e90c790760912e7",
+            commit = "e5ba5d2b96843903108b00f07fea782268cdd6af",
         })
         use({
             "weilbith/nvim-code-action-menu",
@@ -171,13 +178,14 @@ return require("packer").startup({
         _use({
             "onsails/lspkind-nvim",
             config = [[require("lspkind").init()]],
-            commit = "57e5b5dfbe991151b07d272a06e365a77cc3d0e7",
+            commit = "c68b3a003483cf382428a43035079f78474cd11e",
         })
 
         use({
             "glepnir/lspsaga.nvim",
+            event = "BufWinEnter",
             config = [[require'config.lspsaga']],
-            commit = "5b95fbb3e7d5cf39a257caab6a9bc9dd3bc01ac1",
+            commit = "365bf2eae10f6cf04aff427bfccfb4f886841cd9",
         })
 
         _use({
@@ -197,7 +205,7 @@ return require("packer").startup({
 
         _use({
             "hrsh7th/cmp-cmdline",
-            commit = "9c0e331fe78cab7ede1c051c065ee2fc3cf9432e",
+            commit = "c66c379915d68fb52ad5ad1195cdd4265a95ef1e",
         })
 
         _use({
@@ -210,48 +218,70 @@ return require("packer").startup({
             commit = "3dd40097196bdffe5f868d5dddcc0aa146ae41eb",
         })
 
+        -- _use({
+        --     "hrsh7th/cmp-nvim-lsp-document-symbol",
+        --     commit = "c3f0086ed9882e52e0ae38dd5afa915f69054941",
+        -- })
+        --
+        -- _use({
+        --     "rafamadriz/friendly-snippets",
+        --     commit = "2be79d8a9b03d4175ba6b3d14b082680de1b31b1",
+        -- })
+
         _use({
-            "hrsh7th/cmp-nvim-lsp-document-symbol",
-            commit = "c3f0086ed9882e52e0ae38dd5afa915f69054941",
+            knob = "luasnip",
+            "saadparwaiz1/cmp_luasnip",
+            commit = "a9de941bcbda508d0a45d28ae366bb3f08db2e36",
+        })
+
+        _use({
+            knob = "luasnip",
+            "L3MON4D3/LuaSnip",
+            requires = { "saadparwaiz1/cmp_luasnip" },
+            commit = "8f8d493e7836f2697df878ef9c128337cbf2bb84",
         })
 
         _use({
             "hrsh7th/nvim-cmp",
             requires = "hrsh7th/cmp-buffer",
             config = [[require'config.cmp']],
-            commit = "913eb8599816b0b71fe959693080917d8063b26a",
+            commit = "b0dff0ec4f2748626aae13f011d1a47071fe9abc",
+            -- after = "LuaSnip",
         })
 
-        use({
-            knob = "vsnip",
-            "hrsh7th/cmp-vsnip",
-            after = "cmp-nvim-lsp",
-            commit = "0abfa1860f5e095a07c477da940cfcb0d273b700",
-        })
+        -- _use({
+        --     "petertriho/cmp-git",
+        --     requires = "nvim-lua/plenary.nvim",
+        --     config = [[require'config.cmp_git']],
+        --     commit = "fae6cdb407ad6c63a0b1928670bad1a67a55b887",
+        -- })
 
-        use({
-            knob = "vsnip",
-            "hrsh7th/vim-vsnip-integ",
-            after = "cmp-nvim-lsp",
-            commit = "64c2ed66406c58163cf81fb5e13ac2f9fcdfb52b",
-        })
+        -- use({
+        --     knob = "vsnip",
+        --     "hrsh7th/cmp-vsnip",
+        --     after = "cmp-nvim-lsp",
+        --     commit = "0abfa1860f5e095a07c477da940cfcb0d273b700",
+        -- })
 
-        use({
-            "hrsh7th/vim-vsnip",
-            event = "InsertEnter",
-            requires = {
-                { "hrsh7th/vim-vsnip-integ", cond = "vim.g.knob_vsnip ~= nil" },
-            },
-            commit = "8f199ef690ed26dcbb8973d9a6760d1332449ac9",
-        })
-        use({
-            "rafamadriz/friendly-snippets",
-            commit = "22a99756492a340c161ab122b0ded90ab115a1b3",
-        })
+        -- use({
+        --     knob = "vsnip",
+        --     "hrsh7th/vim-vsnip-integ",
+        --     after = "cmp-nvim-lsp",
+        --     commit = "64c2ed66406c58163cf81fb5e13ac2f9fcdfb52b",
+        -- })
+
+        -- use({
+        --     "hrsh7th/vim-vsnip",
+        --     event = "InsertEnter",
+        --     requires = {
+        --         { "hrsh7th/vim-vsnip-integ", cond = "vim.g.knob_vsnip ~= nil" },
+        --     },
+        --     commit = "8f199ef690ed26dcbb8973d9a6760d1332449ac9",
+        -- })
 
         use({
             "j-hui/fidget.nvim",
-            commit = "492492e7d50452a9ace8346d31f6d6da40439f0e",
+            commit = "1097a86db8ba38e390850dc4035a03ed234a4673",
             config = [[require'fidget'.setup{}]],
         })
 
@@ -264,22 +294,21 @@ return require("packer").startup({
         use({
             "jose-elias-alvarez/null-ls.nvim",
             config = [[require'config.null_ls']],
-            commit = "bf027826eeb83606ef7153f312ef66750ef14961",
+            commit = "c0c19f32b614b3921e17886c541c13a72748d450",
             requires = { "nvim-lua/plenary.nvim" },
         })
 
         use({
             cmd = "Vista",
             "liuchengxu/vista.vim",
-            commit = "f9c8c8ad4135346a945e1ebfb00b723976d92dfc",
+            commit = "9c3e31f67653a1d25147a8dd2a0b2724853d9923",
         })
 
         use({
             "rcarriga/nvim-notify",
             config = [[require'config.notify']],
-            commit = "7076ce8e8f042e193668b7ac67f776858df5206b",
+            commit = "414465468c93f693be4e2f69f47586cf37f3f751",
         })
-
 
         use({
             "folke/trouble.nvim",
@@ -290,7 +319,7 @@ return require("packer").startup({
         use({
             "kevinhwang91/nvim-bqf",
             ft = "qf",
-            commit = "aac1ff94a8b411a08810117f41e948743a4df69e",
+            commit = "67a73515da71c59904d55e1409ddab95bec21e7a",
             config = [[require'config.bqf']],
         })
 
@@ -298,7 +327,7 @@ return require("packer").startup({
             "majutsushi/tagbar",
             cmd = "TagbarToggle",
             config = [[require'config.tagbar']],
-            commit = "87afc291ee5250debbbfe0ad0016f24d1eb296a6",
+            commit = "83933d557409639df53fd2ca21484279b5854c1e",
         })
 
         use({
@@ -306,32 +335,40 @@ return require("packer").startup({
             commit = "4e6da1984d23da88a947805866580c48fc3cc8d7",
         })
 
-        use({
-            "dense-analysis/ale",
-            ft = { "sh", "javascript", "markdown", "lua", "python", "typescript", "vim" },
-            cmd = { "ALEFix" },
-            commit = "477ad3fdd2df80a9dc479f974caeca1aa6ae640b",
-        })
+        -- use({
+        --     "dense-analysis/ale",
+        --     ft = { "sh", "javascript", "markdown", "lua", "python", "typescript", "vim" },
+        --     cmd = { "ALEFix" },
+        --     commit = "a33960eb51b638f232dff71cfeac5ede87b38312",
+        -- })
 
         use({
             "nvim-treesitter/nvim-treesitter",
             event = "BufRead",
             config = [[require'config.treesitter']],
             run = ":TSUpdate",
-            commit = "557123a6168936983d7b980df195057ca6b370ed",
+            commit = "e2efbb6569dbe50e6604cfc2d5d0819eb07d5623",
         })
+
+        use({
+            knob = "treesitter",
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            config = [[require'config.treesitter_textobjects']],
+            commit = "41e8d8964e5c874d9ce5e37d00a52f37f218502e",
+        })
+
         use({
             "preservim/vimux",
-            commit = "740320b798106c5de6758fb35bf39e79ee1ce0f0",
+            commit = "616fcb4799674a7a809b14ca2dc155bb6ba25788",
         })
         use({
             "vim-test/vim-test",
-            commit = "2fb195d100cd48fe1ae34e8683c919f34d80247b",
+            commit = "e7150de777ef0c81a015972e4feb56c4b3137efd",
         })
         use({
             knob = "neotest",
             "nvim-neotest/neotest-vim-test",
-            commit = "f95a60d89be8c7098d33306c1d13b412c4c21f9d",
+            commit = "c2d33f3f245fe59143fac95153945d18e5b6052b",
         })
         use({
             "nvim-neotest/neotest",
@@ -342,7 +379,7 @@ return require("packer").startup({
                 "vim-test/vim-test",
                 "nvim-neotest/neotest-vim-test",
             },
-            commit = "a52052c06e737647cc79fc7bc04a7d76f46daeab",
+            commit = "6669f6dda2385ed358ffc90108e574ccccc71f32",
             config = [[require'config.neotest']],
         })
         use({
@@ -353,19 +390,19 @@ return require("packer").startup({
         use({
             "mfussenegger/nvim-dap",
             config = [[require'config.dap']],
-            commit = "d9b315a81622457cddf6875c6ac7134baa9932ce",
+            commit = "0b320f5bd4e5f81e8376f9d9681b5c4ee4483c25",
         })
         use({
             knob = "dap",
             "rcarriga/nvim-dap-ui",
             requires = "mfussenegger/nvim-dap",
             config = [[require'config.dapui']],
-            commit = "ce8894c586e904ce0d00fcae1a7124132810a206",
+            commit = "c8ce83a66deb0ca6f5af5a9f9d5fcc05a6d0f66b",
         })
         use({
             "puremourning/vimspector",
             config = [[require'config.vimspector']],
-            commit = "3378018bc1cdd1d9b70734c3e970bc52fd983415",
+            commit = "c95ad4c8fb54adb75ceb0397ef6ace1c4eec3790",
         })
 
         use({
@@ -392,45 +429,36 @@ return require("packer").startup({
             cmd = { "Ag", "Buffers", "Commits", "Files", "History" },
             fn = { "fzf#vim#ag" },
             ft = { "qf" },
-            requires = { { "junegunn/fzf", opt = true, fn = { "fzf#shellescape" }, ft = { "qf" } } },
-            commit = "c491d702b76c6b4918abb80be3cfb57d1b618ffa",
+            commit = "9ceac718026fd39498d95ff04fa04d3e40c465d7",
         })
-        use({
+        _use({
             "nvim-lua/plenary.nvim",
-            commit = "4b66054e75356ac0b909bbfee9c682e703f535c2",
+            commit = "4b7e52044bbb84242158d977a50c4cbcd85070c7",
         })
-        use({
+        _use({
             "nvim-telescope/telescope-fzf-native.nvim",
             run = "make",
             commit = "65c0ee3d4bb9cb696e262bca1ea5e9af3938fc90",
         })
-        use({ knob = "frecency", "tami5/sqlite.lua", commit = "56c5aacd5e31496d9b3cd3d1b0e570bb9a65d35b" })
 
-        use({
-            knob = "frecency",
-            "nvim-telescope/telescope-frecency.nvim",
-            after = { "sqlite.lua" },
-            commit = "d51c7631dcc0f598692676f554c4e79d7596d541",
+        _use({
+            "nvim-telescope/telescope-symbols.nvim",
+            commit = "f7d7c84873c95c7bd5682783dd66f84170231704",
         })
-
-        use({
-          "nvim-telescope/telescope-symbols.nvim",
-          commit = "f7d7c84873c95c7bd5682783dd66f84170231704"
+        _use({
+            "nvim-lua/popup.nvim",
+            commit = "b7404d35d5d3548a82149238289fa71f7f6de4ac",
         })
-        use({
+        _use({
             "nvim-telescope/telescope.nvim",
             requires = {
-                { "nvim-lua/popup.nvim", cond = "vim.g['knob_telescope']" },
-                { "nvim-lua/plenary.nvim", cond = "vim.g['knob_telescope']" },
-                {
-                    "nvim-telescope/telescope-fzf-native.nvim",
-                    cond = "vim.g['knob_telescope_fzf_native']",
-                },
-                { "nvim-telescope/telescope-symbols.nvim", cond = "vim.g['knob_telescope_symbols']"},
-                { "nvim-telescope/telescope-frecency.nvim", cond = "vim.g['knob_frecency']" },
+                { "nvim-lua/popup.nvim" },
+                { "nvim-lua/plenary.nvim" },
+                { "nvim-telescope/telescope-fzf-native.nvim" },
+                { "nvim-telescope/telescope-symbols.nvim" },
             },
             config = [[require'config.telescope']],
-            commit = "2584ff391b528d01bf5e8c04206d5902a79ebdde",
+            commit = "76ea9a898d3307244dce3573392dcf2cc38f340f",
         })
 
         use({
@@ -438,18 +466,18 @@ return require("packer").startup({
             requires = "kyazdani42/nvim-web-devicons",
             config = [[require'config.nvimtree']],
             cmd = { "NvimTreeFindFile", "NvimTreeOpen", "NvimTreeToggle" },
-            commit = "3e49d9b7484e21f0b24ebdf21b8b7af227ea97a6",
+            commit = "7282f7de8aedf861fe0162a559fc2b214383c51c",
         })
-        use({
+        _use({
             "ryanoasis/vim-devicons",
-            commit = "a2258658661e42dd4cdba4958805dbad1fe29ef4",
+            commit = "71f239af28b7214eebb60d4ea5bd040291fb7e33",
         })
         use({ "wfxr/minimap.vim", cmd = { "Minimap" }, commit = "3801d9dfaa5431e7b83ae6f98423ac077d9f5c3f" })
         use({
             "folke/which-key.nvim",
             event = "BufWinEnter",
             config = [[require'config.which_key']],
-            commit = "439637d6a75fe27e369190df7910ed2a454109f6",
+            commit = "6885b669523ff4238de99a7c653d47b081b5506d",
         })
         use({
             "phaazon/hop.nvim",
@@ -469,17 +497,17 @@ return require("packer").startup({
             "nvim-lualine/lualine.nvim",
             requires = { "kyazdani42/nvim-web-devicons", opt = true },
             config = [[require'config.lualine']],
-            commit = "3cf45404d4ab5e3b5da283877f57b676cb78d41d",
+            commit = "a52f078026b27694d2290e34efa61a6e4a690621",
         })
         use({
             "vimpostor/vim-tpipeline",
-            commit = "7c820414b7ba6280e774c10df4bea6798ce5b031",
+            commit = "c9a050e10d95461e344f7908fdb5e2d93156601a",
         })
         use({
             "romgrk/barbar.nvim",
             requires = { "kyazdani42/nvim-web-devicons" },
             config = [[require'config.barbar']],
-            commit = "c41ad6e3f68c2c9f6aa268c6232cdef885107303",
+            commit = "855dbe9e148fb211e079adfb9bab8dfc4c904ac1",
         })
 
         -- Style
@@ -497,10 +525,15 @@ return require("packer").startup({
             config = [[require'config.kanagawa']],
         })
         use({
-            "norcalli/nvim-colorizer.lua",
+            "NvChad/nvim-colorizer.lua",
             config = [[require'config.colorizer']],
-            cmd = "BufRead",
-            commit = "36c610a9717cc9ec426a07c8e6bf3b3abcb139d6",
+            event = "BufRead",
+            commit = "9dd7ecde55b06b5114e1fa67c522433e7e59db8b",
+        })
+        use({
+            "mrshmllow/document-color.nvim",
+            config = [[require'config.document_color']],
+            commit = "74c487f0e5accfaae033755451b9e367220693fd",
         })
         use({
             "karb94/neoscroll.nvim",
@@ -511,7 +544,7 @@ return require("packer").startup({
             "p00f/nvim-ts-rainbow",
             after = "nvim-treesitter",
             config = [[require'config.rainbow']],
-            commit = "0c7fb04a3d0e99c2f7e401c687e9c52b2b49a95c",
+            commit = "1ec3f880585c644ddd50a51502c59f4e36f03e62",
         })
         -- use({
         --   knob = "ufo",
@@ -533,7 +566,7 @@ return require("packer").startup({
         })
         use({
             "rbong/vim-flog",
-            commit = "bce44d82719ca196d938ba6c68294b55f8ba359c",
+            commit = "c880254c0d56a9dba0bfe7bc3a5f99cd15273363",
         })
         use({
             "tpope/vim-rhubarb",
@@ -557,7 +590,7 @@ return require("packer").startup({
             "lewis6991/gitsigns.nvim",
             event = "BufRead",
             config = [[require'config.gitsigns']],
-            commit = "d7e0bcbe45bd9d5d106a7b2e11dc15917d272c7a",
+            commit = "f98c85e7c3d65a51f45863a34feb4849c82f240f",
         })
         use({
             "junegunn/gv.vim",
@@ -569,11 +602,15 @@ return require("packer").startup({
             "windwp/nvim-autopairs",
             after = "nvim-cmp",
             config = [[require'config.autopairs']],
-            commit = "5fe24419e7a7ec536d78d60be1515b018ab41b15§",
+            commit = "4fc96c8f3df89b6d23e5092d31c866c53a346347",
         })
         use({
             "tpope/vim-surround",
             commit = "bf3480dc9ae7bea34c78fbba4c65b4548b5b1fea",
+        })
+        use({
+            "tpope/vim-sleuth",
+            commit = "1d25e8e5dc4062e38cab1a461934ee5e9d59e5a8",
         })
         use({
             "tpope/vim-commentary",
@@ -592,14 +629,14 @@ return require("packer").startup({
             commit = "3f0c8faadf0c5b68bcf40785c1c42e3731bfa522",
         })
         _use({
-          "stevearc/dressing.nvim",
-          commit = "b188b7750c78c0dbe0c61d79d824673a53ff82db"
+            "stevearc/dressing.nvim",
+            commit = "76477792b34f8fed167b5aa61a325e4dab26c3d7",
         })
         use({
-          "ziontee113/icon-picker.nvim",
-          commit = "0f3b2648f6f8e788bc8dfe37bc9bb18b565cfc3c",
-          config = [[require'config.icon_picker']],
-          after = "dressing.nvim"
+            "ziontee113/icon-picker.nvim",
+            commit = "0f3b2648f6f8e788bc8dfe37bc9bb18b565cfc3c",
+            config = [[require'config.icon_picker']],
+            after = "dressing.nvim",
         })
         use({ "godlygeek/tabular", cmd = { "Tabularize" }, command = "339091ac4dd1f17e225fe7d57b48aff55f99b23a" })
         use({
@@ -608,7 +645,7 @@ return require("packer").startup({
         })
         use({
             "chrisbra/unicode.vim",
-            commit = "92878e4ebd8df9e225c35b92985b7b6996e6cd5f",
+            commit = "4c851a24310fcfb5540a7e2b17c563f1f542e3a2",
         })
 
         vim.api.nvim_set_keymap("n", "<space>i", "<cmd>:ZenMode<CR>", {})
@@ -632,13 +669,13 @@ return require("packer").startup({
         use({
             "renerocksai/telekasten.nvim",
             config = [[require'config.telekasten']],
-            commit = "fdb089daf6d66e9d559645e664a172ff5b6a5ddd",
+            commit = "fb7f476dcd445a50bb9046e0210a373c5761f5bf",
         })
 
         use({
             "ellisonleao/glow.nvim",
             cmd = { "Glow" },
-            commit = "8dca3583e44d54bcfd79cb8dc06ddb89128aa5e0",
+            commit = "b6b997277e019f751031ea52f9571ad2e1e7e42d",
         })
         use({
             "iamcco/markdown-preview.nvim",
@@ -666,11 +703,11 @@ return require("packer").startup({
             "akinsho/toggleterm.nvim",
             cmd = { "ToggleTerm", "TermExec" },
             config = [[require'config.toggleterm']],
-            commit = "5e393e558f7c41d132542c8e9626aa824a1caa59",
+            commit = "2a787c426ef00cb3488c11b14f5dcf892bbd0bda",
         })
         use({
             "tpope/vim-eunuch",
-            commit = "63da2dd64c040abc02b24b6a4679e0b7ff35be29",
+            commit = "cc564695076d89b3d1e06b2693fca788cfbc5910",
         })
 
         -- Diagnostics

@@ -1,4 +1,4 @@
-if !knobs#At(2)
+if !knobs#At(9)
   finish
 endif
 

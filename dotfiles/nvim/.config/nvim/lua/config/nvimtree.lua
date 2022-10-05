@@ -11,7 +11,7 @@ require("nvim-tree").setup({
         },
     },
     view = {
-      adaptive_size = false
+        adaptive_size = false,
     },
     update_focused_file = {
         enable = true,
@@ -20,7 +20,7 @@ require("nvim-tree").setup({
         ignore = false,
     },
     filters = {
-        dotfiles = true,
+        dotfiles = false,
         custom = { "^\\.DS_Store", "^\\.git$", "^\\.pytest_cache", "^node_modules" },
         exclude = { ".env", ".config" },
     },
@@ -44,9 +44,15 @@ require("nvim-tree").setup({
         },
     },
     live_filter = {
-      always_show_folders = false
+        always_show_folders = false,
     },
     actions = {
+        file_popup = {
+            open_win_config = {
+                border = "rounded",
+            },
+        },
+
         open_file = {
             resize_window = false,
             window_picker = {
@@ -64,19 +70,8 @@ require("nvim-tree").setup({
     },
 })
 
-local Event = require('nvim-tree.api').events.Event
-local api = require('nvim-tree.api')
+local Event = require("nvim-tree.api").events.Event
+local api = require("nvim-tree.api")
 api.events.subscribe(Event.FileCreated, function(data)
-  vim.api.nvim_command(":edit " .. data.fname)
+    vim.api.nvim_command(":edit " .. data.fname)
 end)
-
--- vim.api.nvim_exec(
---     [[
--- augroup nvimttree
---     au!
---     au BufLeave NvimTree NvimTreeRefresh
---     au BufEnter NvimTree NvimTreeRefresh
--- augroup END
--- ]],
---     false
--- )

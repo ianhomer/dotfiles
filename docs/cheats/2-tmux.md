@@ -20,7 +20,7 @@
 ### windows
 
 |                     |                                        |
-| -----------------   | -------------------------------------- |
+| ------------------- | -------------------------------------- |
 | `Ctrl+a+c`          | new window                             |
 | `Ctrl+a+w`          | show windows                           |
 | `Ctrl+a+,`          | rename window                          |
@@ -64,6 +64,7 @@
 | `Ctrl+a+space`             | toggle between layouts    |
 | `tmux ls`                  | list sessions             |
 | `tmux attach -tmy-session` | attach to session         |
+| `Ctrl+a+b`                 | toggle status bottom bar  |
 
 hold option + mouse
 : bypass tmux mouse handling and do iterm action

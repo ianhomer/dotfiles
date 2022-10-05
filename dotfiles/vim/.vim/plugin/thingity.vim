@@ -1,3 +1,7 @@
+if get(g:, "knobs_level", 0) == 1
+  finish
+endif
+
 " Goyo distraction free writing
 if exists("g:knob_goyo")
   nnoremap <leader>i :Goyo<CR>
@@ -13,7 +17,7 @@ if get(g:,"knobs_level", 0) > 2
   " Enable folding
   let g:markdown_folding = 1
   " Default large fold level start, folding everything up by default feels odd.
-  set foldlevelstart=8
+  set foldlevelstart=12
 endif
 
 nnoremap <silent> <leader>jd :call thingity#DateHeading()<CR>
