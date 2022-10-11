@@ -9,6 +9,7 @@ parser.add_argument("--single", action="store_true")
 parser.add_argument("--unicoderange", action="store_true")
 parser.add_argument("--emojirange", action="store_true")
 parser.add_argument("--nolabel", action="store_true")
+parser.add_argument("--repeat", default="1")
 
 args = parser.parse_args()
 
@@ -16,7 +17,7 @@ all = (
     not args.selector
     and not args.ascii
     and not args.single
-    and args.unicoderange
+    and not args.unicoderange
     and not args.emojirange
 )
 
@@ -36,11 +37,14 @@ def printCharacters(label, chars):
     print(end="\n")
 
 
-printRange("  ascii range", 0x30, 0x39) if all or args.ascii else None
-# https://unicode.org/reports/tr28/tr28-3.html#13_7_variation_selectors
-# the variation selector FE0F can extend the preceding character into
-# a double width character
-printMultiple("unicode selector", 0x26A0, 0xFE0F) if all or args.selector else None
-printMultiple("unicode single", 0x26A0) if all or args.single else None
-printRange("unicode range", 0x26A0, 0x26A9) if all or args.unicoderange else None
-printRange("  emoji range", 0x0001F600, 0x0001F609) if all or args.emojirange else None
+for i in range(0, int(args.repeat)):
+    printRange("  ascii range", 0x30, 0x39) if all or args.ascii else None
+    # https://unicode.org/reports/tr28/tr28-3.html#13_7_variation_selectors
+    # the variation selector FE0F can extend the preceding character into
+    # a double width character
+    printMultiple("unicode selector", 0x26A0, 0xFE0F) if all or args.selector else None
+    printMultiple("unicode single", 0x26A0) if all or args.single else None
+    printRange("unicode range", 0x26A0, 0x26A9) if all or args.unicoderange else None
+    printRange(
+        "  emoji range", 0x0001F600, 0x0001F609
+    ) if all or args.emojirange else None
