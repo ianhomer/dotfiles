@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
 
+#
+# Test font rendering in terminal
+#
+# For example, the following tests unicode selector with long lines which
+# can sometimes trip up terminal rendering
+#
+#   test-fonts --selector --repeat=7 --postcharacters=300 --nolabel
+
+
 import argparse
 
 parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -9,6 +18,12 @@ parser.add_argument("--single", action="store_true")
 parser.add_argument("--unicoderange", action="store_true")
 parser.add_argument("--emojirange", action="store_true")
 parser.add_argument("--nolabel", action="store_true")
+parser.add_argument("--postlabel", action="store_true")
+parser.add_argument(
+    "--postcharacters",
+    default="0",
+    help="append given number of characters at end of line to force a line wrap",
+)
 parser.add_argument("--repeat", default="1")
 
 args = parser.parse_args()
@@ -21,6 +36,8 @@ all = (
     and not args.emojirange
 )
 
+postCharacters = int(args.postcharacters)
+
 
 def printMultiple(label, *chars):
     printCharacters(label, chars)
@@ -31,9 +48,13 @@ def printRange(label, start, end):
 
 
 def printCharacters(label, chars):
-    print(label.ljust(20, " "), end=" ") if not args.nolabel else None
+    print(
+        label.ljust(20, " "), end=" "
+    ) if not args.nolabel and not args.postlabel else None
     for c in chars:
         print(chr(c), end="")
+    print(" " + label, end="") if args.postlabel else None
+    print(" " + "." * postCharacters, end="") if postCharacters > 0 else None
     print(end="\n")
 
 
