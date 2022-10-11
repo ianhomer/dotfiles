@@ -148,3 +148,10 @@ Typescript
 ```typescript
 const myGlobal = [];
 ```
+
+## Emojis
+
+abc
+♻️ refactor
+
+⚠️

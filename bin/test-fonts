@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+
+
+def printCharacters(label, *chars):
+    printArray(label, chars)
+
+
+def printRange(label, start, end):
+    printArray(label, range(start, end + 1))
+
+
+def printArray(label, chars):
+    print(label.ljust(20, " "), end=" ")
+    for c in chars:
+        print(chr(c), end="")
+    print(end="\n")
+
+
+printRange("  ascii range", 0x30, 0x39)
+printCharacters(" double byte", 0x26A0, 0xFE0F)
+printCharacters("unicode single", 0x26A0)
+printRange("unicode range", 0x26A0, 0x26A9)
+printRange("  emoji range", 0x0001F600, 0x0001F609)
