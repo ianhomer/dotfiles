@@ -1,23 +1,46 @@
 #!/usr/bin/env python3
 
+import argparse
 
-def printCharacters(label, *chars):
-    printArray(label, chars)
+parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter)
+parser.add_argument("--ascii", action="store_true")
+parser.add_argument("--selector", action="store_true")
+parser.add_argument("--single", action="store_true")
+parser.add_argument("--unicoderange", action="store_true")
+parser.add_argument("--emojirange", action="store_true")
+parser.add_argument("--nolabel", action="store_true")
+
+args = parser.parse_args()
+
+all = (
+    not args.selector
+    and not args.ascii
+    and not args.single
+    and args.unicoderange
+    and not args.emojirange
+)
+
+
+def printMultiple(label, *chars):
+    printCharacters(label, chars)
 
 
 def printRange(label, start, end):
-    printArray(label, range(start, end + 1))
+    printCharacters(label, range(start, end + 1))
 
 
-def printArray(label, chars):
-    print(label.ljust(20, " "), end=" ")
+def printCharacters(label, chars):
+    print(label.ljust(20, " "), end=" ") if not args.nolabel else None
     for c in chars:
         print(chr(c), end="")
     print(end="\n")
 
 
-printRange("  ascii range", 0x30, 0x39)
-printCharacters(" double byte", 0x26A0, 0xFE0F)
-printCharacters("unicode single", 0x26A0)
-printRange("unicode range", 0x26A0, 0x26A9)
-printRange("  emoji range", 0x0001F600, 0x0001F609)
+printRange("  ascii range", 0x30, 0x39) if all or args.ascii else None
+# https://unicode.org/reports/tr28/tr28-3.html#13_7_variation_selectors
+# the variation selector FE0F can extend the preceding character into
+# a double width character
+printMultiple("unicode selector", 0x26A0, 0xFE0F) if all or args.selector else None
+printMultiple("unicode single", 0x26A0) if all or args.single else None
+printRange("unicode range", 0x26A0, 0x26A9) if all or args.unicoderange else None
+printRange("  emoji range", 0x0001F600, 0x0001F609) if all or args.emojirange else None
