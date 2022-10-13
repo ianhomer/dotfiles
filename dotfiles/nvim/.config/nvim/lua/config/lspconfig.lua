@@ -140,6 +140,7 @@ local lspsettings = {
         json = {
             schemas = require("schemastore").json.schemas(),
             validate = { enable = true },
+            provideFormatter = false,
         },
     },
 }
@@ -147,6 +148,13 @@ local lspsettings = {
 local filetypes = {
     terraformls = { "terraform", "hcl" },
 }
+
+local init_options = {
+    jsonls = {
+        provideFormatter = false,
+    },
+}
+
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 for _, lsp in ipairs(servers) do
     local module = lspconfig[lsp]
@@ -163,6 +171,7 @@ for _, lsp in ipairs(servers) do
             },
             filetypes = filetypes[lsp],
             settings = lspsettings[lsp],
+            init_options = init_options[lsp],
             capabilities = capabilities,
         })
     else
