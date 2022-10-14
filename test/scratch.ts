@@ -29,3 +29,5 @@ const thing: Thing = { title: "My Title", content: "My Content" };
 console.log(myGlobal);
 console.log(thing.title);
 console.log(add(1, 2));
+
+console.log()

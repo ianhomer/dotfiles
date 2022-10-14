@@ -151,7 +151,6 @@ const myGlobal = [];
 
 ## Emojis
 
-abc
 ♻️ refactor
 
-⚠️
+⚠️o
