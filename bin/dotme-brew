@@ -84,4 +84,13 @@ if [[ ! -d ~/.cache/vale ]] ; then
   vale sync || echo "failed to sync vale"
 fi
 
+# Wire up pinentry-mac as pinentry
+# brewPrefix=$(brew --prefix)
+# pinetryPath="$brewPrefix/bin/pinentry"
+# if [ ! -e $pinetryPath ] ; then
+#   pinetryMacPath="$brewPrefix/bin/pinentry-mac"
+#   log:: "Installing $pinetryMacPath at $pinetryPath"
+#   ln -s $pinetryMacPath $pinetryPath
+# fi
+
 should-run -fu $0

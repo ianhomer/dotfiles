@@ -21,7 +21,7 @@ nvim_set_var("knobs_levels", {
     airline = 9,
     autopairs = 3,
     autosave = 3,
-    barbar = 5,
+    barbar = 6,
     bqf = 5,
     colorizer = 4,
     conflict_marker = 7,
@@ -81,7 +81,7 @@ nvim_set_var("knobs_levels", {
     peekaboo = 9,
     polyglot = 9,
     rainbow = 3,
-    refactoring = 5,
+    refactoring = 7,
     rhubarb = 7,
     shortcuts = 3,
     sleuth = 3,
@@ -178,7 +178,7 @@ return require("packer").startup({
         _use({
             "onsails/lspkind-nvim",
             config = [[require("lspkind").init()]],
-            commit = "58e12501ea028ff1171f8f06ea53891f7c6e1c3f",
+            commit = "c68b3a003483cf382428a43035079f78474cd11e",
         })
 
         use({
