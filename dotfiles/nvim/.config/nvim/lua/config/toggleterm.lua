@@ -1,5 +1,6 @@
 require("toggleterm").setup{
-  shell = vim.env.SHELL
+  shell = vim.env.SHELL,
+  start_in_insert = false
 }
 
 function _G.set_terminal_keymaps()
