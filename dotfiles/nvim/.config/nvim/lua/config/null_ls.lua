@@ -20,7 +20,7 @@ null_ls.setup({
         formatting.fish_indent,
         formatting.stylua,
         formatting.trim_whitespace.with({
-            filetypes = { "cucumber" },
+            filetypes = { "cucumber", "sh" },
         }),
         diagnostics.markdownlint.with({
             diagnostics_postprocess = function(diagnostic)

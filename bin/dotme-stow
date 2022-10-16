@@ -55,7 +55,7 @@ done
 if [[ -z $PLATFORM ]] ; then
   log:: "Stowing platform"
   dotme-stow $@ -p
-else 
+else
   # Special case - remarkrc at project root so that global remark works,
   # for example from vim with ALE
 
