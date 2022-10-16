@@ -19,6 +19,12 @@ esac done
 
 [[ "${PLATFORM_SHIM}" == "y" ]] && PLATFORM=$(get-platform)
 if [[ -n $PLATFORM ]] ; then
+  if [[ "$PLATFORM" == "default-platform" ]] ; then
+    # no-op for default platform, if we ever need to do platform
+    # specifics for another platform, get-platform can be enhanced
+    # to identify given platform
+    exit
+  fi
   [[ -n $VERBOSE ]] && echo "Platform : $PLATFORM";
   DOTFILES_DOTFILES="${DOTFILES_DOTFILES}/platform/${PLATFORM}"
 fi
@@ -49,14 +55,14 @@ done
 if [[ -z $PLATFORM ]] ; then
   log:: "Stowing platform"
   dotme-stow $@ -p
-fi
+else 
+  # Special case - remarkrc at project root so that global remark works,
+  # for example from vim with ALE
 
-# Special case - remarkrc at project root so that global remark works,
-# for example from vim with ALE
-
-if [[ ! -f ~/projects/.remarkrc.yaml ]] ; then
-  log:: "Linking remarkrc.yaml into ~/projects"
-  ln -s ~/.config/.remarkrc.yaml ~/projects
+  if [[ ! -f ~/projects/.remarkrc.yaml ]] ; then
+    log:: "Linking remarkrc.yaml into ~/projects"
+    ln -s ~/.config/.remarkrc.yaml ~/projects
+  fi
 fi
 
 should-run -fu $SHOULD_RUN_ARGS $0
