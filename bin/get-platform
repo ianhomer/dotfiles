@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+  if [[ `uname -m` == 'arm64' ]]; then
+    echo "mac-m1"
+  else
+    echo "mac-intel"
+  fi
+else
+  echo "default-platform"
+fi
+
+exit 0
+

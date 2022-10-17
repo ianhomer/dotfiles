@@ -6,6 +6,8 @@ alias q="exit"
 alias push="git push"
 alias gs="git status"
 alias gd="git diff HEAD"
+alias ...="cd ../.."
+alias ....="cd ../../.."
 
 # Things
 alias d="do"

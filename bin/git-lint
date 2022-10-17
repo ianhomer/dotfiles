@@ -37,18 +37,33 @@ shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
 action=${1:-show}
 
+function fixWho() {
+  if [[ "${INSIDE_GIT_REPOSITORY}" == "y" ]] ; then
+    gitUserEmail=$(git config user.email)
+    gitUserName=$(git config user.name)
+    log:: IS "local" $gitUserName $gitUserEmail
+  fi 
+  gitGlobalUserEmail=$(git config --global user.email)
+  gitGlobalUserName=$(git config --global user.name)
+  log:: IS "global" $gitGlobalUserName $gitGlobalUserEmail 
+}
+
+function showConfig {
+  log:: IS "commit.gpsign" $(git config --get commit.gpgsign)
+}
+
 function setMyGitUrl {
   currentRemoteUrl=$(git config --get remote.origin.url)
   case $currentRemoteUrl in
     *github.com*)    host="github.com"    ;;
     *bitbucket.org*) host="bitbucket.org" ;;
     *)
-      log:: NOK remote-url URL not recognised
+      log:: NOK "remote-url   " URL not recognised
       if [[ -z "$currentRemoteUrl" ]] ; then
         log:: NOK remote-url is empty
         log:: "set with 'git remote add origin my-url'"
       else
-        log:: IS remote-url $currentRemoteUrl
+        log:: IS "remote-url   " $currentRemoteUrl
       fi
       return 1
       ;;
@@ -117,30 +132,20 @@ function fixUpstream() {
   fi
 }
 
-function fixWho() {
-  if [[ "${INSIDE_GIT_REPOSITORY}" == "y" ]] ; then
-    gitUserEmail=$(git config user.email)
-    gitUserName=$(git config user.name)
-    log:: IS "local" $gitUserEmail $gitUserName
-  fi 
-  gitGlobalUserEmail=$(git config --global user.email)
-  gitGlobalUserName=$(git config --global user.name)
-  log:: IS "global" $gitGlobalUserEmail $gitGlobalUserName
-}
-
 
 [[ -n "${verbose}" ]] && echo "deleting identites from SSH agent"
 ssh-add -q -D
 [[ -n "${verbose}" ]] && ssh-add -l
 
 if [[ "${INSIDE_GIT_REPOSITORY}" == "y" ]] ; then
+  showConfig
+  fixWho
   setMyGitUrl || log::exit "Cannot process git URL"
   fixMain
   fixUpstream
 else
   log:: "not in a git repository"
 fi
-fixWho
 
 # Clear authentication agent
 
