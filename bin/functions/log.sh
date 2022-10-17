@@ -10,8 +10,8 @@ function log::() {
     status) shift && log::status ${@} ;;
     IS) shift && log::status IS "${@}" ;;
     OK) shift && log::status OK "${@}" ;;
-    AOK) shift && log::status AOK ${@} ;;
-    NOK) shift && log::status NOK ${@} ;;
+    AOK) shift && log::status AOK "${@}" ;;
+    NOK) shift && log::status NOK "${@}" ;;
     *) log::info ${@}
   esac
 }

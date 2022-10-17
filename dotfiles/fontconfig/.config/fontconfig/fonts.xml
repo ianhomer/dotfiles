@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
+<fontconfig>
+
+  <match target="scan">
+    <test name="family">
+      <string>Noto Emoji</string>
+    </test>
+    <edit name="spacing">
+      <int>100</int>
+    </edit>
+  </match>
+  <match target="scan">
+    <test name="family">
+      <string>Noto Color Emoji</string>
+    </test>
+    <edit name="spacing">
+      <int>100</int>
+    </edit>
+  </match>
+  <match target="scan">
+    <test name="family">
+      <string>Symbols Nerd Font Mono</string>
+    </test>
+    <edit name="spacing">
+      <int>100</int>
+    </edit>
+  </match>
+</fontconfig>

@@ -7,27 +7,41 @@
 set -e
 
 DOTFILES_DOTFILES=~/.dotfiles/dotfiles
-while getopts "d:v" o; do case "$o" in
+SHOULD_RUN_ARGS=""
+PLATFORM=""
+while getopts "d:fprv" o; do case "$o" in
   d) DOTFILES_DOTFILES=$OPTARG ;;
+  f) SHOULD_RUN_ARGS="${SHOULD_RUN_ARGS} -f" ;;
+  p) PLATFORM_SHIM="y" ;;
   r) DRY="y" ;;
   v) VERBOSE="y" ;;
 esac done
 
-shouldRunArgument=""
-[[ -n $VERBOSE ]] && shouldRunArgument=" -v"
+[[ "${PLATFORM_SHIM}" == "y" ]] && PLATFORM=$(get-platform)
+if [[ -n $PLATFORM ]] ; then
+  if [[ "$PLATFORM" == "default-platform" ]] ; then
+    # no-op for default platform, if we ever need to do platform
+    # specifics for another platform, get-platform can be enhanced
+    # to identify given platform
+    exit
+  fi
+  [[ -n $VERBOSE ]] && echo "Platform : $PLATFORM";
+  DOTFILES_DOTFILES="${DOTFILES_DOTFILES}/platform/${PLATFORM}"
+fi
 
-should-run -z $0 $DOTFILES_DOTFILES $shouldRunArgument || exit 0
+# [[ -n $VERBOSE ]] && SHOULD_RUN_ARGS="${SHOULD_RUN_ARGS} -v"
+
+should-run -z $SHOULD_RUN_ARGS $0 $DOTFILES_DOTFILES || exit 0
 
 $(shim) && . ${ME}/i.sh
 
 cd $DOTFILES_DOTFILES
 log:: "stowing dotfiles"
 for DIR in `ls -d */` ; do
-  if should-run -ozs $0 $DOTFILES_DOTFILES/$DIR ; then
+  # platform is special directory for platform specific configuration
+  [[ "$DIR" == "platform/" ]] && continue
+  if should-run -ozs $SHOULD_RUN_ARGS $0 $DOTFILES_DOTFILES/$DIR ; then
     cd $DOTFILES_DOTFILES/$DIR
-    for FILE in `find . -type f -print` ; do
-      [[ -n $DRY ]] && backup $FILE
-    done
     [[ -n $VERBOSE ]] && echo "... stowing $DIR"
     # Copy directory structure so that stow links files NOT directories
     find . -mindepth 1 -type d -exec mkdir -p $HOME/{} \;
@@ -38,12 +52,17 @@ for DIR in `ls -d */` ; do
   fi
 done
 
-# Special case - remarkrc at project root so that global remark works,
-# for example from vim with ALE
+if [[ -z $PLATFORM ]] ; then
+  log:: "Stowing platform"
+  dotme-stow $@ -p
+else
+  # Special case - remarkrc at project root so that global remark works,
+  # for example from vim with ALE
 
-if [[ ! -f ~/projects/.remarkrc.yaml ]] ; then
-  log:: "Linking remarkrc.yaml into ~/projects"
-  ln -s ~/.config/.remarkrc.yaml ~/projects
+  if [[ ! -f ~/projects/.remarkrc.yaml ]] ; then
+    log:: "Linking remarkrc.yaml into ~/projects"
+    ln -s ~/.config/.remarkrc.yaml ~/projects
+  fi
 fi
 
-should-run -fu $shouldRunArgument $0
+should-run -fu $SHOULD_RUN_ARGS $0

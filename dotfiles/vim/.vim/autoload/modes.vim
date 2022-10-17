@@ -16,10 +16,10 @@ endfunction
 
 function modes#enableBarbar(enable)
   if a:enable == 1
-    lua require"bufferline".setup({auto_hide=true})
+    lua require"config.barbar".show()
     set showtabline=2  
   else
-    lua require"bufferline".setup({auto_hide=false})
+    lua require"config.barbar".hide()
     set showtabline=0
   endif
 endfunction
