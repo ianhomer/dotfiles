@@ -44,4 +44,5 @@ vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 -- vim.o.foldcolumn = "auto:2"
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 -- vim.o.foldtext = "substitute(foldtext(), '\\(.*\\) \\(\\d\\+\\) lines: \\(.*\\)', '\\3 (\\2 lines)', 'g')"
+-- 
 
