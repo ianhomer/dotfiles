@@ -25,7 +25,6 @@ cmp.setup({
         end,
     },
     mapping = cmp.mapping.preset.insert({
-        ["<Esc>"] = cmp.mapping.abort(),
         ["<C-p>"] = cmp.mapping.select_prev_item(),
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ["<Up>"] = cmp.mapping.select_prev_item(),
