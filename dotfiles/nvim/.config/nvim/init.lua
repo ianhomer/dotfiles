@@ -79,7 +79,6 @@ nvim_set_var("knobs_levels", {
     null_ls = 3,
     nvim_tree = 3,
     peekaboo = 9,
-    polyglot = 9,
     rainbow = 3,
     refactoring = 5,
     rhubarb = 7,

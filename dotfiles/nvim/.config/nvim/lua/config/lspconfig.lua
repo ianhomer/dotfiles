@@ -147,6 +147,7 @@ local lspsettings = {
 
 local filetypes = {
     terraformls = { "terraform", "hcl" },
+    tailwindcss = { "css" }
 }
 
 local init_options = {
