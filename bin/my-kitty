@@ -1,12 +1,61 @@
 #!/usr/bin/env python3
 
-# import json
+import json
 import os
+import subprocess
+from functools import cached_property
+
+
+class KittyState:
+    def __init__(self):
+        self.state = json.loads(subprocess.check_output(["kitty", "@", "ls"]))
+
+    def print(self):
+        for window in self.state:
+            print(window)
+            for tab in window["tabs"]:
+                print(tab["title"])
+
+    @cached_property
+    def tabTitles(self):
+        titles = []
+        for window in self.state:
+            for tab in window["tabs"]:
+                titles.append(tab["title"])
+        return titles
+
+
+class Kitty:
+    def __init__(self):
+        self.state = KittyState()
+
+    def launchTab(self, title, directory):
+        if title not in self.state.tabTitles:
+            os.system(
+                "kitty @ launch --type=tab --tab-title "
+                + title
+                + " --cwd "
+                + directory
+                + " fish"
+            )
+
 
 print("Initialising my kitty")
+kitty = Kitty()
+print("Current tabs : " + ",".join(kitty.state.tabTitles))
+kitty.launchTab("dot", "~/.dotfiles")
+kitty.launchTab("garden", "~/projects/my/digital-garden")
+kitty.launchTab("things", "~/projects/things")
+# print("... complete")
 
-# state = json.loads()
-
-os.system('kitty @ launch --type=tab --tab-title dots --cwd ~/.dotfiles nvim
+# os.system(
+#     "kitty @ launch --type=tab --tab-title dot --cwd ~/.dotfiles fish"
+# )
+# os.system(
+#     "kitty @ launch --type=tab --tab-title garden --cwd ~/projects/my/digital-garden fish"
+# )
+# os.system(
+#     "kitty @ launch --type=tab --tab-title things --cwd ~/projects/things fish"
+# )
 
 # kitty @ launch --type=tab --tab-title things --cwd ~/projects/things nvim
