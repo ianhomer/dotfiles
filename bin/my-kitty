@@ -38,6 +38,8 @@ class Kitty:
                 + directory
                 + " fish"
             )
+        else:
+            print("Tab already exists : " + title)
 
 
 print("Initialising my kitty")
@@ -46,16 +48,9 @@ print("Current tabs : " + ",".join(kitty.state.tabTitles))
 kitty.launchTab("dot", "~/.dotfiles")
 kitty.launchTab("garden", "~/projects/my/digital-garden")
 kitty.launchTab("things", "~/projects/things")
-# print("... complete")
 
-# os.system(
-#     "kitty @ launch --type=tab --tab-title dot --cwd ~/.dotfiles fish"
-# )
-# os.system(
-#     "kitty @ launch --type=tab --tab-title garden --cwd ~/projects/my/digital-garden fish"
-# )
-# os.system(
-#     "kitty @ launch --type=tab --tab-title things --cwd ~/projects/things fish"
-# )
+print("... complete")
 
-# kitty @ launch --type=tab --tab-title things --cwd ~/projects/things nvim
+# new_os_window
+# cd ~/projects
+# launch fish
