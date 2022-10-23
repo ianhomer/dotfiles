@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+#
+# Set up base line kitty session
+#
+
 import json
 import os
 import subprocess
@@ -29,10 +33,13 @@ class Kitty:
     def __init__(self):
         self.state = KittyState()
 
+    def action(self, action):
+        os.system("kitty @ " + action)
+
     def launchTab(self, title, directory):
         if title not in self.state.tabTitles:
-            os.system(
-                "kitty @ launch --type=tab --tab-title "
+            self.action(
+                "launch --type=tab --tab-title "
                 + title
                 + " --cwd "
                 + directory
@@ -48,5 +55,6 @@ print("Current tabs : " + ",".join(kitty.state.tabTitles))
 kitty.launchTab("dot", "~/.dotfiles")
 kitty.launchTab("garden", "~/projects/my/digital-garden")
 kitty.launchTab("things", "~/projects/things")
+kitty.action("focus-tab --match 'title:^dot'")
 
 print("... complete")
