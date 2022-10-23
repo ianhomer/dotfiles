@@ -77,7 +77,7 @@ cmp.setup({
         { name = "nvim_lsp_signature_help" },
     },
     formatting = {
-        format = lspkind.cmp_format({ mode = "symbol_text" }),
+        format = lspkind.cmp_format({ mode = "symbol" }),
     },
     matching = {
         disallow_fuzzy_matching = true,
