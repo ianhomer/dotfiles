@@ -74,6 +74,7 @@ nvim_set_var("knobs_levels", {
     mundo = 3,
     neoscroll = 3,
     neotest = 9,
+    noice = 5,
     nnn = 9,
     notify = 5,
     null_ls = 3,
@@ -309,6 +310,16 @@ return require("packer").startup({
             "rcarriga/nvim-notify",
             config = [[require'config.notify']],
             commit = "5e8d4942976bbc45e3adb8f4beb81964a79cfd02",
+        })
+
+        use({
+            "folke/noice.nvim",
+            event = "VimEnter",
+            config = [[require'config.noice']],
+            commit = "a810700bb8189fe7fb699f388fda6fdb9869fac8",
+            requires = {
+                "MunifTanjim/nui.nvim"
+            }
         })
 
         use({
