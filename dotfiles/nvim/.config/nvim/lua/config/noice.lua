@@ -23,7 +23,7 @@ require("noice").setup({
     },
     messages = {
         -- enable when fix vertical scroll and redraw issue
-        enabled = false,
+        enabled = true,
         view = "mini",
         view_warn = "mini",
         view_error = "mini",
@@ -34,6 +34,16 @@ require("noice").setup({
         filter = {
             event = { "msg_show", "notify" },
             ["not"] = { kind = { "search_count" } },
+        },
+    },
+    routes = {
+        {
+            filter = {
+                event = "msg_show",
+                kind = "",
+                find = "written",
+            },
+            opts = { skip = true },
         },
     },
 })
