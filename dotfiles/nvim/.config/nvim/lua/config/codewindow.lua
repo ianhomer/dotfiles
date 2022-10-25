@@ -10,7 +10,7 @@ local border = {
 }
 
 require("codewindow").setup({
-    auto_enable = true,
+    auto_enable = false,
     exclude_filetypes = { "NvimTree", "fugitive", "help", "startify" },
     max_minimap_height = 20,
     width_multiplier = 8,
