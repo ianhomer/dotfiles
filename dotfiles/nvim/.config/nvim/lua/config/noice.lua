@@ -15,8 +15,18 @@ require("noice").setup({
             },
         },
     },
-    messages = {
+    cmdline = {
         enabled = true,
+    },
+    lsp_progress = {
+        enabled = true,
+    },
+    messages = {
+        -- enable when fix vertical scroll and redraw issue
+        enabled = false,
+        view = "mini",
+        view_warn = "mini",
+        view_error = "mini",
     },
     history = {
         view = "split",

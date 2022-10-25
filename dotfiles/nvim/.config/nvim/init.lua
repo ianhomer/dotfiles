@@ -511,6 +511,7 @@ return require("packer").startup({
             requires = { "kyazdani42/nvim-web-devicons", opt = true },
             config = [[require'config.lualine']],
             commit = "3325d5d43a7a2bc9baeef2b7e58e1d915278beaf",
+            after = 'noice.nvim'
         })
         use({
             "vimpostor/vim-tpipeline",
