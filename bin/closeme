@@ -4,6 +4,7 @@ set -e
 $(shim) && . ${ME}/i.sh
 
 i=0
+unclosed=0
 
 # Get user ID so that it can be used in grep of ps to find process that start
 # with named command
@@ -22,11 +23,26 @@ for application in nvim Flipper.app node ; do
     name=$(ps -o command= -p $process)
     directory=$(lsof -p $process | grep cwd | sed 's/  */ /g' | cut -d " " -f9- )
     kill -3 $process
-    log:: OK closed $process $name $directory
-    ((i=i+1))
+    stillRunningName=$(ps -o command= -p $process)
+    if [ -n "${stillRunningName}" ] ; then
+      log:: NOK not-closed $process $name $directory
+      ((unclosed=unclosed+1))
+      if [ "$1" == "-f" ] ; then
+        kill -9 $process
+        log:: OK force-closed $process $name $directory
+        ((i=i+1))
+      fi
+    else
+      log:: OK closed $process $name $directory
+      ((i=i+1))
+    fi
   done
 done
 
 [ $i -eq 1 ] && plural="" || plural="s"
 
 log:: DONE close closed ${i} app${plural}
+
+if [ $unclosed -gt 0 ] ; then
+  log::error run closeme -f to force close
+fi

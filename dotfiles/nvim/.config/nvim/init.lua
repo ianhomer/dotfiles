@@ -97,7 +97,7 @@ nvim_set_var("knobs_levels", {
     telekasten = 9,
     test = 5,
     thingity = 3,
-    tmux_navigator = 3,
+    tmux_navigator = 9,
     toggleterm = 3,
     tpipeline = 9,
     treesitter = 3,
@@ -139,6 +139,8 @@ g.indent_blankline_buftype_exclude = { "terminal" }
 
 g.indent_blankline_show_trailing_blankline_indent = false
 g.indent_blankline_show_first_indent_level = false
+
+require("config/kitty")
 
 return require("packer").startup({
     function(_use)
