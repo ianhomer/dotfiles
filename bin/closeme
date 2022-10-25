@@ -21,9 +21,10 @@ for application in nvim Flipper.app node ; do
   log:: closing $application
   for process in $(ps -o pid,uid,command | grep "$uid $application" | grep -v -E 'lock|grep' | awk '{ print $1; }') ; do
     name=$(ps -o command= -p $process)
-    directory=$(lsof -p $process | grep cwd | sed 's/  */ /g' | cut -d " " -f9- )
+    log:: closing $process
     kill -3 $process
-    stillRunningName=$(ps -o command= -p $process)
+    directory=$(lsof -p $process | grep cwd | sed 's/  */ /g' | cut -d " " -f9- )
+    stillRunningName=$(ps -o command= -p $process || echo "")
     if [ -n "${stillRunningName}" ] ; then
       log:: NOK not-closed $process $name $directory
       ((unclosed=unclosed+1))
