@@ -81,6 +81,7 @@ map["7"] = { "<cmd>TroubleToggle<cr>", "Trouble" }
 map["8"] = { "<cmd>call my#ToggleBlame()<cr>", "Blame" }
 map["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap" }
 
+map["m"] = { "<cmd>lua require'codewindow'.toggle_minimap()<cr>", "Minimap" }
 map["rg"] = { ":reg<cr>", "Registers" }
 
 -- Dev

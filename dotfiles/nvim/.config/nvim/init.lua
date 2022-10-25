@@ -23,6 +23,7 @@ nvim_set_var("knobs_levels", {
     autosave = 3,
     barbar = 5,
     bqf = 5,
+    codewindow = 5,
     colorizer = 4,
     conflict_marker = 7,
     commentary = 4,
@@ -69,7 +70,7 @@ nvim_set_var("knobs_levels", {
     luasnip = 3,
     markdown_syntax_table = 3,
     markdown_preview = 3,
-    minimap = 5,
+    minimap = 9,
     modes = 3,
     mundo = 3,
     neoscroll = 3,
@@ -486,7 +487,16 @@ return require("packer").startup({
             "ryanoasis/vim-devicons",
             commit = "71f239af28b7214eebb60d4ea5bd040291fb7e33",
         })
-        use({ "wfxr/minimap.vim", cmd = { "Minimap" }, commit = "3801d9dfaa5431e7b83ae6f98423ac077d9f5c3f" })
+        use({
+            "wfxr/minimap.vim",
+            cmd = { "Minimap" },
+            commit = "3801d9dfaa5431e7b83ae6f98423ac077d9f5c3f",
+        })
+        use({
+            'gorbit99/codewindow.nvim',
+            config = [[require'config.codewindow']],
+            commit = "7123d6fb4dc24b0433d8a9b37287f3b5e9a20d2c"
+        })
         use({
             "folke/which-key.nvim",
             event = "BufWinEnter",
@@ -512,7 +522,7 @@ return require("packer").startup({
             requires = { "kyazdani42/nvim-web-devicons", opt = true },
             config = [[require'config.lualine']],
             commit = "3325d5d43a7a2bc9baeef2b7e58e1d915278beaf",
-            after = 'noice.nvim'
+            after = "noice.nvim",
         })
         use({
             "vimpostor/vim-tpipeline",
