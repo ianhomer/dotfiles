@@ -2,12 +2,12 @@ require("noice").setup({
     views = {
         cmdline_popup = {
             position = {
-                row = "90%",
-                col = "2",
+                row = "99%",
+                col = "0",
             },
             border = {
                 style = "none",
-                padding = { 2, 3 },
+                padding = { 0, 1 },
             },
             filter_options = {},
             win_options = {
