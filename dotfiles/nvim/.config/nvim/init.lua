@@ -37,7 +37,7 @@ nvim_set_var("knobs_levels", {
     editorconfig = 9,
     endwise = 7,
     eunuch = 3,
-    fidget = 3,
+    fidget = 9,
     flog = 9,
     fugitive = 3,
     friendly_snippets = 3,
@@ -318,8 +318,9 @@ return require("packer").startup({
             config = [[require'config.noice']],
             commit = "a810700bb8189fe7fb699f388fda6fdb9869fac8",
             requires = {
-                "MunifTanjim/nui.nvim"
-            }
+                "MunifTanjim/nui.nvim",
+                "rcarriga/nvim-notify",
+            },
         })
 
         use({
