@@ -15,7 +15,7 @@ local function navigate(direction)
     local current_window = vim.fn.win_getid()
     vim.api.nvim_command('wincmd ' .. direction)
     local at_edge = current_window == vim.fn.win_getid()
-    if (at_edge) then
+     if (at_edge) then
         kitty("kitten navigate.py "..kitty_direction[direction])
     end
 end

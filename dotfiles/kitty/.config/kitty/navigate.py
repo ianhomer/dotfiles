@@ -13,4 +13,4 @@ def handle_result(
     args: List[str], answer: str, target_window_id: int, boss: Boss
 ) -> None:
     direction = args[1]
-    #boss.active_tab.neighboring_window(direction)
+    boss.active_tab.neighboring_window(direction)
