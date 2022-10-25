@@ -1,6 +1,6 @@
 local M = {}
 
-local kitty_direction = {
+local directions = {
     h = "left",
     l = "right",
     j = "bottom",
@@ -16,23 +16,15 @@ local function navigate(direction)
     vim.api.nvim_command('wincmd ' .. direction)
     local at_edge = current_window == vim.fn.win_getid()
      if (at_edge) then
-        kitty("kitten navigate.py "..kitty_direction[direction])
+        kitty("kitten navigate.py "..directions[direction])
     end
 end
 
-
-vim.keymap.set("", "<c-h>", function()
-    navigate("h")
-end)
-vim.keymap.set("", "<c-l>", function()
-    navigate("l")
-end)
-vim.keymap.set("", "<c-k>", function()
-    navigate("k")
-end)
-vim.keymap.set("", "<c-j>", function()
-    navigate("j")
-end)
+for key,_ in pairs(directions) do
+    vim.keymap.set("", "<c-".. key.. ">", function()
+        navigate(key)
+    end)
+end
 
 return M
 
