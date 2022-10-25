@@ -216,6 +216,7 @@ return require("packer").startup({
         })
 
         _use({
+            knob = "lsp_signature",
             "hrsh7th/cmp-nvim-lsp-signature-help",
             commit = "d2768cb1b83de649d57d967085fe73c5e01f8fd7",
         })
