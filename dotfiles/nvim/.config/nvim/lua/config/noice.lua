@@ -5,6 +5,9 @@ require("noice").setup({
                 row = "99%",
                 col = "0",
             },
+            size = {
+                width = "100%"
+            },
             border = {
                 style = "none",
                 padding = { 0, 1 },
@@ -17,6 +20,9 @@ require("noice").setup({
     },
     cmdline = {
         enabled = true,
+        format = {
+            cmdline = { pattern = "^:", icon = ":", lang = "vim" },
+        }
     },
     lsp_progress = {
         enabled = true,
