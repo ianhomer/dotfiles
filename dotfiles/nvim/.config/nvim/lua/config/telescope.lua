@@ -40,10 +40,10 @@ telescope.setup({
                     kitty.navigate("l")
                 end,
                 ["<c-up>"] = function()
-                    kitty.navigate("j")
+                    kitty.navigate("k")
                 end,
                 ["<c-down>"] = function()
-                    kitty.navigate("k")
+                    kitty.navigate("j")
                 end
             },
         },
