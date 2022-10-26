@@ -7,8 +7,15 @@ local directions = {
     k = "top"
 }
 
-local function command(command)
-   os.execute("kitty @ "..command)
+local arrows = {
+    h = "left",
+    l = "right",
+    j = "down",
+    k = "up",
+}
+
+local function command(args)
+   os.execute("kitty @ "..args)
 end
 
 function M.navigate(direction)
@@ -26,6 +33,9 @@ end
 
 for key,_ in pairs(directions) do
     vim.keymap.set("", "<c-".. key.. ">", function()
+        M.go_direction(key)
+    end)
+    vim.keymap.set("", "<c-".. arrows[key] .. ">", function()
         M.go_direction(key)
     end)
 end
