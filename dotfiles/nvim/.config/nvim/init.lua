@@ -142,7 +142,7 @@ g.indent_blankline_buftype_exclude = { "terminal" }
 g.indent_blankline_show_trailing_blankline_indent = false
 g.indent_blankline_show_first_indent_level = false
 
-require("config/kitty")
+require("config.kitty")
 
 return require("packer").startup({
     function(_use)
