@@ -10,7 +10,7 @@ require("noice").setup({
             },
             border = {
                 style = "none",
-                padding = { 0, 1 },
+                padding = { 0, 0 },
             },
             filter_options = {},
             win_options = {

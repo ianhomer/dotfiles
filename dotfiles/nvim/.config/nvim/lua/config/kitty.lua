@@ -35,7 +35,8 @@ for key,_ in pairs(directions) do
     vim.keymap.set("", "<c-".. key.. ">", function()
         M.go_direction(key)
     end)
-    vim.keymap.set("", "<c-".. arrows[key] .. ">", function()
+    -- support ctrl arrow keys in normal an insert mode
+    vim.keymap.set({"i","n","v","x", "c"}, "<c-".. arrows[key] .. ">", function()
         M.go_direction(key)
     end)
 end
