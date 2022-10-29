@@ -85,7 +85,7 @@ nvim_set_var("knobs_levels", {
     refactoring = 9,
     rhubarb = 7,
     shortcuts = 3,
-    sleuth = 3,
+    sleuth = 9,
     spelling = 3,
     startify = 4,
     startuptime = 3,
@@ -318,7 +318,7 @@ return require("packer").startup({
             "folke/noice.nvim",
             event = "VimEnter",
             config = [[require'config.noice']],
-            commit = "a810700bb8189fe7fb699f388fda6fdb9869fac8",
+            commit = "ab1d78d587db24f97293419d79cdbbf761986ab3",
             requires = {
                 "MunifTanjim/nui.nvim",
                 "rcarriga/nvim-notify",
