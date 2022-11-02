@@ -311,14 +311,14 @@ return require("packer").startup({
         use({
             "rcarriga/nvim-notify",
             config = [[require'config.notify']],
-            commit = "5e8d4942976bbc45e3adb8f4beb81964a79cfd02",
+            commit = "354e0ebb269d9e4feca073372431e8453f5f262a",
         })
 
         use({
             "folke/noice.nvim",
             event = "VimEnter",
             config = [[require'config.noice']],
-            commit = "ab1d78d587db24f97293419d79cdbbf761986ab3",
+            commit = "7b62ccfc236e51e78e5b2fc7d3068eacd65e4590",
             requires = {
                 "MunifTanjim/nui.nvim",
                 "rcarriga/nvim-notify",
