@@ -9,10 +9,13 @@
   log-branch = "log --format='%C(auto)%h %Cgreen%<(8,trunc)%cr %Creset %<(20,trunc)%s %Cblue%d'"
   log-just-what = "log --format='%s'"
   log-what = "log --format='%C(auto) %h %s %Cblue%ae%d'"
+  what = "log --format='%C(auto) %h %s %Cblue%ae%d'"
   log-what-when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %s%Cgreen %cd% %Cblue %Cblue%ae%d'"
   log-who = "log --format='%C(auto) %h %Cblue%ae %G?%Creset %<(30,trunc)%s%Cblue%d'"
+  who = "log --format='%C(auto) %h %Cblue%ae %G?%Creset %<(30,trunc)%s%Cblue%d'"
   log-who-when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto)%h%Cblue %ae%Cgreen %cd%Creset %<(40,trunc)%s'"
   log-when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %Cblue%cd%Creset %<(60,trunc)%s'"
+  when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %Cblue%cd%Creset %<(60,trunc)%s'"
   set-upstream = !git branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)
 
 [core]

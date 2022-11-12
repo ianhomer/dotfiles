@@ -19,13 +19,13 @@ local luasnip = require("luasnip")
 local cmp = require("cmp")
 
 cmp.setup({
+    preselect = cmp.PreselectMode.None,
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
         end,
     },
     mapping = cmp.mapping.preset.insert({
-        ["<Esc>"] = cmp.mapping.abort(),
         ["<C-p>"] = cmp.mapping.select_prev_item(),
         ["<C-n>"] = cmp.mapping.select_next_item(),
         ["<Up>"] = cmp.mapping.select_prev_item(),
@@ -78,7 +78,7 @@ cmp.setup({
         { name = "nvim_lsp_signature_help" },
     },
     formatting = {
-        format = lspkind.cmp_format({ mode = "symbol_text" }),
+        format = lspkind.cmp_format({ mode = "symbol" }),
     },
     matching = {
         disallow_fuzzy_matching = true,

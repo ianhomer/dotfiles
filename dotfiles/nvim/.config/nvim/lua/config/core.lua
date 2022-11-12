@@ -26,7 +26,7 @@ end
 
 vim.api.nvim_exec(
     [[
-command! -nargs=* Fuzzy Telescope grep_string search=<args>
+command! -nargs=* Fuzzy execute "Telescope grep_string search=".escape(<q-args>, ' ')
 ]],
     true
 )

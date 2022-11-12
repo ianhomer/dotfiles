@@ -1,4 +1,5 @@
 local actions = require("telescope.actions")
+local kitty = require("config.kitty")
 -- local trouble = require("trouble.providers.telescope")
 local telescope = require("telescope")
 
@@ -32,6 +33,18 @@ telescope.setup({
         mappings = {
             i = {
                 ["<esc>"] = actions.close,
+                ["<c-left>"] = function()
+                    kitty.navigate("h")
+                end,
+                ["<c-right>"] = function()
+                    kitty.navigate("l")
+                end,
+                ["<c-up>"] = function()
+                    kitty.navigate("k")
+                end,
+                ["<c-down>"] = function()
+                    kitty.navigate("j")
+                end
             },
         },
         --    i = {["<c-t>"] = trouble.open_with_trouble},
@@ -81,8 +94,9 @@ telescope.setup({
 })
 
 if vim.g.knob_telescope_fzf_native then
-  telescope.load_extension("fzf")
+    telescope.load_extension("fzf")
 end
+
 if vim.g.knob_frecency then
     telescope.load_extension("frecency")
 end

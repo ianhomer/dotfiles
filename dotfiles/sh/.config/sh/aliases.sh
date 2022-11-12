@@ -18,6 +18,9 @@ alias s="things-sync"
 # Attach to tmux session if exists, otherwise new
 alias tm="tmux attach || tmux new"
 
+# Start kitty base
+alias kit="kitty --single-instance --session ~/.config/kitty/base.conf& ; disown ; exit"
+
 # search for file in directory and open in vi
 alias o="fzf --height "100%" | xargs nvim -c ':cd %:h'"
 alias oh="fd -H | fzf --height "100%" | xargs nvim -c ':cd %:h'"

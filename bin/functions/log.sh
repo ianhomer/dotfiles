@@ -18,7 +18,7 @@ function log::() {
 
 function log::trim() {
   width=$1
-  (( ${#2} > $width )) && printf "${2:0:$((width-3))}..." || printf $2
+  (( ${#2} > $width )) && printf "${2:0:$((width-3))}..." || printf "$2"
 }
 
 function log::box() {
@@ -28,6 +28,15 @@ function log::box() {
   one=`log::trim $left "$1"`
   two=`log::trim $right "$2"`
   printf "\e[0;35m%-${left}s\e[36m%${right}s\e[0m\n" "$one" "$two"
+}
+
+function log::table() {
+  cols=`tput cols`
+  left="$1"
+  right=$((cols - left))
+  one=`log::trim "$left" "$2 "`
+  two=`log::trim "$right" "$3"`
+  printf "\e[0;35m%${left}s\e[36m%-${right}s\e[0m\n" "$one" "$two"
 }
 
 #

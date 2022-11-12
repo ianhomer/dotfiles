@@ -80,28 +80,37 @@ local on_attach = function(client, bufnr)
         -- augroup END
     end
 
-    vim.api.nvim_create_autocmd("CursorHold", {
-        buffer = bufnr,
-        callback = function()
-            vim.diagnostic.open_float(nil, {
-                focusable = false,
-                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-                border = "rounded",
-                source = "always",
-                prefix = " ",
-                scope = "cursor",
-            })
-        end,
-    })
+    -- vim.api.nvim_create_autocmd("CursorHold", {
+    --     buffer = bufnr,
+    --     callback = function()
+    --         vim.diagnostic.open_float(nil, {
+    --             focusable = false,
+    --             close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+    --             border = "rounded",
+    --             source = "always",
+    --             prefix = " ",
+    --             scope = "cursor",
+    --         })
+    --     end,
+    -- })
 
     vim.diagnostic.config({
         float = {
             source = "yes",
         },
     })
-
     -- require"lsp_signature".on_attach()
 end
+
+-- for now stick with the native vim format expr. In the future I may like the
+-- LSP formatexpr registration.
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
+-- https://zignar.net/2022/10/01/new-lsp-features-in-neovim-08/
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+        vim.bo[args.buf].formatexpr = nil
+    end,
+})
 
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches
@@ -147,6 +156,7 @@ local lspsettings = {
 
 local filetypes = {
     terraformls = { "terraform", "hcl" },
+    tailwindcss = { "css" },
 }
 
 local init_options = {
@@ -155,7 +165,7 @@ local init_options = {
     },
 }
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 for _, lsp in ipairs(servers) do
     local module = lspconfig[lsp]
     if module then
