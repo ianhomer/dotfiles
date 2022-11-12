@@ -22,7 +22,11 @@ if [ ! -d ${nightlyInstallation} ] ; then
   tar xzf ~/Downloads/nvim-macos.tar.gz
 
   [ -L ~/bin/nvim ] && rm ~/bin/nvim
-  ln -s ${nightlyInstallation}/nvim-osx64/bin/nvim ~/bin/nvim
+  ln -s ${nightlyInstallation}/nvim-macos/bin/nvim ~/bin/nvim
 else
+  if [ ! -f ~/bin/nvim ] ; then
+    log:: "linking latest nightly to ~/bin/nvim"
+    ln -s ${nightlyInstallation}/nvim-macos/bin/nvim ~/bin/nvim
+  fi
   log:: "nightly nvim ${nightlyInstallation} already installed"
 fi

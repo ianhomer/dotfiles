@@ -1,32 +1,71 @@
 #!/usr/bin/env bash
 
+# Close apps that are reasonably safe to just close. Useful as a housekeeping
+# step to free up resources.
+
+# For nvim, this closes all proceses without lock in the process name
+# Start vim with 
+#
+#    nvim +lock 
+#
+# to withstand this close process. This process of closing nvim relies on nvim
+# autosaving files, this process does not save files.
+
 set -e
 $(shim) && . ${ME}/i.sh
 
 i=0
+unclosed=0
 
 # Get user ID so that it can be used in grep of ps to find process that start
 # with named command
 uid=$(id -u)
 
-# Close apps that are reasonable safe to just close. Useful as a housekeeping
-# step to free up resources
-
-# For nvim, this closes all proceses without lock in the process name
-# Start vim with nvim +lock to withstand this close process
-# This process of closing nvim relies on nvim autosaving files, this process
-# does not save files
-for application in nvim Flipper.app node ; do
-  log:: closing $application
-  for process in $(ps -o pid,uid,command | grep "$uid $application" | grep -v -E 'lock|grep' | awk '{ print $1; }') ; do
+for application in nvim /Applications/Flipper.app node prettierd eslint_d adb ; do
+  applicationsClosed=0
+  for process in $(ps -A -o pid,uid,command | grep "$uid $application" | grep -v -E 'lock|grep' | awk '{ print $1; }') ; do
     name=$(ps -o command= -p $process)
-    directory=$(lsof -p $process | grep cwd | sed 's/  */ /g' | cut -d " " -f9- )
+    log:: closing $process
     kill -3 $process
-    log:: OK closed $process $name $directory
-    ((i=i+1))
+    directory=$(lsof -p $process | grep cwd | sed 's/  */ /g' | cut -d " " -f9- )
+    stillRunningName=$(ps -o command= -p $process || echo "")
+    if [ -n "${stillRunningName}" ] ; then
+      log:: NOK not-closed $process $name $directory
+      ((unclosed=unclosed+1))
+      if [ "$1" == "-f" ] ; then
+        kill -9 $process
+        log:: OK force-closed $process $name $directory
+        ((applicationsClosed=applicationsClosed+1))
+        ((i=i+1))
+      fi
+    else
+      log:: OK closed $process $name $directory
+      ((applicationsClosed=applicationsClosed+1))
+      ((i=i+1))
+    fi
+  done
+  [ $i -gt 0 ] && log:: closed $application
+done
+
+runningTotal=0
+for application in Dropbox watchman Drive.ap Spotify Music.app Safari.app; do
+  for process in $(ps -A -o pid,command | grep "$application" | grep -v -E 'grep' | awk '{ print $1 }' ) ; do
+    name=$(ps -o command= -p $process || echo "command name n/a")
+    time=$(ps -o time= -p $process || echo "unknown")
+    log::table 20 "$process ${time}" "$name"
+    ((runningTotal=runningTotal+1))
   done
 done
+[ $runningTotal -gt 0 ] && log::info "the above low priority processes are running"
 
 [ $i -eq 1 ] && plural="" || plural="s"
 
-log:: DONE close closed ${i} app${plural}
+if [ $i -gt 0 ] ; then
+  log:: DONE closed ${i} app${plural}
+elif [ $runningTotal -eq 0 ] ; then
+  log:: DONE no applications to close
+fi
+
+if [ $unclosed -gt 0 ] ; then
+  log::error run closeme -f to force close
+fi
