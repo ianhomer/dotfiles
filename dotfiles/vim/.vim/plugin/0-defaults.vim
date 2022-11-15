@@ -198,7 +198,7 @@ augroup dotme
     " *** Scope : IO ***
     "
     " Auto reload when focus gained or buffer entered
-    autocmd FocusGained,WinEnter,BufEnter * :checktime
+    autocmd FocusGained,WinEnter,BufEnter * if &buftype != 'nofile'|silent! checktime|endif
     call my#EnableAutoSave()
   endif
 
