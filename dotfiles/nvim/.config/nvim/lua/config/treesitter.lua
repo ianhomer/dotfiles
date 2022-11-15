@@ -38,3 +38,13 @@ treesitter.setup {
         }
     }
 }
+
+-- fix attempt to index local 'node_or_range' for cmd window
+-- https://github.com/nvim-treesitter/nvim-treesitter/issues/2634
+vim.api.nvim_create_augroup("cmdwin_treesitter", { clear = true })
+vim.api.nvim_create_autocmd("CmdwinEnter", {
+  pattern = "*",
+  command = "TSBufDisable incremental_selection",
+  group = "cmdwin_treesitter",
+  desc = "Disable treesitter's incremental selection in Command-line window",
+})
