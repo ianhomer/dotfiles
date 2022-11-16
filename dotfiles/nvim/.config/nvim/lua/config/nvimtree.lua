@@ -61,6 +61,11 @@ require("nvim-tree").setup({
       },
     },
 
+    change_dir = {
+      enable = false,
+      restrict_above_cwd = true
+    },
+
     open_file = {
       resize_window = false,
       window_picker = {
