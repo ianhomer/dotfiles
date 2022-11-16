@@ -189,7 +189,7 @@ return require("packer").startup({
 
     _use({
       "hrsh7th/cmp-nvim-lsp",
-      commit = "78924d1d677b29b3d1fe429864185341724ee5a2",
+      commit = "59224771f91b86d1de12570b4070fe4ad7cd1eeb",
     })
 
     _use({
