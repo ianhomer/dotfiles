@@ -40,7 +40,7 @@ echo $@
 BREW_PREFIX=`brew --prefix`
 
 if [[ "$JUST_NODE" == "y" ]] ; then
-  applications="node"
+  applications="node $BREW_PREFIX/Cellar/node"
 else
   applications="nvim"
   applications+=" watchman $BREW_PREFIX/bin/watchman"
