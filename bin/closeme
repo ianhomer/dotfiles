@@ -1,27 +1,64 @@
 #!/usr/bin/env bash
 
-# Close apps that are reasonably safe to just close. Useful as a housekeeping
-# step to free up resources.
-
-# For nvim, this closes all proceses without lock in the process name
-# Start vim with 
-#
-#    nvim +lock 
-#
-# to withstand this close process. This process of closing nvim relies on nvim
-# autosaving files, this process does not save files.
-
 set -e
 $(shim) && . ${ME}/i.sh
 
+help() {
+  cat << EOF
+Close apps that are reasonably safe to just close. Useful as a housekeeping
+step to free up resources.
+
+  -h this help
+  -n close only node processes
+  -v close only vim processes
+
+#or nvim, this closes all proceses without lock in the process name
+Start vim with 
+
+    nvim +lock 
+
+to withstand this close process. This process of closing nvim relies on nvim
+autosaving files, this process does not save files.
+EOF
+}
+
+OPTIND=1
+while getopts "hnv" o; do case "$o" in
+  h) help && exit 0 ;;
+  f) FORCE_CLOSE=y ;;
+  n) JUST_NODE=y ;;
+  v) JUST_VIM=y ;;
+  *) exit 1 ;;
+esac done
+shift $((OPTIND-1))
+
 i=0
 unclosed=0
+
+echo $@
+
+BREW_PREFIX=`brew --prefix`
+
+if [[ "$JUST_NODE" == "y" ]] ; then
+  applications="node"
+else
+  applications="nvim"
+  applications+=" watchman $BREW_PREFIX/bin/watchman"
+  applications+=" node $BREW_PREFIX/Cellar/node"
+  applications+=" /Applications/Flipper.app prettierd eslint_d adb"
+  applicationsToReport="Dropbox Drive.ap Spotify Music.app"
+  applicationsToReport+=" Safari.app "
+  # Check others that should have been closed by applications list
+  # above, in case of hangers on.
+  applicationsToReport+=" node watchman"
+fi
+
 
 # Get user ID so that it can be used in grep of ps to find process that start
 # with named command
 uid=$(id -u)
 
-for application in nvim /Applications/Flipper.app node prettierd eslint_d adb ; do
+for application in $applications ; do
   applicationsClosed=0
   for process in $(ps -A -o pid,uid,command | grep "$uid $application" | grep -v -E 'lock|grep' | awk '{ print $1; }') ; do
     name=$(ps -o command= -p $process)
@@ -32,7 +69,7 @@ for application in nvim /Applications/Flipper.app node prettierd eslint_d adb ; 
     if [ -n "${stillRunningName}" ] ; then
       log:: NOK not-closed $process $name $directory
       ((unclosed=unclosed+1))
-      if [ "$1" == "-f" ] ; then
+      if [ "$FORCE_CLOSE" == "y" ] ; then
         kill -9 $process
         log:: OK force-closed $process $name $directory
         ((applicationsClosed=applicationsClosed+1))
@@ -48,22 +85,22 @@ for application in nvim /Applications/Flipper.app node prettierd eslint_d adb ; 
 done
 
 runningTotal=0
-for application in Dropbox watchman Drive.ap Spotify Music.app Safari.app; do
-  for process in $(ps -A -o pid,command | grep "$application" | grep -v -E 'grep' | awk '{ print $1 }' ) ; do
-    name=$(ps -o command= -p $process || echo "command name n/a")
-    time=$(ps -o time= -p $process || echo "unknown")
-    log::table 20 "$process ${time}" "$name"
-    ((runningTotal=runningTotal+1))
+if [[ -n "${applicationsToReport}" ]] ; then
+  for application in $applicationsToReport ; do
+    for process in $(ps -A -o pid,command | grep "$application" | grep -v -E 'grep' | awk '{ print $1 }' ) ; do
+      name=$(ps -o command= -p $process || echo "command name n/a")
+      time=$(ps -o time= -p $process || echo "unknown")
+      log::table 20 "$process ${time}" "$name"
+      ((runningTotal=runningTotal+1))
+    done
   done
-done
-[ $runningTotal -gt 0 ] && log::info "the above low priority processes are running"
+  [ $runningTotal -gt 0 ] && log::info "the above low priority processes are running"
+fi
 
 [ $i -eq 1 ] && plural="" || plural="s"
 
 if [ $i -gt 0 ] ; then
   log:: DONE closed ${i} app${plural}
-elif [ $runningTotal -eq 0 ] ; then
-  log:: DONE no applications to close
 fi
 
 if [ $unclosed -gt 0 ] ; then
