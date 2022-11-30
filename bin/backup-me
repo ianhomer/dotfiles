@@ -47,7 +47,7 @@ args="$args --log-file=$LOG"
 # args="$args --dry-run"
 log:: "rsync args : $args"
 
-LOCATIONS=".dotfiles Dropbox"
+LOCATIONS=".dotfiles gdrive Dropbox"
 PROJECT_ROOTS="things dotmodules my try"
 for root in $PROJECT_ROOTS ; do
   LOCATIONS="$LOCATIONS projects/$root"
