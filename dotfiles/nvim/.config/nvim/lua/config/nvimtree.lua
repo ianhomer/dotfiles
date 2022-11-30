@@ -18,6 +18,7 @@ require("nvim-tree").setup({
       list = {
         -- ignore normal C-o since odd in tree window
         { key = "<C-o>", action = "parent_node" },
+        { key = "r", action = "relative_rename" },
       },
     },
   },

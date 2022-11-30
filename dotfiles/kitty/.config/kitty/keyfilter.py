@@ -2,7 +2,7 @@ from typing import List
 from kitty.boss import Boss
 from kittens.tui.handler import result_handler
 from kitty.key_encoding import KeyEvent, parse_shortcut
-
+from kitty.key_encoding import CTRL
 
 def main(args: List[str]) -> str:
     pass
@@ -16,7 +16,7 @@ def is_vim(window):
 
 def key_event(keymap):
     mods, key = parse_shortcut(keymap)
-    return KeyEvent(mods=mods, key=key, ctrl=True)
+    return KeyEvent(mods=mods, key=key, ctrl=CTRL & mods)
 
 
 @result_handler(no_ui=True)
@@ -32,5 +32,5 @@ def handle_result(
     if is_vim(window):
         encoded_key = window.encoded_key(key_event(keymap).as_window_system_event())
         window.write_to_child(encoded_key)
-    else:
+    elif action in ["left", "right", "top", "bottom"]:
         boss.active_tab.neighboring_window(action)
