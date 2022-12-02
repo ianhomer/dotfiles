@@ -69,7 +69,7 @@ nvim_set_var("knobs_levels", {
   lualine = 3,
   luasnip = 3,
   markdown_syntax_table = 3,
-  markdown_preview = 3,
+  markdown_preview = 9,
   minimap = 9,
   modes = 3,
   mundo = 3,
@@ -80,6 +80,7 @@ nvim_set_var("knobs_levels", {
   notify = 5,
   null_ls = 3,
   nvim_tree = 3,
+  peek = 5,
   peekaboo = 9,
   rainbow = 3,
   refactoring = 9,
@@ -690,6 +691,12 @@ return require("packer").startup({
       -- cmd = {"MarkdownPreview"},
       run = "cd app && yarn install",
       commit = "02cc3874738bc0f86e4b91f09b8a0ac88aef8e96",
+    })
+    use({
+      'toppair/peek.nvim',
+      config = [[require'config.peek']],
+      run = 'deno task --quiet build:fast',
+      commit = "18284b64f6c5103ccf18d6b53f288d2b2de2dc4a"
     })
     use({
       "lukas-reineke/indent-blankline.nvim",

@@ -43,8 +43,9 @@ if get(g:, "knobs_level", 0) > 2
     nnoremap <silent> ' :WhichKey "'"<CR>
   endif
 
-  nnoremap <silent> <leader>p :MarkdownPreview<CR>
-  nnoremap <silent> <leader>.m :!mind-map %:p<CR>
+  if exists("g:knob_markdown_preview")
+    nnoremap <silent> <leader>p :MarkdownPreview<CR>
+  endif
 endif
 
 command! -nargs=0 LintMe :call my#LintMe()

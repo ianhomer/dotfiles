@@ -97,6 +97,10 @@ if vim.g.knob_nvim_tree then
     map["n"] = { "<cmd>NvimTreeToggle<cr>", "Files" }
 end
 
+if vim.g.knob_peek then
+    map["p"] = { "<cmd>PeekOpen<cr>", "Markdown Peek"}
+end
+
 map["e"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics" }
 if vim.g.knob_hop then
     map["h"] = { "<cmd>lua require'hop'.hint_words()<cr>", "Hop" }
