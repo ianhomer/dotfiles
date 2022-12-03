@@ -18,7 +18,7 @@ require("nvim-tree").setup({
       list = {
         -- ignore normal C-o since odd in tree window
         { key = "<C-o>", action = "parent_node" },
-        { key = "r", action = "relative_rename" },
+        -- { key = "r", action = "relative_rename" },
       },
     },
   },
@@ -54,6 +54,9 @@ require("nvim-tree").setup({
   },
   live_filter = {
     always_show_folders = false,
+  },
+  notify = {
+    threshold = vim.log.levels.WARN
   },
   actions = {
     file_popup = {
