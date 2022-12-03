@@ -146,14 +146,14 @@ command_inner() {
   [ $DRY -eq 0 ] && is-pc && dotme-jenv
   [ $DRY -eq 0 ] && is-pc && dotme-bash
   if command -v fish &> /dev/null ; then
-    [ $DRY -eq 0 ] && dotme-fish
-    [ $DRY -eq 0 ] && dotme-fisher
+    [ $DRY -eq 0 ] && is-pc && dotme-fish
+    [ $DRY -eq 0 ] && is-pc && dotme-fisher
   fi
   if command -v zsh &> /dev/null ; then
     [ $DRY -eq 0 ] && dotme-zsh
   fi
   [ $DRY -eq 0 ] && dotme-gitme
-  [ $DRY -eq 0 ] && dotme-modules
+  [ $DRY -eq 0 ] && is-pc && dotme-modules
   [ $DRY -eq 0 ] && is-pc && dotme-test
   #[ $DRY -eq 0 ] && is-pc && dotme-nnn
   command_clean
