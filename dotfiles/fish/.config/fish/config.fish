@@ -42,6 +42,9 @@ if status --is-login
     set -x NNN_FIFO "/tmp/nnn.fifo"
     set -x VISUAL ewrap
 
+    # Android development set up
+    set -x ANDROID_SDK_ROOT "$HOME/Library/Android/sdk"
+
     time-me "BEFORE nvm use"
     # Efficient switching to latest node by default for shell. nvm use is a little
     # slower and does not force activation if node installed globally
