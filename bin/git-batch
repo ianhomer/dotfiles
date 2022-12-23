@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+#
+# Batching changes for git.
+#
+# Suitable only for git content repositories such as a digital garden and not
+# code repositories where branches should branch names should be named with
+# meaning.
+#
+# When I make changes to my digital garden I like to work in batches and then
+# review the batch before merging. I tend to have one batch open at a time, and
+# a batch tends to cover a days work. This allows me to collect my thoughts in a
+# batch and use the PR process to review the changes. It also allows me to jump
+# between devices. This git commmand aims to make this easy for me.
+#
+
+$(shim) && . ${ME}/i.sh
+
+OPTIND=1
+while getopts "hn:" o; do case "$o" in
+  h) WITH_HOUR="y" ;;
+  n) BATCH_NAME=$OPTARG ;;
+esac done
+
+trunk=main
+
+function newBatch {
+  currentBranchName=`git rev-parse --abbrev-ref HEAD`
+  if [[ "$currentBranchName" != "$trunk" ]] ; then
+    log::error "On $currentBranchName"
+  else
+    log::info "Creating a new batch"
+    if [ -n "$BATCH_NAME" ] ; then
+      batchName=$BATCH_NAME
+    elif [ "$WITH_HOUR" == "y" ] ; then
+      batchName=`date +%Y%m%d%H`
+    else
+      batchName=`date +%Y%m%d`
+    fi
+    batchBranchName=batch/$batchName
+    git ls-remote --exit-code --heads origin $batchBranchName
+    if [ $? -eq 0 ] ; then
+      log::error "Checking out existing remote batch $batchName"
+      git checkout $batchBranchName
+    elif [ `git rev-parse --verify $batchBranchName 2>/dev/null` ] ; then
+      log::error "Checking out existing local batch $batchName"
+      git checkout $batchBranchName
+    else
+      log::info "Creating new batch $batchName"
+      git checkout -b $batchBranchName
+    fi
+  fi
+  git ls-remote --heads origin | grep "/batch/"
+}
+
+newBatch
+
+
+
+
+

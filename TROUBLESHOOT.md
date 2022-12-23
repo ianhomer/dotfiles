@@ -5,21 +5,18 @@
 My Mac keyboard got it's ~ character mapped incorrectly I had to reset the
 keyboard with
 
-```sh
-sudo mv /Library/Preferences/com.apple.keyboardtype.plist ~/tmp
-```
+    sudo mv /Library/Preferences/com.apple.keyboardtype.plist ~/tmp
 
 Then restart my machine, to go through the keyboard re-initialisation. It then
 remapped the ~ AOK. Not sure why it got it wrong first time.
 
-# keyboard troubleshooting
-
+## keyboard troubleshooting
 
 In vi -> i -> `Ctrl+v` -> `key` combo => vi prints raw code.
 
 Install keycastr to see key presses on screen
 
-Simple execute
+Execute
 
     brew cask install keycastr
 

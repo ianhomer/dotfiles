@@ -2,7 +2,9 @@
 #
 #   rsync --exclude-from=~/.config/rsync/rsync-excludes.txt
 
+*.egg-info/
 .DS*
+.dropbox
 .dropbox.cache/
 .git/
 .gradle/
@@ -12,13 +14,11 @@
 .obsidian/
 .parcel-cache/
 .pytest_cache/
-*.egg-info/
 .vim/
 .vscode/
+Icon?
 __pycache__
 build/
 node_modules/
 static/
 target/
-Icon?
-.dropbox

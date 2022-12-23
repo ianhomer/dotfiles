@@ -198,7 +198,7 @@ augroup dotme
     " *** Scope : IO ***
     "
     " Auto reload when focus gained or buffer entered
-    autocmd FocusGained,WinEnter,BufEnter * :checktime
+    autocmd FocusGained,WinEnter,BufEnter * if &buftype != 'nofile'|silent! checktime|endif
     call my#EnableAutoSave()
   endif
 
@@ -206,7 +206,6 @@ augroup dotme
   autocmd QuickFixCmdPost [^l]* cwindow
   autocmd QuickFixCmdPost l* lwindow
 augroup end
-
 "
 " *** Scope : Editing ***
 "
@@ -305,7 +304,7 @@ endif
 " Thanks to Damian Conway                                                         test long line
 set colorcolumn=""
 highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%82v', 100)
+call matchadd('ColorColumn', '\%#=182v', 100)
 
 highlight ErrorMsg ctermbg=grey guibg=grey
 
