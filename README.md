@@ -43,12 +43,8 @@ of working to streamline distraction free coding. This includes:
 **kitty**
 : slick terminals
 
-**tmux**
-: terminal multiplexer with plugins - tmux-continuum ; tmux-resurrect ;
-  vim-tmux-navigator
-
 **neovim**
-: file editing with plugins - airline ; ale ; dispatch ; fugitive ;
+: file editing with plugins - airline ; null-ls ; dispatch ; fugitive ;
   fzf.vim ; lsp ; markdown-preview ; nerdtree ; repeat ; startify ;
   surround ; tabular ; which-key ; surround
 

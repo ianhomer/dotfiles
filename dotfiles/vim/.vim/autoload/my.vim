@@ -26,7 +26,8 @@ endfunction
 function my#LintMe()
   if knobs#("null_ls")
     let linter="lsp"
-    lua vim.lsp.buf.format { async = true }
+    " Use null_ls for formatting, not tsserver
+    lua vim.lsp.buf.format { async = true, filter = function(client) return client.name ~= "tsserver" end }
   else
     if &filetype == "markdown"
       let linter="thingity"

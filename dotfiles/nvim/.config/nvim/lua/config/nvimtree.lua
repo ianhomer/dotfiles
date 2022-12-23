@@ -1,5 +1,4 @@
 require("nvim-tree").setup({
-  create_in_closed_folder = true,
   hijack_cursor = true,
   sync_root_with_cwd = true,
   diagnostics = {
@@ -18,6 +17,7 @@ require("nvim-tree").setup({
       list = {
         -- ignore normal C-o since odd in tree window
         { key = "<C-o>", action = "parent_node" },
+        -- { key = "r", action = "relative_rename" },
       },
     },
   },
@@ -54,11 +54,19 @@ require("nvim-tree").setup({
   live_filter = {
     always_show_folders = false,
   },
+  notify = {
+    threshold = vim.log.levels.WARN
+  },
   actions = {
     file_popup = {
       open_win_config = {
         border = "rounded",
       },
+    },
+
+    change_dir = {
+      enable = false,
+      restrict_above_cwd = true
     },
 
     open_file = {
