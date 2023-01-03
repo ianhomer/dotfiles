@@ -40,7 +40,8 @@ if status --is-login
     set -x NNN_FCOLORS E63100
     set -x NNN_PLUG 'b:bookmarks;c:fzcd;p:preview-tui;f:fzopen'
     set -x NNN_FIFO "/tmp/nnn.fifo"
-    set -x VISUAL ewrap
+    set -x VISUAL nvim
+    set -x EDITOR nvim
 
     # Android development set up
     set -x ANDROID_SDK_ROOT "$HOME/Library/Android/sdk"
