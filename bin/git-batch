@@ -81,7 +81,9 @@ function completeBatch {
   if [[ "${currentBranchName}" != batch/* ]] ; then
     log::error "Current branch ${currentBranchName} is not a batch"
   else
-    git commit -am "batch complete"
+    if [[ `git status --porcelain` ]]; then
+      git commit -am "batch complete"
+    fi
     # early push in case issues, however on success remote
     # branch will be removed
     git push
