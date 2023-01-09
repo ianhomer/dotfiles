@@ -21,15 +21,20 @@ help() {
 
 Batch git changes
 
-  -h this help
-  -t use time in batch name
-  -n explicit batch name
+  -e (e)nable batch completions
+  -h this (h)elp
+  -t use (t)ime in batch name
+  -n explicit batch (n)ame
 
 Create a new batch
 
   git batch
 
-Complete a batch
+Complete a batch, first enable batch completions for a given repository
+
+  git batch -e
+
+And then 
 
   git batch complete
 
