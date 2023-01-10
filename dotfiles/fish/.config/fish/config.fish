@@ -53,6 +53,9 @@ if status --is-login
     set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
     _nvm_version_activate $v
     time-me "AFTER nvm use"
+
+    # Enable pyenv
+    pyenv init - | source
 end
 
 if status --is-interactive

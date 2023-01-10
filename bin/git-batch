@@ -42,7 +42,8 @@ EOF
 }
 
 OPTIND=1
-while getopts "hn:t" o; do case "$o" in
+while getopts "ehn:t" o; do case "$o" in
+  e) git config core.allowbatchcompletions true ;;
   h) help && exit 0 ;;
   t) WITH_TIME="y" ;;
   n) BATCH_NAME=$OPTARG ;;
