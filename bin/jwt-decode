@@ -9,7 +9,13 @@ for i in 1 2 ; do
     3) part="${part}=";;
   esac
   echo $part
-  echo $part | base64 -d
+  value=$(echo $part | base64 -d)
+  echo $value
+  if [ ${i} -eq 2 ] ; then
+    exp=$(echo $value | jq '.exp')
+    echo "Expiry : " $exp
+    date -r ${exp}
+  fi
 done
 echo
 
