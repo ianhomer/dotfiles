@@ -66,6 +66,12 @@ Set the following to start on login
   - Folder Actions set up
 - Show preview
 
+## Google Drive
+
+Set up folders to backup from local machine
+
+- `~/.local/share/buku/`
+
 ## Install Apps
 
 I often use the following, installing them manually as needed

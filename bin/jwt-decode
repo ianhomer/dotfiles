@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Part 1 is Header
+# Part 2 is Payload
+
+for i in 1 2 ; do
+  echo
+  echo "Part $i"
+  part=$(echo $1 | cut -f$i -d .)
+  case $((${#part} % 4)) in
+    2) part="${part}==";;
+    3) part="${part}=";;
+  esac
+  echo $part
+  value=$(echo $part | base64 -d)
+  echo $value
+  if [ ${i} -eq 2 ] ; then
+    exp=$(echo $value | jq '.exp')
+    echo "Expiry : " $exp
+    date -r ${exp}
+  fi
+done
+echo
+
