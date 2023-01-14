@@ -82,7 +82,7 @@ actually happens.
 You can also update parts of the initialisation separately, see `dotme -h` to
 get a list of each part. `man dotme` will give you more guidance on usage.
 
-I configure something on my system [manually](./docs/manual-osx.md)
+I configure somethings on my system [manually](./docs/manual-osx.md)
 for minor tweaks and enhancements.
 
 To customise local dotme configuration, `vi ~/.config/dotme/.env` and edit a
