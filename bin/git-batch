@@ -16,11 +16,41 @@
 
 $(shim) && . ${ME}/i.sh
 
+help() {
+  cat << EOF
+
+Batch git changes
+
+  -e (e)nable batch completions
+  -h this (h)elp
+  -t use (t)ime in batch name
+  -n explicit batch (n)ame
+
+Create a new batch
+
+  git batch
+
+Complete a batch, first enable batch completions for a given repository
+
+  git batch -e
+
+And then
+
+  git batch complete
+
+EOF
+}
+
 OPTIND=1
-while getopts "hn:" o; do case "$o" in
-  h) WITH_HOUR="y" ;;
+while getopts "ahn:t" o; do case "$o" in
+  a) git config core.allowbatchcompletions true ;;
+  h) help && exit 0 ;;
+  t) WITH_TIME="y" ;;
   n) BATCH_NAME=$OPTARG ;;
 esac done
+shift $((OPTIND-1))
+
+COMMAND=$1
 
 trunk=main
 
@@ -29,11 +59,10 @@ function newBatch {
   if [[ "$currentBranchName" != "$trunk" ]] ; then
     log::error "On $currentBranchName"
   else
-    log::info "Creating a new batch"
     if [ -n "$BATCH_NAME" ] ; then
       batchName=$BATCH_NAME
-    elif [ "$WITH_HOUR" == "y" ] ; then
-      batchName=`date +%Y%m%d%H`
+    elif [ "$WITH_TIME" == "y" ] ; then
+      batchName=`date +%Y%m%d%H%M`
     else
       batchName=`date +%Y%m%d`
     fi
@@ -53,7 +82,45 @@ function newBatch {
   git ls-remote --heads origin | grep "/batch/"
 }
 
-newBatch
+function completeBatch {
+  if [[ "true" != `git config core.allowbatchcompletions` ]] ; then
+      # Otherwise we have not explicit set that this repo can complete
+      # batches
+      printf "∷ ◉ $current - set allowbatchcompletions with git synk -a to allow batch completions"
+      return 128
+
+  fi
+  currentBranchName=`git rev-parse --abbrev-ref HEAD`
+  if [[ "${currentBranchName}" != batch/* ]] ; then
+    log::error "Current branch ${currentBranchName} is not a batch"
+  else
+    if [[ `git status --porcelain` ]]; then
+      git commit -am "batch complete"
+    fi
+    # early push in case issues, however on success remote
+    # branch will be removed
+    git push
+    # Squash merge onto trunk with auto commit message. If there
+    # are comflicts then this will fail and the conflict should be resolved
+    # manually
+    git checkout $trunk
+    git merge --squash $currentBranchName
+    git commit -m "${currentBranchName}"
+    git push
+    # auto delete remote bracnh, not that local copy remains
+    # and is useful for troubleshooting
+    git push origin -d "${currentBranchName}"
+  fi
+}
+
+if [[ -z "$COMMAND" ]] ; then
+  newBatch
+elif [[ "$COMMAND" == "complete" ]] ; then
+  set -e
+  completeBatch
+else
+  echo "Command $COMMAND" is not recognised
+fi
 
 
 
