@@ -34,7 +34,7 @@ Complete a batch, first enable batch completions for a given repository
 
   git batch -e
 
-And then 
+And then
 
   git batch complete
 
@@ -42,8 +42,8 @@ EOF
 }
 
 OPTIND=1
-while getopts "ehn:t" o; do case "$o" in
-  e) git config core.allowbatchcompletions true ;;
+while getopts "ahn:t" o; do case "$o" in
+  a) git config core.allowbatchcompletions true ;;
   h) help && exit 0 ;;
   t) WITH_TIME="y" ;;
   n) BATCH_NAME=$OPTARG ;;
@@ -83,6 +83,13 @@ function newBatch {
 }
 
 function completeBatch {
+  if [[ "true" != `git config core.allowbatchcompletions` ]] ; then
+      # Otherwise we have not explicit set that this repo can complete
+      # batches
+      printf "∷ ◉ $current - set allowbatchcompletions with git synk -a to allow batch completions"
+      return 128
+
+  fi
   currentBranchName=`git rev-parse --abbrev-ref HEAD`
   if [[ "${currentBranchName}" != batch/* ]] ; then
     log::error "Current branch ${currentBranchName} is not a batch"
@@ -93,8 +100,8 @@ function completeBatch {
     # early push in case issues, however on success remote
     # branch will be removed
     git push
-    # Sequash merge onto trunk with auto commit message. If there
-    # are comflicts then this will fail and the conflict should be resolved 
+    # Squash merge onto trunk with auto commit message. If there
+    # are comflicts then this will fail and the conflict should be resolved
     # manually
     git checkout $trunk
     git merge --squash $currentBranchName
