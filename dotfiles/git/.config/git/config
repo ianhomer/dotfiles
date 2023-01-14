@@ -16,9 +16,9 @@
   log-who-when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto)%h%Cblue %ae%Cgreen %cd%Creset %<(40,trunc)%s'"
   log-when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %Cblue%cd%Creset %<(60,trunc)%s'"
   when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %Cblue%cd%Creset %<(60,trunc)%s'"
-  log-graph = "log --all --decorate --oneline --graph --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %s%Cgreen %cd% %Cblue %Cblue%ae%d'"
+  log-graph = "log --all --decorate --oneline --graph --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %<(20,trunc)%s%Cgreen %cd% %Cblue %Cblue%ae%d'"
   # Graph only the branch points
-  log-graph-branches = "log --all --decorate --oneline --graph --simplify-by-decoration --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %s%Cgreen %cd% %Cblue %Cblue%ae%d'"
+  log-graph-branches = "log --all --decorate --oneline --graph --simplify-by-decoration --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %<(20,trunc)%s %Cgreen %cd% %Cblue %Cblue%ae%d'"
   set-upstream = !git branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)
 
 [core]
