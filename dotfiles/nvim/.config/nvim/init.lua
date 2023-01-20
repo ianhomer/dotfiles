@@ -23,7 +23,7 @@ nvim_set_var("knobs_levels", {
   autosave = 3,
   barbar = 5,
   bqf = 5,
-  codewindow = 5,
+  codewindow = 6,
   colorizer = 4,
   conflict_marker = 7,
   commentary = 4,
@@ -98,7 +98,7 @@ nvim_set_var("knobs_levels", {
   telescope_fzf_native = 3,
   telescope_symbols = 3,
   telekasten = 9,
-  test = 5,
+  test = 6,
   thingity = 3,
   tmux_navigator = 9,
   toggleterm = 3,
@@ -115,7 +115,7 @@ nvim_set_var("knobs_levels", {
   writegood = 3,
   vimspector = 9,
   vsnip = 9,
-  vimux = 5,
+  vimux = 9,
   zen_mode = 5,
   zephyr = 9,
 })
@@ -599,7 +599,7 @@ return require("packer").startup({
       "lewis6991/gitsigns.nvim",
       event = "BufRead",
       config = [[require'config.gitsigns']],
-      commit = "addd6e174a85fc1c4007ab0b65d77e6555b417bf",
+      commit = "d076301a634198e0ae3efee3b298fc63c055a871",
     })
     use({
       "junegunn/gv.vim",
