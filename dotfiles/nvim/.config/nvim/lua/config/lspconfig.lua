@@ -144,18 +144,21 @@ local servers = {
       },
     },
   },
-  pylsp = {
-    pylsp = {
-      plugins = {
-        rope_autoimport = {
-          enabled = true,
-        },
-        rope_completion = {
-          enabled = true,
-        },
-      },
-    },
-  },
+  -- pylsp = {
+  --   settings = {
+  --     pylsp = {
+  --       plugins = {
+  --         rope_autoimport = {
+  --           enabled = true,
+  --           memory = false
+  --         },
+  --         rope_completion = {
+  --           enabled = true,
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
   pyright = {},
   sumneko_lua = {
     settings = {
@@ -183,9 +186,6 @@ local servers = {
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 for server, opts in pairs(servers) do
   local module = lspconfig[server]
-  print(server)
-  print(opts.filetypes)
-
   if module then
     -- experimental ufo folding configuration
     -- capabilities.textDocument.foldingRange = {

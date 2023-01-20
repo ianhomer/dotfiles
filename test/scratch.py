@@ -10,6 +10,5 @@ def foo(bar):
     return "value"
 
 
-uuid()
 bar = "hello"
 foo(bar)
