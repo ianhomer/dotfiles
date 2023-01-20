@@ -599,7 +599,7 @@ return require("packer").startup({
       "lewis6991/gitsigns.nvim",
       event = "BufRead",
       config = [[require'config.gitsigns']],
-      commit = "d076301a634198e0ae3efee3b298fc63c055a871",
+      commit = "7b37bd5c2dd4d7abc86f2af096af79120608eeca",
     })
     use({
       "junegunn/gv.vim",
