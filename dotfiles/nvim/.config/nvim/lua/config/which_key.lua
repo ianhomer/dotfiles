@@ -102,6 +102,7 @@ if vim.g.knob_peek then
 end
 
 map["e"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics" }
+map["cc"] = { "beli<cmd>lua require'cmp'.complete()<cr>", "Autocompletion menu"}
 if vim.g.knob_hop then
     map["h"] = { "<cmd>lua require'hop'.hint_words()<cr>", "Hop" }
 end
