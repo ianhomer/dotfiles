@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+should-run -m 1 $@ $0 || exit 0
+
+OPTIND=1
+while getopts "f" o; do case "$o" in
+  f) FORCE=y ;;
+  *) exit 1 ;;
+esac done
+shift $((OPTIND-1))
+
+
+backup-things -abs
+
+
+
+should-run -fu $0
+
