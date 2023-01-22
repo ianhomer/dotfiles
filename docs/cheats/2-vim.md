@@ -11,9 +11,10 @@ Shortcuts I'm trying to remember.
 | `gd`      | Go to definition                                      |
 | `ctrl-]`  | Go to tag                                             |
 | `ctrl-o`  | Jump back to previous location (after `gd` or `ctr-]` |
-| `space-d` | Show LSP diagnostics on current line                  |
+| `space-e` | Show LSP diagnostics on current line                  |
 | `[-d`     | Previous LSP diagnostic                               |
 | `]-d`     | Next LSP diagnostic                                   |
+| `space-7  | Show trouble                                          |
 | `ctrl-X`  | In FZF open in horizontal split                       |
 | `%norm`   | Do operation on each line in file                     |
 | `csw"`    | Quote word                                            |
@@ -23,17 +24,18 @@ Shortcuts I'm trying to remember.
 
 |             |                                                 |
 | ----------- | ----------------------------------------------- |
-| `0`         | beginning of line                               |
-| `$`         | end of line                                     |
-| `}`         | next block                                      |
-| `{`         | previous block                                  |
-| `[[`        | next header                                     |
-| `]]`        | previous header                                 |
-| `:nn`       | line nn                                         |
-| `gd`        | go to definition                                |
-| `gg`        | beginning of file                               |
-| `GG`        | end of file                                     |
-| `percent %` | next / previous bracket                         |
+| `0`         | Beginning of line                               |
+| `$`         | End of line                                     |
+| `}`         | Next block                                      |
+| `{`         | Previous block                                  |
+| `[[`        | Next header                                     |
+| `]]`        | Previous header                                 |
+| `:nn`       | Line nn                                         |
+| `gd`        | Go to definition                                |
+| `gg`        | Beginning of file                               |
+| `GG`        | End of file                                     |
+| `gx`        | Open URL                                        |
+| `percent %` | Next / previous bracket                         |
 | `*`         | Search for next occurrence of word under cursor |
 | `Ctrl+o`    | Jump to previous cursor position (jumplist)     |
 | `Ctrl+i`    | Jump to next cursor position (jumplist)         |
@@ -68,7 +70,7 @@ command-line-window
 
 |          |                         |
 | -------- | ----------------------- |
-| `ctrl-/` | show telescope mappings |
+| `ctrl-/` | Show telescope mappings |
 
 ### debug
 
@@ -77,10 +79,10 @@ shortcuts for run and debug features.
 
 |      |                                   |
 | ---- | --------------------------------- |
-| `,t` | toggle a break point              |
-| `,c` | attach to debugger or continue    |
-| `,o` | open debugger UI                  |
-| `,p` | hover window for current variable |
+| `,t` | Toggle a break point              |
+| `,c` | Attach to debugger or continue    |
+| `,o` | Open debugger UI                  |
+| `,p` | Hover window for current variable |
 
 ### misc
 
@@ -109,27 +111,27 @@ shortcuts for run and debug features.
 | `call setreg('a', [])` | Clear a register                             |
 | `"add`                 | Delete line into register a                  |
 | `"ap`                  | Paste line from register a                   |
-| `space + r` or `:reg`  | show paste register                          |
+| `space + r` or `:reg`  | Show paste register                          |
 
 ### files
 
 |              |                           |
 | ------------ | ------------------------- |
-| `space+n`    | Open nerd tree            |
+| `space+n`    | Open file explorer        |
 | `space+s`    | Save all files            |
 | `space+f`    | Open file browser         |
-| `:cd`        | change directory          |
-| `"2p`        | paste a previous cut      |
-| `gf`         | go to file under cursor   |
-| `gx`         | open link in browser      |
-| `gt`         | go to next tab            |
-| `tabe`       | open file in new tab      |
-| `m + letter` | set mark                  |
-| `' + letter` | go to mark                |
-| `Ctrl+^`     | switch to previous buffer |
-| `:tab h foo` | open help in a new tab    |
-| `Ctrl+w o`   | make pane the visible one |
-| `:noh`       | clear last highlight      |
+| `:cd`        | Change directory          |
+| `"2p`        | Paste a previous cut      |
+| `gf`         | Go to file under cursor   |
+| `gx`         | Open link in browser      |
+| `gt`         | Go to next tab            |
+| `tabe`       | Open file in new tab      |
+| `m + letter` | Set mark                  |
+| `' + letter` | Go to mark                |
+| `Ctrl+^`     | Switch to previous buffer |
+| `:tab h foo` | Open help in a new tab    |
+| `Ctrl+w o`   | Make pane the visible one |
+| `:noh`       | Clear last highlight      |
 
 `:enew | pu=execute('autocmd')`
 : copy output of command, e.g. autocmd, into buffer
@@ -138,9 +140,9 @@ shortcuts for run and debug features.
 
 |               |                            |
 | ------------- | -------------------------- |
-| `:bd`         | close buffer               |
-| `:bn`         | next buffer                |
-| `bufdo bd`    | close all buffers          |
+| `:bd`         | Close buffer               |
+| `:bn`         | Next buffer                |
+| `bufdo bd`    | Close all buffers          |
 | `space+b`     | Commits for current buffer |
 | `space+space` | Show buffers               |
 
@@ -148,25 +150,25 @@ shortcuts for run and debug features.
 
 |                 |                                   |
 | --------------- | --------------------------------- |
-| `:split`        | split pane                        |
-| `:vsplit`       | split pan vertically              |
-| `80 Ctrl+w`     | set current pane to 80 characters |
-| `Ctrl+w Ctrl+=` | even out the windows              |
+| `:split`        | Split pane                        |
+| `:vsplit`       | Split pan vertically              |
+| `80 Ctrl+w`     | Set current pane to 80 characters |
+| `Ctrl+w Ctrl+=` | Even out the windows              |
 
 ### edit
 
 |                  |                                        |
 | ---------------- | -------------------------------------- |
-| `space+g`        | distraction free coding with Goyo      |
-| `gw{motion}`     | reformat content                       |
-| `select+gw`      | reformat content                       |
-| `select+S"`      | surround selected **area** with quotes |
-| `ysiW"`          | surround word with quotes              |
-| `ysiWb`          | surround double star - bold            |
+| `space+g`        | Distraction free coding with Goyo      |
+| `gw{motion}`     | Reformat content                       |
+| `select+gw`      | Reformat content                       |
+| `select+S"`      | Surround selected **area** with quotes |
+| `ysiW"`          | Surround word with quotes              |
+| `ysiWb`          | Surround double star - bold            |
 | `visual+S`       | surround visual selection              |
-| `Ctrl+v`         | select visual block, e.g. column       |
-| `:%!jq .`        | reformat JSON                          |
-| `count+space+cc` | comment out the next count lines       |
+| `Ctrl+v`         | Select visual block, e.g. column       |
+| `:%!jq .`        | Reformat JSON                          |
+| `count+space+cc` | Comment out the next count lines       |
 | `:Format`        | Format current buffer                  |
 | `:nu`            | Show line numbers                      |
 | `:set rnu`       | Show relative line numbers             |
@@ -227,17 +229,17 @@ shortcuts for run and debug features.
 
 |             |                  |
 | ----------- | ---------------- |
-| `viWS+`     | make a word bold |
-| `zR`        | open all folds   |
-| `zM`        | close all folds  |
+| `viWS+`     | Make a word bold |
+| `zR`        | Open all folds   |
+| `zM`        | Close all folds  |
 | `<space>+l` | Lint file        |
 
 ### Selections
 
 |       |                                                  |
 | ----- | ------------------------------------------------ |
-| `vip` | select paragraph                                 |
-| `viW` | select current word (including non-alphanumeric) |
+| `vip` | Select paragraph                                 |
+| `viW` | Select current word (including non-alphanumeric) |
 
 ### Configuration
 
