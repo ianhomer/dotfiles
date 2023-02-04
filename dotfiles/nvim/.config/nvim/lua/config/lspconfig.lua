@@ -1,6 +1,7 @@
 local lspconfig = require("lspconfig")
 local outer_nmap = function(keys, func, desc)
-    vim.keymap.set("n", keys, func, { silent = true, noremap = true, desc = desc })
+    vim.keymap.set("n", keys, func,
+        { silent = true, noremap = true, desc = desc })
 end
 
 outer_nmap("[d", vim.diagnostic.goto_prev, "Previous diagnostic")
@@ -31,7 +32,8 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
     local nmap = function(keys, func, desc)
-        vim.keymap.set("n", keys, func, { buffer = bufnr, silent = true, noremap = true, desc = desc })
+        vim.keymap.set("n", keys, func,
+            { buffer = bufnr, silent = true, noremap = true, desc = desc })
     end
 
     if not vim.g.knob_lspsaga then
@@ -50,8 +52,11 @@ local on_attach = function(client, bufnr)
     nmap("<leader>,sh", vim.lsp.buf.signature_help, "Signature help")
 
     nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
-    nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder")
-    nmap("<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", "List workspaces")
+    nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder,
+        "Remove workspace folder")
+    nmap("<leader>wl",
+        "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
+        "List workspaces")
     nmap("<leader>D", vim.lsp.buf.type_definition, "Type definition")
 
     if vim.g.knob_null_ls then
@@ -115,76 +120,97 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- Use a loop to conveniently both setup defined servers
 -- and map buffer local keybindings when the language server attaches
 local servers = {
-    "bashls",
-    "cssls",
-    "html",
-    "jsonls",
-    "pyright",
-    "sumneko_lua",
-    "tailwindcss",
-    "terraformls",
-    "tsserver",
-    "vimls",
-}
-local lspsettings = {
-    sumneko_lua = {
-        Lua = {
-            diagnostics = {
-                globals = { "vim" },
-            },
-            runtime = {
-                version = "LuaJIT",
-            },
-            telemetry = { enable = false },
-        },
-    },
+    bashls = {},
     cssls = {
-        css = {
-            lint = {
-                unknownAtRules = "ignore",
+        settings = {
+            css = {
+                lint = {
+                    unknownAtRules = "ignore",
+                },
             },
         },
     },
+    html = {},
     jsonls = {
-        json = {
-            schemas = require("schemastore").json.schemas(),
-            validate = { enable = true },
-            provideFormatter = false,
+        init_options = {
+            jsonls = {
+                provideFormatter = false,
+            },
+        },
+        settings = {
+            json = {
+                schemas = require("schemastore").json.schemas(),
+                validate = { enable = true },
+                provideFormatter = false,
+            },
         },
     },
-}
-
-local filetypes = {
-    terraformls = { "terraform", "hcl" },
-    tailwindcss = { "css" },
-}
-
-local init_options = {
-    jsonls = {
-        provideFormatter = false,
+    -- pylsp = {
+    --   settings = {
+    --     pylsp = {
+    --       plugins = {
+    --         rope_autoimport = {
+    --           enabled = true,
+    --           memory = false
+    --         },
+    --         rope_completion = {
+    --           enabled = true,
+    --         },
+    --       },
+    --     },
+    --   },
+    -- },
+    pyright = {
+        -- see setting documentation in https://github.com/microsoft/pyright/blob/main/packages/vscode-pyright/package.json
+        settings = {
+            pyright = {
+                disableOrganizeImports = false,
+                disableLanguageServices = false,
+            },
+            python = {
+                analysis = {
+                    autoImportCompletions = true,
+                    -- logLevel = "Trace",
+                },
+            },
+        },
     },
+    sumneko_lua = {
+        settings = {
+            Lua = {
+                diagnostics = {
+                    globals = { "vim" },
+                },
+                runtime = {
+                    version = "LuaJIT",
+                },
+                telemetry = { enable = false },
+            },
+        },
+    },
+    tailwindcss = {
+        filetypes = { "css" },
+    },
+    terraformls = {
+        filetypes = { "terraform", "hcl" },
+    },
+    tsserver = {},
+    vimls = {},
 }
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-for _, lsp in ipairs(servers) do
-    local module = lspconfig[lsp]
+for server, opts in pairs(servers) do
+    local module = lspconfig[server]
     if module then
         -- experimental ufo folding configuration
         -- capabilities.textDocument.foldingRange = {
         --     dynamicRegistration = false,
         --     lineFoldingOnly = true
         -- }
-        module.setup({
-            on_attach = on_attach,
-            flags = {
-                debounce_text_changes = 150,
-            },
-            filetypes = filetypes[lsp],
-            settings = lspsettings[lsp],
-            init_options = init_options[lsp],
-            capabilities = capabilities,
-        })
+        opts.capabilities = capabilities
+        opts.on_attach = on_attach
+        module.setup(opts)
     else
-        print("Can't set up LSP for" .. lsp)
+        print("Can't set up LSP for" .. server)
     end
 end

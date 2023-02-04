@@ -44,8 +44,8 @@ of working to streamline distraction free coding. This includes:
 : slick terminals
 
 **neovim**
-: file editing with plugins - airline ; null-ls ; dispatch ; fugitive ;
-  fzf.vim ; lsp ; markdown-preview ; nerdtree ; repeat ; startify ;
+: file editing with plugins - null-ls ; dispatch ; fugitive ;
+  fzf.vim ; lsp ; markdown-preview ; nvim tree ; repeat ; startify ;
   surround ; tabular ; which-key ; surround
 
 **nnn** and **broot**
@@ -82,7 +82,7 @@ actually happens.
 You can also update parts of the initialisation separately, see `dotme -h` to
 get a list of each part. `man dotme` will give you more guidance on usage.
 
-I configure something on my system [manually](./docs/manual-osx.md)
+I configure somethings on my system [manually](./docs/manual-osx.md)
 for minor tweaks and enhancements.
 
 To customise local dotme configuration, `vi ~/.config/dotme/.env` and edit a

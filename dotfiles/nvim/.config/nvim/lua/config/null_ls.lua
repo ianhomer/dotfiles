@@ -39,6 +39,7 @@ null_ls.setup({
         vim.fn.expand("~/.flake8"),
       },
     }),
+    diagnostics.mypy,
     diagnostics.tidy,
     diagnostics.vale,
     diagnostics.trail_space.with({

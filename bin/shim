@@ -81,6 +81,11 @@ if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
   [[ -f $ENV ]] && export $(grep -v "^#" $ENV | xargs)
 
   #
+  # Defaults
+  #
+  REMOTE_DIR=${REMOTE_DIR:-$HOME/gdrive}
+
+  #
   # Imply the OS value from the underlying OSTYPE
   #
   if [[ -z "$OS" ]] ; then
@@ -137,6 +142,7 @@ export SHIM_OS=$SHIM_OS
 export SHIM_SED=$SHIM_SED
 export SHIM_STAT=$SHIM_STAT
 export THINGS_DIR=$THINGS_DIR
+export REMOTE_DIR=$REMOTE_DIR
 EOF
   fi
 else

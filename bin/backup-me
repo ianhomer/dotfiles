@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #
-# Backup my files
+# Backup my files to a removable drive
 #
 
 set -e
@@ -33,8 +33,8 @@ fi
 EXCLUDES_FILE=~/.dotfiles/dotfiles/rsync/.config/rsync/rsync-excludes.txt
 LOG_DIR=~/local/logs
 [[ ! -d $LOG_DIR ]] && mkdir $LOG_DIR
-LOG=$LOG_DIR/back-me-$(date "+%Y%m%d-%H%M%S").log
-OUT_LOG=$LOG_DIR/back-me-$(date "+%Y%m%d-%H%M%S")-out.log
+LOG=$LOG_DIR/backup-me-$(date "+%Y%m%d-%H%M%S").log
+OUT_LOG=$LOG_DIR/backup-me-$(date "+%Y%m%d-%H%M%S")-out.log
 stamp=$(date "+%Y/%m/%d/%H%M%S")
 
 # r - archive => -rlptgoD

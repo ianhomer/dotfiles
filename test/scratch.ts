@@ -1,9 +1,11 @@
+import { FOO } from "./scratch-module";
+
 interface Thing {
   title: string;
   content: string;
 }
 
-const myGlobal = [];
+const myGlobal = ["bar"];
 
 function add(x: number, y: number): number {
   return x + y;
@@ -29,3 +31,4 @@ const thing: Thing = { title: "My Title", content: "My Content" };
 console.log(myGlobal);
 console.log(thing.title);
 console.log(add(1, 2));
+console.log(FOO);

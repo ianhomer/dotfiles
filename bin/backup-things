@@ -3,36 +3,93 @@
 set -e
 
 $(shim) && . ${ME}/i.sh
-repository=${1:-$MY_NOTES}
+
+help() {
+  cat << EOF
+Backup local thing repositories
+  -a back up all thing repositories, not just primary one
+  -s sync backups to remote
+EOF
+}
+
+OPTIND=1
+while getopts "abs" o; do case "$o" in
+  a) BACKUP_ALL=y ;;
+  b) BACKUP_BUKU_BOOKMARKS=y ;;
+  s) SYNC_BACKUPS=y ;;
+  h) help && exit 0 ;;
+  *) exit 1 ;;
+esac done
+shift $((OPTIND-1))
+
+primaryRepository=${1:-$MY_NOTES}
 recipient=${2}
 if [[ -z "${recipient}" ]] ; then
   recipient=$(get-recipient)
 fi
-things=${THINGS_DIR}/$repository
-
-if [ ! -d "$things" ] ; then
-  log::exit "Not a directory $things"
-fi
-
-if [ -z "$recipient" ] ; then
-   log::exit "recipient is empty"
-fi
-
-if [ ! -d "$HOME/backups" ] ; then
-  log:: "Creating backups directory"
-  mkdir ~/backups
-fi
-
+localBackupDirectory=~/backups/things-backups
 stamp=$(date "+%Y%m%d-%H%M%S")
-base=$(basename $things)
-outputFilename=back-$base-$stamp.tar.gz.gpg
-outputFullFilename=~/backups/$outputFilename
 
-log:: "Archiving directory"
-log::  "$things ($base) for $recipient : $stamp"
-log:: "... $outputFilename"
+backupThingRepository() {
+  repository=$1
+  things=${THINGS_DIR}/$repository
 
-tar -C ${THINGS_DIR} --exclude .git -chzf - $base |
-  gpg --encrypt --recipient $recipient            \
-  --output $outputFullFilename
+  if [ ! -d "$things" ] ; then
+    log::exit "Not a directory $things"
+  fi
 
+  if [ -z "$recipient" ] ; then
+     log::exit "recipient is empty"
+  fi
+
+  if [ ! -d "$HOME/backups" ] ; then
+    log:: "Creating backups directory"
+    mkdir ~/backups
+  fi
+
+  if [ ! -d "$HOME/backups/things-backups" ] ; then
+    log:: "Creating backups directory"
+    mkdir $localBackupDirectory
+  fi
+
+  base=$(basename $things)
+  outputFilename=back-$base-$stamp.tar.gz.gpg
+  outputFullFilename=$localBackupDirectory/$outputFilename
+
+  log::  "$things ($base) for $recipient : $stamp"
+  log:: "... $outputFilename"
+
+  tar -C ${THINGS_DIR} --exclude .git -chzf - $base |
+    gpg --encrypt --recipient $recipient            \
+    --output $outputFullFilename
+}
+
+if [[ "${BACKUP_ALL}" == "y" ]] ; then
+  for repository in `ls ${THINGS_DIR}` ; do
+    if [[ -d "${THINGS_DIR}/$repository" ]] ; then
+      backupThingRepository $repository
+    fi
+  done
+fi
+
+echo ${BACKUP_ALL}
+if [[ "${BACKUP_ALL}" != "y" && "${BACKUP_BUKU_BOOKMARKS}" != "y" ]] ; then
+  backupThingRepository $primaryRepository
+fi
+
+if [[ "$BACKUP_BUKU_BOOKMARKS" == "y" ]] ; then
+  # Backup buku bookmarks database
+  bookmarkFilename=${localBackupDirectory}/bookmarks-${stamp}.html
+  echo "Backing up bookmarks : $bookmarkFilename"
+  buku -e $bookmarkFilename
+fi
+
+if [[ "${SYNC_BACKUPS}" == "y" && -n "$REMOTE_DIR" ]] ; then
+  LOG_DIR=~/local/logs
+  [[ ! -d $LOG_DIR ]] && mkdir $LOG_DIR
+  OUT_LOG=$LOG_DIR/backup-things-$(date "+%Y%m%d-%H%M%S")-out.log
+  remoteBackup="$REMOTE_DIR/historical/backups/things-backups"
+  echo "Syncing backups to remote directory : $REMOTE_DIR" | tee -a >> $OUT_LOG
+  echo "Log file : $OUT_LOG"
+  rsync -Pa ${localBackupDirectory}/ $remoteBackup
+fi

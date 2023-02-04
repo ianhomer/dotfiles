@@ -152,6 +152,7 @@ command_inner() {
   if command -v zsh &> /dev/null ; then
     [ $DRY -eq 0 ] && dotme-zsh
   fi
+  [ $DRY -eq 0 ] && dotme-backup
   [ $DRY -eq 0 ] && dotme-gitme
   [ $DRY -eq 0 ] && is-pc && dotme-modules
   [ $DRY -eq 0 ] && is-pc && dotme-test
