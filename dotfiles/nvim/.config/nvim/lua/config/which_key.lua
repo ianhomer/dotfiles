@@ -77,7 +77,8 @@ map[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "LSP Range Format" }
 -- Modes
 map["5"] = { "<cmd>lua require'config/null_ls'.setLevel(3)<cr>", "Core Lints" }
 map["6"] = { "<cmd>lua require'config/null_ls'.toggle()<cr>", "Toggle Lints" }
-map["7"] = { "<cmd>TroubleToggle<cr>", "Trouble" }
+map["7"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Trouble File" }
+map["&"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble All" }
 map["8"] = { "<cmd>call my#ToggleBlame()<cr>", "Blame" }
 map["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap" }
 
@@ -102,6 +103,7 @@ if vim.g.knob_peek then
 end
 
 map["e"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics" }
+map["cc"] = { "beli<cmd>lua require'cmp'.complete()<cr>", "Autocompletion menu"}
 if vim.g.knob_hop then
     map["h"] = { "<cmd>lua require'hop'.hint_words()<cr>", "Hop" }
 end

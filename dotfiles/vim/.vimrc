@@ -23,7 +23,7 @@ let g:knobs_levels = {
   \   "eunuch":5,
   \   "fugitive":3,
   \   "fzf":1,
-  \   "gitgutter":3,
+  \   "gitgutter":6,
   \   "gruvbox":3,
   \   "gruvbox8":1,
   \   "goyo":4,
@@ -33,6 +33,7 @@ let g:knobs_levels = {
   \   "modes":1,
   \   "nerdtree":1,
   \   "shortcuts":1,
+  \   "signify":3,
   \   "spelling":4,
   \   "startify":1,
   \   "startuptime":2,
@@ -154,6 +155,7 @@ endif
 
 " gitgutter - Git change indicator to left of window
 IfKnob 'gitgutter' Plug 'airblade/vim-gitgutter'
+IfKnob 'signify' Plug 'mhinz/vim-signify'
 
 " HTML
 if knobs#At(9) | Plug 'mattn/emmet-vim' | endif

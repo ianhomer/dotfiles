@@ -39,11 +39,6 @@ endfunction
 
 function window#cleaner#CloseAllBuffersButCurrent()
   call window#cleaner#Close("fzf")
-  if exists(':NvimTreeClose')
-    " Close Nvim cleanly since using bd on NvimTree leads to a file named
-    " NvimTree being created
-    NvimTreeClose
-  endif
   let current = bufnr("%")
   " Find the listed buffers
   let buffers = filter(range(1, bufnr('$')), 'buflisted(v:val)')
@@ -51,8 +46,8 @@ function window#cleaner#CloseAllBuffersButCurrent()
   let last = buffers[-1]
 
   for buffer in buffers
-    " Close every buffer except the current
-    if current != buffer
+    " Close every buffer except the current or the NvimTree one
+    if current != buffer && getbufvar(buffer, '&filetype') != 'NvimTree'
       execute buffer."bd"
     endif
   endfor
@@ -72,6 +67,12 @@ function window#cleaner#CloseOtherBuffers()
   endif
   " Return to saved mark
   normal `A
+  if knobs#("barbar")
+    " Barbar doesn't refresh immediately unless you click to another bugfer,
+    " let's just make it refresh.
+    BarbarDisable
+    BarbarEnable
+  endif
 endfunction
 
 "
