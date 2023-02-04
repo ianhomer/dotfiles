@@ -44,8 +44,8 @@ of working to streamline distraction free coding. This includes:
 : slick terminals
 
 **neovim**
-: file editing with plugins - airline ; null-ls ; dispatch ; fugitive ;
-  fzf.vim ; lsp ; markdown-preview ; nerdtree ; repeat ; startify ;
+: file editing with plugins - null-ls ; dispatch ; fugitive ;
+  fzf.vim ; lsp ; markdown-preview ; nvim tree ; repeat ; startify ;
   surround ; tabular ; which-key ; surround
 
 **nnn** and **broot**
