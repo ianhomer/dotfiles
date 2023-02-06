@@ -141,9 +141,8 @@ command_inner() {
   [ $DRY -eq 0 ] && clean-vim
   [ $DRY -eq 0 ] && dotme-vim
   [ $DRY -eq 0 ] && is-pc && dotme-tmux
-  [ $DRY -eq 0 ] && is-pc && dotme-node
-  [ $DRY -eq 0 ] && is-pc && dotme-rust
   [ $DRY -eq 0 ] && is-pc && dotme-jenv
+  [ $DRY -eq 0 ] && is-pc && dotme-rust
   [ $DRY -eq 0 ] && is-pc && dotme-bash
   if command -v fish &> /dev/null ; then
     [ $DRY -eq 0 ] && is-pc && dotme-fish
@@ -152,6 +151,7 @@ command_inner() {
   if command -v zsh &> /dev/null ; then
     [ $DRY -eq 0 ] && dotme-zsh
   fi
+  [ $DRY -eq 0 ] && is-pc && dotme-node
   [ $DRY -eq 0 ] && dotme-backup
   [ $DRY -eq 0 ] && dotme-gitme
   [ $DRY -eq 0 ] && is-pc && dotme-modules
