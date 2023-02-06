@@ -13,7 +13,6 @@ local has_nvim_tree_events, nvim_tree_events = pcall(require, "nvim-tree.events"
 local has_bufferline_api, bufferline_api = pcall(require, "bufferline.api")
 
 if has_bufferline_api and has_nvim_tree_events then
-
   nvim_tree_events.subscribe("TreeOpen", function()
     if vim.o.showtabline > 0 then
       bufferline_api.set_offset(get_tree_size())
