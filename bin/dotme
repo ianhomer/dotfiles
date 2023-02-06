@@ -122,6 +122,7 @@ command_initialise() {
 #
 command_inner() {
   command_initialise
+  [ $DRY -eq 0 ] && dotme-doctor
   if command -v stow &> /dev/null ; then
     # stow early if stow alreay installed, otherwise we have to wait for package
     # to be installed
