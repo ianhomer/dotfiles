@@ -141,7 +141,8 @@ command_inner() {
   [ $DRY -eq 0 ] && is-pc && dotme-gem
   [ $DRY -eq 0 ] && clean-vim
   [ $DRY -eq 0 ] && dotme-vim
-  [ $DRY -eq 0 ] && is-pc && dotme-tmux
+  # Not using tmux any more
+  # [ $DRY -eq 0 ] && is-pc && dotme-tmux
   [ $DRY -eq 0 ] && is-pc && dotme-jenv
   [ $DRY -eq 0 ] && is-pc && dotme-rust
   [ $DRY -eq 0 ] && is-pc && dotme-bash
@@ -157,7 +158,8 @@ command_inner() {
   [ $DRY -eq 0 ] && dotme-gitme
   [ $DRY -eq 0 ] && is-pc && dotme-modules
   [ $DRY -eq 0 ] && is-pc && dotme-test
-  #[ $DRY -eq 0 ] && is-pc && dotme-nnn
+  # Not using nnn for now
+  # [ $DRY -eq 0 ] && is-pc && dotme-nnn
   command_clean
 }
 
