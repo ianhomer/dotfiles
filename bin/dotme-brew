@@ -24,10 +24,10 @@ if ! is-executable brew ; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-if ! grep -q "/brew shellenv" ~/.zprofile ; then
+if [[ ! -f ~/.zprofile ]] || ! grep -q "/brew shellenv" ~/.zprofile ; then
   log:: "initialising ~/.zprofile"
-  brewCommand=$(which brew)
-  echo 'eval $('${brewCommand}' shellenv)' >> ~/.zprofile
+  brewCommand=/opt/homebrew/bin/brew
+  echo 'eval $(${brewCommand} shellenv)' >> ~/.zprofile
   eval "$(${brewCommand} shellenv)"
 fi
 

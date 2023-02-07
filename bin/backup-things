@@ -25,6 +25,10 @@ shift $((OPTIND-1))
 primaryRepository=${1:-$MY_NOTES}
 recipient=${2}
 if [[ -z "${recipient}" ]] ; then
+  if [ -z $(grep "MY_RECIPIENT" ~/.config/dotme/.env) ] ; then
+    log:: "Add MY_RECIPIENT to ~/.config/dotme/.env to enable backups"
+    exit 0
+  fi
   recipient=$(get-recipient)
 fi
 localBackupDirectory=~/backups/things-backups

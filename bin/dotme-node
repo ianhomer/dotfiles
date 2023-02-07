@@ -31,8 +31,8 @@ node -v
 #
 
 log:: "Cleaning npm globals"
-npm ls --global --json                                                 |
-  jq --raw-output  '.dependencies | keys[] | select(. != "npm")' |
+npm ls --global --json                                                               |
+  jq --raw-output  '.dependencies | keys[] | select((. != "npm") and (. != "pnpm"))' |
   xargs -r npm -g rm
 
 log:: "Updating pnpm"

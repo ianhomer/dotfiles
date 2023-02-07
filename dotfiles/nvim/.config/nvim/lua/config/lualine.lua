@@ -21,11 +21,12 @@ local function diff_source()
     end
 end
 
-local kanagawa = require("lualine.themes.kanagawa")
-
-kanagawa.inactive.a.bg = kanagawa.normal.b.bg
-kanagawa.inactive.b.bg = kanagawa.normal.b.bg
-kanagawa.inactive.c.bg = kanagawa.normal.b.bg
+local has_kanagawa, kanagawa = pcall(require,"lualine.themes.kanagawa")
+if has_kanagawa then
+  kanagawa.inactive.a.bg = kanagawa.normal.b.bg
+  kanagawa.inactive.b.bg = kanagawa.normal.b.bg
+  kanagawa.inactive.c.bg = kanagawa.normal.b.bg
+end
 
 require("lualine").setup({
     options = {
