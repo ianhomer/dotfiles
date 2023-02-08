@@ -108,6 +108,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 . ~/.config/sh/aliases.sh
+. ~/.config/sh/aliases-non-fish.sh
 
 fpath+=~/.config/zsh/functions
 autoload br

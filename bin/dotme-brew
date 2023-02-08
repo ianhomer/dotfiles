@@ -19,16 +19,22 @@ if [[ "$ADMIN" != "y" ]] ; then
   should-run -m 14 $@ $0 $BREW_DIR/Brewfile || exit 0
 fi
 
-if ! is-executable brew ; then
+if is-silicon ; then
+  brewCommand=/opt/homebrew/bin/brew
+else
+  # TBD
+  brewCommand=/usr/local/opt/bin/brew
+fi
+
+if ! is-executable $brewCommand ; then
   log:: "installing brew (sudo required)"
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-if [[ ! -f ~/.zprofile ]] || ! grep -q "/brew shellenv" ~/.zprofile ; then
+if [[ ! -f ~/.zprofile ]] || ! grep -q "homebrew" ~/.zprofile ; then
   log:: "initialising ~/.zprofile"
-  brewCommand=/opt/homebrew/bin/brew
-  echo 'eval $(${brewCommand} shellenv)' >> ~/.zprofile
-  eval "$(${brewCommand} shellenv)"
+  ${brewCommand} shellenv >> ~/.zprofile
+  . ~/.zprofile
 fi
 
 adminFormula="adoptopenjdk8 adoptopenjdk11 java11 languagetool openjdk@11"
@@ -72,13 +78,24 @@ if [[ "$ADMIN" == "y" ]] ; then
   brew bundle
 fi
 
-# Force pnpm overwrite, we'll always take an upgrade
+# (disabled) force pnpm overwrite, we'll always take an upgrade
 # brew link --overwrite pnpm
 
-# Restart Alfred - it might have updated, and it's quick to recycle, so until I
-# can be cleverer about restarting when updated ...
-osascript -e 'tell application "Alfred" to quit'
-/usr/bin/open -a "Alfred 5" || echo "Cannot open Alfred"
+alfredPid=$(pgrep Alfred || echo "")
+if [[ -z "${alfredPid}" ]] ; then
+  log:: "Starting Alfred"
+  /usr/bin/open -a "Alfred 5"
+else
+  alfredAge=$(expr $(date +%s) - $(stat -f "%m" /Applications/Alfred\ 5.app))
+  if [[ $alfredAge -lt 864000 ]] ; then
+    log:: "Alfred recently updated, age ${alfredAge}s"
+    # Restart Alfred - it might have updated, and it's quick to recycle, so until I
+    # can be cleverer about restarting when updated ...
+    osascript -e 'tell application "Alfred" to quit'
+    sleep 1
+    /usr/bin/open -a "Alfred 5" || echo "Cannot open Alfred"
+  fi
+fi
 
 if [[ ! -d ~/.cache/vale ]] ; then
   vale sync || echo "failed to sync vale"

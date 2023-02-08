@@ -43,8 +43,10 @@ export NVM_DIR="$HOME/.nvm"
 . "$NVM_DIR/nvm.sh" --no-use
 # . "$NVM_DIR/bash_completion.d/nvm"
 
+. ~/.config/sh/aliases.sh
+. ~/.config/sh/aliases-non-fish.sh
+
 # neovim is the new vim
-alias vi="VIM_KNOBS=5 nvim"
-alias v="VIM_KNOBS=5 nvim"
-alias pull="git pullme"
+. ~/.config/sh/aliases.sh
+. ~/.config/sh/aliases-non-fish.sh
 . "$HOME/.cargo/env"

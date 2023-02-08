@@ -33,12 +33,9 @@ else
     alias git-count="git log --format=format: --name-only | egrep -v '^\$' | sort | uniq -c | sort -rg | head -10"
 
     alias git-whoami="git config user.name ; git config user.email"
-    alias git-config-personal="git config user.email ian@purplepip.com"
+    alias git-config-personal="git config user.email code@ianhomer.com"
 
     alias draw="/usr/bin/open -a /Applications/draw.io.app/"
-
-    alias lastpass="lpass show --password -c"
-    alias lastpasses="lpass ls"
 
     alias findmd="find . -type f -name '*.md' -not -path '*/node_modules/*' | sort"
     # cat markdown files with a space between each
