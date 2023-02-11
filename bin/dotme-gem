@@ -8,8 +8,15 @@ should-run $0 || exit 0
 
 $(shim) && cd ${ME} && . bin/i.sh
 
+# Install given ruby version as global
+rbenv install -s 3.2.1
+rbenv global 3.2.1
+rbenv version
+gem env home
+
 log:: "installing gem packages"
 
+# neovim gem is ruby support in neovim
 gem install neovim
 
 should-run -fu $0
