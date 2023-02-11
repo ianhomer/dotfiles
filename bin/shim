@@ -78,7 +78,10 @@ if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
   MY_NOTES="my-notes"
   MY_DO="-WOR"
   export ENV=~/.config/dotme/.env
-  [[ -f $ENV ]] && export $(grep -v "^#" $ENV | xargs)
+  # If .env file has content
+  if grep -v "^#" $ENV ; then
+     [[ -f $ENV ]] && export $(grep -v "^#" $ENV | xargs)
+  fi
 
   #
   # Defaults
@@ -98,6 +101,7 @@ if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
         SHIM_OS="$OSTYPE" ;;
     esac
   fi
+
 
   if [[ "$SHIM_OS" = "termux" ]] ; then
     THINGS_DIR=$HOME/storage/shared/projects/things
