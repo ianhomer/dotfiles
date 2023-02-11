@@ -39,7 +39,8 @@ shift $((OPTIND-1))
 #
 if [[ "$UPDATE" = "y" ]] ; then
   DOTFILES_BIN="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-  . ${DOTFILES_BIN}/functions/log.sh
+  cd $DOTFILES_BIN
+  . ./functions/log.sh
   mkdir -p $DOTME_CONFIG
 
   # Update .shim

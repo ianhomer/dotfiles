@@ -11,7 +11,7 @@ while getopts "af" o; do case "$o" in
   a) ADMIN=y ;;
 esac done
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 
 BREW_DIR=${DOTFILES_DIR}/config/brew
 

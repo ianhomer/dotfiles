@@ -16,7 +16,7 @@ set -e
 _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 PATH=${_DIR}:${PATH}
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 DOTFILES_DOTFILES="${DOTFILES_DIR}/dotfiles"
 
 VERBOSE=0

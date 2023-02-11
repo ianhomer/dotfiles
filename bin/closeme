@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 
 help() {
   cat << EOF

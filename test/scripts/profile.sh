@@ -10,7 +10,7 @@ set -e
 
 # Experiment with function loading
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 i:: time
 
 log:: "profile"

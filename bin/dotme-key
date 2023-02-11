@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 
 if [[ -z "$1" ]] ; then
   . dotenv

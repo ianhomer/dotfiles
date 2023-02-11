@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh && cd -
 
 OPTIND=1
 while getopts "a" o; do case "$o" in

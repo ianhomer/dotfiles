@@ -9,7 +9,7 @@
 
 set -e
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 
 nightlyInstallation=~/local/nvim/$(date +%Y%m%d)
 if [ ! -d ${nightlyInstallation} ] ; then

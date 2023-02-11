@@ -7,7 +7,7 @@
 # right.
 #
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 
 if git rev-parse --is-inside-work-tree 2>&1 >/dev/null ; then
   INSIDE_GIT_REPOSITORY=y
