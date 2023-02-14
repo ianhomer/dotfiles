@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# Doctor dotfiles environment
+#
+
+set -e
+
+should-run -m 7d $@ $0 || exit 0
+
+$(shim) && cd ${ME} && . bin/i.sh
+
+# Ensure dotme .env file exists
+dotmeEnvFile=~/.config/dotme/.env
+if [ ! -f "$dotmeEnvFile" ] ; then
+  log:: "Creating $dotmeEnvFile"
+  touch $dotmeEnvFile
+fi
+
+should-run -fu $0
+
+gnupgPermissions=$(stat -f %A ~/.gnupg)
+if [ "$gnupgPermissions" != 700 ] ; then
+  log:: "Correcting ~/.gnupg permissions from $gnupgPermissions to 700"
+  chmod 700 ~/.gnupg
+fi
+
+# Some tools don't resolve to ipv6 addresses yet, so safer not to have
+# the folliwng in /etc/hosts
+#
+# ::1             localhost
+#
+ipv6LocalHostRoute=$(grep localhost /etc/hosts | grep "::1" | grep -v "^#" | wc -l)
+if [ ${ipv6LocalHostRoute} -eq 1 ] ; then
+  log::error "/etc/hosts has ipv6 localhost enabled which is not reliable, please comment out"
+fi

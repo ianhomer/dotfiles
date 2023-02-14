@@ -14,7 +14,7 @@
 # between devices. This git commmand aims to make this easy for me.
 #
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh && cd -
 
 help() {
   cat << EOF

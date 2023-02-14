@@ -16,3 +16,4 @@ else
 fi
 
 source ~/.bashrc
+. "$HOME/.cargo/env"

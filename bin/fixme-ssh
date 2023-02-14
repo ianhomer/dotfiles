@@ -6,7 +6,7 @@ set -e
 # Non destructive fix of my environment
 #
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 log:: OK "ssh" "linting and fixing of SSH"
 
 ssh-add -D

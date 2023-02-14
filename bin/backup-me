@@ -6,7 +6,7 @@
 
 set -e
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 
 BACKUP_ROOT=${1:-/Volumes/my-backup}
 

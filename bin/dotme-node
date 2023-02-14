@@ -13,7 +13,7 @@ set -e
 
 NODE_GLOBAL=~/.dotfiles/config/node/global.txt
 should-run -m 14 $@ $0 $NODE_GLOBAL || exit 0
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 
 #
 # Set up nvm
@@ -31,8 +31,8 @@ node -v
 #
 
 log:: "Cleaning npm globals"
-npm ls --global --json                                                 |
-  jq --raw-output  '.dependencies | keys[] | select(. != "npm")' |
+npm ls --global --json                                                               |
+  jq --raw-output  '.dependencies | keys[] | select((. != "npm") and (. != "pnpm"))' |
   xargs -r npm -g rm
 
 log:: "Updating pnpm"

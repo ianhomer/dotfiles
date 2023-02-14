@@ -7,7 +7,7 @@ if command -v fasd &> /dev/null ; then
   if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
     fasd --init posix-alias bash-hook bash-ccomp bash-ccomp-install >| "$fasd_cache"
   fi
-  source "$fasd_cache"
+  source ~/.fasd-init-bash
   unset fasd_cache
 fi
 
@@ -40,11 +40,13 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 export NVM_DIR="$HOME/.nvm"
 # with --no-use we postpone nvm until we use it so we can take explicit
 # control
-. "$NVM_DIR/nvm.sh" --no-use
-# . "$NVM_DIR/bash_completion.d/nvm"
+. ~/.nvm/nvm.sh --no-use
+# . ~/.nvm/bash_completion.d/nvm
+
+. ~/.config/sh/aliases.sh
+. ~/.config/sh/aliases-non-fish.sh
 
 # neovim is the new vim
-alias vi="VIM_KNOBS=5 nvim"
-alias v="VIM_KNOBS=5 nvim"
-alias pull="git pullme"
-. "$HOME/.cargo/env"
+. ~/.config/sh/aliases.sh
+. ~/.config/sh/aliases-non-fish.sh
+. ~/.cargo/env

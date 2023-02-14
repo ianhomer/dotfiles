@@ -105,18 +105,22 @@ if vim.g.knob_refactoring then
     telescope.load_extension("refactoring")
 end
 
-local colors = require("kanagawa.colors").setup()
 
-vim.cmd("hi TelescopeBorder guibg = " .. colors.bg_dim .. " guifg = " .. colors.bg_dim)
+local has_colors, colors_module = pcall(require,"kanagawa.colors")
+if has_colors then
+  local colors = colors_module.setup()
 
-vim.cmd("hi TelescopePromptBorder guibg = " .. colors.bg_light1 .. " guifg = " .. colors.bg_light1)
-vim.cmd("hi TelescopePromptNormal guibg = " .. colors.bg_light1 .. " guifg = " .. colors.nu)
-vim.cmd("hi TelescopePromptPrefix guibg = " .. colors.bg_light1 .. " guifg = " .. colors.nu)
-vim.cmd("hi TelescopeSelection guibg = " .. colors.bg_light1 .. " guifg = " .. colors.nu)
+  vim.cmd("hi TelescopeBorder guibg = " .. colors.bg_dim .. " guifg = " .. colors.bg_dim)
 
-vim.cmd("hi TelescopePreviewTitle guibg = " .. colors.bg_dim .. " guifg = " .. colors.co)
-vim.cmd("hi TelescopePromptTitle guibg = " .. colors.bg_light1 .. " guifg = " .. colors.co)
-vim.cmd("hi TelescopeResultsTitle guibg = " .. colors.bg_dim .. " guifg = " .. colors.co)
+  vim.cmd("hi TelescopePromptBorder guibg = " .. colors.bg_light1 .. " guifg = " .. colors.bg_light1)
+  vim.cmd("hi TelescopePromptNormal guibg = " .. colors.bg_light1 .. " guifg = " .. colors.nu)
+  vim.cmd("hi TelescopePromptPrefix guibg = " .. colors.bg_light1 .. " guifg = " .. colors.nu)
+  vim.cmd("hi TelescopeSelection guibg = " .. colors.bg_light1 .. " guifg = " .. colors.nu)
+
+  vim.cmd("hi TelescopePreviewTitle guibg = " .. colors.bg_dim .. " guifg = " .. colors.co)
+  vim.cmd("hi TelescopePromptTitle guibg = " .. colors.bg_light1 .. " guifg = " .. colors.co)
+  vim.cmd("hi TelescopeResultsTitle guibg = " .. colors.bg_dim .. " guifg = " .. colors.co)
+end
 
 local opts = { noremap = true, silent = true }
 

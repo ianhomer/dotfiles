@@ -2,8 +2,8 @@
 
 # Change repository to ssh
 
-$(shim) && . ${ME}/i.sh
-
+startingDirectory=($PWD)
+$(shim) && cd ${ME} && . bin/i.sh && cd $startingDirectory
 remoteUrl=`git config --get remote.origin.url`
 
 if [[ "$remoteUrl" != *ianhomer/dotfiles* ]] ; then

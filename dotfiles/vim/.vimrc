@@ -58,6 +58,12 @@ let g:knobs_layers_map = {
   \    }
   \  }
 
+" vim specials
+
+" change cursor for insert mode
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
 packadd knobs.vim
 call knobs#Init()
 
@@ -180,3 +186,4 @@ if knobs#At(6) | Plug 'junegunn/vader.vim' | endif
 IfKnob 'startuptime' Plug 'tweekmonster/startuptime.vim'
 
 call plug#end()
+

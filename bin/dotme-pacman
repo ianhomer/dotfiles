@@ -4,9 +4,9 @@
 # Install pacman - arch package manager - packages
 #
 
-$(shim) && . ${ME}/i.sh
-
 should-run -m 7 dotme-pacman ${ME}/config/pacman || exit 0
+
+$(shim) && cd ${ME} && . bin/i.sh
 
 if ! command -v sudo &> /dev/null ; then
   log::exit "sudo is needed, but not found"

@@ -5,7 +5,7 @@
 
 should-run -m 7 dotme-zsh || exit 0
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 
 log:: "Configuring zsh shell"
 

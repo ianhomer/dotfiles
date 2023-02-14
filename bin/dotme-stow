@@ -33,7 +33,7 @@ fi
 
 should-run -z $SHOULD_RUN_ARGS $0 $DOTFILES_DOTFILES || exit 0
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 
 cd $DOTFILES_DOTFILES
 log:: "stowing dotfiles"

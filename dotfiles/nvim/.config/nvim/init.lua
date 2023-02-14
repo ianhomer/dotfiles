@@ -93,6 +93,8 @@ nvim_set_var("knobs_levels", {
   thingity = 3,
   toggleterm = 3,
   treesitter = 3,
+  treesitter_textobjects = 6,
+  treesitter_context = 6,
   trouble = 3,
   ufo = 3,
   unicode = 9,
@@ -302,14 +304,14 @@ return require("packer").startup({
     })
 
     use({
-      knob = "treesitter",
+      knob = "treesitter_textobjects",
       "nvim-treesitter/nvim-treesitter-textobjects",
       config = [[require'config.treesitter_textobjects']],
       commit = "249d90a84df63f3ffff65fcc06a45d58415672de",
     })
 
     use({
-      knob = "treesitter",
+      knob = "treesitter_context",
       "nvim-treesitter/nvim-treesitter-context",
       config = [[require'config.treesitter_context']],
       commit = "cacee4828152dd3a83736169ae61bbcd29a3d213",
@@ -406,6 +408,7 @@ return require("packer").startup({
     })
     _use({
       "nvim-telescope/telescope.nvim",
+      after = "kanagawa.nvim",
       requires = {
         { "nvim-lua/popup.nvim" },
         { "nvim-lua/plenary.nvim" },

@@ -9,10 +9,7 @@ while getopts "f" o; do case "$o" in
 esac done
 shift $((OPTIND-1))
 
-
 backup-things -abs
-
-
 
 should-run -fu $0
 

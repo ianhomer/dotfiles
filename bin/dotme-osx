@@ -2,7 +2,7 @@
 
 should-run $0 ~/.dotfiles/config/osx/duti.config || exit 0
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 
 log:: "setting up OSX defaults"
 

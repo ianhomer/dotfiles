@@ -141,12 +141,12 @@ System preferences -> Trackpad -> Point & Click
 
 Disable all keyboard shortcuts I don't use.
 
-System preferences -> Keyboard -> Shortcuts ->
+System preferences -> Keyboard -> Keyboard Shortcuts ->
 
 - Disable Mission Control Ctrl-arrow short cuts
 - Disable Ctrl-space and Shift-Ctrl-space for selecting input source
 - Disable any other shortcuts that would never get used
-- Change Press **globe/fn** to "Show Emoji and Symbols"
+- Change Press **fn** key to "Show Emoji and Symbols"
 
 -> Mission Control - remove all keyboard and mouse shortcuts
 
