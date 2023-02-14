@@ -80,7 +80,7 @@ if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
   MY_DO="-WOR"
   export ENV=~/.config/dotme/.env
   # If .env file has content
-  if grep -v "^#" $ENV > /dev/null ; then
+  if grep -v "^#" $ENV >/dev/null 2>&1 ; then
      [[ -f $ENV ]] && export $(grep -v "^#" $ENV | xargs)
   fi
 
