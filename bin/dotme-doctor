@@ -23,3 +23,13 @@ if [ "$gnupgPermissions" != 700 ] ; then
   log:: "Correcting ~/.gnupg permissions from $gnupgPermissions to 700"
   chmod 700 ~/.gnupg
 fi
+
+# Some tools don't resolve to ipv6 addresses yet, so safer not to have
+# the folliwng in /etc/hosts
+#
+# ::1             localhost
+#
+ipv6LocalHostRoute=$(grep localhost /etc/hosts | grep "::1" | grep -v "^#" | wc -l)
+if [ ${ipv6LocalHostRoute} -eq 1 ] ; then
+  log::error "/etc/hosts has ipv6 localhost enabled which is not reliable, please comment out"
+fi
