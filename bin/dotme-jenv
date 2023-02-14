@@ -6,7 +6,7 @@
 
 should-run $0 || exit 0
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 
 if ! command -v jenv &> /dev/null ; then
   log:: "jenv not installed"
@@ -16,15 +16,19 @@ else
   jenv rehash 2>/dev/null
   jenv refresh-plugins
 
-  set -e JAVA
-  log:: "JDKs installed"
-  for jdk in /Library/Java/JavaVirtualMachines/*/Contents/Home ; do
-    log:: "$jdk"
-    JAVA_VERSION=$($jdk/bin/java -version 2>&1 | sed -n ';s/.* version "\([^"]*\)".*/\1/p;')
-    jenv add $jdk | grep -v "skip" || log:: OK "$JAVA_VERSION" "already added to jenv"
-  done
+  jvmsDirectory=/Library/Java/JavaVirtualMachines/
+  if [ -n "$(ls -A $jvmsDirectory 2>/dev/null)" ] ; then
+    set -e JAVA
+    log:: "JDKs installed"
+    for jdk in $jvmsDirectory/*/Contents/Home ; do
+      log:: "$jdk"
+      JAVA_VERSION=$($jdk/bin/java -version 2>&1 | sed -n ';s/.* version "\([^"]*\)".*/\1/p;')
+      jenv add $jdk | grep -v "skip" || log:: OK "$JAVA_VERSION" "already added to jenv"
+    done
 
-  log:: "JDKs registered with jenv"
+    log:: "JDKs registered with jenv"
+  fi
+
   jenv versions
 fi
 

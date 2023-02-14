@@ -4,7 +4,7 @@
 # Test log functions
 #
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 
 log:: message
 log:: "a log message"

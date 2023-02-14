@@ -16,7 +16,7 @@ set -e
 _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
 PATH=${_DIR}:${PATH}
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 DOTFILES_DOTFILES="${DOTFILES_DIR}/dotfiles"
 
 VERBOSE=0
@@ -122,6 +122,7 @@ command_initialise() {
 #
 command_inner() {
   command_initialise
+  [ $DRY -eq 0 ] && dotme-doctor
   if command -v stow &> /dev/null ; then
     # stow early if stow alreay installed, otherwise we have to wait for package
     # to be installed
@@ -140,10 +141,10 @@ command_inner() {
   [ $DRY -eq 0 ] && is-pc && dotme-gem
   [ $DRY -eq 0 ] && clean-vim
   [ $DRY -eq 0 ] && dotme-vim
-  [ $DRY -eq 0 ] && is-pc && dotme-tmux
-  [ $DRY -eq 0 ] && is-pc && dotme-node
-  [ $DRY -eq 0 ] && is-pc && dotme-rust
+  # Not using tmux any more
+  # [ $DRY -eq 0 ] && is-pc && dotme-tmux
   [ $DRY -eq 0 ] && is-pc && dotme-jenv
+  [ $DRY -eq 0 ] && is-pc && dotme-rust
   [ $DRY -eq 0 ] && is-pc && dotme-bash
   if command -v fish &> /dev/null ; then
     [ $DRY -eq 0 ] && is-pc && dotme-fish
@@ -152,11 +153,13 @@ command_inner() {
   if command -v zsh &> /dev/null ; then
     [ $DRY -eq 0 ] && dotme-zsh
   fi
+  [ $DRY -eq 0 ] && is-pc && dotme-node
   [ $DRY -eq 0 ] && dotme-backup
   [ $DRY -eq 0 ] && dotme-gitme
   [ $DRY -eq 0 ] && is-pc && dotme-modules
   [ $DRY -eq 0 ] && is-pc && dotme-test
-  #[ $DRY -eq 0 ] && is-pc && dotme-nnn
+  # Not using nnn for now
+  # [ $DRY -eq 0 ] && is-pc && dotme-nnn
   command_clean
 }
 

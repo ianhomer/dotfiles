@@ -9,7 +9,7 @@
 
 set -e
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 
 nightlyInstallation=~/local/nvim/$(date +%Y%m%d)
 if [ ! -d ${nightlyInstallation} ] ; then
@@ -26,6 +26,10 @@ if [ ! -d ${nightlyInstallation} ] ; then
 else
   if [ ! -f ~/bin/nvim ] ; then
     log:: "linking latest nightly to ~/bin/nvim"
+    if [ ! -d ~/bin ] ; then
+      log:: "Creating ~/bin"
+      mkdir ~/bin
+    fi
     ln -s ${nightlyInstallation}/nvim-macos/bin/nvim ~/bin/nvim
   fi
   log:: "nightly nvim ${nightlyInstallation} already installed"

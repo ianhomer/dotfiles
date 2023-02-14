@@ -2,7 +2,7 @@
 
 set -e
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh && cd -
 directory=${1}
 recipient=${2}
 if [[ -z "${recipient}" ]] ; then

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-$(shim) && . ${ME}/i.sh
+$(shim) && cd ${ME} && . bin/i.sh
 
 log:: "Cleaning npm globals"
 pnpm ls --global --json                                             |

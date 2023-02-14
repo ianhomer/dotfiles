@@ -7,7 +7,7 @@
 # The typical idiom for using this module loader is in scripts when run alongside
 # the shim script giving us:
 #
-#   $(shim) && . ${ME}/i.sh
+#   $(shim) && cd ${ME} && . bin/i.sh
 #
 # which shims in the necessary environment variables and sets up the module
 # loader, along with importing the log module by default.

@@ -39,7 +39,8 @@ shift $((OPTIND-1))
 #
 if [[ "$UPDATE" = "y" ]] ; then
   DOTFILES_BIN="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
-  . ${DOTFILES_BIN}/functions/log.sh
+  cd $DOTFILES_BIN
+  . ./functions/log.sh
   mkdir -p $DOTME_CONFIG
 
   # Update .shim
@@ -78,7 +79,10 @@ if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
   MY_NOTES="my-notes"
   MY_DO="-WOR"
   export ENV=~/.config/dotme/.env
-  [[ -f $ENV ]] && export $(grep -v "^#" $ENV | xargs)
+  # If .env file has content
+  if grep -v "^#" $ENV >/dev/null 2>&1 ; then
+     [[ -f $ENV ]] && export $(grep -v "^#" $ENV | xargs)
+  fi
 
   #
   # Defaults
@@ -98,6 +102,7 @@ if [[ "$FORCE" == "y" ]] || [[ ! -f "$LOCAL_SHIM" ]] ; then
         SHIM_OS="$OSTYPE" ;;
     esac
   fi
+
 
   if [[ "$SHIM_OS" = "termux" ]] ; then
     THINGS_DIR=$HOME/storage/shared/projects/things
