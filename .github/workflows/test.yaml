@@ -14,7 +14,6 @@ jobs:
       - name: node tests
         working-directory: ./test
         run: |
-          ./bin/shim
           pnpm install
           pnpm test
 
