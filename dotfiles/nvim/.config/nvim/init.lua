@@ -425,10 +425,11 @@ require("lazy").setup({
     lazy = true,
     cond = vim.g.knob_devicons or false,
   },
-  -- {
-  --   "wfxr/minimap.vim",
-  --   cmd = { "Minimap" },
-  -- },
+  {
+    "wfxr/minimap.vim",
+    cond = vim.g.knob_minimap or false,
+    cmd = { "Minimap" },
+  },
   -- {
   --   "gorbit99/codewindow.nvim",
   --   config = [[require'config.codewindow']],
@@ -478,15 +479,20 @@ require("lazy").setup({
   --   "mrshmllow/document-color.nvim",
   --   config = [[require'config.document_color']],
   -- },
-  -- {
-  --   "karb94/neoscroll.nvim",
-  --   config = [[require'config.neoscroll']],
-  -- },
-  -- {
-  --   "p00f/nvim-ts-rainbow",
-  --   after = "nvim-treesitter",
-  --   config = [[require'config.rainbow']],
-  -- },
+  {
+    "karb94/neoscroll.nvim",
+    config = function()
+      require("config.neoscroll")
+    end,
+  },
+  {
+    "p00f/nvim-ts-rainbow",
+    cond = vim.g.knob_rainbow or false,
+    dependencies = "nvim-treesitter",
+    config = function()
+      require("config.rainbow")
+    end,
+  },
   {
     "kevinhwang91/promise-async",
     cond = vim.g.knob_ufo or false,
@@ -521,9 +527,10 @@ require("lazy").setup({
   --   "akinsho/git-conflict.nvim",
   --   config = [[require'config.git_conflict']],
   -- },
-  -- {
-  --   "tpope/vim-dispatch",
-  -- },
+  {
+    "tpope/vim-dispatch",
+    cond = vim.g.knob_dispatch or false
+  },
   {
     "lewis6991/gitsigns.nvim",
     cond = vim.g.knob_gitsigns or false,
@@ -537,11 +544,12 @@ require("lazy").setup({
   --   cmd = { "GV" },
   -- },
   -- -- Editing
-  -- {
-  --   "windwp/nvim-autopairs",
-  --   after = "nvim-cmp",
-  --   config = [[require'config.autopairs']],
-  -- },
+  {
+    "windwp/nvim-autopairs",
+    cond = vim.g.knob_autopairs or false,
+    dependencies = "nvim-cmp",
+    config = [[require'config.autopairs']],
+  },
   {
     "tpope/vim-surround",
     cond = vim.g.knob_surround or false,
@@ -571,7 +579,11 @@ require("lazy").setup({
   --   config = [[require'config.icon_picker']],
   --   dependencies = "dressing.nvim",
   -- },
-  -- { "godlygeek/tabular", cmd = { "Tabularize" } },
+  {
+    "godlygeek/tabular",
+    cond = vim.g.knob_tabular or false,
+    cmd = { "Tabularize" }
+  },
   -- {
   --   "editorconfig/editorconfig-vim",
   -- },
@@ -607,10 +619,11 @@ require("lazy").setup({
     "lukas-reineke/indent-blankline.nvim",
     cond = vim.g.knob_indent_blankline or false,
   },
-  -- {
-  --   "simnalamburt/vim-mundo",
-  --   cmd = { "MundoToggle" },
-  -- },
+  {
+    "simnalamburt/vim-mundo",
+    cond = vim.g.knob_mundo or false,
+    cmd = { "MundoToggle" },
+  },
 
   -- -- Misc
 
