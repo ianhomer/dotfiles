@@ -169,7 +169,7 @@ require("config.config")
 require("lazy").setup({
   {
     "b0o/schemastore.nvim",
-    cond = vim.g.knob_schemastore or false
+    cond = vim.g.knob_schemastore or false,
   },
 
   -- LSP, autocomplete and code guidance
@@ -200,30 +200,6 @@ require("lazy").setup({
   --   end,
   -- },
   {
-    "hrsh7th/cmp-nvim-lsp",
-    cond = vim.g.knob_cmp or false,
-  },
-  {
-    "hrsh7th/cmp-buffer",
-    cond = vim.g.knob_cmp or false,
-  },
-  {
-    "hrsh7th/cmp-path",
-    cond = vim.g.knob_cmp or false,
-  },
-  {
-    "hrsh7th/cmp-cmdline",
-    cond = vim.g.knob_cmp or false,
-  },
-  {
-    "hrsh7th/cmp-nvim-lua",
-    cond = vim.g.knob_cmp or false,
-  },
-  {
-    "hrsh7th/cmp-nvim-lsp-signature-help",
-    cond = vim.g.knob_lsp_signature or false,
-  },
-  {
     "saadparwaiz1/cmp_luasnip",
     cond = vim.g.knob_luasnip or false,
   },
@@ -235,7 +211,14 @@ require("lazy").setup({
   {
     "hrsh7th/nvim-cmp",
     cond = vim.g.knob_cmp or false,
-    dependencies = "hrsh7th/cmp-buffer",
+    dependencies = {
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+    },
     config = function()
       require("config.cmp")
     end,
@@ -382,10 +365,6 @@ require("lazy").setup({
   --   ft = { "qf" },
   -- },
   {
-    "nvim-lua/plenary.nvim",
-    lazy = true,
-  },
-  {
     "nvim-telescope/telescope-fzf-native.nvim",
     cond = vim.g.knob_telescope or false,
     build = "make",
@@ -529,7 +508,7 @@ require("lazy").setup({
   -- },
   {
     "tpope/vim-dispatch",
-    cond = vim.g.knob_dispatch or false
+    cond = vim.g.knob_dispatch or false,
   },
   {
     "lewis6991/gitsigns.nvim",
@@ -559,14 +538,14 @@ require("lazy").setup({
   -- },
   {
     "tpope/vim-commentary",
-    cond = vim.g.knob_commentary or false
+    cond = vim.g.knob_commentary or false,
   },
   -- {
   --   "tpope/vim-unimpaired",
   -- },
   {
     "tpope/vim-repeat",
-    cond = vim.g.knob_repeat or false
+    cond = vim.g.knob_repeat or false,
   },
   -- {
   --   "tpope/vim-abolish",
@@ -582,7 +561,7 @@ require("lazy").setup({
   {
     "godlygeek/tabular",
     cond = vim.g.knob_tabular or false,
-    cmd = { "Tabularize" }
+    cmd = { "Tabularize" },
   },
   -- {
   --   "editorconfig/editorconfig-vim",
