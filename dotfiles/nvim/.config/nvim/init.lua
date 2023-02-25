@@ -77,7 +77,9 @@ nvim_set_var("knobs_levels", {
   nvim_tree = 3,
   rainbow = 3,
   refactoring = 9,
+  vim_repeat = 3,
   rhubarb = 7,
+  schemastore = 3,
   shortcuts = 3,
   sleuth = 9,
   spelling = 3,
@@ -165,7 +167,10 @@ require("knobs").setup()
 require("config.config")
 
 require("lazy").setup({
-  { "b0o/schemastore.nvim" },
+  {
+    "b0o/schemastore.nvim",
+    cond = vim.g.knob_schemastore or false
+  },
 
   -- LSP, autocomplete and code guidance
   {
@@ -174,7 +179,7 @@ require("lazy").setup({
     config = function()
       require("config.lspconfig")
     end,
-    cond = vim.g.knob_lspconfig,
+    cond = vim.g.knob_lspconfig or false,
   },
   {
     "weilbith/nvim-code-action-menu",
@@ -185,7 +190,7 @@ require("lazy").setup({
     config = function()
       require("lspkind").init()
     end,
-    cond = vim.g.knob_lspkind,
+    cond = vim.g.knob_lspkind or false,
   },
   -- {
   --   "glepnir/lspsaga.nvim",
@@ -196,35 +201,40 @@ require("lazy").setup({
   -- },
   {
     "hrsh7th/cmp-nvim-lsp",
+    cond = vim.g.knob_cmp or false,
   },
   {
     "hrsh7th/cmp-buffer",
+    cond = vim.g.knob_cmp or false,
   },
   {
     "hrsh7th/cmp-path",
+    cond = vim.g.knob_cmp or false,
   },
   {
     "hrsh7th/cmp-cmdline",
+    cond = vim.g.knob_cmp or false,
   },
   {
     "hrsh7th/cmp-nvim-lua",
+    cond = vim.g.knob_cmp or false,
   },
   {
     "hrsh7th/cmp-nvim-lsp-signature-help",
-    cond = vim.g.knob_lsp_signature,
+    cond = vim.g.knob_lsp_signature or false,
   },
   {
     "saadparwaiz1/cmp_luasnip",
-    commit = "18095520391186d634a0045dacaa346291096566",
-    cond = vim.g.knob_luasnip,
+    cond = vim.g.knob_luasnip or false,
   },
   {
     "L3MON4D3/LuaSnip",
+    cond = vim.g.knob_luasnip or false,
     dependencies = { "saadparwaiz1/cmp_luasnip" },
-    cond = vim.g.knob_luasnip,
   },
   {
     "hrsh7th/nvim-cmp",
+    cond = vim.g.knob_cmp or false,
     dependencies = "hrsh7th/cmp-buffer",
     config = function()
       require("config.cmp")
@@ -236,12 +246,14 @@ require("lazy").setup({
   -- },
   {
     "kosayoda/nvim-lightbulb",
+    cond = vim.g.knob_lightbulb or false,
     config = function()
       require("config.lightbulb")
     end,
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
+    cond = vim.g.knob_null_ls or false,
     config = function()
       require("config.null_ls")
     end,
@@ -267,10 +279,11 @@ require("lazy").setup({
   -- },
   {
     "folke/trouble.nvim",
+    cond = vim.g.knob_trouble or false,
     dependencies = "kyazdani42/nvim-web-devicons",
     config = function()
       require("config.trouble")
-    end
+    end,
   },
   -- {
   --   "kevinhwang91/nvim-bqf",
@@ -295,14 +308,14 @@ require("lazy").setup({
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    cond = vim.g.knob_treesitter_textobjects,
+    cond = vim.g.knob_treesitter_textobjects or false,
     config = function()
       require("config.treesitter_textobjects")
     end,
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
-    cond = vim.g_knob_treesitter_context,
+    cond = vim.g.knob_treesitter_context or false,
     config = function()
       require("config.treesitter_context")
     end,
@@ -358,7 +371,10 @@ require("lazy").setup({
 
   -- -- Navigation
 
-  { "mhinz/vim-startify" },
+  {
+    "mhinz/vim-startify",
+    cond = vim.g.knob_startify or false,
+  },
   -- {
   --   "junegunn/fzf.vim",
   --   cmd = { "Ag", "Buffers", "Commits", "Files", "History" },
@@ -367,19 +383,23 @@ require("lazy").setup({
   -- },
   {
     "nvim-lua/plenary.nvim",
+    lazy = true,
   },
   {
     "nvim-telescope/telescope-fzf-native.nvim",
+    cond = vim.g.knob_telescope or false,
     build = "make",
   },
   {
     "nvim-telescope/telescope-symbols.nvim",
+    cond = vim.g.knob_telescope or false,
   },
   -- {
   --   "nvim-lua/popup.nvim",
   -- },
   {
     "nvim-telescope/telescope.nvim",
+    cond = vim.g.knob_telescope or false,
     dependencies = {
       { "rebelot/kanagawa.nvim" },
       { "nvim-lua/popup.nvim" },
@@ -389,10 +409,11 @@ require("lazy").setup({
     },
     config = function()
       require("config.telescope")
-    end
+    end,
   },
   {
     "kyazdani42/nvim-tree.lua",
+    cond = vim.g.knob_nvim_tree or false,
     dependencies = "kyazdani42/nvim-web-devicons",
     config = function()
       require("config.nvimtree")
@@ -401,6 +422,8 @@ require("lazy").setup({
   },
   {
     "ryanoasis/vim-devicons",
+    lazy = true,
+    cond = vim.g.knob_devicons or false,
   },
   -- {
   --   "wfxr/minimap.vim",
@@ -412,6 +435,7 @@ require("lazy").setup({
   -- },
   {
     "folke/which-key.nvim",
+    cond = vim.g.knob_which_key or false,
     event = "BufWinEnter",
     config = function()
       require("config.which_key")
@@ -422,6 +446,7 @@ require("lazy").setup({
   -- },
   {
     "nvim-lualine/lualine.nvim",
+    cond = vim.g.knob_lualine or false,
     dependencies = { "kyazdani42/nvim-web-devicons" },
     config = function()
       require("config.lualine")
@@ -429,6 +454,7 @@ require("lazy").setup({
   },
   {
     "romgrk/barbar.nvim",
+    cond = vim.g.knob_barbar or false,
     dependencies = { "kyazdani42/nvim-web-devicons" },
     config = function()
       require("config.barbar")
@@ -438,6 +464,7 @@ require("lazy").setup({
   -- -- Style
   {
     "rebelot/kanagawa.nvim",
+    cond = vim.g.knob_kanagawa or false,
     config = function()
       require("config.kanagawa")
     end,
@@ -461,20 +488,22 @@ require("lazy").setup({
   --   config = [[require'config.rainbow']],
   -- },
   {
-    cond = vim.g.knob_ufo,
     "kevinhwang91/promise-async",
+    cond = vim.g.knob_ufo or false,
   },
   {
     "kevinhwang91/nvim-ufo",
+    cond = vim.g.knob_ufo or false,
     dependencies = "kevinhwang91/promise-async",
     config = function()
-	require("config.ufo")
+      require("config.ufo")
     end,
   },
 
   -- -- Git
   {
     "tpope/vim-fugitive",
+    cond = vim.g.knob_fugitive or false,
     cmd = { "G", "Git", "Gstatus", "Gblame", "Ggrep", "Gpush", "Gpull" },
   },
   -- {
@@ -486,6 +515,7 @@ require("lazy").setup({
   -- },
   {
     "airblade/vim-gitgutter",
+    cond = vim.g.knob_gitgutter or false,
   },
   -- {
   --   "akinsho/git-conflict.nvim",
@@ -496,6 +526,7 @@ require("lazy").setup({
   -- },
   {
     "lewis6991/gitsigns.nvim",
+    cond = vim.g.knob_gitsigns or false,
     event = "BufRead",
     config = function()
       require("config.gitsigns")
@@ -511,21 +542,24 @@ require("lazy").setup({
   --   after = "nvim-cmp",
   --   config = [[require'config.autopairs']],
   -- },
-  -- {
-  --   "tpope/vim-surround",
-  -- },
+  {
+    "tpope/vim-surround",
+    cond = vim.g.knob_surround or false,
+  },
   -- {
   --   "tpope/vim-sleuth",
   -- },
   {
-     "tpope/vim-commentary",
+    "tpope/vim-commentary",
+    cond = vim.g.knob_commentary or false
   },
   -- {
   --   "tpope/vim-unimpaired",
   -- },
-  -- {
-  --   "tpope/vim-repeat",
-  -- },
+  {
+    "tpope/vim-repeat",
+    cond = vim.g.knob_repeat or false
+  },
   -- {
   --   "tpope/vim-abolish",
   -- },
@@ -565,11 +599,13 @@ require("lazy").setup({
   -- },
   {
     "iamcco/markdown-preview.nvim",
+    cond = vim.g.knob_markdown_preview or false,
     -- cmd = {"MarkdownPreview"},
     build = "cd app && yarn install",
   },
   {
     "lukas-reineke/indent-blankline.nvim",
+    cond = vim.g.knob_indent_blankline or false,
   },
   -- {
   --   "simnalamburt/vim-mundo",
@@ -580,6 +616,7 @@ require("lazy").setup({
 
   {
     "akinsho/toggleterm.nvim",
+    cond = vim.g.knob_toggleterm or false,
     cmd = { "ToggleTerm", "TermExec" },
     config = function()
       require("config.toggleterm")
@@ -587,23 +624,25 @@ require("lazy").setup({
   },
   {
     "tpope/vim-eunuch",
+    cond = vim.g.knob_eunuch or false,
   },
 
   -- -- Diagnostics
 
   {
     "tweekmonster/startuptime.vim",
-    commit = "dfa57f522d6f61793fe5fea65bca7484751b8ca2",
+    cond = vim.g.knob_startuptime or false,
   },
 }, {
   ui = {
-    size = { width = 1.0, height = 1.0 }
+    size = { width = 1.0, height = 1.0 },
   },
   performance = {
     rtp = {
       paths = {
-        os.getenv("HOME") .. "/.vim"
-      }
-    }
-  }
+        os.getenv("HOME") .. "/.vim",
+        knobspath,
+      },
+    },
+  },
 })
