@@ -105,28 +105,34 @@ if vim.g.knob_refactoring then
   telescope.load_extension("refactoring")
 end
 
-local has_colors, colors_module = pcall(require, "kanagawa.colors")
-if has_colors then
-  local colors = colors_module.setup()
+-- set hightlights on color scheme so that it survives highlight clear that
+-- colorschemes may do
+vim.api.nvim_create_autocmd({ "ColorScheme" }, {
+  callback = function()
+    local has_colors, colors_module = pcall(require, "kanagawa.colors")
+    if has_colors then
+      local colors = colors_module.setup()
 
-  vim.api.nvim_set_hl(0, "TelescopeBorder",
-    { bg = colors.bg_dim, fg = colors.bg_dim })
-  vim.api.nvim_set_hl(0, "TelescopePromptBorder",
-    { bg = colors.bg_light1, fg = colors.bg_light1 })
-  vim.api.nvim_set_hl(0, "TelescopePromptNormal",
-    { bg = colors.bg_light1, fg = colors.nu })
-  vim.api.nvim_set_hl(0, "TelescopePromptPrefix",
-    { bg = colors.bg_light1, fg = colors.nu })
-  vim.api.nvim_set_hl(0, "TelescopePromptTitle",
-    { bg = colors.bg_light1, fg = colors.co })
+      vim.api.nvim_set_hl(0, "XTelescopeBorder",
+        { bg = colors.bg_dim, fg = colors.bg_dim, bold = 1 })
+      vim.api.nvim_set_hl(0, "TelescopePromptBorder",
+        { bg = colors.bg_light1, fg = colors.bg_light1 })
+      vim.api.nvim_set_hl(0, "TelescopePromptNormal",
+        { bg = colors.bg_light1, fg = colors.nu })
+      vim.api.nvim_set_hl(0, "TelescopePromptPrefix",
+        { bg = colors.bg_light1, fg = colors.nu })
+      vim.api.nvim_set_hl(0, "TelescopePromptTitle",
+        { bg = colors.bg_light1, fg = colors.co })
 
-  vim.api.nvim_set_hl(0, "TelescopeSelection",
-    { bg = colors.bg_light1, fg = colors.nu })
-  vim.api.nvim_set_hl(0, "TelescopePreviewTitle",
-    { bg = colors.bg_dim, fg = colors.co })
-  vim.api.nvim_set_hl(0, "TelescopeResultsTitle",
-    { bg = colors.bg_dim, fg = colors.co })
-end
+      vim.api.nvim_set_hl(0, "TelescopeSelection",
+        { bg = colors.bg_light1, fg = colors.nu })
+      vim.api.nvim_set_hl(0, "TelescopePreviewTitle",
+        { bg = colors.bg_dim, fg = colors.co })
+      vim.api.nvim_set_hl(0, "TelescopeResultsTitle",
+        { bg = colors.bg_dim, fg = colors.co })
+    end
+  end,
+})
 
 local opts = { noremap = true, silent = true }
 

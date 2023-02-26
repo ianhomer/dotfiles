@@ -444,6 +444,7 @@ require("lazy").setup(
     -- -- Style
     {
       "rebelot/kanagawa.nvim",
+      priority = 90,
       config = function()
         require("config.kanagawa")
       end,
