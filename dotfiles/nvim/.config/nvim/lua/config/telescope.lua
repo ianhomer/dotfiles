@@ -113,8 +113,8 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, {
     if has_colors then
       local colors = colors_module.setup()
 
-      vim.api.nvim_set_hl(0, "XTelescopeBorder",
-        { bg = colors.bg_dim, fg = colors.bg_dim, bold = 1 })
+      vim.api.nvim_set_hl(0, "TelescopeBorder",
+        { bg = colors.bg_dim, fg = colors.bg_dim })
       vim.api.nvim_set_hl(0, "TelescopePromptBorder",
         { bg = colors.bg_light1, fg = colors.bg_light1 })
       vim.api.nvim_set_hl(0, "TelescopePromptNormal",
