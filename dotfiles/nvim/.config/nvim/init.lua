@@ -272,6 +272,7 @@ require("lazy").setup(
     {
       "folke/trouble.nvim",
       dependencies = "kyazdani42/nvim-web-devicons",
+      cmd = "Trouble",
       config = function()
         require("config.trouble")
       end,
@@ -434,6 +435,7 @@ require("lazy").setup(
     {
       "romgrk/barbar.nvim",
       dependencies = { "kyazdani42/nvim-web-devicons" },
+      cmd = "BarbarEnable",
       config = function()
         require("config.barbar")
       end,
