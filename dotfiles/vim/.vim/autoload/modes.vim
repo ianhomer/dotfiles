@@ -16,11 +16,15 @@ endfunction
 
 function modes#enableBarbar(enable)
   if a:enable == 1
-    BarbarEnable
-    lua require"config.barbar".show()
+    if knobs#("barbar")
+      BarbarEnable
+      lua require"config.barbar".show()
+    endif
     set showtabline=2
   else
-    lua require"config.barbar".hide()
+    if knobs#("barbar")
+      lua require"config.barbar".hide()
+    endif
     set showtabline=0
   endif
 endfunction

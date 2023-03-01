@@ -19,8 +19,9 @@ nvim_set_var("knobs_levels", {
   apathy = 6,
   autopairs = 3,
   autosave = 3,
-  barbar = 5,
+  barbar = 6,
   bqf = 5,
+  bufferline = 5,
   codewindow = 6,
   colorizer = 4,
   conflict_marker = 7,
@@ -53,6 +54,7 @@ nvim_set_var("knobs_levels", {
   icon_picker = 5,
   indent_blankline = 5,
   indentline = 5,
+  indentscope = 5,
   kanagawa = 3,
   lens = 8,
   lightbulb = 3,
@@ -215,7 +217,7 @@ require("lazy").setup(
     -- },
     {
       "saadparwaiz1/cmp_luasnip",
-      knob = "luasnip"
+      knob = "luasnip",
     },
     {
       "L3MON4D3/LuaSnip",
@@ -418,7 +420,7 @@ require("lazy").setup(
     -- },
     {
       "folke/which-key.nvim",
-      event = "BufWinEnter",
+      event = "VeryLazy",
       config = function()
         require("config.which_key")
       end,
@@ -441,7 +443,13 @@ require("lazy").setup(
         require("config.barbar")
       end,
     },
-
+    {
+      "akinsho/bufferline.nvim",
+      event = "VeryLazy",
+      config = function()
+        require("config.bufferline")
+      end,
+    },
     -- -- Style
     {
       "rebelot/kanagawa.nvim",
@@ -534,7 +542,8 @@ require("lazy").setup(
     -- },
     {
       "tpope/vim-repeat",
-      knob = "vim_repeat"
+      event = "VeryLazy",
+      knob = "vim_repeat",
     },
     {
       "tpope/vim-abolish",
@@ -583,6 +592,28 @@ require("lazy").setup(
     },
     {
       "lukas-reineke/indent-blankline.nvim",
+      event = { "BufReadPost", "BufNewFile" },
+      opts = {
+        char = "│",
+        filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
+        show_trailing_blankline_indent = false,
+        show_current_context = false,
+      },
+    },
+    {
+      "echasnovski/mini.indentscope",
+      event = { "BufReadPre", "BufNewFile" },
+      init = function()
+        vim.api.nvim_create_autocmd("FileType", {
+          pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
+          callback = function()
+            vim.b.miniindentscope_disable = true
+          end,
+        })
+      end,
+      config = function()
+        require("config.indentscope")
+      end,
     },
     {
       "simnalamburt/vim-mundo",
