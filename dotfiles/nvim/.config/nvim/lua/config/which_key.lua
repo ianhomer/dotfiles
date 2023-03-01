@@ -20,8 +20,22 @@ whichKey.setup({
     },
 })
 
-local map = {}
+local leaders = {}
 local vmap = {}
+
+-- Core navigation
+whichKey.register{
+  ["g"] = { name = "+goto" },
+  ["]"] = { name = "+next" },
+  ["["] = { name = "+prev" },
+}
+
+leaders["b"] = { name = "+buffer" }
+leaders["c"] = { name = "+code" }
+leaders["f"] = { name = "+find" }
+leaders["g"] = { name = "+git" }
+leaders["gh"] = { name = "+hunks" }
+leaders["s"] = { name = "+search" }
 
 local findNamedFile = {
     "<cmd>lua require'telescope.builtin'.find_files({find_command={'fd', '-H', '-i', vim.fn.expand('<cword>')}})<cr>",
@@ -30,102 +44,100 @@ local findNamedFile = {
 
 if vim.g.knob_telescope then
     -- Alternatives
-    map["tg"] = { "<cmd>Telescope grep_string<cr>", "Grep String" }
+    leaders["tg"] = { "<cmd>Telescope grep_string<cr>", "Grep String" }
 
     -- Find
-    map["<space>"] = { "<cmd>Telescope buffers<cr>", "Buffers" }
-    map["f"] = { name = "+find" }
-    map["F"] = { "<cmd>Telescope find_files hidden=true<cr>", "Find File" }
-    map["ff"] = { "<cmd>Telescope find_files hidden=true<cr>", "Find File" }
-    map["fh"] = { "<cmd>Telescope oldfiles only_cwd=true<cr>", "File History" }
-    map["fH"] = { "<cmd>Telescope frecency<cr>", "Frequent" }
-    map["fF"] = findNamedFile
+    leaders["<space>"] = { "<cmd>Telescope buffers<cr>", "Buffers" }
+    leaders["F"] = { "<cmd>Telescope find_files hidden=true<cr>", "Find File" }
+    leaders["ff"] = { "<cmd>Telescope find_files hidden=true<cr>", "Find File" }
+    leaders["fh"] = { "<cmd>Telescope oldfiles only_cwd=true<cr>", "File History" }
+    leaders["fH"] = { "<cmd>Telescope frecency<cr>", "Frequent" }
+    leaders["fF"] = findNamedFile
 
     -- Search
-    map["s"] = { name = "+search" }
-    map["S"] = { "<cmd>Telescope live_grep<cr>", "Search" }
-    map["ss"] = { "<cmd>Telescope live_grep<cr>", "Search" }
-    map["sA"] = { "<cmd>Telescope live_grep hidden=true<cr>", "Search" }
-    map["sS"] = { "<cmd>Fuzzy<cr>", "Fuzzy Search" }
-    map["sa"] = { "<cmd>Telescope autocommands<cr>", "Auto Commands" }
-    map["sb"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Buffer" }
-    map["sc"] = { "<cmd>Telescope command_history<cr>", "Command History" }
-    map["sC"] = { "<cmd>Telescope commands<cr>", "Commands" }
-    map["sd"] = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" }
-    map["sh"] = { "<cmd>Telescope help_tags<cr>", "Help Tags" }
-    map["sH"] = { "<cmd>Telescope highlights<cr>", "Highlights" }
-    map["sk"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" }
-    map["sm"] = { "<cmd>Telescope marks<cr>", "Jump to Mark" }
-    map["sM"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" }
-    map["so"] = { "<cmd>Telescope vim_options<cr>", "Options" }
-    map["sR"] = { "<cmd>Telescope resume<cr>", "Resume" }
-    map["st"] = { "<cmd>Telescope<cr>", "Telescope" }
-    map["sT"] = { "<cmd>Telescope tags<cr>", "Tags" }
-    map["sq"] = { "<cmd>Telescope quickfix<cr>", "Quick Fix" }
-    map["sj"] = { "<cmd>Telescope jumplist<cr>", "Jump List" }
-    map["sl"] = { "<cmd>Telescope loclist<cr>", "Location List" }
-    map["sr"] = { "<cmd>Telescope registers<cr>", "Registers" }
+    leaders["S"] = { "<cmd>Telescope live_grep<cr>", "Search" }
+    leaders["ss"] = { "<cmd>Telescope live_grep<cr>", "Search" }
+    leaders["sA"] = { "<cmd>Telescope live_grep hidden=true<cr>", "Search" }
+    leaders["sS"] = { "<cmd>Fuzzy<cr>", "Fuzzy Search" }
+    leaders["sa"] = { "<cmd>Telescope autocommands<cr>", "Auto Commands" }
+    leaders["sb"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Buffer" }
+    leaders["sc"] = { "<cmd>Telescope command_history<cr>", "Command History" }
+    leaders["sC"] = { "<cmd>Telescope commands<cr>", "Commands" }
+    leaders["sd"] = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" }
+    leaders["sh"] = { "<cmd>Telescope help_tags<cr>", "Help Tags" }
+    leaders["sH"] = { "<cmd>Telescope highlights<cr>", "Highlights" }
+    leaders["sk"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" }
+    leaders["sm"] = { "<cmd>Telescope marks<cr>", "Jump to Mark" }
+    leaders["sM"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" }
+    leaders["so"] = { "<cmd>Telescope vim_options<cr>", "Options" }
+    leaders["sR"] = { "<cmd>Telescope resume<cr>", "Resume" }
+    leaders["st"] = { "<cmd>Telescope<cr>", "Telescope" }
+    leaders["sT"] = { "<cmd>Telescope tags<cr>", "Tags" }
+    leaders["sq"] = { "<cmd>Telescope quickfix<cr>", "Quick Fix" }
+    leaders["sj"] = { "<cmd>Telescope jumplist<cr>", "Jump List" }
+    leaders["sl"] = { "<cmd>Telescope loclist<cr>", "Location List" }
+    leaders["sr"] = { "<cmd>Telescope registers<cr>", "Registers" }
 
-    map["/"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search Buffer" }
-    map["t4"] = { "<cmd>Telescope search_history<cr>", "Search History" }
-    map["t9"] = { "<cmd>Telescope spell_suggest<cr>", "Spell Suggest" }
+    leaders["/"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search Buffer" }
+    leaders["t4"] = { "<cmd>Telescope search_history<cr>", "Search History" }
+    leaders["t9"] = { "<cmd>Telescope spell_suggest<cr>", "Spell Suggest" }
 
     -- Git
-    map["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
-    map["t1"] = { "<cmd>Telescope git_commits<cr>", "Git Commits" }
-    map["t2"] = { "<cmd>Telescope: git_branches<cr>", "Git Branches" }
-    map["t3"] = { "<cmd>Telescope git_stash<cr>", "Git Stash" }
+    leaders["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
+    leaders["t1"] = { "<cmd>Telescope git_commits<cr>", "Git Commits" }
+    leaders["t2"] = { "<cmd>Telescope: git_branches<cr>", "Git Branches" }
+    leaders["t3"] = { "<cmd>Telescope git_stash<cr>", "Git Stash" }
 
     -- LSP
-    map["td"] = { "<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols" }
+    leaders["td"] = { "<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols" }
 end
 
-map[";"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "LSP Format" }
-map[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "LSP Range Format" }
+leaders[";"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "LSP Format" }
+leaders[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "LSP Range Format" }
 
 -- Modes
-map["5"] = { "<cmd>lua require'config/null_ls'.setLevel(3)<cr>", "Core Lints" }
-map["6"] = { "<cmd>lua require'config/null_ls'.toggle()<cr>", "Toggle Lints" }
-map["7"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Trouble File" }
-map["&"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble All" }
-map["8"] = { "<cmd>call my#ToggleBlame()<cr>", "Blame" }
-map["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap" }
+leaders["5"] = { "<cmd>lua require'config/null_ls'.setLevel(3)<cr>", "Core Lints" }
+leaders["6"] = { "<cmd>lua require'config/null_ls'.toggle()<cr>", "Toggle Lints" }
+leaders["7"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Trouble File" }
+leaders["&"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble All" }
+leaders["8"] = { "<cmd>call my#ToggleBlame()<cr>", "Blame" }
+leaders["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap" }
 
-map["m"] = { "<cmd>lua require'codewindow'.toggle_minimap()<cr>", "Minimap" }
-map["rg"] = { ":reg<cr>", "Registers" }
+leaders["m"] = { "<cmd>lua require'codewindow'.toggle_minimap()<cr>", "Minimap" }
+leaders["rg"] = { ":reg<cr>", "Registers" }
 
 -- Dev
-map["y"] = { "<cmd>TestNearest<cr>", "Test nearest" }
-map["Y"] = { "<cmd>TestFile<cr>", "Test file" }
-map["q"] = { vim.diagnostic.setloclist, "Set Loc List" }
+leaders["y"] = { "<cmd>TestNearest<cr>", "Test nearest" }
+leaders["Y"] = { "<cmd>TestFile<cr>", "Test file" }
+leaders["q"] = { vim.diagnostic.setloclist, "Set Loc List" }
 
 if vim.g.knob_toggleterm then
-    map["a"] = { "<cmd>ToggleTerm<cr>", "Terminal" }
+    leaders["a"] = { "<cmd>ToggleTerm<cr>", "Terminal" }
 end
 
 if vim.g.knob_nvim_tree then
-    map["n"] = { "<cmd>NvimTreeToggle<cr>", "Files" }
+    leaders["n"] = { "<cmd>NvimTreeToggle<cr>", "Files" }
 end
 
 if vim.g.knob_peek then
-    map["p"] = { "<cmd>PeekOpen<cr>", "Markdown Peek"}
+    leaders["p"] = { "<cmd>PeekOpen<cr>", "Markdown Peek"}
 end
 
-map["e"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics" }
-map["cc"] = { "beli<cmd>lua require'cmp'.complete()<cr>", "Autocompletion menu"}
+leaders["e"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics" }
+leaders["cc"] = { "beli<cmd>lua require'cmp'.complete()<cr>", "Autocompletion menu"}
 if vim.g.knob_hop then
-    map["h"] = { "<cmd>lua require'hop'.hint_words()<cr>", "Hop" }
+    leaders["h"] = { "<cmd>lua require'hop'.hint_words()<cr>", "Hop" }
 end
 
 if vim.g.knob_refactoring then
-    map["rc"] = { ":lua require('refactoring').debug.cleanup({})<cr>", "Refactor debug cleanup" }
-    map["rn"] =
+    leaders["rc"] = { ":lua require('refactoring').debug.cleanup({})<cr>", "Refactor debug cleanup" }
+    leaders["rn"] =
         { ":lua require('refactoring').debug.print_var({ normal = true })<cr>", "Refactor debug print variable" }
 
-    map["rb"] = { [[ <cmd>lua require('refactoring').refactor('Extract Block')<cr>]], "Extract Block" }
-    map["rbf"] = { [[ <cmd>lua require('refactoring').refactor('Extract Block To File')<cr>]], "Extract Block to File" }
-    map["ri"] = { [[ <cmd>lua require('refactoring').refactor('Inline Variable')<cr>]], "Inline Variable" }
-    map["rd"] =
+    leaders["rb"] = { [[ <cmd>lua require('refactoring').refactor('Extract Block')<cr>]], "Extract Block" }
+    leaders["rbf"] = { [[ <cmd>lua require('refactoring').refactor('Extract Block To File')<cr>]], "Extract Block to File" }
+    leaders["ri"] = { [[ <cmd>lua require('refactoring').refactor('Inline Variable')<cr>]], "Inline Variable" }
+    leaders["rd"] =
         { ":lua require('refactoring').debug.print_var({ normal = true })<cr>", "Refactor debug print variable" }
 
     vmap["re"] = { [[ <esc><cmd>lua require('refactoring').refactor('Extract Function')<cr>]], "Extract function" }
@@ -141,7 +153,7 @@ if vim.g.knob_refactoring then
     vmap["ri"] = { [[ <esc><cmd>lua require('refactoring').refactor('Inline Variable')<cr>]], "Inline variable" }
 end
 
-whichKey.register(map, { prefix = "<leader>" })
+whichKey.register(leaders, { prefix = "<leader>" })
 whichKey.register(vmap, { prefix = "<leader>", mode = "v" })
 
 local cheats = {}

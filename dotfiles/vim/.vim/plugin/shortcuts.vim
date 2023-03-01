@@ -27,7 +27,7 @@ if get(g:, "knobs_level", 0) > 2
 
   nnoremap <silent> <leader>k :ToggleQuickFix<CR>
   nnoremap <silent> <leader>K :ToggleLocationList<CR>
-  nnoremap <silent> <leader>g :ToggleFugitive<CR>
+  nnoremap <silent> <leader>gg :ToggleFugitive<CR>
   nnoremap <leader>,gdh :diffget //2<CR>
   nnoremap <leader>,gdl :diffget //3<CR>
   nnoremap <silent> <leader>b :GPush<CR>
