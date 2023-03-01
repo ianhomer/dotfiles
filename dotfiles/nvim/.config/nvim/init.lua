@@ -32,6 +32,7 @@ nvim_set_var("knobs_levels", {
   devicons = 3,
   dispatch = 3,
   document_color = 9,
+  dressing = 5,
   easy_align = 3,
   editorconfig = 9,
   endwise = 7,
@@ -234,10 +235,10 @@ require("lazy").setup(
         require("config.cmp")
       end,
     },
-    -- {
-    --   "j-hui/fidget.nvim",
-    --   config = [[require'fidget'.setup{}]],
-    -- },
+    {
+      "j-hui/fidget.nvim",
+      config = [[require'fidget'.setup{}]],
+    },
     {
       "kosayoda/nvim-lightbulb",
       config = function()
@@ -255,10 +256,10 @@ require("lazy").setup(
     --   cmd = "Vista",
     --   "liuchengxu/vista.vim",
     -- },
-    -- {
-    --   "rcarriga/nvim-notify",
-    --   config = [[require'config.notify']],
-    -- },
+    {
+      "rcarriga/nvim-notify",
+      config = [[require'config.notify']],
+    },
     -- {
     --   "folke/noice.nvim",
     --   event = "VimEnter",
@@ -277,11 +278,11 @@ require("lazy").setup(
         require("config.trouble")
       end,
     },
-    -- {
-    --   "kevinhwang91/nvim-bqf",
-    --   ft = "qf",
-    --   config = [[require'config.bqf']],
-    -- },
+    {
+      "kevinhwang91/nvim-bqf",
+      ft = "qf",
+      config = [[require'config.bqf']],
+    },
     -- {
     --   "majutsushi/tagbar",
     --   cmd = "TagbarToggle",
@@ -422,9 +423,9 @@ require("lazy").setup(
         require("config.which_key")
       end,
     },
-    -- {
-    --   "ggandor/lightspeed.nvim",
-    -- },
+    {
+      "ggandor/lightspeed.nvim",
+    },
     {
       "nvim-lualine/lualine.nvim",
       dependencies = { "kyazdani42/nvim-web-devicons" },
@@ -449,11 +450,11 @@ require("lazy").setup(
         require("config.kanagawa")
       end,
     },
-    -- {
-    --   "NvChad/nvim-colorizer.lua",
-    --   config = [[require'config.colorizer']],
-    --   event = "BufRead",
-    -- },
+    {
+      "NvChad/nvim-colorizer.lua",
+      config = [[require'config.colorizer']],
+      event = "BufRead",
+    },
     -- {
     --   "mrshmllow/document-color.nvim",
     --   config = [[require'config.document_color']],
@@ -535,17 +536,17 @@ require("lazy").setup(
       "tpope/vim-repeat",
       knob = "vim_repeat"
     },
-    -- {
-    --   "tpope/vim-abolish",
-    -- },
-    -- {
-    --   "stevearc/dressing.nvim",
-    -- },
-    -- {
-    --   "ziontee113/icon-picker.nvim",
-    --   config = [[require'config.icon_picker']],
-    --   dependencies = "dressing.nvim",
-    -- },
+    {
+      "tpope/vim-abolish",
+    },
+    {
+      "stevearc/dressing.nvim",
+    },
+    {
+      "ziontee113/icon-picker.nvim",
+      config = [[require'config.icon_picker']],
+      dependencies = "dressing.nvim",
+    },
     {
       "godlygeek/tabular",
       cmd = { "Tabularize" },
@@ -557,24 +558,24 @@ require("lazy").setup(
     --   "chrisbra/unicode.vim",
     -- },
 
-    -- {
-    --   "folke/zen-mode.nvim",
-    --   cmd = { "ZenMode" },
-    --   config = [[require'config.zen_mode']],
-    -- },
+    {
+      "folke/zen-mode.nvim",
+      cmd = { "ZenMode" },
+      config = [[require'config.zen_mode']],
+    },
 
     -- {
     --   "junegunn/goyo.vim",
     -- },
 
-    -- {
-    --   "junegunn/vim-easy-align",
-    -- },
+    {
+      "junegunn/vim-easy-align",
+    },
 
-    -- {
-    --   "ellisonleao/glow.nvim",
-    --   cmd = { "Glow" },
-    -- },
+    {
+      "ellisonleao/glow.nvim",
+      cmd = { "Glow" },
+    },
     {
       "iamcco/markdown-preview.nvim",
       -- cmd = {"MarkdownPreview"},
