@@ -31,8 +31,6 @@ local findNamedFile = {
 if vim.g.knob_telescope then
     -- Common Searches
     map["f"] = { "<cmd>Telescope find_files hidden=true<cr>", "Find File" }
-    map["s"] = { "<cmd>Telescope live_grep<cr>", "Search" }
-    map["S"] = { "<cmd>Fuzzy<cr>", "Fuzzy Search" }
     map["h"] = { "<cmd>Telescope oldfiles only_cwd=true<cr>", "File History" }
     map["H"] = { "<cmd>Telescope frecency<cr>", "Frequent" }
     map["<space>"] = { "<cmd>Telescope buffers<cr>", "Buffers" }
@@ -45,21 +43,33 @@ if vim.g.knob_telescope then
     map["tf"] = findNamedFile
     map["tF"] = { "<cmd>Telescope file_browser<cr>", "File Browser" }
 
-    -- Pickers
-    map["t4"] = { "<cmd>Telescope search_history<cr>", "Search History" }
+    -- Search
+    map["s"] = { name = "+search" }
+    map["S"] = { "<cmd>Telescope live_grep<cr>", "Search" }
+    map["ss"] = { "<cmd>Telescope live_grep<cr>", "Search" }
+    map["sS"] = { "<cmd>Fuzzy<cr>", "Fuzzy Search" }
+    map["sa"] = { "<cmd>Telescope autocommands<cr>", "Auto Commands" }
+    map["sb"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Buffer" }
+    map["sc"] = { "<cmd>Telescope command_history<cr>", "Command History" }
+    map["sC"] = { "<cmd>Telescope commands<cr>", "Commands" }
+    map["sd"] = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" }
+    map["sh"] = { "<cmd>Telescope help_tags<cr>", "Help Tags" }
+    map["sH"] = { "<cmd>Telescope highlights<cr>", "Highlights" }
+    map["sk"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" }
+    map["sm"] = { "<cmd>Telescope marks<cr>", "Jump to Mark" }
+    map["sM"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" }
+    map["so"] = { "<cmd>Telescope vim_options<cr>", "Options" }
+    map["sR"] = { "<cmd>Telescope resume<cr>", "Resume" }
+    map["st"] = { "<cmd>Telescope<cr>", "Telescope" }
+    map["sT"] = { "<cmd>Telescope tags<cr>", "Tags" }
+    map["sq"] = { "<cmd>Telescope quickfix<cr>", "Quick Fix" }
+    map["sj"] = { "<cmd>Telescope jumplist<cr>", "Jump List" }
+    map["sl"] = { "<cmd>Telescope loclist<cr>", "Location List" }
+    map["sr"] = { "<cmd>Telescope registers<cr>", "Registers" }
+
     map["/"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search Buffer" }
+    map["t4"] = { "<cmd>Telescope search_history<cr>", "Search History" }
     map["t9"] = { "<cmd>Telescope spell_suggest<cr>", "Spell Suggest" }
-    map["tC"] = { "<cmd>Telescope commands<cr>", "Available Commands" }
-    map["tH"] = { "<cmd>Telescope help_tags<cr>", "Help" }
-    map["tT"] = { "<cmd>Telescope tags<cr>", "Tags" }
-    map["tc"] = { "<cmd>Telescope command_history<cr>", "Recent Commands" }
-    map["th"] = { "<cmd>Telescope highlights<cr>", "Highlights" }
-    map["tj"] = { "<cmd>Telescope jumplist<cr>", "Jump List" }
-    map["tk"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" }
-    map["tl"] = { "<cmd>Telescope loclist<cr>", "Location List" }
-    map["tr"] = { "<cmd>Telescope registers<cr>", "Registers" }
-    map["tq"] = { "<cmd>Telescope quickfix<cr>", "Quick Fix" }
-    map["tt"] = { "<cmd>Telescope<cr>", "Telescope" }
 
     -- Git
     map["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
