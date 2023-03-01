@@ -29,24 +29,23 @@ local findNamedFile = {
 }
 
 if vim.g.knob_telescope then
-    -- Common Searches
-    map["f"] = { "<cmd>Telescope find_files hidden=true<cr>", "Find File" }
-    map["h"] = { "<cmd>Telescope oldfiles only_cwd=true<cr>", "File History" }
-    map["H"] = { "<cmd>Telescope frecency<cr>", "Frequent" }
-    map["<space>"] = { "<cmd>Telescope buffers<cr>", "Buffers" }
-
     -- Alternatives
-    map["tS"] = { "<cmd>Telescope live_grep hidden=true<cr>", "Search" }
     map["tg"] = { "<cmd>Telescope grep_string<cr>", "Grep String" }
 
-    -- File
-    map["tf"] = findNamedFile
-    map["tF"] = { "<cmd>Telescope file_browser<cr>", "File Browser" }
+    -- Find
+    map["<space>"] = { "<cmd>Telescope buffers<cr>", "Buffers" }
+    map["f"] = { name = "+find" }
+    map["F"] = { "<cmd>Telescope find_files hidden=true<cr>", "Find File" }
+    map["ff"] = { "<cmd>Telescope find_files hidden=true<cr>", "Find File" }
+    map["fh"] = { "<cmd>Telescope oldfiles only_cwd=true<cr>", "File History" }
+    map["fH"] = { "<cmd>Telescope frecency<cr>", "Frequent" }
+    map["fF"] = findNamedFile
 
     -- Search
     map["s"] = { name = "+search" }
     map["S"] = { "<cmd>Telescope live_grep<cr>", "Search" }
     map["ss"] = { "<cmd>Telescope live_grep<cr>", "Search" }
+    map["sA"] = { "<cmd>Telescope live_grep hidden=true<cr>", "Search" }
     map["sS"] = { "<cmd>Fuzzy<cr>", "Fuzzy Search" }
     map["sa"] = { "<cmd>Telescope autocommands<cr>", "Auto Commands" }
     map["sb"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Buffer" }
