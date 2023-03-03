@@ -17,3 +17,5 @@ fi
 
 source ~/.bashrc
 . "$HOME/.cargo/env"
+
+source /Users/ian/.docker/init-bash.sh || true # Added by Docker Desktop

@@ -151,8 +151,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.api.nvim_set_keymap("n", "<space>i", "<cmd>:ZenMode<CR>", {})
-
 local knobspath = vim.fn.stdpath("data") .. "/knobs/knobs.vim"
 if not vim.loop.fs_stat(knobspath) then
   vim.fn.system({

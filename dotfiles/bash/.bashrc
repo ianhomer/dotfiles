@@ -50,3 +50,5 @@ export NVM_DIR="$HOME/.nvm"
 . ~/.config/sh/aliases.sh
 . ~/.config/sh/aliases-non-fish.sh
 . ~/.cargo/env
+
+source /Users/ian/.docker/init-bash.sh || true # Added by Docker Desktop

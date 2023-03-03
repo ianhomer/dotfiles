@@ -27,9 +27,9 @@ if get(g:, "knobs_level", 0) > 2
 
   nnoremap <silent> <leader>k :ToggleQuickFix<CR>
   nnoremap <silent> <leader>K :ToggleLocationList<CR>
-  nnoremap <silent> <leader>gg :ToggleFugitive<CR>
-  nnoremap <leader>,gdh :diffget //2<CR>
-  nnoremap <leader>,gdl :diffget //3<CR>
+  nnoremap <silent> <leader>g :ToggleFugitive<CR>
+  nnoremap /gdh :diffget //2<CR>
+  nnoremap /gdl :diffget //3<CR>
   nnoremap <silent> <leader>b :GPush<CR>
 
   " ... and let this q mapping apply for NERDTree
@@ -50,4 +50,3 @@ endif
 
 command! -nargs=0 LintMe :call my#LintMe()
 nnoremap <silent> <leader>l :LintMe<CR>
-nnoremap <leader>.e <C-W><C-=>

@@ -21,6 +21,7 @@ whichKey.setup({
 })
 
 local leaders = {}
+local extras = {}
 local vmap = {}
 
 -- Core navigation
@@ -28,14 +29,21 @@ whichKey.register{
   ["g"] = { name = "+goto" },
   ["]"] = { name = "+next" },
   ["["] = { name = "+prev" },
+  ["/"] = { name = "+extras" },
 }
 
-leaders["b"] = { name = "+buffer" }
 leaders["c"] = { name = "+code" }
-leaders["f"] = { name = "+find" }
-leaders["g"] = { name = "+git" }
-leaders["gh"] = { name = "+hunks" }
-leaders["s"] = { name = "+search" }
+leaders["j"] = { name = "+thingity" }
+leaders["/"] = { name = "+extras" }
+
+extras["b"] = { name = "+buffer" }
+extras["f"] = { name = "+find" }
+extras["g"] = { name = "+git" }
+extras["gh"] = { name = "+hunks" }
+extras["gd"] = { name = "+diff" }
+extras["s"] = { name = "+search" }
+extras["u"] = { name = "+ui" }
+extras["."] = { name = "+profile" }
 
 local findNamedFile = {
     "<cmd>lua require'telescope.builtin'.find_files({find_command={'fd', '-H', '-i', vim.fn.expand('<cword>')}})<cr>",
@@ -43,53 +51,51 @@ local findNamedFile = {
 }
 
 if vim.g.knob_telescope then
-    -- Alternatives
-    leaders["tg"] = { "<cmd>Telescope grep_string<cr>", "Grep String" }
-
     -- Find
     leaders["<space>"] = { "<cmd>Telescope buffers<cr>", "Buffers" }
-    leaders["F"] = { "<cmd>Telescope find_files hidden=true<cr>", "Find File" }
-    leaders["ff"] = { "<cmd>Telescope find_files hidden=true<cr>", "Find File" }
-    leaders["fh"] = { "<cmd>Telescope oldfiles only_cwd=true<cr>", "File History" }
-    leaders["fH"] = { "<cmd>Telescope frecency<cr>", "Frequent" }
-    leaders["fF"] = findNamedFile
+    leaders["f"] = { "<cmd>Telescope find_files hidden=true<cr>", "Find File" }
+    leaders["h"] = { "<cmd>Telescope oldfiles only_cwd=true<cr>", "File History" }
+
+    extras["fH"] = { "<cmd>Telescope frecency<cr>", "Frequent" }
+    extras["fF"] = findNamedFile
 
     -- Search
-    leaders["S"] = { "<cmd>Telescope live_grep<cr>", "Search" }
-    leaders["ss"] = { "<cmd>Telescope live_grep<cr>", "Search" }
-    leaders["sA"] = { "<cmd>Telescope live_grep hidden=true<cr>", "Search" }
-    leaders["sS"] = { "<cmd>Fuzzy<cr>", "Fuzzy Search" }
-    leaders["sa"] = { "<cmd>Telescope autocommands<cr>", "Auto Commands" }
-    leaders["sb"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Buffer" }
-    leaders["sc"] = { "<cmd>Telescope command_history<cr>", "Command History" }
-    leaders["sC"] = { "<cmd>Telescope commands<cr>", "Commands" }
-    leaders["sd"] = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" }
-    leaders["sh"] = { "<cmd>Telescope help_tags<cr>", "Help Tags" }
-    leaders["sH"] = { "<cmd>Telescope highlights<cr>", "Highlights" }
-    leaders["sk"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" }
-    leaders["sm"] = { "<cmd>Telescope marks<cr>", "Jump to Mark" }
-    leaders["sM"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" }
-    leaders["so"] = { "<cmd>Telescope vim_options<cr>", "Options" }
-    leaders["sR"] = { "<cmd>Telescope resume<cr>", "Resume" }
-    leaders["st"] = { "<cmd>Telescope<cr>", "Telescope" }
-    leaders["sT"] = { "<cmd>Telescope tags<cr>", "Tags" }
-    leaders["sq"] = { "<cmd>Telescope quickfix<cr>", "Quick Fix" }
-    leaders["sj"] = { "<cmd>Telescope jumplist<cr>", "Jump List" }
-    leaders["sl"] = { "<cmd>Telescope loclist<cr>", "Location List" }
-    leaders["sr"] = { "<cmd>Telescope registers<cr>", "Registers" }
+    leaders["s"] = { "<cmd>Telescope live_grep<cr>", "Search" }
 
-    leaders["/"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Search Buffer" }
-    leaders["t4"] = { "<cmd>Telescope search_history<cr>", "Search History" }
-    leaders["t9"] = { "<cmd>Telescope spell_suggest<cr>", "Spell Suggest" }
+    extras["sA"] = { "<cmd>Telescope live_grep hidden=true<cr>", "Search" }
+    extras["sC"] = { "<cmd>Telescope commands<cr>", "Commands" }
+    extras["sH"] = { "<cmd>Telescope highlights<cr>", "Highlights" }
+    extras["sM"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" }
+    extras["sR"] = { "<cmd>Telescope resume<cr>", "Resume" }
+    extras["sS"] = { "<cmd>Fuzzy<cr>", "Fuzzy Search" }
+    extras["sT"] = { "<cmd>Telescope tags<cr>", "Tags" }
+    extras["sa"] = { "<cmd>Telescope autocommands<cr>", "Auto Commands" }
+    extras["sb"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Buffer" }
+    extras["sc"] = { "<cmd>Telescope command_history<cr>", "Command History" }
+    extras["sd"] = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" }
+    extras["sh"] = { "<cmd>Telescope help_tags<cr>", "Help Tags" }
+    extras["sj"] = { "<cmd>Telescope jumplist<cr>", "Jump List" }
+    extras["sg"] = { "<cmd>Telescope grep_string<cr>", "Grep String" }
+    extras["sk"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" }
+    extras["sl"] = { "<cmd>Telescope loclist<cr>", "Location List" }
+    extras["sl"] = { "<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols" }
+    extras["sm"] = { "<cmd>Telescope marks<cr>", "Jump to Mark" }
+    extras["so"] = { "<cmd>Telescope vim_options<cr>", "Options" }
+    extras["sq"] = { "<cmd>Telescope quickfix<cr>", "Quick Fix" }
+    extras["sr"] = { "<cmd>Telescope registers<cr>", "Registers" }
+    extras["st"] = { "<cmd>Telescope<cr>", "Telescope" }
+    extras["sx"] = { ":reg<cr>", "Registers (:reg)" }
+    extras["s4"] = { "<cmd>Telescope search_history<cr>", "Search History" }
+    extras["s9"] = { "<cmd>Telescope spell_suggest<cr>", "Spell Suggest" }
 
     -- Git
-    leaders["tb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
-    leaders["t1"] = { "<cmd>Telescope git_commits<cr>", "Git Commits" }
-    leaders["t2"] = { "<cmd>Telescope: git_branches<cr>", "Git Branches" }
-    leaders["t3"] = { "<cmd>Telescope git_stash<cr>", "Git Stash" }
+    extras["gtb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
+    extras["gt1"] = { "<cmd>Telescope git_commits<cr>", "Git Commits" }
+    extras["gt2"] = { "<cmd>Telescope: git_branches<cr>", "Git Branches" }
+    extras["gt3"] = { "<cmd>Telescope git_stash<cr>", "Git Stash" }
 
-    -- LSP
-    leaders["td"] = { "<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols" }
+    -- UI
+    extras["uz"] = { "<cmd>ZenMode<cr>", "Zen mode" }
 end
 
 leaders[";"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "LSP Format" }
@@ -104,7 +110,6 @@ leaders["8"] = { "<cmd>call my#ToggleBlame()<cr>", "Blame" }
 leaders["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap" }
 
 leaders["m"] = { "<cmd>lua require'codewindow'.toggle_minimap()<cr>", "Minimap" }
-leaders["rg"] = { ":reg<cr>", "Registers" }
 
 -- Dev
 leaders["y"] = { "<cmd>TestNearest<cr>", "Test nearest" }
@@ -154,6 +159,8 @@ if vim.g.knob_refactoring then
 end
 
 whichKey.register(leaders, { prefix = "<leader>" })
+whichKey.register(extras, { prefix = "<leader>/" })
+whichKey.register(extras, { prefix = "/" })
 whichKey.register(vmap, { prefix = "<leader>", mode = "v" })
 
 local cheats = {}
