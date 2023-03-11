@@ -22,7 +22,7 @@ nvim_set_var("knobs_levels", {
   barbar = 6,
   bqf = 5,
   bufferline = 5,
-  codewindow = 6,
+  codewindow = 5,
   colorizer = 4,
   conflict_marker = 7,
   commentary = 4,
@@ -418,10 +418,10 @@ require("lazy").setup(
       "wfxr/minimap.vim",
       cmd = { "Minimap" },
     },
-    -- {
-    --   "gorbit99/codewindow.nvim",
-    --   config = [[require'config.codewindow']],
-    -- },
+    {
+      "gorbit99/codewindow.nvim",
+      config = [[require'config.codewindow']],
+    },
     {
       "folke/which-key.nvim",
       event = "VeryLazy",

@@ -15,9 +15,6 @@ if knobs#("fzf")
   nnoremap <silent> <leader>h :History<CR>
 endif
 
-" Hide all windows except the current one
-nnoremap <silent> <leader>O :only<CR>
-
 if get(g:, "knobs_level", 0) > 2
   command! -nargs=0 ToggleQuickFix :call my#ToggleQuickFix()
   command! -nargs=0 ToggleLocationList :call my#ToggleLocationList()
@@ -25,11 +22,9 @@ if get(g:, "knobs_level", 0) > 2
   command! -nargs=0 GPush :call my#GitSynk(1)
   command! -nargs=0 GSynk :call my#GitSynk(0)
 
-  nnoremap <silent> <leader>k :ToggleQuickFix<CR>
-  nnoremap <silent> <leader>K :ToggleLocationList<CR>
   nnoremap <silent> <leader>g :ToggleFugitive<CR>
-  nnoremap /gdh :diffget //2<CR>
-  nnoremap /gdl :diffget //3<CR>
+  nnoremap <leader>,gDh :diffget //2<CR>
+  nnoremap <leader>,gDl :diffget //3<CR>
   nnoremap <silent> <leader>b :GPush<CR>
 
   " ... and let this q mapping apply for NERDTree

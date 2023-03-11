@@ -65,8 +65,8 @@ require("nvim-treesitter.configs").setup({
   },
 })
 
-local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-vim.keymap.set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next,
+local repeatable_move = require("nvim-treesitter.textobjects.repeatable_move")
+vim.keymap.set({ "n", "x", "o" }, ";", repeatable_move.repeat_last_move_next,
 { desc = "repeat ->" })
-vim.keymap.set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous,
+vim.keymap.set({ "n", "x", "o" }, ",", repeatable_move.repeat_last_move_previous,
 { desc = "repeat <-" })
