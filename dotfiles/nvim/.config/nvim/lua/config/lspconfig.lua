@@ -1,15 +1,23 @@
 local lspconfig = require("lspconfig")
+
+-- get next and previous diagnostic functions
+local next_diagnostic, prev_diagnostic = (function()
+  if vim.g.knob_treesitter_textobjects then
+    -- if we have treesitter text objects installed we can return a repeatable
+    -- function allowing ';' and ',' to repeat forward and backward
+    local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+    return ts_repeat_move.make_repeatable_move_pair(vim.diagnostic.goto_next,
+    vim.diagnostic.goto_prev)
+  else
+    return vim.diagnostic.goto_next, vim.diagnostic.goto_prev
+  end
+end)()
+
 local outer_nmap = function(keys, func, desc)
   vim.keymap.set("n", keys, func, { silent = true, noremap = true, desc = desc })
 end
-
-local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-local next_diagnostic_repeat, prev_diagnostic_repeat =
-    ts_repeat_move.make_repeatable_move_pair(vim.diagnostic.goto_next,
-    vim.diagnostic.goto_prev)
-
-outer_nmap("[d", prev_diagnostic_repeat, "Previous diagnostic")
-outer_nmap("]d", next_diagnostic_repeat, "Next diagnostic")
+outer_nmap("[d", prev_diagnostic, "Previous diagnostic")
+outer_nmap("]d", next_diagnostic, "Next diagnostic")
 
 vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]])
 vim.cmd(
