@@ -145,7 +145,7 @@ if not vim.loop.fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    "--branch=stable",     -- latest stable release
     lazypath,
   })
 end
@@ -214,12 +214,18 @@ require("lazy").setup(
     --   end,
     -- },
     {
-      "saadparwaiz1/cmp_luasnip",
-      knob = "luasnip",
-    },
-    {
       "L3MON4D3/LuaSnip",
-      dependencies = { "saadparwaiz1/cmp_luasnip" },
+      dependencies = {
+        "rafamadriz/friendly-snippets",
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load()
+        end,
+      },
+      build = "make install_jsregexp",
+      opts = {
+        history = true,
+        delete_check_events = "TextChanged",
+      },
     },
     {
       "hrsh7th/nvim-cmp",
@@ -230,6 +236,7 @@ require("lazy").setup(
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-nvim-lsp-signature-help",
+        "saadparwaiz1/cmp_luasnip",
       },
       config = function()
         require("config.cmp")
@@ -275,7 +282,7 @@ require("lazy").setup(
       dependencies = "kyazdani42/nvim-web-devicons",
       cmd = { "TroubleToggle", "Trouble" },
       config = require("config.trouble").config,
-      keys = require("config.trouble").keys
+      keys = require("config.trouble").keys,
     },
     {
       "kevinhwang91/nvim-bqf",
@@ -426,7 +433,7 @@ require("lazy").setup(
       "ggandor/lightspeed.nvim",
       config = function()
         require("config.lightspeed")
-      end
+      end,
     },
     {
       "nvim-lualine/lualine.nvim",
@@ -595,7 +602,8 @@ require("lazy").setup(
       event = { "BufReadPost", "BufNewFile" },
       opts = {
         char = "│",
-        filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" },
+        filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble",
+          "lazy" },
         show_trailing_blankline_indent = false,
         show_current_context = false,
       },
@@ -605,7 +613,8 @@ require("lazy").setup(
       event = { "BufReadPre", "BufNewFile" },
       init = function()
         vim.api.nvim_create_autocmd("FileType", {
-          pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
+          pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble",
+            "lazy", "mason" },
           callback = function()
             vim.b.miniindentscope_disable = true
           end,
