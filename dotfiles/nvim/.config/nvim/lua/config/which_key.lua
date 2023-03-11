@@ -196,8 +196,7 @@ if vim.g.knob_refactoring then
 end
 
 whichKey.register(leaders, { prefix = "<leader>" })
-whichKey.register(extras, { prefix = "<leader>/" })
-whichKey.register(extras, { prefix = "," })
+whichKey.register(extras, { prefix = "<leader>," })
 whichKey.register(vmap, { prefix = "<leader>", mode = "v" })
 
 local cheats = {}
@@ -249,5 +248,5 @@ if vim.g.knob_dap then
   runners["i"] = { "<cmd>lua require'dapui'.toggle()<CR>", "UI Toggle" }
   runners["p"] = { "<cmd>lua require'dapui'.eval()<CR>", "Show Variable" }
 
-  whichKey.register(runners, { prefix = "," })
+  whichKey.register(runners, { prefix = "<leader>," })
 end

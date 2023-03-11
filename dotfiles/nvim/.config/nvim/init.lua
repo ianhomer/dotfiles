@@ -58,7 +58,7 @@ nvim_set_var("knobs_levels", {
   kanagawa = 3,
   lens = 8,
   lightbulb = 3,
-  lightspeed = 6,
+  lightspeed = 3,
   lsp = 3,
   lsp_colors = 9,
   lspconfig = 3,
@@ -98,7 +98,7 @@ nvim_set_var("knobs_levels", {
   thingity = 3,
   toggleterm = 3,
   treesitter = 3,
-  treesitter_textobjects = 6,
+  treesitter_textobjects = 3,
   treesitter_context = 6,
   trouble = 3,
   ufo = 3,
@@ -424,6 +424,9 @@ require("lazy").setup(
     },
     {
       "ggandor/lightspeed.nvim",
+      config = function()
+        require("config.lightspeed")
+      end
     },
     {
       "nvim-lualine/lualine.nvim",
