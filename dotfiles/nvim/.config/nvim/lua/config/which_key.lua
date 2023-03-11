@@ -197,7 +197,7 @@ end
 
 whichKey.register(leaders, { prefix = "<leader>" })
 whichKey.register(extras, { prefix = "<leader>/" })
-whichKey.register(extras, { prefix = "/" })
+whichKey.register(extras, { prefix = "," })
 whichKey.register(vmap, { prefix = "<leader>", mode = "v" })
 
 local cheats = {}

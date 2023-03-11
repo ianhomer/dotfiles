@@ -58,7 +58,7 @@ nvim_set_var("knobs_levels", {
   kanagawa = 3,
   lens = 8,
   lightbulb = 3,
-  lightspeed = 3,
+  lightspeed = 6,
   lsp = 3,
   lsp_colors = 9,
   lspconfig = 3,
