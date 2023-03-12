@@ -252,3 +252,22 @@ if vim.g.knob_dap then
 
   whichKey.register(runners, { prefix = "<leader>," })
 end
+
+local augmentExisting = {}
+if vim.g.knob_neoscroll then
+  -- neoscroll takes over scrolling short cuts
+  augmentExisting["<c-f>"] = {desc = "⬇"} -- page down
+  augmentExisting["<c-d>"] = {desc = "⇩"} -- page half down
+  augmentExisting["<c-e>"] = {desc = "↓"} -- line down
+  augmentExisting["<c-b>"] = {desc = "⬆"} -- page up
+  augmentExisting["<c-u>"] = {desc = "⇧"} -- page half up
+  augmentExisting["<c-y>"] = {desc = "↑"} -- line up
+end
+augmentExisting["<cr>"] = {desc = "Start select block"}
+augmentExisting["%"] = {desc = "Jump bracket"}
+augmentExisting["s"] = {desc = "Jump lightspeed"}
+augmentExisting["S"] = {desc = "Jump back lightspeed"}
+augmentExisting["^"] = {desc = "Start of line"}
+augmentExisting["!"] = {desc = "External program"}
+
+whichKey.register(augmentExisting)

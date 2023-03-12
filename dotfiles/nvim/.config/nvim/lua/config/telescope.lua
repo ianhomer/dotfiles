@@ -107,6 +107,7 @@ end
 
 local opts = { noremap = true, silent = true }
 
+-- Register gitmoji symbols from telescope-symbols plugin
 vim.keymap.set("i", "<C-l>",
   "<cmd>lua require'telescope.builtin'.symbols{ sources = {'gitmoji'}}<cr>", opts)
 vim.keymap.set("i", "<C-k><C-l>", "<cmd>Telescope symbols<cr>", opts)
