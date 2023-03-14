@@ -139,3 +139,5 @@ time-me "END config.fish"
 
 set -gx PNPM_HOME "$HOME/Library/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
+
+source /Users/ian/.docker/init-fish.sh || true # Added by Docker Desktop

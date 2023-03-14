@@ -1,5 +1,3 @@
-vim.o.completeopt = "menu,menuone,noselect"
-
 local check_back_space = function()
   local col = vim.fn.col(".") - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
@@ -10,19 +8,22 @@ local termcodes = function(str)
 end
 
 local has_words_before = function()
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and
+  vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match(
+  "%s") == nil
 end
 
-local lspkind = require("lspkind")
-local luasnip = require("luasnip")
 local cmp = require("cmp")
 
 cmp.setup({
   preselect = cmp.PreselectMode.None,
+  completion = {
+    completeopt = "menu,menuone,noinsert",
+  },
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      require("luasnip").lsp_expand(args.body)
     end,
   },
   mapping = cmp.mapping.preset.insert({
@@ -41,13 +42,15 @@ cmp.setup({
     ["<CR>"] = cmp.mapping.confirm({
       select = false,
     }),
+    ["<S-CR>"] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    }),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-        -- elseif luasnip.expand_or_jumpable() then
-        --     luasnip.expand_or_jump()
-        -- elseif has_words_before() then
-        --     cmp.complete()
+      elseif vim.g.knob_luasnip and require("luasnip").expand_or_jumpable() then
+        require("luasnip").expand_or_jump()
       elseif check_back_space() then
         vim.fn.feedkeys(termcodes("<Tab>"), "n")
       elseif has_words_before() then
@@ -59,8 +62,8 @@ cmp.setup({
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-        -- elseif luasnip.jumpable(-1) then
-        --     luasnip.jump(-1)
+      elseif vim.g.knob_luasnip and require("luasnip").jumpable(-1) then
+        require("luasnip").jump(-1)
       elseif check_back_space() then
         vim.fn.feedkeys(termcodes("<S-Tab>"), "n")
       else
@@ -69,10 +72,12 @@ cmp.setup({
     end, { "i", "s" }),
   }),
   experimental = {
-    ghost_text = true,
+    ghost_text = {
+      hl_group = "LspCodeLens",
+    },
   },
   sources = {
-    { name = "nvim_lsp", max_item_count = 10 },
+    { name = "nvim_lsp",               max_item_count = 10 },
     { name = "luasnip" },
     { name = "buffer" },
     { name = "nvim_lua" },
@@ -80,7 +85,7 @@ cmp.setup({
     { name = "nvim_lsp_signature_help" },
   },
   formatting = {
-    format = lspkind.cmp_format({
+    format = require("lspkind").cmp_format({
       mode = "symbol_text",
       before = function(entry, vim_item)
         if entry.source.name == "nvim_lsp" then

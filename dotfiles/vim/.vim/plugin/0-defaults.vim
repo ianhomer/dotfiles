@@ -97,9 +97,9 @@ if exists("g:knob_minimap")
 endif
 
 " Start / stop profiling
-nnoremap <leader>.p :profile start ~/vim-performance.log<CR>:profile func*<CR>:profile file *<CR>
-nnoremap <leader>.o :profile stop<CR>
-nnoremap <leader>.i :profile dump<CR>
+nnoremap /.p :profile start ~/vim-performance.log<CR>:profile func*<CR>:profile file *<CR>
+nnoremap /.o :profile stop<CR>
+nnoremap /.i :profile dump<CR>
 
 " save all files
 if !exists("g:knob_autosave") | nnoremap <silent> <leader>w :silent! wall<CR> | endif
