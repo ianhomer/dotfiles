@@ -4,137 +4,122 @@ local kitty = require("config.kitty")
 local telescope = require("telescope")
 
 local git_command = {
-    "git",
-    "log",
-    "--date=format:%Y-%m-%d %H:%M",
-    "--format=%h %cd %<(8,trunc)%aN %s",
-    "--abbrev-commit",
-    "--",
-    ".",
+  "git",
+  "log",
+  "--date=format:%Y-%m-%d %H:%M",
+  "--format=%h %cd %<(8,trunc)%aN %s",
+  "--abbrev-commit",
+  "--",
+  ".",
 }
 
 telescope.setup({
-    defaults = {
-        vimgrep_arguments = {
-            "rg",
-            "--color=never",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--smart-case",
-            "--trim",
-            "--hidden",
-            "--ignore-file",
-            os.getenv("HOME") .. "/.config/rg/nvim-telescope.ignore",
-        },
-        prompt_prefix = "   ",
-        entry_prefix = "  ",
-        mappings = {
-            i = {
-                ["<esc>"] = actions.close,
-                ["<c-left>"] = function()
-                    kitty.navigate("h")
-                end,
-                ["<c-right>"] = function()
-                    kitty.navigate("l")
-                end,
-                ["<c-up>"] = function()
-                    kitty.navigate("k")
-                end,
-                ["<c-down>"] = function()
-                    kitty.navigate("j")
-                end
-            },
-        },
-        --    i = {["<c-t>"] = trouble.open_with_trouble},
-        --    n = {["<c-t>"] = trouble.open_with_trouble}
-        --},
-        path_display = { "shorten" },
-        layout_strategy = "vertical",
-        layout_config = {
-            horizontal = {
-                prompt_position = "bottom",
-            },
-            vertical = {
-                mirror = false,
-            },
-            height = 0.95,
-            width = 0.95,
-        },
-        winblend = 0,
-        border = {},
-        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+  defaults = {
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--trim",
+      "--hidden",
+      "--ignore-file",
+      os.getenv("HOME") .. "/.config/rg/nvim-telescope.ignore",
     },
-    extensions = {
-        frecency = {
-            default_workspace = "CWD",
-            show_scores = true,
-        },
+    prompt_prefix = "   ",
+    entry_prefix = "  ",
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close,
+        ["<c-left>"] = function()
+          kitty.navigate("h")
+        end,
+        ["<c-right>"] = function()
+          kitty.navigate("l")
+        end,
+        ["<c-up>"] = function()
+          kitty.navigate("k")
+        end,
+        ["<c-down>"] = function()
+          kitty.navigate("j")
+        end,
+      },
     },
-    pickers = {
-        buffers = {
-            sort_lastused = true,
-            mappings = {
-                i = {
-                    ["<c-k>"] = "delete_buffer",
-                },
-            },
-        },
-        find_files = {
-            find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/**" },
-        },
-        git_bcommits = {
-            git_command = git_command,
-        },
-        git_commits = {
-            git_command = git_command,
-        },
+    --    i = {["<c-t>"] = trouble.open_with_trouble},
+    --    n = {["<c-t>"] = trouble.open_with_trouble}
+    --},
+    path_display = { "shorten" },
+    layout_strategy = "vertical",
+    layout_config = {
+      horizontal = {
+        prompt_position = "bottom",
+      },
+      vertical = {
+        mirror = false,
+      },
+      height = 0.99,
+      width = 0.99,
     },
+    winblend = 0,
+    border = {},
+    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+  },
+  extensions = {
+    frecency = {
+      default_workspace = "CWD",
+      show_scores = true,
+    },
+  },
+  pickers = {
+    buffers = {
+      sort_lastused = true,
+      mappings = {
+        i = {
+          ["<c-k>"] = "delete_buffer",
+        },
+      },
+    },
+    find_files = {
+      find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/**" },
+    },
+    git_bcommits = {
+      git_command = git_command,
+    },
+    git_commits = {
+      git_command = git_command,
+    },
+  },
 })
 
 if vim.g.knob_telescope_fzf_native then
-    telescope.load_extension("fzf")
+  telescope.load_extension("fzf")
 end
 
 if vim.g.knob_frecency then
-    telescope.load_extension("frecency")
+  telescope.load_extension("frecency")
 end
 
 if vim.g.knob_refactoring then
-    telescope.load_extension("refactoring")
-end
-
-
-local has_colors, colors_module = pcall(require,"kanagawa.colors")
-if has_colors then
-  local colors = colors_module.setup()
-
-  vim.cmd("hi TelescopeBorder guibg = " .. colors.bg_dim .. " guifg = " .. colors.bg_dim)
-
-  vim.cmd("hi TelescopePromptBorder guibg = " .. colors.bg_light1 .. " guifg = " .. colors.bg_light1)
-  vim.cmd("hi TelescopePromptNormal guibg = " .. colors.bg_light1 .. " guifg = " .. colors.nu)
-  vim.cmd("hi TelescopePromptPrefix guibg = " .. colors.bg_light1 .. " guifg = " .. colors.nu)
-  vim.cmd("hi TelescopeSelection guibg = " .. colors.bg_light1 .. " guifg = " .. colors.nu)
-
-  vim.cmd("hi TelescopePreviewTitle guibg = " .. colors.bg_dim .. " guifg = " .. colors.co)
-  vim.cmd("hi TelescopePromptTitle guibg = " .. colors.bg_light1 .. " guifg = " .. colors.co)
-  vim.cmd("hi TelescopeResultsTitle guibg = " .. colors.bg_dim .. " guifg = " .. colors.co)
+  telescope.load_extension("refactoring")
 end
 
 local opts = { noremap = true, silent = true }
 
-vim.keymap.set("i", "<C-l>", "<cmd>lua require'telescope.builtin'.symbols{ sources = {'gitmoji'}}<cr>", opts)
+-- Register gitmoji symbols from telescope-symbols plugin
+vim.keymap.set("i", "<C-l>",
+  "<cmd>lua require'telescope.builtin'.symbols{ sources = {'gitmoji'}}<cr>", opts)
 vim.keymap.set("i", "<C-k><C-l>", "<cmd>Telescope symbols<cr>", opts)
 
 -- Disable which-key registry help in TelescopePrompt so that C-R can be used to
 -- insert from registry
 -- https://github.com/nvim-telescope/telescope.nvim/issues/1047
 vim.api.nvim_exec(
-    [[
+  [[
     augroup telescope
         autocmd!
         autocmd FileType TelescopePrompt inoremap <buffer> <silent> <C-r> <C-r>
     augroup END]],
-    false
+  false
 )

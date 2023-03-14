@@ -86,7 +86,7 @@ function completeBatch {
   if [[ "true" != `git config core.allowbatchcompletions` ]] ; then
       # Otherwise we have not explicit set that this repo can complete
       # batches
-      printf "∷ ◉ $current - set allowbatchcompletions with git synk -a to allow batch completions"
+      printf "∷ ◉ $current - set allowbatchcompletions with git batch -a to allow batch completions"
       return 128
 
   fi

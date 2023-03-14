@@ -7,12 +7,24 @@ interface Thing {
 
 const myGlobal = ["bar"];
 
+/**
+ * Add two numbers
+ */
 function add(x: number, y: number): number {
   return x + y;
 }
 
 export const hello = (): string => "Hello World!";
 
+/**
+ * Foo
+ *
+ * @param a - any old string
+ *
+ * ```ts
+ * foo("hello")
+ * ````
+ */
 export function foo(a: string): string {
   if (a) {
     console.log("branch 1");

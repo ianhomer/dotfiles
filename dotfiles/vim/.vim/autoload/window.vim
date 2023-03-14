@@ -69,6 +69,8 @@ endfunction
 
 function window#ToggleFugitive()
   if !window#cleaner#CloseFugitive()
+    " Close quick fix before opening fugitive window
+    cclose
     Git
   endif
 endfunction

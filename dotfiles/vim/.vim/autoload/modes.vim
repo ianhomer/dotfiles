@@ -1,4 +1,4 @@
-if exists('g:modes_autoloaded') || !exists("g:knob_modes") 
+if exists('g:modes_autoloaded') || !exists("g:knob_modes")
   finish
 endif
 let g:modes_autoloaded = 1
@@ -16,15 +16,20 @@ endfunction
 
 function modes#enableBarbar(enable)
   if a:enable == 1
-    lua require"config.barbar".show()
-    set showtabline=2  
+    if knobs#("barbar")
+      BarbarEnable
+      lua require"config.barbar".show()
+    endif
+    set showtabline=2
   else
-    lua require"config.barbar".hide()
+    if knobs#("barbar")
+      lua require"config.barbar".hide()
+    endif
     set showtabline=0
   endif
 endfunction
 
-function modes#Reset() 
+function modes#Reset()
   silent! nunmap <Up>
   silent! nunmap <Down>
   silent! nunmap <Left>
