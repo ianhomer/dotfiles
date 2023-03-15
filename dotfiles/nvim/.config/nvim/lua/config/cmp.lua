@@ -1,3 +1,5 @@
+vim.o.completeopt = "menu,menuone,noselect"
+
 local check_back_space = function()
   local col = vim.fn.col(".") - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
@@ -18,9 +20,6 @@ local cmp = require("cmp")
 
 cmp.setup({
   preselect = cmp.PreselectMode.None,
-  completion = {
-    completeopt = "menu,menuone,noinsert",
-  },
   snippet = {
     expand = function(args)
       require("luasnip").lsp_expand(args.body)
