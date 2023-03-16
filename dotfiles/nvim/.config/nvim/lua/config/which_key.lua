@@ -51,6 +51,8 @@ local findNamedFile = {
   "Find named file",
 }
 
+leaders["xa"] = { "<cmd>CloseTerms<cr> | :xa<cr>", "Exit Vim" }
+
 if vim.g.knob_telescope then
   -- Find
   leaders["<space>"] = { "<cmd>Telescope buffers<cr>", "Buffers" }
