@@ -26,10 +26,11 @@ local vmap = {}
 
 -- Core navigation
 whichKey.register({
-  ["g"] = { name = "+goto" },
-  ["]"] = { name = "+next" },
-  ["["] = { name = "+prev" },
-  ["/"] = { name = "+extras" },
+      ["g"] = { name = "+goto" },
+      ["]"] = { name = "+next" },
+      ["["] = { name = "+prev" },
+      ["/"] = { name = "+extras" },
+      ["u"] = { name = "+ui" },
 })
 
 leaders["c"] = { name = "+code" }
@@ -43,7 +44,6 @@ extras["g"] = { name = "+git" }
 extras["gh"] = { name = "+hunks" }
 extras["gd"] = { name = "+diff" }
 extras["s"] = { name = "+search" }
-extras["u"] = { name = "+ui" }
 extras["."] = { name = "+profile" }
 
 local findNamedFile = {
@@ -52,6 +52,10 @@ local findNamedFile = {
 }
 
 leaders["xa"] = { "<cmd>CloseTerms<cr> | :xa<cr>", "Exit Vim" }
+
+local my = require("myutils")
+leaders["us"] = { my.toggle_function("spell"), "Toggle Spell" }
+leaders["uw"] = { my.toggle_function("wrap"), "Toggle Wrap" }
 
 if vim.g.knob_telescope then
   -- Find
@@ -258,18 +262,18 @@ end
 local augmentExisting = {}
 if vim.g.knob_neoscroll then
   -- neoscroll takes over scrolling short cuts
-  augmentExisting["<c-f>"] = {desc = "⬇"} -- page down
-  augmentExisting["<c-d>"] = {desc = "⇩"} -- page half down
-  augmentExisting["<c-e>"] = {desc = "↓"} -- line down
-  augmentExisting["<c-b>"] = {desc = "⬆"} -- page up
-  augmentExisting["<c-u>"] = {desc = "⇧"} -- page half up
-  augmentExisting["<c-y>"] = {desc = "↑"} -- line up
+  augmentExisting["<c-f>"] = { desc = "⬇" } -- page down
+  augmentExisting["<c-d>"] = { desc = "⇩" } -- page half down
+  augmentExisting["<c-e>"] = { desc = "↓" } -- line down
+  augmentExisting["<c-b>"] = { desc = "⬆" } -- page up
+  augmentExisting["<c-u>"] = { desc = "⇧" } -- page half up
+  augmentExisting["<c-y>"] = { desc = "↑" } -- line up
 end
-augmentExisting["<cr>"] = {desc = "Start select block"}
-augmentExisting["%"] = {desc = "Jump bracket"}
-augmentExisting["s"] = {desc = "Jump lightspeed"}
-augmentExisting["S"] = {desc = "Jump back lightspeed"}
-augmentExisting["^"] = {desc = "Start of line"}
-augmentExisting["!"] = {desc = "External program"}
+augmentExisting["<cr>"] = { desc = "Start select block" }
+augmentExisting["%"] = { desc = "Jump bracket" }
+augmentExisting["s"] = { desc = "Jump lightspeed" }
+augmentExisting["S"] = { desc = "Jump back lightspeed" }
+augmentExisting["^"] = { desc = "Start of line" }
+augmentExisting["!"] = { desc = "External program" }
 
 whichKey.register(augmentExisting)
