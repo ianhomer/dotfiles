@@ -28,7 +28,7 @@ nvim_set_var("knobs_levels", {
   commentary = 4,
   compactcmd = 3,
   cmp = 3,
-  dap = 6,
+  dap = 5,
   defaults = 3,
   devicons = 3,
   dispatch = 3,
@@ -55,6 +55,7 @@ nvim_set_var("knobs_levels", {
   indent_blankline = 5,
   indentline = 5,
   indentscope = 5,
+  jester = 5,
   kanagawa = 3,
   lens = 8,
   lightbulb = 3,
@@ -318,37 +319,50 @@ require("lazy").setup(
       end,
     },
     -- {
+    --   "David-Kunz/jester",
+    --   config = function()
+    --     require("config.jester")
+    --   end,
+    -- },
+    -- {
+    --   knob = "dap",
     --   "vim-test/vim-test",
     -- },
     -- {
-    --   cond = vim.g.knob_neotest,
+    --   knob = "dap",
     --   "nvim-neotest/neotest-vim-test",
     -- },
     -- {
+    --   knob = "dap",
     --   "nvim-neotest/neotest",
-    --   requires = {
+    --   dependencies = {
     --     "nvim-lua/plenary.nvim",
     --     "nvim-treesitter/nvim-treesitter",
     --     "antoinemadec/FixCursorHold.nvim",
-    --     "vim-test/vim-test",
     --     "nvim-neotest/neotest-vim-test",
     --   },
-    --   config = [[require'config.neotest']],
+    --   config = function()
+    --     require("config.neotest")
+    --   end,
     -- },
-    -- {
-    --   cond = vim.g.knob_dap,
-    --   "nvim-telescope/telescope-dap.nvim",
-    -- },
-    -- {
-    --   "mfussenegger/nvim-dap",
-    --   config = [[require'config.dap']],
-    -- },
-    -- {
-    --   cond = vim.g.knob_dap,
-    --   "rcarriga/nvim-dap-ui",
-    --   requires = "mfussenegger/nvim-dap",
-    --   config = [[require'config.dapui']],
-    -- },
+    {
+      knob = "dap",
+      "nvim-telescope/telescope-dap.nvim",
+    },
+    {
+      "mfussenegger/nvim-dap",
+      config = function()
+        require("config.dap")
+      end,
+    },
+    {
+      knob = "dap",
+      "rcarriga/nvim-dap-ui",
+      requires = "mfussenegger/nvim-dap",
+      config = function()
+        require("config.dapui")
+      end,
+    },
     -- {
     --   "puremourning/vimspector",
     --   config = [[require'config.vimspector']],
