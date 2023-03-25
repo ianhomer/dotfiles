@@ -25,6 +25,11 @@ cmp.setup({
       require("luasnip").lsp_expand(args.body)
     end,
   },
+  -- customise enabled for completion in DAP REPL
+  enabled = function()
+    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+        or require("cmp_dap").is_dap_buffer()
+  end,
   mapping = cmp.mapping.preset.insert({
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -110,6 +115,14 @@ cmp.setup.filetype("gitcommit", {
   }),
 })
 
+if vim.g.knob_dap then
+  cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+    sources = {
+      { name = "dap" },
+    },
+  })
+end
+
 for _, v in pairs({ "/", "?" }) do
   cmp.setup.cmdline(v, {
     mapping = cmp.mapping.preset.cmdline(),
@@ -127,5 +140,6 @@ cmp.setup.cmdline(":", {
     { name = "cmdline" },
   }),
 })
+
 
 -- require("luasnip.loaders.from_vscode").lazy_load()

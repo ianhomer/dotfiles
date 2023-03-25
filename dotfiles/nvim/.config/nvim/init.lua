@@ -238,6 +238,7 @@ require("lazy").setup(
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-nvim-lsp-signature-help",
         "saadparwaiz1/cmp_luasnip",
+        "rcarriga/cmp-dap",
       },
       config = function()
         require("config.cmp")
@@ -360,7 +361,7 @@ require("lazy").setup(
       "rcarriga/nvim-dap-ui",
       requires = "mfussenegger/nvim-dap",
       dependencies = {
-        "mxsdev/nvim-dap-vscode-js"
+        "mxsdev/nvim-dap-vscode-js",
       },
       config = function()
         require("config.dapui")
