@@ -359,8 +359,18 @@ require("lazy").setup(
       knob = "dap",
       "rcarriga/nvim-dap-ui",
       requires = "mfussenegger/nvim-dap",
+      dependencies = {
+        "mxsdev/nvim-dap-vscode-js"
+      },
       config = function()
         require("config.dapui")
+      end,
+    },
+    {
+      knob = "dap",
+      "theHamsta/nvim-dap-virtual-text",
+      config = function()
+        require("config.dap_virtual_text")
       end,
     },
     -- {
