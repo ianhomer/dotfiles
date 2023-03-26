@@ -12,7 +12,7 @@ local function pick_node_debug_process()
     return processOnPort
   end
   local procs = myutils.find_named_processes("node")
-  if table.getn(procs) == 1 then
+  if #procs == 1 then
     return procs[0].pid
   end
   local label_fn = function(proc)
