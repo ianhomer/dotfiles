@@ -225,7 +225,9 @@ whichKey.register(goes, { prefix = "g" })
 
 if vim.g.knob_dap then
   local runners = {}
-  runners["m"] = { "<cmd>lua require'dap'.continue()<CR>", "attach/continue" }
+  runners["m"] = { "<cmd>lua require'dap'.continue()<CR>", "continue (F8)" }
+  vim.keymap.set('n', '<F8>', "<cmd>lua require'dap'.continue()<CR>")
+
   runners["n"] = { "<cmd>lua require'dap'.run_last()<CR>", "terminate" }
   runners["b"] = { "<cmd>lua require'dap'.terminate()<CR>", "terminate" }
   runners["t"] = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>",
@@ -239,6 +241,8 @@ if vim.g.knob_dap then
 
   runners["z"] = { "<cmd>lua require'dap'.step_out()<CR>", "step out" }
   runners["x"] = { "<cmd>lua require'dap'.step_over()<CR>", "step over" }
+  vim.keymap.set('n', '<F9>', "<cmd>lua require'dap'.step_over()<CR>")
+
   runners["c"] = { "<cmd>lua require'dap'.step_into()<CR>", "step into" }
   runners["a"] = { "<cmd>lua require'dap'.up()<CR>", "up stack" }
   runners["s"] = { "<cmd>lua require'dap'.down()<CR>", "down stack" }
@@ -256,7 +260,7 @@ if vim.g.knob_dap then
   runners["i"] = { "<cmd>lua require'dapui'.toggle()<CR>", "UI Toggle" }
   runners["p"] = { "<cmd>lua require'dapui'.eval()<CR>", "Show Variable" }
 
-  whichKey.register(runners, { prefix = "<leader>," })
+  whichKey.register(runners, { prefix = "<leader>x" })
 end
 
 local augmentExisting = {}
