@@ -1,5 +1,5 @@
 require("dap-vscode-js").setup({
-  debugger_path = os.getenv("HOME") .. "/projects/opensource/vscode-js-debug",
+  debugger_path = os.getenv("HOME") .. "/.local/share/nvim/lazy/vscode-js-debug",
   adapters = { "pwa-node" },
 })
 

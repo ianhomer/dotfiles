@@ -358,6 +358,13 @@ require("lazy").setup(
     },
     {
       knob = "dap",
+      "microsoft/vscode-js-debug",
+      build = "npm install --legacy-peer-deps " ..
+      "&& npx gulp vsDebugServerBundle && mv dist out",
+      commit = "c0a36fab894ea0be2c2306b34661447443cfaf61"
+    },
+    {
+      knob = "dap",
       "rcarriga/nvim-dap-ui",
       requires = "mfussenegger/nvim-dap",
       dependencies = {
