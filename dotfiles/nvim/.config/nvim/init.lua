@@ -238,7 +238,10 @@ require("lazy").setup(
         "hrsh7th/cmp-nvim-lua",
         "hrsh7th/cmp-nvim-lsp-signature-help",
         "saadparwaiz1/cmp_luasnip",
-        "rcarriga/cmp-dap",
+        {
+          "rcarriga/cmp-dap",
+          cond = vim.g["knob_dap"] or false
+        }
       },
       config = function()
         require("config.cmp")
