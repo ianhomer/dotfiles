@@ -78,7 +78,7 @@ function gitSynk() {
   remoteName=$(git config --get branch.$branchName.remote)
 
   if [[ "$originProtocol" == *@* ]] ; then
-    ssh -T $originProtocol -o ConnectTimeout=1 >/dev/null 2>&1
+    ssh -T $originProtocol -o ConnectTimeout=1 'exit 0' >/dev/null 2>&1
     if [ $? -gt 1 ] ; then
       echo "! not syncing $originUrl"
       echo "  ! remote $originProtocol is not available"
