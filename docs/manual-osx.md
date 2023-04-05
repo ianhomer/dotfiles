@@ -68,7 +68,9 @@ Set the following to start on login
 
 ## Google Drive
 
-Set up folders to backup from local machine
+[Install Google Drive](https://www.google.com/intl/en-GB/drive/download/). Set
+up folders to backup from local machine. Set up the syncing options to be mirror
+files choosing `~/gdrive` as the location.
 
 - `~/.local/share/buku/`
 
