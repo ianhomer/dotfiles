@@ -104,9 +104,22 @@ function completeBatch {
     # are comflicts then this will fail and the conflict should be resolved
     # manually
     git checkout $trunk
+    set +e
     git merge --squash $currentBranchName
-    git commit -m "${currentBranchName}"
-    git push
+    if [ $? -ne 0 ] ; then
+        git checkout $currentBranchName
+        log::error "Cannot merge branch, please rebase manually"
+        log::info "    git rebase origin/main"
+        log::info "    git rebase --continue"
+        log::info "    git push"
+        return $?
+    fi
+    set -e
+
+    if [[ `git status --porcelain` ]]; then
+        git commit -m "${currentBranchName}"
+        git push
+    fi
     # auto delete remote bracnh, not that local copy remains
     # and is useful for troubleshooting
     git push origin -d "${currentBranchName}"
