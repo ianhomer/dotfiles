@@ -85,7 +85,7 @@ function newBatch {
 function completeBatch {
   if [[ "true" != `git config core.allowbatchcompletions` ]] ; then
       # Otherwise we have not explicit set that this repo can complete
-      # batches
+      # batches.
       printf "∷ ◉ $current - set allowbatchcompletions with git batch -a to allow batch completions"
       return 128
 
@@ -94,34 +94,45 @@ function completeBatch {
   if [[ "${currentBranchName}" != batch/* ]] ; then
     log::error "Current branch ${currentBranchName} is not a batch"
   else
+    log::info "Completing branch ${currentBranchName}"
     if [[ `git status --porcelain` ]]; then
+      log::info "Commit uncommitted changes in batch"
       git commit -am "batch complete"
     fi
-    # early push in case issues, however on success remote
-    # branch will be removed
+    # Early push incase issues arise, however on success remote
+    # branch will be removed.
     git push
     # Squash merge onto trunk with auto commit message. If there
     # are comflicts then this will fail and the conflict should be resolved
-    # manually
+    # manually.
     git checkout $trunk
-    set +e
-    git merge --squash $currentBranchName
-    if [ $? -ne 0 ] ; then
-        git checkout $currentBranchName
-        log::error "Cannot merge branch, please rebase manually"
-        log::info "    git rebase origin/main"
-        log::info "    git rebase --continue"
-        log::info "    git push"
-        return $?
+    leftRight=$(git rev-list --count --left-right $currentBranchName...HEAD)
+    left=$(echo $leftRight | awk '{print $1}')
+
+    if [ $left -gt 0 ] ; then
+      log::info "Merging changes from batch into trunk"
+      set +e
+      git merge --squash $currentBranchName
+      if [ $? -ne 0 ] ; then
+          git checkout $currentBranchName
+          log::error "Cannot merge branch, please rebase manually"
+          log::info "    git rebase origin/main"
+          log::info "    git rebase --continue"
+          log::info "    git push"
+          return $?
+      fi
+      set -e
+    else
+      log::info "No changes in batch"
     fi
-    set -e
 
     if [[ `git status --porcelain` ]]; then
         git commit -m "${currentBranchName}"
         git push
     fi
-    # auto delete remote bracnh, not that local copy remains
-    # and is useful for troubleshooting
+    # Auto delete local and remote branch. Note that local copy remains
+    # and is useful for troubleshooting. Use git pruneme to clear up local
+    # branches as needed.
     git push origin -d "${currentBranchName}"
   fi
 }
@@ -134,7 +145,6 @@ elif [[ "$COMMAND" == "complete" ]] ; then
 else
   echo "Command $COMMAND" is not recognised
 fi
-
 
 
 
