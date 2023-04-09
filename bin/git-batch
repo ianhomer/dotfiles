@@ -140,6 +140,7 @@ function completeBatch {
       log::info "No changes in batch"
       git checkout $trunk
       git pull
+      git branch -d "${currentBranchName}"
     fi
   fi
 }
