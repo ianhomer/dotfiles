@@ -14,7 +14,7 @@
 # between devices. This git commmand aims to make this easy for me.
 #
 
-$(shim) && cd ${ME} && . bin/i.sh && cd -
+$(shim) && . ${ME}/bin/i.sh
 
 help() {
   cat << EOF
@@ -57,8 +57,9 @@ trunk=main
 function newBatch {
   currentBranchName=`git rev-parse --abbrev-ref HEAD`
   if [[ "$currentBranchName" != "$trunk" ]] ; then
-    log::error "On $currentBranchName"
+    log::error "Already on batch $currentBranchName"
   else
+    log::info "Creating new batch"
     if [ -n "$BATCH_NAME" ] ; then
       batchName=$BATCH_NAME
     elif [ "$WITH_TIME" == "y" ] ; then
@@ -70,6 +71,7 @@ function newBatch {
     git ls-remote --exit-code --heads origin $batchBranchName
     if [ $? -eq 0 ] ; then
       log::error "Checking out existing remote batch $batchName"
+      git fetch origin $batchBranchName
       git checkout $batchBranchName
     elif [ `git rev-parse --verify $batchBranchName 2>/dev/null` ] ; then
       log::error "Checking out existing local batch $batchName"
@@ -78,11 +80,13 @@ function newBatch {
       log::info "Creating new batch $batchName"
       git checkout -b $batchBranchName
     fi
+    git ls-remote --heads origin | grep "/batch/"
+    [ $? -eq 0 ] && log::info "^ batches on remote listed above"
   fi
-  git ls-remote --heads origin | grep "/batch/"
 }
 
 function completeBatch {
+  log::info "Completing batch"
   if [[ "true" != `git config core.allowbatchcompletions` ]] ; then
       # Otherwise we have not explicit set that this repo can complete
       # batches.
@@ -99,17 +103,18 @@ function completeBatch {
       log::info "Commit uncommitted changes in batch"
       git commit -am "batch complete"
     fi
-    # Early push incase issues arise, however on success remote
-    # branch will be removed.
-    git push
-    # Squash merge onto trunk with auto commit message. If there
-    # are comflicts then this will fail and the conflict should be resolved
-    # manually.
-    git checkout $trunk
-    leftRight=$(git rev-list --count --left-right $currentBranchName...HEAD)
+    leftRight=$(git rev-list --count --left-right $currentBranchName...$trunk)
     left=$(echo $leftRight | awk '{print $1}')
 
     if [ $left -gt 0 ] ; then
+      # Early push in case issues arise, however on success remote
+      # branch will be removed.
+      git push
+      # Squash merge onto trunk with auto commit message. If there
+      # are comflicts then this will fail and the conflict should be resolved
+      # manually.
+      git checkout $trunk
+      git pull
       log::info "Merging changes from batch into trunk"
       set +e
       git merge --squash $currentBranchName
@@ -122,18 +127,20 @@ function completeBatch {
           return $?
       fi
       set -e
+      if [[ `git status --porcelain` ]]; then
+          git commit -m "${currentBranchName}"
+          git push
+      fi
+
+      # Auto delete local and remote branch. Note that local copy remains
+      # and is useful for troubleshooting. Use git pruneme to clear up local
+      # branches as needed.
+      git push origin -d "${currentBranchName}"
     else
       log::info "No changes in batch"
+      git checkout $trunk
+      git pull
     fi
-
-    if [[ `git status --porcelain` ]]; then
-        git commit -m "${currentBranchName}"
-        git push
-    fi
-    # Auto delete local and remote branch. Note that local copy remains
-    # and is useful for troubleshooting. Use git pruneme to clear up local
-    # branches as needed.
-    git push origin -d "${currentBranchName}"
   fi
 }
 
@@ -145,7 +152,5 @@ elif [[ "$COMMAND" == "complete" ]] ; then
 else
   echo "Command $COMMAND" is not recognised
 fi
-
-
 
 
