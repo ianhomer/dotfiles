@@ -120,11 +120,15 @@ function completeBatch {
       git merge --squash $currentBranchName
       if [ $? -ne 0 ] ; then
           git checkout $currentBranchName
-          log::error "Cannot merge branch, please rebase manually"
-          log::info "    git rebase origin/main"
-          log::info "    git rebase --continue"
-          log::info "    git push"
-          return $?
+          if [ $? -eq 0 ] ; then
+            log::error "Cannot merge branch, please rebase manually from batch branch"
+            log::info "    git rebase origin/main"
+            log::info "    git rebase --continue"
+            log::info "    git push"
+            return $?
+          else
+            log::error "Cannot merge branch, please resolve conflicts in trunk"
+          fi
       fi
       set -e
       if [[ `git status --porcelain` ]]; then
