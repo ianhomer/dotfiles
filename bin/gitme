@@ -48,6 +48,8 @@ for d in `git-get-directories` ; do
     printf '\033[0;35m%s ' $root
     if [[ `git remote | wc -l` -eq 0 ]] ; then
       log:: "no remote"
+    elif [[ "$root" == */our/* ]] ; then
+      log:: "not auto fetching shared project"
     else
       now=`date +%s`
       if [[ -f .git/FETCH_HEAD ]] ; then
