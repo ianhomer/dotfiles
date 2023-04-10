@@ -8,10 +8,10 @@
 # meaning.
 #
 # When I make changes to my digital garden I like to work in batches and then
-# review the batch before merging. I tend to have one batch open at a time, and
-# a batch tends to cover a days work. This allows me to collect my thoughts in a
-# batch and use the PR process to review the changes. It also allows me to jump
-# between devices. This git commmand aims to make this easy for me.
+# review the batch before merging. I tend to have one batch open at a time per
+# device, and a batch tends to cover a days work. This allows me to collect my
+# thoughts in a batch and use git to review the changes. It also allows me to
+# jump between devices. This git commmand aims to make this easy for me.
 #
 
 $(shim) && . ${ME}/bin/i.sh
@@ -78,6 +78,8 @@ function newBatch {
       git checkout $batchBranchName
     else
       log::info "Creating new batch $batchName"
+      # Pull latest trunk before branching
+      git pull
       git checkout -b $batchBranchName
     fi
     git ls-remote --heads origin | grep "/batch/"
@@ -86,7 +88,6 @@ function newBatch {
 }
 
 function completeBatch {
-  log::info "Completing batch"
   if [[ "true" != `git config core.allowbatchcompletions` ]] ; then
       # Otherwise we have not explicit set that this repo can complete
       # batches.
@@ -98,48 +99,63 @@ function completeBatch {
   if [[ "${currentBranchName}" != batch/* ]] ; then
     log::error "Current branch ${currentBranchName} is not a batch"
   else
-    log::info "Completing branch ${currentBranchName}"
+    log::info "Completing batch ${currentBranchName}"
     if [[ `git status --porcelain` ]]; then
+      # Check for conflict markers before proceeding
+      git diff --check
       log::info "Commit uncommitted changes in batch"
       git commit -am "batch complete"
     fi
+    git fetch origin $trunk:$trunk
     leftRight=$(git rev-list --count --left-right $currentBranchName...$trunk)
     left=$(echo $leftRight | awk '{print $1}')
 
     if [ $left -gt 0 ] ; then
-      # Early push in case issues arise, however on success remote
-      # branch will be removed.
-      git push
+      # Check if any merge conflicts
+      log::info "Checking OK to merge"
+      set +e
+      git merge main --no-ff --no-commit
+      if [ $? -ne 0 ] ; then
+        log::error "Merge conflicts need to be resolved"
+        log::info "Resolve conflicts and commit, or"
+        log::info "    git merge --abort"
+        return $?
+      fi
+      set -e
       # Squash merge onto trunk with auto commit message. If there
       # are comflicts then this will fail and the conflict should be resolved
       # manually.
+      log::info "Merging batch into trunk"
       git checkout $trunk
-      git pull
-      log::info "Merging changes from batch into trunk"
       set +e
       git merge --squash $currentBranchName
       if [ $? -ne 0 ] ; then
+          mergeReturnCode=$?
           git checkout $currentBranchName
           if [ $? -eq 0 ] ; then
             log::error "Cannot merge branch, please rebase manually from batch branch"
             log::info "    git rebase origin/main"
             log::info "    git rebase --continue"
             log::info "    git push"
-            return $?
+            return $mergeReturnCode
           else
             log::error "Cannot merge branch, please resolve conflicts in trunk"
+            return $mergeReturnCode
           fi
       fi
       set -e
       if [[ `git status --porcelain` ]]; then
-          git commit -m "${currentBranchName}"
+          summary=`git diff --cached --shortstat | sed "s/ changed//"`
+          git commit -m "${currentBranchName} ${summary}"
           git push
       fi
 
-      # Auto delete local and remote branch. Note that local copy remains
-      # and is useful for troubleshooting. Use git pruneme to clear up local
-      # branches as needed.
-      git push origin -d "${currentBranchName}"
+      if [ `git rev-parse --verify origin/${currentBranchName} 2>/dev/null` ] ; then
+        # Auto delete local and remote branch. Note that local copy remains
+        # and is useful for troubleshooting. Use git pruneme to clear up local
+        # branches as needed.
+        git push origin -d "${currentBranchName}"
+      fi
     else
       log::info "No changes in batch"
       git checkout $trunk
@@ -157,5 +173,4 @@ elif [[ "$COMMAND" == "complete" ]] ; then
 else
   echo "Command $COMMAND" is not recognised
 fi
-
 

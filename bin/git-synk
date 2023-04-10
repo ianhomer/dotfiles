@@ -67,15 +67,23 @@ function gitSynk() {
   # Make sure in git repository
   git rev-parse
 
-  printf "▻ "
   headsName=$(git describe --all)
   if [[ "$headsName" != heads/* ]] ; then
     log::exit "$headsName from describe --all shoud start with heads/ "
   fi
   branchName=${headsName:6}
+  current=`pwd | sed 's|.*/||g'`
+
+  if [[ "$branchName" != */* ]] ; then
+    log::error "Please create a branch (with '/' in) before syncing"
+    log::info "Current branch for $current is $branchName"
+    return
+  fi
+
   originUrl=$(git config --get remote.origin.url)
   originProtocol=${originUrl%:*}
   remoteName=$(git config --get branch.$branchName.remote)
+  printf "▻ "
 
   if [[ "$originProtocol" == *@* ]] ; then
     ssh -T $originProtocol -o ConnectTimeout=1 'exit 0' >/dev/null 2>&1
@@ -87,8 +95,6 @@ function gitSynk() {
   fi
 
   protocol=${originUrl%%\:*}
-
-  current=`pwd | sed 's|.*/||g'`
 
   if git rebase --show-current-patch > /dev/null 2>&1 ; then
     echo "$current - rebase in progress"
