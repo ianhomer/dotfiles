@@ -24,8 +24,8 @@ if exists('g:window_cleaner_autoloaded')
 endif
 let g:window_cleaner_autoloaded = 1
 
-function window#cleaner#Close(type)
-  let l:window = bufwinnr(bufnr(a:type))
+function window#cleaner#Close(name)
+  let l:window = bufwinnr(bufnr(a:name))
   if l:window > 0
     execute l:window 'q'
     return 1
@@ -33,8 +33,22 @@ function window#cleaner#Close(type)
   return 0
 endfunction
 
+function window#cleaner#CloseByType(type)
+  let buffers = filter(range(1, bufnr('$')), 'bufexists(v:val)')
+
+  for buffer in buffers
+    if getbufvar(buffer, '&filetype') == a:type
+      execute buffer."bd!"
+    endif
+  endfor
+endfunction
+
 function window#cleaner#CloseFugitive()
   return window#cleaner#Close("fugitive://*")
+endfunction
+
+function window#cleaner#CloseTerms()
+  return window#cleaner#CloseByType("toggleterm")
 endfunction
 
 function window#cleaner#CloseAllBuffersButCurrent()

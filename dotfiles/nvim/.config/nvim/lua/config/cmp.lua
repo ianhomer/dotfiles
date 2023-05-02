@@ -1,3 +1,5 @@
+vim.o.completeopt = "menu,menuone,noselect"
+
 local check_back_space = function()
   local col = vim.fn.col(".") - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
@@ -18,14 +20,16 @@ local cmp = require("cmp")
 
 cmp.setup({
   preselect = cmp.PreselectMode.None,
-  completion = {
-    completeopt = "menu,menuone,noinsert",
-  },
   snippet = {
     expand = function(args)
       require("luasnip").lsp_expand(args.body)
     end,
   },
+  -- customise enabled for completion in DAP REPL
+  enabled = function()
+    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+        or require("cmp_dap").is_dap_buffer()
+  end,
   mapping = cmp.mapping.preset.insert({
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -111,6 +115,14 @@ cmp.setup.filetype("gitcommit", {
   }),
 })
 
+if vim.g.knob_dap then
+  cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+    sources = {
+      { name = "dap" },
+    },
+  })
+end
+
 for _, v in pairs({ "/", "?" }) do
   cmp.setup.cmdline(v, {
     mapping = cmp.mapping.preset.cmdline(),
@@ -128,5 +140,6 @@ cmp.setup.cmdline(":", {
     { name = "cmdline" },
   }),
 })
+
 
 -- require("luasnip.loaders.from_vscode").lazy_load()

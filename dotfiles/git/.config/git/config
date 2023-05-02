@@ -12,6 +12,7 @@
   what = "log --format='%C(auto) %h %s %Cblue%ae%d'"
   log-what-when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %s%Cgreen %cd% %Cblue %Cblue%ae%d'"
   log-who = "log --format='%C(auto) %h %Cblue%ae %G?%Creset %<(30,trunc)%s%Cblue%d'"
+  log-who-signed = "log --format='%C(auto) %h %Cblue%ae %G? %GK%Creset %<(30,trunc)%s'"
   who = "log --format='%C(auto) %h %Cblue%ae %G?%Creset %<(30,trunc)%s%Cblue%d'"
   log-who-when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto)%h%Cblue %ae%Cgreen %cd%Creset %<(40,trunc)%s'"
   log-when = "log --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %Cblue%cd%Creset %<(60,trunc)%s'"

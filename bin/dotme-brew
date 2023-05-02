@@ -38,7 +38,7 @@ if [[ ! -f ~/.zprofile ]] || ! grep -q "homebrew" ~/.zprofile ; then
 fi
 
 adminFormula="adoptopenjdk8 adoptopenjdk11 java11 languagetool openjdk@11"
-adminFormula="${adminFormula} dotnet-sdk5-0-200 powershell"
+adminFormula="${adminFormula} dotnet-sdk5-0-200 powershell google-cloud-sdk"
 
 installed=`brew list -1 --formula`
 

@@ -26,10 +26,11 @@ local vmap = {}
 
 -- Core navigation
 whichKey.register({
-  ["g"] = { name = "+goto" },
-  ["]"] = { name = "+next" },
-  ["["] = { name = "+prev" },
-  ["/"] = { name = "+extras" },
+      ["g"] = { name = "+goto" },
+      ["]"] = { name = "+next" },
+      ["["] = { name = "+prev" },
+      ["/"] = { name = "+extras" },
+      ["u"] = { name = "+ui" },
 })
 
 leaders["c"] = { name = "+code" }
@@ -43,13 +44,18 @@ extras["g"] = { name = "+git" }
 extras["gh"] = { name = "+hunks" }
 extras["gd"] = { name = "+diff" }
 extras["s"] = { name = "+search" }
-extras["u"] = { name = "+ui" }
 extras["."] = { name = "+profile" }
 
 local findNamedFile = {
   "<cmd>lua require'telescope.builtin'.find_files({find_command={'fd', '-H', '-i', vim.fn.expand('<cword>')}})<cr>",
   "Find named file",
 }
+
+leaders["xa"] = { "<cmd>CloseTerms<cr> | :xa<cr>", "Exit Vim" }
+
+local my = require("myutils")
+leaders["us"] = { my.toggle_function("spell"), "Toggle Spell" }
+leaders["uw"] = { my.toggle_function("wrap"), "Toggle Wrap" }
 
 if vim.g.knob_telescope then
   -- Find
@@ -219,7 +225,9 @@ whichKey.register(goes, { prefix = "g" })
 
 if vim.g.knob_dap then
   local runners = {}
-  runners["m"] = { "<cmd>lua require'dap'.continue()<CR>", "attach/continue" }
+  runners["m"] = { "<cmd>lua require'dap'.continue()<CR>", "continue (F8)" }
+  vim.keymap.set('n', '<F8>', "<cmd>lua require'dap'.continue()<CR>")
+
   runners["n"] = { "<cmd>lua require'dap'.run_last()<CR>", "terminate" }
   runners["b"] = { "<cmd>lua require'dap'.terminate()<CR>", "terminate" }
   runners["t"] = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>",
@@ -233,6 +241,8 @@ if vim.g.knob_dap then
 
   runners["z"] = { "<cmd>lua require'dap'.step_out()<CR>", "step out" }
   runners["x"] = { "<cmd>lua require'dap'.step_over()<CR>", "step over" }
+  vim.keymap.set('n', '<F9>', "<cmd>lua require'dap'.step_over()<CR>")
+
   runners["c"] = { "<cmd>lua require'dap'.step_into()<CR>", "step into" }
   runners["a"] = { "<cmd>lua require'dap'.up()<CR>", "up stack" }
   runners["s"] = { "<cmd>lua require'dap'.down()<CR>", "down stack" }
@@ -250,24 +260,24 @@ if vim.g.knob_dap then
   runners["i"] = { "<cmd>lua require'dapui'.toggle()<CR>", "UI Toggle" }
   runners["p"] = { "<cmd>lua require'dapui'.eval()<CR>", "Show Variable" }
 
-  whichKey.register(runners, { prefix = "<leader>," })
+  whichKey.register(runners, { prefix = "<leader>x" })
 end
 
 local augmentExisting = {}
 if vim.g.knob_neoscroll then
   -- neoscroll takes over scrolling short cuts
-  augmentExisting["<c-f>"] = {desc = "⬇"} -- page down
-  augmentExisting["<c-d>"] = {desc = "⇩"} -- page half down
-  augmentExisting["<c-e>"] = {desc = "↓"} -- line down
-  augmentExisting["<c-b>"] = {desc = "⬆"} -- page up
-  augmentExisting["<c-u>"] = {desc = "⇧"} -- page half up
-  augmentExisting["<c-y>"] = {desc = "↑"} -- line up
+  augmentExisting["<c-f>"] = { desc = "⬇" } -- page down
+  augmentExisting["<c-d>"] = { desc = "⇩" } -- page half down
+  augmentExisting["<c-e>"] = { desc = "↓" } -- line down
+  augmentExisting["<c-b>"] = { desc = "⬆" } -- page up
+  augmentExisting["<c-u>"] = { desc = "⇧" } -- page half up
+  augmentExisting["<c-y>"] = { desc = "↑" } -- line up
 end
-augmentExisting["<cr>"] = {desc = "Start select block"}
-augmentExisting["%"] = {desc = "Jump bracket"}
-augmentExisting["s"] = {desc = "Jump lightspeed"}
-augmentExisting["S"] = {desc = "Jump back lightspeed"}
-augmentExisting["^"] = {desc = "Start of line"}
-augmentExisting["!"] = {desc = "External program"}
+augmentExisting["<cr>"] = { desc = "Start select block" }
+augmentExisting["%"] = { desc = "Jump bracket" }
+augmentExisting["s"] = { desc = "Jump lightspeed" }
+augmentExisting["S"] = { desc = "Jump back lightspeed" }
+augmentExisting["^"] = { desc = "Start of line" }
+augmentExisting["!"] = { desc = "External program" }
 
 whichKey.register(augmentExisting)

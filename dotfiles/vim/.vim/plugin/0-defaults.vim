@@ -306,8 +306,6 @@ set colorcolumn=""
 highlight ColorColumn ctermbg=magenta
 call matchadd('ColorColumn', '\%#=182v', 100)
 
-highlight ErrorMsg ctermbg=grey guibg=grey
-
 " Open new splits to the right and below
 set splitright
 set splitbelow
