@@ -7,7 +7,7 @@
 # right.
 #
 
-$(shim) && cd ${ME} && . bin/i.sh
+$(shim) && . ${ME}/bin/i.sh
 
 if git rev-parse --is-inside-work-tree 2>&1 >/dev/null ; then
   INSIDE_GIT_REPOSITORY=y
@@ -42,10 +42,10 @@ function fixWho() {
     gitUserEmail=$(git config user.email)
     gitUserName=$(git config user.name)
     log:: IS "local" $gitUserName $gitUserEmail
-  fi 
+  fi
   gitGlobalUserEmail=$(git config --global user.email)
   gitGlobalUserName=$(git config --global user.name)
-  log:: IS "global" $gitGlobalUserName $gitGlobalUserEmail 
+  log:: IS "global" $gitGlobalUserName $gitGlobalUserEmail
 }
 
 function showConfig {
@@ -58,14 +58,20 @@ function setMyGitUrl {
     *github.com*)    host="github.com"    ;;
     *bitbucket.org*) host="bitbucket.org" ;;
     *)
-      log:: NOK "remote-url   " URL not recognised
-      if [[ -z "$currentRemoteUrl" ]] ; then
-        log:: NOK remote-url is empty
-        log:: "set with 'git remote add origin my-url'"
+      if [[ "$currentRemoteUrl" =~ ^[^:]+@[^:]+: ]] ; then
+          hostType="ssh"
+          log:: "git repository is SSH host based"
+          log:: IS "remote-url" $currentRemoteUrl
       else
-        log:: IS "remote-url   " $currentRemoteUrl
+        log:: NOK "remote-url" URL not recognised
+        if [[ -z "$currentRemoteUrl" ]] ; then
+          log:: NOK remote-url is empty
+          log:: "set with 'git remote add origin my-url'"
+        else
+          log:: IS "remote-url" $currentRemoteUrl
+        fi
+        return 1
       fi
-      return 1
       ;;
   esac
 
@@ -78,7 +84,9 @@ function setMyGitUrl {
     myRemoteUrl=${currentRemoteUrl}
   fi
 
-  if [[ "$NOCONTEXT" == "y" ]] ; then
+  if [[ "$hostType" == "ssh" ]] ; then
+    myRemoteUrl=$currentRemoteUrl
+  elif [[ "$NOCONTEXT" == "y" ]] ; then
     # Desired state is without context
     myRemoteUrl=${myRemoteUrl/-*:/:}
   else

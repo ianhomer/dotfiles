@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-$(shim) && cd ${ME} && . bin/i.sh && cd -
+$(shim) && . ${ME}/bin/i.sh
 
 OPTIND=1
 while getopts "a" o; do case "$o" in
@@ -10,7 +10,6 @@ esac done
 git fetch -p
 log::trace "remote prune origin"
 git remote prune origin
-
 
 #
 # Prune branches that have squash merged into master

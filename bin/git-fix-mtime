@@ -74,10 +74,13 @@ def fixModifiedTime():
                 file = line.split("\t")[-1]
                 if file in files:
                     files.remove(file)
-                    stinfo = os.stat(file)
-                    if modifiedTime != int(stinfo.st_mtime):
-                        print(f"set mtime {modifiedTime} -> {file}")
-                        os.utime(file, (modifiedTime, modifiedTime))
+                    if os.path.isfile(file):
+                        stinfo = os.stat(file)
+                        if modifiedTime != int(stinfo.st_mtime):
+                            print(f"set mtime {modifiedTime} -> {file}")
+                            os.utime(file, (modifiedTime, modifiedTime))
+                    else:
+                        print(f"file {file} does not exist")
             else:
                 modifiedTime = int(line)
 

@@ -1,9 +1,11 @@
 require("neotest").setup({
-    adapters = {
-        -- require("neotest-jest")({
-        --     jestCommand = "npm test --",
-        --     jestConfigFile = "custom.jest.config.ts",
-        -- }),
-        require("neotest-vim-test")({allow_file_types = { "javascript" }})
-    },
+  adapters = {
+    -- require("neotest-python")({
+    --   dap = { justMyCode = false },
+    -- }),
+    -- require("neotest-plenary"),
+    require("neotest-vim-test")({
+      allow_file_types = { "javascript" },
+    }),
+  },
 })

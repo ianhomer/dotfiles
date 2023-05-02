@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+#
+# Debug test, currently only supports jest
+#
+
+$(shim) && . ${ME}/bin/i.sh
+
+args=$@
+
+# Find jest.js
+
+current_directory=$PWD
+previous_directory="no-previous-directory"
+up_directory=""
+relative_jest_script=node_modules/jest/bin/jest.js
+until [ $PWD == / ] || [ -d "${previous_directory}/.git" ] ; do
+  candidate_jest_script="$PWD/$relative_jest_script"
+  if [ -f "$candidate_jest_script" ] ; then
+    jest_script="$up_directory/$relative_jest_script"
+    break
+  fi
+  previous_directory=$PWD
+  cd ..
+  if [ -z "$up_directory" ] ; then
+    up_directory=".."
+  else
+    up_directory="../$up_directory"
+  fi
+done
+cd ${current_directory}
+
+if [ -z "${jest_script}" ] ; then
+  log::error "jest script not found in ${current_directory} or up to project root"
+  exit 1
+fi
+
+log:: "Debugging with $jest_script"
+echo
+debug_command="node --inspect-brk $jest_script --runInBand $@"
+echo $debug_command
+echo
+$debug_command
+
+
+

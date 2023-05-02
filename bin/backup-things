@@ -76,7 +76,6 @@ if [[ "${BACKUP_ALL}" == "y" ]] ; then
   done
 fi
 
-echo ${BACKUP_ALL}
 if [[ "${BACKUP_ALL}" != "y" && "${BACKUP_BUKU_BOOKMARKS}" != "y" ]] ; then
   backupThingRepository $primaryRepository
 fi
@@ -91,9 +90,10 @@ fi
 if [[ "${SYNC_BACKUPS}" == "y" && -n "$REMOTE_DIR" ]] ; then
   LOG_DIR=~/local/logs
   [[ ! -d $LOG_DIR ]] && mkdir $LOG_DIR
-  OUT_LOG=$LOG_DIR/backup-things-$(date "+%Y%m%d-%H%M%S")-out.log
+  OUT_LOG=$LOG_DIR/backup-things-$(date "+%Y%m")-out.log
   remoteBackup="$REMOTE_DIR/historical/backups/things-backups"
-  echo "Syncing backups to remote directory : $REMOTE_DIR" | tee -a >> $OUT_LOG
+  date "+%Y%m%d-%H%M%S" > $OUT_LOG
+  echo "Syncing backups to remote directory : $REMOTE_DIR" | tee -a $OUT_LOG
   echo "Log file : $OUT_LOG"
-  rsync -Pa ${localBackupDirectory}/ $remoteBackup
+  rsync -Pa ${localBackupDirectory}/ $remoteBackup | tee -a $OUT_LOG
 fi

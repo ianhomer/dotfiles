@@ -33,7 +33,8 @@ while getopts "ahuw:" o; do case "$o" in
   h) help && exit 1 ;;
 esac done
 
-$(shim) && cd ${ME} && . bin/i.sh && cd -
+
+$(shim) && cd ${ME} && . bin/i.sh && cd ~-
 
 #
 # Execute git quietly
@@ -66,18 +67,34 @@ function gitSynk() {
   # Make sure in git repository
   git rev-parse
 
-  printf "▻ "
   headsName=$(git describe --all)
   if [[ "$headsName" != heads/* ]] ; then
     log::exit "$headsName from describe --all shoud start with heads/ "
   fi
   branchName=${headsName:6}
+  current=`pwd | sed 's|.*/||g'`
+
+  if [[ "$branchName" != */* ]] ; then
+    log::error "Please create a branch (with '/' in) before syncing"
+    log::info "Current branch for $current is $branchName"
+    return
+  fi
+
   originUrl=$(git config --get remote.origin.url)
+  originProtocol=${originUrl%:*}
   remoteName=$(git config --get branch.$branchName.remote)
+  printf "▻ "
+
+  if [[ "$originProtocol" == *@* ]] ; then
+    ssh -T $originProtocol -o ConnectTimeout=1 'exit 0' >/dev/null 2>&1
+    if [ $? -gt 1 ] ; then
+      echo "! not syncing $originUrl"
+      echo "  ! remote $originProtocol is not available"
+      exit
+    fi
+  fi
 
   protocol=${originUrl%%\:*}
-
-  current=`pwd | sed 's|.*/||g'`
 
   if git rebase --show-current-patch > /dev/null 2>&1 ; then
     echo "$current - rebase in progress"
