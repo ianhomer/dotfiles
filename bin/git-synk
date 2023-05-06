@@ -74,7 +74,11 @@ function gitSynk() {
   branchName=${headsName:6}
   current=`pwd | sed 's|.*/||g'`
 
-  if [[ "$branchName" != */* ]] ; then
+  if [[ "$branchName" == "main" ]] ; then
+    log::info "Pulling ${PWD##*/} from main, no push"
+    git pull
+    return
+  elif [[ "$branchName" != */* ]] ; then
     log::error "Please create a branch (with '/' in) before syncing"
     log::info "Current branch for $current is $branchName"
     return
