@@ -11,6 +11,15 @@ set -e
 $(shim) && cd ${ME} && . bin/i.sh
 should-run -m 7 $@ $0 || exit 0
 
+#
+# Manual gcloud install process. Prefered over brew, since we have this in brew
+# brew update requires users' password. Furthermore it is not possible to pin a cask
+# in brew to control the update process in brew. Requiring a password breaks
+# non-interactive flow which disrupts general day-to-day processes.
+#
+# TODO : Consider update process of this, does gcloud itself warn us if it is
+# out of date. When I run into this, I will update this process to handle
+# updates.
 if ! command -v gcloud ; then
   log:: "gcloud is not installed"
   downloaded=~/local/gcloud/google-cloud-cli*.tar.gz
