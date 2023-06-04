@@ -152,7 +152,12 @@ brew "warrensbox/tap/tgswitch"
 brew "watchman"
 
 cask "db-browser-for-sqlite"
-cask "google-cloud-sdk"
+#
+# Don't install google-cloud-sdk by brew since it asks for admin password and
+# breaks non-interactive flow
+#
+# cask "google-cloud-sdk"
+#
 cask "lens"
 #cask "libreoffice"
 cask "visual-studio-code"
