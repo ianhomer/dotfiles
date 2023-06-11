@@ -167,6 +167,7 @@ command_packages() {
   if [[ $DRY -eq 0 ]] ; then
     if is-macos ; then
       dotme-brew
+      dotme-apps
     elif is-android ; then
       dotme-pkg
     elif has-pacman ; then

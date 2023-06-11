@@ -41,6 +41,11 @@ Check if script needs to run
 
   should-run $0 || exit
 
+Pass all arguments on current script into should-run, for example supporting
+pass through of "-f"
+
+  should-run $0 || exit
+
 Check if script needs to run, with expiry
 
   should-run -m 1 $0  || exit  # 1 day
