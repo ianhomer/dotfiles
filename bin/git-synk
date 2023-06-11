@@ -73,15 +73,24 @@ function gitSynk() {
   fi
   branchName=${headsName:6}
   current=`pwd | sed 's|.*/||g'`
+  changes=$(git status --porcelain | wc -l)
 
   if [[ "$branchName" == "main" ]] ; then
     log::info "Pulling ${PWD##*/} from main, no push"
     git pull
     return
   elif [[ "$branchName" != */* ]] ; then
-    log::error "Please create a branch (with '/' in) before syncing"
-    log::info "Current branch for $current is $branchName"
-    return
+    if [[ $changes -gt 0 ]] ; then
+      if [[ "true" == `git config core.autocommit` ]] ; then
+        # Automatically create batch
+        git batch
+      else
+        log::error "Please create a branch (with '/' in) before syncing"
+        log::info "Current branch for $current is $branchName"
+        printf "∷ ◉ $current - set autocommit with git synk -a to enable auto branching"
+        return 128
+      fi
+    fi
   fi
 
   originUrl=$(git config --get remote.origin.url)
@@ -106,7 +115,6 @@ function gitSynk() {
     return 128
   fi
 
-  changes=$(git status --porcelain | wc -l)
 
   if [[ $changes -gt 0 ]] ; then
     if [[ "true" == `git config core.autocommit` ]] ; then
