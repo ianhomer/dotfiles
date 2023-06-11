@@ -45,6 +45,7 @@ null_ls.setup({
     diagnostics.trail_space.with({
       filetypes = { "cucumber" },
     }),
+    diagnostics.yamllint,
     code_actions.eslint_d,
     completion.spell.with({
       filetypes = { "markdown" },

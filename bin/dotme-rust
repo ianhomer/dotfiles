@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-should-run -m 7 $0 || exit 0
+should-run -m 7 $@ $0 || exit 0
 $(shim) && cd ${ME} && . bin/i.sh
 
 log:: "configuring rust"
 
 if ! command -v cargo ; then
+  log:: "initialising rust"
   rustup-init -y
 fi
 
+rustup update
 cargo install stylua
 
 should-run -fu $0
-
-

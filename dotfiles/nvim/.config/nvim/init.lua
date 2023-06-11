@@ -240,8 +240,8 @@ require("lazy").setup(
         "saadparwaiz1/cmp_luasnip",
         {
           "rcarriga/cmp-dap",
-          cond = vim.g["knob_dap"] or false
-        }
+          cond = vim.g["knob_dap"] or false,
+        },
       },
       config = function()
         require("config.cmp")
@@ -364,7 +364,7 @@ require("lazy").setup(
       "microsoft/vscode-js-debug",
       build = "npm install --legacy-peer-deps " ..
       "&& npx gulp vsDebugServerBundle && mv dist out",
-      commit = "c0a36fab894ea0be2c2306b34661447443cfaf61"
+      commit = "c0a36fab894ea0be2c2306b34661447443cfaf61",
     },
     {
       knob = "dap",
@@ -630,7 +630,9 @@ require("lazy").setup(
     {
       "iamcco/markdown-preview.nvim",
       -- cmd = {"MarkdownPreview"},
-      build = "cd app && yarn install",
+      build = "cd app && npm install",
+      enabled = true,
+      ft = "markdown",
     },
     {
       "lukas-reineke/indent-blankline.nvim",

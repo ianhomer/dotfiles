@@ -127,6 +127,7 @@ brew "bitwarden-cli"
 brew "charmbracelet/tap/gum"
 brew "gh"
 brew "git"
+brew "gitleaks"
 brew "gpg"
 brew "gradle"
 brew "hashicorp/tap/terraform-ls"
@@ -152,7 +153,12 @@ brew "warrensbox/tap/tgswitch"
 brew "watchman"
 
 cask "db-browser-for-sqlite"
-cask "google-cloud-sdk"
+#
+# Don't install google-cloud-sdk by brew since it asks for admin password and
+# breaks non-interactive flow
+#
+# cask "google-cloud-sdk"
+#
 cask "lens"
 #cask "libreoffice"
 cask "visual-studio-code"
