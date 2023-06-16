@@ -4,6 +4,7 @@ treesitter.setup({
   ensure_installed = {
     "bash",
     "css",
+    "dockerfile",
     "go",
     "hcl",
     "java",
@@ -11,7 +12,6 @@ treesitter.setup({
     "html",
     "lua",
     "make",
-    "markdown",
     "python",
     "javascript",
     "scss",
