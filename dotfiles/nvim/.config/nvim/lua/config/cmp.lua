@@ -28,7 +28,7 @@ cmp.setup({
   -- customise enabled for completion in DAP REPL
   enabled = function()
     return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
-        or require("cmp_dap").is_dap_buffer()
+        or (vim.g["knob_dap"] and require("cmp_dap").is_dap_buffer())
   end,
   mapping = cmp.mapping.preset.insert({
     ["<C-p>"] = cmp.mapping.select_prev_item(),
