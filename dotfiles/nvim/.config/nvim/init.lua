@@ -249,6 +249,7 @@ require("lazy").setup(
     },
     {
       "j-hui/fidget.nvim",
+      branch = "legacy",
       config = [[require'fidget'.setup{}]],
     },
     {
