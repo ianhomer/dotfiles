@@ -65,7 +65,7 @@ MacOS with
 **[hiddenbar](https://github.com/dwarvesf/hidden)**
 : focused status bar
 
-**[magnet](https://magnet.crowdcafe.com/)**
+**[rectangle](https://rectangleapp.com/)**
 : window manager
 
 Other tools woven into these dotfiles include **ag**, **fzf**, **pandoc**,
