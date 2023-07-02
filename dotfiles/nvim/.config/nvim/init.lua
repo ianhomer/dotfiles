@@ -100,7 +100,8 @@ nvim_set_var("knobs_levels", {
   toggleterm = 3,
   treesitter = 4,
   treesitter_textobjects = 4,
-  treesitter_context = 6,
+  treesitter_context = 5,
+  treesitter_playground = 5,
   trouble = 3,
   ufo = 4,
   unicode = 9,
@@ -310,6 +311,10 @@ require("lazy").setup(
         require("config.treesitter")
       end,
       build = ":TSUpdate",
+    },
+    {
+      "nvim-treesitter/playground",
+      event = "BufRead",
     },
     {
       "nvim-treesitter/nvim-treesitter-textobjects",
