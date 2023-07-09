@@ -76,6 +76,9 @@ function newBatch {
     elif [ `git rev-parse --verify $batchBranchName 2>/dev/null` ] ; then
       log::error "Checking out existing local batch $batchName"
       git checkout $batchBranchName
+      git branch --unset-upstream $batchBranchName
+      git push
+      git pullme
     else
       log::info "Creating new batch $batchName"
       # Pull latest trunk before branching
