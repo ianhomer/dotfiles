@@ -79,7 +79,7 @@ nvim_set_var("knobs_levels", {
   notify = 5,
   null_ls = 3,
   nvim_tree = 3,
-  rainbow = 4,
+  rainbow = 6,
   refactoring = 9,
   vim_repeat = 3,
   rhubarb = 7,
