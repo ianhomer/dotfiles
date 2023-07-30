@@ -201,7 +201,15 @@ local servers = {
       },
     },
   },
-  rust_analyzer = {},
+  rust_analyzer = {
+    settings = {
+      ["rust-analyzer"] = {
+        cargo = {
+          allFeatures = true
+        }
+      },
+    },
+  },
   tailwindcss = {
     filetypes = { "css" },
   },
