@@ -16,6 +16,7 @@ treesitter.setup({
     "python",
     "query",
     "javascript",
+    "rust",
     "scss",
     "terraform",
     "toml",

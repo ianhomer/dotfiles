@@ -7,7 +7,7 @@ local next_diagnostic, prev_diagnostic = (function()
     -- function allowing ';' and ',' to repeat forward and backward
     local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
     return ts_repeat_move.make_repeatable_move_pair(vim.diagnostic.goto_next,
-    vim.diagnostic.goto_prev)
+      vim.diagnostic.goto_prev)
   else
     return vim.diagnostic.goto_next, vim.diagnostic.goto_prev
   end
@@ -46,7 +46,7 @@ local on_attach = function(client, bufnr)
 
   local nmap = function(keys, func, desc)
     vim.keymap.set("n", keys, func,
-    { buffer = bufnr, silent = true, noremap = true, desc = desc })
+      { buffer = bufnr, silent = true, noremap = true, desc = desc })
   end
 
   if not vim.g.knob_lspsaga then
@@ -66,10 +66,10 @@ local on_attach = function(client, bufnr)
 
   nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
   nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder,
-  "Remove workspace folder")
+    "Remove workspace folder")
   nmap("<leader>wl",
-  "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-  "List workspaces")
+    "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
+    "List workspaces")
   nmap("<leader>D", vim.lsp.buf.type_definition, "Type definition")
 
   if vim.g.knob_null_ls then
@@ -201,6 +201,7 @@ local servers = {
       },
     },
   },
+  rust_analyzer = {},
   tailwindcss = {
     filetypes = { "css" },
   },
