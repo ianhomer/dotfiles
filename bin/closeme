@@ -51,8 +51,6 @@ else
   else
     applications="nvim"
   fi
-  # TODO : find safe way to close todo
-  # applications+=" todo"
   applications+=" watchman $BREW_PREFIX/bin/watchman"
   applications+=" node $BREW_PREFIX/Cellar/node"
   applications+=" /Applications/Flipper.app prettierd eslint_d adb"
