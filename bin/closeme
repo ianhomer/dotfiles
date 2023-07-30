@@ -13,9 +13,9 @@ step to free up resources.
   -v close only vim processes
 
 #or nvim, this closes all proceses without lock in the process name
-Start vim with 
+Start vim with
 
-    nvim +lock 
+    nvim +lock
 
 to withstand this close process. This process of closing nvim relies on nvim
 autosaving files, this process does not save files.
@@ -23,11 +23,12 @@ EOF
 }
 
 OPTIND=1
-while getopts "hnv" o; do case "$o" in
+while getopts "hnvV" o; do case "$o" in
   h) help && exit 0 ;;
   f) FORCE_CLOSE=y ;;
   n) JUST_NODE=y ;;
   v) JUST_VIM=y ;;
+  V) NOT_VIM=y ;;
   *) exit 1 ;;
 esac done
 shift $((OPTIND-1))
@@ -41,8 +42,17 @@ BREW_PREFIX=`brew --prefix`
 
 if [[ "$JUST_NODE" == "y" ]] ; then
   applications="node $BREW_PREFIX/Cellar/node"
-else
+elif [[ "$JUST_VIM" == "y" ]] ; then
   applications="nvim"
+else
+  if [[ "$NOT_VIM" == "y" ]] ; then
+    echo "Not closing neovim"
+    applications=""
+  else
+    applications="nvim"
+  fi
+  # TODO : find safe way to close todo
+  # applications+=" todo"
   applications+=" watchman $BREW_PREFIX/bin/watchman"
   applications+=" node $BREW_PREFIX/Cellar/node"
   applications+=" /Applications/Flipper.app prettierd eslint_d adb"
