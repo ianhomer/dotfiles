@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   gherkin-lint:
     specifier: ^4.2.2
@@ -1443,7 +1447,7 @@ packages:
     resolution: {integrity: sha512-lUnWRMjwA9+KhDec/5xRZV3Du67ISumHnVLywWQXyvzmc4P+Eqx8CoeQrBQoau3Pw1hs4kJLTDyV85hFBF00SQ==}
     dependencies:
       '@types/uuid': 3.4.10
-      protobufjs: 6.11.3
+      protobufjs: 6.11.4
       uuid: 3.4.0
     dev: false
 
@@ -3165,8 +3169,8 @@ packages:
       react-is: 16.13.1
     dev: true
 
-  /protobufjs@6.11.3:
-    resolution: {integrity: sha512-xL96WDdCZYdU7Slin569tFX712BxsxslWwAfAhCYjQKGTq7dAU91Lomy6nLLhh/dyGhk/YH4TwTSRxTzhuHyZg==}
+  /protobufjs@6.11.4:
+    resolution: {integrity: sha512-5kQWPaJHi1WoCpjTGszzQ32PG2F4+wRY6BmAT4Vfw56Q2FZ4YZzK20xUYQH4YkfehY1e6QSICrJquM6xXZNcrw==}
     hasBin: true
     requiresBuild: true
     dependencies:
