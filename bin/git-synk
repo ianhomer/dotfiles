@@ -75,11 +75,7 @@ function gitSynk() {
   current=`pwd | sed 's|.*/||g'`
   changes=$(git status --porcelain | wc -l)
 
-  if [[ "$branchName" == "main" ]] ; then
-    log::info "Pulling ${PWD##*/} from main, no push"
-    git pull
-    return
-  elif [[ "$branchName" != */* ]] ; then
+  if [[ "$branchName" != */* ]] ; then
     if [[ $changes -gt 0 ]] ; then
       if [[ "true" == `git config core.autocommit` ]] ; then
         # Automatically create batch
@@ -90,6 +86,10 @@ function gitSynk() {
         printf "∷ ◉ $current - set autocommit with git synk -a to enable auto branching"
         return 128
       fi
+    else
+      log::info "Pulling ${PWD##*/} from main, no push"
+      git pull
+      return
     fi
   fi
 

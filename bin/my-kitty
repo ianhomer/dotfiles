@@ -7,18 +7,23 @@
 import json
 import os
 import subprocess
+import time
 from functools import cached_property
 
 
 class KittyState:
     def __init__(self):
-        self.state = json.loads(subprocess.check_output(["kitty", "@", "ls"]))
+        self.refresh()
 
     def print(self):
         for window in self.state:
             print(window)
             for tab in window["tabs"]:
                 print(tab["title"])
+
+    def refresh(self):
+        self.state = json.loads(subprocess.check_output(["kitty", "@", "ls"]))
+
 
     @cached_property
     def tabTitles(self):
@@ -31,20 +36,44 @@ class KittyState:
 
 class Kitty:
     def __init__(self):
+        self.refreshState()
+
+    def refreshState(self):
         self.state = KittyState()
 
     def action(self, action):
         os.system("kitty @ " + action)
 
-    def launchTab(self, title, directory):
+    def launchOsWindow(self, title):
+        if title not in self.state.tabTitles:
+            kitty.action(
+                "launch --type os-window --keep-focus --title "
+                + title
+                + " --os-window-title "
+                + title
+            )
+        else:
+            print("Tab for OS window already exists : " + title)
+
+    def waitForTab(self, title):
+        for _ in range(10):
+            self.refreshState()
+            if title in self.state.tabTitles:
+                return
+            time.sleep(0.1)
+        print("Tab " + title + " not found")
+
+    def launchTab(self, title, directory, match=None):
         if title not in self.state.tabTitles:
             self.action(
                 "launch --type=tab --tab-title "
                 + title
+                + (" --match " + match if match else "")
                 + " --cwd "
                 + directory
                 + " fish"
             )
+            return True
         else:
             print("Tab already exists : " + title)
 
@@ -55,5 +84,18 @@ kitty = Kitty()
 print("Current tabs : " + ",".join(kitty.state.tabTitles))
 kitty.launchTab(".", "~/.dotfiles")
 kitty.launchTab("󰧮", "~/projects/things")
-kitty.action("focus-tab --match 'title:^.'")
+
+kitty.launchOsWindow("O")
+kitty.action("set-background-opacity --match title:O 0.8")
+kitty.action("set-spacing --match title:O margin=0")
+kitty.action("set-spacing --match title:O padding=0")
+kitty.action("resize-os-window --match title:O --width 100 --height 40 --self")
+if kitty.launchTab("things", "~/projects/things", "title:O"):
+    # Only launch todo first time window initialised
+    kitty.waitForTab("things")
+    time.sleep(0.3)  # give time for shell to initialise
+    kitty.action("send-text --match title:things 'do -ai\n'")
+
+kitty.action("focus-tab --match 'title:^\\.'")
+
 print("... complete")

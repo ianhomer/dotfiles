@@ -18,6 +18,7 @@ null_ls.setup({
     formatting.eslint_d,
     formatting.black,
     formatting.fish_indent,
+    formatting.rustfmt,
     formatting.stylua,
     formatting.trim_whitespace.with({
       filetypes = { "cucumber", "sh" },

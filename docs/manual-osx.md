@@ -18,15 +18,6 @@ The ones I install by default (in order of my preferred browser):
 
 I install bitwarden extension in each browser
 
-### Magnet
-
-Install Magnet and change keyboard shortcuts.
-
-|              |                  |
-| ------------ | ---------------- |
-| `Ctrl-Alt-,` | Previous Display |
-| `Ctrl-Alt-.` | Next Display     |
-
 ### Hidden Bar
 
 Open Hidden Bar. Select "Start Hidden Bar when I log in" and "Enable always
@@ -44,7 +35,7 @@ Alfred Preferences -> Advanced -> Set Preferences folder ->
 Set the following to start on login
 
 - Alfred 4
-- Magnet
+- Rectangle
 
 ## Finder
 

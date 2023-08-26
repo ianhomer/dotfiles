@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+#
+# Install nightly version of rust-analyzer.
+#
+
+set -e
+
+$(shim) && cd ${ME} && . bin/i.sh
+
+nightlyInstallation=~/local/rust-analyzer/$(date +%Y%m%d)
+if [ ! -f ${nightlyInstallation}/rust-analyzer-aarch64-apple-darwin ] ; then
+  log:: "installing nightly rust-analyzer ${nightlyInstallation}"
+  nightlyRelease=~/Downloads/rust-analyzer-aarch64-apple-darwin.gz
+  if [ ! -f "${nightlyRelease}" ] ; then
+    log:: "downloading nightly"
+    curl -fLo $nightlyRelease \
+      https://github.com/rust-lang/rust-analyzer/releases/download/nightly/rust-analyzer-aarch64-apple-darwin.gz
+  fi
+
+  mkdir -p ${nightlyInstallation}
+  cd ${nightlyInstallation}
+  cp "${nightlyRelease}" .
+  gunzip rust-analyzer-aarch64-apple-darwin.gz
+  chmod +x rust-analyzer-aarch64-apple-darwin
+
+  [ -L ~/bin/rust-analyzer ] && rm ~/bin/rust-analyzer
+  ln -s ${nightlyInstallation}/rust-analyzer-aarch64-apple-darwin ~/bin/rust-analyzer
+else
+  if [ ! -f ~/bin/rust-analyzer ] ; then
+    log:: "linking latest nightly to ~/bin/rust-analyzer"
+    if [ ! -d ~/bin ] ; then
+      log:: "Creating ~/bin"
+      mkdir ~/bin
+    fi
+    ln -s ${nightlyInstallation}/rust-analyzer-aarch64-apple-darwin ~/bin/rust-analyzer
+  else
+    log:: "nightly rust-analyzer ${nightlyInstallation} already installed"
+  fi
+fi

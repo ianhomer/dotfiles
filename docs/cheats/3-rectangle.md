@@ -1,8 +1,8 @@
-# Magnet
+# Rectangle
 
-## magnet
+## rectangle
 
-### magnet
+### rectangle
 
 **Ctrl+Opt+return**
 : Full screen
@@ -27,6 +27,3 @@
 
 **Ctrl+Opt+back**
 : Back to manually set screen size
-
-
-

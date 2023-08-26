@@ -19,7 +19,9 @@ if [[ ! -d "$BACKUP_ROOT" ]] ; then
   exit 1
 fi
 
-BACKUP_DESTINATION=$BACKUP_ROOT/backup/$(scutil --get ComputerName)-$USER
+COMPUTER_NAME=$(scutil --get ComputerName)
+
+BACKUP_DESTINATION=$BACKUP_ROOT/backup/${COMPUTER_NAME/ /-}-$USER
 
 if [[ ! -d $BACKUP_DESTINATION ]] ; then
   #
