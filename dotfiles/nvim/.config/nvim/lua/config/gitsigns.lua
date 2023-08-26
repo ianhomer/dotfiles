@@ -1,5 +1,4 @@
 require("gitsigns").setup({
-  keymaps = {},
   on_attach = function(buffer)
     local gs = package.loaded.gitsigns
 

@@ -3,10 +3,15 @@
 # Part 1 is Header
 # Part 2 is Payload
 
+JWT=$1
+if [[ -z "$JWT" ]] ; then
+  JWT=$(</dev/stdin)
+fi
+
 for i in 1 2 ; do
   echo
   echo "Part $i"
-  part=$(echo $1 | cut -f$i -d .)
+  part=$(echo $JWT | cut -f$i -d .)
   case $((${#part} % 4)) in
     2) part="${part}==";;
     3) part="${part}=";;

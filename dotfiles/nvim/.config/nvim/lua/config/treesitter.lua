@@ -4,6 +4,8 @@ treesitter.setup({
   ensure_installed = {
     "bash",
     "css",
+    "dockerfile",
+    "fish",
     "go",
     "hcl",
     "java",
@@ -11,10 +13,12 @@ treesitter.setup({
     "html",
     "lua",
     "make",
-    "markdown",
     "python",
+    "query",
     "javascript",
+    "rust",
     "scss",
+    "terraform",
     "toml",
     "tsx",
     "typescript",
@@ -45,6 +49,24 @@ treesitter.setup({
       node_decremental = "<S-TAB>",
     },
   },
+  playground = {
+    enable = vim.g.knob_treesitter_playground,
+    disable = {},
+    updatetime = 25,
+    persist_queries = false,
+    keybindings = {
+      toggle_query_editor = 'o',
+      toggle_hl_groups = 'i',
+      toggle_injected_languages = 't',
+      toggle_anonymous_nodes = 'a',
+      toggle_language_display = 'I',
+      focus_language = 'f',
+      unfocus_language = 'F',
+      update = 'R',
+      goto_node = '<cr>',
+      show_help = '?',
+    },
+  }
 })
 
 -- fix attempt to index local 'node_or_range' for cmd window

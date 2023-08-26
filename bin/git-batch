@@ -42,11 +42,12 @@ EOF
 }
 
 OPTIND=1
-while getopts "ahn:t" o; do case "$o" in
+while getopts "ahn:ot" o; do case "$o" in
   a) git config core.allowbatchcompletions true ;;
   h) help && exit 0 ;;
   t) WITH_TIME="y" ;;
   n) BATCH_NAME=$OPTARG ;;
+  o) OFFLINE="y" ;;
 esac done
 shift $((OPTIND-1))
 
@@ -68,22 +69,29 @@ function newBatch {
       batchName=`date +%Y%m%d`
     fi
     batchBranchName=batch/$batchName
-    git ls-remote --exit-code --heads origin $batchBranchName
-    if [ $? -eq 0 ] ; then
-      log::error "Checking out existing remote batch $batchName"
-      git fetch origin $batchBranchName
-      git checkout $batchBranchName
-    elif [ `git rev-parse --verify $batchBranchName 2>/dev/null` ] ; then
-      log::error "Checking out existing local batch $batchName"
-      git checkout $batchBranchName
+    if [[ "$OFFLINE" != "y" ]] ; then
+      git ls-remote --exit-code --heads origin $batchBranchName
+      if [ $? -eq 0 ] ; then
+        log::error "Checking out existing remote batch $batchName"
+        git fetch origin $batchBranchName
+        git checkout $batchBranchName
+      elif [ `git rev-parse --verify $batchBranchName 2>/dev/null` ] ; then
+        log::error "Checking out existing local batch $batchName"
+        git checkout $batchBranchName
+        git branch --unset-upstream $batchBranchName
+        git push
+        git pullme
+      else
+        log::info "Creating new batch $batchName"
+        # Pull latest trunk before branching
+        git pull
+        git checkout -b $batchBranchName
+      fi
+      git ls-remote --heads origin | grep "/batch/"
+      [ $? -eq 0 ] && log::info "^ batches on remote listed above"
     else
-      log::info "Creating new batch $batchName"
-      # Pull latest trunk before branching
-      git pull
       git checkout -b $batchBranchName
     fi
-    git ls-remote --heads origin | grep "/batch/"
-    [ $? -eq 0 ] && log::info "^ batches on remote listed above"
   fi
 }
 

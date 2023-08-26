@@ -79,7 +79,7 @@ nvim_set_var("knobs_levels", {
   notify = 5,
   null_ls = 3,
   nvim_tree = 3,
-  rainbow = 3,
+  rainbow = 6,
   refactoring = 9,
   vim_repeat = 3,
   rhubarb = 7,
@@ -98,11 +98,12 @@ nvim_set_var("knobs_levels", {
   test = 6,
   thingity = 3,
   toggleterm = 3,
-  treesitter = 3,
-  treesitter_textobjects = 3,
-  treesitter_context = 6,
+  treesitter = 4,
+  treesitter_textobjects = 4,
+  treesitter_context = 5,
+  treesitter_playground = 6,
   trouble = 3,
-  ufo = 3,
+  ufo = 4,
   unicode = 9,
   unimpaired = 4,
   update_spelling = 7,
@@ -249,6 +250,7 @@ require("lazy").setup(
     },
     {
       "j-hui/fidget.nvim",
+      branch = "legacy",
       config = [[require'fidget'.setup{}]],
     },
     {
@@ -309,6 +311,11 @@ require("lazy").setup(
         require("config.treesitter")
       end,
       build = ":TSUpdate",
+    },
+    {
+      knob = "treesitter_playground",
+      "nvim-treesitter/playground",
+      event = "BufRead",
     },
     {
       "nvim-treesitter/nvim-treesitter-textobjects",
