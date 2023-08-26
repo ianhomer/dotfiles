@@ -10,16 +10,16 @@ require("nvim-tree").setup({
       error = "!",
     },
   },
-  remove_keymaps = { "-", "<C-]>", "<2-RightMouse>" },
+  -- remove_keymaps = { "-", "<C-]>", "<2-RightMouse>" },
   view = {
     adaptive_size = false,
-    mappings = {
-      list = {
-        -- ignore normal C-o since odd in tree window
-        { key = "<C-o>", action = "parent_node" },
-        -- { key = "r", action = "relative_rename" },
-      },
-    },
+    -- mappings =
+    --   list = {
+    --     -- ignore normal C-o since odd in tree window
+    --     { key = "<C-o>", action = "parent_node" },
+    --     -- { key = "r", action = "relative_rename" },
+    --   },
+    -- },
   },
   update_focused_file = {
     enable = true,
