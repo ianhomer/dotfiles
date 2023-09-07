@@ -30,8 +30,6 @@ if get(g:, "knobs_level", 0) > 2
   " ... and let this q mapping apply for NERDTree
   let NERDTreeMapQuit='qq'
 
-  "nnoremap <silent> q :echo "q disabled"<CR>
-
   if exists("g:knob_which_key") && !has("nvim")
     nnoremap <silent> <localleader> :<c-u>WhichKey  '\\'<CR>
     nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
