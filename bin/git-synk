@@ -26,8 +26,9 @@ OPTIND=1
 # Time in seconds when not to re-fetch
 FETCH_WINDOW=600
 
-while getopts "ahuw:" o; do case "$o" in
+while getopts "achuw:" o; do case "$o" in
   a) git config core.autocommit true ;;
+  c) BATCH_COMPLETE=true ;;
   u) git config --unset core.autocommit ;;
   w) FETCH_WINDOW=$OPTARG ;;
   h) help && exit 1 ;;
@@ -79,7 +80,7 @@ function gitSynk() {
     if [[ $changes -gt 0 ]] ; then
       if [[ "true" == `git config core.autocommit` ]] ; then
         # Automatically create batch
-        git batch
+        git batch || log::exit "Error creating batch"
       else
         log::error "Please create a branch (with '/' in) before syncing"
         log::info "Current branch for $current is $branchName"
@@ -220,5 +221,27 @@ else
       first=0
     fi
   done
+
+  if [[ "$BATCH_COMPLETE" == "true" ]] ; then
+    echo
+    log::info "Completing batches"
+    cd ${root}
+    for child in */ ; do
+      cd ${root}
+      if [ -d "${child}.git" ] ; then
+        cd $child
+        headsName=$(git describe --all)
+        if [[ "$headsName" != heads/* ]] ; then
+          log::exit "$headsName from describe --all shoud start with heads/ "
+        fi
+        branchName=${headsName:6}
+        if [[ "$branchName" == batch/* ]] ; then
+          log::info "Completing batch : ${child} : ${branchName}"
+          git batch complete
+        fi
+      fi
+    done
+  fi
+
   [[ $error -eq 0 ]] || exit $error
 fi

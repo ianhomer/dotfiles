@@ -7,12 +7,14 @@ $(shim)
 is-connected || (echo "Not connected, no sync" ; exit 1)
 
 FETCH_WINDOW=600
-while getopts "w:" o; do case "$o" in
+EXTRA_ARGS=""
+while getopts "cw:" o; do case "$o" in
+  c) EXTRA_ARGS="-c" ;;
   w) FETCH_WINDOW=$OPTARG ;;
 esac done
 
 cd $THINGS_DIR
-git synk -w $FETCH_WINDOW
+git synk -w $FETCH_WINDOW $EXTRA_ARGS
 
 # Fix modified time for things
 for child in */ ; do

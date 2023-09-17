@@ -14,6 +14,8 @@
 # jump between devices. This git commmand aims to make this easy for me.
 #
 
+set -e
+
 $(shim) && . ${ME}/bin/i.sh
 
 help() {
@@ -70,8 +72,11 @@ function newBatch {
     fi
     batchBranchName=batch/$batchName
     if [[ "$OFFLINE" != "y" ]] ; then
+      set +e
       git ls-remote --exit-code --heads origin $batchBranchName
-      if [ $? -eq 0 ] ; then
+      errorCode=$?
+      set -e
+      if [ $errorCode -eq 0 ] ; then
         log::error "Checking out existing remote batch $batchName"
         git fetch origin $batchBranchName
         git checkout $batchBranchName
