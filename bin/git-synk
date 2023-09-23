@@ -4,9 +4,12 @@
 # Synchronise a local git repository with remote
 #
 
+import datetime
 import os
 import re
 from subprocess import call, getoutput, STDOUT
+
+fetch_window = 600
 
 
 def is_git_repo(path):
@@ -34,10 +37,32 @@ def synk(path):
             f"Directory {path} is not a git repository and can not be synked"
         )
     os.chdir(path)
-    print(path)
-    print("synching")
+    repository_name = os.path.basename(path)
     branch = get_branch_name()
-    print(f"Branch {branch}")
+    changes = int(getoutput("git status --porcelain | wc -l"))
+    auto_commit = getoutput("git config core.autocommit") == "true"
+    original_url = getoutput("git config --get remote.origin.url")
+
+    if changes > 0:
+        if auto_commit:
+            os.system("git add -A ; git commit --quiet -m sync")
+        else:
+            print(f"∷ ◉ {repository_name} - set autocommit with git synk -a to commit local")
+            return
+    print("▻ ", end="")
+
+    dated_file = f"{path}/.git/FETCH_HEAD"
+    if not os.path.exists(dated_file):
+        dated_file = f"{path}/.git/HEAD"
+    last_modified = datetime.datetime.fromtimestamp(os.path.getmtime(dated_file))
+    now = datetime.datetime.now()
+    if last_modified + datetime.timedelta(seconds=fetch_window) < now:
+        print(".", end="")
+        print(".", end="")
+    else:
+        print("∷ ", end="")
+
+    print("")
 
 
 def run():
