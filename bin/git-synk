@@ -26,9 +26,7 @@ def get_branch_name():
     match = re.search("heads/(.*)", heads)
     if match:
         return match.group(1)
-    raise Exception(
-        f"heads of git repository is {heads} and does not match 'heads/*"
-    )
+    raise Exception(f"heads of git repository is {heads} and does not match 'heads/*")
 
 
 def synk(path):
@@ -38,16 +36,19 @@ def synk(path):
         )
     os.chdir(path)
     repository_name = os.path.basename(path)
-    branch = get_branch_name()
+    branch_name = get_branch_name()
     changes = int(getoutput("git status --porcelain | wc -l"))
     auto_commit = getoutput("git config core.autocommit") == "true"
     original_url = getoutput("git config --get remote.origin.url")
+    remote_name = getoutput(f"git config --get branch.{branch_name}.remote")
 
     if changes > 0:
         if auto_commit:
             os.system("git add -A ; git commit --quiet -m sync")
         else:
-            print(f"∷ ◉ {repository_name} - set autocommit with git synk -a to commit local")
+            print(
+                f"∷ ◉ {repository_name} - set autocommit with git synk -a to commit local"
+            )
             return
     print("▻ ", end="")
 
@@ -61,6 +62,27 @@ def synk(path):
         print(".", end="")
     else:
         print("∷ ", end="")
+
+    if remote_name != "":
+        left_right_as_string = getoutput(
+            f"git rev-list --count --left-right {remote_name}/{branch_name}...HEAD"
+        )
+        [left, right] = list(map(lambda a: int(a), left_right_as_string.split()))
+        print(f"LR {left_right_as_string}")
+        # Determine action about to take place
+        if left > 0:
+            if right > 0:
+                action = f"↓ {left} ↑ {right}"
+            else:
+                action = f"↓ {left}"
+        elif right > 0:
+            action = f"↑ {right}"
+        else:
+            action = "≡"
+    else:
+        action = "✧"
+
+    print(f"{action}", end="")
 
     print("")
 
