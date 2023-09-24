@@ -58,6 +58,7 @@ def synk(path):
     now = datetime.datetime.now()
     if last_modified + datetime.timedelta(seconds=fetch_window) < now:
         print(".", end="")
+        os.system("git fetch")
         print(".", end="")
     else:
         print("∷ ", end="")
@@ -67,6 +68,10 @@ def synk(path):
 
 def run():
     cwd = os.getcwd()
+    match = re.search("projects/things", cwd)
+    if not match:
+        raise Exception("Can only sync in project/things directory")
+
     print(cwd)
     if is_git_repo(cwd):
         synk(cwd)
