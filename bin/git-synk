@@ -29,6 +29,17 @@ def get_branch_name():
     raise Exception(f"heads of git repository is {heads} and does not match 'heads/*")
 
 
+# Reduce branch name and original name, for example:
+#   feature/abc becomes f/abc
+#   user@host:/path/to/repository becomes u@h:/p/t/repository
+def reduce_git_uri(uri):
+    return re.compile("([a-z])[.a-z]*([/@:])").sub(r"\1\2", uri)
+
+
+def printf(message):
+    print(message, end="")
+
+
 def synk(path):
     if not is_git_repo(path):
         raise Exception(
@@ -50,6 +61,7 @@ def synk(path):
                 f"∷ ◉ {repository_name} - set autocommit with git synk -a to commit local"
             )
             return
+
     print("▻ ", end="")
 
     dated_file = f"{path}/.git/FETCH_HEAD"
@@ -58,18 +70,17 @@ def synk(path):
     last_modified = datetime.datetime.fromtimestamp(os.path.getmtime(dated_file))
     now = datetime.datetime.now()
     if last_modified + datetime.timedelta(seconds=fetch_window) < now:
-        print(".", end="")
+        printf(".")
         os.system("git fetch")
-        print(".", end="")
+        printf(".")
     else:
-        print("∷ ", end="")
+        printf("∷ ")
 
     if remote_name != "":
         left_right_as_string = getoutput(
             f"git rev-list --count --left-right {remote_name}/{branch_name}...HEAD"
         )
         [left, right] = list(map(lambda a: int(a), left_right_as_string.split()))
-        print(f"LR {left_right_as_string}")
         # Determine action about to take place
         if left > 0:
             if right > 0:
@@ -81,11 +92,22 @@ def synk(path):
         else:
             action = "≡"
     else:
+        (left, right) = (0, 0)
         action = "✧"
 
-    print(f"{action}", end="")
+    print(
+        f"{action} {reduce_git_uri(branch_name)} {reduce_git_uri(original_url)}", end=""
+    )
 
-    print("")
+    if left > 0:
+        printf(" ↓")
+        os.system("git rebase")
+
+    if right > 0:
+        printf(" ↑")
+        os.system("git push")
+
+    print(" ☆")
 
 
 def run():
@@ -94,7 +116,6 @@ def run():
     if not match:
         raise Exception("Can only sync in project/things directory")
 
-    print(cwd)
     if is_git_repo(cwd):
         synk(cwd)
     else:
