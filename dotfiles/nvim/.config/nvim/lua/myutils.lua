@@ -1,10 +1,10 @@
 local M = {}
 
-local pickers = require("telescope.pickers")
-local finders = require("telescope.finders")
-local conf = require("telescope.config").values
-local actions = require("telescope.actions")
-local action_state = require("telescope.actions.state")
+-- local pickers = require("telescope.pickers")
+-- local finders = require("telescope.finders")
+-- local conf = require("telescope.config").values
+-- local actions = require("telescope.actions")
+-- local action_state = require("telescope.actions.state")
 
 function M.find_process_on_port(port)
   local pid = vim.trim(vim.fn.system({ "lsof", "-i", ":" .. port, "-t" }))
