@@ -1,12 +1,12 @@
 local M = {}
 
-local null_ls = require("null-ls")
-local formatting = null_ls.builtins.formatting
-local diagnostics = null_ls.builtins.diagnostics
-local code_actions = null_ls.builtins.code_actions
-local completion = null_ls.builtins.completion
+local none_ls = require("null-ls")
+local formatting = none_ls.builtins.formatting
+local diagnostics = none_ls.builtins.diagnostics
+local code_actions = none_ls.builtins.code_actions
+local completion = none_ls.builtins.completion
 
-null_ls.setup({
+none_ls.setup({
   debug = false,
   sources = {
     -- order is important, prettier should be before eslint
@@ -56,17 +56,17 @@ null_ls.setup({
 
 function M.setLevel(level)
   if level > 4 then
-    null_ls.enable("markdownlint")
-    null_ls.enable("vale")
+    none_ls.enable("markdownlint")
+    none_ls.enable("vale")
   else
-    null_ls.disable("markdownlint")
-    null_ls.disable("vale")
+    none_ls.disable("markdownlint")
+    none_ls.disable("vale")
   end
 end
 
 function M.toggle()
-  null_ls.toggle("markdownlint")
-  null_ls.toggle("vale")
+  none_ls.toggle("markdownlint")
+  none_ls.toggle("vale")
 end
 
 return M
