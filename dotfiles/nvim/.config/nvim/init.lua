@@ -48,7 +48,7 @@ nvim_set_var("knobs_levels", {
   gitsigns = 5,
   gruvbox = 9,
   gruvbox8 = 9,
-  glow = 5,
+  glow = 3,
   goyo = 9,
   gv = 9,
   icon_picker = 5,
@@ -628,10 +628,12 @@ require("lazy").setup(
     {
       "junegunn/vim-easy-align",
     },
-
     {
       "ellisonleao/glow.nvim",
-      cmd = { "Glow" },
+      config = function()
+        require("config.glow")
+      end,
+      cmd = "Glow",
     },
     {
       "iamcco/markdown-preview.nvim",
@@ -661,8 +663,8 @@ require("lazy").setup(
             "terminal",
           },
           buftypes = {
-            "terminal"
-          }
+            "terminal",
+          },
         },
       },
     },
