@@ -55,6 +55,7 @@ nvim_set_var("knobs_levels", {
   indent_blankline = 5,
   indentline = 5,
   indentscope = 5,
+  illuminate = 5,
   jester = 5,
   kanagawa = 3,
   lens = 8,
@@ -502,6 +503,13 @@ require("lazy").setup(
       "NvChad/nvim-colorizer.lua",
       config = [[require'config.colorizer']],
       event = "BufRead",
+    },
+    {
+      "RRethy/vim-illuminate",
+      event = "BufReadPost",
+      config = function()
+        require("illuminate").configure({ delay = 200 })
+      end,
     },
     -- {
     --   "mrshmllow/document-color.nvim",
