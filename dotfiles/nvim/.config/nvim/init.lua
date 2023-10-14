@@ -77,7 +77,7 @@ nvim_set_var("knobs_levels", {
   neotest = 9,
   noice = 9,
   notify = 5,
-  null_ls = 3,
+  none_ls = 3,
   nvim_tree = 3,
   rainbow = 6,
   refactoring = 9,
@@ -251,9 +251,9 @@ require("lazy").setup(
       end,
     },
     {
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/none-ls.nvim",
       config = function()
-        require("config.null_ls")
+        require("config.none_ls")
       end,
       dependencies = { "nvim-lua/plenary.nvim" },
     },
@@ -278,7 +278,7 @@ require("lazy").setup(
     {
       "folke/trouble.nvim",
       dependencies = "kyazdani42/nvim-web-devicons",
-      cmd = { "TroubleToggle", "Trouble" },
+      cmd = { "TroubleClose", "TroubleToggle", "Trouble" },
       config = require("config.trouble").config,
       keys = require("config.trouble").keys,
     },
