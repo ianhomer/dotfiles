@@ -210,6 +210,7 @@ local servers = {
       },
     },
   },
+  svelte = {},
   tailwindcss = {
     filetypes = { "css" },
   },
