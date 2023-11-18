@@ -11,6 +11,7 @@ $(shim) && cd ${ME} && . bin/i.sh
 log:: "updating apk"
 
 apk add stow
+apk add curl
 
 should-run -fu dotme-apk
 
