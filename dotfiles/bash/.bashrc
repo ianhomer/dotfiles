@@ -3,7 +3,7 @@ echo "... running ~/.bashrc from dotfiles"
 
 if command -v dotme &> /dev/null ; then
   PATH=$PATH:$HOME/.dotfiles/bin
-exit
+fi
 
 if command -v fasd &> /dev/null ; then
   # Initialise fasd https://github.com/clvv/fasd
