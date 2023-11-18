@@ -9,6 +9,11 @@ $(shim) && cd ${ME} && . ./bin/i.sh
 log:: "initialising bash shell"
 
 export NVM_DIR="$HOME/.nvm"
+
+if [ ! -d "$NVM_DIR" ] ; then
+  mkdir $NVM_DIR
+fi
+
 if [[ ! -L "$NVM_DIR/bash_completion.d" ]] ; then
   if [[ `uname -m` == 'arm64' ]] ; then
     # Silicon
