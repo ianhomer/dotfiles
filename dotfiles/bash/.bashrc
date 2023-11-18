@@ -40,8 +40,10 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 export NVM_DIR="$HOME/.nvm"
 # with --no-use we postpone nvm until we use it so we can take explicit
 # control
-. ~/.nvm/nvm.sh --no-use
-# . ~/.nvm/bash_completion.d/nvm
+if [[ -f ~/.nvm/nvm.sh ]] ; then
+  . ~/.nvm/nvm.sh --no-use
+  # . ~/.nvm/bash_completion.d/nvm
+fi
 
 . ~/.config/sh/aliases.sh
 . ~/.config/sh/aliases-non-fish.sh
