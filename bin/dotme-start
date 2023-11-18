@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 #
 # Prepare environment during bootstrap
@@ -7,6 +7,16 @@
 if [[ ! -d ~/projects ]] ; then
   echo "Creating ~/projects directory"
   mkdir ~/projects/
+fi
+
+if ! command -v bash > /dev/null 2>&1; then
+  if command -v apk > /dev/null 2>&1; then
+    echo "bash not installed, installing with apk"
+    apk get bash
+  else
+    echo "bash not installed"
+    exit
+  fi
 fi
 
 if [[ "$OSTYPE" =~ ^linux-android ]]; then
