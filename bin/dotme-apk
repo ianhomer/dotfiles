@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+#
+# Install with apk
+#
+
+should-run -m 7 dotme-apk ${ME}/config/apk || exit 0
+
+$(shim) && cd ${ME} && . bin/i.sh
+
+log:: "updating apk"
+
+apk add stow
+
+should-run -fu dotme-apk
+
+

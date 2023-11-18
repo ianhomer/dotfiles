@@ -172,6 +172,8 @@ command_packages() {
       dotme-pkg
     elif has-pacman ; then
       dotme-pacman
+    elif command -v apk ; then
+      dotme-apk
     else
       echo "Unknown package management, exiting"
       exit
