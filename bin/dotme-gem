@@ -8,7 +8,8 @@ should-run $0 || exit 0
 
 $(shim) && cd ${ME} && . bin/i.sh
 if ! command -v rbenv ; then
-  log::exit "rbenv not installed"
+  log::info "rbenv not installed"
+  exit
 fi
 
 # Install given ruby version as global
