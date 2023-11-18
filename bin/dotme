@@ -172,7 +172,7 @@ command_packages() {
       dotme-pkg
     elif has-pacman ; then
       dotme-pacman
-    else ; then
+    else
       echo "Unknown package management, exiting"
       exit
     fi
