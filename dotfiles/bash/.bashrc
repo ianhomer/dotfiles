@@ -51,8 +51,5 @@ fi
 # neovim is the new vim
 . ~/.config/sh/aliases.sh
 . ~/.config/sh/aliases-non-fish.sh
-. ~/.cargo/env
 
-if [[ -f ~/.docker/init-bash.sh ]] ; then
-  source ~/.docker/init-bash.sh || true # Added by Docker Desktop
-fi
+[[ -f ~/.carg/env ]] && . ~/.cargo/env
