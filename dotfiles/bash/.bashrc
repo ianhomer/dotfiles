@@ -1,6 +1,10 @@
 # .bashrc is executed each time shell starts
 echo "... running ~/.bashrc from dotfiles"
 
+if command -v dotme &> /dev/null ; then
+  PATH=$PATH:$HOME/.dotfiles/bin
+exit
+
 if command -v fasd &> /dev/null ; then
   # Initialise fasd https://github.com/clvv/fasd
   fasd_cache="$HOME/.fasd-init-bash"
