@@ -5,6 +5,11 @@ $(shim) && cd ${ME} && . bin/i.sh
 
 log:: "configuring rust"
 
+if ! command -v rustup-init ; then
+  log::info "rustup-init not installed"
+  exit
+fi
+
 if ! command -v cargo ; then
   log:: "initialising rust"
   rustup-init -y
