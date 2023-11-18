@@ -1,7 +1,7 @@
 # .bashrc is executed each time shell starts
 echo "... running ~/.bashrc from dotfiles"
 
-if command -v dotme &> /dev/null ; then
+if ! command -v dotme &> /dev/null ; then
   PATH=$PATH:$HOME/.dotfiles/bin
 fi
 
