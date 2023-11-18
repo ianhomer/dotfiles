@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
 if [[ ! "$OSTYPE" =~ ^linux-android ]]; then
+  if [ "$HOME" == "/root" ] ; then
+    # If home is root then we're not on a PC, we might be in a lightweight
+    # container
+    exit 1
+  fi
   exit 0
 else
   exit 1
