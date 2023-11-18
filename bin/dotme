@@ -172,7 +172,7 @@ command_packages() {
       dotme-pkg
     elif has-pacman ; then
       dotme-pacman
-    elif command -v apk ; then
+    elif command -v apk > /dev/null 2>&1; then
       dotme-apk
     else
       echo "Unknown package management, exiting"
