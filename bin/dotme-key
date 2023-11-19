@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
 $(shim) && cd ${ME} && . bin/i.sh
+log::info "Setting up SSH key"
 
 if [[ -z "$1" ]] ; then
-  . dotenv
+   . ${ME}/bin/dotenv
 else
   MY_EMAIL=$1
 fi
+log::info "My email ${MY_EMAIL}"
 
 if [[ -z "$MY_EMAIL" ]] ; then
   log:: "... set email with"
