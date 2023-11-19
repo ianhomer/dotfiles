@@ -11,10 +11,11 @@ log:: "a log message"
 log:: another log message
 log:: "info with multiple words"
 log:: OK status
-log:: error with $(log::bold message)
 log:: skip this that
-log:: box this that
-log:: box "a long message, a long message, a long message" that
+log::warn warn with $(log::bold message)
+log::error error with $(log::bold message)
+log::box this that
+log::box "a long message, a long message, a long message" that
 log::box this "a long message, a long message, a long message"
 log::trim 15 "a long message, a long message"
 log::trim 15 "short"

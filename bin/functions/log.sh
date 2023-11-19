@@ -52,17 +52,21 @@ function log::status() {
     "$status" "$message"
 }
 
-function log::info() {
-  printf "\e[36m$*\e[0m\n"
-}
-
 function log::trace() {
   [[ "$TRACEME" == "y" ]] && printf "\e[38;5;238m$*\e[0m\n"
   return 0
 }
 
-function log::error() {
+function log::info() {
+  printf "\e[36m$*\e[0m\n"
+}
+
+function log::warn() {
   printf "\e[33m$*\e[0m\n"
+}
+
+function log::error() {
+  printf "\e[31m$*\e[0m\n"
 }
 
 # Error and exit

@@ -16,7 +16,11 @@ esac done
 cd $THINGS_DIR
 git synk -w $FETCH_WINDOW $EXTRA_ARGS
 
-# Fix modified time for things
-for child in */ ; do
-  (cd $child ; git fix-mtime)
-done
+if [[ -z "*/" ]] ; then
+  # Fix modified time for things
+  for child in */ ; do
+    (cd $child ; git fix-mtime)
+  done
+else
+  echo "No thing directories to fix mtime"
+fi

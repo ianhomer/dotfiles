@@ -33,5 +33,5 @@ fi
 #
 ipv6LocalHostRoute=$(grep localhost /etc/hosts | grep "::1" | grep -v "^#" | wc -l)
 if [ ${ipv6LocalHostRoute} -eq 1 ] ; then
-  log::error "/etc/hosts has ipv6 localhost enabled which is not reliable, please comment out"
+  log::warn "/etc/hosts has ipv6 localhost enabled which is not reliable, please comment out"
 fi
