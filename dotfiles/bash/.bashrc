@@ -56,4 +56,4 @@ fi
 . ~/.config/sh/aliases.sh
 . ~/.config/sh/aliases-non-fish.sh
 
-[[ -f ~/.carg/env ]] && . ~/.cargo/env
+[[ -f ~/.cargo/env ]] && . ~/.cargo/env
