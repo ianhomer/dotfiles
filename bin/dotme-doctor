@@ -18,10 +18,12 @@ fi
 
 should-run -fu $0
 
-gnupgPermissions=$(stat -f %A ~/.gnupg)
-if [ "$gnupgPermissions" != 700 ] ; then
-  log:: "Correcting ~/.gnupg permissions from $gnupgPermissions to 700"
-  chmod 700 ~/.gnupg
+if [ -d ~/.gnupg ] ; then
+  gnupgPermissions=$(stat -f %A ~/.gnupg)
+  if [ "$gnupgPermissions" != 700 ] ; then
+    log:: "Correcting ~/.gnupg permissions from $gnupgPermissions to 700"
+    chmod 700 ~/.gnupg
+  fi
 fi
 
 # Some tools don't resolve to ipv6 addresses yet, so safer not to have
@@ -31,5 +33,5 @@ fi
 #
 ipv6LocalHostRoute=$(grep localhost /etc/hosts | grep "::1" | grep -v "^#" | wc -l)
 if [ ${ipv6LocalHostRoute} -eq 1 ] ; then
-  log::error "/etc/hosts has ipv6 localhost enabled which is not reliable, please comment out"
+  log::warn "/etc/hosts has ipv6 localhost enabled which is not reliable, please comment out"
 fi

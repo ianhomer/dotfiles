@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+if [ -f $HOME/.config/dotme/.light ] ; then
+    exit 1
+fi
+
+exit 0

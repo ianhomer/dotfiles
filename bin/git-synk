@@ -1,224 +1,128 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
 
 #
-# Safe synchronisation of git repository. Auto-commits can be enabled by setting
-# the git config core.autocommit, i.e. run the following once in the repository
-# directory
+# Synchronise a local git repository with remote
 #
-#    git synk -a
-#
-# Autocommitting should only be enabled when the commit messages are of limited
-# value, for example personal / note style repositories.
 
-set -e
+import datetime
+import os
+import re
+from subprocess import call, getoutput, STDOUT
 
-help() {
-  cat <<EOF
-
-    git synk -a    # autocommit
-    git synk -u    # unset autocommmit
-    git synk -w 5  # fetch window of 5 seconds
-
-EOF
-}
-
-OPTIND=1
-# Time in seconds when not to re-fetch
-FETCH_WINDOW=600
-
-while getopts "ahuw:" o; do case "$o" in
-  a) git config core.autocommit true ;;
-  u) git config --unset core.autocommit ;;
-  w) FETCH_WINDOW=$OPTARG ;;
-  h) help && exit 1 ;;
-esac done
+fetch_window = 600
 
 
-$(shim) && cd ${ME} && . bin/i.sh && cd ~-
-
-#
-# Execute git quietly
-#
-function gitQuiet() {
-  if [[ "$protocol" == "keybase" ]] ; then
-    echo "keybase no longer supported"
-    return 1
-  else
-    if ! git $1 --quiet ; then
-      if [[ "$1" == "fetch" ]] ; then
-        # Sometimes git fetch will fail if we have the
-        # wrong SSH key cached, just clearing the
-        # ssh cache seems to fix it.
-        printf "!"
-        ssh-add -q -D
-        git $1 --quiet
-      else
-        printf ' ! '
-        return 1
-      fi
-    fi
-  fi
-}
-
-#
-# Sync the current directory if possible
-#
-function gitSynk() {
-  # Make sure in git repository
-  git rev-parse
-
-  headsName=$(git describe --all)
-  if [[ "$headsName" != heads/* ]] ; then
-    log::exit "$headsName from describe --all shoud start with heads/ "
-  fi
-  branchName=${headsName:6}
-  current=`pwd | sed 's|.*/||g'`
-  changes=$(git status --porcelain | wc -l)
-
-  if [[ "$branchName" != */* ]] ; then
-    if [[ $changes -gt 0 ]] ; then
-      if [[ "true" == `git config core.autocommit` ]] ; then
-        # Automatically create batch
-        git batch
-      else
-        log::error "Please create a branch (with '/' in) before syncing"
-        log::info "Current branch for $current is $branchName"
-        printf "∷ ◉ $current - set autocommit with git synk -a to enable auto branching"
-        return 128
-      fi
-    else
-      log::info "Pulling ${PWD##*/} from main, no push"
-      git pull
-      return
-    fi
-  fi
-
-  originUrl=$(git config --get remote.origin.url)
-  originProtocol=${originUrl%:*}
-  remoteName=$(git config --get branch.$branchName.remote)
-  printf "▻ "
-
-  if [[ "$originProtocol" == *@* ]] ; then
-    ssh -T $originProtocol -o ConnectTimeout=1 'exit 0' >/dev/null 2>&1
-    if [ $? -gt 1 ] ; then
-      echo "! not syncing $originUrl"
-      echo "  ! remote $originProtocol is not available"
-      exit
-    fi
-  fi
-
-  protocol=${originUrl%%\:*}
-
-  if git rebase --show-current-patch > /dev/null 2>&1 ; then
-    echo "$current - rebase in progress"
-    git rebase
-    return 128
-  fi
+def is_git_repo(path):
+    return os.path.isdir(path) and (
+        call(
+            ["git", "rev-parse"], cwd=path, stderr=STDOUT, stdout=open(os.devnull, "w")
+        )
+        == 0
+    )
 
 
-  if [[ $changes -gt 0 ]] ; then
-    if [[ "true" == `git config core.autocommit` ]] ; then
-      # Handle dirty state only if autocommit flag set
-      git add -A ; git commit --quiet -m "sync"
-    else
-      # Otherwise if there are local changes and the autocommit is not set then
-      # we bomb
-      printf "∷ ◉ $current - set autocommit with git synk -a to commit local"
-      return 128
-    fi
-  fi
+def get_branch_name():
+    heads = getoutput("git describe --all")
+    match = re.search("heads/(.*)", heads)
+    if match:
+        return match.group(1)
+    raise Exception(f"heads of git repository is {heads} and does not match 'heads/*")
 
-  now=`date +%s`
-  datedFile=".git/FETCH_HEAD"
-  if [ ! -f "$datedFile" ] ; then
-    datedFile=".git/HEAD"
-  fi
 
-  lastModified=`$SHIM_STAT -c '%Y' $datedFile`
-  if [[ $((lastModified + FETCH_WINDOW)) < $now ]] ; then
-    printf "."
-    gitQuiet fetch
-    printf "."
-  else
-    printf "∷ "
-  fi
+# Reduce branch name and original name, for example:
+#   feature/abc becomes f/abc
+#   user@host:/path/to/repository becomes u@h:/p/t/repository
+def reduce_git_uri(uri):
+    return re.compile("([a-z])[.a-z]*([/@:])").sub(r"\1\2", uri)
 
-  if [[ -n "${remoteName}" ]] ; then
-    leftRight=$(git rev-list --count --left-right $remoteName/$branchName...HEAD)
-    left=$(echo $leftRight | awk '{print $1}')
-    right=$(echo $leftRight | awk '{print $2}')
 
-    # Determine action about to take place
-    if [[ $left -gt 0 ]] ; then
-      if [[ $right -gt 0 ]] ; then
-        action="↓ $left ↑ $right"
-      else
-        action="↓ $left"
-      fi
-    elif [[ $right -gt 0 ]] ; then
-      action="↑ $right"
-    else
-      action="≡"
-    fi
-  else
-    action="✧"
-  fi
+def printf(message):
+    print(message, end="")
 
-  reducer='s|\([a-z]\)[\.a-z]*\([\/@\:]\)|\1\2|g'
-  reducedBranchName=`echo $branchName | sed -e $reducer`
-  reducedOriginUrl=`echo $originUrl | sed -e $reducer`
 
-  printf "$action $reducedBranchName ${reducedOriginUrl%%.git}"
+def synk(path):
+    if not is_git_repo(path):
+        raise Exception(
+            f"Directory {path} is not a git repository and can not be synked"
+        )
+    os.chdir(path)
+    repository_name = os.path.basename(path)
+    branch_name = get_branch_name()
+    changes = int(getoutput("git status --porcelain | wc -l"))
+    auto_commit = getoutput("git config core.autocommit") == "true"
+    original_url = getoutput("git config --get remote.origin.url")
+    remote_name = getoutput(f"git config --get branch.{branch_name}.remote")
 
-  if [[ $left -gt 0 ]] ; then
-    printf " ↓"
-    if ! gitQuiet rebase ; then
-      echo
-      log:: "START DIFF"
-      git diff --diff-filter=U
-      log:: "END   DIFF"
-      git rebase --abort
-      cat <<EOF
-Could not rebase, please rebase manually with:
+    if changes > 0:
+        if auto_commit:
+            os.system("git add -A ; git commit --quiet -m sync")
+        else:
+            print(
+                f"∷ ◉ {repository_name} - set autocommit with git synk -a to commit local"
+            )
+            return
 
-    cd $(pwd)
-    git rebase
+    print("▻ ", end="")
 
-EOF
-      exit
-    fi
-  fi
+    dated_file = f"{path}/.git/FETCH_HEAD"
+    if not os.path.exists(dated_file):
+        dated_file = f"{path}/.git/HEAD"
+    last_modified = datetime.datetime.fromtimestamp(os.path.getmtime(dated_file))
+    now = datetime.datetime.now()
+    if last_modified + datetime.timedelta(seconds=fetch_window) < now:
+        printf(".")
+        os.system("git fetch")
+        printf(".")
+    else:
+        printf("∷ ")
 
-  if [[ $right -gt 0 ]] ; then
-    printf " ↑"
-    git push
-  elif [[ -z "${remoteName}" ]] ; then
-    printf " ↟\n"
-    git push -u
-  fi
+    if remote_name != "":
+        left_right_as_string = getoutput(
+            f"git rev-list --count --left-right {remote_name}/{branch_name}...HEAD"
+        )
+        [left, right] = list(map(lambda a: int(a), left_right_as_string.split()))
+        # Determine action about to take place
+        if left > 0:
+            if right > 0:
+                action = f"↓ {left} ↑ {right}"
+            else:
+                action = f"↓ {left}"
+        elif right > 0:
+            action = f"↑ {right}"
+        else:
+            action = "≡"
+    else:
+        (left, right) = (0, 0)
+        action = "✧"
 
-  # Print AOK signal
-  printf " ☆"
-}
+    print(
+        f"{action} {reduce_git_uri(branch_name)} {reduce_git_uri(original_url)}", end=""
+    )
 
-if git rev-parse 2>/dev/null  ; then
-  # We're in a git directory, just go ahead and synk
-  gitSynk || exit 128
-else
-  # We're not in a git directory, loop over child directories and if a child is
-  # git directory then synk
-  root=`pwd`
-  first=1
-  error=0
-  for child in */ ; do
-    cd ${root}
-    if [ -d "${child}.git" ] ; then
-      # Each subsequence synk on a new line
-      [[ first -eq 0 ]] && printf "\n"
-      cd $child
-      gitSynk || error=1
-      first=0
-    fi
-  done
-  [[ $error -eq 0 ]] || exit $error
-fi
+    if left > 0:
+        printf(" ↓")
+        os.system("git rebase")
+
+    if right > 0:
+        printf(" ↑")
+        os.system("git push")
+
+    print(" ☆")
+
+
+def run():
+    cwd = os.getcwd()
+    match = re.search("projects/things", cwd)
+    if not match:
+        raise Exception("Can only sync in project/things directory")
+
+    if is_git_repo(cwd):
+        synk(cwd)
+    else:
+        for child in os.listdir(cwd):
+            directory = os.path.join(cwd, child)
+            if is_git_repo(directory):
+                synk(directory)
+
+
+run()

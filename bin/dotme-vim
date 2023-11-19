@@ -42,7 +42,7 @@ if [ ! -d ~/.vim/swaps ] ; then
 fi
 
 if [ ! -d ~/.cache/tags ] ; then
-  mkdir ~/.cache/tags
+  mkdir -p ~/.cache/tags
 fi
 
 should-run -fu $0

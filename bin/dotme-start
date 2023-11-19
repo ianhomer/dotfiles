@@ -1,4 +1,10 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
+
+#
+# Start dotfiles in light mode, i.e. core functionality to get going
+#
+mkdir -p $HOME/.config/dotme
+touch $HOME/.config/dotme/.light
 
 #
 # Prepare environment during bootstrap
@@ -7,6 +13,20 @@
 if [[ ! -d ~/projects ]] ; then
   echo "Creating ~/projects directory"
   mkdir ~/projects/
+  if [[ ! -d ~/projects/things ]] ; then
+    echo "Creating ~/projects/things directory"
+    mkdir ~/projects/things
+  fi
+fi
+
+if ! command -v bash > /dev/null 2>&1; then
+  if command -v apk > /dev/null 2>&1; then
+    echo "bash not installed, installing with apk"
+    apk add bash
+  else
+    echo "bash not installed"
+    exit
+  fi
 fi
 
 if [[ "$OSTYPE" =~ ^linux-android ]]; then

@@ -111,8 +111,8 @@ leaders[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>",
   "LSP Range Format" }
 
 -- Modes
-leaders["5"] = { "<cmd>lua require'config/null_ls'.setLevel(3)<cr>", "Core Lints" }
-leaders["6"] = { "<cmd>lua require'config/null_ls'.toggle()<cr>", "Toggle Lints" }
+leaders["5"] = { "<cmd>lua require'config/none_ls'.setLevel(3)<cr>", "Core Lints" }
+leaders["6"] = { "<cmd>lua require'config/none_ls'.toggle()<cr>", "Toggle Lints" }
 leaders["7"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Trouble File" }
 leaders["&"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble All" }
 leaders["8"] = { "<cmd>call my#ToggleBlame()<cr>", "Blame" }

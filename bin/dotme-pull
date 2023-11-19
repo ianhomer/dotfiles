@@ -9,6 +9,10 @@ set -e
 should-run -m 1h $0 || exit 0
 
 $(shim) && cd ${ME} && . bin/i.sh
+if ! command -v rbenv ; then
+  log::warn "git not installed"
+  exit
+fi
 
 if git config pull.rebase > /dev/null ; then
   cd ${DOTFILES_DIR}

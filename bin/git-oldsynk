@@ -1,0 +1,247 @@
+#!/usr/bin/env bash
+
+#
+# Safe synchronisation of git repository. Auto-commits can be enabled by setting
+# the git config core.autocommit, i.e. run the following once in the repository
+# directory
+#
+#    git synk -a
+#
+# Autocommitting should only be enabled when the commit messages are of limited
+# value, for example personal / note style repositories.
+
+set -e
+
+help() {
+  cat <<EOF
+
+    git synk -a    # autocommit
+    git synk -u    # unset autocommmit
+    git synk -w 5  # fetch window of 5 seconds
+
+EOF
+}
+
+OPTIND=1
+# Time in seconds when not to re-fetch
+FETCH_WINDOW=600
+
+while getopts "achuw:" o; do case "$o" in
+  a) git config core.autocommit true ;;
+  c) BATCH_COMPLETE=true ;;
+  u) git config --unset core.autocommit ;;
+  w) FETCH_WINDOW=$OPTARG ;;
+  h) help && exit 1 ;;
+esac done
+
+
+$(shim) && cd ${ME} && . bin/i.sh && cd ~-
+
+#
+# Execute git quietly
+#
+function gitQuiet() {
+  if [[ "$protocol" == "keybase" ]] ; then
+    echo "keybase no longer supported"
+    return 1
+  else
+    if ! git $1 --quiet ; then
+      if [[ "$1" == "fetch" ]] ; then
+        # Sometimes git fetch will fail if we have the
+        # wrong SSH key cached, just clearing the
+        # ssh cache seems to fix it.
+        printf "!"
+        ssh-add -q -D
+        git $1 --quiet
+      else
+        printf ' ! '
+        return 1
+      fi
+    fi
+  fi
+}
+
+#
+# Sync the current directory if possible
+#
+function gitSynk() {
+  # Make sure in git repository
+  git rev-parse
+
+  headsName=$(git describe --all)
+  if [[ "$headsName" != heads/* ]] ; then
+    log::exit "$headsName from describe --all shoud start with heads/ "
+  fi
+  branchName=${headsName:6}
+  current=`pwd | sed 's|.*/||g'`
+  changes=$(git status --porcelain | wc -l)
+
+  if [[ "$branchName" != */* ]] ; then
+    if [[ $changes -gt 0 ]] ; then
+      if [[ "true" == `git config core.autocommit` ]] ; then
+        # Automatically create batch
+        git batch || log::exit "Error creating batch"
+      else
+        log::error "Please create a branch (with '/' in) before syncing"
+        log::info "Current branch for $current is $branchName"
+        printf "∷ ◉ $current - set autocommit with git synk -a to enable auto branching"
+        return 128
+      fi
+    else
+      log::info "Pulling ${PWD##*/} from main, no push"
+      git pull
+      return
+    fi
+  fi
+
+  originUrl=$(git config --get remote.origin.url)
+  originProtocol=${originUrl%:*}
+  remoteName=$(git config --get branch.$branchName.remote)
+  printf "▻ "
+
+  if [[ "$originProtocol" == *@* ]] ; then
+    ssh -T $originProtocol -o ConnectTimeout=1 'exit 0' >/dev/null 2>&1
+    if [ $? -gt 1 ] ; then
+      echo "! not syncing $originUrl"
+      echo "  ! remote $originProtocol is not available"
+      exit
+    fi
+  fi
+
+  protocol=${originUrl%%\:*}
+
+  if git rebase --show-current-patch > /dev/null 2>&1 ; then
+    echo "$current - rebase in progress"
+    git rebase
+    return 128
+  fi
+
+
+  if [[ $changes -gt 0 ]] ; then
+    if [[ "true" == `git config core.autocommit` ]] ; then
+      # Handle dirty state only if autocommit flag set
+      git add -A ; git commit --quiet -m "sync"
+    else
+      # Otherwise if there are local changes and the autocommit is not set then
+      # we bomb
+      printf "∷ ◉ $current - set autocommit with git synk -a to commit local"
+      return 128
+    fi
+  fi
+
+  now=`date +%s`
+  datedFile=".git/FETCH_HEAD"
+  if [ ! -f "$datedFile" ] ; then
+    datedFile=".git/HEAD"
+  fi
+
+  lastModified=`$SHIM_STAT -c '%Y' $datedFile`
+  if [[ $((lastModified + FETCH_WINDOW)) < $now ]] ; then
+    printf "."
+    gitQuiet fetch
+    printf "."
+  else
+    printf "∷ "
+  fi
+
+  if [[ -n "${remoteName}" ]] ; then
+    leftRight=$(git rev-list --count --left-right $remoteName/$branchName...HEAD)
+    left=$(echo $leftRight | awk '{print $1}')
+    right=$(echo $leftRight | awk '{print $2}')
+
+    # Determine action about to take place
+    if [[ $left -gt 0 ]] ; then
+      if [[ $right -gt 0 ]] ; then
+        action="↓ $left ↑ $right"
+      else
+        action="↓ $left"
+      fi
+    elif [[ $right -gt 0 ]] ; then
+      action="↑ $right"
+    else
+      action="≡"
+    fi
+  else
+    action="✧"
+  fi
+
+  reducer='s|\([a-z]\)[\.a-z]*\([\/@\:]\)|\1\2|g'
+  reducedBranchName=`echo $branchName | sed -e $reducer`
+  reducedOriginUrl=`echo $originUrl | sed -e $reducer`
+
+  printf "$action $reducedBranchName ${reducedOriginUrl%%.git}"
+
+  if [[ $left -gt 0 ]] ; then
+    printf " ↓"
+    if ! gitQuiet rebase ; then
+      echo
+      log:: "START DIFF"
+      git diff --diff-filter=U
+      log:: "END   DIFF"
+      git rebase --abort
+      cat <<EOF
+Could not rebase, please rebase manually with:
+
+    cd $(pwd)
+    git rebase
+
+EOF
+      exit
+    fi
+  fi
+
+  if [[ $right -gt 0 ]] ; then
+    printf " ↑"
+    git push
+  elif [[ -z "${remoteName}" ]] ; then
+    printf " ↟\n"
+    git push -u
+  fi
+
+  # Print AOK signal
+  printf " ☆"
+}
+
+if git rev-parse 2>/dev/null  ; then
+  # We're in a git directory, just go ahead and synk
+  gitSynk || exit 128
+else
+  # We're not in a git directory, loop over child directories and if a child is
+  # git directory then synk
+  root=`pwd`
+  first=1
+  error=0
+  for child in */ ; do
+    cd ${root}
+    if [ -d "${child}.git" ] ; then
+      # Each subsequence synk on a new line
+      [[ first -eq 0 ]] && printf "\n"
+      cd $child
+      gitSynk || error=1
+      first=0
+    fi
+  done
+
+  if [[ "$BATCH_COMPLETE" == "true" ]] ; then
+    echo
+    log::info "Completing batches"
+    cd ${root}
+    for child in */ ; do
+      cd ${root}
+      if [ -d "${child}.git" ] ; then
+        cd $child
+        headsName=$(git describe --all)
+        if [[ "$headsName" != heads/* ]] ; then
+          log::exit "$headsName from describe --all shoud start with heads/ "
+        fi
+        branchName=${headsName:6}
+        if [[ "$branchName" == batch/* ]] ; then
+          log::info "Completing batch : ${child} : ${branchName}"
+          git batch complete
+        fi
+      fi
+    done
+  fi
+
+  [[ $error -eq 0 ]] || exit $error
+fi

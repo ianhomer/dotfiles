@@ -7,6 +7,10 @@
 should-run $0 || exit 0
 
 $(shim) && cd ${ME} && . bin/i.sh
+if ! command -v rbenv ; then
+  log::warn "rbenv not installed"
+  exit
+fi
 
 # Install given ruby version as global
 rbenv install -s 3.2.1

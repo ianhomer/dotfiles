@@ -24,9 +24,9 @@ function! my#GitSynk(onlyPush)
 endfunction
 
 function my#LintMe()
-  if knobs#("null_ls")
+  if knobs#("none_ls")
     let linter="lsp"
-    " Use null_ls for formatting, not tsserver
+    " Use none_ls for formatting, not tsserver
     lua vim.lsp.buf.format { async = true, filter = function(client) return client.name ~= "tsserver" end }
   else
     if &filetype == "markdown"

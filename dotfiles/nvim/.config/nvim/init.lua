@@ -48,13 +48,14 @@ nvim_set_var("knobs_levels", {
   gitsigns = 5,
   gruvbox = 9,
   gruvbox8 = 9,
-  glow = 5,
+  glow = 3,
   goyo = 9,
   gv = 9,
   icon_picker = 5,
   indent_blankline = 5,
   indentline = 5,
   indentscope = 5,
+  illuminate = 5,
   jester = 5,
   kanagawa = 3,
   lens = 8,
@@ -77,7 +78,7 @@ nvim_set_var("knobs_levels", {
   neotest = 9,
   noice = 9,
   notify = 5,
-  null_ls = 3,
+  none_ls = 3,
   nvim_tree = 3,
   rainbow = 6,
   refactoring = 9,
@@ -128,15 +129,6 @@ nvim_set_var("knobs_layers_map", {
     markdown_syntax_list = 1,
   },
 })
-
-g.indentLine_enabled = 1
-g.indent_blankline_char = "▏"
-
-g.indent_blankline_filetype_exclude = { "help", "startify", "terminal" }
-g.indent_blankline_buftype_exclude = { "terminal" }
-
-g.indent_blankline_show_trailing_blankline_indent = false
-g.indent_blankline_show_first_indent_level = false
 
 require("config.kitty")
 
@@ -260,9 +252,9 @@ require("lazy").setup(
       end,
     },
     {
-      "jose-elias-alvarez/null-ls.nvim",
+      "nvimtools/none-ls.nvim",
       config = function()
-        require("config.null_ls")
+        require("config.none_ls")
       end,
       dependencies = { "nvim-lua/plenary.nvim" },
     },
@@ -287,7 +279,7 @@ require("lazy").setup(
     {
       "folke/trouble.nvim",
       dependencies = "kyazdani42/nvim-web-devicons",
-      cmd = { "TroubleToggle", "Trouble" },
+      cmd = { "TroubleClose", "TroubleToggle", "Trouble" },
       config = require("config.trouble").config,
       keys = require("config.trouble").keys,
     },
@@ -512,6 +504,13 @@ require("lazy").setup(
       config = [[require'config.colorizer']],
       event = "BufRead",
     },
+    {
+      "RRethy/vim-illuminate",
+      event = "BufReadPost",
+      config = function()
+        require("illuminate").configure({ delay = 200 })
+      end,
+    },
     -- {
     --   "mrshmllow/document-color.nvim",
     --   config = [[require'config.document_color']],
@@ -629,10 +628,12 @@ require("lazy").setup(
     {
       "junegunn/vim-easy-align",
     },
-
     {
       "ellisonleao/glow.nvim",
-      cmd = { "Glow" },
+      config = function()
+        require("config.glow")
+      end,
+      cmd = "Glow",
     },
     {
       "iamcco/markdown-preview.nvim",
@@ -644,12 +645,27 @@ require("lazy").setup(
     {
       "lukas-reineke/indent-blankline.nvim",
       event = { "BufReadPost", "BufNewFile" },
+      main = "ibl",
       opts = {
-        char = "│",
-        filetype_exclude = { "help", "alpha", "dashboard", "neo-tree", "Trouble",
-          "lazy" },
-        show_trailing_blankline_indent = false,
-        show_current_context = false,
+        indent = {
+          char = "│",
+          highlight = "IndentBlanklineChar",
+        },
+        exclude = {
+          filetypes = {
+            "Trouble",
+            "alpha",
+            "dashboard",
+            "help",
+            "lazy",
+            "neo-tree",
+            "startify",
+            "terminal",
+          },
+          buftypes = {
+            "terminal",
+          },
+        },
       },
     },
     {

@@ -14,6 +14,7 @@ alias d="do"
 alias t="thing"
 alias ts="things"
 alias s="things-sync"
+alias sc="things-sync -c"
 
 # Attach to tmux session if exists, otherwise new
 alias tm="tmux attach || tmux new"
