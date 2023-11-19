@@ -14,11 +14,15 @@ set -e
 NODE_GLOBAL=~/.dotfiles/config/node/global.txt
 should-run -m 14 $@ $0 $NODE_GLOBAL || exit 0
 $(shim) && cd ${ME} && . bin/i.sh
-
 #
 # Set up nvm
 #
 [ ! -d ~/.nvm ] && mkdir ~/.nvm
+
+if ! command -v node ; then
+  log::info "node not installed"
+  exit
+fi
 
 #
 # Node is installed with brew and pnpm installed with corepack

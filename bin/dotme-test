@@ -9,6 +9,11 @@ set -e
 should-run -m 7 $@ $0 || exit 0
 $(shim) && cd ${ME} && . bin/i.sh
 
+if ! command -v node ; then
+  log::info "pnpm not installed"
+  exit
+fi
+
 cd ${ME}/test
 # packages must be installed in test so that LSP completion works on test files
 
