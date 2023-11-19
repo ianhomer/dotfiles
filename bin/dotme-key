@@ -10,7 +10,12 @@ esac done
 
 if [[ -n "$help" ]] ; then
   cat <<EOF
-Usage
+Set up an SSH key which can used for
+
+* GitHub personal SSH key for general access
+* GitHub repository deploy key for specific repository access
+* Other git platforms
+* SSH key for passwordless logins
 
 Set up a default key
 
