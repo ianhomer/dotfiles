@@ -20,7 +20,7 @@ function foo(a) {
   if (a == 1) {
     // if (a==2) {
     console.log("uncomment inner if to get a sonarjs code smell");
-    // }
+    //
   }
 
   return a;

@@ -72,7 +72,7 @@ local on_attach = function(client, bufnr)
     "List workspaces")
   nmap("<leader>D", vim.lsp.buf.type_definition, "Type definition")
 
-  if vim.g.knob_null_ls then
+  if vim.g.knob_none_ls then
     -- Use null-ls for formatting
     client.server_capabilities.document_formatting = false
     client.server_capabilities.document_range_formatting = false
@@ -210,6 +210,7 @@ local servers = {
       },
     },
   },
+  svelte = {},
   tailwindcss = {
     filetypes = { "css" },
   },

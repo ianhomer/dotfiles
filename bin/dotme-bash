@@ -8,36 +8,43 @@ $(shim) && cd ${ME} && . ./bin/i.sh
 
 log:: "initialising bash shell"
 
-export NVM_DIR="$HOME/.nvm"
-if [[ ! -L "$NVM_DIR/bash_completion.d" ]] ; then
-  if [[ `uname -m` == 'arm64' ]] ; then
-    # Silicon
-    ln -s /opt/homebrew/opt/nvm/etc/bash_completion.d $NVM_DIR
-  else
-    ln -s /usr/local/opt/nvm/etc/bash_completion.d $NVM_DIR
+if command -v nvm ; then
+  export NVM_DIR="$HOME/.nvm"
+
+  if [ ! -d "$NVM_DIR" ] ; then
+    mkdir $NVM_DIR
   fi
-fi
 
-if [[ ! -f "$NVM_DIR/nvm.sh" ]] ; then
-  if [[ `uname -m` == 'arm64' ]] ; then
-    # Silicon
-    ln -s /opt/homebrew/opt/nvm/nvm.sh $NVM_DIR
-  else
-    ln -s /usr/local/opt/nvm/nvm.sh $NVM_DIR
+  if [[ ! -L "$NVM_DIR/bash_completion.d" ]] ; then
+    if [[ `uname -m` == 'arm64' ]] ; then
+      # Silicon
+      ln -s /opt/homebrew/opt/nvm/etc/bash_completion.d $NVM_DIR
+    else
+      ln -s /usr/local/opt/nvm/etc/bash_completion.d $NVM_DIR
+    fi
   fi
-fi
 
-# source bashrc which sources nvm and acts as a test that the bash shell is
-# set up OK
-. ~/.bashrc
+  if [[ ! -f "$NVM_DIR/nvm.sh" ]] ; then
+    if [[ `uname -m` == 'arm64' ]] ; then
+      # Silicon
+      ln -s /opt/homebrew/opt/nvm/nvm.sh $NVM_DIR
+    else
+      ln -s /usr/local/opt/nvm/nvm.sh $NVM_DIR
+    fi
+  fi
 
-# nvm set up is in dotme-bash since it's explictly set here for bash purposes
-# with the bash nvm aliases
-if ! nvm which default 2>&1>/dev/null ; then
-  nvm install node
-  nvm alias default node
-else
-  log:: "nvm default is `nvm which default`"
+  # source bashrc which sources nvm and acts as a test that the bash shell is
+  # set up OK
+  . ~/.bashrc
+
+  # nvm set up is in dotme-bash since it's explictly set here for bash purposes
+  # with the bash nvm aliases
+  if ! nvm which default 2>&1>/dev/null ; then
+    nvm install node
+    nvm alias default node
+  else
+    log:: "nvm default is `nvm which default`"
+  fi
 fi
 
 should-run -fu $0

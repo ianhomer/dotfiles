@@ -216,7 +216,7 @@ Settings -> Keyboard Shortcuts -> Keyboard shortcuts on
 
 #### .NET
 
-Install v3.1, v5 and v6 as needed from Microsoft Downloads. Don't use Brew,
+Install v3.1, v5, and v6 as needed from Microsoft Downloads. Don't use Brew,
 since a little bleeding edge at the moment.
 
 v6 on M1
@@ -234,7 +234,7 @@ For .NET 5 and .NET 3.5 development
 - -> Properties
 - -> Build, Execution & Deployment
 - -> Toolset and Build
-- -> .NET Core CLI Execution path = /use/local/share/dotnet/x64/dotnet
+- -> .NET Core CLI Execution path = `/use/local/share/dotnet/x64/dotnet`
 
 Restart and on solution -> Manage .NET SDK -> Select 5.0
 

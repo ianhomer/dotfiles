@@ -34,6 +34,9 @@ require("kanagawa").setup({
       TelescopeResultsBorder = { fg = theme.ui.bg_m1, bg = theme.ui.bg_m1 },
       TelescopePreviewNormal = { bg = theme.ui.bg_dim },
       TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
+      IlluminatedWordText = { bg = theme.ui.bg_p1, fg = "NONE" },
+      IlluminatedWordRead = { bg = theme.ui.bg_p1, fg = "NONE" },
+      IlluminatedWordWrite = { bg = theme.ui.bg_p1, fg = "NONE" }
     }
   end,
 })

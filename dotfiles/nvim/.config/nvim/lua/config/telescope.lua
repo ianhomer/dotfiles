@@ -50,7 +50,9 @@ telescope.setup({
     --    i = {["<c-t>"] = trouble.open_with_trouble},
     --    n = {["<c-t>"] = trouble.open_with_trouble}
     --},
-    path_display = { "shorten" },
+    path_display = {
+      shorten = { len = 3, exclude = {1, -1, -2} }
+    },
     layout_strategy = "vertical",
     layout_config = {
       horizontal = {

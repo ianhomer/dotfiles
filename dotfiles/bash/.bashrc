@@ -1,6 +1,10 @@
 # .bashrc is executed each time shell starts
 echo "... running ~/.bashrc from dotfiles"
 
+if ! command -v dotme &> /dev/null ; then
+  PATH=$PATH:$HOME/.dotfiles/bin
+fi
+
 if command -v fasd &> /dev/null ; then
   # Initialise fasd https://github.com/clvv/fasd
   fasd_cache="$HOME/.fasd-init-bash"
@@ -40,8 +44,10 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 export NVM_DIR="$HOME/.nvm"
 # with --no-use we postpone nvm until we use it so we can take explicit
 # control
-. ~/.nvm/nvm.sh --no-use
-# . ~/.nvm/bash_completion.d/nvm
+if [[ -f ~/.nvm/nvm.sh ]] ; then
+  . ~/.nvm/nvm.sh --no-use
+  # . ~/.nvm/bash_completion.d/nvm
+fi
 
 . ~/.config/sh/aliases.sh
 . ~/.config/sh/aliases-non-fish.sh
@@ -49,8 +55,5 @@ export NVM_DIR="$HOME/.nvm"
 # neovim is the new vim
 . ~/.config/sh/aliases.sh
 . ~/.config/sh/aliases-non-fish.sh
-. ~/.cargo/env
 
-if [[ -f ~/.docker/init-bash.sh ]] ; then
-  source ~/.docker/init-bash.sh || true # Added by Docker Desktop
-fi
+[[ -f ~/.cargo/env ]] && . ~/.cargo/env

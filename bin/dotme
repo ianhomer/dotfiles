@@ -108,6 +108,18 @@ command_install() {
   [ $DRY -eq 1 ] && arguments="$arguments -d"
   $_DIR/dotme $arguments inner
   log:: "dotfiles installed and $(log::bold AOK)"
+  if ! is-dotme-full ; then
+    log::info "In dotme light mode, enable full mode with $(log::bold dotme full)"
+  fi
+}
+
+command_full() {
+  if is-dotme-full ; then
+    log::info "Already in dotme full mode"
+  else
+    rm $HOME/.config/dotme/.light
+    log::info "Enabled dotme full mode"
+  fi
 }
 
 command_initialise() {
@@ -137,14 +149,18 @@ command_inner() {
   [ $DRY -eq 0 ] && dotme-git
   [ $DRY -eq 0 ] && is-macos && dotme-osx
   [ $DRY -eq 0 ] && is-android && dotme-termux
-  [ $DRY -eq 0 ] && is-pc && dotme-pip
-  [ $DRY -eq 0 ] && is-pc && dotme-gem
+  if is-dotme-full ; then
+    [ $DRY -eq 0 ] && is-pc && dotme-pip
+    [ $DRY -eq 0 ] && is-pc && dotme-gem
+  fi
   [ $DRY -eq 0 ] && clean-vim
   [ $DRY -eq 0 ] && dotme-vim
   # Not using tmux any more
   # [ $DRY -eq 0 ] && is-pc && dotme-tmux
-  [ $DRY -eq 0 ] && is-pc && dotme-jenv
-  [ $DRY -eq 0 ] && is-pc && dotme-rust
+  if is-dotme-full ; then
+    [ $DRY -eq 0 ] && is-pc && dotme-jenv
+    [ $DRY -eq 0 ] && is-pc && dotme-rust
+  fi
   [ $DRY -eq 0 ] && is-pc && dotme-bash
   if command -v fish &> /dev/null ; then
     [ $DRY -eq 0 ] && is-pc && dotme-fish
@@ -153,11 +169,15 @@ command_inner() {
   if command -v zsh &> /dev/null ; then
     [ $DRY -eq 0 ] && dotme-zsh
   fi
-  [ $DRY -eq 0 ] && is-pc && dotme-node
-  [ $DRY -eq 0 ] && dotme-backup
-  [ $DRY -eq 0 ] && dotme-gitme
-  [ $DRY -eq 0 ] && is-pc && dotme-modules
-  [ $DRY -eq 0 ] && is-pc && dotme-test
+  [ $DRY -eq 0 ] && is-dotme-full && is-pc && dotme-node
+  if is-dotme-full ; then
+    [ $DRY -eq 0 ] && dotme-backup
+    [ $DRY -eq 0 ] && dotme-gitme
+  fi
+  if is-dotme-full ; then
+    [ $DRY -eq 0 ] && is-pc && dotme-modules
+    [ $DRY -eq 0 ] && is-pc && dotme-test
+  fi
   # Not using nnn for now
   # [ $DRY -eq 0 ] && is-pc && dotme-nnn
   command_clean
@@ -172,6 +192,11 @@ command_packages() {
       dotme-pkg
     elif has-pacman ; then
       dotme-pacman
+    elif command -v apk > /dev/null 2>&1; then
+      dotme-apk
+    else
+      echo "Unknown package management, exiting"
+      exit
     fi
   fi
 }
@@ -345,3 +370,4 @@ if [ $? = 127 ]; then
   usage
   exit 1
 fi
+

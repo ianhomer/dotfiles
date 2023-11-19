@@ -8,6 +8,8 @@ log:: "Cleaning vim swaps"
 
 # Clean swap files older than 2 days ago
 
-find ~/.vim/swaps -type f -mtime +2 -exec rm -v {} \;
+if [ -d ~/.vim/swaps ] ; then
+  find ~/.vim/swaps -type f -mtime +2 -exec rm -v {} \;
+fi
 
 should-run -fu $0
