@@ -1,6 +1,33 @@
 #!/usr/bin/env bash
 
 $(shim) && cd ${ME} && . bin/i.sh
+
+OPTIND=1
+while getopts "hn:" o; do case "$o" in
+  h) help="y" ;;
+  n) key_name=$OPTARG ;;  # Qualifying name of key file
+esac done
+
+if [[ -n "$help" ]] ; then
+  cat <<EOF
+Usage
+
+Set up a default key
+
+  dotme-key
+
+Use a different email address
+
+  dotme-key me@email.test
+
+Use a different key name, e.g. ~/.ssh/id_dotme_alt
+
+  dotme-key -n alt
+EOF
+  exit
+fi
+
+
 log::info "Setting up SSH key"
 
 if [[ -z "$1" ]] ; then
@@ -16,7 +43,11 @@ if [[ -z "$MY_EMAIL" ]] ; then
   exit 1
 fi
 
-keyFile=~/.ssh/id_dotme
+if [[ -n "${key_name}" ]] ; then
+  keyFile=~/.ssh/id_dotme_${key_name}
+else
+  keyFile=~/.ssh/id_dotme
+fi
 
 if [[ ! -f $keyFile ]] ; then
   log:: "... creating SSH key for : $MY_EMAIL"
@@ -39,8 +70,12 @@ if [[ ! -f ${sshConfig} ]] ; then
 cat <<EOF > ${sshConfig}
 Host *
   AddKeysToAgent yes
-  UseKeychain yes
   IdentityFile ${keyFile}
 EOF
+  if is-macos ; then
+cat <<EOF >> ${sshConfig}
+  UseKeychain yes
+EOF
+  fi
 fi
 
