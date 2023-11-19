@@ -191,8 +191,18 @@ elif [[ -z "$force" ]] && [[ -f "$shouldRunFile" ]] ; then
 
   if [[ $shouldRun -eq 0 ]] ; then
     if [[ -n "$modified" ]] ; then
+      # busybox (and other shell) versions of find do not support +1d and +1h
+      # syntax. Instead parse them into a more cross compatible version
+      if [[ "$modified" == *d ]] ; then
+        modifiedArguments="-mtime +${modified::-1}"
+      elif [[ "$modified" == *h ]] ; then
+        modifiedArguments="-mmin +$((${modified::-1} * 60))"
+      else
+        modifiedArguments="-mtime +${modified}"
+      fi
+
       log::trace "Checking modified $modified"
-      if [[ $(find "$shouldRunFile" -mtime +${modified} -print) ]]; then
+      if [[ $(find "$shouldRunFile" ${modifiedArguments} -print) ]]; then
         shouldRun=1
         log::trace "Should run expired, older than ${modified}"
       fi
