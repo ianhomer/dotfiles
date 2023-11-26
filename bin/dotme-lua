@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+#
+# Install lua packages
+#
+
+should-run $0 || exit 0
+
+if ! command -v luarocks ; then
+  log::info "luarocks not installed"
+  exit
+fi
+
+
+luarocks --lua-version 5.1 --local install magick
+
+should-run -fu $0
+
+
