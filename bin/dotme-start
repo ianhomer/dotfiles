@@ -10,7 +10,7 @@ touch $HOME/.config/dotme/.light
 # Prepare environment during bootstrap
 #
 
-if [[ ! -d ~/projects ]] ; then
+if [ ! -d ~/projects ] ; then
   echo "Creating ~/projects directory"
   mkdir ~/projects/
   if [[ ! -d ~/projects/things ]] ; then
@@ -29,13 +29,13 @@ if ! command -v bash > /dev/null 2>&1; then
   fi
 fi
 
-if [[ "$OSTYPE" =~ ^linux-android ]]; then
+if [ "expr substr $(uname -s) 1 5" == "Linux" ]; then
   echo "Removing default termux properties since this is dotfiles managed"
-  if [[ -f ~/.termux/termux.properties ]] ; then
+  if [ -f ~/.termux/termux.properties ] ; then
     rm ~/.termux/termux.properties
   fi
   echo "Setting up storage"
-  if [[ ! -d ~/storage ]] ; then
+  if [ ! -d ~/storage ] ; then
     termux-setup-storage
   fi
 fi
