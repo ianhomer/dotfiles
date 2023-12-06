@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+#
+# Install with apt
+#
+
+set -e
+
+should-run -m 7 dotme-apt ${ME}/config/apt || exit 0
+
+$(shim) && cd ${ME} && . bin/i.sh
+
+if [ $(sudo -n -l apt) = "/usr/bin/apt" ] ; then
+  log:: "updating apt"
+
+  sudo apt update
+  sudo apt install bash \
+    curl \
+    git \
+    openssh-client \
+    python3 \
+    stow
+
+else
+  log::warn "user does not have permission to run apt"
+  exit
+fi
+
+should-run -fu dotme-apt
+
