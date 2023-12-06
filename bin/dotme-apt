@@ -22,7 +22,8 @@ if [ $(sudo -n -l apt) = "/usr/bin/apt" ] ; then
     stow
 
 else
-  log::warn "user does not have permission to run apt"
+  log::warn "user does not have permission to run apt."
+  log::info "consider add entry in /etc/sudoers"
   exit
 fi
 
