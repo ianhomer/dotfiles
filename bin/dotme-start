@@ -30,13 +30,16 @@ if ! command -v bash > /dev/null 2>&1; then
 fi
 
 if [ "expr substr $(uname -s) 1 5" == "Linux" ]; then
-  echo "Removing default termux properties since this is dotfiles managed"
-  if [ -f ~/.termux/termux.properties ] ; then
-    rm ~/.termux/termux.properties
-  fi
-  echo "Setting up storage"
-  if [ ! -d ~/storage ] ; then
-    termux-setup-storage
+  if [ "$(uname -o)" == "Android" ] ; then
+    # termux bootstrap
+    echo "Removing default termux properties since this is dotfiles managed"
+    if [ -f ~/.termux/termux.properties ] ; then
+      rm ~/.termux/termux.properties
+    fi
+    echo "Setting up storage"
+    if [ ! -d ~/storage ] ; then
+      termux-setup-storage
+    fi
   fi
 fi
 
