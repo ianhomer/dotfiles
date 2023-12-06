@@ -194,6 +194,8 @@ command_packages() {
       dotme-pacman
     elif command -v apk > /dev/null 2>&1; then
       dotme-apk
+    elif command -v apt > /dev/null 2>&1; then
+      dotme-apt 
     else
       echo "Unknown package management, exiting"
       exit
