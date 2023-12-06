@@ -13,7 +13,7 @@ touch $HOME/.config/dotme/.light
 if [ ! -d ~/projects ] ; then
   echo "Creating ~/projects directory"
   mkdir ~/projects/
-  if [[ ! -d ~/projects/things ]] ; then
+  if [ ! -d ~/projects/things ] ; then
     echo "Creating ~/projects/things directory"
     mkdir ~/projects/things
   fi
@@ -29,8 +29,8 @@ if ! command -v bash > /dev/null 2>&1; then
   fi
 fi
 
-if [ "expr substr $(uname -s) 1 5" == "Linux" ]; then
-  if [ "$(uname -o)" == "Android" ] ; then
+if [ "expr substr $(uname -s) 1 5" = "Linux" ] ; then
+  if [ "$(uname -o)" = "Android" ] ; then
     # termux bootstrap
     echo "Removing default termux properties since this is dotfiles managed"
     if [ -f ~/.termux/termux.properties ] ; then
