@@ -10,7 +10,7 @@ should-run -m 30 $0 $REQUIREMENTS || exit 0
 $(shim) && cd ${ME} && . bin/i.sh
 
 if ! command -v pip3 ; then
-  log::warn "pip3 not installed"
+  log::info "pip3 not installed"
   exit
 fi
 

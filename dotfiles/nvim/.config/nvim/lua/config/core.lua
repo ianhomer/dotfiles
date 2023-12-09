@@ -24,6 +24,8 @@ for _, plugin in pairs(disabled_built_ins) do
     vim.g["loaded_" .. plugin] = 1
 end
 
+
+
 vim.api.nvim_exec(
     [[
 command! -nargs=* Fuzzy execute "Telescope grep_string search=".escape(<q-args>, ' ')

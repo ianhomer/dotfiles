@@ -152,6 +152,7 @@ command_inner() {
   if is-dotme-full ; then
     [ $DRY -eq 0 ] && is-pc && dotme-pip
     [ $DRY -eq 0 ] && is-pc && dotme-gem
+    [ $DRY -eq 0 ] && is-pc && dotme-lua
   fi
   [ $DRY -eq 0 ] && clean-vim
   [ $DRY -eq 0 ] && dotme-vim
