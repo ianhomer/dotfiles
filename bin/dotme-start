@@ -19,6 +19,7 @@ if [ ! -d ~/projects ] ; then
   fi
 fi
 
+# test
 if ! command -v bash > /dev/null 2>&1; then
   if command -v apk > /dev/null 2>&1; then
     echo "bash not installed, installing with apk"
