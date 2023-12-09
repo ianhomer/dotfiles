@@ -56,6 +56,7 @@ nvim_set_var("knobs_levels", {
   indentline = 5,
   indentscope = 5,
   illuminate = 5,
+  image = 7,
   jester = 5,
   kanagawa = 3,
   lens = 8,
@@ -536,7 +537,14 @@ require("lazy").setup(
         require("config.ufo")
       end,
     },
-
+    {
+      "3rd/image.nvim",
+      event = "VeryLazy",
+      opts = {
+        backend = "kitty",
+        hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" }
+      }
+    },
     -- -- Git
     {
       "tpope/vim-fugitive",
@@ -722,3 +730,6 @@ require("lazy").setup(
     },
   }
 )
+
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?/init.lua;"
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/share/lua/5.1/?.lua;"

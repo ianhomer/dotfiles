@@ -8,7 +8,7 @@ should-run $0 || exit 0
 
 $(shim) && cd ${ME} && . bin/i.sh
 if ! command -v rbenv ; then
-  log::warn "rbenv not installed"
+  log::info "rbenv not installed"
   exit
 fi
 

@@ -20,7 +20,7 @@ $(shim) && cd ${ME} && . bin/i.sh
 [ ! -d ~/.nvm ] && mkdir ~/.nvm
 
 if ! command -v node ; then
-  log::warn "node not installed"
+  log::info "node not installed"
   exit
 fi
 

@@ -49,10 +49,18 @@ args="$args --log-file=$LOG"
 # args="$args --dry-run"
 log:: "rsync args : $args"
 
-LOCATIONS=".dotfiles gdrive .local/share/buku"
+LOCATIONS=".dotfiles .local/share/buku"
 PROJECT_ROOTS="things dotmodules my try"
 for root in $PROJECT_ROOTS ; do
   LOCATIONS="$LOCATIONS projects/$root"
+done
+GDRIVE_LOCATIONS=$(
+  find $HOME -maxdepth 1 -type d \( -name 'gdrive' -o -name 'gdrive-*' \) \
+    -exec basename {} \;
+)
+for gdrive in $GDRIVE_LOCATIONS ; do
+  echo "Found gdrive : $gdrive"
+  LOCATIONS="$LOCATIONS $gdrive"
 done
 echo $DEFAULT_PROJECT_ROOTS
 for location in $LOCATIONS ; do
