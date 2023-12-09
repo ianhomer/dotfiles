@@ -29,6 +29,16 @@ if ! command -v bash > /dev/null 2>&1; then
   fi
 fi
 
+if ! command -v bash > /dev/null 2>&1; then
+  if command -v apk > /dev/null 2>&1; then
+    echo "bash not installed, installing with apk"
+    apk add bash
+  else
+    echo "bash not installed"
+    exit
+  fi
+fi
+
 if [[ "$OSTYPE" =~ ^linux-android ]]; then
   echo "Removing default termux properties since this is dotfiles managed"
   if [[ -f ~/.termux/termux.properties ]] ; then

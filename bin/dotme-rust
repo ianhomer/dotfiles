@@ -6,7 +6,7 @@ $(shim) && cd ${ME} && . bin/i.sh
 log:: "configuring rust"
 
 if ! command -v rustup-init ; then
-  log::warn "rustup-init not installed"
+  log::info "rustup-init not installed"
   exit
 fi
 

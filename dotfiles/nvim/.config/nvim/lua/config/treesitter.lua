@@ -13,6 +13,8 @@ treesitter.setup({
     "html",
     "lua",
     "make",
+    -- "markdown",
+    "markdown_inline",
     "markdown",
     "python",
     "query",

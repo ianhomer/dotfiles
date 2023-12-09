@@ -56,4 +56,6 @@ fi
 . ~/.config/sh/aliases.sh
 . ~/.config/sh/aliases-non-fish.sh
 
-[[ -f ~/.cargo/env ]] && . ~/.cargo/env
+[[ -f ~/.carg/env ]] && . ~/.cargo/env
+
+echo "... ~/.bashrc complete"
