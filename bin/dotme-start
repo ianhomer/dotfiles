@@ -13,6 +13,20 @@ touch $HOME/.config/dotme/.light
 if [[ ! -d ~/projects ]] ; then
   echo "Creating ~/projects directory"
   mkdir ~/projects/
+  if [[ ! -d ~/projects/things ]] ; then
+    echo "Creating ~/projects/things directory"
+    mkdir ~/projects/things
+  fi
+fi
+
+if ! command -v bash > /dev/null 2>&1; then
+  if command -v apk > /dev/null 2>&1; then
+    echo "bash not installed, installing with apk"
+    apk add bash
+  else
+    echo "bash not installed"
+    exit
+  fi
 fi
 
 if ! command -v bash > /dev/null 2>&1; then

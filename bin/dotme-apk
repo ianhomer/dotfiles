@@ -13,6 +13,9 @@ log:: "updating apk"
 apk add bash
 apk add curl
 apk add git
+apk add openssh-client
+apk add openssh-keygen
+apk add python3
 apk add stow
 
 should-run -fu dotme-apk

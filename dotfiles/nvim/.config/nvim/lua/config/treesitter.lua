@@ -15,6 +15,7 @@ treesitter.setup({
     "make",
     -- "markdown",
     "markdown_inline",
+    "markdown",
     "python",
     "query",
     "javascript",
