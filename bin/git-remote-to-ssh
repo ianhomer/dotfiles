@@ -4,7 +4,13 @@
 
 startingDirectory=($PWD)
 $(shim) && cd ${ME} && . bin/i.sh && cd $startingDirectory
+if [[ ! -d .git ]] ; then
+  log:: OK "Not a git directory, no remote URL to change"
+  exit 0
+fi
 remoteUrl=`git config --get remote.origin.url`
+
+
 
 if [[ "$remoteUrl" != *ianhomer/dotfiles* ]] ; then
   log:: NOK "${remoteUrl} not supported for conversion"
