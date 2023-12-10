@@ -69,7 +69,7 @@ nvim_set_var("knobs_levels", {
   lsp_signature = 3,
   lspsaga = 9,
   lualine = 3,
-  luasnip = 3,
+  luasnip = 6,
   markdown_syntax_table = 3,
   markdown_preview = 3,
   minimap = 9,
@@ -369,9 +369,9 @@ require("lazy").setup(
     {
       knob = "dap",
       "rcarriga/nvim-dap-ui",
-      requires = "mfussenegger/nvim-dap",
       dependencies = {
         "mxsdev/nvim-dap-vscode-js",
+        "mfussenegger/nvim-dap"
       },
       config = function()
         require("config.dapui")

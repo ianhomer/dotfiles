@@ -14,12 +14,19 @@ if [ $(sudo -n -l apt) = "/usr/bin/apt" ] ; then
   log:: "updating apt"
 
   sudo apt update
-  sudo apt install bash \
-    curl \
-    git \
+  sudo apt install \
+    bash           \
+    cmake          \
+    curl           \
+    fd-find        \
+    gettext        \
+    git            \
+    ninja-build    \
     openssh-client \
-    python3 \
-    stow
+    python3        \
+    ripgrep        \
+    stow           \
+    unzip
 
 else
   log::warn "user does not have permission to run apt."
