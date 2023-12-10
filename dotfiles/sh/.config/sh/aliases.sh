@@ -8,6 +8,7 @@ alias gs="git status"
 alias gd="git diff HEAD"
 alias ...="cd ../.."
 alias ....="cd ../../.."
+alias ls="ls --color=auto"
 
 # Things
 alias d="do"

@@ -44,7 +44,6 @@ else
     alias b='buku --suggest'
 
     alias fck="fuck"
-    alias ls="ls --color=auto"
     alias nnn="nnn -e"
 
     [ {$DOT_LOG_LEVEL} -gt 1 ]; and echo "◎ loaded ~/.config/fish/aliases.fish"
