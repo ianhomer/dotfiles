@@ -1,6 +1,19 @@
 # .bashrc is executed each time shell starts
 echo "... running ~/.bashrc from dotfiles"
 
+# Set up history
+HISTCONTROL=ignoreboth
+HISTSIZE=1000
+HISTFILESIZE=2000
+shopt -s histappend
+shopt -s checkwinsize
+
+if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+  PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w \$\[\033[00m\] '
+else
+  PS1='\u@\h:\w\$ '
+fi
+
 if ! command -v dotme &> /dev/null ; then
   PATH=$PATH:$HOME/.dotfiles/bin
 fi
