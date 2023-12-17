@@ -39,7 +39,9 @@ Set the following to start on login
 
 ## Finder
 
-- Preferences
+- Show hidden files, by clicking `commannd+shift+.`
+
+- Settings
   - Keep folders on top when sorting by name
   - Remove AirDrop
   - Set explicit tags, e.g. "admin", "projects", "personal"
@@ -51,9 +53,10 @@ Set the following to start on login
   - path
   - view
   - (remove search, since never use finder search)
-- Click on Macintosh HD - `cmd-J` select always open in list view
-- Services - Services Preferences, just
-  - new Kitty Window
+- Click on Macintosh HD, change view to list - click `cmd-J` and select always
+  open in list view
+- Services - Services Settings, just
+  - Files and Folders -> new Kitty Window
   - Folder Actions set up
 - Show preview
 
@@ -121,8 +124,9 @@ Preferences -> Accessibility -> Allow animated images and emoji
 
 ### Dock & Menu Bar Configuration - MacOS
 
-- Clock - Show Date - Always
+- Show Date - Always
 - Now Playing - Untick Show in Menu Bar
+- Click wallpaper to reveal desktop - Only in stage manager
 
 ### Trackpad Configuration - MacOS
 
@@ -136,12 +140,10 @@ Disable all keyboard shortcuts I don't use.
 
 System preferences -> Keyboard -> Keyboard Shortcuts ->
 
-- Disable Mission Control Ctrl-arrow short cuts
-- Disable Ctrl-space and Shift-Ctrl-space for selecting input source
+- For mission control disable remove all keyboard and mouse shortcuts
+- For input source disable Ctrl-space and Shift-Ctrl-space
 - Disable any other shortcuts that would never get used
 - Change Press **fn** key to "Show Emoji and Symbols"
-
--> Mission Control - remove all keyboard and mouse shortcuts
 
 For a Microsoft keyboard :
 
@@ -150,6 +152,8 @@ For a Microsoft keyboard :
 
 And then use [keyboard shortcuts](https://support.google.com/mail/answer/6594) -
 see [cheat sheet](./docs/cheats/) for my favourites.
+
+If 1Password installed, open settings and remove keyboard shortcuts.
 
 #### Keyboard - MacOS default
 
