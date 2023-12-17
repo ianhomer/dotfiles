@@ -128,6 +128,7 @@ if [ {$DOT_LOG_LEVEL} -gt 0 ]
 end
 
 starship init fish | source
+direnv hook fish | source
 
 # Things bind
 
