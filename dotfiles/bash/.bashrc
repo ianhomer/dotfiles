@@ -46,11 +46,6 @@ function br {
     fi
 }
 
-if [[ -x thefuck ]] ; then
-  eval "$(thefuck --alias)"
-  alias fck="fuck"
-fi
-
 # FZF better with fd
 export FZF_DEFAULT_COMMAND='fd --type f'
 
