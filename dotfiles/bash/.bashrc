@@ -18,14 +18,8 @@ if ! command -v dotme &> /dev/null ; then
   PATH=$PATH:$HOME/.dotfiles/bin
 fi
 
-if command -v fasd &> /dev/null ; then
-  # Initialise fasd https://github.com/clvv/fasd
-  fasd_cache="$HOME/.fasd-init-bash"
-  if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
-    fasd --init posix-alias bash-hook bash-ccomp bash-ccomp-install >| "$fasd_cache"
-  fi
-  source ~/.fasd-init-bash
-  unset fasd_cache
+if command -v zoxide &> /dev/null ; then
+  eval "$(zoxide init bash)"
 fi
 
 # Inline br function, this comes from

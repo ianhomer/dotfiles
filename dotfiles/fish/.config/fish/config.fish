@@ -129,6 +129,7 @@ end
 
 starship init fish | source
 direnv hook fish | source
+zoxide init fish | source
 
 # Things bind
 
