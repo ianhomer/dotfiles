@@ -6,6 +6,8 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
   else
     echo "mac-intel"
   fi
+elif [[ "$OSTYPE" =~ ^linux ]]; then
+  echo "linux"
 else
   echo "default-platform"
 fi

@@ -14,17 +14,20 @@ if [ $(sudo -n -l apt) = "/usr/bin/apt" ] ; then
   log:: "updating apt"
 
   sudo apt update
-  sudo apt install \
+  sudo apt install -y \
     bash           \
     cmake          \
     curl           \
     fd-find        \
+    fzf            \
     gettext        \
     git            \
     ninja-build    \
     openssh-client \
+    pinentry-tty   \
     python3        \
     ripgrep        \
+    silversearcher-ag \
     stow           \
     unzip
 
