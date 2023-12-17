@@ -40,6 +40,10 @@ npm ls --global --json                                                          
   xargs -r npm -g rm
 
 log:: "Updating pnpm"
+if ! command -v pnpm ; then
+  log::info "installing pnpm"
+  npm add -g pnpm
+fi
 pnpm add -g pnpm
 log:: "Updating npm"
 npm install -g npm
