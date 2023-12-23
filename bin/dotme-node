@@ -19,7 +19,7 @@ $(shim) && cd ${ME} && . bin/i.sh
 #
 [ ! -d ~/.nvm ] && mkdir ~/.nvm
 
-if ! command -v node ; then
+if ! command -v node &>/dev/null ; then
   log::info "node not installed"
   exit
 fi
@@ -27,7 +27,6 @@ fi
 #
 # Node is installed with brew and pnpm installed with corepack
 #
-which node
 node -v
 
 #
@@ -63,9 +62,13 @@ cat $NODE_GLOBAL | grep -v '#' | grep '@'                |
   xargs pnpm install --global
 
 log:: "checking pnpm outdated"
-pnpm --global outdated || log:: "pnpm is outdated"
-log:: "pnpm update"
-pnpm --global update
+if pnpm --global outdated ; then
+  log:: "pnpm global is up to date"
+else
+  log:: "pnpm global is outdated"
+  log:: "pnpm global update to latest"
+  pnpm --global update --latest
+fi
 
 echo
 log:: "... Global node packages installed"
