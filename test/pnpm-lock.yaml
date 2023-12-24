@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   gherkin-lint:
     specifier: ^4.2.4
@@ -1440,7 +1436,7 @@ packages:
     dev: false
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
+    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
 
   /convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
@@ -1485,7 +1481,6 @@ packages:
 
   /cucumber-messages@8.0.0:
     resolution: {integrity: sha512-lUnWRMjwA9+KhDec/5xRZV3Du67ISumHnVLywWQXyvzmc4P+Eqx8CoeQrBQoau3Pw1hs4kJLTDyV85hFBF00SQ==}
-    deprecated: This package is now published under @cucumber/messages
     dependencies:
       '@types/uuid': 3.4.13
       protobufjs: 6.11.4
@@ -2042,7 +2037,6 @@ packages:
 
   /gherkin@9.0.0:
     resolution: {integrity: sha512-6xoAepoxo5vhkBXjB4RCfVnSKHu5z9SqXIQVUyj+Jw8BQX8odATlee5otXgdN8llZvyvHokuvNiBeB3naEnnIQ==}
-    deprecated: This package is now published under @cucumber/gherkin
     hasBin: true
     dependencies:
       commander: 4.1.1
@@ -3967,3 +3961,7 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

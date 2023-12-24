@@ -26,7 +26,11 @@ def get_branch_name():
     match = re.search("heads/(.*)", heads)
     if match:
         return match.group(1)
-    raise Exception(f"heads of git repository is {heads} and does not match 'heads/*")
+    raise Exception(
+        f"heads of git repository {os.getcwd()} is {heads} and "
+        + "does not match 'heads/*'."
+        + "Perhaps a rebase is in flight"
+    )
 
 
 # Reduce branch name and original name, for example:
@@ -58,7 +62,8 @@ def synk(path):
             os.system("git add -A ; git commit --quiet -m sync")
         else:
             print(
-                f"∷ ◉ {repository_name} - set autocommit with git synk -a to commit local"
+                f"∷ ◉ {repository_name} - set autocommit with "
+                + "git synk -a to commit local"
             )
             return
 

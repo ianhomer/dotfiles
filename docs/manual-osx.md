@@ -186,7 +186,7 @@ System Preferences -> Spotlight -> Privacy -> add following directories
 - `/System/Library/Perl`
 - `/System/Library/PrivateFrameworks`
 - `/System/iOSSupport`
-- `/Library/Developer`
+- `/System/Developer`
 - `/Library/Java/`
 - `/opt`
 - `/usr/local/Caskroom`
