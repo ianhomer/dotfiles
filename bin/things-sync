@@ -8,10 +8,22 @@ is-connected || (echo "Not connected, no sync" ; exit 1)
 
 FETCH_WINDOW=600
 EXTRA_ARGS=""
-while getopts "cw:" o; do case "$o" in
-  c) EXTRA_ARGS="-c" ;;
+while getopts "chw:" o; do case "$o" in
+  h) HELP=y ;;
   w) FETCH_WINDOW=$OPTARG ;;
 esac done
+
+help() {
+  cat << EOF
+  -h      this help
+  -w 600  set fetch window in seconds
+EOF
+}
+
+if [ "$HELP" == "y" ] ; then
+  help
+  exit 1
+fi
 
 cd $THINGS_DIR
 git synk -w $FETCH_WINDOW $EXTRA_ARGS
