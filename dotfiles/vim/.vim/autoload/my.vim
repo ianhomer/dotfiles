@@ -24,6 +24,14 @@ function! my#GitSynk(onlyPush)
 endfunction
 
 function my#LintMe()
+  if &filetype == "cucumber"
+    " Internal vim indentation formatter best for cucumber linting
+    normal ma
+    normal gg=G
+    normal `a
+    " then drop through to any other linting
+  endif
+
   if knobs#("none_ls")
     let linter="lsp"
     " Use none_ls for formatting, not tsserver
@@ -117,7 +125,7 @@ endfunction
 
 function my#EnableAutoSave()
   augroup MyAutoSave
-     " Auto write when text changes using debouncing to wait for pause in text
+    " Auto write when text changes using debouncing to wait for pause in text
     " entry. If we save too often then tools that watch for change will get too
     " busy.
     autocmd TextChangedI,TextChangedP * ++nested silent!
