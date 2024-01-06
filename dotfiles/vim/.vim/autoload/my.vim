@@ -32,8 +32,7 @@ function my#LintMe()
     " then drop through to any other linting
   endif
 
-  if knobs#("none_ls")
-    let linter="lsp"
+  if knobs#("lspconfig")
     " Use none_ls for formatting, not tsserver
     lua vim.lsp.buf.format { async = true, filter = function(client) return client.name ~= "tsserver" end }
   else

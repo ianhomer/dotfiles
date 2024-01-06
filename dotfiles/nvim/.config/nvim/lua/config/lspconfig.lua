@@ -73,9 +73,9 @@ local on_attach = function(client, bufnr)
   nmap("<leader>D", vim.lsp.buf.type_definition, "Type definition")
 
   if vim.g.knob_none_ls then
-    -- Use null-ls for formatting
-    client.server_capabilities.document_formatting = false
-    client.server_capabilities.document_range_formatting = false
+    -- Use none_ls for formatting
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end
 
   -- Set autocommands conditional on server_capabilities
@@ -154,7 +154,7 @@ local servers = {
       json = {
         schemas = require("schemastore").json.schemas(),
         validate = { enable = true },
-        provideFormatter = false,
+        format = false,
       },
     },
   },
