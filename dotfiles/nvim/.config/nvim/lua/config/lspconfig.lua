@@ -73,7 +73,10 @@ local on_attach = function(client, bufnr)
   nmap("<leader>D", vim.lsp.buf.type_definition, "Type definition")
 
   if vim.g.knob_none_ls then
-    -- Use none_ls for formatting
+    -- Only use none_ls for formatting by disabling th lsp document formatting
+    -- providerers. When we want to more subtle and use a balance of none_ls and
+    -- LSP formatting we can tweak this along with appropriate use of vim.lsp.buf.format
+    -- See https://github.com/nvimtools/none-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end

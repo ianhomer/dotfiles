@@ -33,7 +33,8 @@ function my#LintMe()
   endif
 
   if knobs#("lspconfig")
-    " Use none_ls for formatting, not tsserver
+    " Use tsserver by default for formatting, however if none_ls is enabled that that will
+    " take precendence as per the server_capabilities set in the lspconfig file
     lua vim.lsp.buf.format { async = true, filter = function(client) return client.name ~= "tsserver" end }
   else
     if &filetype == "markdown"
