@@ -77,7 +77,7 @@ I often use the following, installing them manually as needed
 - YubiKey manager
 - Bitwarden Desktop <https://bitwarden.com/download/>
 - [Wally](https://www.zsa.io/wally/) - Moonlander configuration
-- ObinsKit - AnnePro configuration
+- ObinsKit - Anne Pro configuration
 
 ### Additional developer tools
 

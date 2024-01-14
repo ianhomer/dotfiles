@@ -44,8 +44,8 @@ devDependencies:
     specifier: ^29.7.0
     version: 29.7.0(@types/node@20.11.0)(ts-node@10.9.2)
   prettier:
-    specifier: 3.2.1
-    version: 3.2.1
+    specifier: 3.2.2
+    version: 3.2.2
   ts-node:
     specifier: 10.9.2
     version: 10.9.2(@types/node@20.11.0)(typescript@5.3.3)
@@ -1447,7 +1447,7 @@ packages:
     dev: false
 
   /concat-map@0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
   /convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
@@ -1492,6 +1492,7 @@ packages:
 
   /cucumber-messages@8.0.0:
     resolution: {integrity: sha512-lUnWRMjwA9+KhDec/5xRZV3Du67ISumHnVLywWQXyvzmc4P+Eqx8CoeQrBQoau3Pw1hs4kJLTDyV85hFBF00SQ==}
+    deprecated: This package is now published under @cucumber/messages
     dependencies:
       '@types/uuid': 3.4.13
       protobufjs: 6.11.4
@@ -2048,6 +2049,7 @@ packages:
 
   /gherkin@9.0.0:
     resolution: {integrity: sha512-6xoAepoxo5vhkBXjB4RCfVnSKHu5z9SqXIQVUyj+Jw8BQX8odATlee5otXgdN8llZvyvHokuvNiBeB3naEnnIQ==}
+    deprecated: This package is now published under @cucumber/gherkin
     hasBin: true
     dependencies:
       commander: 4.1.1
@@ -3286,8 +3288,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier@3.2.1:
-    resolution: {integrity: sha512-qSUWshj1IobVbKc226Gw2pync27t0Kf0EdufZa9j7uBSJay1CC+B3K5lAAZoqgX3ASiKuWsk6OmzKRetXNObWg==}
+  /prettier@3.2.2:
+    resolution: {integrity: sha512-HTByuKZzw7utPiDO523Tt2pLtEyK7OibUD9suEJQrPUCYQqrHr74GGX6VidMrovbf/I50mPqr8j/II6oBAuc5A==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
