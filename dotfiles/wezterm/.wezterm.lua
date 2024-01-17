@@ -4,6 +4,37 @@ local wezterm = require("wezterm")
 -- This table will hold the configuration.
 local config = {}
 
+local function isVi(pane)
+    return pane:get_foreground_process_name():find('n?vim') ~= nil
+end
+
+local action = wezterm.action
+
+-- Thank you https://github.com/numToStr/Navigator.nvim/wiki/WezTerm-Integration
+local function activatePane(window, pane, pane_direction, vim_direction)
+    if isVi(pane) then
+        window:perform_action(
+            action.SendKey({ key = vim_direction, mods = 'CTRL' }),
+            pane
+        )
+    else
+        window:perform_action(action.ActivatePaneDirection(pane_direction), pane)
+    end
+end
+
+wezterm.on('ActivatePaneDirection-right', function(window, pane)
+    activatePane(window, pane, 'Right', 'l')
+end)
+wezterm.on('ActivatePaneDirection-left', function(window, pane)
+    activatePane(window, pane, 'Left', 'h')
+end)
+wezterm.on('ActivatePaneDirection-up', function(window, pane)
+    activatePane(window, pane, 'Up', 'k')
+end)
+wezterm.on('ActivatePaneDirection-down', function(window, pane)
+    activatePane(window, pane, 'Down', 'j')
+end)
+
 -- In newer versions of wezterm, use the config_builder which will
 -- help provide clearer error messages
 if wezterm.config_builder then
@@ -12,8 +43,8 @@ end
 
 -- This is where you actually apply your config choices
 
-config.font = wezterm.font("FiraCode Nerd Font")
-config.font_size = 13.0
+config.font = wezterm.font("FiraCode Nerd Font", {weight = "Medium"})
+config.font_size = 12.5
 
 config.force_reverse_video_cursor = true
 config.colors = {
@@ -35,7 +66,6 @@ config.automatically_reload_config = true
 config.window_decorations = "RESIZE"
 config.tab_bar_at_bottom = true
 
-local action = wezterm.action
 config.keys = {
     {
         key = "-",
@@ -65,27 +95,21 @@ config.keys = {
     {
         key = "RightArrow",
         mods = "CTRL",
-        action = action.ActivatePaneDirection("Right"),
+        action = action.EmitEvent('ActivatePaneDirection-left')
     },
     {
         key = "LeftArrow",
         mods = "CTRL",
-        action = action.ActivatePaneDirection("Left"),
-    },
-    {
-        key = "RightArrow",
-        mods = "CTRL",
-        action = action.ActivatePaneDirection("Right"),
-    },
+        action = action.EmitEvent('ActivatePaneDirection-left')
     {
         key = "UpArrow",
         mods = "CTRL",
-        action = action.ActivatePaneDirection("Up"),
+        action = action.EmitEvent('ActivatePaneDirection-up')
     },
     {
         key = "DownArrow",
         mods = "CTRL",
-        action = action.ActivatePaneDirection("Down"),
+        action = action.EmitEvent('ActivatePaneDirection-down')
     },
 }
 
