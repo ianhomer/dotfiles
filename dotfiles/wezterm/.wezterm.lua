@@ -43,14 +43,14 @@ config.keys = {
         action = action.SplitVertical,
     },
     {
-        key = "/",
+        key = "\\",
         mods = "CMD",
         action = action.SplitHorizontal,
     },
     {
         key = "t",
         mods = "CMD",
-        action = action.SpawnTab "CurrentPaneDomain",
+        action = action.SpawnTab("CurrentPaneDomain"),
     },
     {
         key = "LeftArrow",
