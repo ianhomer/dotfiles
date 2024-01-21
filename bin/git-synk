@@ -117,6 +117,12 @@ def synk(path, fetch_window: int):
 def run():
     parser = argparse.ArgumentParser(description="Git synk")
     parser.add_argument("--window", "-w", help="fetch window in seconds", default=600)
+    parser.add_argument(
+        "--autcommit",
+        "-a",
+        help="enable autocommit",
+        action=argparse.BooleanOptionalAction,
+    )
     args = parser.parse_args()
 
     fetch_window = int(args.window)
@@ -127,6 +133,8 @@ def run():
         raise Exception("Can only sync in project/things directory")
 
     if is_git_repo(cwd):
+        if args.autcommit:
+            os.system("git config core.autocommit true")
         synk(cwd, fetch_window=fetch_window)
     else:
         for child in os.listdir(cwd):
