@@ -57,11 +57,16 @@ config.colors = {
     ansi = { "#090618", "#c34043", "#76946a", "#c0a36e", "#7e9cd8", "#957fb8", "#6a9589", "#c8c093" },
     brights = { "#727169", "#e82424", "#98bb6c", "#e6c384", "#7fb4ca", "#938aa9", "#7aa89f", "#dcd7ba" },
     indexed = { [16] = "#ffa066", [17] = "#ff5d62" },
+    tab_bar = {
+        background = "#1F1F28",
+    },
 }
 
 config.automatically_reload_config = true
 config.window_decorations = "RESIZE"
 config.tab_bar_at_bottom = true
+config.use_fancy_tab_bar = false
+config.show_new_tab_button_in_tab_bar = false
 
 config.keys = {
     {
@@ -122,31 +127,36 @@ end
 -- The filled in variant of the > symbol
 local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
 
+local active_background = "#2D4F67"
+local inactive_background = "#223249"
+
 wezterm.on("format-tab-title", function(tab, tabs, panes, _config, hover, max_width)
-    local background = "#223249"
+    local background = inactive_background
+    local right_edge_background = active_background
+    local left_edge_foreground = active_background
     local foreground = "#727169"
 
     if tab.is_active then
-        background = "#2D4F67"
+        background = active_background
+        right_edge_background = inactive_background
+        left_edge_foreground = inactive_background
         foreground = "##DCD7BA"
     elseif hover then
         background = "#3b3052"
         foreground = "#909090"
     end
 
-    local edge_foreground = background
-
     local title = wezterm.truncate_right(tab_title(tab), max_width - 2)
 
     return {
         { Background = { Color = background } },
-        { Foreground = { Color = foreground } },
+        { Foreground = { Color = left_edge_foreground } },
         { Text = SOLID_RIGHT_ARROW },
         { Background = { Color = background } },
         { Foreground = { Color = foreground } },
         { Text = title },
-        { Background = { Color = background } },
-        { Foreground = { Color = foreground } },
+        { Background = { Color = right_edge_background } },
+        { Foreground = { Color = background } },
         { Text = SOLID_RIGHT_ARROW },
     }
 end)
