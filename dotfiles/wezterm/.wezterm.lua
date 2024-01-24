@@ -2,7 +2,7 @@
 local wezterm = require("wezterm")
 
 -- This table will hold the configuration.
-local config = {}
+local config = wezterm.config_builder()
 
 local function isVi(pane)
     return pane:get_foreground_process_name():find("n?vim") ~= nil
@@ -110,5 +110,45 @@ config.keys = {
         action = action.EmitEvent("ActivatePaneDirection-down"),
     },
 }
+
+local function tab_title(tab_info)
+    local title = tab_info.tab_title
+    if title and #title > 0 then
+        return title
+    end
+    return tab_info.active_pane.title
+end
+
+-- The filled in variant of the > symbol
+local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
+
+wezterm.on("format-tab-title", function(tab, tabs, panes, _config, hover, max_width)
+    local background = "#223249"
+    local foreground = "#727169"
+
+    if tab.is_active then
+        background = "#2D4F67"
+        foreground = "##DCD7BA"
+    elseif hover then
+        background = "#3b3052"
+        foreground = "#909090"
+    end
+
+    local edge_foreground = background
+
+    local title = wezterm.truncate_right(tab_title(tab), max_width - 2)
+
+    return {
+        { Background = { Color = background } },
+        { Foreground = { Color = foreground } },
+        { Text = SOLID_RIGHT_ARROW },
+        { Background = { Color = background } },
+        { Foreground = { Color = foreground } },
+        { Text = title },
+        { Background = { Color = background } },
+        { Foreground = { Color = foreground } },
+        { Text = SOLID_RIGHT_ARROW },
+    }
+end)
 
 return config
