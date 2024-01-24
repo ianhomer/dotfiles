@@ -43,7 +43,8 @@ local window_background = "#1f1f28"
 -- This is where you actually apply your config choices
 
 config.font = wezterm.font("FiraCode Nerd Font", { weight = "Medium" })
-config.font_size = 12.5
+config.font_size = 12.0
+config.line_height = 1.15
 
 config.force_reverse_video_cursor = true
 config.colors = {
@@ -119,12 +120,25 @@ config.keys = {
     },
 }
 
-local function tab_title(tab_info)
-    local title = tab_info.tab_title
-    if title and #title > 0 then
-        return title
-    end
-    return tab_info.active_pane.title
+local get_last_folder_segment = function(cwd)
+  if cwd == nil then
+    return "?"
+  end
+
+  local path = {}
+  for segment in string.gmatch(cwd, "[^/]+") do
+    table.insert(path, segment)
+  end
+  return path[#path]
+end
+
+local function get_current_working_dir(tab)
+  local current_dir = tab.active_pane.current_working_dir or ''
+  return get_last_folder_segment(current_dir)
+end
+
+local function tab_title(tab)
+   return get_current_working_dir(tab)
 end
 
 -- The filled in variant of the > symbol
