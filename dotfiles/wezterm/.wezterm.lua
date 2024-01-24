@@ -5,7 +5,7 @@ local wezterm = require("wezterm")
 local config = {}
 
 local function isVi(pane)
-    return pane:get_foreground_process_name():find('n?vim') ~= nil
+    return pane:get_foreground_process_name():find("n?vim") ~= nil
 end
 
 local action = wezterm.action
@@ -13,26 +13,23 @@ local action = wezterm.action
 -- Thank you https://github.com/numToStr/Navigator.nvim/wiki/WezTerm-Integration
 local function activatePane(window, pane, pane_direction, vim_direction)
     if isVi(pane) then
-        window:perform_action(
-            action.SendKey({ key = vim_direction, mods = 'CTRL' }),
-            pane
-        )
+        window:perform_action(action.SendKey({ key = vim_direction, mods = "CTRL" }), pane)
     else
         window:perform_action(action.ActivatePaneDirection(pane_direction), pane)
     end
 end
 
-wezterm.on('ActivatePaneDirection-right', function(window, pane)
-    activatePane(window, pane, 'Right', 'l')
+wezterm.on("ActivatePaneDirection-right", function(window, pane)
+    activatePane(window, pane, "Right", "l")
 end)
-wezterm.on('ActivatePaneDirection-left', function(window, pane)
-    activatePane(window, pane, 'Left', 'h')
+wezterm.on("ActivatePaneDirection-left", function(window, pane)
+    activatePane(window, pane, "Left", "h")
 end)
-wezterm.on('ActivatePaneDirection-up', function(window, pane)
-    activatePane(window, pane, 'Up', 'k')
+wezterm.on("ActivatePaneDirection-up", function(window, pane)
+    activatePane(window, pane, "Up", "k")
 end)
-wezterm.on('ActivatePaneDirection-down', function(window, pane)
-    activatePane(window, pane, 'Down', 'j')
+wezterm.on("ActivatePaneDirection-down", function(window, pane)
+    activatePane(window, pane, "Down", "j")
 end)
 
 -- In newer versions of wezterm, use the config_builder which will
@@ -43,7 +40,7 @@ end
 
 -- This is where you actually apply your config choices
 
-config.font = wezterm.font("FiraCode Nerd Font", {weight = "Medium"})
+config.font = wezterm.font("FiraCode Nerd Font", { weight = "Medium" })
 config.font_size = 12.5
 
 config.force_reverse_video_cursor = true
@@ -95,25 +92,23 @@ config.keys = {
     {
         key = "RightArrow",
         mods = "CTRL",
-        action = action.EmitEvent('ActivatePaneDirection-left')
+        action = action.EmitEvent("ActivatePaneDirection-left"),
     },
     {
         key = "LeftArrow",
         mods = "CTRL",
-        action = action.EmitEvent('ActivatePaneDirection-left')
+        action = action.EmitEvent("ActivatePaneDirection-left"),
+    },
     {
         key = "UpArrow",
         mods = "CTRL",
-        action = action.EmitEvent('ActivatePaneDirection-up')
+        action = action.EmitEvent("ActivatePaneDirection-up"),
     },
     {
         key = "DownArrow",
         mods = "CTRL",
-        action = action.EmitEvent('ActivatePaneDirection-down')
+        action = action.EmitEvent("ActivatePaneDirection-down"),
     },
 }
 
--- pane:split { args = { 'top' } }
-
--- and finally, return the configuration to wezterm
 return config
