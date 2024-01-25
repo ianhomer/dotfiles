@@ -71,6 +71,7 @@ config.window_decorations = "RESIZE"
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.show_new_tab_button_in_tab_bar = false
+config.window_close_confirmation = "NeverPrompt"
 
 config.keys = {
     {
@@ -118,27 +119,30 @@ config.keys = {
         mods = "CTRL",
         action = action.EmitEvent("ActivatePaneDirection-down"),
     },
+    { key = "LeftArrow", mods = "SHIFT|OPT", action = action.MoveTabRelative(-1) },
+    { key = "RightArrow", mods = "SHIFT|OPT", action = action.MoveTabRelative(1) },
+    { key = "z", mods = "CMD", action = action.TogglePaneZoomState },
 }
 
 local get_last_folder_segment = function(cwd)
-  if cwd == nil then
-    return "?"
-  end
+    if cwd == nil then
+        return "?"
+    end
 
-  local path = {}
-  for segment in string.gmatch(cwd, "[^/]+") do
-    table.insert(path, segment)
-  end
-  return path[#path]
+    local path = {}
+    for segment in string.gmatch(cwd, "[^/]+") do
+        table.insert(path, segment)
+    end
+    return path[#path]
 end
 
 local function get_current_working_dir(tab)
-  local current_dir = tab.active_pane.current_working_dir or ''
-  return get_last_folder_segment(current_dir)
+    local current_dir = tab.active_pane.current_working_dir or ""
+    return get_last_folder_segment(current_dir)
 end
 
 local function tab_title(tab)
-   return get_current_working_dir(tab)
+    return get_current_working_dir(tab)
 end
 
 -- The filled in variant of the > symbol
