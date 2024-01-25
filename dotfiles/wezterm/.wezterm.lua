@@ -136,13 +136,19 @@ local get_last_folder_segment = function(cwd)
     return path[#path]
 end
 
-local function get_current_working_dir(tab)
+local function get_relative_working_dir(tab)
     local current_dir = tab.active_pane.current_working_dir or ""
     return get_last_folder_segment(current_dir)
 end
 
 local function tab_title(tab)
-    return get_current_working_dir(tab)
+    local relative_working_dir = get_relative_working_dir(tab)
+    if relative_working_dir == ".dotfiles" then
+      return "."
+    elseif relative_working_dir == "things" then
+      return "󰧮"
+    end
+    return relative_working_dir
 end
 
 -- The filled in variant of the > symbol
