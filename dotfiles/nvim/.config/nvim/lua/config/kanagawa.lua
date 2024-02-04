@@ -44,7 +44,9 @@ require("kanagawa").setup({
       ["@markup.heading"] = infoColor,
       ["@markup.strong"] = infoColor,
       ["@markup.italic"] = infoColor,
-      ["@markup.strikethrough"] = { strikethrough = true }
+      ["@markup.strikethrough"] = { strikethrough = true },
+      ["@markup.raw.block"] = { fg = theme.syn.statement },
+      ["@markup.list.unchecked"] = { bold = true }
     }
   end,
 })
