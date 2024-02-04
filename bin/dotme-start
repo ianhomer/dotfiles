@@ -10,10 +10,10 @@ touch $HOME/.config/dotme/.light
 # Prepare environment during bootstrap
 #
 
-if [[ ! -d ~/projects ]] ; then
+if [ ! -d ~/projects ] ; then
   echo "Creating ~/projects directory"
   mkdir ~/projects/
-  if [[ ! -d ~/projects/things ]] ; then
+  if [ ! -d ~/projects/things ] ; then
     echo "Creating ~/projects/things directory"
     mkdir ~/projects/things
   fi
@@ -29,24 +29,17 @@ if ! command -v bash > /dev/null 2>&1; then
   fi
 fi
 
-if ! command -v bash > /dev/null 2>&1; then
-  if command -v apk > /dev/null 2>&1; then
-    echo "bash not installed, installing with apk"
-    apk add bash
-  else
-    echo "bash not installed"
-    exit
-  fi
-fi
-
-if [[ "$OSTYPE" =~ ^linux-android ]]; then
-  echo "Removing default termux properties since this is dotfiles managed"
-  if [[ -f ~/.termux/termux.properties ]] ; then
-    rm ~/.termux/termux.properties
-  fi
-  echo "Setting up storage"
-  if [[ ! -d ~/storage ]] ; then
-    termux-setup-storage
+if [ "expr substr $(uname -s) 1 5" = "Linux" ] ; then
+  if [ "$(uname -o)" = "Android" ] ; then
+    # termux bootstrap
+    echo "Removing default termux properties since this is dotfiles managed"
+    if [ -f ~/.termux/termux.properties ] ; then
+      rm ~/.termux/termux.properties
+    fi
+    echo "Setting up storage"
+    if [ ! -d ~/storage ] ; then
+      termux-setup-storage
+    fi
   fi
 fi
 

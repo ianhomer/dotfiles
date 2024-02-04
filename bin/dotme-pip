@@ -9,7 +9,7 @@ REQUIREMENTS=~/.dotfiles/config/python/requirements.txt
 should-run -m 30 $0 $REQUIREMENTS || exit 0
 $(shim) && cd ${ME} && . bin/i.sh
 
-if ! command -v pip3 ; then
+if ! command -v pip3 &>/dev/null ; then
   log::info "pip3 not installed"
   exit
 fi

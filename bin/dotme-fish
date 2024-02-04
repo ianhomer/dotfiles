@@ -15,6 +15,13 @@ if not grep -q "/fish" /etc/shells
   exit 1
 end
 
+function fish_remove_path
+  if set -l index (contains -i "$argv" $fish_user_paths)
+    printf "\e[36mRemoving $argv from PATH\e[0m\n"
+    set -e fish_user_paths[$index]
+  end
+end
+
 #
 # Set up path note that this include
 #
@@ -23,8 +30,11 @@ end
 #
 #
 
+
 # See https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
 # fish_add_path ~/.npm-global/bin
+
+set python_version 3.10
 
 fish_add_path ~/bin
 fish_add_path ~/.jenv/shims
@@ -33,16 +43,26 @@ fish_add_path ~/.pyenv/bin
 fish_add_path ~/.jenv/bin
 fish_add_path ~/.cargo/bin
 fish_add_path ~/.rbenv/shims
-fish_add_path ~/Library/Python/3.9/bin
 if is-silicon
   fish_add_path /opt/homebrew/bin
   fish_add_path /opt/homebrew/sbin
-  if test -d /opt/homebrew/opt/python@3.10
-    fish_add_path /opt/homebrew/opt/python@3.10/libexec/bin
+  set global_python_bin /opt/homebrew/opt/python@{$python_version}
+  printf "\e[36mPython global bin : $global_python_bin\e[0m\n"
+  if test -d $global_python_bin
+    fish_add_path $global_python_bin
+  end
+  set local_python_bin /Users/ian/Library/Python/{$python_version}/bin
+  printf "\e[36mPython local  bin : $local_python_bin\e[0m\n"
+  if test -d $local_python_bin
+    fish_add_path $local_python_bin
   end
 else
   fish_add_path /usr/local/opt/python@3.10/Frameworks/Python.framework/Versions/3.10/bin
 end
+
+# Legacy clean up
+fish_remove_path ~/Library/Python/3.9/bin
+
 
 # Google cloud
 fish_add_path ~/local/gcloud/google-cloud-sdk/bin

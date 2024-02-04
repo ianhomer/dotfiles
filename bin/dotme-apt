@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+#
+# Install with apt
+#
+
+set -e
+
+should-run -m 7 dotme-apt ${ME}/config/apt || exit 0
+
+$(shim) && cd ${ME} && . bin/i.sh
+
+if [ $(sudo -n -l apt) = "/usr/bin/apt" ] ; then
+  log:: "updating apt"
+
+  sudo apt update
+  sudo apt install -y \
+    bash           \
+    cmake          \
+    curl           \
+    fd-find        \
+    fzf            \
+    gettext        \
+    git            \
+    ninja-build    \
+    openssh-client \
+    pinentry-tty   \
+    python3        \
+    ripgrep        \
+    silversearcher-ag \
+    stow           \
+    unzip
+
+else
+  log::warn "user does not have permission to run apt."
+  log::info "consider add entry in /etc/sudoers"
+  exit
+fi
+
+should-run -fu dotme-apt
+
