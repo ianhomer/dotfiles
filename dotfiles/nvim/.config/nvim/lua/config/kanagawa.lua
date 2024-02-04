@@ -15,13 +15,16 @@ local my_colors = {
   },
 }
 
+
 require("kanagawa").setup({
+  compile = true,
   undercurl = true,
   dimInactive = true,
   globalStatus = true,
   colors = my_colors,
   overrides = function(colors)
     local theme = colors.theme
+    local infoColor = { bold = true, fg = theme.syn.special1 }
     return {
       WinSeparator = { fg = "#223249", bg = "NONE" },
       VertSplit = { fg = "#223249", bg = "NONE" },
@@ -36,7 +39,12 @@ require("kanagawa").setup({
       TelescopePreviewBorder = { bg = theme.ui.bg_dim, fg = theme.ui.bg_dim },
       IlluminatedWordText = { bg = theme.ui.bg_p1, fg = "NONE" },
       IlluminatedWordRead = { bg = theme.ui.bg_p1, fg = "NONE" },
-      IlluminatedWordWrite = { bg = theme.ui.bg_p1, fg = "NONE" }
+      IlluminatedWordWrite = { bg = theme.ui.bg_p1, fg = "NONE" },
+      -- Use :Inspect to find the highlight name to help with customisation
+      ["@markup.heading"] = infoColor,
+      ["@markup.strong"] = infoColor,
+      ["@markup.italic"] = infoColor,
+      ["@markup.strikethrough"] = { strikethrough = true }
     }
   end,
 })
