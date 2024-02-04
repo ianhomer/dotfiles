@@ -85,11 +85,11 @@ print("Current tabs : " + ",".join(kitty.state.tabTitles))
 kitty.launchTab(".", "~/.dotfiles")
 kitty.launchTab("󰧮", "~/projects/things")
 
-kitty.launchOsWindow("O")
-kitty.action("set-background-opacity --match title:O 0.8")
-kitty.action("set-spacing --match title:O margin=0")
-kitty.action("set-spacing --match title:O padding=0")
-kitty.action("resize-os-window --match title:O --width 100 --height 40 --self")
+# kitty.launchOsWindow("O")
+# kitty.action("set-background-opacity --match title:O 0.8")
+# kitty.action("set-spacing --match title:O margin=0")
+# kitty.action("set-spacing --match title:O padding=0")
+# kitty.action("resize-os-window --match title:O --width 100 --height 40 --self")
 # if kitty.launchTab("things", "~/projects/things", "title:O"):
 #     # Only launch todo first time window initialised
 #     kitty.waitForTab("things")

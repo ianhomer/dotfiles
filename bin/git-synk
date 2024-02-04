@@ -4,12 +4,11 @@
 # Synchronise a local git repository with remote
 #
 
+import argparse
 import datetime
 import os
 import re
 from subprocess import call, getoutput, STDOUT
-
-fetch_window = 600
 
 
 def is_git_repo(path):
@@ -26,7 +25,11 @@ def get_branch_name():
     match = re.search("heads/(.*)", heads)
     if match:
         return match.group(1)
-    raise Exception(f"heads of git repository is {heads} and does not match 'heads/*")
+    raise Exception(
+        f"heads of git repository {os.getcwd()} is {heads} and "
+        + "does not match 'heads/*'."
+        + "Perhaps a rebase is in flight"
+    )
 
 
 # Reduce branch name and original name, for example:
@@ -40,7 +43,7 @@ def printf(message):
     print(message, end="")
 
 
-def synk(path):
+def synk(path, fetch_window: int):
     if not is_git_repo(path):
         raise Exception(
             f"Directory {path} is not a git repository and can not be synked"
@@ -58,7 +61,8 @@ def synk(path):
             os.system("git add -A ; git commit --quiet -m sync")
         else:
             print(
-                f"∷ ◉ {repository_name} - set autocommit with git synk -a to commit local"
+                f"∷ ◉ {repository_name} - set autocommit with "
+                + "git synk -a to commit local"
             )
             return
 
@@ -111,18 +115,32 @@ def synk(path):
 
 
 def run():
+    parser = argparse.ArgumentParser(description="Git synk")
+    parser.add_argument("--window", "-w", help="fetch window in seconds", default=600)
+    parser.add_argument(
+        "--autcommit",
+        "-a",
+        help="enable autocommit",
+        action=argparse.BooleanOptionalAction,
+    )
+    args = parser.parse_args()
+
+    fetch_window = int(args.window)
+
     cwd = os.getcwd()
     match = re.search("projects/things", cwd)
     if not match:
         raise Exception("Can only sync in project/things directory")
 
     if is_git_repo(cwd):
-        synk(cwd)
+        if args.autcommit:
+            os.system("git config core.autocommit true")
+        synk(cwd, fetch_window=fetch_window)
     else:
         for child in os.listdir(cwd):
             directory = os.path.join(cwd, child)
             if is_git_repo(directory):
-                synk(directory)
+                synk(directory, fetch_window=fetch_window)
 
 
 run()

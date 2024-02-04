@@ -9,7 +9,7 @@ set -e
 should-run -m 1h $0 || exit 0
 
 $(shim) && cd ${ME} && . bin/i.sh
-if ! command -v rbenv ; then
+if ! command -v rbenv &> /dev/null ; then
   log::warn "git not installed"
   exit
 fi
