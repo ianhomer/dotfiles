@@ -13,6 +13,8 @@ local git_command = {
   ".",
 }
 
+local rg_ignore = os.getenv("HOME") .. "/.config/rg/nvim-telescope.ignore"
+
 telescope.setup({
   defaults = {
     vimgrep_arguments = {
@@ -26,7 +28,7 @@ telescope.setup({
       "--trim",
       "--hidden",
       "--ignore-file",
-      os.getenv("HOME") .. "/.config/rg/nvim-telescope.ignore",
+      rg_ignore,
     },
     prompt_prefix = "   ",
     entry_prefix = "  ",
@@ -51,7 +53,7 @@ telescope.setup({
     --    n = {["<c-t>"] = trouble.open_with_trouble}
     --},
     path_display = {
-      shorten = { len = 3, exclude = {1, -1, -2} }
+      shorten = { len = 3, exclude = { 1, -1, -2 } },
     },
     layout_strategy = "vertical",
     layout_config = {
@@ -84,7 +86,7 @@ telescope.setup({
       },
     },
     find_files = {
-      find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/**" },
+      find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/**", "--ignore-file", rg_ignore },
     },
     git_bcommits = {
       git_command = git_command,
@@ -110,8 +112,7 @@ end
 local opts = { noremap = true, silent = true }
 
 -- Register gitmoji symbols from telescope-symbols plugin
-vim.keymap.set("i", "<C-l>",
-  "<cmd>lua require'telescope.builtin'.symbols{ sources = {'gitmoji'}}<cr>", opts)
+vim.keymap.set("i", "<C-l>", "<cmd>lua require'telescope.builtin'.symbols{ sources = {'gitmoji'}}<cr>", opts)
 vim.keymap.set("i", "<C-k><C-l>", "<cmd>Telescope symbols<cr>", opts)
 
 -- Disable which-key registry help in TelescopePrompt so that C-R can be used to

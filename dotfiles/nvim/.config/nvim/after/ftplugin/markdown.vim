@@ -12,7 +12,7 @@ endfunction
 
 function! s:LintTable()
   let l:line = line('.')
-  let l:lineValue = getline(l:line) 
+  let l:lineValue = getline(l:line)
 
   " Skip if not a table
   if len(l:lineValue) > 0 && l:lineValue[0] != '|'
