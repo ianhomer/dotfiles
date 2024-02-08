@@ -21,7 +21,7 @@ elseif knobs#("obsidian")
 else
   " e.g coding
   set conceallevel=0
-endif
+endi
 set concealcursor=nc
 
 " Markdown list rendering

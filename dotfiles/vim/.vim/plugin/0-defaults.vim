@@ -315,9 +315,9 @@ set splitbelow
 " https://stackoverflow.com/questions/32769488/double-vim-surround-with
 " autocmd Filetype markdown let b:surround_43 = "**\r**"
 
-" Don't conceal any syntax
-set conceallevel=0
-
+" Conceal syntax by default
+set conceallevel=1
+set concealcursor=nc
 
 " vim-test
 let test#strategy = "vimux"

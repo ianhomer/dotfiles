@@ -659,8 +659,15 @@ require("lazy").setup(
         "nvim-lua/plenary.nvim",
       },
       opts = {
+        daily_notes = {
+          folder = "my-notes/stream",
+          date_format = "%m%d",
+          alias_format = "%a %d %b %Y",
+        },
+        disable_frontmatter = true,
+        log_level = vim.log.levels.WARN,
         ui = {
-          enable = false,
+          enable = true,
         },
         workspaces = {
           {
