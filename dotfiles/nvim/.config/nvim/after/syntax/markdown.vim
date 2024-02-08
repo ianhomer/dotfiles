@@ -8,12 +8,16 @@ unlet b:current_syntax
 syntax include @Yaml syntax/yaml.vim
 syntax region yamlFrontmatter start=/\%^---$/ end=/^---$/ keepend contains=@Yaml
 
+" conceallevel controls how text with the "conceal" syntax attribute is shown
 if knobs#("markdown_conceal_full")
   " e.g. mobile
   set conceallevel=2
 elseif knobs#("markdown_conceal_partial")
   " e.g. note taking
   set conceallevel=1
+elseif knobs#("obsidian")
+  " obsidian UI needs conceallevel=2
+  set conceallevel=2
 else
   " e.g coding
   set conceallevel=0

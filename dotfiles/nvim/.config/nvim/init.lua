@@ -81,6 +81,7 @@ nvim_set_var("knobs_levels", {
   notify = 5,
   none_ls = 3,
   nvim_tree = 3,
+  obsidian = 3,
   rainbow = 6,
   refactoring = 9,
   vim_repeat = 3,
@@ -140,7 +141,7 @@ if not vim.loop.fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",     -- latest stable release
+    "--branch=stable", -- latest stable release
     lazypath,
   })
 end
@@ -362,8 +363,7 @@ require("lazy").setup(
     {
       knob = "dap",
       "microsoft/vscode-js-debug",
-      build = "npm install --legacy-peer-deps " ..
-      "&& npx gulp vsDebugServerBundle && mv dist out",
+      build = "npm install --legacy-peer-deps " .. "&& npx gulp vsDebugServerBundle && mv dist out",
       commit = "c0a36fab894ea0be2c2306b34661447443cfaf61",
     },
     {
@@ -371,7 +371,7 @@ require("lazy").setup(
       "rcarriga/nvim-dap-ui",
       dependencies = {
         "mxsdev/nvim-dap-vscode-js",
-        "mfussenegger/nvim-dap"
+        "mfussenegger/nvim-dap",
       },
       config = function()
         require("config.dapui")
@@ -542,8 +542,8 @@ require("lazy").setup(
       event = "VeryLazy",
       opts = {
         backend = "kitty",
-        hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" }
-      }
+        hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" },
+      },
     },
     -- -- Git
     {
@@ -651,6 +651,26 @@ require("lazy").setup(
       ft = "markdown",
     },
     {
+      "epwalsh/obsidian.nvim",
+      version = "*",
+      lazy = true,
+      ft = "markdown",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+      },
+      opts = {
+        ui = {
+          enable = false,
+        },
+        workspaces = {
+          {
+            name = "things",
+            path = "~/projects/things",
+          },
+        },
+      },
+    },
+    {
       "lukas-reineke/indent-blankline.nvim",
       event = { "BufReadPost", "BufNewFile" },
       main = "ibl",
@@ -681,8 +701,7 @@ require("lazy").setup(
       event = { "BufReadPre", "BufNewFile" },
       init = function()
         vim.api.nvim_create_autocmd("FileType", {
-          pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble",
-            "lazy", "mason" },
+          pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
           callback = function()
             vim.b.miniindentscope_disable = true
           end,
