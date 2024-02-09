@@ -318,6 +318,7 @@ set splitbelow
 " Conceal syntax by default
 set conceallevel=1
 set concealcursor=nc
+" let g:markdown_syntax_conceal=0
 
 " vim-test
 let test#strategy = "vimux"

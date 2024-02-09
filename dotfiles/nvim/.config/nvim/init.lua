@@ -658,24 +658,9 @@ require("lazy").setup(
       dependencies = {
         "nvim-lua/plenary.nvim",
       },
-      opts = {
-        daily_notes = {
-          folder = "my-notes/stream",
-          date_format = "%m%d",
-          alias_format = "%a %d %b %Y",
-        },
-        disable_frontmatter = true,
-        log_level = vim.log.levels.WARN,
-        ui = {
-          enable = true,
-        },
-        workspaces = {
-          {
-            name = "things",
-            path = "~/projects/things",
-          },
-        },
-      },
+      opts = function()
+        require("config.obsidian")
+      end,
     },
     {
       "lukas-reineke/indent-blankline.nvim",

@@ -2,7 +2,7 @@
 created: "Mon 03 May 2021 17:37:15"
 id: 62DA6AF1-E7C8-48A2-8E15-6DB239D3E4A2
 label: foo
-tag: bar
+tags: [bar]
 ---
 
 # Title
@@ -97,11 +97,12 @@ ut aliquip ex ea commodo consequat.
 
 ## Tables
 
-| x     | y     |
-| ----- | ----- |
-| value | value |
-| value | value |
-| value | value |
+| x       | y         |
+| ------- | --------- |
+| value   | value     |
+| value   | **value** |
+| `value` | value     |
+| value   | value     |
 
 | x    | y   |
 | ---- | --- |

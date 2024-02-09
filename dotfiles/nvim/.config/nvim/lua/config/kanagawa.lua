@@ -15,7 +15,7 @@ local my_colors = {
   },
 }
 
-
+-- compile with :KanagawaCompile after change
 require("kanagawa").setup({
   compile = true,
   undercurl = true,
@@ -43,10 +43,10 @@ require("kanagawa").setup({
       -- Use :Inspect to find the highlight name to help with customisation
       ["@markup.heading"] = infoColor,
       ["@markup.strong"] = infoColor,
-      ["@markup.italic"] = infoColor,
+      ["@markup.italic"] = { italic = true, fg = theme.syn.special1 },
       ["@markup.strikethrough"] = { strikethrough = true },
-      ["@markup.raw.block"] = { fg = theme.syn.statement },
-      ["@markup.list.unchecked"] = { bold = true }
+      ["@markup.raw"] = { fg = theme.syn.statement },
+      ["@markup.list.unchecked"] = { bold = true },
     }
   end,
 })
