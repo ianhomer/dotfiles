@@ -51,6 +51,7 @@ nvim_set_var("knobs_levels", {
   glow = 3,
   goyo = 9,
   gv = 9,
+  gx = 3,
   icon_picker = 5,
   indent_blankline = 5,
   indentline = 5,
@@ -660,6 +661,21 @@ require("lazy").setup(
       },
       config = function()
         require("config.obsidian")
+      end,
+    },
+    {
+      "chrishrb/gx.nvim",
+      lazy = true,
+      ft = "markdown",
+      cmd = "Browse",
+      keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
+      init = function()
+        vim.g.netrw_nogx = 1
+      end,
+      dependencies = { "nvim-lua/plenary.nvim" },
+      submodules = false,
+      config = function()
+        require("config.gx")
       end,
     },
     {
