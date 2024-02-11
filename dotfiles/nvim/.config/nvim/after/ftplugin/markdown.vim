@@ -144,6 +144,22 @@ set formatoptions=jtcqln
 
 set comments=fb:*,fb:-,fb:+,fb:\:,nb:>,se:---,se:```
 
+" conceallevel controls how text with the "conceal" syntax attribute is shown
+if knobs#("markdown_conceal_full")
+  " e.g. mobile
+  set conceallevel=2
+elseif knobs#("markdown_conceal_partial")
+  " e.g. note taking
+  set conceallevel=1
+elseif knobs#("obsidian")
+  " obsidian UI needs conceallevel=2
+  set conceallevel=2
+else
+  " e.g coding
+  set conceallevel=0
+endi
+set concealcursor=nc
+
 " Markdown surrounds
 " bold
 nmap <buffer> <leader>jb ysiWb
