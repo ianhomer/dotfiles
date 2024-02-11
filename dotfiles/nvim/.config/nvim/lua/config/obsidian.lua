@@ -6,7 +6,7 @@ local my_frontmatter_func = function(note)
 
   -- Add directories as tags
   local relative = note.path:parent():make_relative(vim.fn.getcwd())
-  for part in vim.gsplit(relative, '/') do
+  for part in vim.gsplit(relative, "/") do
     note:add_tag(part)
   end
 
@@ -34,6 +34,12 @@ require("obsidian").setup({
   note_frontmatter_func = my_frontmatter_func,
   ui = {
     enable = true,
+    checkboxes = {
+      [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
+      ["x"] = { char = "", hl_group = "ObsidianDone" },
+      [">"] = { char = "", hl_group = "ObsidianRightArrow" },
+      ["~"] = { char = "❎", hl_group = "ObsidianTilde" },
+    },
   },
   workspaces = {
     {
