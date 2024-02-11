@@ -57,6 +57,7 @@ function modes#ResetMode()
   set backspace=indent,eol,start
   set nohlsearch
   set laststatus=3
+  set conceallevel=1
   lua require"lualine".setup({options={globalstatus=true}})
   call modes#Reset()
 endfunction
@@ -66,6 +67,7 @@ function modes#PersonalDevMode()
   call modes#ResetMode()
   windo call modes#setLineNumbers(0,1)
   set laststatus=3
+  set conceallevel=1
   lua require"lualine".setup({options={globalstatus=true}})
   call modes#Reset()
 endfunction
@@ -74,6 +76,7 @@ endfunction
 function modes#MobbingMode()
   call modes#enableBarbar(1)
   set laststatus=2
+  set conceallevel=0
   windo call modes#setLineNumbers(1,0)
   lua require"lualine".setup({options={globalstatus=false}})
   call modes#Reset()

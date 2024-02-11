@@ -658,7 +658,7 @@ require("lazy").setup(
       dependencies = {
         "nvim-lua/plenary.nvim",
       },
-      opts = function()
+      config = function()
         require("config.obsidian")
       end,
     },
