@@ -23,7 +23,7 @@ if is-silicon ; then
   brewCommand=/opt/homebrew/bin/brew
 else
   # TBD
-  brewCommand=/usr/local/opt/bin/brew
+  brewCommand=/usr/local/bin/brew
 fi
 
 if ! is-executable $brewCommand ; then
