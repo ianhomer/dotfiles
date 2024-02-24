@@ -1,10 +1,10 @@
 local M = {}
 
 local directions = {
-    h = "left",
-    l = "right",
-    j = "bottom",
-    k = "top"
+    h = "Left",
+    l = "Right",
+    j = "Down",
+    k = "Up"
 }
 
 local arrows = {
@@ -14,8 +14,12 @@ local arrows = {
     k = "up",
 }
 
+local function command(args)
+   os.execute("wezterm cli "..args)
+end
+
 function M.navigate(direction)
-  -- wezterm command
+  command("activate-pane-direction "..directions[direction])
 end
 
 function M.go_direction(direction)
