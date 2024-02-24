@@ -132,6 +132,16 @@ config.keys = {
   { key = "DownArrow", mods = "CTRL|CMD", action = action.AdjustPaneSize({ "Down", 1 }) },
   { key = "LeftArrow", mods = "CTRL|CMD", action = action.AdjustPaneSize({ "Left", 1 }) },
   { key = "RightArrow", mods = "CTRL|CMD", action = action.AdjustPaneSize({ "Right", 1 }) },
+
+  -- Puzzling, but left opt 3 enters vim mode on terminal.  We can bind it
+  -- explicitly to £ to work around this
+  {
+    key = '3',
+    mods = 'OPT',
+    action = action.SendKey {
+      key = '£',
+    },
+  },
 }
 
 local get_last_folder_segment = function(cwd)
