@@ -69,7 +69,7 @@ config.tab_max_width = 32
 config.automatically_reload_config = true
 config.window_decorations = "RESIZE"
 config.tab_bar_at_bottom = true
-config.use_fancy_tab_bar = true
+config.use_fancy_tab_bar = false
 config.show_new_tab_button_in_tab_bar = false
 config.window_close_confirmation = "NeverPrompt"
 config.show_tab_index_in_tab_bar = false
@@ -139,7 +139,7 @@ local get_last_folder_segment = function(cwd)
 end
 
 local function get_relative_working_dir(tab)
-    local current_dir = tab.active_pane.current_working_dir or ""
+    local current_dir = tab.active_pane.current_working_dir.file_path or ""
     return get_last_folder_segment(current_dir)
 end
 
@@ -158,8 +158,7 @@ local SOLID_RIGHT_ARROW = wezterm.nerdfonts.pl_left_hard_divider
 
 local active_background = "#2D4F67"
 local inactive_background = "#223249"
-
-wezterm.on("format-tab-title", function(tab, tabs, panes, _config, hover, max_width)
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
     local background = active_background
     local right_edge_background = inactive_background
     local left_edge_foreground = inactive_background
@@ -183,6 +182,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, _config, hover, max_wi
 
     local title = wezterm.truncate_left(" " .. tab_title(tab) .. " ", max_width + 2)
     -- title = tostring(tab.tab_index)
+    -- local title = "TEXT"
 
     return {
         { Background = { Color = background } },
@@ -190,11 +190,12 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, _config, hover, max_wi
         { Text = "" },
         { Background = { Color = background } },
         { Foreground = { Color = foreground } },
-        { Text = "X"..title },
+        { Text = title },
         { Background = { Color = right_edge_background } },
         { Foreground = { Color = background } },
         { Text = SOLID_RIGHT_ARROW },
     }
 end)
+
 
 return config
