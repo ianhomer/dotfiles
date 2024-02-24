@@ -1,5 +1,6 @@
 local actions = require("telescope.actions")
-local kitty = require("config.kitty")
+local navigator = require("config.navigator")
+
 -- local trouble = require("trouble.providers.telescope")
 local telescope = require("telescope")
 
@@ -36,16 +37,16 @@ telescope.setup({
       i = {
         ["<esc>"] = actions.close,
         ["<c-left>"] = function()
-          kitty.navigate("h")
+          navigator.navigate("h")
         end,
         ["<c-right>"] = function()
-          kitty.navigate("l")
+          navigator.navigate("l")
         end,
         ["<c-up>"] = function()
-          kitty.navigate("k")
+          navigator.navigate("k")
         end,
         ["<c-down>"] = function()
-          kitty.navigate("j")
+          navigator.navigate("j")
         end,
       },
     },

@@ -131,9 +131,14 @@ nvim_set_var("knobs_layers_map", {
     markdown_conceal_full = 1,
     markdown_syntax_list = 1,
   },
+  kitty = {
+    kitty = 1
+  },
+  wezterm = {
+    wezterm = 1
+  }
 })
 
-require("config.kitty")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -164,6 +169,7 @@ vim.opt.rtp:prepend(knobspath)
 local knobs = require("knobs")
 knobs.setup()
 
+
 local with_knobs = function(plugins)
   for _, plugin in ipairs(plugins) do
     if plugin.cond == nil then
@@ -177,6 +183,7 @@ local with_knobs = function(plugins)
   return plugins
 end
 
+require("config.navigator")
 require("config.config")
 
 require("lazy").setup(

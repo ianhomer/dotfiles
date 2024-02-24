@@ -69,9 +69,11 @@ config.tab_max_width = 32
 config.automatically_reload_config = true
 config.window_decorations = "RESIZE"
 config.tab_bar_at_bottom = true
-config.use_fancy_tab_bar = false
+config.use_fancy_tab_bar = true
 config.show_new_tab_button_in_tab_bar = false
 config.window_close_confirmation = "NeverPrompt"
+config.show_tab_index_in_tab_bar = false
+config.hide_tab_bar_if_only_one_tab = true
 
 config.keys = {
     {
@@ -102,7 +104,7 @@ config.keys = {
     {
         key = "RightArrow",
         mods = "CTRL",
-        action = action.EmitEvent("ActivatePaneDirection-left"),
+        action = action.EmitEvent("ActivatePaneDirection-right"),
     },
     {
         key = "LeftArrow",
@@ -188,7 +190,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, _config, hover, max_wi
         { Text = "" },
         { Background = { Color = background } },
         { Foreground = { Color = foreground } },
-        { Text = title },
+        { Text = "X"..title },
         { Background = { Color = right_edge_background } },
         { Foreground = { Color = background } },
         { Text = SOLID_RIGHT_ARROW },
