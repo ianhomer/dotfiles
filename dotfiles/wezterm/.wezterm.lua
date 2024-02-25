@@ -136,11 +136,11 @@ config.keys = {
   -- Puzzling, but left opt 3 enters vim mode on terminal.  We can bind it
   -- explicitly to £ to work around this
   {
-    key = '3',
-    mods = 'OPT',
-    action = action.SendKey {
-      key = '£',
-    },
+    key = "3",
+    mods = "OPT",
+    action = action.SendKey({
+      key = "£",
+    }),
   },
 }
 
@@ -162,6 +162,9 @@ local function get_relative_working_dir(tab)
 end
 
 local function tab_title(tab)
+  if tab.active_pane.current_working_dir.file_path == wezterm.home_dir then
+    return "~"
+  end
   local relative_working_dir = get_relative_working_dir(tab)
   if relative_working_dir == ".dotfiles" then
     return "."
@@ -200,10 +203,10 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 
   local function title_explicit_or_dynamic()
     local explicit_title = tab.tab_title
-      if explicit_title and #explicit_title > 0 then
-        return explicit_title
-      end
-      return wezterm.truncate_left(" " .. tab_title(tab) .. " ", max_width + 2)
+    if explicit_title and #explicit_title > 0 then
+      return explicit_title
+    end
+    return wezterm.truncate_left(" " .. tab_title(tab) .. " ", max_width + 2)
   end
 
   local title = title_explicit_or_dynamic()
@@ -219,6 +222,17 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     { Foreground = { Color = background } },
     { Text = SOLID_RIGHT_ARROW },
   }
+end)
+
+wezterm.on("gui-startup", function(_)
+  local _, _, window = wezterm.mux.spawn_window({})
+  window:gui_window():maximize()
+  local _, second_pane, _ = window:spawn_tab({ cwd = wezterm.home_dir .. "/.dotfiles" })
+  local _, third_pane, _ = window:spawn_tab({ cwd = wezterm.home_dir .. "/projects/things" })
+  window:spawn_tab({ cwd = wezterm.home_dir .. "/projects" })
+
+  second_pane:send_text("vi\n")
+  third_pane:send_text("vi\n")
 end)
 
 return config
