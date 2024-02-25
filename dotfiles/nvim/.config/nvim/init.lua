@@ -375,7 +375,7 @@ require("lazy").setup(
     {
       knob = "dap",
       "microsoft/vscode-js-debug",
-      build = "npm install --legacy-peer-deps " .. "&& npx gulp vsDebugServerBundle && mv dist out",
+      build = "npm install --legacy-peer-deps " .. "&& npx gulp vsDebugServerBundle && mv dist out && git restore .",
       commit = "c0a36fab894ea0be2c2306b34661447443cfaf61",
     },
     {
@@ -658,7 +658,7 @@ require("lazy").setup(
     {
       "iamcco/markdown-preview.nvim",
       -- cmd = {"MarkdownPreview"},
-      build = "cd app && npm install",
+      build = "cd app && npm install && git restore .",
       enabled = true,
       ft = "markdown",
     },
