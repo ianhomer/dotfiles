@@ -1,6 +1,7 @@
 local M = {}
 
 local none_ls = require("null-ls")
+local none_ls_legacy = require("config/none_ls_legacy")
 local formatting = none_ls.builtins.formatting
 local diagnostics = none_ls.builtins.diagnostics
 local code_actions = none_ls.builtins.code_actions
@@ -15,12 +16,12 @@ none_ls.setup({
         PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/.config/.prettierrc.toml"),
       },
     }),
-    formatting.eslint_d,
+    none_ls_legacy.formatting.eslint_d,
     formatting.black,
     formatting.fish_indent,
-    formatting.rustfmt,
+    none_ls_legacy.formatting.rustfmt,
     formatting.stylua,
-    formatting.trim_whitespace.with({
+    none_ls_legacy.formatting.trim_whitespace.with({
       filetypes = { "cucumber", "sh" },
     }),
     diagnostics.markdownlint.with({
@@ -28,8 +29,8 @@ none_ls.setup({
         diagnostic.severity = vim.diagnostic.severity["HINT"]
       end,
     }),
-    diagnostics.eslint_d,
-    diagnostics.flake8.with({
+    none_ls_legacy.diagnostics.eslint_d,
+    none_ls_legacy.diagnostics.flake8.with({
       args = {
         "--format",
         "default",
@@ -47,7 +48,7 @@ none_ls.setup({
       filetypes = { "cucumber" },
     }),
     diagnostics.yamllint,
-    code_actions.eslint_d,
+    none_ls_legacy.code_actions.eslint_d,
     completion.spell.with({
       filetypes = { "markdown" },
     }),

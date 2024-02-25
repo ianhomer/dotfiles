@@ -262,11 +262,15 @@ require("lazy").setup(
       end,
     },
     {
+      knob = "none_ls",
+      "nvimtools/none-ls-extras.nvim",
+    },
+    {
       "nvimtools/none-ls.nvim",
       config = function()
         require("config.none_ls")
       end,
-      dependencies = { "nvim-lua/plenary.nvim" },
+      dependencies = { "nvim-lua/plenary.nvim", "nvimtools/none-ls-extras.nvim" },
     },
     -- {
     --   cmd = "Vista",
