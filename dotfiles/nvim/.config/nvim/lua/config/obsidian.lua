@@ -5,8 +5,10 @@ local my_frontmatter_func = function(note)
   end
 
   -- Add directories as tags
-  local relative = note.path:parent():make_relative(vim.fn.getcwd())
-  for part in vim.gsplit(relative, "/") do
+  local parent = note.path:parent()
+
+  local relative = parent:relative_to(vim.fn.getcwd())
+  for part in vim.gsplit(relative.filename, "/") do
     note:add_tag(part)
   end
 
