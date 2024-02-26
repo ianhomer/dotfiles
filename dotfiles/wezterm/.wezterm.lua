@@ -92,6 +92,11 @@ config.keys = {
     action = action.SpawnTab("CurrentPaneDomain"),
   },
   {
+    key = "w",
+    mods = "CMD",
+    action = wezterm.action.CloseCurrentTab({ confirm = false }),
+  },
+  {
     key = "LeftArrow",
     mods = "OPT",
     action = action.ActivateTabRelative(-1),
