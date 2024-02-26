@@ -70,7 +70,7 @@ nvim_set_var("knobs_levels", {
   lsp_signature = 3,
   lspsaga = 9,
   lualine = 3,
-  luasnip = 6,
+  luasnip = 3,
   markdown_syntax_table = 3,
   markdown_preview = 3,
   minimap = 9,
