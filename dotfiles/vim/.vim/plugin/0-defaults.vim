@@ -140,6 +140,10 @@ if exists("g:knob_gitgutter")
   let g:gitgutter_highlight_linenrs = 1
 endif
 
+" Ignore markdown recommended style in core neovim, which sets tab width to 4
+" spaces
+let g:markdown_recommended_style = 0
+
 " markdown preview
 let g:mkdp_auto_close = 0
 let g:mkdp_page_title = '${name}'
