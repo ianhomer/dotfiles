@@ -42,4 +42,6 @@ if get(g:, "knobs_level", 0) > 2
 endif
 
 command! -nargs=0 LintMe :call my#LintMe()
+command! -nargs=0 Sum :call my#Sum()
 nnoremap <silent> <leader>l :LintMe<CR>
+vnoremap <silent> <leader>js :<c-u>Sum<CR>

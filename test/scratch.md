@@ -110,6 +110,14 @@ ut aliquip ex ea commodo consequat.
 | ---- | --- |
 | this |     |
 
+Sum :
+
+| Name |     Value |
+| ---- | --------: |
+| x    |        12 |
+| y    |        15 |
+| z    | 10,000.00 |
+
 ## Ligatures
 
 - =>
