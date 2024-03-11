@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# Show words, from input arguments or clipboard
+# Words are rendered 1 per line with line number shown
+# Line number rolls through the alphabet
+
+words="${@}"
+
+if [ -z "$words" ] ; then
+  words=`pbpaste`
+fi
+
+if [ -z "$words" ] ; then
+  echo "No words provided"
+  exit 1
+fi
+
+echo "${words}" | sed s/[,\.-]//g | tr -s ' ' '\n' |
+  awk '{printf "%c\t%s\n", (NR > 9) ? NR+87: NR+48, $0}'
+

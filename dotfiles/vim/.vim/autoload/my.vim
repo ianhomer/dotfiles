@@ -166,7 +166,8 @@ function my#nerdtreeBookmarks()
   return map(bookmarks, "{'line': v:val, 'path': v:val}")
 endfunction
 
-function my#Sum()
+" calculate the sum of the selected text
+function my#Calculate()
   normal gv"ay
   let @a = substitute(@a, ',', '', 'g')
   let @a = substitute(@a, '\n', '+', 'g')
