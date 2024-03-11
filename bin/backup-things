@@ -63,7 +63,8 @@ backupThingRepository() {
   log::  "$things ($base) for $recipient : $stamp"
   log:: "... $outputFilename"
 
-  tar -C ${THINGS_DIR} --exclude .git -chzf - $base |
+  tar -C ${THINGS_DIR} --no-mac-metadata --no-xattrs \
+    --exclude .git -chzf - $base |
     gpg --encrypt --recipient $recipient            \
     --output $outputFullFilename
 }

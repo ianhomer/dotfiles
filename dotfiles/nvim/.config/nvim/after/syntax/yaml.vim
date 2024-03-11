@@ -1,3 +1,3 @@
-set conceallevel=0 concealcursor=inc
+set concealcursor=nc
 
 source <sfile>:p:h/indent.vim

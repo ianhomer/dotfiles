@@ -34,11 +34,13 @@ end
 # See https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
 # fish_add_path ~/.npm-global/bin
 
+# Legacy way of managing python path, moving to venv way
 set python_version 3.10
 
 fish_add_path ~/bin
 fish_add_path ~/.jenv/shims
 fish_add_path ~/.dotfiles/bin
+fish_add_path ~/.local/share/venv/bin
 fish_add_path ~/.pyenv/bin
 fish_add_path ~/.jenv/bin
 fish_add_path ~/.cargo/bin
@@ -46,23 +48,19 @@ fish_add_path ~/.rbenv/shims
 if is-silicon
   fish_add_path /opt/homebrew/bin
   fish_add_path /opt/homebrew/sbin
+  # Clean up legacy way of setting python path
   set global_python_bin /opt/homebrew/opt/python@{$python_version}
-  printf "\e[36mPython global bin : $global_python_bin\e[0m\n"
-  if test -d $global_python_bin
-    fish_add_path $global_python_bin
-  end
+  fish_remove_path $global_python_bin
   set local_python_bin /Users/ian/Library/Python/{$python_version}/bin
-  printf "\e[36mPython local  bin : $local_python_bin\e[0m\n"
-  if test -d $local_python_bin
-    fish_add_path $local_python_bin
-  end
+  fish_remove_path $local_python_bin
+  fish_remove_path /opt/homebrew/opt/python@3.10/libexec/bin
 else
-  fish_add_path /usr/local/opt/python@3.10/Frameworks/Python.framework/Versions/3.10/bin
+  fish_remove_path /usr/local/opt/python@3.10/Frameworks/Python.framework/Versions/3.10/bin
 end
 
 # Legacy clean up
 fish_remove_path ~/Library/Python/3.9/bin
-
+fish_remove_path ~/.local/share/venv
 
 # Google cloud
 fish_add_path ~/local/gcloud/google-cloud-sdk/bin

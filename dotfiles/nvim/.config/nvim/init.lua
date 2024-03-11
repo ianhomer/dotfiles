@@ -51,6 +51,7 @@ nvim_set_var("knobs_levels", {
   glow = 3,
   goyo = 9,
   gv = 9,
+  gx = 3,
   icon_picker = 5,
   indent_blankline = 5,
   indentline = 5,
@@ -69,7 +70,7 @@ nvim_set_var("knobs_levels", {
   lsp_signature = 3,
   lspsaga = 9,
   lualine = 3,
-  luasnip = 6,
+  luasnip = 3,
   markdown_syntax_table = 3,
   markdown_preview = 3,
   minimap = 9,
@@ -81,6 +82,7 @@ nvim_set_var("knobs_levels", {
   notify = 5,
   none_ls = 3,
   nvim_tree = 3,
+  obsidian = 3,
   rainbow = 6,
   refactoring = 9,
   vim_repeat = 3,
@@ -129,9 +131,14 @@ nvim_set_var("knobs_layers_map", {
     markdown_conceal_full = 1,
     markdown_syntax_list = 1,
   },
+  kitty = {
+    kitty = 1
+  },
+  wezterm = {
+    wezterm = 1
+  }
 })
 
-require("config.kitty")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -140,7 +147,7 @@ if not vim.loop.fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",     -- latest stable release
+    "--branch=stable", -- latest stable release
     lazypath,
   })
 end
@@ -162,6 +169,7 @@ vim.opt.rtp:prepend(knobspath)
 local knobs = require("knobs")
 knobs.setup()
 
+
 local with_knobs = function(plugins)
   for _, plugin in ipairs(plugins) do
     if plugin.cond == nil then
@@ -175,6 +183,7 @@ local with_knobs = function(plugins)
   return plugins
 end
 
+require("config.navigator")
 require("config.config")
 
 require("lazy").setup(
@@ -253,11 +262,15 @@ require("lazy").setup(
       end,
     },
     {
+      knob = "none_ls",
+      "nvimtools/none-ls-extras.nvim",
+    },
+    {
       "nvimtools/none-ls.nvim",
       config = function()
         require("config.none_ls")
       end,
-      dependencies = { "nvim-lua/plenary.nvim" },
+      dependencies = { "nvim-lua/plenary.nvim", "nvimtools/none-ls-extras.nvim" },
     },
     -- {
     --   cmd = "Vista",
@@ -362,8 +375,7 @@ require("lazy").setup(
     {
       knob = "dap",
       "microsoft/vscode-js-debug",
-      build = "npm install --legacy-peer-deps " ..
-      "&& npx gulp vsDebugServerBundle && mv dist out",
+      build = "npm install --legacy-peer-deps " .. "&& npx gulp vsDebugServerBundle && mv dist out && git restore .",
       commit = "c0a36fab894ea0be2c2306b34661447443cfaf61",
     },
     {
@@ -371,7 +383,7 @@ require("lazy").setup(
       "rcarriga/nvim-dap-ui",
       dependencies = {
         "mxsdev/nvim-dap-vscode-js",
-        "mfussenegger/nvim-dap"
+        "mfussenegger/nvim-dap",
       },
       config = function()
         require("config.dapui")
@@ -542,8 +554,8 @@ require("lazy").setup(
       event = "VeryLazy",
       opts = {
         backend = "kitty",
-        hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" }
-      }
+        hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp" },
+      },
     },
     -- -- Git
     {
@@ -646,9 +658,36 @@ require("lazy").setup(
     {
       "iamcco/markdown-preview.nvim",
       -- cmd = {"MarkdownPreview"},
-      build = "cd app && npm install",
+      build = "cd app && npm install && git restore .",
       enabled = true,
       ft = "markdown",
+    },
+    {
+      "epwalsh/obsidian.nvim",
+      version = "*",
+      lazy = true,
+      ft = "markdown",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+      },
+      config = function()
+        require("config.obsidian")
+      end,
+    },
+    {
+      "chrishrb/gx.nvim",
+      lazy = true,
+      ft = "markdown",
+      cmd = "Browse",
+      keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
+      init = function()
+        vim.g.netrw_nogx = 1
+      end,
+      dependencies = { "nvim-lua/plenary.nvim" },
+      submodules = false,
+      config = function()
+        require("config.gx")
+      end,
     },
     {
       "lukas-reineke/indent-blankline.nvim",
@@ -681,8 +720,7 @@ require("lazy").setup(
       event = { "BufReadPre", "BufNewFile" },
       init = function()
         vim.api.nvim_create_autocmd("FileType", {
-          pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble",
-            "lazy", "mason" },
+          pattern = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy", "mason" },
           callback = function()
             vim.b.miniindentscope_disable = true
           end,
