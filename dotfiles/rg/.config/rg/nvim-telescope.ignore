@@ -6,9 +6,6 @@
 # JavaScript and node internals
 .yarn/
 node_modules/
-yarn.lock
-package-lock.json
-pnpm-lock.yaml
 *.js.map
 webpack-runtime-*.js
 pages-manifest-*.js
@@ -19,8 +16,6 @@ component---*.js
 **/static/d/
 
 # Misc web internals
-**/assets/js/*.js
-**/assets/css/*.css
 **/assets/packed/
 
 # Python internals
@@ -41,3 +36,4 @@ dist/
 # Misc files that have little value in search results
 .svg
 .*.json
+.DS_Store

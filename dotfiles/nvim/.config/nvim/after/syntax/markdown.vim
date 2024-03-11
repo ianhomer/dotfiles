@@ -8,18 +8,6 @@ unlet b:current_syntax
 syntax include @Yaml syntax/yaml.vim
 syntax region yamlFrontmatter start=/\%^---$/ end=/^---$/ keepend contains=@Yaml
 
-if knobs#("markdown_conceal_full")
-  " e.g. mobile
-  set conceallevel=2
-elseif knobs#("markdown_conceal_partial")
-  " e.g. note taking
-  set conceallevel=1
-else
-  " e.g coding
-  set conceallevel=0
-endif
-set concealcursor=nc
-
 " Markdown list rendering
 if knobs#("markdown_syntax_list")
   syntax match mdList /^\s*-\s.*/ contains=mdListBullet

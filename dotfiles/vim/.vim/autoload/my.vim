@@ -165,3 +165,11 @@ function my#nerdtreeBookmarks()
   let bookmarks = bookmarks[0:-2] " Slices an empty last line
   return map(bookmarks, "{'line': v:val, 'path': v:val}")
 endfunction
+
+" calculate the sum of the selected text
+function my#Calculate()
+  normal gv"ay
+  let @a = substitute(@a, ',', '', 'g')
+  let @a = substitute(@a, '\n', '+', 'g')
+  execute "normal! }O\<ESC>o\<ESC>i\<C-r>=\<C-r>a\<CR>"
+endfunction

@@ -8,10 +8,13 @@
 # things
 #
 
+# default query from command line argument
+query=$([ -n "$1" ] && echo " --query $1" || echo "")
+
 cheat=$(cat ~/.dotfiles/docs/cheats/*.md |
   fzf-cheats  |
   fzf --ansi --height 100% -d : --with-nth 2..        \
-  --tiebreak=index --no-hscroll                       \
+  --tiebreak=index --no-hscroll $query                \
   --bind "ctrl-s:abort,ctrl-x:abort,ctrl-space:abort" |
   sed 's/\(.*\):.*/\1/')
 

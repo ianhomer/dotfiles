@@ -11,9 +11,7 @@ end
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and
-  vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match(
-  "%s") == nil
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 local cmp = require("cmp")
@@ -22,13 +20,34 @@ cmp.setup({
   preselect = cmp.PreselectMode.None,
   snippet = {
     expand = function(args)
-      require("luasnip").lsp_expand(args.body)
+      if vim.g.knob_luasnip then
+        require("luasnip").lsp_expand(args.body)
+      else
+        -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#no-snippet-plugin
+        unpack = unpack or table.unpack
+        local line_num, col = unpack(vim.api.nvim_win_get_cursor(0))
+        local line_text = vim.api.nvim_buf_get_lines(0, line_num - 1, line_num, true)[1]
+        local indent = string.match(line_text, "^%s*")
+        local replace = vim.split(args.body, "\n", true)
+        local surround = string.match(line_text, "%S.*") or ""
+        local surround_end = surround:sub(col)
+
+        replace[1] = surround:sub(0, col - 1) .. replace[1]
+        replace[#replace] = replace[#replace] .. (#surround_end > 1 and " " or "") .. surround_end
+        if indent ~= "" then
+          for i, line in ipairs(replace) do
+            replace[i] = indent .. line
+          end
+        end
+
+        vim.api.nvim_buf_set_lines(0, line_num - 1, line_num, true, replace)
+      end
     end,
   },
   -- customise enabled for completion in DAP REPL
   enabled = function()
     return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
-        or (vim.g["knob_dap"] and require("cmp_dap").is_dap_buffer())
+      or (vim.g["knob_dap"] and require("cmp_dap").is_dap_buffer())
   end,
   mapping = cmp.mapping.preset.insert({
     ["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -81,7 +100,7 @@ cmp.setup({
     },
   },
   sources = {
-    { name = "nvim_lsp",               max_item_count = 10 },
+    { name = "nvim_lsp", max_item_count = 10 },
     { name = "luasnip" },
     { name = "buffer" },
     { name = "nvim_lua" },
@@ -140,6 +159,5 @@ cmp.setup.cmdline(":", {
     { name = "cmdline" },
   }),
 })
-
 
 -- require("luasnip.loaders.from_vscode").lazy_load()

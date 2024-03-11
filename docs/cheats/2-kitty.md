@@ -8,7 +8,7 @@
 | ------------------ | ------------------- |
 | `Shift+Cmd+enter`  | New window          |
 | `Shift+Cmd+t`      | New tab             |
-| `Shift+Cmd+w`      | Close tag           |
+| `Cmd+w`            | Close tab           |
 | `Shift+Cmd+arrows` | Resize window       |
 | `Shift+Cmd+d`      | Close window        |
 | `Shift+Alt+Cmd+t`  | Change window title |

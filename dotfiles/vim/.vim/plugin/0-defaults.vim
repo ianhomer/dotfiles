@@ -140,6 +140,10 @@ if exists("g:knob_gitgutter")
   let g:gitgutter_highlight_linenrs = 1
 endif
 
+" Ignore markdown recommended style in core neovim, which sets tab width to 4
+" spaces
+let g:markdown_recommended_style = 0
+
 " markdown preview
 let g:mkdp_auto_close = 0
 let g:mkdp_page_title = '${name}'
@@ -315,9 +319,11 @@ set splitbelow
 " https://stackoverflow.com/questions/32769488/double-vim-surround-with
 " autocmd Filetype markdown let b:surround_43 = "**\r**"
 
-" Don't conceal any syntax
-set conceallevel=0
-
+" Configure conceal syntax
+set conceallevel=1
+" Don't conceal text in insert mode
+set concealcursor=nc
+" let g:markdown_syntax_conceal=0
 
 " vim-test
 let test#strategy = "vimux"

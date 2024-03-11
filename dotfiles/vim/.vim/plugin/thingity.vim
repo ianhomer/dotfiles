@@ -42,9 +42,6 @@ command! -bang -nargs=* AgMarkdown
 
 nnoremap <silent> <leader>jm :AgMarkdown<CR>
 
-" generic search (experimental alternative to Ag)
-nnoremap <silent> <leader>js :Search<CR>
-
 " todos
 nnoremap <silent> <leader>jT :Ag! \[\ \]<CR>
 " todos (aligned with task filtering in bin/todo)

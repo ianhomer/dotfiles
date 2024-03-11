@@ -1,5 +1,6 @@
 tap "homebrew/cask-fonts"
 tap "hashicorp/tap"
+tap "bats-core/bats-core"
 
 # The awesome Hack Nerd fonts combining the Hack source code font
 # -  https://github.com/source-foundry/Hack
@@ -27,13 +28,14 @@ cask "font-jetbrains-mono-nerd-font"
 # - the_silver_searcher - ack, recursive grep alternative a.k.a ag
 # - tmux - terminal multiplexer
 
-
 # brew "podman"
 # brew "busted"
 brew "ack"
 brew "bash"
 brew "bat"
+brew "bats-assert"
 brew "bats-core"
+brew "bats-support"
 brew "broot"
 brew "btop"
 brew "code-minimap"
