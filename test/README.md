@@ -1,5 +1,9 @@
 # Testing
 
+## Test dot scripts
+
+  bats -T fixtures
+
 ## Testing autosave
 
 Watch file and then edit it

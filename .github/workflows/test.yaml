@@ -7,15 +7,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3.3.0
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2.2.4
-        with:
-          version: 7.27.0
-      - name: node tests
+      - name: Setup Bats and bats libs
+        uses: bats-core/bats-action@1.5.4
+      - name: tests
         working-directory: ./test
         run: |
-          pnpm install
-          pnpm test
+          bats -T fixtures
 
   test-dotme:
     runs-on: ubuntu-latest

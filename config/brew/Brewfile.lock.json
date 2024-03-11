@@ -2,13 +2,16 @@
   "entries": {
     "tap": {
       "homebrew/cask-fonts": {
-        "revision": "a2a6ae60acabdea8c98a9a4fbc78dc0d83bc6efd"
+        "revision": "2ffb58600554a5984a3d06439418a7c494a482fb"
       },
       "hashicorp/tap": {
         "revision": "1ee747ddb032bc66f2a65d7176ed2ab8924cd226"
       },
       "charmbracelet/tap": {
         "revision": "642024d341ad0c08371d7b8b030031c512c3aca7"
+      },
+      "bats-core/bats-core": {
+        "revision": "e71b40da024b064108588bb10c8c8a3546c3b677"
       }
     },
     "cask": {
@@ -4116,6 +4119,14 @@
             }
           }
         }
+      },
+      "bats-assert": {
+        "version": "2.1.0",
+        "bottle": false
+      },
+      "bats-support": {
+        "version": "0.3.0",
+        "bottle": false
       }
     }
   },
@@ -4146,11 +4157,11 @@
         "macOS": "13.5.2"
       },
       "sonoma": {
-        "HOMEBREW_VERSION": "4.2.11-105-gae0ceee",
+        "HOMEBREW_VERSION": "4.2.12",
         "HOMEBREW_PREFIX": "/opt/homebrew",
         "Homebrew/homebrew-core": "api",
         "CLT": "15.3.0.0.1.1708646388",
-        "Xcode": "15.3",
+        "Xcode": "15.1",
         "macOS": "14.3.1"
       }
     }
