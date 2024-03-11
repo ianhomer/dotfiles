@@ -15,6 +15,5 @@ if [ -z "$words" ] ; then
   exit 1
 fi
 
-echo "${words}" | sed s/[,\.-]//g | tr -s ' ' '\n' |
-  awk '{printf "%c\t%s\n", (NR > 9) ? NR+87: NR+48, $0}'
-
+echo "${words}" | sed s/[,\.-]//g | tr -s ' ' '\n' | head -n 61 |
+  awk '{printf "%c\t%s\n", (NR > 9) ? ((NR > 35) ? NR+29 : NR+87): NR+48, $0}'
