@@ -4,7 +4,6 @@ local none_ls = require("null-ls")
 local none_ls_legacy = require("config/none_ls_legacy")
 local formatting = none_ls.builtins.formatting
 local diagnostics = none_ls.builtins.diagnostics
-local code_actions = none_ls.builtins.code_actions
 local completion = none_ls.builtins.completion
 
 none_ls.setup({
@@ -12,6 +11,7 @@ none_ls.setup({
   sources = {
     -- order is important, prettier should be before eslint
     formatting.prettierd.with({
+      extra_filetypes = { "svelte" },
       env = {
         PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/.config/.prettierrc.toml"),
       },
@@ -20,6 +20,7 @@ none_ls.setup({
     formatting.black,
     formatting.fish_indent,
     none_ls_legacy.formatting.rustfmt,
+    formatting.rustywind,
     formatting.stylua,
     none_ls_legacy.formatting.trim_whitespace.with({
       filetypes = { "cucumber", "sh" },
