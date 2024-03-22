@@ -149,6 +149,40 @@ config.keys = {
   },
 }
 
+-- copy of hyperlink rules from https://wezfurlong.org/wezterm/config/lua/config/hyperlink_rules.html
+-- without the mailto, and restrict hyperlinks to http or https
+config.hyperlink_rules = {
+  -- Matches: a URL in parens: (URL)
+  {
+    regex = '\\((https?://\\S+)\\)',
+    format = '$1',
+    highlight = 1,
+  },
+  -- Matches: a URL in brackets: [URL]
+  {
+    regex = '\\[(https?://\\S+)\\]',
+    format = '$1',
+    highlight = 1,
+  },
+  -- Matches: a URL in curly braces: {URL}
+  {
+    regex = '\\{(https?://\\S+)\\}',
+    format = '$1',
+    highlight = 1,
+  },
+  -- Matches: a URL in angle brackets: <URL>
+  {
+    regex = '<(https?://\\S+)>',
+    format = '$1',
+    highlight = 1,
+  },
+  -- Then handle URLs not wrapped in brackets
+  {
+    regex = '\\bhttps?://\\S+[)/a-zA-Z0-9-]+',
+    format = '$0',
+  }
+}
+
 local get_last_folder_segment = function(cwd)
   if cwd == nil then
     return "?"
