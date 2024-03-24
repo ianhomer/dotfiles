@@ -20,6 +20,7 @@ none_ls.setup({
     formatting.black,
     formatting.fish_indent,
     none_ls_legacy.formatting.rustfmt,
+    formatting.rustywind,
     formatting.stylua,
     none_ls_legacy.formatting.trim_whitespace.with({
       filetypes = { "cucumber", "sh" },
