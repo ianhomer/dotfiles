@@ -194,9 +194,6 @@ augroup dotme
   " Do not highlight current line when in insert mode
   autocmd InsertEnter,InsertLeave * set cul!
 
-  " Override shiftwidth for python
-  autocmd Filetype python set shiftwidth=4
-
   if exists("g:knob_autosave")
     "
     " *** Scope : IO ***

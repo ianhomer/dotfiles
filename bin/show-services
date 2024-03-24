@@ -1,0 +1,110 @@
+#!/bin/bash
+
+$(shim) && cd ${ME} && . bin/i.sh
+
+help() {
+  cat << EOF
+
+Report on locally running services, to help identify unexpected services that
+are running
+
+  -h this help
+  -o show non recognised services
+  -p report on the given search pattern
+EOF
+}
+
+
+while getopts "h?op:" opt; do
+  case "$opt" in
+  h|\?)
+    help
+    exit 0
+    ;;
+  p) PATTERN=${OPTARG}
+    ;;
+  o) SHOW_OTHERS=1
+    ;;
+  esac
+done
+
+shift $((OPTIND-1))
+
+
+log:: "Info on services running locally"
+
+commands="ps -ASww -o command="
+exclude="grep"
+
+if [[ -n "$PATTERN" ]] ; then
+  $commands | grep $PATTERN
+  exit
+fi
+
+nvims=`$commands | grep -v -E $exclude | grep nvim | wc -l`
+fishes=`$commands | grep -v -E $exclude | grep fish | wc -l`
+mdworkers=`$commands | grep -v -E $exclude | grep mdworker | wc -l`
+braves=`$commands | grep -v -E $exclude | grep Brave | wc -l`
+todos=`$commands | grep -v -E $exclude | grep todo | wc -l`
+googleDrives=`$commands | grep -v -E $exclude | grep 'Drive' | wc -l`
+googleUpdaters=`$commands | grep -v -E $exclude | grep 'GoogleUpdater' | wc -l`
+safaris=`$commands | grep -v -E $exclude | grep 'Safari' | wc -l`
+distnoteds=`$commands | grep -v -E $exclude | grep 'distnoted' | wc -l`
+wezterms=`$commands | grep -v -E $exclude | grep 'WezTerm' | wc -l`
+rectangles=`$commands | grep -v -E $exclude | grep 'Rectangle' | wc -l`
+alfreds=`$commands | grep -v -E $exclude | grep 'Alfred' | wc -l`
+logis=`$commands | grep -v -E $exclude | grep 'LogiMgrDaemon' | wc -l`
+previews=`$commands | grep -v -E $exclude | grep 'Preview' | wc -l`
+wezterms=`$commands | grep -v -E $exclude | grep 'WezTerm' | wc -l`
+homebrews=`$commands | grep -v -E $exclude | grep 'homebrew' | wc -l`
+calendarMailMessages=`$commands | grep -v -E $exclude | grep -E 'Calendar|Mail|Messages' | wc -l`
+
+exclude="$exclude|fish|nvim|mdworker|Brave|Drive|Safari|distnoted|WezTerm|Calendar|Mail|Messages|GoogleUpdater|Rectangle|Alfred|LogiMgrDaemon|Preview|homebrew"
+
+coreServices=`$commands | grep -v -E $exclude | grep 'CoreServices' | wc -l`
+libraries=`$commands | grep -v -E $exclude | grep 'Library' | wc -l`
+frameworks=`$commands | grep -v -E $exclude | grep 'Frameworks' | wc -l`
+privateFrameworks=`$commands | grep -v -E $exclude | grep 'PrivateFrameworks' | wc -l`
+
+exclude="$exclude|CoreServices|Library|Frameworks|PrivateFrameworks"
+
+libexecs=`$commands | grep -v -E $exclude | grep 'libexec' | wc -l`
+
+exclude="$exclude|libexec"
+
+sbins=`$commands | grep -v -E $exclude | grep 'sbin' | wc -l`
+
+exclude="$exclude|sbin"
+
+others=`$commands | grep -v -E $exclude | wc -l`
+
+if [[ "$SHOW_OTHERS" == "1" ]] ; then
+  $commands | grep -v -E $exclude | sort
+else
+  log::status "Library" "$libraries"
+  log::status "Frameworks" "$frameworks"
+  log::status "PrivateFrameworks" "$privateFrameworks"
+  log::status "libexec" "$libexecs"
+  log::status "CoreServices" "$coreServices"
+  log::status "sbin" "$sbins"
+  log::status "Drive" "$googleDrives" "Google Drive"
+  log::status "Brave" "$braves"
+  log::status "distnoted" "$distnoteds"
+  log::status "fish" "$fishes" "Fish shells"
+  log::status "nvim" "$nvims"
+  log::status "Calendar,Mail,Messages" "$calendarMailMessages"
+  log::status "mdworker" "$mdworkers"
+  log::status "Safari" "$safaris"
+  log::status "homebrew" "$homebrews"
+  log::status "WezTerm" "$wezterms"
+  log::status "Alfred" "$alfreds"
+  log::status "Rectangle" "$rectangles"
+  log::status "LogiMgrDaemon" "$logis"
+  log::status "Preview" "$previews"
+  log::status "todo" "$todos" "Do commands"
+  log::status "GoogleUpdater"  "$googleUpdaters" "Google Drive"
+  log::status "others" "$others"
+
+  exclude="$exclude|less|sort|ps|dotfiles"
+  $commands | grep -v -E $exclude | sort
+fi

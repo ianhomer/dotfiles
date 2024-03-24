@@ -6,8 +6,7 @@ local next_diagnostic, prev_diagnostic = (function()
     -- if we have treesitter text objects installed we can return a repeatable
     -- function allowing ';' and ',' to repeat forward and backward
     local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-    return ts_repeat_move.make_repeatable_move_pair(vim.diagnostic.goto_next,
-      vim.diagnostic.goto_prev)
+    return ts_repeat_move.make_repeatable_move_pair(vim.diagnostic.goto_next, vim.diagnostic.goto_prev)
   else
     return vim.diagnostic.goto_next, vim.diagnostic.goto_prev
   end
@@ -20,8 +19,7 @@ outer_nmap("[d", prev_diagnostic, "Previous diagnostic")
 outer_nmap("]d", next_diagnostic, "Next diagnostic")
 
 vim.cmd([[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]])
-vim.cmd(
-[[autocmd! ColorScheme * highlight FloatBorder guifg=grey guibg=#1f2335]])
+vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=grey guibg=#1f2335]])
 
 local border = {
   { "╭", "FloatBorder" },
@@ -45,8 +43,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
   local nmap = function(keys, func, desc)
-    vim.keymap.set("n", keys, func,
-      { buffer = bufnr, silent = true, noremap = true, desc = desc })
+    vim.keymap.set("n", keys, func, { buffer = bufnr, silent = true, noremap = true, desc = desc })
   end
 
   if not vim.g.knob_lspsaga then
@@ -65,11 +62,8 @@ local on_attach = function(client, bufnr)
   nmap("<leader>,sh", vim.lsp.buf.signature_help, "Signature help")
 
   nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "Add workspace folder")
-  nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder,
-    "Remove workspace folder")
-  nmap("<leader>wl",
-    "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-    "List workspaces")
+  nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder")
+  nmap("<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", "List workspaces")
   nmap("<leader>D", vim.lsp.buf.type_definition, "Type definition")
 
   if vim.g.knob_none_ls then
@@ -208,12 +202,12 @@ local servers = {
     settings = {
       ["rust-analyzer"] = {
         cargo = {
-          allFeatures = true
-        }
+          allFeatures = true,
+        },
       },
     },
   },
-  svelte = {},
+  svelte = { "svelte" },
   tailwindcss = {
     filetypes = { "css" },
   },

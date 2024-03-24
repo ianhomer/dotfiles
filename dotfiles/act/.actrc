@@ -1,0 +1,5 @@
+# disable bind mounting the socket - https://github.com/nektos/act/issues/2239
+--container-daemon-socket -
+
+# A little bit faster locally - https://nektosact.com/usage/index.html#action-offline-mode
+--action-offline-mode

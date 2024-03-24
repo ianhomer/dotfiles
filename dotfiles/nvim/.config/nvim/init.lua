@@ -384,6 +384,7 @@ require("lazy").setup(
       dependencies = {
         "mxsdev/nvim-dap-vscode-js",
         "mfussenegger/nvim-dap",
+        "nvim-neotest/nvim-nio"
       },
       config = function()
         require("config.dapui")
