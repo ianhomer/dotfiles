@@ -2,10 +2,23 @@
 
 $(shim) && cd ${ME} && . bin/i.sh
 
+help() {
+  cat << EOF
+
+Report on locally running services, to help identify unexpected services that
+are running
+
+  -h this help
+  -o show non recognised services
+  -p report on the given search pattern
+EOF
+}
+
+
 while getopts "h?op:" opt; do
   case "$opt" in
   h|\?)
-    command_help
+    help
     exit 0
     ;;
   p) PATTERN=${OPTARG}
