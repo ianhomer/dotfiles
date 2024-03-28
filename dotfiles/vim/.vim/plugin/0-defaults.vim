@@ -245,7 +245,8 @@ nmap '' ysiW'
 nmap '` ysiW`
 nmap '< ysiW<
 nmap 'b ysiWb
-
+" Double square brackets, wiki link
+nmap '[ ysiW]ysiW]
 
 " easy align
 xmap ga <Plug>(EasyAlign)
