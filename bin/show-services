@@ -45,6 +45,8 @@ nvims=`$commands | grep -v -E $exclude | grep nvim | wc -l`
 fishes=`$commands | grep -v -E $exclude | grep fish | wc -l`
 mdworkers=`$commands | grep -v -E $exclude | grep mdworker | wc -l`
 braves=`$commands | grep -v -E $exclude | grep Brave | wc -l`
+chromes=`$commands | grep -v -E $exclude | grep Chrome | wc -l`
+dockers=`$commands | grep -v -E $exclude | grep -E 'docker|Docker' | wc -l`
 todos=`$commands | grep -v -E $exclude | grep todo | wc -l`
 googleDrives=`$commands | grep -v -E $exclude | grep 'Drive' | wc -l`
 googleUpdaters=`$commands | grep -v -E $exclude | grep 'GoogleUpdater' | wc -l`
@@ -53,13 +55,13 @@ distnoteds=`$commands | grep -v -E $exclude | grep 'distnoted' | wc -l`
 wezterms=`$commands | grep -v -E $exclude | grep 'WezTerm' | wc -l`
 rectangles=`$commands | grep -v -E $exclude | grep 'Rectangle' | wc -l`
 alfreds=`$commands | grep -v -E $exclude | grep 'Alfred' | wc -l`
-logis=`$commands | grep -v -E $exclude | grep 'LogiMgrDaemon' | wc -l`
+logis=`$commands | grep -v -E $exclude | grep -E 'LogiMgrDaemon|LogiTune' | wc -l`
 previews=`$commands | grep -v -E $exclude | grep 'Preview' | wc -l`
 wezterms=`$commands | grep -v -E $exclude | grep 'WezTerm' | wc -l`
 homebrews=`$commands | grep -v -E $exclude | grep 'homebrew' | wc -l`
 calendarMailMessages=`$commands | grep -v -E $exclude | grep -E 'Calendar|Mail|Messages' | wc -l`
 
-exclude="$exclude|fish|nvim|mdworker|Brave|Drive|Safari|distnoted|WezTerm|Calendar|Mail|Messages|GoogleUpdater|Rectangle|Alfred|LogiMgrDaemon|Preview|homebrew"
+exclude="$exclude|fish|nvim|mdworker|Brave|Chrome|Drive|Safari|distnoted|WezTerm|Calendar|Mail|Messages|GoogleUpdater|Rectangle|Alfred|LogiMgrDaemon|LogiTune|Preview|homebrew|docker|Docker"
 
 coreServices=`$commands | grep -v -E $exclude | grep 'CoreServices' | wc -l`
 libraries=`$commands | grep -v -E $exclude | grep 'Library' | wc -l`
@@ -89,9 +91,11 @@ else
   log::status "sbin" "$sbins"
   log::status "Drive" "$googleDrives" "Google Drive"
   log::status "Brave" "$braves"
+  log::status "Chrome" "$chromes"
   log::status "distnoted" "$distnoteds"
   log::status "fish" "$fishes" "Fish shells"
   log::status "nvim" "$nvims"
+  log::status "docker" "$dockers"
   log::status "Calendar,Mail,Messages" "$calendarMailMessages"
   log::status "mdworker" "$mdworkers"
   log::status "Safari" "$safaris"
@@ -99,7 +103,7 @@ else
   log::status "WezTerm" "$wezterms"
   log::status "Alfred" "$alfreds"
   log::status "Rectangle" "$rectangles"
-  log::status "LogiMgrDaemon" "$logis"
+  log::status "LogiMgrDaemon,LogiTune" "$logis"
   log::status "Preview" "$previews"
   log::status "todo" "$todos" "Do commands"
   log::status "GoogleUpdater"  "$googleUpdaters" "Google Drive"
