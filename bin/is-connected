@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
 if is-macos ; then
-  maxRate=`/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep maxRate | awk '{print $2}'`
+  exit 0
 
-  if [[ "$maxRate" -eq "0" ]] ; then
-    exit 1
-  fi
+  # This technique has stopped working, for now return always connected
+  # TODO : WARNING: The airport command line tool is deprecated and will be removed in a future release.
+  # For diagnosing Wi-Fi related issues, use the Wireless Diagnostics app or wdutil command line tool.
+
+  # maxRate=`/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | grep maxRate | awk '{print $2}'`
+
+  # if [[ "$maxRate" -eq "0" ]] ; then
+  #   exit 1
+  # fi
 fi

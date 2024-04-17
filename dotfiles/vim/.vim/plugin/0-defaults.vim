@@ -194,9 +194,6 @@ augroup dotme
   " Do not highlight current line when in insert mode
   autocmd InsertEnter,InsertLeave * set cul!
 
-  " Override shiftwidth for python
-  autocmd Filetype python set shiftwidth=4
-
   if exists("g:knob_autosave")
     "
     " *** Scope : IO ***
@@ -248,7 +245,8 @@ nmap '' ysiW'
 nmap '` ysiW`
 nmap '< ysiW<
 nmap 'b ysiWb
-
+" Double square brackets, wiki link
+nmap '[ ysiW]ysiW]
 
 " easy align
 xmap ga <Plug>(EasyAlign)
@@ -262,16 +260,24 @@ if exists("g:knob_autosave")
   set autoread
   set autowrite
 endif
+
 " Allow hidden buffers without saving
 set hidden
+
 " No backups or backups during write
 set nobackup
 set nowritebackup
+
 " Keep swap and backups centrally
 set backupdir=~/.vim/backups
-" Swap directory ends with double slash to ensure uniqueness across
-" directories
-" See https://github.com/tpope/vim-eunuch/issues/18
+
+" Swap files low value for me since never far from truth since I have auto save,
+" auto load and trunk based small atomic changes.
+set noswapfile
+
+" However if swap was enabled we set swap directory to end with double slash to
+" ensure uniqueness across directories See
+" https://github.com/tpope/vim-eunuch/issues/18
 set directory=~/.vim/swaps//
 
 " Scroll 3 lines before border
