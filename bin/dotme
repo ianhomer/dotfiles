@@ -150,6 +150,7 @@ command_inner() {
   [ $DRY -eq 0 ] && is-macos && dotme-osx
   [ $DRY -eq 0 ] && is-android && dotme-termux
   if is-dotme-full ; then
+    [ $DRY -eq 0 ] && is-pc && dotme-notes
     [ $DRY -eq 0 ] && is-pc && dotme-pip
     [ $DRY -eq 0 ] && is-pc && dotme-gem
     [ $DRY -eq 0 ] && is-pc && dotme-lua
@@ -196,7 +197,7 @@ command_packages() {
     elif command -v apk > /dev/null 2>&1; then
       dotme-apk
     elif command -v apt > /dev/null 2>&1; then
-      dotme-apt 
+      dotme-apt
     else
       echo "Unknown package management, exiting"
       exit
