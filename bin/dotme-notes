@@ -9,8 +9,8 @@ should-run -m 1 $@ $0 || exit 0
 $(shim) && cd ${ME} && . bin/i.sh
 log::info "notes housekeeping"
 
-ENOTE_SOURCE=~/Dropbox/Supernote/Note
-ENOTE_DESTINATION=~/projects/things/my-supernotes/stream
+ENOTE_SOURCE=~/supernote/Supernote/Note
+ENOTE_DESTINATION=~/projects/things/my-supernote/stream
 
 if [[ -d ${ENOTE_SOURCE} ]] ; then
   count=`ls -1 ${ENOTE_SOURCE}/*.note 2>/dev/null | wc -l`
