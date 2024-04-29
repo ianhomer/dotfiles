@@ -79,8 +79,6 @@ def fixModifiedTime():
                         if modifiedTime != int(stinfo.st_mtime):
                             print(f"set mtime {modifiedTime} -> {file}")
                             os.utime(file, (modifiedTime, modifiedTime))
-                    else:
-                        print(f"file {file} does not exist")
             else:
                 modifiedTime = int(line)
 
