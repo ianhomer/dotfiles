@@ -153,7 +153,7 @@ elseif knobs#("markdown_conceal_partial")
   set conceallevel=1
 elseif knobs#("obsidian")
   " obsidian UI needs conceallevel=2
-  set conceallevel=2
+  set conceallevel=0
 else
   " e.g coding
   set conceallevel=0

@@ -35,7 +35,7 @@ require("obsidian").setup({
   log_level = vim.log.levels.WARN,
   note_frontmatter_func = my_frontmatter_func,
   ui = {
-    enable = true,
+    enable = false,
     checkboxes = {
       [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
       ["x"] = { char = "", hl_group = "ObsidianDone" },
