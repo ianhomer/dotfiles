@@ -337,3 +337,6 @@ let g:test#preserve_screen = 1
 let g:test#echo_command = 0
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
+
+" disable perl
+let g:loaded_perl_provider = 0

@@ -438,7 +438,6 @@ require("lazy").setup(
     -- },
     {
       "nvim-telescope/telescope.nvim",
-      knob = "telescope",
       dependencies = {
         { "rebelot/kanagawa.nvim" },
         { "nvim-lua/popup.nvim" },
@@ -612,7 +611,6 @@ require("lazy").setup(
     {
       "tpope/vim-repeat",
       event = "VeryLazy",
-      knob = "vim_repeat",
     },
     {
       "tpope/vim-abolish",
