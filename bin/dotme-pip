@@ -6,9 +6,13 @@
 
 REQUIREMENTS=~/.dotfiles/config/python/requirements.txt
 
-should-run -m 30 $0 $REQUIREMENTS || exit 0
+should-run -m 30 $@ $0 $REQUIREMENTS || exit 0
 $(shim) && cd ${ME} && . bin/i.sh
 
+# TODO - create a way to recreate local venv to upgrade python
+# currently if you delete this venv directory then the venv will
+# be recreated with the latest python version, but it'd be good
+# to automate this
 PYTHON_VENV_DIR=$HOME/.local/share/venv
 
 if [ ! -d "$PYTHON_VENV_DIR" ] ; then
@@ -16,7 +20,9 @@ if [ ! -d "$PYTHON_VENV_DIR" ] ; then
   python3 -m venv $PYTHON_VENV_DIR
 fi
 
-export PATH=$PYTHON_VENV_DIR/bin:$PATH
+
+source $PYTHON_VENV_DIR/bin/activate
+python -V
 
 if ! command -v pip3 &>/dev/null ; then
   log::info "pip3 not installed"
