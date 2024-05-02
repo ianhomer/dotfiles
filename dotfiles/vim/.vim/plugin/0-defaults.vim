@@ -340,3 +340,6 @@ let g:VimuxHeight = "40"
 
 " disable perl
 let g:loaded_perl_provider = 0
+
+" Global python - https://neovim.io/doc/user/provider.html
+let g:python3_host_prog = "~/.local/share/venv/bin/python"
