@@ -10,6 +10,7 @@ dotmoduleDirectory=$HOME/projects/dotmodules
 
 if [[ -d ${dotmoduleDirectory} ]] ; then
   for d in ${dotmoduleDirectory}/dot*/ ; do
+    PATH="${PATH}:${d}/bin"
     command=$(basename $d)
     $command
   done
