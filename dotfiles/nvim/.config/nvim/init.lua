@@ -25,6 +25,7 @@ nvim_set_var("knobs_levels", {
   codewindow = 5,
   colorizer = 4,
   conflict_marker = 7,
+  codecompanion = 3,
   commentary = 4,
   compactcmd = 3,
   cmp = 3,
@@ -132,13 +133,12 @@ nvim_set_var("knobs_layers_map", {
     markdown_syntax_list = 1,
   },
   kitty = {
-    kitty = 1
+    kitty = 1,
   },
   wezterm = {
-    wezterm = 1
-  }
+    wezterm = 1,
+  },
 })
-
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -168,7 +168,6 @@ vim.opt.rtp:prepend(knobspath)
 
 local knobs = require("knobs")
 knobs.setup()
-
 
 local with_knobs = function(plugins)
   for _, plugin in ipairs(plugins) do
@@ -384,7 +383,7 @@ require("lazy").setup(
       dependencies = {
         "mxsdev/nvim-dap-vscode-js",
         "mfussenegger/nvim-dap",
-        "nvim-neotest/nvim-nio"
+        "nvim-neotest/nvim-nio",
       },
       config = function()
         require("config.dapui")
@@ -413,6 +412,22 @@ require("lazy").setup(
     --   "simrat39/symbols-outline.nvim",
     --   setup = [[require'config.symbols_outline']],
     -- },
+
+    {
+      "olimorris/codecompanion.nvim",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-telescope/telescope.nvim",
+        {
+          "stevearc/dressing.nvim",
+          opts = {},
+        },
+      },
+      config = function()
+        require("config.codecompanion")
+      end,
+    },
 
     -- -- Navigation
 
