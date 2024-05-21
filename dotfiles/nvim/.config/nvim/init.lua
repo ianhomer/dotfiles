@@ -35,6 +35,7 @@ nvim_set_var("knobs_levels", {
   dispatch = 3,
   document_color = 9,
   dressing = 5,
+  edgy = 5,
   easy_align = 3,
   editorconfig = 9,
   endwise = 7,
@@ -84,6 +85,7 @@ nvim_set_var("knobs_levels", {
   none_ls = 3,
   nvim_tree = 3,
   obsidian = 3,
+  oil = 5,
   rainbow = 6,
   refactoring = 9,
   vim_repeat = 3,
@@ -473,6 +475,11 @@ require("lazy").setup(
       cmd = { "NvimTreeFindFile", "NvimTreeOpen", "NvimTreeToggle" },
     },
     {
+      "stevearc/oil.nvim",
+      opts = {},
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+    {
       "ryanoasis/vim-devicons",
       lazy = true,
     },
@@ -496,6 +503,11 @@ require("lazy").setup(
       config = function()
         require("config.lightspeed")
       end,
+    },
+    {
+      "folke/edgy.nvim",
+      event = "VeryLazy",
+      opts = {},
     },
     {
       "nvim-lualine/lualine.nvim",
