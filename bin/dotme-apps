@@ -20,7 +20,7 @@ should-run -m 7 $@ $0 || exit 0
 # TODO : Consider update process of this, does gcloud itself warn us if it is
 # out of date. When I run into this, I will update this process to handle
 # updates.
-if ! command -v gcloud 2>/dev/null ; then
+if ! command -v gcloud &>/dev/null ; then
   log:: "gcloud is not installed"
   downloaded=~/local/gcloud/google-cloud-cli*.tar.gz
   echo $downloaded
