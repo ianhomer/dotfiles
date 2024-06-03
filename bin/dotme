@@ -172,6 +172,7 @@ command_inner() {
     [ $DRY -eq 0 ] && dotme-zsh
   fi
   [ $DRY -eq 0 ] && is-dotme-full && is-pc && dotme-node
+  [ $DRY -eq 0 ] && is-dotme-full && is-pc && dotme-nnn
   if is-dotme-full ; then
     [ $DRY -eq 0 ] && dotme-backup
     [ $DRY -eq 0 ] && dotme-gitme

@@ -25,7 +25,7 @@ nvim_set_var("knobs_levels", {
   codewindow = 5,
   colorizer = 4,
   conflict_marker = 7,
-  codecompanion = 3,
+  codecompanion = 9,
   commentary = 4,
   compactcmd = 3,
   cmp = 3,
