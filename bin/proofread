@@ -4,7 +4,7 @@ files=$@
 
 for file in $files ; do
   echo "proofreading : $file"
-  ollama run llama3 "proof read this file, "\
+  ollama run mixtral:8x7b "proof read this file, "\
     "don't reword it, just show me grammatical errors, "\
     "punctuation errors and typos, ignore the frontmatter "\
     "at the beginning, ignore line breaks" \

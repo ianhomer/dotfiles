@@ -15,6 +15,7 @@ local git_command = {
 }
 
 local rg_ignore = os.getenv("HOME") .. "/.config/rg/nvim-telescope.ignore"
+local rg_ignore_lesser = os.getenv("HOME") .. "/.config/rg/nvim-telescope-lesser.ignore"
 
 telescope.setup({
   defaults = {
@@ -30,6 +31,8 @@ telescope.setup({
       "--hidden",
       "--ignore-file",
       rg_ignore,
+      "--ignore-file",
+      rg_ignore_lesser,
     },
     prompt_prefix = "   ",
     entry_prefix = "  ",
@@ -87,7 +90,17 @@ telescope.setup({
       },
     },
     find_files = {
-      find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/**", "--ignore-file", rg_ignore },
+      find_command = {
+        "rg",
+        "--files",
+        "--hidden",
+        "--glob",
+        "!**/.git/**",
+        "--ignore-file",
+        rg_ignore,
+        "--ignore-file",
+        rg_ignore_lesser,
+      },
     },
     git_bcommits = {
       git_command = git_command,
