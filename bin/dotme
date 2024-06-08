@@ -173,6 +173,7 @@ command_inner() {
   fi
   [ $DRY -eq 0 ] && is-dotme-full && is-pc && dotme-node
   [ $DRY -eq 0 ] && is-dotme-full && is-pc && dotme-nnn
+  [ $DRY -eq 0 ] && is-dotme-full && is-pc && dotme-vale
   if is-dotme-full ; then
     [ $DRY -eq 0 ] && dotme-backup
     [ $DRY -eq 0 ] && dotme-gitme

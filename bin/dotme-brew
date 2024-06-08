@@ -97,8 +97,4 @@ else
   fi
 fi
 
-if [[ ! -d ~/.cache/vale ]] ; then
-  vale sync || echo "failed to sync vale"
-fi
-
 should-run -fu $0

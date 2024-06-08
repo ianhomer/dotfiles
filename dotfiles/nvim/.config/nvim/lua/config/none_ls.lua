@@ -55,7 +55,8 @@ none_ls.setup({
     completion.spell.with({
       filetypes = { "markdown" },
     }),
-    code_actions.proselint
+    code_actions.proselint,
+    code_actions.gitsigns
   },
 })
 
