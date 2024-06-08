@@ -31,8 +31,32 @@ if [[ -z "${recipient}" ]] ; then
   fi
   recipient=$(get-recipient)
 fi
-localBackupDirectory=~/backups/things-backups
+localBackupDirectory=$HOME/backups/things-backups
+year=$(date "+%Y")
+month=$(date "+%m")
+localBackupYearDirectory="$localBackupDirectory/things-backups-$year"
+localBackupMonthDirectory="$localBackupYearDirectory/things-backups-$year$month"
 stamp=$(date "+%Y%m%d-%H%M%S")
+
+if [ ! -d "$HOME/backups" ] ; then
+  log:: "Creating backups directory"
+  mkdir $HOME/backups
+fi
+
+if [ ! -d "$localBackupDirectory" ] ; then
+  log:: "Creating backups directory"
+  mkdir $localBackupDirectory
+fi
+
+if [ ! -d "$localBackupYearDirectory" ] ; then
+  log:: "Creating backups year directory"
+  mkdir $localBackupYearDirectory
+fi
+
+if [ ! -d "$localBackupMonthDirectory" ] ; then
+  log:: "Creating backups month directory"
+  mkdir $localBackupMonthDirectory
+fi
 
 backupThingRepository() {
   repository=$1
@@ -46,19 +70,10 @@ backupThingRepository() {
      log::exit "recipient is empty"
   fi
 
-  if [ ! -d "$HOME/backups" ] ; then
-    log:: "Creating backups directory"
-    mkdir ~/backups
-  fi
-
-  if [ ! -d "$HOME/backups/things-backups" ] ; then
-    log:: "Creating backups directory"
-    mkdir $localBackupDirectory
-  fi
 
   base=$(basename $things)
   outputFilename=back-$base-$stamp.tar.gz.gpg
-  outputFullFilename=$localBackupDirectory/$outputFilename
+  outputFullFilename=$localBackupMonthDirectory/$outputFilename
 
   log::  "$things ($base) for $recipient : $stamp"
   log:: "... $outputFilename"
@@ -84,7 +99,7 @@ fi
 
 if [[ "$BACKUP_BUKU_BOOKMARKS" == "y" ]] ; then
   # Backup buku bookmarks database
-  bookmarkFilename=${localBackupDirectory}/bookmarks-${stamp}.html
+  bookmarkFilename=${localBackupMonthDirectory}/bookmarks-${stamp}.html
   echo "Backing up bookmarks : $bookmarkFilename"
   buku -e $bookmarkFilename
 fi
