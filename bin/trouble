@@ -45,7 +45,7 @@ if [[ "$ESLINT" == "y" || "$PRETTIER" == "y" || "$TSC" == "y" ]] ; then
   if [[ "$ESLINT" == "y" ]] ; then
     ${command} eslint ${resource} -f json               |
       jq '.[] | select((.messages | length) > 0) | .filePath' -r |
-      xargs realpath --relative-to=$PWD |
+      xargs realpath |
       fzf -m --bind ctrl-t:toggle-all   |
       xargs nvim "+Trouble" "+silent argdo e"
   elif [[ "$TSC" == "y" ]] ; then
@@ -60,14 +60,14 @@ if [[ "$ESLINT" == "y" || "$PRETTIER" == "y" || "$TSC" == "y" ]] ; then
       grep "warn"              |
       sed 's/\[warn\] //'      |
       head -n 20               |
-      xargs realpath --relative-to=$PWD |
+      xargs realpath           |
       fzf -m --bind ctrl-t:toggle-all   |
       xargs nvim "+Trouble" "+silent argdo e"
   fi
 else
   if [[ "$VALE" == "y" ]] ; then
     vale --output JSON . | jq 'keys[]'  |
-      xargs realpath --relative-to=$PWD |
+      xargs realpath                    |
       fzf -m --bind ctrl-t:toggle-all   |
       xargs nvim "+Trouble" "+silent argdo e"
   fi
