@@ -69,7 +69,7 @@ else
     vale --output JSON . | jq 'keys[]'  |
       xargs realpath                    |
       fzf -m --bind ctrl-t:toggle-all   |
-      xargs nvim "+Trouble" "+silent argdo e"
+      VIM_KNOBS=5 xargs nvim "+Trouble" "+silent argdo e"
   fi
 fi
 

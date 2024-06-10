@@ -3,7 +3,7 @@ local M = {}
 M.config = function()
   require("trouble").setup({
     auto_open = false,
-    auto_close = false,
+    auto_close = true,
     height = 15,
     use_diagnostic_signs = true,
     padding = false,
