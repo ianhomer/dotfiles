@@ -4,7 +4,11 @@ local function repositoryName()
   if j > 0 then
     local k, _ = string.find(filename, "/", j + 1)
     if k > 0 then
-      return filename.sub(filename, j + 1, k - 1)
+      local name = filename.sub(filename, j + 1, k - 1)
+      if name:match('^my-') then
+        name = "🔒" .. name
+      end
+      return name
     end
   end
   return nil
