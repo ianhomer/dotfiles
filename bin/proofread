@@ -1,0 +1,25 @@
+#!/bin/bash
+
+files=$@
+
+for file in $files ; do
+  echo "proofreading : $file"
+  ollama run mixtral:8x7b "proof read this file, "\
+    "don't reword it, just show me grammatical errors, "\
+    "punctuation errors and typos, ignore the frontmatter "\
+    "at the beginning, ignore line breaks" \
+    < $file
+
+  # ollama run llama3 \
+  #   "just identify errors with spelling and grammar in this file" \
+  #   " don't rewrite" \
+  #   " ignore errors in the frontmatter" \
+  #    < $file
+
+  # ollama run llama3 \
+  #   "errors are only grammar, spelling and punctuation issues, " \
+  #   "don't summarise the content "\
+  #   "if you can't find an errors you say OK " \
+  #   "find errors in this file" \
+  #    < $file
+done

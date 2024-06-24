@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+#
+# Notes housekeeping
+#
+
+should-run -m 1 $@ $0 || exit 0
+
+$(shim) && cd ${ME} && . bin/i.sh
+log::info "notes housekeeping"
+
+ENOTE_SOURCE=~/supernote/Supernote/Note
+ENOTE_DESTINATION=~/projects/things/my-supernote/stream
+
+if [[ -d ${ENOTE_SOURCE} ]] ; then
+  count=`ls -1 ${ENOTE_SOURCE}/*.note 2>/dev/null | wc -l`
+  if [[ $count -eq 0 ]] ; then
+    log::info "no enotes to move into place"
+  else
+    log::info "moving $count enotes into place"
+    ls -l ${ENOTE_SOURCE}/*.note
+    mv ${ENOTE_SOURCE}/*.note $ENOTE_DESTINATION
+  fi
+fi
+
+if command -v things-sync &>/dev/null ; then
+  log::info "syncing things"
+  things-sync
+fi
+
+should-run -fu $0

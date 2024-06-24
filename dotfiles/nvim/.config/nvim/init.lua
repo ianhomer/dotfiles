@@ -25,6 +25,7 @@ nvim_set_var("knobs_levels", {
   codewindow = 5,
   colorizer = 4,
   conflict_marker = 7,
+  codecompanion = 9,
   commentary = 4,
   compactcmd = 3,
   cmp = 3,
@@ -34,6 +35,7 @@ nvim_set_var("knobs_levels", {
   dispatch = 3,
   document_color = 9,
   dressing = 5,
+  edgy = 5,
   easy_align = 3,
   editorconfig = 9,
   endwise = 7,
@@ -83,6 +85,7 @@ nvim_set_var("knobs_levels", {
   none_ls = 3,
   nvim_tree = 3,
   obsidian = 3,
+  oil = 5,
   rainbow = 6,
   refactoring = 9,
   vim_repeat = 3,
@@ -132,13 +135,12 @@ nvim_set_var("knobs_layers_map", {
     markdown_syntax_list = 1,
   },
   kitty = {
-    kitty = 1
+    kitty = 1,
   },
   wezterm = {
-    wezterm = 1
-  }
+    wezterm = 1,
+  },
 })
-
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -168,7 +170,6 @@ vim.opt.rtp:prepend(knobspath)
 
 local knobs = require("knobs")
 knobs.setup()
-
 
 local with_knobs = function(plugins)
   for _, plugin in ipairs(plugins) do
@@ -384,7 +385,7 @@ require("lazy").setup(
       dependencies = {
         "mxsdev/nvim-dap-vscode-js",
         "mfussenegger/nvim-dap",
-        "nvim-neotest/nvim-nio"
+        "nvim-neotest/nvim-nio",
       },
       config = function()
         require("config.dapui")
@@ -414,6 +415,22 @@ require("lazy").setup(
     --   setup = [[require'config.symbols_outline']],
     -- },
 
+    {
+      "olimorris/codecompanion.nvim",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-telescope/telescope.nvim",
+        {
+          "stevearc/dressing.nvim",
+          opts = {},
+        },
+      },
+      config = function()
+        require("config.codecompanion")
+      end,
+    },
+
     -- -- Navigation
 
     {
@@ -438,7 +455,6 @@ require("lazy").setup(
     -- },
     {
       "nvim-telescope/telescope.nvim",
-      knob = "telescope",
       dependencies = {
         { "rebelot/kanagawa.nvim" },
         { "nvim-lua/popup.nvim" },
@@ -451,12 +467,17 @@ require("lazy").setup(
       end,
     },
     {
-      "kyazdani42/nvim-tree.lua",
-      dependencies = "kyazdani42/nvim-web-devicons",
+      "nvim-tree/nvim-tree.lua",
+      dependencies = "nvim-tree/nvim-web-devicons",
       config = function()
         require("config.nvimtree")
       end,
       cmd = { "NvimTreeFindFile", "NvimTreeOpen", "NvimTreeToggle" },
+    },
+    {
+      "stevearc/oil.nvim",
+      opts = {},
+      dependencies = { "nvim-tree/nvim-web-devicons" },
     },
     {
       "ryanoasis/vim-devicons",
@@ -482,6 +503,11 @@ require("lazy").setup(
       config = function()
         require("config.lightspeed")
       end,
+    },
+    {
+      "folke/edgy.nvim",
+      event = "VeryLazy",
+      opts = {},
     },
     {
       "nvim-lualine/lualine.nvim",
@@ -612,7 +638,6 @@ require("lazy").setup(
     {
       "tpope/vim-repeat",
       event = "VeryLazy",
-      knob = "vim_repeat",
     },
     {
       "tpope/vim-abolish",

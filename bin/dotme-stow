@@ -40,7 +40,7 @@ log:: "stowing dotfiles"
 for DIR in `ls -d */` ; do
   # platform is special directory for platform specific configuration
   [[ "$DIR" == "platform/" ]] && continue
-  if should-run -ozs $SHOULD_RUN_ARGS $0 $DOTFILES_DOTFILES/$DIR ; then
+  if should-run -ozs -b ${DIR%/} $SHOULD_RUN_ARGS ${0} $DOTFILES_DOTFILES/$DIR - ; then
     cd $DOTFILES_DOTFILES/$DIR
     [[ -n $VERBOSE ]] && echo "... stowing $DIR"
     # Copy directory structure so that stow links files NOT directories

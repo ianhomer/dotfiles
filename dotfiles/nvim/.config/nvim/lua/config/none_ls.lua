@@ -5,6 +5,7 @@ local none_ls_legacy = require("config/none_ls_legacy")
 local formatting = none_ls.builtins.formatting
 local diagnostics = none_ls.builtins.diagnostics
 local completion = none_ls.builtins.completion
+local code_actions = none_ls.builtins.code_actions
 
 none_ls.setup({
   debug = false,
@@ -49,10 +50,13 @@ none_ls.setup({
       filetypes = { "cucumber" },
     }),
     diagnostics.yamllint,
+    diagnostics.proselint,
     none_ls_legacy.code_actions.eslint_d,
     completion.spell.with({
       filetypes = { "markdown" },
     }),
+    code_actions.proselint,
+    code_actions.gitsigns
   },
 })
 

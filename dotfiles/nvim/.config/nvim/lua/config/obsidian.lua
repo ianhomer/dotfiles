@@ -4,12 +4,14 @@ local my_frontmatter_func = function(note)
     note:add_alias(note.title)
   end
 
-  -- Add directories as tags
+  -- Add directories as tags if in sub-directory of working directory
   local parent = note.path:parent()
-
-  local relative = parent:relative_to(vim.fn.getcwd())
-  for part in vim.gsplit(relative.filename, "/") do
-    note:add_tag(part)
+  local cwd = vim.fn.getcwd()
+  if vim.startswith(parent.filename, cwd .. '/') then
+    local relative = parent:relative_to(cwd)
+    for part in vim.gsplit(relative.filename, "/") do
+      note:add_tag(part)
+    end
   end
 
   local out = { id = note.id, aliases = note.aliases, tags = note.tags }
@@ -35,7 +37,7 @@ require("obsidian").setup({
   log_level = vim.log.levels.WARN,
   note_frontmatter_func = my_frontmatter_func,
   ui = {
-    enable = true,
+    enable = false,
     checkboxes = {
       [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
       ["x"] = { char = "", hl_group = "ObsidianDone" },

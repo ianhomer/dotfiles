@@ -11,8 +11,9 @@ set -o noglob
 $(shim) && cd ${ME} && . ./bin/i.sh
 
 OPTIND=1
-while getopts "ace:fhi:lm:norsuvz" o; do case "$o" in
+while getopts "ab:ce:fhi:lm:norsuvz" o; do case "$o" in
   a) all="y" ;;         # Reset global filter
+  b) context=$OPTARG ;; # Context for the run
   c) clean="y" ;;       # Clean should run cache
   e) exclude=$OPTARG ;; # Set global should run filter
   f) force="y" ;;       # Force should run
@@ -239,5 +240,5 @@ elif [[ $shouldRun -eq 0 ]] ; then
   [[ -z "$silent" ]] && log:: skip $scriptName $shouldNotRunMessage
   exit 1
 else
-  log:: run $scriptName
+  log:: run $scriptName $context
 fi

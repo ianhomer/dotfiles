@@ -127,8 +127,15 @@ leaders["y"] = { "<cmd>TestNearest<cr>", "Test nearest" }
 leaders["Y"] = { "<cmd>TestFile<cr>", "Test file" }
 leaders["q"] = { vim.diagnostic.setloclist, "Set Loc List" }
 
+if vim.g.knob_codecompanion then
+  vim.api.nvim_set_keymap("n", "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+  vim.api.nvim_set_keymap("v", "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+  leaders["a"] = { "<cmd>CodeCompanionToggle<cr>", "AI" }
+  vmap = leaders["a"]
+end
+
 if vim.g.knob_toggleterm then
-  leaders["a"] = { "<cmd>ToggleTerm<cr>", "Terminal" }
+  leaders["t"] = { "<cmd>ToggleTerm<cr>", "Terminal" }
 end
 
 if vim.g.knob_nvim_tree then

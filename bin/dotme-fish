@@ -35,7 +35,9 @@ end
 # fish_add_path ~/.npm-global/bin
 
 # Legacy way of managing python path, moving to venv way
-set python_version 3.10
+set python_version 3.12
+
+echo $PATH
 
 fish_add_path ~/bin
 fish_add_path ~/.jenv/shims
@@ -53,12 +55,16 @@ if is-silicon
   fish_remove_path $global_python_bin
   set local_python_bin /Users/ian/Library/Python/{$python_version}/bin
   fish_remove_path $local_python_bin
+  fish_remove_path /opt/homebrew/opt/python@3.9/Frameworks/Python.framework/Versions/3.9/bin
   fish_remove_path /opt/homebrew/opt/python@3.10/libexec/bin
+  fish_remove_path /opt/homebrew/opt/python@3.10/Frameworks/Python.framework/Versions/3.10/bin
+
 else
   fish_remove_path /usr/local/opt/python@3.10/Frameworks/Python.framework/Versions/3.10/bin
 end
 
 # Legacy clean up
+fish_remove_path ~/bin
 fish_remove_path ~/Library/Python/3.9/bin
 fish_remove_path ~/.local/share/venv
 

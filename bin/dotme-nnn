@@ -24,7 +24,7 @@ fi
 
 if [[ ! -d $SOURCE_DIR ]] ; then
   NNN_CHANGED=1
-  git clone git@github.com:ianhomer/nnn.git ~/projects/opensource/nnn
+  git clone git@github.com:jarun/nnn.git ~/projects/opensource/nnn
 else
   cd $SOURCE_DIR
   if [[ `git status --porcelain` ]]; then

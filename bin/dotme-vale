@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+#
+# Vale synch
+#
+
+should-run -m 7 $0 || exit 0
+
+$(shim) && cd ${ME} && . bin/i.sh
+
+if ! command -v jenv &> /dev/null ; then
+  log:: "jenv not installed"
+else
+  vale sync || echo "failed to sync vale"
+fi
+
+should-run -fu $0
+

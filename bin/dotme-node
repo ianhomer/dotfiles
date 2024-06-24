@@ -32,15 +32,20 @@ node -v
 #
 # Uninstall all npm globals so that we can use pnpm
 #
+PNPM_LOCATION=`which pnpm`
+if [[ $PNPM_LOCATION =~ "homebrew" ]] ; then
+  log::error "pnpm should be installed with corepack not brew"
+  log::info "either brew uninstall pnpm or rm /opt/homebrew/bin/pnpm and pnpx"
+fi
 
 log:: "Cleaning npm globals"
 npm ls --global --json                                                               |
   jq --raw-output  '.dependencies | keys[] | select((. != "npm") and (. != "pnpm"))' |
   xargs -r npm -g rm
 
-log:: "Updating pnpm"
-if ! command -v pnpm ; then
+if ! command -v pnpm &>/dev/null ; then
   log::info "installing pnpm"
+  corepack enable && corepack prepare pnpm@latest --activate
   npm add -g pnpm
 fi
 pnpm add -g pnpm

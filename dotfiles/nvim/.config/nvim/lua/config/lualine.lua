@@ -1,13 +1,29 @@
 local function repositoryName()
   local filename = vim.fn.expand("%:p")
   local _, j = string.find(filename, "projects/things/")
-  if j > 0 then
+  if j and j > 0 then
     local k, _ = string.find(filename, "/", j + 1)
     if k > 0 then
       return filename.sub(filename, j + 1, k - 1)
     end
   end
   return nil
+end
+
+local function decoratedRepositoryName()
+  local name = repositoryName()
+  if name and name:match('^my-') then
+     return  "🔒" .. name
+  end
+  return name
+end
+
+local function repositoryNameColor()
+  local name = repositoryName()
+  if name and name:match('^my-') then
+    return { bg = 255, fg = 0, gui = "bold" }
+  end
+  return { fg = 225, gui = "bold" }
 end
 
 local function dapStatus()
@@ -63,7 +79,7 @@ require("lualine").setup({
     lualine_a = { "mode" },
     lualine_b = { "branch" },
     lualine_c = {
-      { repositoryName, color = { fg = 225, gui = "bold" } },
+      { decoratedRepositoryName, color = repositoryNameColor },
       { dapStatus },
       { "diff",         source = diff_source },
       {
