@@ -22,7 +22,6 @@
     "eslint": "npx eslint . --ext js,ts,tsx",
     "eslint:debug": "DEBUG=eslint:cli-engine npx eslint . --ext js,ts,tsx",
     "eslint:fix": "npx eslint . --ext js,ts,tsx --fix",
-    "gherkin-lint": "npx gherkin-lint",
     "lint": "pnpm prettier && pnpm eslint && pnpm gherkin-lint",
     "lint:fix": "pnpm prettier:fix && pnpm eslint:fix",
     "prettier": "npx prettier --check .",
