@@ -129,7 +129,7 @@ function my#EnableAutoSave()
     " entry. If we save too often then tools that watch for change will get too
     " busy.
     autocmd TextChangedI,TextChangedP * ++nested silent!
-      \ call my#DebouncedSave(4000)
+      \ call my#DebouncedSave(10000)
     autocmd InsertLeave,TextChanged * ++nested silent! call my#DebouncedSave(300)
   augroup end
 endfunction
