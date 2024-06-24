@@ -467,8 +467,8 @@ require("lazy").setup(
       end,
     },
     {
-      "kyazdani42/nvim-tree.lua",
-      dependencies = "kyazdani42/nvim-web-devicons",
+      "nvim-tree/nvim-tree.lua",
+      dependencies = "nvim-tree/nvim-web-devicons",
       config = function()
         require("config.nvimtree")
       end,
