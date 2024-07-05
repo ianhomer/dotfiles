@@ -50,12 +50,13 @@ none_ls.setup({
       filetypes = { "cucumber" },
     }),
     diagnostics.yamllint,
-    diagnostics.proselint,
+    -- experimenting with proselint in vale
+    -- diagnostics.proselint,
     none_ls_legacy.code_actions.eslint_d,
     completion.spell.with({
       filetypes = { "markdown" },
     }),
-    code_actions.proselint,
+    -- code_actions.proselint,
     code_actions.gitsigns
   },
 })
