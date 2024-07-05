@@ -28,7 +28,7 @@ end
 
 local function dapStatus()
   if not vim.g.knob_dap then
-    return nil
+    return ""
   end
   return require('dap').status()
 end
