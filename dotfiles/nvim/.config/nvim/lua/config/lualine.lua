@@ -7,12 +7,26 @@ local function repositoryName()
       return filename.sub(filename, j + 1, k - 1)
     end
   end
-  return nil
+  _, j = string.find(filename, "projects/")
+  if j and j > 0 then
+    local k, _ = string.find(filename, "/", j + 1)
+    if k > 0 then
+      local l, _ = string.find(filename, "/", k + 1)
+      if k > 0 then
+        return filename.sub(filename, j + 1, l - 1)
+      end
+    end
+  end
+  _, j = string.find(filename, ".dotfiles/")
+  if j and j > 0 then
+    return ".dotfiles"
+  end
+  return ""
 end
 
 local function decoratedRepositoryName()
   local name = repositoryName()
-  if name and name:match('^my-') then
+  if name and name:match('^my--') then
      return  "🔒" .. name
   end
   return name
@@ -20,7 +34,7 @@ end
 
 local function repositoryNameColor()
   local name = repositoryName()
-  if name and name:match('^my-') then
+  if name and name:match('^my--') then
     return { bg = 255, fg = 0, gui = "bold" }
   end
   return { fg = 225, gui = "bold" }
