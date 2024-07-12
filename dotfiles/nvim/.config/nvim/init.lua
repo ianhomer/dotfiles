@@ -1,5 +1,3 @@
-local g = vim.g
-local o = vim.o
 local nvim_set_var = vim.api.nvim_set_var
 
 vim.opt.shell = "/bin/bash"
