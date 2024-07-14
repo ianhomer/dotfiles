@@ -241,12 +241,14 @@ whichKey.register(extras, { prefix = "<leader>," })
 whichKey.register(vmap, { prefix = "<leader>", mode = "v" })
 
 local cheats = {}
-cheats["'"] = findNamedFile
-cheats["m"] = { ":let @m=@+<cr>", ":let @m=@+" }
-cheats["M"] = { 'viw"mp<cr>', 'viw"mp' }
-cheats["a"] = { ":messages<cr>", ":messages" }
-cheats["s"] = { ":let @+ = execute('messages')<cr>", ":let @+ = execute('messages')" }
-cheats["T"] = { "<cmd>let test#project_root=@0<cr>", "Test dir to clipboard" }
+whichKey.add({
+  { "\\'", findNamedFile },
+  { "\\m", ":let @m=@+<cr>", desc = ":let @m=@+" },
+  { "\\M", 'viw"mp<cr>', desc = 'viw"mp' },
+  { "\\a", ":messages<cr>", desc = ":messages" },
+  { "\\s", ":let @+ = execute('messages')<cr>", desc = ":let @+ = execute('messages')" },
+  { "\\T", "<cmd>let test#project_root=@0<cr>", desc = "Test dir to clipboard" },
+})
 
 whichKey.register(cheats, { prefix = "\\" })
 
@@ -256,38 +258,38 @@ whichKey.add({
 })
 
 if vim.g.knob_dap then
-  local runners = {}
-  runners["m"] = { "<cmd>lua require'dap'.continue()<CR>", "continue (F8)" }
+  whichKey.add({
+    { "<leader>xm", "<cmd>lua require'dap'.continue()<CR>", desc = "continue (F8)" },
+
+    { "<leader>xn", "<cmd>lua require'dap'.run_last()<CR>", desc = "terminate" },
+    { "<leader>xb", "<cmd>lua require'dap'.terminate()<CR>", desc = "terminate" },
+    { "<leader>xt", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", desc = "toggle breakpoint" },
+    { "<leader>xy", "<cmd>lua require'dap'.list_breakpoints()<CR>", desc = "list breakpoints" },
+    { "<leader>xh", "<cmd>lua require'dap'.clear_breakpoints()<CR>", desc = "clear breakpoints" },
+    { "<leader>xg", "<cmd>lua require'dap'.set_exception_breakpoints()<CR>", desc = "exception breakpoints" },
+
+    { "<leader>xz", "<cmd>lua require'dap'.step_out()<CR>", desc = "step out" },
+    { "<leader>xx", "<cmd>lua require'dap'.step_over()<CR>", desc = "step over" },
+
+    { "<leader>xc", "<cmd>lua require'dap'.step_into()<CR>", desc = "step into" },
+    { "<leader>xa", "<cmd>lua require'dap'.up()<CR>", desc = "up stack" },
+    { "<leader>xs", "<cmd>lua require'dap'.down()<CR>", desc = "down stack" },
+    { "<leader>xv", "<cmd>lua require'telescope'.extensions.dap.variables{}<CR>", desc = "variables" },
+    { "<leader>xr", "<cmd>lua require'dap'.repl.open()<CR>", desc = "REPL" },
+    { "<leader>xd", "<cmd>Telescope dap commands<CR>", desc = "DAP commands" },
+    {
+      "<leader>xf",
+      "<cmd>lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>",
+      desc = "Scopes",
+    },
+    { "<leader>xo", "<cmd>lua require'dapui'.open()<CR>", desc = "UI Open" },
+    { "<leader>xk", "<cmd>lua require'dapui'.close()<CR>", desc = "UI Close" },
+    { "<leader>xi", "<cmd>lua require'dapui'.toggle()<CR>", desc = "UI Toggle" },
+    { "<leader>xp", "<cmd>lua require'dapui'.eval()<CR>", desc = "Show Variable" },
+  })
+
   vim.keymap.set("n", "<F8>", "<cmd>lua require'dap'.continue()<CR>")
-
-  runners["n"] = { "<cmd>lua require'dap'.run_last()<CR>", "terminate" }
-  runners["b"] = { "<cmd>lua require'dap'.terminate()<CR>", "terminate" }
-  runners["t"] = { "<cmd>lua require'dap'.toggle_breakpoint()<CR>", "toggle breakpoint" }
-  runners["y"] = { "<cmd>lua require'dap'.list_breakpoints()<CR>", "list breakpoints" }
-  runners["h"] = { "<cmd>lua require'dap'.clear_breakpoints()<CR>", "clear breakpoints" }
-  runners["g"] = { "<cmd>lua require'dap'.set_exception_breakpoints()<CR>", "exception breakpoints" }
-
-  runners["z"] = { "<cmd>lua require'dap'.step_out()<CR>", "step out" }
-  runners["x"] = { "<cmd>lua require'dap'.step_over()<CR>", "step over" }
   vim.keymap.set("n", "<F9>", "<cmd>lua require'dap'.step_over()<CR>")
-
-  runners["c"] = { "<cmd>lua require'dap'.step_into()<CR>", "step into" }
-  runners["a"] = { "<cmd>lua require'dap'.up()<CR>", "up stack" }
-  runners["s"] = { "<cmd>lua require'dap'.down()<CR>", "down stack" }
-  runners["v"] = { "<cmd>lua require'telescope'.extensions.dap.variables{}<CR>", "variables" }
-  runners["r"] = { "<cmd>lua require'dap'.repl.open()<CR>", "REPL" }
-  runners["d"] = { "<cmd>Telescope dap commands<CR>", "DAP commands" }
-  runners["f"] = {
-    "<cmd>lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>",
-    "Scopes",
-  }
-  runners["o"] = { "<cmd>lua require'dapui'.open()<CR>", "UI Open" }
-
-  runners["k"] = { "<cmd>lua require'dapui'.close()<CR>", "UI Close" }
-  runners["i"] = { "<cmd>lua require'dapui'.toggle()<CR>", "UI Toggle" }
-  runners["p"] = { "<cmd>lua require'dapui'.eval()<CR>", "Show Variable" }
-
-  whichKey.register(runners, { prefix = "<leader>x" })
 end
 
 local augmentExisting = {}
