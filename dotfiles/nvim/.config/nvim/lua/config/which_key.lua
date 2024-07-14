@@ -56,19 +56,18 @@ local findNamedFile = {
 leaders["xa"] = { "<cmd>CloseTerms<cr> | :xa<cr>", "Exit Vim" }
 
 local my = require("myutils")
-leaders["us"] = { my.toggle_function("spell"), "Toggle Spell" }
-leaders["uw"] = { my.toggle_function("wrap"), "Toggle Wrap" }
+leaders["us"] = { my.toggle_function("spell"), "Toggle spell" }
+leaders["uw"] = { my.toggle_function("wrap"), "Toggle wrap" }
 
 if vim.g.knob_telescope then
   -- Find
   whichKey.add({
     { "<leader><space>", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-    { "<leader>f", "<cmd>Telescope find_files hidden=true<cr>", desc = "Find File" },
-    { "<leader>h", "<cmd>Telescope oldfiles only_cwd=true<cr>", desc = "File History" },
+    { "<leader>f", "<cmd>Telescope find_files hidden=true<cr>", desc = "Find file" },
+    { "<leader>h", "<cmd>Telescope oldfiles only_cwd=true<cr>", desc = "File history" },
+    { "<leader>,fH", "<cmd>Telescope frecency<cr>", desc = "Frequent" },
+    { "<leader>,fF", findNamedFile, desc = "Find named file" },
   })
-
-  extras["fH"] = { "<cmd>Telescope frecency<cr>", "Frequent" }
-  extras["fF"] = findNamedFile
 
   -- Search
   whichKey.add({
