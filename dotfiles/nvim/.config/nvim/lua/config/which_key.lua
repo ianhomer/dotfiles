@@ -24,12 +24,6 @@ local leaders = {}
 local extras = {}
 local vmap = {}
 
--- {"/", group = "extras" },
--- {"[", group = "prev" },
--- {"]", group = "next" },
--- {"g", group = "goto" },
--- {"u", group = "ui" },
-
 -- Core navigation
 whichKey.add({
   { "/", group = "extras" },
@@ -117,16 +111,20 @@ if vim.g.knob_telescope then
   extras["uz"] = { "<cmd>ZenMode<cr>", "Zen mode" }
 end
 
-leaders[";"] = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "LSP Format" }
-leaders[":"] = { "<cmd>lua vim.lsp.buf.range_formatting()<cr>", "LSP Range Format" }
+whichKey.add({
+  { "<leader>;", "<cmd>lua vim.lsp.buf.formatting()<cr>", desc = "LSP Format" },
+  { "<leader>:", "<cmd>lua vim.lsp.buf.range_formatting()<cr>", desc = "LSP Range Format" },
+})
 
 -- Modes
-leaders["5"] = { "<cmd>lua require'config/none_ls'.setLevel(3)<cr>", "Core Lints" }
-leaders["6"] = { "<cmd>lua require'config/none_ls'.toggle()<cr>", "Toggle Lints" }
-leaders["7"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Trouble File" }
-leaders["&"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble All" }
-leaders["8"] = { "<cmd>call my#ToggleBlame()<cr>", "Blame" }
-leaders["9"] = { "<cmd>set wrap! | set wrap?<cr>", "Wrap" }
+whichKey.add({
+  { "<leader>5", "<cmd>lua require'config/none_ls'.setLevel(3)<cr>", desc = "Core Lints" },
+  { "<leader>6", "<cmd>lua require'config/none_ls'.toggle()<cr>", desc = "Toggle Lints" },
+  { "<leader>7", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Trouble File" },
+  { "<leader>&", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Trouble All" },
+  { "<leader>8", "<cmd>call my#ToggleBlame()<cr>", desc = "Blame" },
+  { "<leader>9", "<cmd>set wrap! | set wrap?<cr>", desc = "Wrap" },
+})
 
 if vim.g.knob_codewindow then
   leaders["m"] = { "<cmd>lua require'codewindow'.toggle_minimap()<cr>", "Minimap" }
@@ -163,10 +161,10 @@ if vim.g.knob_trouble then
   leaders["xQ"] = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix List (Trouble)" }
 end
 
-  whichKey.add({
-   { "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>", desc = "Diagnostics" },
-   { "<leader>cc", "<cmd>lua require'cmp'.complete()<cr>", desc = "Autocompletion menu" }
-  })
+whichKey.add({
+  { "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>", desc = "Diagnostics" },
+  { "<leader>cc", "<cmd>lua require'cmp'.complete()<cr>", desc = "Autocompletion menu" },
+})
 
 if vim.g.knob_hop then
   whichKey.add({
