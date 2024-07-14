@@ -182,22 +182,35 @@ if vim.g.knob_hop then
 end
 
 if vim.g.knob_refactoring then
-  leaders["rc"] = { ":lua require('refactoring').debug.cleanup({})<cr>", "Refactor debug cleanup" }
-  leaders["rn"] =
-    { ":lua require('refactoring').debug.print_var({ normal = true })<cr>", "Refactor debug print variable" }
+  whichKey.add({
+    { "<leader>rc", ":lua require('refactoring').debug.cleanup({})<cr>", desc = "Refactor debug cleanup" },
+    {
+      "<leader>rn",
+      ":lua require('refactoring').debug.print_var({ normal = true })<cr>",
+      desc = "Refactor debug print variable",
+    },
 
-  leaders["rb"] = {
-    [[ <cmd>lua require('refactoring').refactor('Extract Block')<cr>]],
-    "Extract Block",
-  }
-  leaders["rbf"] =
-    { [[ <cmd>lua require('refactoring').refactor('Extract Block To File')<cr>]], "Extract Block to File" }
-  leaders["ri"] = {
-    [[ <cmd>lua require('refactoring').refactor('Inline Variable')<cr>]],
-    "Inline Variable",
-  }
-  leaders["rd"] =
-    { ":lua require('refactoring').debug.print_var({ normal = true })<cr>", "Refactor debug print variable" }
+    {
+      "<leader>rb",
+      [[ <cmd>lua require('refactoring').refactor('Extract Block')<cr>]],
+      desc = "Extract Block",
+    },
+    {
+      "<leader>rbf",
+      [[ <cmd>lua require('refactoring').refactor('Extract Block To File')<cr>]],
+      desc = "Extract Block to File",
+    },
+    {
+      "<leader>ri",
+      [[ <cmd>lua require('refactoring').refactor('Inline Variable')<cr>]],
+      desc = "Inline Variable",
+    },
+    {
+      "<leader>rd",
+      ":lua require('refactoring').debug.print_var({ normal = true })<cr>",
+      desc = "Refactor debug print variable",
+    },
+  })
 
   vmap["re"] = {
     [[ <esc><cmd>lua require('refactoring').refactor('Extract Function')<cr>]],
