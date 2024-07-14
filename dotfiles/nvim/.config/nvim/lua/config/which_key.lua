@@ -31,18 +31,20 @@ local vmap = {}
 -- {"u", group = "ui" },
 
 -- Core navigation
-whichKey.register({
-  ["g"] = { name = "+goto" },
-  ["]"] = { name = "+next" },
-  ["["] = { name = "+prev" },
-  ["/"] = { name = "+extras" },
-  ["u"] = { name = "+ui" },
+whichKey.add({
+  { "/", group = "extras" },
+  { "[", group = "prev" },
+  { "]", group = "next" },
+  { "g", group = "goto" },
+  { "u", group = "ui" },
 })
 
-leaders["c"] = { name = "+code" }
-leaders["j"] = { name = "+thingity" }
-leaders["/"] = { name = "+extras" }
-leaders["x"] = { name = "+fix" }
+whichKey.add({
+  { "<leader>c", group = "code" },
+  { "<leader>j", group = "thingity" },
+  { "<leader>/", group = "extras" },
+  { "<leader>x", group = "fix" },
+})
 
 extras["b"] = { name = "+buffer" }
 extras["f"] = { name = "+find" }
@@ -65,15 +67,19 @@ leaders["uw"] = { my.toggle_function("wrap"), "Toggle Wrap" }
 
 if vim.g.knob_telescope then
   -- Find
-  leaders["<space>"] = { "<cmd>Telescope buffers<cr>", "Buffers" }
-  leaders["f"] = { "<cmd>Telescope find_files hidden=true<cr>", "Find File" }
-  leaders["h"] = { "<cmd>Telescope oldfiles only_cwd=true<cr>", "File History" }
+  whichKey.add({
+    { "<leader><space>", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+    { "<leader>f", "<cmd>Telescope find_files hidden=true<cr>", desc = "Find File" },
+    { "<leader>h", "<cmd>Telescope oldfiles only_cwd=true<cr>", desc = "File History" },
+  })
 
   extras["fH"] = { "<cmd>Telescope frecency<cr>", "Frequent" }
   extras["fF"] = findNamedFile
 
   -- Search
-  leaders["s"] = { "<cmd>Telescope live_grep<cr>", "Search" }
+  whichKey.add({
+    { "<keader>s", "<cmd>Telescope live_grep<cr>", desc = "Search" },
+  })
 
   extras["sA"] = { "<cmd>Telescope live_grep hidden=true<cr>", "Search" }
   extras["sC"] = { "<cmd>Telescope commands<cr>", "Commands" }
@@ -157,10 +163,15 @@ if vim.g.knob_trouble then
   leaders["xQ"] = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix List (Trouble)" }
 end
 
-leaders["e"] = { "<cmd>lua vim.diagnostic.open_float()<cr>", "Diagnostics" }
-leaders["cc"] = { "beli<cmd>lua require'cmp'.complete()<cr>", "Autocompletion menu" }
+  whichKey.add({
+   { "<leader>e", "<cmd>lua vim.diagnostic.open_float()<cr>", desc = "Diagnostics" },
+   { "<leader>cc", "<cmd>lua require'cmp'.complete()<cr>", desc = "Autocompletion menu" }
+  })
+
 if vim.g.knob_hop then
-  leaders["h"] = { "<cmd>lua require'hop'.hint_words()<cr>", "Hop" }
+  whichKey.add({
+    { "<leader>h", "<cmd>lua require'hop'.hint_words()<cr>", desc = "Hop" },
+  })
 end
 
 if vim.g.knob_refactoring then
@@ -219,10 +230,10 @@ cheats["T"] = { "<cmd>let test#project_root=@0<cr>", "Test dir to clipboard" }
 
 whichKey.register(cheats, { prefix = "\\" })
 
- whichKey.add{
+whichKey.add({
   { "gw", ":FindWord<cr>", desc = "Find word" },
   { "gW", ":GrepWord<cr>", desc = "Grep word" },
-}
+})
 
 if vim.g.knob_dap then
   local runners = {}
