@@ -53,7 +53,7 @@ local findNamedFile = {
 
 local my = require("myutils")
 whichKey.add({
-  { "<leader>xa", "<cmd>CloseTerms<cr> | :xa<cr>", desc = "Exit Vim" },
+  { "<leader>,xa", "<cmd>CloseTerms<cr> | :xa<cr>", desc = "Exit Vim" },
   { "<leader>us", my.toggle_function("spell"), desc = "Toggle spell" },
   { "<leader>uw", my.toggle_function("wrap"), desc = "Toggle wrap" },
 })
@@ -87,7 +87,7 @@ if vim.g.knob_telescope then
     { "<leader>,sg", "<cmd>Telescope grep_string<cr>", desc = "Grep String" },
     { "<leader>,sk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
     { "<leader>,sl", "<cmd>Telescope loclist<cr>", desc = "Location List" },
-    { "<leader>,sl", "<cmd>Telescope lsp_document_symbols<cr>", desc = "LSP document symbols" },
+    { "<leader>,sL", "<cmd>Telescope lsp_document_symbols<cr>", desc = "LSP document symbols" },
     { "<leader>,sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
     { "<leader>,so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
     { "<leader>,sq", "<cmd>Telescope quickfix<cr>", desc = "Quick Fix" },
@@ -160,8 +160,8 @@ end
 
 if vim.g.knob_trouble then
   whichKey.add({
-    { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
-    { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+    { "<leader>,xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+    { "<leader>,xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
     { "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
     { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
   })
