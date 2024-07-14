@@ -20,10 +20,6 @@ whichKey.setup({
   },
 })
 
-local leaders = {}
-local extras = {}
-local vmap = {}
-
 -- Core navigation
 whichKey.add({
   { "/", group = "extras" },
@@ -145,8 +141,9 @@ whichKey.add({
 if vim.g.knob_codecompanion then
   vim.api.nvim_set_keymap("n", "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
   vim.api.nvim_set_keymap("v", "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
-  leaders["a"] = { "<cmd>CodeCompanionToggle<cr>", "AI" }
-  vmap = leaders["a"]
+  whichKey.add({
+    { "<leader>a", "<cmd>CodeCompanionToggle<cr>", desc = "AI" },
+  })
 end
 
 if vim.g.knob_toggleterm then
@@ -212,35 +209,45 @@ if vim.g.knob_refactoring then
     },
   })
 
-  vmap["re"] = {
-    [[ <esc><cmd>lua require('refactoring').refactor('Extract Function')<cr>]],
-    "Extract function",
-  }
-  vmap["rr"] = {
-    "<esc><cmd>lua require('telescope').extensions.refactoring.refactors()<cr>",
-    "Refactor select",
-  }
-  vmap["rd"] = { ":lua require('refactoring').debug.print_var({ normal = true})<cr>", "Refactor debug print variable" }
+  whichKey.add({
+    {
+      mode = "v",
+      {
+        "re",
+        [[ <esc><cmd>lua require('refactoring').refactor('Extract Function')<cr>]],
+        desc = "Extract function",
+      },
+      {
+        "rr",
+        "<esc><cmd>lua require('telescope').extensions.refactoring.refactors()<cr>",
+        desc = "Refactor select",
+      },
+      {
+        "rd",
+        ":lua require('refactoring').debug.print_var({ normal = true})<cr>",
+        desc = "Refactor debug print variable",
+      },
 
-  vmap["rf"] = {
-    [[ <esc><cmd>lua require('refactoring').refactor('Extract Function To File')<cr>]],
-    "Extract function to file",
-  }
-  vmap["rv"] = {
-    [[<esc><cmd>lua require('refactoring').refactor('Extract Variable')<cr>]],
-    "Extract variable",
-  }
-  vmap["ri"] = {
-    [[ <esc><cmd>lua require('refactoring').refactor('Inline Variable')<cr>]],
-    "Inline variable",
-  }
+      {
+        "rf",
+        [[ <esc><cmd>lua require('refactoring').refactor('Extract Function To File')<cr>]],
+        desc = "Extract function to file",
+      },
+      {
+        "rv",
+        [[<esc><cmd>lua require('refactoring').refactor('Extract Variable')<cr>]],
+        desc = "Extract variable",
+      },
+      {
+        "ri",
+        [[ <esc><cmd>lua require('refactoring').refactor('Inline Variable')<cr>]],
+        desc = "Inline variable",
+      },
+    },
+  })
 end
 
-whichKey.register(leaders, { prefix = "<leader>" })
-whichKey.register(extras, { prefix = "<leader>," })
-whichKey.register(vmap, { prefix = "<leader>", mode = "v" })
 
-local cheats = {}
 whichKey.add({
   { "\\'", findNamedFile },
   { "\\m", ":let @m=@+<cr>", desc = ":let @m=@+" },
@@ -249,8 +256,6 @@ whichKey.add({
   { "\\s", ":let @+ = execute('messages')<cr>", desc = ":let @+ = execute('messages')" },
   { "\\T", "<cmd>let test#project_root=@0<cr>", desc = "Test dir to clipboard" },
 })
-
-whichKey.register(cheats, { prefix = "\\" })
 
 whichKey.add({
   { "gw", ":FindWord<cr>", desc = "Find word" },
@@ -292,21 +297,22 @@ if vim.g.knob_dap then
   vim.keymap.set("n", "<F9>", "<cmd>lua require'dap'.step_over()<CR>")
 end
 
-local augmentExisting = {}
 if vim.g.knob_neoscroll then
   -- neoscroll takes over scrolling short cuts
-  augmentExisting["<c-f>"] = { desc = "⬇" } -- page down
-  augmentExisting["<c-d>"] = { desc = "⇩" } -- page half down
-  augmentExisting["<c-e>"] = { desc = "↓" } -- line down
-  augmentExisting["<c-b>"] = { desc = "⬆" } -- page up
-  augmentExisting["<c-u>"] = { desc = "⇧" } -- page half up
-  augmentExisting["<c-y>"] = { desc = "↑" } -- line up
+  whichKey.add({
+    { "<c-f>", desc = "⬇" }, -- page down
+    { "<c-d>", desc = "⇩" }, -- page half down
+    { "<c-e>", desc = "↓" }, -- line down
+    { "<c-b>", desc = "⬆" }, -- page up
+    { "<c-u>", desc = "⇧" }, -- page half up
+    { "<c-y>", desc = "↑" }, -- line up
+  })
 end
-augmentExisting["<cr>"] = { desc = "Start select block" }
-augmentExisting["%"] = { desc = "Jump bracket" }
-augmentExisting["s"] = { desc = "Jump lightspeed" }
-augmentExisting["S"] = { desc = "Jump back lightspeed" }
-augmentExisting["^"] = { desc = "Start of line" }
-augmentExisting["!"] = { desc = "External program" }
-
-whichKey.register(augmentExisting)
+whichKey.add({
+  { "<cr>", desc = "Start select block" },
+  { "%", desc = "Jump bracket" },
+  { "s", desc = "Jump lightspeed" },
+  { "S", desc = "Jump back lightspeed" },
+  { "^", desc = "Start of line" },
+  { "!", desc = "External program" },
+})
