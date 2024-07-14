@@ -40,24 +40,27 @@ whichKey.add({
   { "<leader>x", group = "fix" },
 })
 
-extras["b"] = { name = "+buffer" }
-extras["f"] = { name = "+find" }
-extras["g"] = { name = "+git" }
-extras["gh"] = { name = "+hunks" }
-extras["gd"] = { name = "+diff" }
-extras["s"] = { name = "+search" }
-extras["."] = { name = "+profile" }
+whichKey.add({
+  { "<leader>,b", group = "buffer" },
+  { "<leader>,f", group = "find" },
+  { "<leader>,g", group = "git" },
+  { "<leader>,gh", group = "hunks" },
+  { "<leader>,gd", group = "diff" },
+  { "<leader>,s", group = "search" },
+  { "<leader>,.", group = "profile" },
+})
 
 local findNamedFile = {
   "<cmd>lua require'telescope.builtin'.find_files({find_command={'fd', '-H', '-i', vim.fn.expand('<cword>')}})<cr>",
   "Find named file",
 }
 
-leaders["xa"] = { "<cmd>CloseTerms<cr> | :xa<cr>", "Exit Vim" }
-
 local my = require("myutils")
-leaders["us"] = { my.toggle_function("spell"), "Toggle spell" }
-leaders["uw"] = { my.toggle_function("wrap"), "Toggle wrap" }
+whichKey.add({
+  { "<leader>xa", "<cmd>CloseTerms<cr> | :xa<cr>", desc = "Exit Vim" },
+  { "<leader>us", my.toggle_function("spell"), desc = "Toggle spell" },
+  { "<leader>uw", my.toggle_function("wrap"), desc = "Toggle wrap" },
+})
 
 if vim.g.knob_telescope then
   -- Find
@@ -71,43 +74,46 @@ if vim.g.knob_telescope then
 
   -- Search
   whichKey.add({
-    { "<keader>s", "<cmd>Telescope live_grep<cr>", desc = "Search" },
+    { "<leader>s", "<cmd>Telescope live_grep<cr>", desc = "Search" },
+    { "<leader>,sA", "<cmd>Telescope live_grep hidden=true<cr>", desc = "Search" },
+    { "<leader>,sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
+    { "<leader>,sH", "<cmd>Telescope highlights<cr>", desc = "Highlights" },
+    { "<leader>,sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+    { "<leader>,sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
+    { "<leader>,sS", "<cmd>Fuzzy<cr>", desc = "Fuzzy Search" },
+    { "<leader>,sT", "<cmd>Telescope tags<cr>", desc = "Tags" },
+    { "<leader>,sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
+    { "<leader>,sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
+    { "<leader>,sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+    { "<leader>,sd", "<cmd>Telescope diagnostics<cr>", desc = "Diagnostics" },
+    { "<leader>,sh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
+    { "<leader>,sj", "<cmd>Telescope jumplist<cr>", desc = "Jump List" },
+    { "<leader>,sg", "<cmd>Telescope grep_string<cr>", desc = "Grep String" },
+    { "<leader>,sk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
+    { "<leader>,sl", "<cmd>Telescope loclist<cr>", desc = "Location List" },
+    { "<leader>,sl", "<cmd>Telescope lsp_document_symbols<cr>", desc = "LSP document symbols" },
+    { "<leader>,sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+    { "<leader>,so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
+    { "<leader>,sq", "<cmd>Telescope quickfix<cr>", desc = "Quick Fix" },
+    { "<leader>,sr", "<cmd>Telescope registers<cr>", desc = "Registers" },
+    { "<leader>,st", "<cmd>Telescope<cr>", desc = "Telescope" },
+    { "<leader>,sx", ":reg<cr>", desc = "Registers (:reg)" },
+    { "<leader>,s4", "<cmd>Telescope search_history<cr>", desc = "Search History" },
+    { "<leader>,s9", "<cmd>Telescope spell_suggest<cr>", desc = "Spell Suggest" },
   })
 
-  extras["sA"] = { "<cmd>Telescope live_grep hidden=true<cr>", "Search" }
-  extras["sC"] = { "<cmd>Telescope commands<cr>", "Commands" }
-  extras["sH"] = { "<cmd>Telescope highlights<cr>", "Highlights" }
-  extras["sM"] = { "<cmd>Telescope man_pages<cr>", "Man Pages" }
-  extras["sR"] = { "<cmd>Telescope resume<cr>", "Resume" }
-  extras["sS"] = { "<cmd>Fuzzy<cr>", "Fuzzy Search" }
-  extras["sT"] = { "<cmd>Telescope tags<cr>", "Tags" }
-  extras["sa"] = { "<cmd>Telescope autocommands<cr>", "Auto Commands" }
-  extras["sb"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Buffer" }
-  extras["sc"] = { "<cmd>Telescope command_history<cr>", "Command History" }
-  extras["sd"] = { "<cmd>Telescope diagnostics<cr>", "Diagnostics" }
-  extras["sh"] = { "<cmd>Telescope help_tags<cr>", "Help Tags" }
-  extras["sj"] = { "<cmd>Telescope jumplist<cr>", "Jump List" }
-  extras["sg"] = { "<cmd>Telescope grep_string<cr>", "Grep String" }
-  extras["sk"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" }
-  extras["sl"] = { "<cmd>Telescope loclist<cr>", "Location List" }
-  extras["sl"] = { "<cmd>Telescope lsp_document_symbols<cr>", "LSP document symbols" }
-  extras["sm"] = { "<cmd>Telescope marks<cr>", "Jump to Mark" }
-  extras["so"] = { "<cmd>Telescope vim_options<cr>", "Options" }
-  extras["sq"] = { "<cmd>Telescope quickfix<cr>", "Quick Fix" }
-  extras["sr"] = { "<cmd>Telescope registers<cr>", "Registers" }
-  extras["st"] = { "<cmd>Telescope<cr>", "Telescope" }
-  extras["sx"] = { ":reg<cr>", "Registers (:reg)" }
-  extras["s4"] = { "<cmd>Telescope search_history<cr>", "Search History" }
-  extras["s9"] = { "<cmd>Telescope spell_suggest<cr>", "Spell Suggest" }
-
   -- Git
-  extras["gtb"] = { "<cmd>Telescope git_bcommits<cr>", "Buffer Commits" }
-  extras["gt1"] = { "<cmd>Telescope git_commits<cr>", "Git Commits" }
-  extras["gt2"] = { "<cmd>Telescope: git_branches<cr>", "Git Branches" }
-  extras["gt3"] = { "<cmd>Telescope git_stash<cr>", "Git Stash" }
+  whichKey.add({
+    { "<leader>,gtb", "<cmd>Telescope git_bcommits<cr>", desc = "Buffer Commits" },
+    { "<leader>,gt1", "<cmd>Telescope git_commits<cr>", desc = "Git Commits" },
+    { "<leader>,gt2", "<cmd>Telescope: git_branches<cr>", desc = "Git Branches" },
+    { "<leader>,gt3", "<cmd>Telescope git_stash<cr>", desc = "Git Stash" },
+  })
 
   -- UI
-  extras["uz"] = { "<cmd>ZenMode<cr>", "Zen mode" }
+  whichKey.add({
+    { "<leader>,uz", "<cmd>ZenMode<cr>", desc = "Zen mode" },
+  })
 end
 
 whichKey.add({
@@ -126,13 +132,15 @@ whichKey.add({
 })
 
 if vim.g.knob_codewindow then
-  leaders["m"] = { "<cmd>lua require'codewindow'.toggle_minimap()<cr>", "Minimap" }
+  whichKey.add({ { "<leader>m", "<cmd>lua require'codewindow'.toggle_minimap()<cr>", desc = "Minimap" } })
 end
 
 -- Dev
-leaders["y"] = { "<cmd>TestNearest<cr>", "Test nearest" }
-leaders["Y"] = { "<cmd>TestFile<cr>", "Test file" }
-leaders["q"] = { vim.diagnostic.setloclist, "Set Loc List" }
+whichKey.add({
+  { "<leader>y", "<cmd>TestNearest<cr>", desc = "Test nearest" },
+  { "<leader>Y", "<cmd>TestFile<cr>", desc = "Test file" },
+  { "<leader>q", vim.diagnostic.setloclist, desc = "Set Loc List" },
+})
 
 if vim.g.knob_codecompanion then
   vim.api.nvim_set_keymap("n", "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
@@ -142,22 +150,24 @@ if vim.g.knob_codecompanion then
 end
 
 if vim.g.knob_toggleterm then
-  leaders["t"] = { "<cmd>ToggleTerm<cr>", "Terminal" }
+  whichKey.add({ { "<leader>t", "<cmd>ToggleTerm<cr>", desc = "Terminal" } })
 end
 
 if vim.g.knob_nvim_tree then
-  leaders["n"] = { "<cmd>NvimTreeToggle<cr>", "Files" }
+  whichKey.add({ { "<leader>n", "<cmd>NvimTreeToggle<cr>", desc = "Files" } })
 end
 
 if vim.g.knob_peek then
-  leaders["p"] = { "<cmd>PeekOpen<cr>", "Markdown Peek" }
+  whichKey.add({ { "<leader>p", "<cmd>PeekOpen<cr>", desc = "Markdown Peek" } })
 end
 
 if vim.g.knob_trouble then
-  leaders["xx"] = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics (Trouble)" }
-  leaders["xX"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics (Trouble)" }
-  leaders["xL"] = { "<cmd>TroubleToggle loclist<cr>", "Location List (Trouble)" }
-  leaders["xQ"] = { "<cmd>TroubleToggle quickfix<cr>", "Quickfix List (Trouble)" }
+  whichKey.add({
+    { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
+    { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
+    { "<leader>xL", "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
+    { "<leader>xQ", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+  })
 end
 
 whichKey.add({
