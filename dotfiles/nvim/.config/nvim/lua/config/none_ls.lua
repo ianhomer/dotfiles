@@ -2,13 +2,14 @@ local M = {}
 
 local none_ls = require("null-ls")
 local none_ls_legacy = require("config/none_ls_legacy")
+local none_ls_custom = require("config/none_ls_custom")
 local formatting = none_ls.builtins.formatting
 local diagnostics = none_ls.builtins.diagnostics
 local completion = none_ls.builtins.completion
 local code_actions = none_ls.builtins.code_actions
 
 none_ls.setup({
-  debug = false,
+  debug = true,
   sources = {
     -- order is important, prettier should be before eslint
     formatting.prettierd.with({
@@ -45,7 +46,7 @@ none_ls.setup({
     }),
     diagnostics.mypy,
     diagnostics.tidy,
-    diagnostics.vale,
+    none_ls_custom.diagnostics.vale,
     diagnostics.trail_space.with({
       filetypes = { "cucumber" },
     }),
