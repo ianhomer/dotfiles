@@ -65,7 +65,7 @@ if vim.g.knob_telescope then
     { "<leader>f", "<cmd>Telescope find_files hidden=true<cr>", desc = "Find file" },
     { "<leader>h", "<cmd>Telescope oldfiles only_cwd=true<cr>", desc = "File history" },
     { "<leader>,fH", "<cmd>Telescope frecency<cr>", desc = "Frequent" },
-    { "<leader>,fF", findNamedFile, desc = "Find named file" },
+    -- { "<leader>,fF", findNamedFile, desc = "Find named file" },
   })
 
   -- Search
@@ -249,7 +249,7 @@ end
 
 
 whichKey.add({
-  { "\\'", findNamedFile },
+  -- { "\\'", findNamedFile },
   { "\\m", ":let @m=@+<cr>", desc = ":let @m=@+" },
   { "\\M", 'viw"mp<cr>', desc = 'viw"mp' },
   { "\\a", ":messages<cr>", desc = ":messages" },

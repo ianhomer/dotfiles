@@ -46,7 +46,7 @@ none_ls.setup({
     }),
     diagnostics.mypy,
     diagnostics.tidy,
-    none_ls_custom.diagnostics.vale,
+    diagnostics.vale,
     diagnostics.trail_space.with({
       filetypes = { "cucumber" },
     }),

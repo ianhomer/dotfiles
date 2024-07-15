@@ -266,7 +266,7 @@ require("lazy").setup(
       "nvimtools/none-ls-extras.nvim",
     },
     {
-      "nvimtools/none-ls.nvim",
+      "ianhomer/none-ls.nvim",
       config = function()
         require("config.none_ls")
       end,
@@ -493,6 +493,7 @@ require("lazy").setup(
     },
     {
       "folke/which-key.nvim",
+      version = "3.2.0",
       event = "VeryLazy",
       config = function()
         require("config.which_key")
