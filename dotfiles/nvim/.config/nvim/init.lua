@@ -266,7 +266,7 @@ require("lazy").setup(
       "nvimtools/none-ls-extras.nvim",
     },
     {
-      "ianhomer/none-ls.nvim",
+      "nvimtools/none-ls.nvim",
       config = function()
         require("config.none_ls")
       end,
