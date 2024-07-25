@@ -201,7 +201,11 @@ local function get_relative_working_dir(tab)
 end
 
 local function tab_title(tab)
-  if tab.active_pane.current_working_dir.file_path == wezterm.home_dir then
+  local current_working_dir = tab.active_pane.current_working_dir
+  if current_working_dir == nil then
+    return "special"
+  end
+  if current_working_dir.file_path == wezterm.home_dir then
     return "~"
   end
   local relative_working_dir = get_relative_working_dir(tab)
