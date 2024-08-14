@@ -9,7 +9,7 @@ local completion = none_ls.builtins.completion
 local code_actions = none_ls.builtins.code_actions
 
 none_ls.setup({
-  debug = true,
+  debug = false,
   sources = {
     -- order is important, prettier should be before eslint
     formatting.prettierd.with({
