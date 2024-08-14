@@ -1,5 +1,3 @@
-local g = vim.g
-local o = vim.o
 local nvim_set_var = vim.api.nvim_set_var
 
 vim.opt.shell = "/bin/bash"
@@ -76,6 +74,7 @@ nvim_set_var("knobs_levels", {
   markdown_syntax_table = 3,
   markdown_preview = 3,
   minimap = 9,
+  mini = 3,
   modes = 3,
   mundo = 3,
   neoscroll = 3,
@@ -479,6 +478,7 @@ require("lazy").setup(
       opts = {},
       dependencies = { "nvim-tree/nvim-web-devicons" },
     },
+    { "echasnovski/mini.icons", version = false },
     {
       "ryanoasis/vim-devicons",
       lazy = true,
@@ -493,6 +493,7 @@ require("lazy").setup(
     },
     {
       "folke/which-key.nvim",
+      version = "3.2.0",
       event = "VeryLazy",
       config = function()
         require("config.which_key")

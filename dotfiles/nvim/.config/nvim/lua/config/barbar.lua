@@ -61,7 +61,7 @@ end
 
 function M.hide()
   config.auto_hide = false
-  require("bufferline").setup(config)
+  bufferline.setup(config)
 end
 
 return M

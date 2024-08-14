@@ -2,13 +2,14 @@ local M = {}
 
 local none_ls = require("null-ls")
 local none_ls_legacy = require("config/none_ls_legacy")
+local none_ls_custom = require("config/none_ls_custom")
 local formatting = none_ls.builtins.formatting
 local diagnostics = none_ls.builtins.diagnostics
 local completion = none_ls.builtins.completion
 local code_actions = none_ls.builtins.code_actions
 
 none_ls.setup({
-  debug = false,
+  debug = true,
   sources = {
     -- order is important, prettier should be before eslint
     formatting.prettierd.with({
@@ -50,12 +51,13 @@ none_ls.setup({
       filetypes = { "cucumber" },
     }),
     diagnostics.yamllint,
-    diagnostics.proselint,
+    -- experimenting with proselint in vale
+    -- diagnostics.proselint,
     none_ls_legacy.code_actions.eslint_d,
     completion.spell.with({
       filetypes = { "markdown" },
     }),
-    code_actions.proselint,
+    -- code_actions.proselint,
     code_actions.gitsigns
   },
 })
