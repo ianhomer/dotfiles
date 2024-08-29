@@ -144,7 +144,12 @@ set formatlistpat+=\\\|^[^:\\s]\\+:\\s
 
 set autoindent
 
-set formatoptions=jtcqln
+" j remove comment leader on join
+" (disabled) t auto wrap using textwidth
+" c auto wrap comments
+" q allow formatting with gq
+" l don't break long lines (once they'r long)
+set formatoptions=jcqln
 
 set comments=fb:*,fb:-,fb:+,fb:\:,nb:>,se:---,se:```
 
