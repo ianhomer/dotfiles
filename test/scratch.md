@@ -7,6 +7,8 @@ tags:
   - test
 ---
 
+<!-- vale write-good.E-Prime = NO -->
+
 # Title
 
 ## Heading 1
