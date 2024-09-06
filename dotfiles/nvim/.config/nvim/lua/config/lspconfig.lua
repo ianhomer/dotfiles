@@ -214,7 +214,7 @@ local servers = {
   terraformls = {
     filetypes = { "terraform", "hcl" },
   },
-  tsserver = {},
+  ts_ls = {},
   vimls = {},
 }
 
