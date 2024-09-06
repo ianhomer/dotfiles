@@ -17,6 +17,7 @@ nvim_set_var("knobs_levels", {
   apathy = 6,
   autopairs = 3,
   autosave = 3,
+  avante = 6,
   barbar = 6,
   bqf = 5,
   bufferline = 5,
@@ -427,6 +428,23 @@ require("lazy").setup(
       },
       config = function()
         require("config.codecompanion")
+      end,
+    },
+
+    {
+      "yetone/avante.nvim",
+      event = "VeryLazy",
+      lazy = false,
+      version = true,
+      build = "make",
+      dependencies = {
+        "stevearc/dressing.nvim",
+        "nvim-lua/plenary.nvim",
+        "MunifTanjim/nui.nvim",
+        "nvim-tree/nvim-web-devicons"
+      },
+      config = function()
+        require("config.avante")
       end,
     },
 
