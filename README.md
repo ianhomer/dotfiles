@@ -19,8 +19,7 @@ Update at any time with:
 
 This gets local machine up to date, including pulling latest version of this
 repository, sets OSX defaults, updates brew including packages. Run this at any
-time to update to latest. It updates what's changed or out of date, so it's
-quick and painless.
+time to update to latest. The script updates packages that are changed or out of date.
 
 I remind myself of commands and shortcuts I use with:
 
@@ -40,22 +39,16 @@ of working to streamline distraction free coding. This includes:
 **git**
 : source control
 
-**kitty**
+**wezterm**
 : slick terminals
 
 **neovim**
-: file editing with plugins - null-ls ; dispatch ; fugitive ;
+: file editing with plugins - none-ls ; dispatch ; fugitive ;
   fzf.vim ; lsp ; markdown-preview ; nvim tree ; repeat ; startify ;
   surround ; tabular ; which-key ; surround
 
-**nnn** and **broot**
-: file explorers
-
 **FiraCode Nerd Font**
 : ligatures, powerline and more
-
-**termux**
-: Android support
 
 MacOS with
 
@@ -68,8 +61,8 @@ MacOS with
 **[rectangle](https://rectangleapp.com/)**
 : window manager
 
-Other tools woven into these dotfiles include **ag**, **fzf**, **pandoc**,
-**cspell**, **fugitive**, **java**, **node** and **python**.
+Other tools woven into these dotfiles include **ag**, **fzf**,
+**fugitive**, **java**, **node** and **python**.
 
 ## How
 
@@ -79,10 +72,10 @@ backed up and dotfiles linked into place. Further installation and configuration
 takes place with scripts in the bin directory. Look at bin/dotme to see what
 actually happens.
 
-You can also update parts of the initialisation separately, see `dotme -h` to
+Components are initialised separately, see `dotme -h` to
 get a list of each part. `man dotme` will give you more guidance on usage.
 
-I configure somethings on my system [manually](./docs/manual-osx.md)
+I configure some components on my system [manually](./docs/manual-osx.md)
 for minor tweaks and enhancements.
 
 To customise local dotme configuration, `vi ~/.config/dotme/.env` and edit a

@@ -2,7 +2,6 @@ local M = {}
 
 local none_ls = require("null-ls")
 local none_ls_legacy = require("config/none_ls_legacy")
-local none_ls_custom = require("config/none_ls_custom")
 local formatting = none_ls.builtins.formatting
 local diagnostics = none_ls.builtins.diagnostics
 local completion = none_ls.builtins.completion
@@ -44,7 +43,8 @@ none_ls.setup({
         vim.fn.expand("~/.flake8"),
       },
     }),
-    diagnostics.mypy,
+    -- mypy not finding imports from pyenv -> disable ; may not need it anymore
+    -- diagnostics.mypy,
     diagnostics.tidy,
     diagnostics.vale,
     diagnostics.trail_space.with({
