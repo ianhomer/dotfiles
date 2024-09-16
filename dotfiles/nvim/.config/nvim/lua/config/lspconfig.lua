@@ -198,6 +198,7 @@ local servers = {
       },
     },
   },
+  ruff = {},
   rust_analyzer = {
     settings = {
       ["rust-analyzer"] = {

@@ -44,7 +44,7 @@ none_ls.setup({
       },
     }),
     -- mypy not finding imports from pyenv -> disable ; may not need it anymore
-    -- diagnostics.mypy,
+    diagnostics.mypy,
     diagnostics.tidy,
     diagnostics.vale,
     diagnostics.trail_space.with({
