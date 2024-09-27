@@ -116,7 +116,7 @@ nvim_set_var("knobs_levels", {
   update_spelling = 7,
   which_key = 3,
   window_cleaner = 3,
-  writegood = 3,
+  writegood = 9,
   vimspector = 9,
   vsnip = 9,
   zen_mode = 5,
