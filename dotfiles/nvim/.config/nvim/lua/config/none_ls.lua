@@ -1,13 +1,13 @@
 local M = {}
 
-local none_ls = require("null-ls")
+local null_ls = require("null-ls")
 local none_ls_legacy = require("config/none_ls_legacy")
-local formatting = none_ls.builtins.formatting
-local diagnostics = none_ls.builtins.diagnostics
-local completion = none_ls.builtins.completion
-local code_actions = none_ls.builtins.code_actions
+local formatting = null_ls.builtins.formatting
+local diagnostics = null_ls.builtins.diagnostics
+local completion = null_ls.builtins.completion
+local code_actions = null_ls.builtins.code_actions
 
-none_ls.setup({
+null_ls.setup({
   debug = false,
   sources = {
     -- order is important, prettier should be before eslint
@@ -17,7 +17,7 @@ none_ls.setup({
         PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/.config/.prettierrc.toml"),
       },
     }),
-    none_ls_legacy.formatting.eslint_d,
+    require("none-ls.formatting.eslint_d"),
     formatting.black,
     formatting.fish_indent,
     none_ls_legacy.formatting.rustfmt,

@@ -265,6 +265,9 @@ require("lazy").setup(
     {
       knob = "none_ls",
       "nvimtools/none-ls-extras.nvim",
+      dependencies = {
+        "nvimtools/none-ls-extras.nvim",
+      },
     },
     {
       "nvimtools/none-ls.nvim",
@@ -441,7 +444,7 @@ require("lazy").setup(
         "stevearc/dressing.nvim",
         "nvim-lua/plenary.nvim",
         "MunifTanjim/nui.nvim",
-        "nvim-tree/nvim-web-devicons"
+        "nvim-tree/nvim-web-devicons",
       },
       config = function()
         require("config.avante")
