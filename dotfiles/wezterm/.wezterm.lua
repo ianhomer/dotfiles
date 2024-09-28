@@ -32,6 +32,18 @@ wezterm.on("ActivatePaneDirection-down", function(window, pane)
   activatePane(window, pane, "Down", "j")
 end)
 
+local function scrollPane(window, pane, key, amount)
+  if isVi(pane) then
+    window:perform_action(action.SendKey({ key = key, mods = "CTRL" }), pane)
+  else
+    window:perform_action(action.ScrollByPage(amount))
+  end
+end
+
+wezterm.on("ScrollByPage-up", function(window, pane)
+  scrollPane(window, pane, "u", -1)
+end)
+
 -- In newer versions of wezterm, use the config_builder which will
 -- help provide clearer error messages
 if wezterm.config_builder then
@@ -75,6 +87,16 @@ config.window_close_confirmation = "NeverPrompt"
 config.show_tab_index_in_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 
+
+-- Over and above default keys, e.g.
+--
+-- SHIFT-PageUp/Down to scroll pane up and down
+--
+-- Out put defaults with
+--
+-- wezterm show-keys --lua
+--
+-- see https://wezfurlong.org/wezterm/config/default-keys.html
 config.keys = {
   {
     key = "-",
@@ -154,33 +176,33 @@ config.keys = {
 config.hyperlink_rules = {
   -- Matches: a URL in parens: (URL)
   {
-    regex = '\\((https?://\\S+)\\)',
-    format = '$1',
+    regex = "\\((https?://\\S+)\\)",
+    format = "$1",
     highlight = 1,
   },
   -- Matches: a URL in brackets: [URL]
   {
-    regex = '\\[(https?://\\S+)\\]',
-    format = '$1',
+    regex = "\\[(https?://\\S+)\\]",
+    format = "$1",
     highlight = 1,
   },
   -- Matches: a URL in curly braces: {URL}
   {
-    regex = '\\{(https?://\\S+)\\}',
-    format = '$1',
+    regex = "\\{(https?://\\S+)\\}",
+    format = "$1",
     highlight = 1,
   },
   -- Matches: a URL in angle brackets: <URL>
   {
-    regex = '<(https?://\\S+)>',
-    format = '$1',
+    regex = "<(https?://\\S+)>",
+    format = "$1",
     highlight = 1,
   },
   -- Then handle URLs not wrapped in brackets
   {
-    regex = '\\bhttps?://\\S+[)/a-zA-Z0-9-]+',
-    format = '$0',
-  }
+    regex = "\\bhttps?://\\S+[)/a-zA-Z0-9-]+",
+    format = "$0",
+  },
 }
 
 local get_last_folder_segment = function(cwd)
