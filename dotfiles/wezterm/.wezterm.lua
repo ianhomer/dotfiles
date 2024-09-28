@@ -8,14 +8,14 @@ local function isVi(pane)
   return pane:get_foreground_process_name():find("n?vim") ~= nil
 end
 
-local action = wezterm.action
+local act = wezterm.action
 
 -- Thank you https://github.com/numToStr/Navigator.nvim/wiki/WezTerm-Integration
 local function activatePane(window, pane, pane_direction, vim_direction)
   if isVi(pane) then
-    window:perform_action(action.SendKey({ key = vim_direction, mods = "CTRL" }), pane)
+    window:perform_action(act.SendKey({ key = vim_direction, mods = "CTRL" }), pane)
   else
-    window:perform_action(action.ActivatePaneDirection(pane_direction), pane)
+    window:perform_action(act.ActivatePaneDirection(pane_direction), pane)
   end
 end
 
@@ -34,9 +34,9 @@ end)
 
 local function scrollPane(window, pane, key, amount)
   if isVi(pane) then
-    window:perform_action(action.SendKey({ key = key, mods = "CTRL" }), pane)
+    window:perform_action(act.SendKey({ key = key, mods = "CTRL" }), pane)
   else
-    window:perform_action(action.ScrollByPage(amount))
+    window:perform_action(act.ScrollByPage(amount))
   end
 end
 
@@ -101,17 +101,17 @@ config.keys = {
   {
     key = "-",
     mods = "CMD",
-    action = action.SplitVertical,
+    action = act.SplitVertical,
   },
   {
     key = "\\",
     mods = "CMD",
-    action = action.SplitHorizontal,
+    action = act.SplitHorizontal,
   },
   {
     key = "t",
     mods = "CMD",
-    action = action.SpawnTab("CurrentPaneDomain"),
+    action = act.SpawnTab("CurrentPaneDomain"),
   },
   {
     key = "w",
@@ -121,51 +121,51 @@ config.keys = {
   {
     key = "LeftArrow",
     mods = "OPT",
-    action = action.ActivateTabRelative(-1),
+    action = act.ActivateTabRelative(-1),
   },
   {
     key = "RightArrow",
     mods = "OPT",
-    action = action.ActivateTabRelative(1),
+    action = act.ActivateTabRelative(1),
   },
   {
     key = "RightArrow",
     mods = "CTRL",
-    action = action.EmitEvent("ActivatePaneDirection-right"),
+    action = act.EmitEvent("ActivatePaneDirection-right"),
   },
   {
     key = "LeftArrow",
     mods = "CTRL",
-    action = action.EmitEvent("ActivatePaneDirection-left"),
+    action = act.EmitEvent("ActivatePaneDirection-left"),
   },
   {
     key = "UpArrow",
     mods = "CTRL",
-    action = action.EmitEvent("ActivatePaneDirection-up"),
+    action = act.EmitEvent("ActivatePaneDirection-up"),
   },
   {
     key = "DownArrow",
     mods = "CTRL",
-    action = action.EmitEvent("ActivatePaneDirection-down"),
+    action = act.EmitEvent("ActivatePaneDirection-down"),
   },
-  { key = "LeftArrow", mods = "SHIFT|OPT", action = action.MoveTabRelative(-1) },
-  { key = "RightArrow", mods = "SHIFT|OPT", action = action.MoveTabRelative(1) },
-  { key = "z", mods = "CMD", action = action.TogglePaneZoomState },
-  { key = "UpArrow", mods = "SHIFT|CMD", action = action.AdjustPaneSize({ "Up", 5 }) },
-  { key = "DownArrow", mods = "SHIFT|CMD", action = action.AdjustPaneSize({ "Down", 5 }) },
-  { key = "LeftArrow", mods = "SHIFT|CMD", action = action.AdjustPaneSize({ "Left", 5 }) },
-  { key = "RightArrow", mods = "SHIFT|CMD", action = action.AdjustPaneSize({ "Right", 5 }) },
-  { key = "UpArrow", mods = "CTRL|CMD", action = action.AdjustPaneSize({ "Up", 1 }) },
-  { key = "DownArrow", mods = "CTRL|CMD", action = action.AdjustPaneSize({ "Down", 1 }) },
-  { key = "LeftArrow", mods = "CTRL|CMD", action = action.AdjustPaneSize({ "Left", 1 }) },
-  { key = "RightArrow", mods = "CTRL|CMD", action = action.AdjustPaneSize({ "Right", 1 }) },
+  { key = "LeftArrow", mods = "SHIFT|OPT", action = act.MoveTabRelative(-1) },
+  { key = "RightArrow", mods = "SHIFT|OPT", action = act.MoveTabRelative(1) },
+  { key = "z", mods = "CMD", action = act.TogglePaneZoomState },
+  { key = "UpArrow", mods = "SHIFT|CMD", action = act.AdjustPaneSize({ "Up", 5 }) },
+  { key = "DownArrow", mods = "SHIFT|CMD", action = act.AdjustPaneSize({ "Down", 5 }) },
+  { key = "LeftArrow", mods = "SHIFT|CMD", action = act.AdjustPaneSize({ "Left", 5 }) },
+  { key = "RightArrow", mods = "SHIFT|CMD", action = act.AdjustPaneSize({ "Right", 5 }) },
+  { key = "UpArrow", mods = "CTRL|CMD", action = act.AdjustPaneSize({ "Up", 1 }) },
+  { key = "DownArrow", mods = "CTRL|CMD", action = act.AdjustPaneSize({ "Down", 1 }) },
+  { key = "LeftArrow", mods = "CTRL|CMD", action = act.AdjustPaneSize({ "Left", 1 }) },
+  { key = "RightArrow", mods = "CTRL|CMD", action = act.AdjustPaneSize({ "Right", 1 }) },
 
   -- Puzzling, but left opt 3 enters vim mode on terminal.  We can bind it
   -- explicitly to £ to work around this
   {
     key = "3",
     mods = "OPT",
-    action = action.SendKey({
+    action = act.SendKey({
       key = "£",
     }),
   },
