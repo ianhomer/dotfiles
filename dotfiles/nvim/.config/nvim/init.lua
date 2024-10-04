@@ -297,7 +297,7 @@ require("lazy").setup(
     {
       "folke/trouble.nvim",
       dependencies = "kyazdani42/nvim-web-devicons",
-      cmd = { "TroubleClose", "TroubleToggle", "Trouble" },
+      cmd = { "Trouble" },
       config = require("config.trouble").config,
       keys = require("config.trouble").keys,
     },

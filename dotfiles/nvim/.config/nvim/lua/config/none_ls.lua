@@ -31,7 +31,8 @@ null_ls.setup({
         diagnostic.severity = vim.diagnostic.severity["HINT"]
       end,
     }),
-    none_ls_legacy.diagnostics.eslint_d,
+    require("none-ls.diagnostics.eslint_d"),
+    -- none_ls_legacy.diagnostics.eslint_d,
     none_ls_legacy.diagnostics.flake8.with({
       args = {
         "--format",
@@ -53,7 +54,8 @@ null_ls.setup({
     diagnostics.yamllint,
     -- experimenting with proselint in vale
     -- diagnostics.proselint,
-    none_ls_legacy.code_actions.eslint_d,
+    require("none-ls.code_actions.eslint_d"),
+    -- none_ls_legacy.code_actions.eslint_d,
     completion.spell.with({
       filetypes = { "markdown" },
     }),

@@ -50,7 +50,7 @@ endfunction
 function modes#ResetMode()
   " not sure why, but commands below cause Trouble to error, so let's just close
   " when we rest
-  TroubleClose
+  Trouble diagnostics close
   call modes#enableBarbar(0)
   windo call modes#setLineNumbers(0, 0)
   bufdo call modes#setLineNumbers(0, 0)
