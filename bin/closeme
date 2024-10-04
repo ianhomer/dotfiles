@@ -54,6 +54,9 @@ else
   applications+=" watchman $BREW_PREFIX/bin/watchman"
   applications+=" node $BREW_PREFIX/Cellar/node"
   applications+=" /Applications/Flipper.app prettierd eslint_d adb"
+  # stream is voice to text command from whisper.cpp I sometimes run for an
+  # interactive chat bot
+  applications+=" ./stream"
   applicationsToReport="Dropbox Drive.ap Spotify Music.app"
   applicationsToReport+=" Safari.app "
   # Check others that should have been closed by applications list

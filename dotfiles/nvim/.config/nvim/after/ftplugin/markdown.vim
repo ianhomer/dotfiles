@@ -41,11 +41,15 @@ function! s:LintTable()
     call s:AddTableHeader()
   endif
   echo "Linting markdown table"
-  Tabularize/|/l1
+  " Urgh, let's explain this regex and Tabularize command
+  " find  first |, find all character not |, then start the match
+  " in other words find the second |
+  " and using Tabularize left align columns with one space padding
+  Tabularize/|[^|]*\zs/l1
 endfunction
 
 function! s:AddTableHeader()
-  execute "normal! {j0i\|\|\|\<CR>\|--\|--\|\<CR>\<ESC>"
+  execute "normal! {j0i\|\|\|\<CR>\| -- \| -- |\<CR>\<ESC>"
 endfunction
 
 " Auto insert of next line
@@ -140,7 +144,12 @@ set formatlistpat+=\\\|^[^:\\s]\\+:\\s
 
 set autoindent
 
-set formatoptions=jtcqln
+" j remove comment leader on join
+" (disabled) t auto wrap using textwidth
+" c auto wrap comments
+" q allow formatting with gq
+" l don't break long lines (once they'r long)
+set formatoptions=jcqln
 
 set comments=fb:*,fb:-,fb:+,fb:\:,nb:>,se:---,se:```
 

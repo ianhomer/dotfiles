@@ -1,15 +1,14 @@
 local M = {}
 
-local none_ls = require("null-ls")
+local null_ls = require("null-ls")
 local none_ls_legacy = require("config/none_ls_legacy")
-local none_ls_custom = require("config/none_ls_custom")
-local formatting = none_ls.builtins.formatting
-local diagnostics = none_ls.builtins.diagnostics
-local completion = none_ls.builtins.completion
-local code_actions = none_ls.builtins.code_actions
+local formatting = null_ls.builtins.formatting
+local diagnostics = null_ls.builtins.diagnostics
+local completion = null_ls.builtins.completion
+local code_actions = null_ls.builtins.code_actions
 
-none_ls.setup({
-  debug = true,
+null_ls.setup({
+  debug = false,
   sources = {
     -- order is important, prettier should be before eslint
     formatting.prettierd.with({
@@ -18,7 +17,7 @@ none_ls.setup({
         PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/.config/.prettierrc.toml"),
       },
     }),
-    none_ls_legacy.formatting.eslint_d,
+    require("none-ls.formatting.eslint_d"),
     formatting.black,
     formatting.fish_indent,
     none_ls_legacy.formatting.rustfmt,
@@ -32,7 +31,8 @@ none_ls.setup({
         diagnostic.severity = vim.diagnostic.severity["HINT"]
       end,
     }),
-    none_ls_legacy.diagnostics.eslint_d,
+    require("none-ls.diagnostics.eslint_d"),
+    -- none_ls_legacy.diagnostics.eslint_d,
     none_ls_legacy.diagnostics.flake8.with({
       args = {
         "--format",
@@ -44,6 +44,7 @@ none_ls.setup({
         vim.fn.expand("~/.flake8"),
       },
     }),
+    -- mypy not finding imports from pyenv -> disable ; may not need it anymore
     diagnostics.mypy,
     diagnostics.tidy,
     diagnostics.vale,
@@ -53,7 +54,8 @@ none_ls.setup({
     diagnostics.yamllint,
     -- experimenting with proselint in vale
     -- diagnostics.proselint,
-    none_ls_legacy.code_actions.eslint_d,
+    require("none-ls.code_actions.eslint_d"),
+    -- none_ls_legacy.code_actions.eslint_d,
     completion.spell.with({
       filetypes = { "markdown" },
     }),

@@ -198,6 +198,7 @@ local servers = {
       },
     },
   },
+  ruff = {},
   rust_analyzer = {
     settings = {
       ["rust-analyzer"] = {
@@ -214,7 +215,7 @@ local servers = {
   terraformls = {
     filetypes = { "terraform", "hcl" },
   },
-  tsserver = {},
+  ts_ls = {},
   vimls = {},
 }
 

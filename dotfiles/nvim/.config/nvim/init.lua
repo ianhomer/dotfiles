@@ -17,6 +17,7 @@ nvim_set_var("knobs_levels", {
   apathy = 6,
   autopairs = 3,
   autosave = 3,
+  avante = 6,
   barbar = 6,
   bqf = 5,
   bufferline = 5,
@@ -115,7 +116,7 @@ nvim_set_var("knobs_levels", {
   update_spelling = 7,
   which_key = 3,
   window_cleaner = 3,
-  writegood = 3,
+  writegood = 9,
   vimspector = 9,
   vsnip = 9,
   zen_mode = 5,
@@ -264,6 +265,9 @@ require("lazy").setup(
     {
       knob = "none_ls",
       "nvimtools/none-ls-extras.nvim",
+      dependencies = {
+        "nvimtools/none-ls-extras.nvim",
+      },
     },
     {
       "nvimtools/none-ls.nvim",
@@ -293,7 +297,7 @@ require("lazy").setup(
     {
       "folke/trouble.nvim",
       dependencies = "kyazdani42/nvim-web-devicons",
-      cmd = { "TroubleClose", "TroubleToggle", "Trouble" },
+      cmd = { "Trouble" },
       config = require("config.trouble").config,
       keys = require("config.trouble").keys,
     },
@@ -427,6 +431,23 @@ require("lazy").setup(
       },
       config = function()
         require("config.codecompanion")
+      end,
+    },
+
+    {
+      "yetone/avante.nvim",
+      event = "VeryLazy",
+      lazy = false,
+      version = true,
+      build = "make",
+      dependencies = {
+        "stevearc/dressing.nvim",
+        "nvim-lua/plenary.nvim",
+        "MunifTanjim/nui.nvim",
+        "nvim-tree/nvim-web-devicons",
+      },
+      config = function()
+        require("config.avante")
       end,
     },
 
