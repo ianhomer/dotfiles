@@ -373,7 +373,7 @@ require("lazy").setup(
     {
       "mfussenegger/nvim-dap",
       config = function()
-        require("config.dap")
+        require("config.dap_config")
       end,
     },
     {
