@@ -8,6 +8,7 @@ M.config = function()
     height = 15,
     use_diagnostic_signs = true,
     padding = false,
+    warn_no_results = false,
   })
 end
 
