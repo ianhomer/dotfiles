@@ -66,17 +66,17 @@ null_ls.setup({
 
 function M.setLevel(level)
   if level > 4 then
-    none_ls.enable("markdownlint")
-    none_ls.enable("vale")
+    null_ls.enable("markdownlint")
+    null_ls.enable("vale")
   else
-    none_ls.disable("markdownlint")
-    none_ls.disable("vale")
+    null_ls.disable("markdownlint")
+    null_ls.disable("vale")
   end
 end
 
 function M.toggle()
-  none_ls.toggle("markdownlint")
-  none_ls.toggle("vale")
+  null_ls.toggle("markdownlint")
+  null_ls.toggle("vale")
 end
 
 return M

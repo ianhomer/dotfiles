@@ -1,5 +1,6 @@
 local whichKey = require("which-key")
 whichKey.setup({
+  delay = 2000,
   plugins = {
     spelling = {
       enabled = true,

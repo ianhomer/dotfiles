@@ -4,7 +4,7 @@ endif
 let g:modes_autoloaded = 1
 
 function modes#DisabledEcho(command)
-  echo a:command . " disabled - enable with space-1"
+  echo a:command . " disabled - hit <space>-1 to enable"
 endfunction
 
 function modes#setLineNumbers(absolute, relative)
@@ -86,7 +86,6 @@ endfunction
 function modes#TrainingMode()
   call modes#ResetMode()
   set rnu
-  set backspace=0
 
   noremap <Up> :call modes#DisabledEcho("normal mode up")<CR>
   noremap <Down> :call modes#DisabledEcho("normal mode down")<CR>
