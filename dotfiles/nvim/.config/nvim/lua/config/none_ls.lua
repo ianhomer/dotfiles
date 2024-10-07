@@ -7,6 +7,11 @@ local diagnostics = null_ls.builtins.diagnostics
 local completion = null_ls.builtins.completion
 local code_actions = null_ls.builtins.code_actions
 
+local eslint_enabled = function(utils)
+  return utils.root_has_file({ "eslint.config.mjs" })
+end
+
+
 null_ls.setup({
   debug = false,
   sources = {
@@ -17,7 +22,9 @@ null_ls.setup({
         PRETTIERD_DEFAULT_CONFIG = vim.fn.expand("~/.config/.prettierrc.toml"),
       },
     }),
-    require("none-ls.formatting.eslint_d"),
+    require("none-ls.formatting.eslint_d").with {
+      condition = eslint_enabled
+    },
     formatting.black,
     formatting.fish_indent,
     none_ls_legacy.formatting.rustfmt,
@@ -31,7 +38,9 @@ null_ls.setup({
         diagnostic.severity = vim.diagnostic.severity["HINT"]
       end,
     }),
-    require("none-ls.diagnostics.eslint_d"),
+    require("none-ls.diagnostics.eslint_d").with {
+      condition = eslint_enabled
+    },
     -- none_ls_legacy.diagnostics.eslint_d,
     none_ls_legacy.diagnostics.flake8.with({
       args = {
@@ -54,13 +63,15 @@ null_ls.setup({
     diagnostics.yamllint,
     -- experimenting with proselint in vale
     -- diagnostics.proselint,
-    require("none-ls.code_actions.eslint_d"),
+    require("none-ls.code_actions.eslint_d").with {
+      condition = eslint_enabled
+    },
     -- none_ls_legacy.code_actions.eslint_d,
     completion.spell.with({
       filetypes = { "markdown" },
     }),
     -- code_actions.proselint,
-    code_actions.gitsigns
+    code_actions.gitsigns,
   },
 })
 
