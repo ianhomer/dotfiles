@@ -46,7 +46,7 @@ nvim_set_var("knobs_levels", {
   fzf = 6,
   git_conflict = 9,
   gitgutter = 6,
-  gitsigns = 5,
+  gitsigns = 3,
   gruvbox = 9,
   gruvbox8 = 9,
   glow = 3,
@@ -267,6 +267,7 @@ require("lazy").setup(
       "nvimtools/none-ls-extras.nvim",
       dependencies = {
         "nvimtools/none-ls-extras.nvim",
+        "lewis6991/gitsigns.nvim"
       },
     },
     {
@@ -373,7 +374,7 @@ require("lazy").setup(
     {
       "mfussenegger/nvim-dap",
       config = function()
-        require("config.dap")
+        require("config.dap_config")
       end,
     },
     {
@@ -630,7 +631,6 @@ require("lazy").setup(
     },
     {
       "lewis6991/gitsigns.nvim",
-      event = "BufRead",
       config = function()
         require("config.gitsigns")
       end,

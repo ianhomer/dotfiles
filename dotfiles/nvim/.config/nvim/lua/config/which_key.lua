@@ -1,5 +1,6 @@
 local whichKey = require("which-key")
 whichKey.setup({
+  delay = 2000,
   plugins = {
     spelling = {
       enabled = true,
@@ -42,10 +43,10 @@ whichKey.add({
   { "<leader>,.", group = "profile" },
 })
 
-local findNamedFile = {
-  "<cmd>lua require'telescope.builtin'.find_files({find_command={'fd', '-H', '-i', vim.fn.expand('<cword>')}})<cr>",
-  "Find named file",
-}
+-- local findNamedFile = {
+--   "<cmd>lua require'telescope.builtin'.find_files({find_command={'fd', '-H', '-i', vim.fn.expand('<cword>')}})<cr>",
+--   "Find named file",
+-- }
 
 local my = require("myutils")
 whichKey.add({
