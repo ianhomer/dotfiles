@@ -27,5 +27,15 @@ return {
         cmdline = { pattern = "^:", icon = ":", lang = "vim" },
       },
     },
+    messages = {
+      -- enable when fix vertical scroll and redraw issue
+      enabled = true,
+      view = "mini",
+      view_warn = "mini",
+      view_error = "mini",
+    },
+    lsp_progress = {
+      enabled = false,
+    },
   },
 }
