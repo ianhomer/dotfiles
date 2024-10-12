@@ -3,3 +3,7 @@
 -- Add any additional options here
 
 vim.g.root_spec = { "cwd" }
+vim.g.autoformat = false
+
+local opt = vim.opt
+opt.relativenumber = false
