@@ -10,6 +10,12 @@ return {
     code = {
       style = "none",
     },
+    checkbox = {
+      position = "overlay",
+    },
+    link = {
+      enabled = false,
+    },
     win_options = {
       conceallevel = {
         rendered = 0,
