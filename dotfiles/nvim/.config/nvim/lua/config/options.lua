@@ -8,3 +8,4 @@ vim.g.autoformat = false
 local opt = vim.opt
 opt.relativenumber = false
 opt.conceallevel = 0
+opt.spellfile = vim.fn.expand("$HOME/.config/vim/spell/en.utf-8.add")
