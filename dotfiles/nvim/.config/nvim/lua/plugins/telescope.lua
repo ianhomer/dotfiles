@@ -2,33 +2,30 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-telescope/telescope-symbols.nvim" },
-    opts = function()
-      local actions = require("telescope.actions")
-
-      return {
-        defaults = {
-          mappings = {
-            i = {
-              ["<esc>"] = actions.close,
-            },
+    opts = {
+      defaults = {
+        mappings = {
+          i = {
+            ["<esc>"] = require("telescope.actions").close
+            -- ["<esc>"] = function() require("telescope.actions").close end,
           },
-          layout_strategy = "vertical",
-          layout_config = {
-            horizontal = {
-              prompt_position = "bottom",
-            },
-            vertical = {
-              mirror = false,
-            },
-            height = 0.99,
-            width = 0.99,
-          },
-          winblend = 0,
-          border = {},
-          borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
         },
-      }
-    end,
+        layout_strategy = "vertical",
+        layout_config = {
+          horizontal = {
+            prompt_position = "bottom",
+          },
+          vertical = {
+            mirror = false,
+          },
+          height = 0.99,
+          width = 0.99,
+        },
+        winblend = 0,
+        border = {},
+        borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+      },
+    },
 
     keys = {
       {
