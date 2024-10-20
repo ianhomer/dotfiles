@@ -25,5 +25,15 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     -- l don't break long lines (once they'r long)
     vim.opt_local.formatoptions = "jcqln"
     vim.opt_local.formatexpr = ""
+
+    -- Use project local spellfile if it exists
+    local dot_git_path = vim.fn.finddir(".git", ".;")
+    if vim.fn.isdirectory(dot_git_path) ~= 0 then
+      local project_spelling_file = vim.fn.fnamemodify(dot_git_path, ":h") .. "/.vim/local.utf-8.add"
+      if vim.fn.filereadable(project_spelling_file) ~= 0 then
+        local spelling_files = project_spelling_file
+        vim.opt_local.spellfile = spelling_files
+      end
+    end
   end,
 })
