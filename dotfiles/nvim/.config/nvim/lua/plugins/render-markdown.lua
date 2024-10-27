@@ -21,7 +21,7 @@ return {
     },
     win_options = {
       conceallevel = {
-        rendered = 0,
+        rendered = 1,
       },
     },
   },

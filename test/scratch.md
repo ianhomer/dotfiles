@@ -80,6 +80,23 @@ Todos
 > quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 > consequat.
 
+## Callouts
+
+> [!NOTE]
+> This is a note
+
+> [!TIP]
+> This is a tip
+
+> [!IMPORTANT]
+> This is important
+
+> [!WARNING]
+> This is a warning
+
+> [!CAUTION]
+> This is a caution
+
 ## Definitions
 
 Long line definitions
@@ -166,4 +183,4 @@ const myGlobal = [];
 
 ♻️ refactor
 
-⚠️o
+⚠️
