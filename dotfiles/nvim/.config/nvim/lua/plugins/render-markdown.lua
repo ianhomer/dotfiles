@@ -7,6 +7,10 @@ return {
       above = 0,
       below = 0,
     },
+    heading = {
+      sign = true,
+      icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
+    },
     code = {
       style = "none",
     },
