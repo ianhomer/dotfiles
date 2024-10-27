@@ -16,6 +16,9 @@ return {
     link = {
       enabled = false,
     },
+    pipe_table = {
+      cell = 'overlay'
+    },
     win_options = {
       conceallevel = {
         rendered = 0,
