@@ -118,4 +118,6 @@ bindkey -v
 # Last command on "escape ."
 bindkey '^[.' insert-last-word
 
-source /Users/ian/.docker/init-zsh.sh || true # Added by Docker Desktop
+if [ -f ~/.docker/init-zsh.sh ] ; then
+  source ~/.docker/init-zsh.sh || true # Added by Docker Desktop
+fi
