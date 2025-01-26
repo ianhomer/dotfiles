@@ -73,14 +73,6 @@ if status --is-interactive
     function __fish_describe_command
     end
 
-    #
-    # key bindings
-    #
-    # * fish_vi_key_bindings -> vi key bindings
-    # * fish_default_key_bindings -> default key bindings
-    #
-    fish_vi_key_bindings
-    #   fish_default_key_bindings
     # Time between escape key press and subsequent character
     set -g fish_escape_delay_ms 200
 

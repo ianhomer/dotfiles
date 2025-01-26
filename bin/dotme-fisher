@@ -9,13 +9,9 @@ should-run -m 7 dotme-fisher || exit 0
 printf "\e[36mInstalling fisher packages\e[0m\n"
 
 if not test -f ~/.config/fish/functions/fisher.fish
-  curl https://git.io/fisher --create-dirs -sLo \
-    ~/.config/fish/functions/fisher.fish
+  curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish |
+    source && fisher install jorgebucaran/fisher
 end
-
-# Update fisher itself, once all environments on latest version
-# fisher update if sufficient.
-fisher update jorgebucaran/fisher
 
 # Update all fisher plugins
 

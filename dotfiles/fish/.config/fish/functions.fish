@@ -23,9 +23,4 @@ end
 
 time-me "AFTER broot"
 
-function fish_user_key_bindings
-    bind \cf forward-word
-    bind \cb backward-word
-end
-
 [ {$DOT_LOG_LEVEL} -gt 1 ]; and echo "◎ loaded ~/.config/fish/functions.fish"

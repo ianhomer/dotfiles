@@ -7,6 +7,10 @@ return {
       above = 0,
       below = 0,
     },
+    heading = {
+      sign = true,
+      icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
+    },
     code = {
       style = "none",
     },
@@ -16,9 +20,12 @@ return {
     link = {
       enabled = false,
     },
+    pipe_table = {
+      cell = 'overlay'
+    },
     win_options = {
       conceallevel = {
-        rendered = 0,
+        rendered = 1,
       },
     },
   },
