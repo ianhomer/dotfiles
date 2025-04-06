@@ -48,7 +48,7 @@ if ! command -v pnpm &>/dev/null ; then
   corepack enable && corepack prepare pnpm@latest --activate
   npm add -g pnpm
 fi
-pnpm add -g pnpm
+pnpm self-update
 log:: "Updating npm"
 npm install -g npm
 
