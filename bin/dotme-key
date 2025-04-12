@@ -42,7 +42,7 @@ else
 fi
 
 if [[ -z "$MY_EMAIL" ]] ; then
-  read -p "Your email address? " MY_EMAIL
+  read -p "Your email address (used in commits)? " MY_EMAIL
   dotme set EMAIL ${MY_EMAIL}
 fi
 log::info "My email ${MY_EMAIL}"
