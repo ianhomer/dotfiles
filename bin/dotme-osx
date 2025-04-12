@@ -118,6 +118,10 @@ defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.dotfile
 # Tell iTerm2 to use the custom preferences in the directory
 defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
+# remove all persistent apps from the menu bar, I use shortcuts to find the
+# app I want
+defaults write com.apple.dock persistent-apps -array
+
 ############################################################################
 # Kill affected applications
 ############################################################################
