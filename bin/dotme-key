@@ -42,8 +42,8 @@ else
 fi
 
 if [[ -z "$MY_EMAIL" ]] ; then
-  read -p "Your email address? " EMAIL
-  dotme set EMAIL ${EMAIL}
+  read -p "Your email address? " MY_EMAIL
+  dotme set EMAIL ${MY_EMAIL}
 fi
 log::info "My email ${MY_EMAIL}"
 
