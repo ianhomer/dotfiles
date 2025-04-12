@@ -12,7 +12,7 @@ And install with
 
     ~/.dotfiles/start
 
-Update at any time with:
+Update and run administrative actions with:
 
     dotme
 
