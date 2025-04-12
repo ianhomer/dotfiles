@@ -1,13 +1,12 @@
 # My .dotfiles
 
-Configure my computers to be more keyboard focused and reduce distraction. Make
-coding and text editing a breeze.
+Configure my computers.
 
-## tl;dr
+## Getting started
 
 First time, clone repository:
 
-    git clone https://github.com/ianhomer/dotfiles.git ~/.dotfiles
+    git clone https://github.com/ianhomer/dotfiles ~/.dotfiles
 
 And install with
 
@@ -16,14 +15,6 @@ And install with
 Update at any time with:
 
     dotme
-
-This gets local machine up to date, including pulling latest version of this
-repository, sets OSX defaults, updates brew including packages. Run this at any
-time to update to latest. The script updates packages that are changed or out of date.
-
-I remind myself of commands and shortcuts I use with:
-
-    cheat
 
 ## Why
 
@@ -72,11 +63,11 @@ backed up and dotfiles linked into place. Further installation and configuration
 takes place with scripts in the bin directory. Look at bin/dotme to see what
 actually happens.
 
-Components are initialised separately, see `dotme -h` to
-get a list of each part. `man dotme` will give you more guidance on usage.
+Components are initialised separately, see `dotme -h` to get a list of each
+part. `man dotme` will give you more guidance on usage.
 
-I configure some components on my system [manually](./docs/manual-osx.md)
-for minor tweaks and enhancements.
+I configure some components on my system [manually](./docs/manual-osx.md) for
+minor tweaks and enhancements.
 
 To customise local dotme configuration, `vi ~/.config/dotme/.env` and edit a
 properties to look like:
