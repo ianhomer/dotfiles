@@ -61,7 +61,6 @@ docfiles() {
   done
 }
 
-
 #
 # Compile resources. Currently this is just the man files.
 #
@@ -291,6 +290,17 @@ command_set() {
   fi
 }
 
+command_get() {
+  envFile=~/.config/dotme/.env
+  if [[ -f ${envFile} ]] ; then
+    name=${2:-MY_EMAIL}
+    value=`grep ${name} ${envFile} | cut -d "=" -f 2`
+    echo $value
+  else
+    echo ""
+  fi
+}
+
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
 
 # Initialize our own variables:
@@ -376,4 +386,3 @@ if [ $? = 127 ]; then
   usage
   exit 1
 fi
-

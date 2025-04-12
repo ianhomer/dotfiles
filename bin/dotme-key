@@ -40,13 +40,12 @@ if [[ -z "$1" ]] ; then
 else
   MY_EMAIL=$1
 fi
-log::info "My email ${MY_EMAIL}"
 
 if [[ -z "$MY_EMAIL" ]] ; then
-  log:: "... set email with"
-  log:: "    dotme set EMAIL my@com"
-  exit 1
+  read -p "Your email address? " EMAIL
+  dotme set EMAIL ${EMAIL}
 fi
+log::info "My email ${MY_EMAIL}"
 
 if [[ -n "${key_name}" ]] ; then
   keyFile=~/.ssh/id_dotme_${key_name}
@@ -59,6 +58,8 @@ if [[ ! -f $keyFile ]] ; then
   ssh-keygen -t ed25519 -C $MY_EMAIL \
     -f $keyFile                          \
     -q -N ""
+else
+  log:: "... SSH key has already been created"
 fi
 
 log:: "... key file = ${keyFile}.pub"
