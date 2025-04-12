@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+#
+# Final configuration checks and request for actions from user. Done at the end
+# to allow the install to be non-blocking and for the messages to be seen at
+# then end
+#
+
+should-run -m 1 $0 || exit 0
+
+if [[ `grep -q "/fish" /etc/shells` -eq 1 ]] ; then
+  which_fish=`which fish`
+  echo "! Please add ${which_fish} to /etc/shells"
+  echo "! You'll need to enter your password for this"
+  echo "! echo ${which_fish} | sudo tee -a /etc/shells"
+  echo "! chsh -s ${which_fish}"
+  echo
+  echo "After this rerun dotme to continue with the configuration"
+fi
+
+

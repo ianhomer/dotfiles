@@ -181,6 +181,7 @@ command_inner() {
     [ $DRY -eq 0 ] && is-pc && dotme-modules
     [ $DRY -eq 0 ] && is-pc && dotme-test
   fi
+  [ $DRY -eq 0 ] && is-pc && dotme-final
   # Not using nnn for now
   # [ $DRY -eq 0 ] && is-pc && dotme-nnn
   command_clean
