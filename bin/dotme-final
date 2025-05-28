@@ -16,4 +16,4 @@ if [[ `grep -q "/fish" /etc/shells` -eq 1 ]] ; then
   chsh -s ${which_fish}
 fi
 
-
+should-run -fu $0

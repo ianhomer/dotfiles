@@ -13,5 +13,6 @@ brew autoremove
 log:: "Cleaning up brew caches"
 brew cleanup
 
-should-run -fu $
 brew autoremove
+
+should-run -fu $0
