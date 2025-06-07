@@ -31,10 +31,9 @@ set python_version 3.12
 echo $PATH
 
 fish_add_path ~/bin
+fish_add_path ~/.local/bin
 fish_add_path ~/.jenv/shims
 fish_add_path ~/.dotfiles/bin
-fish_add_path ~/.local/share/venv/bin
-fish_add_path ~/.pyenv/bin
 fish_add_path ~/.jenv/bin
 fish_add_path ~/.cargo/bin
 fish_add_path ~/.rbenv/shims
@@ -58,6 +57,9 @@ end
 fish_remove_path ~/bin
 fish_remove_path ~/Library/Python/3.9/bin
 fish_remove_path ~/.local/share/venv
+fish_remove_path ~/.local/share/venv/bin
+fish_remove_path ~/.pyenv/bin
+fish_remove_path ~/.pyenv/shims
 
 # Google cloud
 fish_add_path ~/local/gcloud/google-cloud-sdk/bin
