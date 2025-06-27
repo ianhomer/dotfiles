@@ -1,3 +1,4 @@
+-- see https://github.com/MeanderingProgrammer/render-markdown.nvim/wiki
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   opts = {
@@ -12,21 +13,19 @@ return {
       icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
     },
     code = {
-      style = "none",
+      sign = "true",
+      style = "full",
+      width = "block",
+      min_width = 80
     },
     checkbox = {
       position = "overlay",
     },
     link = {
-      enabled = false,
+      enabled = true,
     },
     pipe_table = {
       cell = 'overlay'
-    },
-    win_options = {
-      conceallevel = {
-        rendered = 1,
-      },
     },
   },
 }
