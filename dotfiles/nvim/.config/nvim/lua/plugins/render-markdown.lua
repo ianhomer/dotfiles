@@ -17,6 +17,8 @@ return {
       style = "full",
       width = "block",
       min_width = 80,
+      -- stop vertical jitter on scroll, see https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/430
+      border = "thin",
     },
     checkbox = {
       position = "overlay",
