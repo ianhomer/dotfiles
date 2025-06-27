@@ -10,13 +10,13 @@ return {
     },
     heading = {
       sign = true,
-      icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
+      icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
     },
     code = {
       sign = "true",
       style = "full",
       width = "block",
-      min_width = 80
+      min_width = 80,
     },
     checkbox = {
       position = "overlay",
@@ -25,7 +25,7 @@ return {
       enabled = true,
     },
     pipe_table = {
-      cell = 'overlay'
+      cell = "overlay",
     },
   },
 }
