@@ -9,14 +9,13 @@ REQUIREMENTS=~/.dotfiles/config/python/requirements.txt
 should-run -m 30 $@ $0 $REQUIREMENTS || exit 0
 $(shim) && cd ${ME} && . bin/i.sh
 
-if ! command -v poetry >/dev/null 2>&1 ; then
-  echo "X"
-  pipx install poetry
+if ! command -v poetry >/dev/null 2>&1; then
+	pipx install poetry
 fi
 
 while read requirements; do
-  echo $requirements
-done < $REQUIREMENTS
+	echo $requirements
+done <$REQUIREMENTS
 
 # TODO - create a way to recreate local venv to upgrade python
 # currently if you delete this venv directory then the venv will
