@@ -56,3 +56,8 @@ require("lazy").setup({
     },
   },
 })
+
+require("lspconfig").yamlls.setup(require("schema-companion").setup_client({
+  -- your yaml language server configuration
+}))
+
