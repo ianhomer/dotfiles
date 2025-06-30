@@ -5,6 +5,7 @@
 
 local map = vim.keymap.set
 
-map({"n"}, "'<", "gsaiW>", { desc = "surround <", remap = true})
-map({"n"}, "'*", "gsaiW*.", { desc = "surround **", remap = true})
-map({"n"}, "'\"", "gsaiW\"", { desc = "surround \"", remap = true})
+map({ "n" }, "'<", "gsaiW>", { desc = "surround <", remap = true })
+map({ "n" }, "'*", "gsaiW*.", { desc = "surround **", remap = true })
+map({ "n" }, "'\"", 'gsaiW"', { desc = 'surround "', remap = true })
+map({ "n" }, "'`", "gsaiW`", { desc = 'surround "', remap = true })
