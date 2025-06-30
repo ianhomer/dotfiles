@@ -4,6 +4,7 @@
 
 vim.g.root_spec = { "cwd" }
 vim.g.autoformat = true
+vim.o.winborder = "bold"
 
 local opt = vim.opt
 opt.relativenumber = false
