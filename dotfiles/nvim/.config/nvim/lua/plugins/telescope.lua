@@ -6,23 +6,21 @@ return {
       defaults = {
         mappings = {
           i = {
-            ["<esc>"] = require("telescope.actions").close
+            -- ["<esc>"] = require("telescope.actions").close,
             -- ["<esc>"] = function() require("telescope.actions").close end,
           },
         },
-        layout_strategy = "vertical",
         layout_config = {
-          horizontal = {
-            prompt_position = "bottom",
-          },
+          horizontal = { prompt_position = "top" },
           vertical = {
             mirror = false,
           },
-          height = 0.99,
-          width = 0.99,
+          height = 0.80,
+          width = 0.80,
         },
         winblend = 0,
-        border = {},
+        file_ignore_patterns = { "%.png", "%.note", ".DS_Store" },
+        border = true,
         borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
       },
     },
