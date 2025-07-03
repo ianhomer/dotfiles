@@ -5,7 +5,7 @@
 vim.g.root_spec = { "cwd" }
 vim.g.autoformat = true
 vim.o.winborder = "bold"
-vim.g.lazyvim_picker = "telescope"
+-- vim.g.lazyvim_picker = "telescope"
 
 local opt = vim.opt
 opt.relativenumber = false
