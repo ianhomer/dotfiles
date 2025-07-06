@@ -119,6 +119,7 @@ end
 starship init fish | source
 direnv hook fish | source
 zoxide init fish | source
+pyenv init - fish | source
 
 # Things bind
 
@@ -131,9 +132,9 @@ time-me "END config.fish"
 set -gx PNPM_HOME "$HOME/Library/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
 
- # Added by Docker Desktop
+# Added by Docker Desktop
 if [ -f ~/.docker/init-fish ]
-  source ~/.docker/init-fish.sh
+    source ~/.docker/init-fish.sh
 end
 
 # Created by `pipx` on 2025-06-07 05:31:00

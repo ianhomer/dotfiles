@@ -8,10 +8,10 @@ should-run -m 7 $argv dotme-fish || exit 0
 printf "\e[36mConfiguring fish shell\e[0m\n"
 
 function fish_remove_path
-  if set -l index (contains -i "$argv" $fish_user_paths)
-    printf "\e[36mRemoving $argv from PATH\e[0m\n"
-    set -e fish_user_paths[$index]
-  end
+    if set -l index (contains -i "$argv" $fish_user_paths)
+        printf "\e[36mRemoving $argv from PATH\e[0m\n"
+        set -e fish_user_paths[$index]
+    end
 end
 
 #
@@ -30,6 +30,8 @@ set python_version 3.12
 
 echo $PATH
 
+set -Ux PYENV_ROOT $HOME/.pyenv
+
 fish_add_path ~/bin
 fish_add_path ~/.local/bin
 fish_add_path ~/.jenv/shims
@@ -37,20 +39,21 @@ fish_add_path ~/.dotfiles/bin
 fish_add_path ~/.jenv/bin
 fish_add_path ~/.cargo/bin
 fish_add_path ~/.rbenv/shims
+fish_add_path $PYENV_ROOT/bin
 if is-silicon
-  fish_add_path /opt/homebrew/bin
-  fish_add_path /opt/homebrew/sbin
-  # Clean up legacy way of setting python path
-  set global_python_bin /opt/homebrew/opt/python@{$python_version}
-  fish_remove_path $global_python_bin
-  set local_python_bin /Users/ian/Library/Python/{$python_version}/bin
-  fish_remove_path $local_python_bin
-  fish_remove_path /opt/homebrew/opt/python@3.9/Frameworks/Python.framework/Versions/3.9/bin
-  fish_remove_path /opt/homebrew/opt/python@3.10/libexec/bin
-  fish_remove_path /opt/homebrew/opt/python@3.10/Frameworks/Python.framework/Versions/3.10/bin
+    fish_add_path /opt/homebrew/bin
+    fish_add_path /opt/homebrew/sbin
+    # Clean up legacy way of setting python path
+    set global_python_bin /opt/homebrew/opt/python@{$python_version}
+    fish_remove_path $global_python_bin
+    set local_python_bin /Users/ian/Library/Python/{$python_version}/bin
+    fish_remove_path $local_python_bin
+    fish_remove_path /opt/homebrew/opt/python@3.9/Frameworks/Python.framework/Versions/3.9/bin
+    fish_remove_path /opt/homebrew/opt/python@3.10/libexec/bin
+    fish_remove_path /opt/homebrew/opt/python@3.10/Frameworks/Python.framework/Versions/3.10/bin
 
 else
-  fish_remove_path /usr/local/opt/python@3.10/Frameworks/Python.framework/Versions/3.10/bin
+    fish_remove_path /usr/local/opt/python@3.10/Frameworks/Python.framework/Versions/3.10/bin
 end
 
 # Legacy clean up
@@ -58,8 +61,6 @@ fish_remove_path ~/bin
 fish_remove_path ~/Library/Python/3.9/bin
 fish_remove_path ~/.local/share/venv
 fish_remove_path ~/.local/share/venv/bin
-fish_remove_path ~/.pyenv/bin
-fish_remove_path ~/.pyenv/shims
 
 # Google cloud
 fish_add_path ~/local/gcloud/google-cloud-sdk/bin
@@ -82,7 +83,7 @@ fish_add_path ~/Library/Android/sdk/platform-tools
 # Link in docker completions
 set dockerCompletions ~/.config/fish/completions/docker.fish
 if not test -L $dockerCompletions
-  ln -s /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion $dockerCompletions
+    ln -s /Applications/Docker.app/Contents/Resources/etc/docker.fish-completion $dockerCompletions
 end
 
 set -U fish_greeting ""
