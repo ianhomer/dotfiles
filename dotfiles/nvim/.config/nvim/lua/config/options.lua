@@ -3,7 +3,9 @@
 -- Add any additional options here
 
 vim.g.root_spec = { "cwd" }
-vim.g.autoformat = false
+vim.g.autoformat = true
+vim.o.winborder = "bold"
+-- vim.g.lazyvim_picker = "telescope"
 
 local opt = vim.opt
 opt.relativenumber = false
@@ -21,3 +23,16 @@ nnoremap <silent> <S-Down> :m+<CR>
 inoremap <silent> <S-Up> <Esc>:m-2<CR>
 inoremap <silent> <S-Down> <Esc>:m+<CR>
   ]])
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "TelescopeFindPre",
+  callback = function()
+    vim.opt_local.winborder = "none"
+    vim.api.nvim_create_autocmd("WinLeave", {
+      once = true,
+      callback = function()
+        vim.opt_local.winborder = "rounded"
+      end,
+    })
+  end,
+})

@@ -9,33 +9,41 @@ REQUIREMENTS=~/.dotfiles/config/python/requirements.txt
 should-run -m 30 $@ $0 $REQUIREMENTS || exit 0
 $(shim) && cd ${ME} && . bin/i.sh
 
+if ! command -v poetry >/dev/null 2>&1; then
+	pipx install poetry
+fi
+
+while read requirements; do
+	echo $requirements
+done <$REQUIREMENTS
+
 # TODO - create a way to recreate local venv to upgrade python
 # currently if you delete this venv directory then the venv will
 # be recreated with the latest python version, but it'd be good
 # to automate this
-PYTHON_VENV_DIR=$HOME/.local/share/venv
-
-if [ ! -d "$PYTHON_VENV_DIR" ] ; then
-  log::info "Creating python venv directory"
-  python3 -m venv $PYTHON_VENV_DIR
-fi
-
-source $PYTHON_VENV_DIR/bin/activate
-pyenv which python
-python -V
-
-if ! command -v pip3 &>/dev/null ; then
-  log::info "pip3 not installed"
-  exit
-fi
-
-printf "\e[36mInstalling pip requirements\e[0m\n"
-
-pip3 install --upgrade pip
-
-pip3 install -r $REQUIREMENTS -U | grep -v "already"
-
-printf "\e[35mInstalled pip packages\e[0m\n"
-pip3 list
+# PYTHON_VENV_DIR=$HOME/.local/share/venv
+#
+# if [ ! -d "$PYTHON_VENV_DIR" ] ; then
+#   log::info "Creating python venv directory"
+#   python3 -m venv $PYTHON_VENV_DIR
+# fi
+#
+# source $PYTHON_VENV_DIR/bin/activate
+# pyenv which python
+# python -V
+#
+# if ! command -v pip3 &>/dev/null ; then
+#   log::info "pip3 not installed"
+#   exit
+# fi
+#
+# printf "\e[36mInstalling pip requirements\e[0m\n"
+#
+# pip3 install --upgrade pip
+#
+# pip3 install -r $REQUIREMENTS -U | grep -v "already"
+#
+# printf "\e[35mInstalled pip packages\e[0m\n"
+# pip3 list
 
 should-run -fu $0

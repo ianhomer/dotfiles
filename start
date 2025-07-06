@@ -12,8 +12,21 @@ _DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 echo "dotfiles direct : ${_DIR}"
 
 ${_DIR}/bin/dotme-start
-${_DIR}/bin/dotme
-
 cd ${_DIR}
 export PATH=${_DIR}/bin:${PATH}
+
+# set up local run time path to find brew binaries after install. This is needed
+# because during bootstrap the shell configurations are not in place
+if is-silicon ; then
+  export PATH=/opt/homebrew/bin:${PATH}
+else
+  export PATH=/usr/local/bin:${PATH}
+fi
+
+${_DIR}/bin/dotme
 ${_DIR}/bin/git-remote-to-ssh
+dotme-key
+
+echo
+echo "dotfiles have set up OK"
+echo

@@ -22,8 +22,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.ui.mini-animate" },
     { import = "lazyvim.plugins.extras.coding.mini-surround" },
     { import = "lazyvim.plugins.extras.editor.inc-rename" },
-    -- { import = "lazyvim.plugins.extras.editor.telescope" },
-    -- import/override with your plugins
+    { import = "lazyvim.plugins.extras.editor.telescope" },
+    -- import/override with local plugins
     { import = "plugins" },
   },
   defaults = {
@@ -56,3 +56,7 @@ require("lazy").setup({
     },
   },
 })
+
+require("lspconfig").yamlls.setup(require("schema-companion").setup_client({
+  -- your yaml language server configuration
+}))

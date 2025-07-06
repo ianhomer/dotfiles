@@ -26,12 +26,15 @@ if [ -d ~/.gnupg ] ; then
   fi
 fi
 
+# TODO : ipv6 must be good to go now, I'm going to disable this warning for
+# now and not enforce it. If no issues over the coming months this can be
+# deleted
 # Some tools don't resolve to ipv6 addresses yet, so safer not to have
 # the folliwng in /etc/hosts
 #
 # ::1             localhost
 #
-ipv6LocalHostRoute=$(grep localhost /etc/hosts | grep "::1" | grep -v "^#" | wc -l)
-if [ ${ipv6LocalHostRoute} -eq 1 ] ; then
-  log::warn "/etc/hosts has ipv6 localhost enabled which is not reliable, please comment out"
-fi
+# ipv6LocalHostRoute=$(grep localhost /etc/hosts | grep "::1" | grep -v "^#" | wc -l)
+# if [ ${ipv6LocalHostRoute} -eq 1 ] ; then
+#   log::warn "/etc/hosts has ipv6 localhost enabled which is not reliable, please comment out"
+# fi

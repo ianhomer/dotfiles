@@ -53,9 +53,6 @@ if status --is-login
     set --query nvm_current_version && _nvm_version_deactivate $nvm_current_version
     _nvm_version_activate $v
     time-me "AFTER nvm use"
-
-    # Enable pyenv
-    pyenv init - | source
 end
 
 if status --is-interactive
@@ -122,6 +119,7 @@ end
 starship init fish | source
 direnv hook fish | source
 zoxide init fish | source
+pyenv init - fish | source
 
 # Things bind
 
@@ -134,7 +132,10 @@ time-me "END config.fish"
 set -gx PNPM_HOME "$HOME/Library/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
 
- # Added by Docker Desktop
+# Added by Docker Desktop
 if [ -f ~/.docker/init-fish ]
-  source ~/.docker/init-fish.sh
+    source ~/.docker/init-fish.sh
 end
+
+# Created by `pipx` on 2025-06-07 05:31:00
+set PATH $PATH /Users/ian/.local/bin

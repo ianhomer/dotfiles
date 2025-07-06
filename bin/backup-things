@@ -15,7 +15,7 @@ EOF
 OPTIND=1
 while getopts "abs" o; do case "$o" in
   a) BACKUP_ALL=y ;;
-  b) BACKUP_BUKU_BOOKMARKS=y ;;
+  b) BACKUP_BUKU_BOOKMARKS=n ;;
   s) SYNC_BACKUPS=y ;;
   h) help && exit 0 ;;
   *) exit 1 ;;
