@@ -2,7 +2,8 @@
 
 #
 # Git sets modified time for file to the time the file was downloaded locally,
-# this script sets the modified time to the time of the commit
+# this script sets the modified time to the time of the commit for recent (< 1
+# minute) commits
 #
 
 import os
@@ -20,11 +21,14 @@ class Git:
         self.cmd = ["git"]
         # Getting the root early has the side effect of throwing an error if
         # we're not in a git repository.
-        self.isGit = subprocess.call(
-            ["git", "rev-parse", "--is-inside-work-tree"],
-            stderr=subprocess.STDOUT,
-            stdout=open(os.devnull, "w"),
-        ) == 0
+        self.isGit = (
+            subprocess.call(
+                ["git", "rev-parse", "--is-inside-work-tree"],
+                stderr=subprocess.STDOUT,
+                stdout=open(os.devnull, "w"),
+            )
+            == 0
+        )
         if not self.isGit:
             return
         try:
@@ -61,7 +65,9 @@ def fixModifiedTime():
     # whatchanged returns, for each commit,
     # modified time followed by files changed
     whatchanged = subprocess.Popen(
-        shlex.split("git whatchanged --pretty=%at"), text=True, stdout=subprocess.PIPE
+        shlex.split("git whatchanged --since='2 minutes ago' --pretty=%at"),
+        text=True,
+        stdout=subprocess.PIPE,
     )
     if whatchanged.stdout:
         for line in whatchanged.stdout:
