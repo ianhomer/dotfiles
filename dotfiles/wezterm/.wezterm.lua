@@ -10,7 +10,7 @@ end
 
 local act = wezterm.action
 
--- Thank you https://github.com/numToStr/Navigator.nvim/wiki/WezTerm-Integratio
+-- Thank you https://github.com/numToStr/Navigator.nvim/wiki/WezTerm-Integration
 local function activatePane(window, pane, pane_direction, vim_direction)
   if isVi(pane) then
     window:perform_action(act.SendKey({ key = vim_direction, mods = "CTRL" }), pane)
