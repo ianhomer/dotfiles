@@ -10,7 +10,7 @@ end
 
 local act = wezterm.action
 
--- Thank you https://github.com/numToStr/Navigator.nvim/wiki/WezTerm-Integration
+-- Thank you https://github.com/numToStr/Navigator.nvim/wiki/WezTerm-Integratio
 local function activatePane(window, pane, pane_direction, vim_direction)
   if isVi(pane) then
     window:perform_action(act.SendKey({ key = vim_direction, mods = "CTRL" }), pane)
@@ -32,6 +32,7 @@ wezterm.on("ActivatePaneDirection-down", function(window, pane)
   activatePane(window, pane, "Down", "j")
 end)
 
+-- Navigation out of nvim comes from https://github.com/ianhomer/wezterm.nvim
 local function scrollPane(window, pane, key, amount)
   if isVi(pane) then
     window:perform_action(act.SendKey({ key = key, mods = "CTRL" }), pane)
