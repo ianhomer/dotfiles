@@ -87,6 +87,7 @@ config.window_close_confirmation = "NeverPrompt"
 config.show_tab_index_in_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 config.max_fps = 120
+config.window_close_confirmation = "NeverPrompt"
 
 -- Over and above default keys, e.g.
 --
@@ -169,6 +170,11 @@ config.keys = {
       key = "£",
     }),
   },
+  {
+    key = "w",
+    mods = "SHIFT|CTRL",
+    action = wezterm.action.CloseCurrentTab({ confirm = false }),
+  },
 }
 
 -- copy of hyperlink rules from https://wezfurlong.org/wezterm/config/lua/config/hyperlink_rules.html
@@ -217,20 +223,24 @@ local get_last_folder_segment = function(cwd)
   return path[#path]
 end
 
-local function get_relative_working_dir(tab)
-  local current_dir = tab.active_pane.current_working_dir.file_path or ""
+local function get_relative_working_dir(pane)
+  local current_dir = pane.current_working_dir.file_path or ""
   return get_last_folder_segment(current_dir)
 end
 
 local function tab_title(tab)
-  local current_working_dir = tab.active_pane.current_working_dir
+  -- Personally for each tab, I have nvim in the directory of interest in the
+  -- first pane. Other panes I might navigate around. I want the tab label to
+  -- based on the directory of this first pane, since this is my context.
+  local pane = tab.panes[1]
+  local current_working_dir = pane.current_working_dir
   if current_working_dir == nil then
     return "special"
   end
   if current_working_dir.file_path == wezterm.home_dir then
     return "~"
   end
-  local relative_working_dir = get_relative_working_dir(tab)
+  local relative_working_dir = get_relative_working_dir(pane)
   if relative_working_dir == ".dotfiles" then
     return "."
   elseif relative_working_dir == "things" then
