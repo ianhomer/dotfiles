@@ -1,6 +1,7 @@
 return {
   "neovim/nvim-lspconfig",
   opts = {
+    inlay_hints = { enabled = false },
     servers = {
       -- See https://github.com/LazyVim/LazyVim/issues/3383
       eslint = {
