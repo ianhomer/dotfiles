@@ -12,6 +12,17 @@ return {
           },
         },
       },
+      harper_ls = {
+        settings = {
+          ["harper-ls"] = {
+            linters = {
+              SpellCheck = true,
+              SentenceCapitalization = true,
+            },
+            dialect = "British",
+          },
+        },
+      },
     },
     setup = {
       eslint = function()
