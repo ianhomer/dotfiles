@@ -20,6 +20,7 @@ return {
               SentenceCapitalization = true,
             },
             dialect = "British",
+            diagnosticSeverity = "hint",
           },
         },
       },
