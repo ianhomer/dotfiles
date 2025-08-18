@@ -8,7 +8,7 @@ return {
         settings = {
           useFlatConfig = false, -- set if using flat config
           experimental = {
-            useFlatConfig = nil, -- option not in the latest eslint-lsp
+            useFlatConfig = nil, -- Option not in the latest eslint-lsp
           },
         },
       },
