@@ -62,10 +62,10 @@ def fixModifiedTime():
         files.add(path)
 
     modifiedTime = 0
-    # whatchanged returns, for each commit,
+    # log --raw returns, for each commit,
     # modified time followed by files changed
     whatchanged = subprocess.Popen(
-        shlex.split("git whatchanged --since='2 minutes ago' --pretty=%at"),
+        shlex.split("git log --raw --since='2 minutes ago' --pretty=%at"),
         text=True,
         stdout=subprocess.PIPE,
     )
