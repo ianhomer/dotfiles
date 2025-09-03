@@ -26,6 +26,10 @@ return {
       },
     },
     setup = {
+      ["*"] = function()
+        vim.lsp.buf.workspace_diagnostics()
+      end,
+
       eslint = function()
         require("lazyvim.util").lsp.on_attach(function(client)
           if client.name == "eslint" then

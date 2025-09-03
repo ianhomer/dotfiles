@@ -1,4 +1,4 @@
-# My .dotfiles
+# My dotfiles
 
 Configure my computers.
 
@@ -35,8 +35,8 @@ of working to streamline distraction free coding. This includes:
 
 **neovim**
 : file editing with plugins - none-ls ; dispatch ; fugitive ;
-  fzf.vim ; lsp ; markdown-preview ; nvim tree ; repeat ; startify ;
-  surround ; tabular ; which-key ; surround
+fzf.vim ; lsp ; markdown-preview ; nvim tree ; repeat ; startify ;
+surround ; tabular ; which-key ; surround
 
 **FiraCode Nerd Font**
 : ligatures, powerline and more
@@ -53,14 +53,14 @@ MacOS with
 : window manager
 
 Other tools woven into these dotfiles include **ag**, **fzf**,
-**fugitive**, **java**, **node** and **python**.
+**fugitive**, **java**, **node**, and **python**.
 
 ## How
 
-dotfiles are all located in sub-folders in the dotfiles/ folder for the
+The dotfiles are all located in sub-folders in the dotfiles/ folder for the
 associated tools. Installation stows these in your home directory, i.e. original
 backed up and dotfiles linked into place. Further installation and configuration
-takes place with scripts in the bin directory. Look at bin/dotme to see what
+takes place with scripts in the bin directory. Look at `bin/dotme` to see what
 actually happens.
 
 Components are initialised separately, see `dotme -h` to get a list of each
@@ -69,7 +69,7 @@ part. `man dotme` will give you more guidance on usage.
 I configure some components on my system [manually](./docs/manual-osx.md) for
 minor tweaks and enhancements.
 
-To customise local dotme configuration, `vi ~/.config/dotme/.env` and edit a
+To customise local `dotme` configuration, `vi ~/.config/dotme/.env` and edit a
 properties to look like:
 
 ```properties
