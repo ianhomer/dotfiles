@@ -27,8 +27,8 @@
     "eslint:fix": "eslint . --ext .js,.ts,.tsx --fix",
     "lint": "pnpm prettier && pnpm eslint",
     "lint:fix": "pnpm prettier:fix && pnpm eslint:fix",
-    "prettier": "npx prettier --check .",
-    "prettier:fix": "npx prettier --write .",
+    "prettier": "pnpx prettier --check .",
+    "prettier:fix": "pnpx prettier --write .",
     "start:ts": "ts-node scratch.ts",
     "test": "bats -T fixtures"
   },
