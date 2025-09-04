@@ -58,6 +58,12 @@ npm install -g npm
 log:: "pnpm global list"
 pnpm --global list 2>/dev/null || pnpm --global install pyright
 
+if pnpm --global list | grep remark-lint-no-auto-link-without-protocol ; then
+  # remark-lint-no-auto-link-without-protocol deprecated now, so remove
+  log:: "uninstalling deprecated remark-lint-no-auto-link-without-protocol"
+  pnpm uninstall -g remark-lint-no-auto-link-without-protocol
+fi
+
 # Install missing packages
 
 log:: "pnpm install missing global"
