@@ -56,6 +56,22 @@ def synk(path, fetch_window: int):
     original_url = getoutput("git config --get remote.origin.url")
     remote_name = getoutput(f"git config --get branch.{branch_name}.remote")
 
+    dated_file = f"{path}/.git/FETCH_HEAD"
+    if not os.path.exists(dated_file):
+        dated_file = f"{path}/.git/HEAD"
+    last_modified = datetime.datetime.fromtimestamp(os.path.getmtime(dated_file))
+    now = datetime.datetime.now()
+    if last_modified + datetime.timedelta(seconds=fetch_window) < now:
+        rsync_from = getoutput("git config synk.rsyncfrom")
+        if rsync_from:
+            relative_dir = os.path.basename(rsync_from.rstrip("/"))
+            print("↔ ", end="")
+            os.system(f"rsync -qr {rsync_from}/* {relative_dir}")
+        else:
+            print("▻ ", end="")
+    else:
+        print("▻ ", end="")
+
     if changes > 0:
         if auto_commit:
             os.system("git add -A ; git commit --quiet -m sync")
@@ -66,13 +82,6 @@ def synk(path, fetch_window: int):
             )
             return
 
-    print("▻ ", end="")
-
-    dated_file = f"{path}/.git/FETCH_HEAD"
-    if not os.path.exists(dated_file):
-        dated_file = f"{path}/.git/HEAD"
-    last_modified = datetime.datetime.fromtimestamp(os.path.getmtime(dated_file))
-    now = datetime.datetime.now()
     if last_modified + datetime.timedelta(seconds=fetch_window) < now:
         printf(".")
         os.system("git fetch")
@@ -123,6 +132,11 @@ def run():
         help="enable autocommit",
         action=argparse.BooleanOptionalAction,
     )
+    parser.add_argument(
+        "--rsync",
+        "-r",
+        help="rsync give folder to this repository before git synk",
+    )
     args = parser.parse_args()
 
     fetch_window = int(args.window)
@@ -135,6 +149,12 @@ def run():
     if is_git_repo(cwd):
         if args.autcommit:
             os.system("git config core.autocommit true")
+        if args.rsync:
+            print(
+                f"Enabling rsync of local directory to git this git repository : {args.rsync}"
+            )
+            os.system(f"git config synk.rsyncfrom {args.rsync}")
+
         synk(cwd, fetch_window=fetch_window)
     else:
         for child in os.listdir(cwd):

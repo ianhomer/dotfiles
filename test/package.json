@@ -2,30 +2,33 @@
   "author": "anon",
   "description": "dotme test",
   "devDependencies": {
-    "@types/node": "24.0.10",
-    "@typescript-eslint/eslint-plugin": "8.35.1",
-    "@typescript-eslint/parser": "8.35.1",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "10.1.5",
-    "eslint-plugin-react": "7.37.5",
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.34.0",
+    "@types/node": "24.3.1",
+    "@typescript-eslint/eslint-plugin": "8.42.0",
+    "@typescript-eslint/parser": "8.42.0",
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-sonarjs": "1.0.3",
-    "jest": "^30.0.4",
+    "globals": "^16.3.0",
+    "jest": "^30.1.3",
     "prettier": "3.6.2",
     "ts-node": "10.9.2",
-    "typescript": "5.8.3"
+    "typescript": "5.9.2"
   },
   "license": "ISC",
   "main": "scratch.js",
   "name": "test",
   "type": "module",
   "scripts": {
-    "eslint": "npx eslint . --ext js,ts,tsx",
-    "eslint:debug": "DEBUG=eslint:cli-engine npx eslint . --ext js,ts,tsx",
-    "eslint:fix": "npx eslint . --ext js,ts,tsx --fix",
-    "lint": "pnpm prettier && pnpm eslint && pnpm gherkin-lint",
+    "eslint": "eslint . --ext .js,.ts,.tsx",
+    "eslint:debug": "DEBUG=eslint:cli-engine eslint . --ext js,ts,tsx",
+    "eslint:fix": "eslint . --ext .js,.ts,.tsx --fix",
+    "lint": "pnpm prettier && pnpm eslint",
     "lint:fix": "pnpm prettier:fix && pnpm eslint:fix",
-    "prettier": "npx prettier --check .",
-    "prettier:fix": "npx prettier --write .",
+    "prettier": "pnpx prettier --check .",
+    "prettier:fix": "pnpx prettier --write .",
     "start:ts": "ts-node scratch.ts",
     "test": "bats -T fixtures"
   },
@@ -38,5 +41,5 @@
       ]
     }
   },
-  "packageManager": "pnpm@8.3.1+sha256.ce038ba2617f7a93d0b1f24b733b9d64258b15c97a14c6f37673c8d49e033d9a"
+  "packageManager": "pnpm@10.15.1"
 }

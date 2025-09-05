@@ -30,7 +30,6 @@ return {
         mappings = {
           i = {
             ["<esc>"] = require("telescope.actions").close,
-            -- ["<esc>"] = function() require("telescope.actions").close end,
           },
         },
         layout_config = {
@@ -49,6 +48,12 @@ return {
         find_files = {
           find_command = find_command,
           hidden = true,
+        },
+        live_grep = {
+          file_ignore_patterns = { "node_modules/", "%.git/", "%.venv/" },
+          additional_args = function(_)
+            return { "--hidden" }
+          end,
         },
       },
     },

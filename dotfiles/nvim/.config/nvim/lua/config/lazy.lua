@@ -16,24 +16,33 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
-    -- add LazyVim and import its plugins
+    -- Add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    { import = "lazyvim.plugins.extras.formatting.prettier" },
-    { import = "lazyvim.plugins.extras.ui.mini-animate" },
     { import = "lazyvim.plugins.extras.coding.mini-surround" },
     { import = "lazyvim.plugins.extras.editor.inc-rename" },
+    { import = "lazyvim.plugins.extras.editor.refactoring" },
     { import = "lazyvim.plugins.extras.editor.telescope" },
+    { import = "lazyvim.plugins.extras.formatting.prettier" },
+    { import = "lazyvim.plugins.extras.lang.ansible" },
+    { import = "lazyvim.plugins.extras.lang.docker" },
+    { import = "lazyvim.plugins.extras.lang.json" },
+    { import = "lazyvim.plugins.extras.lang.python" },
+    { import = "lazyvim.plugins.extras.lang.tailwind" },
+    { import = "lazyvim.plugins.extras.lang.terraform" },
+    { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "lazyvim.plugins.extras.lang.yaml" },
+    { import = "lazyvim.plugins.extras.ui.mini-animate" },
     -- import/override with local plugins
     { import = "plugins" },
   },
   defaults = {
-    -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
+    -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during start up.
     -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
     lazy = false,
     -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
     -- have outdated releases, which may break your Neovim install.
     version = false, -- always use the latest git commit
-    -- version = "*", -- try installing the latest stable version for plugins that support semver
+    -- version = "*", -- try installing the latest stable version for plugins that support sever
   },
   install = { colorscheme = { "tokyonight", "habamax" } },
   checker = {
@@ -57,6 +66,20 @@ require("lazy").setup({
   },
 })
 
-require("lspconfig").yamlls.setup(require("schema-companion").setup_client({
-  -- your yaml language server configuration
-}))
+-- after/lsp/yamlls.lua not loading for me, hence keep here for now
+-- See https://github.com/cenk1cenk2/schema-companion.nvim?tab=readme-ov-file#lsp-config-method-deprecated
+require("lspconfig").yamlls.setup(
+  require("schema-companion").setup_client(require("schema-companion").adapters.yamlls.setup({
+    enable_telescope = true,
+    sources = {
+      require("schema-companion").sources.matchers.kubernetes.setup({ version = "master" }),
+      require("schema-companion").sources.lsp.setup(),
+      require("schema-companion").sources.schemas.setup({
+        {
+          name = "Kubernetes master",
+          uri = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/all.json",
+        },
+      }),
+    },
+  }))
+)

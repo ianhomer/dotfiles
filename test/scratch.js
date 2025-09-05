@@ -26,5 +26,5 @@ function foo(a) {
   return a;
 }
 
-console.log(FOO);
+console.console.log(FOO);
 foo(true);

@@ -2,7 +2,7 @@
 
 ## Test dot scripts
 
-  bats -T fixtures
+bats -T fixtures
 
 ## Testing autosave
 
