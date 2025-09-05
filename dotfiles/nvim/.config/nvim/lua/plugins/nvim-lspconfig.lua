@@ -26,9 +26,10 @@ return {
       },
     },
     setup = {
-      ["*"] = function()
-        vim.lsp.buf.workspace_diagnostics()
-      end,
+      -- nvim > v0.11 needed for workspace_diagnostics
+      -- ["*"] = function()
+      --   vim.lsp.buf.workspace_diagnostics()
+      -- end,
 
       eslint = function()
         require("lazyvim.util").lsp.on_attach(function(client)
