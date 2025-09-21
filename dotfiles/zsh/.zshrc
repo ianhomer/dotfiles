@@ -1,6 +1,7 @@
 . ~/.config/sh/aliases.sh
 . ~/.config/sh/aliases-non-fish.sh
 
+
 # Initialise completion
 autoload -U compinit; compinit
 
