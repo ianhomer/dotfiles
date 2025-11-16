@@ -1,6 +1,6 @@
 -- Not sure why, but this plugin is not loading, if I ever work out how to get
 -- it loading I can clean this up
-print("after/lsp/yamlls called, duplicated logic in lua/config/lazy.lua can be removed ")
+-- print("after/lsp/yamlls called, duplicated logic in lua/config/lazy.lua can be removed ")
 
 return require("schema-companion").setup_client(require("schema-companion").adapters.yamlls.setup({
   enable_telescope = true,

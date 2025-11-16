@@ -25,9 +25,9 @@ alias kit="kitty --single-instance --session ~/.config/kitty/base.conf& ; disown
 
 # search for file in directory and open in vi
 alias o="fzf --height "100%" | xargs nvim -c ':cd %:h'"
+alias ox="fzf --height "100%" --bind 'enter:execute(nvim {} -c \':cd %:h\')'"
 alias oh="fd -H | fzf --height "100%" | xargs nvim -c ':cd %:h'"
 alias oi="fd -I | fzf --height "100%" | xargs nvim -c ':cd %:h'"
 alias ohi="fd -HI | fzf --height "100%" | xargs nvim -c ':cd %:h'"
-
 
 
