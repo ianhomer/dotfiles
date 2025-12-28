@@ -30,16 +30,6 @@ return {
       -- ["*"] = function()
       --   vim.lsp.buf.workspace_diagnostics()
       -- end,
-
-      eslint = function()
-        require("lazyvim.util").lsp.on_attach(function(client)
-          if client.name == "eslint" then
-            client.server_capabilities.documentFormattingProvider = true
-          elseif client.name == "tsserver" or client.name == "vtsls" then
-            client.server_capabilities.documentFormattingProvider = false
-          end
-        end)
-      end,
     },
   },
 }
