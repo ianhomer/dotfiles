@@ -125,7 +125,6 @@ pyenv init - fish | source
 
 bind --mode insert \cx do
 bind --mode insert \cw cheat
-bind --mode insert -k nul "things -n headings --witharchive"
 
 time-me "END config.fish"
 

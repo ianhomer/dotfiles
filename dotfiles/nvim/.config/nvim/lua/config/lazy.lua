@@ -68,18 +68,18 @@ require("lazy").setup({
 
 -- after/lsp/yamlls.lua not loading for me, hence keep here for now
 -- See https://github.com/cenk1cenk2/schema-companion.nvim?tab=readme-ov-file#lsp-config-method-deprecated
-require("lspconfig").yamlls.setup(
-  require("schema-companion").setup_client(require("schema-companion").adapters.yamlls.setup({
-    enable_telescope = true,
-    sources = {
-      require("schema-companion").sources.matchers.kubernetes.setup({ version = "master" }),
-      require("schema-companion").sources.lsp.setup(),
-      require("schema-companion").sources.schemas.setup({
-        {
-          name = "Kubernetes master",
-          uri = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/all.json",
-        },
-      }),
-    },
-  }))
-)
+-- require("lspconfig").yamlls.setup(
+--   require("schema-companion").setup_client(require("schema-companion").adapters.yamlls.setup({
+--     enable_telescope = true,
+--     sources = {
+--       require("schema-companion").sources.matchers.kubernetes.setup({ version = "master" }),
+--       require("schema-companion").sources.lsp.setup(),
+--       require("schema-companion").sources.schemas.setup({
+--         {
+--           name = "Kubernetes master",
+--           uri = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/master-standalone-strict/all.json",
+--         },
+--       }),
+--     },
+--   }))
+-- )
