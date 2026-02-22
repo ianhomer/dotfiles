@@ -138,3 +138,4 @@ end
 
 # Created by `pipx` on 2025-06-07 05:31:00
 set PATH $PATH /Users/ian/.local/bin
+set PATH $PATH ~/.luarocks/bin
