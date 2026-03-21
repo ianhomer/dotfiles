@@ -94,7 +94,7 @@ time-me "AFTER bindings"
 
 if status --is-login
     #
-    # Set terminal for GPG to allow signining of git commits
+    # Set terminal for GPG to allow signing of git commits
     #
     set -x GPG_TTY (tty)
 end
