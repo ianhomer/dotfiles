@@ -10,6 +10,14 @@
   },
   "filesystem": {
     "allow": ["."],
-    "read": ["~/.config/nvim", "~/.config/git", "./.local/share/nvim"]
+    "read": [
+      "~/.cache",
+      "~/.pyenv",
+      "~/.config/fish",
+      "~/.config/nvim",
+      "~/.config/git",
+      "~/.local/share/nvim",
+      "/opt/homebrew/Cellar/neovim/"
+    ]
   }
 }
