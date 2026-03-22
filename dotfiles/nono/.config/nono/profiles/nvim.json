@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "name": "nvim"
+  },
+  "security": {
+    "groups": []
+  },
+  "workdir": {
+    "access": "readwrite"
+  },
+  "filesystem": {
+    "allow": ["."],
+    "read": ["~/.config/nvim", "~/.config/git", "./.local/share/nvim"]
+  }
+}
