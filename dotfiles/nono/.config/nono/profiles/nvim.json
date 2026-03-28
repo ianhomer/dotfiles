@@ -1,23 +1,38 @@
 {
   "meta": {
-    "name": "nvim"
+    "name": "nvim",
+    "version": "0.0.1",
+    "description": "nvim sandbox"
   },
+  "extends": ["default"],
   "security": {
     "groups": []
   },
   "workdir": {
     "access": "readwrite"
   },
+  "network": {
+    "block": false
+  },
   "filesystem": {
     "allow": ["."],
     "read": [
-      "~/.cache",
+      "~/.cache/nvim",
       "~/.pyenv",
       "~/.config/fish",
       "~/.config/nvim",
       "~/.config/git",
       "~/.local/share/nvim",
       "/opt/homebrew/Cellar/neovim/"
-    ]
+    ],
+    "write": ["~/.cache/nvim"],
+    "read_file": [
+      "~/.gitconfig"
+    ],
+    "write_file": []
+  },
+  "rollback": {
+    "exclude_patterns": ["node_modules", ".next", "__pycache__", "target"],
+    "exclude_globs": ["*.tmp.[0-9]*.[0-9]*"]
   }
 }
