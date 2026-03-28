@@ -1,3 +1,6 @@
+set -q DOT_SKIP; or set DOT_SKIP 0
+set -q DOT_LOG_LEVEL; or set DOT_LOG_LEVEL 0
+
 [ {$DOT_SKIP} -eq 2 ]; and exit
 
 time-me "START config.fish"

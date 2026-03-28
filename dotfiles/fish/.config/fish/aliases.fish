@@ -1,6 +1,9 @@
+set -q DOT_SKIP; or set DOT_SKIP 0
+set -q DOT_ALIASES; or set DOT_ALIASES 0
+set -q DOT_ALIASES_LOADED; or set DOT_ALIASES_LOADED 0
+
 [ {$DOT_SKIP} -eq 2 ]; and exit
 [ {$DOT_ALIASES} -eq 0 ]; and exit
-set -q DOT_ALIASES_LOADED; or set DOT_ALIASES_LOADED 0
 [ {$DOT_ALIASES_LOADED} -eq 1 ]; and exit
 
 # Shortcuts
