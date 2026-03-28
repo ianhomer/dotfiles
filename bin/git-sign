@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+PUSH_AFTER=false
+
+# 1. Parse Arguments
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --push) PUSH_AFTER=true ;;
+        *) echo "Unknown parameter: $1"; exit 1 ;;
+    esac
+    shift
+done
+
+# 2. Determine the upstream baseline
+UPSTREAM=$(git rev-parse --abbrev-ref @{u} 2>/dev/null || \
+            git rev-parse --abbrev-ref origin/HEAD 2>/dev/null || \
+            echo "origin/main")
+
+# 3. Get unpushed commits (oldest to newest)
+# %H = hash, %G? = signature status
+UNPUSHED_COMMITS=$(git log "$UPSTREAM..HEAD" --format="%H %G?" --reverse)
+
+if [ -z "$UNPUSHED_COMMITS" ]; then
+    echo "✅ No unpushed commits found."
+    exit 0
+fi
+
+FIRST_UNSIGNED=""
+while read -r hash status; do
+    if [[ "$status" != "G" ]]; then
+        FIRST_UNSIGNED="$hash"
+        break
+    fi
+done <<< "$UNPUSHED_COMMITS"
+
+# 4. Rebase if needed
+if [ -z "$FIRST_UNSIGNED" ]; then
+    echo "✅ All unpushed commits are already signed."
+else
+    echo "Found unsigned commit at ${FIRST_UNSIGNED:0:7}. Rebasing..."
+    # We rebase from the parent of the first unsigned commit
+    if git rebase --gpg-sign --force-rebase --no-fork-point "$FIRST_UNSIGNED~1"; then
+        echo "✅ Rebase successful. Commits signed."
+    else
+        echo "❌ Rebase failed (likely a conflict). Please resolve and run 'git rebase --continue'."
+        exit 1
+    fi
+fi
+
+# 5. Handle Push
+if [ "$PUSH_AFTER" = true ]; then
+    echo "Pushing to remote..."
+    git push
+fi
+

@@ -23,8 +23,6 @@
   log-graph-branches = "log --all --decorate --oneline --graph --simplify-by-decoration --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %<(20,trunc)%s %Cgreen %cd% %Cblue %Cblue%ae%d'"
   set-upstream = !git branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)
 
-  sign = !git rebase --gpg-sign @{u} --force-rebase
-  sign-push = !git rebase --gpg-sign @{u} --force-rebase && git push
   unpushed = !git log @{u}..HEAD --oneline
 
 [core]
