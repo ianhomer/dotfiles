@@ -15,7 +15,7 @@ if [ "$HOOK_NAME" = "pre-push" ]; then
     echo "${HOOK_NAME} : local_sha = ${local_sha}"
     echo "${HOOK_NAME} : remote_ref = ${remote_ref}"
     echo "${HOOK_NAME} : remote_sha = ${remote_sha}"
-    if [[ "$remote_sha" == "0"* ]] ; then
+    if [[ "$remote_sha" =~ ^0+ ]] ; then
       # Find the best starting point to avoid checking the whole history
       # Try origin/HEAD first, then origin/main, then origin/master
       BASE=$(git merge-base origin/HEAD "$local_sha" 2>/dev/null || \
@@ -40,6 +40,7 @@ if [ "$HOOK_NAME" = "pre-push" ]; then
       fi
     done
   done
+  exit 1
 fi
 
 
