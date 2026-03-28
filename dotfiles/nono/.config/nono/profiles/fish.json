@@ -23,13 +23,17 @@
       "~/.config/fish"
     ],
     "read": [
-      "~/.dotfiles/dotfiles",
+      "~/.dotfiles",
       "~/.pyenv",
       "~/.config/git",
       "~/.local/share/direnv/allow"
     ],
     "write": ["~/.pyenv/shims"],
-    "read_file": ["~/.gitconfig", "~/.config/starship.toml"]
+    "read_file": [
+      "~/.gitconfig",
+      "~/.config/starship.toml",
+      "~/.gitignore_global"
+    ]
   },
   "rollback": {
     "exclude_patterns": ["node_modules", ".next", "__pycache__", "target"],

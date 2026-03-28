@@ -1,0 +1,49 @@
+#!/bin/sh
+
+set -e
+HOOK_NAME=$(basename "$0")
+LOCAL_HOOK="$(git rev-parse --git-dir)/hooks/$HOOK_NAME"
+
+# --- GLOBAL LOGIC: Mandatory Signature Check ---
+# Only run this for pre-push
+if [ "$HOOK_NAME" = "pre-push" ]; then
+  echo "${HOOK_NAME} : User hook"
+
+  # Capture stdin into a temp file so we can reuse it
+  TEMP_STDIN=$(mktemp)
+  cat > "$TEMP_STDIN"
+
+  # Run signature check using the captured stdin
+  while read local_ref local_sha remote_ref remote_sha; do
+    echo "${HOOK_NAME} : local_ref = ${local_ref}"
+    echo "${HOOK_NAME} : local_sha = ${local_sha}"
+    echo "${HOOK_NAME} : remote_ref = ${remote_ref}"
+    echo "${HOOK_NAME} : remote_sha = ${remote_sha}"
+    range="$([[ "$remote_sha" == "0"* ]] && echo "$local_sha..origin/HEAD" || echo "$remote_sha..$local_sha")"
+    echo "${HOOK_NAME} : Commits ${range}"
+    for commit in $(git rev-list "$range"); do
+      echo "${HOOK_NAME} : ${commit}"
+      if ! git verify-commit "$commit" >/dev/null 2>&1; then
+        echo "❌ GLOBAL REJECT: Unsigned commit $commit."
+        rm "$TEMP_STDIN"; exit 1
+      fi
+    done
+  done < "$TEMP_STDIN"
+fi
+
+
+# --- LOCAL HAND-OFF ---
+if [ -f "$LOCAL_HOOK" ] && [ -x "$LOCAL_HOOK" ]; then
+  echo "${HOOK_NAME} : Repository hook ${LOCAL_HOOK}"
+  if [ -f "$TEMP_STDIN" ]; then
+    # Pass captured stdin to local hook
+    "$LOCAL_HOOK" "$@" < "$TEMP_STDIN"
+  else
+    # Standard execution for non-stdin hooks
+    "$LOCAL_HOOK" "$@"
+  fi
+  EXIT_CODE=$?
+else
+  echo "${HOOK_NAME} : No repository hook"
+  EXIT_CODE=0
+fi
