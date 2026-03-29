@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+DRY_RUN=false
+
+# 1. Parse Arguments
+while [[ "$#" -gt 0 ]]; do
+  case $1 in
+    --dry-run) DRY_RUN=true ;;
+    *) echo "Unknown parameter: $1"; exit 1 ;;
+  esac
+  shift
+done
+
+# 1. Identify the upstream (where we are pushing to)
+# Fallback chain: Tracking branch -> origin/HEAD -> origin/main
+UPSTREAM=$(git rev-parse --abbrev-ref @{u} 2>/dev/null || \
+           git rev-parse --abbrev-ref origin/HEAD 2>/dev/null || \
+           echo "origin/main")
+
+# 2. Get the range of unpushed commits
+# We use 'merge-base' to ensure we only check commits unique to this branch
+RANGE=$(git merge-base "$UPSTREAM" HEAD 2>/dev/null)..HEAD
+
+# If the range is empty (e.g., origin/HEAD doesn't exist yet),
+# we check the current branch's full history against main
+if [[ "$RANGE" == "..HEAD" ]]; then
+  RANGE="origin/main..HEAD"
+fi
+
+COUNT=$(git rev-list --count $RANGE)
+if [[ $COUNT -eq 0 ]]; then
+  echo "✅ No commits to push."
+  exit 0
+fi
+
+echo "Unpushed count : ${COUNT}"
+echo "Range          : $RANGE"
+
+# 3. Audit the signatures
+# %H = hash, %G? = signature status (G=Good, N=None, B=Bad)
+UNSIGNED_COUNT=0
+for commit in $(git rev-list "$RANGE"); do
+  if ! git verify-commit "$commit" >/dev/null 2>&1; then
+    ((UNSIGNED_COUNT++))
+    git log $commit -n 1
+    echo "❌ Unsigned commit: $commit."
+  fi
+done
+
+# 4. Final Decision
+if [[ $UNSIGNED_COUNT -gt 0 ]]; then
+  echo "---------------------------------------------------------------"
+  echo "ABORTED: $UNSIGNED_COUNT unsigned commit(s) found."
+  echo "Run 'git sign' to fix them before pushing."
+  echo "---------------------------------------------------------------"
+  exit 1
+elif [ "$DRY_RUN" = true ]; then
+  echo "✅ DRY RUN: All unpushed commits are signed. No push executed."
+else
+  echo "✅ All unpushed commits are signed."
+  git push
+fi

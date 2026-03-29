@@ -39,7 +39,7 @@ if [ -z "$FIRST_UNSIGNED" ]; then
 else
     echo "Found unsigned commit at ${FIRST_UNSIGNED:0:7}. Rebasing..."
     # We rebase from the parent of the first unsigned commit
-    if git rebase --gpg-sign --force-rebase --no-fork-point "$FIRST_UNSIGNED~1"; then
+    if git rebase --gpg-sign --force-rebase --no-fork-point "$FIRST_UNSIGNED~1" -i; then
         echo "✅ Rebase successful. Commits signed."
     else
         echo "❌ Rebase failed (likely a conflict). Please resolve and run 'git rebase --continue'."

@@ -32,13 +32,16 @@ if [ "$HOOK_NAME" = "pre-push" ]; then
     else
       range="$remote_sha..$local_sha"
     fi
+    FAIL=0
     for commit in $(git rev-list "$range"); do
       echo "${HOOK_NAME} : ${commit}"
       if ! git verify-commit "$commit" >/dev/null 2>&1; then
+        git log $commit -n 1
         echo "❌ GLOBAL REJECT: Unsigned commit $commit."
-        exit 1
+        FAIL=1
       fi
     done
+    [[ $FAIL -eq 1 ]] && exit 1
   done
 fi
 

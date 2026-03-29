@@ -50,6 +50,9 @@
 [pull]
   rebase = false
 
+[rebase]
+  instructionFormat = "[%G?] (%ar) %s"
+
 [push]
   default = current
   autoSetupRemote = true
