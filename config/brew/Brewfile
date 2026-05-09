@@ -13,7 +13,6 @@ cask "font-fira-code"
 cask "font-fira-code-nerd-font"
 cask "font-inconsolata-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
-# cask "font-symbols-only-nerd-font"
 
 #
 # core tools
@@ -24,11 +23,7 @@ cask "font-jetbrains-mono-nerd-font"
 # - fish - friendly interactive shell
 # - mas - mac app store command line
 # - stow - link farming
-# - the_silver_searcher - ack, recursive grep alternative a.k.a ag
-# - tmux - terminal multiplexer
 
-# brew "podman"
-# brew "busted"
 brew "ack"
 brew "bash"
 brew "bat"
@@ -52,18 +47,13 @@ brew "httpie"
 brew "mas"
 brew "neovim"
 brew "nmap"
-brew "nnn"
 brew "nono"
 brew "pass"
-brew "procs"
 brew "ripgrep"
 brew "rustup"
-brew "speedtest-cli"
 brew "starship"
 brew "stow"
 brew "switchaudio-osx"
-# brew "the_silver_searcher"
-# tidy-viewer (tv command) is a CSV pretty printer
 brew "tidy-viewer"
 brew "tig"
 brew "tmux"
@@ -75,7 +65,6 @@ brew "wget"
 brew "zoxide"
 
 cask "kitty"
-cask "iterm2"
 cask "rectangle"
 cask "wezterm"
 
@@ -83,15 +72,13 @@ cask "wezterm"
 # Build chain tools
 #
 
-# brew "libxmlsec1"
 brew "openblas"
 
 
 #
-# linitng tools
+# linting tools
 #
 
-# brew "languagetool"
 brew "yamllint"
 brew "vale"
 
@@ -112,15 +99,11 @@ brew "duti"
 brew "pinentry-mac"
 
 cask "alfred"
-# Hidden bar needed admin password -> disable
-# cask "hiddenbar"
 
 #
 # office tools
-brew "qalculate-gtk"
+#
 brew "pandoc"
-# required password for update
-# cask "mactex"
 cask "drawio"
 cask "obsidian"
 cask "brave-browser"
@@ -176,7 +159,6 @@ brew "tidy-html5"
 brew "uv"
 brew "watchman"
 
-cask "db-browser-for-sqlite"
 # Don't install docker, needs admin password
 # cask "docker"
 #
@@ -186,7 +168,6 @@ cask "db-browser-for-sqlite"
 # cask "google-cloud-sdk"
 #
 cask "lens"
-#cask "libreoffice"
 cask "balenaetcher"
 
 #
