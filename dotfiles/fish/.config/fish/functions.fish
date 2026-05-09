@@ -28,6 +28,6 @@ end
 
 [ {$DOT_FUNCTIONS} -eq 0 ]; and exit
 
-time-me "AFTER broot"
+time-me "AFTER functions"
 
 [ {$DOT_LOG_LEVEL} -gt 1 ]; and echo "◎ loaded ~/.config/fish/functions.fish"

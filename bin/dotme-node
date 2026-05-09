@@ -58,6 +58,7 @@ npm install -g npm
 # pnpm needs one package to be able start listing globals
 #
 log:: "pnpm global list"
+export PATH="$PATH:$HOME/Library/pnpm/bin"
 pnpm --global list 2>/dev/null || pnpm --global install pyright
 
 if pnpm --global list | grep remark-lint-no-auto-link-without-protocol ; then
