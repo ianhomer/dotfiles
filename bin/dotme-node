@@ -51,8 +51,8 @@ fi
 log:: updating pnpm
 pnpm self-update
 
-log:: "Updating npm"
-npm install -g npm
+# log:: "Updating npm"
+# npm install -g npm
 
 #
 # pnpm needs one package to be able start listing globals
@@ -69,7 +69,12 @@ fi
 
 # Install missing packages
 
-log:: "pnpm install missing global"
+log:: "pnpm install missing globals"
+cat $NODE_GLOBAL | grep -v '#' | grep '@' | while read -r pkg; do
+  echo "Checking $pkg..."
+  pnpm install --global "$pkg" || warn:: "Security violation in: $pkg"
+done
+
 cat $NODE_GLOBAL | grep -v '#' | grep '@'                |
   grep -F -v "`pnpm --global --json list                 |
   jq --raw-output '.[0].dependencies | keys[] + \"@\"'`" |
