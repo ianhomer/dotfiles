@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "name": "fish",
+    "version": "0.0.1",
+    "description": "fish sandbox"
+  },
+  "extends": ["default"],
+  "security": {
+    "groups": []
+  },
+  "workdir": {
+    "access": "readwrite"
+  },
+  "network": {
+    "block": true
+  },
+  "filesystem": {
+    "allow": [
+      ".",
+      "~/.cache/fish",
+      "~/.cache/starship",
+      "~/.local/share/fish",
+      "~/.config/fish"
+    ],
+    "read": [
+      "~/.dotfiles",
+      "~/.pyenv",
+      "~/.config/git",
+      "~/.local/share/direnv/allow"
+    ],
+    "write": ["~/.pyenv/shims"],
+    "read_file": [
+      "~/.gitconfig",
+      "~/.config/starship.toml",
+      "~/.gitignore_global"
+    ]
+  },
+  "rollback": {
+    "exclude_patterns": ["node_modules", ".next", "__pycache__", "target"],
+    "exclude_globs": ["*.tmp.[0-9]*.[0-9]*"]
+  }
+}

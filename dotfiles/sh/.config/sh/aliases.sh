@@ -3,7 +3,7 @@ alias vi="VIM_KNOBS=5 nvim"
 alias v="VIM_KNOBS=5 vim"
 
 alias q="exit"
-alias push="git push"
+alias push="git push-with-checks"
 alias gs="git status"
 alias gd="git diff HEAD"
 alias ...="cd ../.."

@@ -1,3 +1,10 @@
+set -q DOT_SKIP
+set DOT_SKIP 0
+set -q DOT_FUNCTIONS
+set DOT_FUNCTIONS 0
+set -q DOT_LOG_LEVEL
+set DOT_LOG_LEVEL 0
+
 [ {$DOT_SKIP} -eq 2 ]; and exit
 
 if not status --is-login
@@ -21,6 +28,6 @@ end
 
 [ {$DOT_FUNCTIONS} -eq 0 ]; and exit
 
-time-me "AFTER broot"
+time-me "AFTER functions"
 
 [ {$DOT_LOG_LEVEL} -gt 1 ]; and echo "◎ loaded ~/.config/fish/functions.fish"

@@ -1,5 +1,5 @@
-tap "hashicorp/tap"
-tap "bats-core/bats-core"
+# tap "hashicorp/tap"
+# tap "bats-core/bats-core"
 
 # The awesome Hack Nerd fonts combining the Hack source code font
 # -  https://github.com/source-foundry/Hack
@@ -13,7 +13,6 @@ cask "font-fira-code"
 cask "font-fira-code-nerd-font"
 cask "font-inconsolata-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
-# cask "font-symbols-only-nerd-font"
 
 #
 # core tools
@@ -24,18 +23,13 @@ cask "font-jetbrains-mono-nerd-font"
 # - fish - friendly interactive shell
 # - mas - mac app store command line
 # - stow - link farming
-# - the_silver_searcher - ack, recursive grep alternative a.k.a ag
-# - tmux - terminal multiplexer
 
-# brew "podman"
-# brew "busted"
 brew "ack"
 brew "bash"
 brew "bat"
-brew "bats-assert"
-brew "bats-core"
-brew "bats-support"
-brew "broot"
+# brew "bats-assert"
+# brew "bats-core"
+# brew "bats-support"
 brew "btop"
 brew "code-minimap"
 brew "coreutils"
@@ -45,7 +39,6 @@ brew "findutils"
 brew "fish"
 brew "fswatch"
 brew "git-crypt"
-brew "glow"
 brew "gnupg"
 brew "harper"
 brew "htop"
@@ -53,17 +46,12 @@ brew "httpie"
 brew "mas"
 brew "neovim"
 brew "nmap"
-brew "nnn"
+brew "nono"
 brew "pass"
-brew "procs"
 brew "ripgrep"
 brew "rustup"
-brew "speedtest-cli"
 brew "starship"
 brew "stow"
-brew "switchaudio-osx"
-# brew "the_silver_searcher"
-# tidy-viewer (tv command) is a CSV pretty printer
 brew "tidy-viewer"
 brew "tig"
 brew "tmux"
@@ -75,7 +63,6 @@ brew "wget"
 brew "zoxide"
 
 cask "kitty"
-cask "iterm2"
 cask "rectangle"
 cask "wezterm"
 
@@ -83,43 +70,38 @@ cask "wezterm"
 # Build chain tools
 #
 
-# brew "libxmlsec1"
 brew "openblas"
 
 
 #
-# linitng tools
+# linting tools
 #
 
-# brew "languagetool"
 brew "yamllint"
 brew "vale"
 
 #
 # supporting tools
 #
-# - fzf - fuzzy file name searcher, powering vi plugin
+# fzf - fuzzy file name searcher, powering vi plugin
 
 brew "fzf"
 
 #
 # macos tools
 #
-# * duti - externision to tool mapping configuration
+# duti - extension for tool mapping configuration
 #
 
 brew "duti"
 brew "pinentry-mac"
 
 cask "alfred"
-cask "hiddenbar"
 
 #
 # office tools
-brew "qalculate-gtk"
+#
 brew "pandoc"
-# required password for update
-# cask "mactex"
 cask "drawio"
 cask "obsidian"
 cask "brave-browser"
@@ -143,9 +125,7 @@ brew "git-lfs"
 brew "gitleaks"
 brew "gpg"
 brew "gradle"
-brew "hashicorp/tap/terraform-ls"
 brew "go-task"
-brew "gum"
 brew "hadolint"
 brew "http-server"
 brew "jenv"
@@ -159,38 +139,23 @@ brew "lua-language-server"
 brew "lua"
 brew "luarocks"
 brew "maven"
-brew "neofetch"
 brew "node"
 brew "npm"
 brew "ollama"
-brew "oven-sh/bun/bun"
+brew "opencode"
+# brew "oven-sh/bun/bun"
 brew "nvm"
 brew "pinentry"
 brew "pipx"
 brew "pyenv"
-brew "qalculate-gtk"
 brew "rbenv"
 brew "ruby-build"
 brew "sops"
-brew "terragrunt"
 brew "tidy-html5"
 brew "uv"
-brew "warrensbox/tap/tfswitch"
-brew "warrensbox/tap/tgswitch"
 brew "watchman"
 
-cask "db-browser-for-sqlite"
-# Don't install docker, needs admin password
-# cask "docker"
-#
-# Don't install google-cloud-sdk by brew since it asks for admin password and
-# breaks non-interactive flow
-#
-# cask "google-cloud-sdk"
-#
 cask "lens"
-#cask "libreoffice"
-cask "visual-studio-code"
 cask "balenaetcher"
 
 #

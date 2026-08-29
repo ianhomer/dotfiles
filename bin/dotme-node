@@ -51,13 +51,14 @@ fi
 log:: updating pnpm
 pnpm self-update
 
-log:: "Updating npm"
-npm install -g npm
+# log:: "Updating npm"
+# npm install -g npm
 
 #
 # pnpm needs one package to be able start listing globals
 #
 log:: "pnpm global list"
+export PATH="$PATH:$HOME/Library/pnpm/bin"
 pnpm --global list 2>/dev/null || pnpm --global install pyright
 
 if pnpm --global list | grep remark-lint-no-auto-link-without-protocol ; then
@@ -68,7 +69,12 @@ fi
 
 # Install missing packages
 
-log:: "pnpm install missing global"
+log:: "pnpm install missing globals"
+cat $NODE_GLOBAL | grep -v '#' | grep '@' | while read -r pkg; do
+  echo "Checking $pkg..."
+  pnpm install --global "$pkg" || warn:: "Security violation in: $pkg"
+done
+
 cat $NODE_GLOBAL | grep -v '#' | grep '@'                |
   grep -F -v "`pnpm --global --json list                 |
   jq --raw-output '.[0].dependencies | keys[] + \"@\"'`" |

@@ -4,7 +4,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { "Failed to clone lazy.nvim to " .. lazypath .. ":\n", "ErrorMsg" },
       { out, "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
