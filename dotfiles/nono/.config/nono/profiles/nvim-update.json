@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "name": "nvim-update",
+    "version": "0.0.1",
+    "description": "nvim sandbox which can update plugins"
+  },
+  "extends": ["nvim"],
+  "network": {
+    "block": false,
+    "network_profile": "developer"
+  },
+  "filesystem": {
+    "write": ["~/.local/share/nvim","~/.config/nvim"]
+  }
+}

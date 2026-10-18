@@ -1,3 +1,6 @@
+set -q DOT_SKIP; or set DOT_SKIP 0
+set -q DOT_LOG_LEVEL; or set DOT_LOG_LEVEL 0
+
 [ {$DOT_SKIP} -eq 2 ]; and exit
 
 time-me "START config.fish"
@@ -94,7 +97,7 @@ time-me "AFTER bindings"
 
 if status --is-login
     #
-    # Set terminal for GPG to allow signining of git commits
+    # Set terminal for GPG to allow signing of git commits
     #
     set -x GPG_TTY (tty)
 end
@@ -137,4 +140,12 @@ if [ -f ~/.docker/init-fish ]
 end
 
 # Created by `pipx` on 2025-06-07 05:31:00
-set PATH $PATH /Users/ian/.local/bin
+set PATH $PATH ~/.local/bin
+set PATH $PATH ~/.luarocks/bin
+
+# pnpm
+set -gx PNPM_HOME "/Users/ian/Library/pnpm"
+if not string match -q -- "$PNPM_HOME/bin" $PATH
+  set -gx PATH "$PNPM_HOME/bin" $PATH
+end
+# pnpm end

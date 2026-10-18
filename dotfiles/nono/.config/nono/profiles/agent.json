@@ -1,0 +1,20 @@
+{
+  "meta": {
+    "name": "agent",
+    "version": "0.0.1",
+    "description": "agent sandbox"
+  },
+  "extends": ["fish"],
+  "security": {
+    "groups": []
+  },
+  "workdir": {
+    "access": "readwrite"
+  },
+  "network": {
+    "block": true
+  },
+  "filesystem": {
+    "allow": ["."]
+  }
+}

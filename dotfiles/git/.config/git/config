@@ -6,6 +6,7 @@
 
   # See https://git-scm.com/docs/pretty-formats
   l = "log --pretty=oneline -n 20 --graph --abbrev-commit"
+  inspect = "log --format='%C(auto) %h %C(bold yellow)[%G?] %Cblue%ae%d%Creset%n%B' --show-signature"
   log-branch = "log --format='%C(auto)%h %Cgreen%<(8,trunc)%cr %Creset %<(20,trunc)%s %Cblue%d'"
   log-just-what = "log --format='%s'"
   log-what = "log --format='%C(auto) %h %s %Cblue%ae%d'"
@@ -22,6 +23,8 @@
   log-graph-branches = "log --all --decorate --oneline --graph --simplify-by-decoration --date=format:'%Y-%m-%d %H:%M' --format='%C(auto) %h %<(20,trunc)%s %Cgreen %cd% %Cblue %Cblue%ae%d'"
   set-upstream = !git branch --set-upstream-to=origin/$(git symbolic-ref --short HEAD)
 
+  unpushed = !git log @{u}..HEAD --oneline
+
 [core]
   editor = nvim
 
@@ -33,6 +36,7 @@
 
 [core]
   autocrlf = input
+  hooksPath = ~/.config/git/hooks
 
 [format]
   pretty = "format:%C(auto) %h %Cblue%<(8,trunc)%aN %Cgreen%<(10,trunc)%cr %Creset %<(50,trunc)%s"
@@ -46,8 +50,12 @@
 [pull]
   rebase = false
 
+[rebase]
+  instructionFormat = "[%G?] (%ar) %s"
+
 [push]
   default = current
+  autoSetupRemote = true
 
 [gpg]
   program = gpg
